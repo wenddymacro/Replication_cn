@@ -1,0 +1,13 @@
+# copyrighted full texts and raw downloads
+data/text/
+raw/
+*.pdf
+# replication packages are kept outside the repository ($CIE_RAW)
+_extracted/
+_work/
+# R / Python
+.Rhistory
+.RData
+__pycache__/
+*.pyc
+.DS_Store
