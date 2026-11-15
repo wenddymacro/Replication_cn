@@ -1,0 +1,27 @@
+{
+  "specifications": 21,
+  "main": 1,
+  "secondary": 20,
+  "all_bootstrap_B_999": true,
+  "main_csa": -0.0044134495907647,
+  "main_bjs": 0.0478313211584511,
+  "main_twfe": 0.0410121205461945,
+  "csa_available": 5,
+  "csa_skipped_categories": 11,
+  "csa_failed": 5,
+  "bjs_available": 21,
+  "schema_fix_identity_checks": {
+    "twfe": true,
+    "twfe_se": true,
+    "bjs": true,
+    "bjs_se": true,
+    "twfe_raw": true,
+    "y_sd": true
+  },
+  "twfe_effective_samples_changed": 16,
+  "delivery_runner_specs_passed": 21,
+  "point_and_se_revalidation_checks": 168,
+  "point_and_se_revalidation_all_passed": true,
+  "coherent_joint_variance_r_python_checks_passed": true,
+  "comparison_rows_checked": 26
+}

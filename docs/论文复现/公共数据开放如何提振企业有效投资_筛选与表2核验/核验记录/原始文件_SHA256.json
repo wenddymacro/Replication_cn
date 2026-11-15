@@ -1,0 +1,68 @@
+[
+  {
+    "file": "原始附件包\\20240919125418WU_FILE_1.zip",
+    "bytes": 6608550,
+    "sha256": "9025274570c4785f568aab5940e5fc07cd68bf039b03382f857c6797a0f64d1d"
+  },
+  {
+    "file": "论文\\公共数据开放如何提振企业有效投资——基于产能利用视角.pdf",
+    "bytes": 9006558,
+    "sha256": "7c864814a60448256d334ad74dd6ba97f54f627edd22c5465a295401476681f5"
+  },
+  {
+    "file": "其他说明\\《中国工业经济》编辑部关于公开数据附件的使用说明.pdf",
+    "zip_member_decoded": "《中国工业经济》编辑部关于公开数据附件的使用说明.pdf",
+    "zip_member_python": "í╢╓╨╣·╣ñ╥╡╛¡╝├í╖▒α╝¡▓┐╣╪╙┌╣½┐¬╩²╛▌╕╜╝■╡─╩╣╙├╦╡├≈.pdf",
+    "bytes": 255153,
+    "sha256": "46047fa2b466c3b01d5247c2b4e9453abf9f8b327ba9d468951fbffbe96ca3aa"
+  },
+  {
+    "file": "代码\\程序.do",
+    "zip_member_decoded": "程序.do",
+    "zip_member_python": "│╠╨≥.do",
+    "bytes": 5661,
+    "sha256": "a59792995cbd51d0028232173eb664fa399caea3342eb3ce25aac208e0f68449"
+  },
+  {
+    "file": "附录\\附录.pdf",
+    "zip_member_decoded": "附录.pdf",
+    "zip_member_python": "╕╜┬╝.pdf",
+    "bytes": 527330,
+    "sha256": "12306943cd3ec6baa9401984e6120d69e975cf11389a0589de5a02ef01f367d6"
+  },
+  {
+    "file": "处理数据\\数据1.dta",
+    "zip_member_decoded": "数据1.dta",
+    "zip_member_python": "╩²╛▌1.dta",
+    "bytes": 6100812,
+    "sha256": "1bfea2af43e03906079407c74ff2b557fb2519aca7555a4874cc646edca2a828"
+  },
+  {
+    "file": "处理数据\\数据2.dta",
+    "zip_member_decoded": "数据2.dta",
+    "zip_member_python": "╩²╛▌2.dta",
+    "bytes": 3450194,
+    "sha256": "25129343cce9fa5c00c9365cb6e99197139d2691a5503aa61b338e0facbc47af"
+  },
+  {
+    "file": "处理数据\\数据3.dta",
+    "zip_member_decoded": "数据3.dta",
+    "zip_member_python": "╩²╛▌3.dta",
+    "bytes": 578285,
+    "sha256": "7f758b07bc5eae76367e6fd2c80c5aa88022d7ed57561962f655a32147976342"
+  },
+  {
+    "file": "处理数据\\数据4.dta",
+    "zip_member_decoded": "数据4.dta",
+    "zip_member_python": "╩²╛▌4.dta",
+    "bytes": 1940850,
+    "sha256": "32806273f22ba62b1d3de4c970cc4b675c593e335b7285342d5c1793726dc910"
+  },
+  {
+    "file": "处理数据\\数据5.dta",
+    "zip_member_decoded": "数据5.dta",
+    "zip_member_python": "╩²╛▌5.dta",
+    "bytes": 4152858,
+    "sha256": "a94947d61bd0dec289f187477839643f4f965cb5cd84f4733dacd74ec1adc89a"
+  }
+]

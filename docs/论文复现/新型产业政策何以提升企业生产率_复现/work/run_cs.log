@@ -1,0 +1,312 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      Stata 19.0
+___/   /   /___/   /   /___/       MP—Parallel Edition
+
+ Statistics and Data Science       Copyright 1985-2025 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-782-8272        https://www.stata.com
+                                   979-696-4600        service@stata.com
+
+Stata license: 114514-student 64-core lab perpetual
+Serial number: 9223372036854775807
+  Licensed to: 1
+               1
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. More than 2 billion observations are allowed; see help obs_advice.
+      4. Maximum number of variables is set to 5,000 but can be increased;
+          see help set_maxvar.
+
+
+Running D:\Stata\Stata19\profile.do ...
+
+. do run_cs.do 
+
+. clear all
+
+. set more off
+
+. set processors 1
+    The maximum number of processors or cores being used is changed from 16
+    to 1.  It can be set to any number between 1 and 16
+
+. set seed 824
+
+. adopath ++ "../output/local_ado"
+  [1]              "../output/local_ado"
+  [2]  (BASE)      "D:\Stata\Stata19\ado\base/"
+  [3]  (SITE)      "D:\Stata\Stata19\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "C:\ado\personal/"
+  [6]  (PLUS)      "C:\ado\plus/"
+  [7]  (OLDPLACE)  "C:\ado\myado/"
+  [8]              "C:\ado\plus"
+  [9]              "C:\ado\github"
+  [10]             "C:\ado\personal"
+
+. use "../author/listed.dta", clear
+
+. global xlist "lnage lnasset lnsize lev edu ceo lngdppc secondary govexp ftd"
+
+. log using "../output/cs.log", text replace
+-------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\
+> work\../output/cs.log
+  log type:  text
+ opened on:  13 Nov 2026, 23:43:50
+
+. //生成动态效应的变量
+. local num1=4
+
+. local num2=3
+
+. replace chainleader_l=. if chainleader_l==0
+(0 real changes made)
+
+. gen event=year-chainleader_l
+(20,134 missing values generated)
+
+. gen setup_mis=chainleader_l
+(20,134 missing values generated)
+
+. replace setup_mis=0 if setup_mis==.
+(20,134 real changes made)
+
+. tab event
+
+      event |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         -9 |         43        0.52        0.52
+         -8 |        121        1.47        2.00
+         -7 |        277        3.37        5.37
+         -6 |        527        6.42       11.79
+         -5 |        589        7.17       18.96
+         -4 |        644        7.84       26.81
+         -3 |        734        8.94       35.74
+         -2 |        787        9.58       45.33
+         -1 |        826       10.06       55.39
+          0 |        945       11.51       66.90
+          1 |        937       11.41       78.31
+          2 |        898       10.94       89.25
+          3 |        662        8.06       97.31
+          4 |        152        1.85       99.16
+          5 |         34        0.41       99.57
+          6 |         35        0.43      100.00
+------------+-----------------------------------
+      Total |      8,211      100.00
+
+. replace event=-`num1' if event<=-`num1'
+(1,557 real changes made)
+
+. replace event=`num2' if event>=`num2'
+(20,355 real changes made)
+
+. forvalues i=`num1'(-1)1{
+  2. gen pre`i'=0
+  3. replace pre`i'=1 if event==-`i'
+  4. }
+(2,201 real changes made)
+(734 real changes made)
+(787 real changes made)
+(826 real changes made)
+
+. forvalues i=0(1)`num2'{
+  2. gen post`i'=0
+  3. replace post`i'=1 if event==`i'
+  4. }
+(945 real changes made)
+(937 real changes made)
+(898 real changes made)
+(21,017 real changes made)
+
+. csdid TFP $xlist, ivar(stkcd) time(year) gvar(setup_mis) method(dripw) long2 
+> cluster(city)
+warning: long and long2 select base_period(universal), whose pre-treatment cell
+> s are the ones Version 1.82 reported under long2: against Version 1.82's long
+> , every pre-treatment estimate changes sign and moves one event time. Specify
+>  base_period(universal) in new code; long and long2 will be removed in a futu
+> re release.
+csdid legacy compatibility: method(dripw) is retired; running method(dr), which
+>  is the same estimator. Use method(dr) in new code.
+warning: dropped observations with missing or non-finite data (4095 observation
+> (s))
+warning: 2740 unit(s) are not observed in all 10 periods; the panel is being ba
+> lanced by dropping them (13920 observation(s)). Use bal(none) to keep every u
+> nit, or bal(pair) to balance each 2×2 separately.
+warning: Some groups in your dataset have very few observations, which may caus
+> e estimation problems.
+  Check groups: 2017,2018.
+warning: overlap condition violated for group 2018 in time period 2014
+warning: overlap condition violated for group 2018 in time period 2015
+warning: overlap condition violated for group 2018 in time period 2016
+
+Group-time average treatment effects
+Std. errors: multiplier bootstrap, 1000 reps; clustered on city (170 clusters);
+>  95% simultaneous bands
+Note: no rseed() set, so these standard errors change slightly between runs; ad
+> d rseed(#) to reproduce them.
+
+     group        time  event_time         att          se   n_treat_t 
+-----------------------------------------------------------------------
+      2017        2014          -3    -.202499    .0461536           7 
+      2017        2015          -2   -.0998003    .0390646           7 
+      2017        2016          -1           0           .           7 
+      2017        2017           0   -.0613875    .0152941           7 
+      2017        2018           1    -.069035    .0187234           7 
+      2017        2019           2   -.0677791    .0286091           7 
+      2017        2020           3      .01811    .0379951           7 
+      2017        2021           4   -.0438119    .0402713           7 
+      2017        2022           5    -.106126    .0473356           7 
+      2017        2023           6    -.164789      .03474           7 
+      2018        2014          -4           .           .           1 
+      2018        2015          -3           .           .           1 
+      2018        2016          -2           .           .           1 
+      2018        2017          -1           0           .           1 
+      2018        2018           0     .200551     .079081           1 
+      2018        2019           1     .183472     .083499           1 
+      2018        2020           2     .195601     .105075           1 
+      2018        2021           3     .514799     .101062           1 
+      2018        2022           4     .613308     .152501           1 
+      2018        2023           5     .644138     .163364           1 
+      2019        2014          -5   -.0256808    .0544053          27 
+      2019        2015          -4    .0344151    .0439755          27 
+      2019        2016          -3    .0495308    .0358282          27 
+      2019        2017          -2   -.0126998    .0194012          27 
+      2019        2018          -1           0           .          27 
+      2019        2019           0    .0240824      .02306          27 
+      2019        2020           1     .148808    .0286935          27 
+      2019        2021           2    .0988528    .0115506          27 
+      2019        2022           3    .0852049    .0448831          27 
+      2019        2023           4    .0507793    .0411806          27 
+      2020        2014          -6   -.0872837    .0382878         123 
+      2020        2015          -5   -.0335542    .0388127         123 
+      2020        2016          -4   -.0216346    .0420805         123 
+      2020        2017          -3   -.0302921    .0326088         123 
+      2020        2018          -2   -.0257766    .0170073         123 
+      2020        2019          -1           0           .         123 
+      2020        2020           0  -.00723203    .0177915         123 
+      2020        2021           1   -.0113215    .0222933         123 
+      2020        2022           2    .0328262    .0366376         123 
+      2020        2023           3    .0719825    .0413231         123 
+      2021        2014          -7   -.0855264    .0793728          85 
+      2021        2015          -6   -.0699485    .0876755          85 
+      2021        2016          -5    .0140848     .052237          85 
+      2021        2017          -4    .0832667       .0564          85 
+      2021        2018          -3    .0495717    .0605444          85 
+      2021        2019          -2    .0486868    .0527015          85 
+      2021        2020          -1           0           .          85 
+      2021        2021           0    .0134617    .0220595          85 
+      2021        2022           1    .0209932     .042921          85 
+      2021        2023           2    .0805312    .0508905          85 
+      2022        2014          -8    .0154801    .0915863          35 
+      2022        2015          -7    .0281053    .0811369          35 
+      2022        2016          -6    .0336512    .0753664          35 
+      2022        2017          -5    .0299978    .0678352          35 
+      2022        2018          -4    .0593258    .0552836          35 
+      2022        2019          -3    .0664675    .0480314          35 
+      2022        2020          -2    .0111704    .0296731          35 
+      2022        2021          -1           0           .          35 
+      2022        2022           0    .0439679    .0470406          35 
+      2022        2023           1    .0603828     .054371          35 
+      2023        2014          -9   -.0426506    .0453154          19 
+      2023        2015          -8   .00093789    .0404962          19 
+      2023        2016          -7   -.0354656    .0355439          19 
+      2023        2017          -6   -.0771512    .0357272          19 
+      2023        2018          -5   -.0993016     .043401          19 
+      2023        2019          -4   -.0875312    .0593357          19 
+      2023        2020          -3   -.0514471    .0494822          19 
+      2023        2021          -2   -.0745191    .0446202          19 
+      2023        2022          -1           0           .          19 
+      2023        2023           0     -.10247    .0204651          19 
+
+ n_treat_~e  n_contro~t  n_contro~e 
+-----------------------------------
+          7        1026        1026 
+          7        1026        1026 
+          7        1026        1026 
+          7        1026        1026 
+          7        1025        1025 
+          7         998         998 
+          7         875         875 
+          7         790         790 
+          7         755         755 
+          7         736         736 
+          1        1025        1025 
+          1        1025        1025 
+          1        1025        1025 
+          1        1025        1025 
+          1        1025        1025 
+          1         998         998 
+          1         875         875 
+          1         790         790 
+          1         755         755 
+          1         736         736 
+         27         998         998 
+         27         998         998 
+         27         998         998 
+         27         998         998 
+         27         998         998 
+         27         998         998 
+         27         875         875 
+         27         790         790 
+         27         755         755 
+         27         736         736 
+        123         875         875 
+        123         875         875 
+        123         875         875 
+        123         875         875 
+        123         875         875 
+        123         875         875 
+        123         875         875 
+        123         790         790 
+        123         755         755 
+        123         736         736 
+         85         790         790 
+         85         790         790 
+         85         790         790 
+         85         790         790 
+         85         790         790 
+         85         790         790 
+         85         790         790 
+         85         790         790 
+         85         755         755 
+         85         736         736 
+         35         755         755 
+         35         755         755 
+         35         755         755 
+         35         755         755 
+         35         755         755 
+         35         755         755 
+         35         755         755 
+         35         755         755 
+         35         755         755 
+         35         736         736 
+         19         736         736 
+         19         736         736 
+         19         736         736 
+         19         736         736 
+         19         736         736 
+         19         736         736 
+         19         736         736 
+         19         736         736 
+         19         736         736 
+         19         736         736 
+P-value for pre-test of parallel trends assumption:  0.00000
+
+. estat event, window(-3 3) post
+3 of the 70 ATT(g,t) cells have a missing estimate, so the aggregation is not d
+> efined over the full set of cells. Specify dropmissing to aggregate over the 
+> 67 cells that were estimated (that is: estat event, dropmissing window(-3 3))
+> , or address the cause of the failures and re-run; e(attgt) holds each cell's
+>  treated and comparison counts, and the warnings printed during estimation na
+> me any cause csdid detected.
+r(498);
+
+end of do-file
+r(498);

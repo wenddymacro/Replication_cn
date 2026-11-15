@@ -1,0 +1,242 @@
+[
+  {
+    "spec": "T1_1",
+    "n": 84747,
+    "units": 9108,
+    "clusters": 9108,
+    "banks": 448,
+    "cohorts": [
+      2014.0,
+      2015.0,
+      2016.0,
+      2017.0,
+      2018.0,
+      2019.0,
+      2020.0
+    ],
+    "always_treated_rows": 177,
+    "never_treated_rows": 48861,
+    "max_duplicate_unit_year": 0,
+    "unbalanced": true
+  },
+  {
+    "spec": "T1_5",
+    "n": 84747,
+    "units": 9108,
+    "clusters": 9108,
+    "banks": 448,
+    "cohorts": [
+      2014.0,
+      2015.0,
+      2016.0,
+      2017.0,
+      2018.0,
+      2019.0,
+      2020.0
+    ],
+    "always_treated_rows": 177,
+    "never_treated_rows": 48861,
+    "max_duplicate_unit_year": 0,
+    "unbalanced": true
+  },
+  {
+    "spec": "T1_2",
+    "n": 84747,
+    "units": 9108,
+    "clusters": 9108,
+    "banks": 448,
+    "cohorts": [
+      2014.0,
+      2015.0,
+      2016.0,
+      2017.0,
+      2018.0,
+      2019.0,
+      2020.0
+    ],
+    "always_treated_rows": 177,
+    "never_treated_rows": 48861,
+    "max_duplicate_unit_year": 0,
+    "unbalanced": true
+  },
+  {
+    "spec": "T1_3",
+    "n": 83660,
+    "units": 8998,
+    "clusters": 8998,
+    "banks": 338,
+    "cohorts": [
+      2014.0,
+      2015.0,
+      2016.0,
+      2017.0,
+      2018.0,
+      2019.0,
+      2020.0
+    ],
+    "always_treated_rows": 177,
+    "never_treated_rows": 48073,
+    "max_duplicate_unit_year": 0,
+    "unbalanced": true
+  },
+  {
+    "spec": "T1_4",
+    "n": 57391,
+    "units": 6691,
+    "clusters": 6691,
+    "banks": 105,
+    "cohorts": [
+      2014.0,
+      2015.0,
+      2016.0,
+      2017.0,
+      2018.0,
+      2019.0,
+      2020.0
+    ],
+    "always_treated_rows": 144,
+    "never_treated_rows": 32892,
+    "max_duplicate_unit_year": 0,
+    "unbalanced": true
+  },
+  {
+    "spec": "T1_6",
+    "n": 84747,
+    "units": 9108,
+    "clusters": 9108,
+    "banks": 448,
+    "cohorts": [
+      2014.0,
+      2015.0,
+      2016.0,
+      2017.0,
+      2018.0,
+      2019.0,
+      2020.0
+    ],
+    "always_treated_rows": 177,
+    "never_treated_rows": 48861,
+    "max_duplicate_unit_year": 0,
+    "unbalanced": true
+  },
+  {
+    "spec": "T1_7",
+    "n": 83660,
+    "units": 8998,
+    "clusters": 8998,
+    "banks": 338,
+    "cohorts": [
+      2014.0,
+      2015.0,
+      2016.0,
+      2017.0,
+      2018.0,
+      2019.0,
+      2020.0
+    ],
+    "always_treated_rows": 177,
+    "never_treated_rows": 48073,
+    "max_duplicate_unit_year": 0,
+    "unbalanced": true
+  },
+  {
+    "spec": "T1_8",
+    "n": 57391,
+    "units": 6691,
+    "clusters": 6691,
+    "banks": 105,
+    "cohorts": [
+      2014.0,
+      2015.0,
+      2016.0,
+      2017.0,
+      2018.0,
+      2019.0,
+      2020.0
+    ],
+    "always_treated_rows": 144,
+    "never_treated_rows": 32892,
+    "max_duplicate_unit_year": 0,
+    "unbalanced": true
+  },
+  {
+    "spec": "T4_1",
+    "n": 57391,
+    "units": 6691,
+    "clusters": 6691,
+    "banks": 105,
+    "cohorts": [
+      2014.0,
+      2015.0,
+      2016.0,
+      2017.0,
+      2018.0,
+      2019.0,
+      2020.0
+    ],
+    "always_treated_rows": 144,
+    "never_treated_rows": 32892,
+    "max_duplicate_unit_year": 0,
+    "unbalanced": true
+  },
+  {
+    "spec": "T4_2",
+    "n": 57391,
+    "units": 6691,
+    "clusters": 6691,
+    "banks": 105,
+    "cohorts": [
+      2014.0,
+      2015.0,
+      2016.0,
+      2017.0,
+      2018.0,
+      2019.0,
+      2020.0
+    ],
+    "always_treated_rows": 144,
+    "never_treated_rows": 32892,
+    "max_duplicate_unit_year": 0,
+    "unbalanced": true
+  },
+  {
+    "spec": "T4_3",
+    "n": 57391,
+    "units": 6691,
+    "clusters": 6691,
+    "banks": 105,
+    "cohorts": [
+      2014.0,
+      2015.0,
+      2016.0,
+      2017.0,
+      2018.0,
+      2019.0,
+      2020.0
+    ],
+    "always_treated_rows": 144,
+    "never_treated_rows": 32892,
+    "max_duplicate_unit_year": 0,
+    "unbalanced": true
+  },
+  {
+    "spec": "T4_4",
+    "n": 57391,
+    "units": 6691,
+    "clusters": 6691,
+    "banks": 105,
+    "cohorts": [
+      2014.0,
+      2015.0,
+      2016.0,
+      2017.0,
+      2018.0,
+      2019.0,
+      2020.0
+    ],
+    "always_treated_rows": 144,
+    "never_treated_rows": 32892,
+    "max_duplicate_unit_year": 0,
+    "unbalanced": true
+  }
+]

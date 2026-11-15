@@ -1,0 +1,27 @@
+{
+  "paper_id": "cie_2026_09_04",
+  "journal": "中国工业经济",
+  "year": 2026,
+  "issue": 9,
+  "pages": "73-95",
+  "title": "新型产业政策何以提升企业生产率——来自产业链链长制的证据",
+  "authors": [
+    "唐跃桓",
+    "黎静霖"
+  ],
+  "method": "staggered DID",
+  "main_checked_coefficient_rows": 35,
+  "main_all_checked_values_match": true,
+  "appendix_checked_coefficient_rows": 187,
+  "appendix_all_checked_values_match": true,
+  "permutation_tests_completed": 9,
+  "permutation_tests_total": 9,
+  "permutation_star_mismatches": [
+    "g_mps",
+    "g_govpur"
+  ],
+  "tax_survey_microdata_available": false,
+  "raw_data_reconstruction_completed": false,
+  "analysis_data_available": true,
+  "status": "主要系数可复现；部分随机检验显著性未复得；税调数据未公开"
+}

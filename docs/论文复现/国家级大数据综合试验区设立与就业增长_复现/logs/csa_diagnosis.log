@@ -1,0 +1,28 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+T2_1 ATT 0.007147509 SE 0.02945543 
+T2_2 ATT 0.05656448 SE 0.02755447 
+You have an unbalanced panel. Proceeding as such.
+T2_3 ATT 5.594056 SE 0.9555707 
+T2_4 ATT 0.04832376 SE 0.03414614 
+You have an unbalanced panel. Proceeding as such.
+Warning messages:
+1: In did_standardization(data, args) :
+  Some groups in your dataset have very few observations, which may cause estimation problems.
+  Check groups: 6.
+2: In did_standardization(data, args) :
+  Some groups in your dataset have very few observations, which may cause estimation problems.
+  Check groups: 6.
+3: In did_standardization(data, args) :
+  Some groups in your dataset have very few observations, which may cause estimation problems.
+  Check groups: 6.
+4: In did_standardization(data, args) :
+  Some groups in your dataset have very few observations, which may cause estimation problems.
+  Check groups: 6.
+5: In did_standardization(data, args) :
+  Some groups in your dataset have very few observations, which may cause estimation problems.
+  Check groups: 6.
+T2_5 ATT 4.84761 SE 0.5849192 

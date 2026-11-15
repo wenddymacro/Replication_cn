@@ -1,0 +1,14 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+You have an unbalanced panel. Proceeding as such.
+The Wald pre-test is not reported when clustering beyond the unit level (clustervars = 'cl_num') because the analytical variance matrix does not account for between-cluster correlation. Use the bootstrap confidence intervals to assess pre-trends.
+   window   twfe twfe_se     csa  csa_se     bjs  bjs_se   neg_abs G_eff_twfe
+   <char>  <num>   <num>   <num>   <num>   <num>   <num>     <num>      <num>
+1: static 0.0802 0.02241 0.03947 0.02858 0.09267 0.02225 0.0006798      23.61
+   G_eff_bjs G_eff_csa
+       <num>     <num>
+1:      21.3     22.91
+-> sensitivity_output/specs/cie117612__STABLE_CITY.csv 

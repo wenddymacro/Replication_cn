@@ -1,0 +1,571 @@
+---------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\wo
+> rk\../output/lp.log
+  log type:  text
+ opened on:  13 Nov 2026, 23:41:47
+
+. //生成动态效应的变量
+. local num1=4
+
+. local num2=3
+
+. replace chainleader_l=. if chainleader_l==0
+(0 real changes made)
+
+. gen event=year-chainleader_l
+(20,134 missing values generated)
+
+. gen setup_mis=chainleader_l
+(20,134 missing values generated)
+
+. replace setup_mis=0 if setup_mis==.
+(20,134 real changes made)
+
+. tab event
+
+      event |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         -9 |         43        0.52        0.52
+         -8 |        121        1.47        2.00
+         -7 |        277        3.37        5.37
+         -6 |        527        6.42       11.79
+         -5 |        589        7.17       18.96
+         -4 |        644        7.84       26.81
+         -3 |        734        8.94       35.74
+         -2 |        787        9.58       45.33
+         -1 |        826       10.06       55.39
+          0 |        945       11.51       66.90
+          1 |        937       11.41       78.31
+          2 |        898       10.94       89.25
+          3 |        662        8.06       97.31
+          4 |        152        1.85       99.16
+          5 |         34        0.41       99.57
+          6 |         35        0.43      100.00
+------------+-----------------------------------
+      Total |      8,211      100.00
+
+. replace event=-`num1' if event<=-`num1'
+(1,557 real changes made)
+
+. replace event=`num2' if event>=`num2'
+(20,355 real changes made)
+
+. forvalues i=`num1'(-1)1{
+  2. gen pre`i'=0
+  3. replace pre`i'=1 if event==-`i'
+  4. }
+(2,201 real changes made)
+(734 real changes made)
+(787 real changes made)
+(826 real changes made)
+
+. forvalues i=0(1)`num2'{
+  2. gen post`i'=0
+  3. replace post`i'=1 if event==`i'
+  4. }
+(945 real changes made)
+(937 real changes made)
+(898 real changes made)
+(21,017 real changes made)
+
+. xtset stkcd year
+
+Panel variable: stkcd (unbalanced)
+ Time variable: year, 2014 to 2023, but with gaps
+         Delta: 1 unit
+
+. // new_treat=1 只在企业首次进入处理的当年出现
+. gen new_treat = D.chainleader
+(4,330 missing values generated)
+
+. matrix lpdid_b = J(1, 8, 0)
+
+. matrix lpdid_v = J(8, 8, 0)
+
+. matrix colnames lpdid_b = pre4 pre3 pre2 pre1 post0 post1 post2 post3
+
+. matrix rownames lpdid_v = pre4 pre3 pre2 pre1 post0 post1 post2 post3
+
+. matrix colnames lpdid_v = pre4 pre3 pre2 pre1 post0 post1 post2 post3
+
+. // 事前安慰剂：Y_(t-h)-Y_(t-1)，h=4,3,2
+. foreach h in 4 3 2 {
+  2. gen dy_m`h' = L`h'.TFP - L.TFP
+  3. reghdfe dy_m`h' new_treat L.($xlist)  if new_treat == 1 | chainleader == 0, 
+>  absorb(prv#year indid#year) vce(cluster city)
+  4. local p = 5 - `h'
+  5. matrix lpdid_b[1, `p'] = _b[new_treat]
+  6. matrix lpdid_v[`p', `p'] = _se[new_treat]^2
+  7. }
+(16,483 missing values generated)
+(dropped 26 singleton observations)
+(MWFE estimator converged in 8 iterations)
+
+HDFE Linear regression                            Number of obs   =      9,863
+Absorbing 2 HDFE groups                           F(  11,    238) =      17.27
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.1862
+                                                  Adj R-squared   =     0.1372
+                                                  Within R-sq.    =     0.0318
+Number of clusters (city)    =        239         Root MSE        =     0.4939
+
+                                 (Std. err. adjusted for 239 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       dy_m4 | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   new_treat |   .0104573    .025697     0.41   0.684    -.0401654    .0610799
+             |
+       lnage |
+         L1. |   .1143334   .0325992     3.51   0.001     .0501136    .1785532
+             |
+     lnasset |
+         L1. |    .050182   .0088784     5.65   0.000     .0326916    .0676723
+             |
+      lnsize |
+         L1. |  -.1083802   .0108895    -9.95   0.000    -.1298323   -.0869281
+             |
+         lev |
+         L1. |  -.0833681   .0574493    -1.45   0.148    -.1965421    .0298059
+             |
+         edu |
+         L1. |  -.1017492   .0398125    -2.56   0.011    -.1801792   -.0233192
+             |
+         ceo |
+         L1. |  -.0198314   .0154053    -1.29   0.199    -.0501795    .0105167
+             |
+     lngdppc |
+         L1. |   .0448487   .0317263     1.41   0.159    -.0176516     .107349
+             |
+   secondary |
+         L1. |  -.1293609   .0983794    -1.31   0.190    -.3231665    .0644448
+             |
+      govexp |
+         L1. |  -.0698341   .1925604    -0.36   0.717    -.4491745    .3095063
+             |
+         ftd |
+         L1. |  -.0439546   .0302763    -1.45   0.148    -.1035983     .015689
+             |
+       _cons |  -1.132858   .3975656    -2.85   0.005    -1.916055   -.3496615
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+     prv#year |       162           0         162     |
+   indid#year |       395           6         389     |
+------------------------------------------------------+
+(13,836 missing values generated)
+(dropped 33 singleton observations)
+(MWFE estimator converged in 8 iterations)
+
+HDFE Linear regression                            Number of obs   =     12,271
+Absorbing 2 HDFE groups                           F(  11,    244) =      15.93
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.1696
+                                                  Adj R-squared   =     0.1230
+                                                  Within R-sq.    =     0.0206
+Number of clusters (city)    =        245         Root MSE        =     0.4141
+
+                                 (Std. err. adjusted for 245 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       dy_m3 | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   new_treat |  -.0038523   .0165689    -0.23   0.816    -.0364887    .0287841
+             |
+       lnage |
+         L1. |   .0873243    .020589     4.24   0.000     .0467696    .1278791
+             |
+     lnasset |
+         L1. |   .0361869   .0069084     5.24   0.000     .0225792    .0497947
+             |
+      lnsize |
+         L1. |  -.0716243    .008637    -8.29   0.000    -.0886369   -.0546118
+             |
+         lev |
+         L1. |  -.0636183   .0407737    -1.56   0.120    -.1439316    .0166949
+             |
+         edu |
+         L1. |  -.0629433   .0281326    -2.24   0.026    -.1183571   -.0075295
+             |
+         ceo |
+         L1. |  -.0152632   .0099111    -1.54   0.125    -.0347855     .004259
+             |
+     lngdppc |
+         L1. |   .0362094   .0207185     1.75   0.082    -.0046006    .0770194
+             |
+   secondary |
+         L1. |  -.0924707   .0623358    -1.48   0.139    -.2152558    .0303143
+             |
+      govexp |
+         L1. |   .0070065   .1313568     0.05   0.958    -.2517314    .2657444
+             |
+         ftd |
+         L1. |  -.0405182   .0201843    -2.01   0.046    -.0802758   -.0007606
+             |
+       _cons |  -.9210836   .2624396    -3.51   0.001     -1.43802   -.4041473
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+     prv#year |       189           0         189     |
+   indid#year |       461           7         454     |
+------------------------------------------------------+
+(10,752 missing values generated)
+(dropped 34 singleton observations)
+(MWFE estimator converged in 8 iterations)
+
+HDFE Linear regression                            Number of obs   =     15,035
+Absorbing 2 HDFE groups                           F(  11,    250) =      18.82
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.1564
+                                                  Adj R-squared   =     0.1122
+                                                  Within R-sq.    =     0.0121
+Number of clusters (city)    =        251         Root MSE        =     0.2927
+
+                                 (Std. err. adjusted for 251 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       dy_m2 | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   new_treat |  -.0098767   .0109082    -0.91   0.366    -.0313603    .0116069
+             |
+       lnage |
+         L1. |   .0513096   .0085426     6.01   0.000      .034485    .0681343
+             |
+     lnasset |
+         L1. |   .0235623   .0036248     6.50   0.000     .0164233    .0307014
+             |
+      lnsize |
+         L1. |  -.0394483   .0043317    -9.11   0.000    -.0479795    -.030917
+             |
+         lev |
+         L1. |  -.0355134   .0215753    -1.65   0.101     -.078006    .0069792
+             |
+         edu |
+         L1. |  -.0378793   .0135433    -2.80   0.006    -.0645529   -.0112058
+             |
+         ceo |
+         L1. |  -.0080598   .0052876    -1.52   0.129    -.0184737    .0023542
+             |
+     lngdppc |
+         L1. |   .0184328   .0092344     2.00   0.047     .0002455      .03662
+             |
+   secondary |
+         L1. |   .0042899   .0312732     0.14   0.891    -.0573026    .0658823
+             |
+      govexp |
+         L1. |   .0604094   .0617321     0.98   0.329    -.0611719    .1819908
+             |
+         ftd |
+         L1. |  -.0200639   .0093949    -2.14   0.034    -.0385672   -.0015606
+             |
+       _cons |  -.5830869    .121139    -4.81   0.000      -.82167   -.3445038
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+     prv#year |       216           0         216     |
+   indid#year |       531           8         523     |
+------------------------------------------------------+
+
+. // 事后动态效应：Y_(t+h)-Y_(t-1)，h=0,1,2,3
+. forvalues h = 0/3 {
+  2. if `h' == 0 {
+  3. gen dy_p0 = TFP - L.TFP
+  4. local clean "chainleader == 0"
+  5. }
+  6. else {
+  7. gen dy_p`h' = F`h'.TFP - L.TFP
+  8. local clean "F`h'.chainleader == 0"
+  9. }
+ 10. reghdfe dy_p`h' new_treat L.($xlist)  if new_treat == 1 | (`clean'),  absorb
+> (prv#year indid#year) vce(cluster city)
+ 11. local p = `h' + 5
+ 12. matrix lpdid_b[1, `p'] = _b[new_treat]
+ 13. matrix lpdid_v[`p', `p'] = _se[new_treat]^2
+ 14. }
+(7,097 missing values generated)
+(dropped 47 singleton observations)
+(MWFE estimator converged in 8 iterations)
+
+HDFE Linear regression                            Number of obs   =     18,227
+Absorbing 2 HDFE groups                           F(  11,    256) =       6.63
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.1386
+                                                  Adj R-squared   =     0.0971
+                                                  Within R-sq.    =     0.0038
+Number of clusters (city)    =        257         Root MSE        =     0.3005
+
+                                 (Std. err. adjusted for 257 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       dy_p0 | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   new_treat |   .0114366   .0124015     0.92   0.357    -.0129854    .0358586
+             |
+       lnage |
+         L1. |  -.0409546   .0080349    -5.10   0.000    -.0567775   -.0251317
+             |
+     lnasset |
+         L1. |   .0099397   .0031818     3.12   0.002     .0036739    .0162056
+             |
+      lnsize |
+         L1. |  -.0020835   .0039181    -0.53   0.595    -.0097993    .0056323
+             |
+         lev |
+         L1. |  -.0563376   .0174058    -3.24   0.001    -.0906144   -.0220608
+             |
+         edu |
+         L1. |  -.0166895   .0128751    -1.30   0.196    -.0420441    .0086651
+             |
+         ceo |
+         L1. |   .0118621   .0047452     2.50   0.013     .0025176    .0212067
+             |
+     lngdppc |
+         L1. |   .0000346    .008505     0.00   0.997    -.0167142    .0167833
+             |
+   secondary |
+         L1. |  -.0352891   .0283484    -1.24   0.214    -.0911148    .0205367
+             |
+      govexp |
+         L1. |    .015819   .0599104     0.26   0.792     -.102161    .1337989
+             |
+         ftd |
+         L1. |   .0082652   .0084043     0.98   0.326    -.0082853    .0248156
+             |
+       _cons |   .0327088    .122125     0.27   0.789    -.2077888    .2732063
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+     prv#year |       243           0         243     |
+   indid#year |       595           9         586     |
+------------------------------------------------------+
+(10,813 missing values generated)
+(dropped 43 singleton observations)
+(MWFE estimator converged in 8 iterations)
+
+HDFE Linear regression                            Number of obs   =     14,910
+Absorbing 2 HDFE groups                           F(  11,    249) =       9.51
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.1464
+                                                  Adj R-squared   =     0.1016
+                                                  Within R-sq.    =     0.0075
+Number of clusters (city)    =        250         Root MSE        =     0.4189
+
+                                 (Std. err. adjusted for 250 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       dy_p1 | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   new_treat |   .0256047   .0170001     1.51   0.133    -.0078776    .0590869
+             |
+       lnage |
+         L1. |   -.063164   .0144488    -4.37   0.000    -.0916214   -.0347065
+             |
+     lnasset |
+         L1. |   .0169339   .0051368     3.30   0.001     .0068169    .0270509
+             |
+      lnsize |
+         L1. |  -.0097679    .006335    -1.54   0.124    -.0222449    .0027091
+             |
+         lev |
+         L1. |  -.1465849   .0308516    -4.75   0.000    -.2073484   -.0858215
+             |
+         edu |
+         L1. |  -.0439499    .027461    -1.60   0.111    -.0980354    .0101356
+             |
+         ceo |
+         L1. |    .019563   .0093801     2.09   0.038     .0010885    .0380374
+             |
+     lngdppc |
+         L1. |  -.0000234   .0173829    -0.00   0.999    -.0342597    .0342129
+             |
+   secondary |
+         L1. |  -.0311919   .0579054    -0.54   0.591    -.1452387    .0828549
+             |
+      govexp |
+         L1. |    .101019   .1186802     0.85   0.395    -.1327261     .334764
+             |
+         ftd |
+         L1. |   .0252862   .0164421     1.54   0.125    -.0070972    .0576696
+             |
+       _cons |   .1236658   .2346868     0.53   0.599    -.3385585    .5858901
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+     prv#year |       216           0         216     |
+   indid#year |       525           8         517     |
+------------------------------------------------------+
+(13,863 missing values generated)
+(dropped 42 singleton observations)
+(MWFE estimator converged in 8 iterations)
+
+HDFE Linear regression                            Number of obs   =     12,119
+Absorbing 2 HDFE groups                           F(  11,    243) =       7.38
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.1403
+                                                  Adj R-squared   =     0.0918
+                                                  Within R-sq.    =     0.0082
+Number of clusters (city)    =        244         Root MSE        =     0.4982
+
+                                 (Std. err. adjusted for 244 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       dy_p2 | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   new_treat |   .0417597   .0209381     1.99   0.047     .0005164     .083003
+             |
+       lnage |
+         L1. |  -.0707623   .0221672    -3.19   0.002    -.1144267    -.027098
+             |
+     lnasset |
+         L1. |   .0158278   .0070941     2.23   0.027     .0018539    .0298016
+             |
+      lnsize |
+         L1. |   -.015437   .0087961    -1.75   0.081    -.0327634    .0018893
+             |
+         lev |
+         L1. |  -.1839247   .0522048    -3.52   0.001    -.2867563    -.081093
+             |
+         edu |
+         L1. |  -.0486801   .0379187    -1.28   0.200    -.1233715    .0260112
+             |
+         ceo |
+         L1. |    .023089   .0141402     1.63   0.104    -.0047641    .0509421
+             |
+     lngdppc |
+         L1. |  -.0035566   .0246608    -0.14   0.885    -.0521328    .0450195
+             |
+   secondary |
+         L1. |  -.0086865   .0881457    -0.10   0.922    -.1823135    .1649406
+             |
+      govexp |
+         L1. |   .1626205    .170215     0.96   0.340    -.1726646    .4979057
+             |
+         ftd |
+         L1. |    .028519   .0214991     1.33   0.186    -.0138294    .0708675
+             |
+       _cons |   .3365736   .3420874     0.98   0.326    -.3372613    1.010409
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+     prv#year |       189           0         189     |
+   indid#year |       454           7         447     |
+------------------------------------------------------+
+(16,513 missing values generated)
+(dropped 37 singleton observations)
+(MWFE estimator converged in 8 iterations)
+
+HDFE Linear regression                            Number of obs   =      9,617
+Absorbing 2 HDFE groups                           F(  11,    236) =       5.35
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.1465
+                                                  Adj R-squared   =     0.0946
+                                                  Within R-sq.    =     0.0094
+Number of clusters (city)    =        237         Root MSE        =     0.5574
+
+                                 (Std. err. adjusted for 237 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       dy_p3 | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   new_treat |     .00392   .0264686     0.15   0.882     -.048225     .056065
+             |
+       lnage |
+         L1. |  -.0873598   .0320328    -2.73   0.007    -.1504666   -.0242529
+             |
+     lnasset |
+         L1. |   .0108912      .0099     1.10   0.272    -.0086125     .030395
+             |
+      lnsize |
+         L1. |  -.0024976   .0119448    -0.21   0.835    -.0260296    .0210344
+             |
+         lev |
+         L1. |  -.2381534   .0655967    -3.63   0.000    -.3673834   -.1089235
+             |
+         edu |
+         L1. |  -.0463883   .0497172    -0.93   0.352    -.1443344    .0515579
+             |
+         ceo |
+         L1. |   .0329538   .0176955     1.86   0.064    -.0019076    .0678151
+             |
+     lngdppc |
+         L1. |  -.0086561   .0346336    -0.25   0.803    -.0768865    .0595744
+             |
+   secondary |
+         L1. |   -.068276    .125324    -0.54   0.586    -.3151726    .1786205
+             |
+      govexp |
+         L1. |   .1022018   .2311095     0.44   0.659    -.3530993    .5575029
+             |
+         ftd |
+         L1. |    .044475   .0307884     1.44   0.150    -.0161803    .1051303
+             |
+       _cons |   .5432903   .4812138     1.13   0.260    -.4047331    1.491314
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+     prv#year |       162           0         162     |
+   indid#year |       386           6         380     |
+------------------------------------------------------+
+
+. 
+. matrix bb=lpdid_b
+
+. matrix vv=lpdid_v
+
+. postfile coef str40 term double b se using "../output/lp.dta", replace
+(file ../output/lp.dta not found)
+
+. local terms : colnames bb
+
+. local j=0
+
+. foreach term of local terms {
+  2. local ++j
+  3. post coef ("`term'") (bb[1,`j']) (sqrt(vv[`j',`j']))
+  4. }
+
+. postclose coef
+
+. preserve
+
+. use "../output/lp.dta", clear
+
+. export delimited using "../output/lp.csv", replace
+(file ../output/lp.csv not found)
+file ../output/lp.csv saved
+
+. restore
+
+. 
+. display "COMPLETE_lp"
+COMPLETE_lp
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\wo
+> rk\../output/lp.log
+  log type:  text
+ closed on:  13 Nov 2026, 23:41:49
+---------------------------------------------------------------------------------

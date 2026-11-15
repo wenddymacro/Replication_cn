@@ -1,0 +1,811 @@
+********************************************************************************
+**《财政风险补偿与知识产权质押融资:来自银行分支机构的证据》*********************
+**运行软件Stata/MP 18.0*********************************************************
+********************************************************************************
+cd "定义路径/数据"
+log using 财政风险补偿与知识产权质押融资.log, text replace
+
+
+use 分支机构层面数据,clear
+global    Y            "PPL LnPPL_Num LnPPL_FNum LnPPL_PNum"
+global    X            "Treat Post"
+global    c_pledgee    "Branch_Age"
+global    c_city       "City_TotalLoan City_BankHHI City_ST City_Patent City_GDP "
+global    c_bank       "Bank_Size Bank_ROA  Bank_CAR Bank_Nplra "
+global    c_fiscalcompensation     "Fund_Size Fund_GovShare Fund_Manage Fund_RiskShare Fund_Structure Fund_RC"
+
+************ 基准回归 ************
+// 基准回归结果 ---表1	
+eststo clear	
+reghdfe  PPL                DiD                              , absorb (pledgee_id       year) vce(cluster pledgee_id)  
+eststo r1, t(PPL ) 		 
+reghdfe  PPL                DiD   $c_city                    , absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r2, t(PPL ) 	
+reghdfe  PPL                DiD   $c_city                    , absorb (pledgee_id    bank_name_id#year  ) vce(cluster pledgee_id)
+eststo r3, t(PPL ) 	 
+reghdfe  PPL                DiD   $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r4, t(PPL ) 		
+reghdfe  LnPPL_Num      DiD                              , absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r5, t(LnPPL_Num ) 
+reghdfe  LnPPL_Num      DiD   $c_city                    , absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r6, t(LnPPL_Num ) 
+reghdfe  LnPPL_Num      DiD   $c_city                    , absorb (pledgee_id    bank_name_id#year  ) vce(cluster pledgee_id)
+eststo r7, t(LnPPL_Num ) 
+reghdfe  LnPPL_Num      DiD   $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r8, t(LnPPL_Num ) 
+local result " r1 r2 r3 r4 r5 r6 r7 r8 "
+esttab `result'  using 表1_基准回归结果.rtf, replace  ///
+                 starlevels(* 0.10 ** 0.05 *** 0.01)          ///
+				 stats(N  r2_a, labels("Observations" "Adjusted R2") fmt(%9.0fc  %9.4fc)) 	///
+                 nogap b(%6.4f) se(%6.4f)  ///
+                 keep  (   DiD   $c_city $c_pledgee  $c_bank) ///
+                 order (   DiD   $c_city  $c_pledgee $c_bank) ///
+                 numbers ar2  ///
+                 mtitles(  )   ///
+                 title({\b  })
+
+				 
+
+************ 机制检验 ************
+// 信号引导机制 ---表2
+eststo clear	
+reghdfe  PPL                DiD_Fund_Size  DiD $c_city $c_pledgee $c_bank , absorb (pledgee_id year) vce(cluster pledgee_id)
+eststo r1, t(PPL ) 
+reghdfe  LnPPL_Num      DiD_Fund_Size  DiD $c_city $c_pledgee $c_bank  , absorb (pledgee_id year) vce(cluster pledgee_id)
+eststo r2, t(LnPPL_Num ) 
+reghdfe  PPL                DiD_Fund_GovShare  DiD $c_city $c_pledgee $c_bank , absorb (pledgee_id year) vce(cluster pledgee_id)
+eststo r3, t(PPL ) 
+reghdfe  LnPPL_Num      DiD_Fund_GovShare  DiD $c_city $c_pledgee $c_bank  , absorb (pledgee_id year) vce(cluster pledgee_id)
+eststo r4, t(LnPPL_Num ) 
+reghdfe  PPL                DiD_Fund_Manage  DiD $c_city $c_pledgee $c_bank , absorb (pledgee_id year) vce(cluster pledgee_id)
+eststo r5, t(PPL ) 
+reghdfe  LnPPL_Num      DiD_Fund_Manage  DiD $c_city $c_pledgee $c_bank  , absorb (pledgee_id year) vce(cluster pledgee_id)
+eststo r6, t(LnPPL_Num ) 
+local result "r1 r2 r3 r4 r5 r6"
+esttab `result'  using  表2_信号引导机制.rtf, replace  ///
+                 starlevels(* 0.10 ** 0.05 *** 0.01)          ///
+				 stats(N  r2_a, labels("Observations" "Adjusted R2") fmt(%9.0fc  %9.4fc)) 	///
+                 nogap b(%6.4f) se(%6.4f)  ///
+                 keep  (   DiD_Fund_Size  DiD_Fund_GovShare DiD_Fund_Manage DiD $c_city $c_pledgee $c_bank ) ///
+                 order (   DiD_Fund_Size  DiD_Fund_GovShare DiD_Fund_Manage DiD $c_city $c_pledgee $c_bank ) ///
+                 numbers ar2  ///
+                 mtitles(  )   ///
+                 title({\b  })	
+
+				 
+// 风险分担机制 ---表3
+eststo clear			 
+reghdfe  PPL               DiD_Fund_RiskShare  DiD $c_city $c_pledgee $c_bank , absorb (pledgee_id  year) vce(cluster pledgee_id)
+eststo r1, t(PPL ) 
+reghdfe  LnPPL_Num    DiD_Fund_RiskShare  DiD $c_city $c_pledgee $c_bank  , absorb (pledgee_id  year) vce(cluster pledgee_id)
+eststo r2, t(LnPPL_Num ) 
+reghdfe  PPL               DiD_Fund_Structure  DiD $c_city $c_pledgee $c_bank , absorb (pledgee_id  year) vce(cluster pledgee_id)
+eststo r3, t(PPL ) 
+reghdfe  LnPPL_Num    DiD_Fund_Structure  DiD $c_city $c_pledgee $c_bank  , absorb (pledgee_id  year) vce(cluster pledgee_id)
+eststo r4, t(LnPPL_Num ) 
+reghdfe  PPL               DiD_Fund_RC  DiD $c_city $c_pledgee $c_bank , absorb (pledgee_id  year) vce(cluster pledgee_id)
+eststo r5, t(PPL ) 
+reghdfe  LnPPL_Num    DiD_Fund_RC  DiD $c_city $c_pledgee $c_bank  , absorb (pledgee_id  year) vce(cluster pledgee_id)
+eststo r6, t(LnPPL_Num ) 
+
+local result "r1 r2 r3 r4 r5 r6"
+esttab `result'  using  表3_风险分担机制.rtf, replace  ///
+                 starlevels(* 0.10 ** 0.05 *** 0.01)          ///
+				 stats(N  r2_a, labels("Observations" "Adjusted R2") fmt(%9.0fc  %9.4fc)) 	///
+                 nogap b(%6.4f) se(%6.4f)  ///
+                 keep  (   DiD_Fund_RiskShare DiD_Fund_Structure DiD_Fund_RC DiD $c_city $c_pledgee $c_bank ) ///
+                 order (   DiD_Fund_RiskShare DiD_Fund_Structure DiD_Fund_RC DiD $c_city $c_pledgee $c_bank ) ///
+                 numbers ar2  ///
+                 mtitles(  )   ///
+                 title({\b  })	
+			 
+			 		 			 
+// 风险容忍度提升机制 ---表4	
+eststo clear	
+reghdfe  FirstLoan            DiD  $c_city $c_pledgee $c_bank , absorb (pledgee_id  year) vce(cluster pledgee_id)
+eststo r1, t(FirstLoan ) 
+reghdfe  FirstLoan_Num   DiD  $c_city $c_pledgee $c_bank , absorb (pledgee_id  year) vce(cluster pledgee_id)
+eststo r2, t(FirstLoan_Num ) 
+reghdfe  NewPatent            DiD  $c_city $c_pledgee $c_bank , absorb (pledgee_id  year) vce(cluster pledgee_id) 
+eststo r3, t(NewPatent ) 
+reghdfe  NewPatent_Num  DiD  $c_city $c_pledgee $c_bank , absorb (pledgee_id  year) vce(cluster pledgee_id)
+eststo r4, t(NewPatent_Num ) 
+
+local result " r1 r2 r3 r4 "
+esttab `result'  using  表4_风险容忍度提升机制.rtf, replace  ///
+                 starlevels(* 0.10 ** 0.05 *** 0.01)          ///
+				 stats(N  r2_a, labels("Observations" "Adjusted R2") fmt(%9.0fc  %9.4fc)) 	///
+                 nogap b(%6.4f) se(%6.4f)  ///
+                 keep  ( DiD $c_city $c_pledgee  $c_bank) ///
+                 order ( DiD $c_city  $c_pledgee $c_bank) ///
+                 numbers ar2  ///
+                 mtitles(  )   ///
+                 title({\b  })		
+
+
+
+************ 进一步分析 ************
+// 是否引发新的逆向选择和道德风险  ---表5		 
+eststo clear	
+reghdfe  PPL  DiDHighCET1 DiD  $c_city $c_pledgee $c_bank , absorb (pledgee_id   year) vce(cluster pledgee_id) 
+eststo r1, t(PPL ) 
+reghdfe  LnPPL_Num  DiDHighCET1 DiD  $c_city $c_pledgee $c_bank , absorb (pledgee_id   year) vce(cluster pledgee_id)
+eststo r2, t(LnPPL_Num ) 
+
+local result " r1 r2 "
+esttab `result'  using  表5_是否引发逆向选择和道德风险问题1.rtf, replace  ///
+                 starlevels(* 0.10 ** 0.05 *** 0.01)          ///
+				 stats(N  r2_a, labels("Observations" "Adjusted R2") fmt(%9.0fc  %9.4fc)) 	///
+                 nogap b(%6.4f) se(%6.4f)  ///
+                 keep  (DiD DiDHighCET1 $c_city $c_pledgee  $c_bank) ///
+                 order (DiD DiDHighCET1 $c_city  $c_pledgee $c_bank) ///
+                 numbers ar2  ///
+                 mtitles(  )   ///
+                 title({\b  })	
+
+
+use 银行层面数据,clear
+reghdfe  Bank_Nplra  Treat_Ratio  Bank_Size AssetTurnover LDR Leverage , absorb (bank_name_id   year) vce(cluster bank_name_id)
+eststo r3, t(Bank_Nplra ) 
+reghdfe  Z_Score  Treat_Ratio  Bank_Size AssetTurnover LDR Leverage , absorb (bank_name_id   year) vce(cluster bank_name_id)
+eststo r4, t(Z_Score )
+
+local result " r3 r4 "
+esttab `result'  using  表5_是否引发逆向选择和道德风险问题2.rtf, replace  ///
+                 starlevels(* 0.10 ** 0.05 *** 0.01)          ///
+				 stats(N  r2_a, labels("Observations" "Adjusted R2") fmt(%9.0fc  %9.4fc)) 	///
+                 nogap b(%6.4f) se(%6.4f)  ///
+                 keep  (Treat_Ratio  Bank_Size AssetTurnover LDR Leverage) ///
+                 order (Treat_Ratio  Bank_Size AssetTurnover LDR Leverage) ///
+                 numbers ar2  ///
+                 mtitles(  )   ///
+                 title({\b  })	
+
+
+
+
+************************附录***************************
+// 2011-2024年设立知识产权质押融资风险补偿基金的城市数量  ---附图1
+use 设立风险补偿基金的城市数量数据,clear
+graph twoway bar 累计城市数量 年份, ///
+	color(gray) ///
+    barwidth(0.5) ///
+    ytitle("城市数量 (个)", size(small)) ///
+    ylabel(0(10)150, angle(0) nogrid) ///
+    xtitle("年份", size(small)) ///
+    xlabel(2011(1)2024, angle(0) labsize(small) nogrid) ///
+    graphregion(color(white) lcolor(white)) ///
+    plotregion(color(white) lcolor(white)) ///
+    bgcolor(color(white) lcolor(white)) 
+graph save "附图1_全国设立知识产权质押融资风险补偿基金的城市数量.png", replace
+graph export "附图1_全国设立知识产权质押融资风险补偿基金的城市数量.png",replace width(2500) height(1500)	
+
+
+
+// 2011-2020年银行专利质押合同数量  ---附图2						 
+use 分支机构层面数据, clear	
+collapse (sum) PPL_sum=PPL_Num Patent_sum=PPL_PNum, by(year)				 
+replace Patent_sum=Patent_sum/10000
+				 
+twoway ///
+    (bar Patent_sum year, yaxis(1) barwidth(0.5) fcolor(gs14) lcolor(black)) /// 
+    (line PPL_sum year, yaxis(2) lcolor(black) lwidth(thick)), /// 
+    xlabel(2011(1)2020, noticks nogrid) /// 
+    xtitle("") /// 
+    ytitle("出质专利数量（万）", axis(1) angle(90)) ///
+    ylabel(, axis(1) angle(0) format(%9.1f) nogrid) /// 
+    ytitle("专利质押贷款笔数（笔）", axis(2) angle(90)) ///
+    ylabel(, axis(2) angle(90) format(%9.0fc) nogrid) /// 
+    legend(order(1 "出质专利数量（万）" 2 "专利质押贷款笔数（笔）") ///
+           position(6) ring(1) /// 
+           cols(2) /// 
+           region(lcolor(black)) /// 
+           symxsize(*1.2) ) /// 
+    graphregion(color(white)) plotregion(color(white))	
+
+graph save "附图2_2011-2020年银行专利质押合同数量.png", replace
+graph export "附图2_2011-2020年银行专利质押合同数量.png", replace width(2500) height(1500)	
+
+
+
+// 2011-2020年开展专利质押业务商业银行分支机构数量  ---附图3
+use 分支机构层面数据, clear	
+collapse (sum) count_pledge = PPL (count) count_total = pledgee_id, by(year)
+gen ratio_pledge = (count_pledge / count_total) * 100
+
+twoway ///
+    (bar count_pledge year, yaxis(1) barwidth(0.5) fcolor(gs14) lcolor(black)) /// 
+    (line ratio_pledge year, yaxis(2) lcolor(black) lwidth(thick)), /// 
+    xlabel(2011(1)2020, noticks nogrid) ///
+    xtitle("") ///
+    ytitle("{fontface SimSun:分支机构数量（个）}", axis(1) angle(90)) ///
+    ylabel(, axis(1) angle(90) format(%9.0f) nogrid) ///
+    ytitle("{fontface SimSun:分支机构数量占比（%）}", axis(2) angle(90)) ///
+    ylabel(, axis(2) angle(90) format(%9.0f) nogrid) /// 
+    legend(order(1 "分支机构数量" 2 "分支机构数量占比") ///
+           position(6) ring(1) ///
+           rows(1) /// 
+           region(lcolor(black)) ///
+           symxsize(*1.2) ///
+           ) ///
+    graphregion(color(white)) plotregion(color(white))
+
+graph export "附图3_2011-2020年开展专利质押业务商业银行分支机构数量.png", width(2500) height(1500) replace
+
+	
+	
+// 2011-2020年专利质押贷款地域分布和银行分布  ---附图4
+*1.地域分布				
+use 专利质押贷款地域分布数据.dta,clear
+
+graph set window fontface "Times New Roman"
+graph set window fontfacesans "宋体" 
+
+graph hbar PPL_sum, /// 
+    over(省, sort(PPL_sum) descending /// 
+         label(labsize(medsmall) angle(0))) ///
+    blabel(bar, position(outside) format(%9.0f) size(small)) /// 
+    bar(1, color(gs9) lcolor(gs9)) /// 
+    ytitle("专利质押贷款数量（笔）", size(small)) /// 
+    ylabel(, nogrid glcolor(gs14) glpattern(solid)) /// 
+    graphregion(color(white)) plotregion(color(white)) /// 
+    title("") /// 
+    note("")  // 
+
+graph export "附图4_1_2011-2020年专利质押贷款地域分布.png", width(2500) height(1800) replace	
+
+
+*2.银行分布			
+use 专利质押贷款银行分布数据,clear
+
+graph set window fontface "Times New Roman"
+graph set window fontfacesans "宋体" 
+
+graph hbar PPL_sum, /// 
+    over(bank_name, sort(PPL_sum) descending /// 
+         label(labsize(medsmall) angle(0))) ///
+    blabel(bar, position(outside) format(%9.0f) size(small)) /// 
+    bar(1, color(gs9) lcolor(gs9)) /// 
+    ytitle("专利质押贷款数量（笔）", size(small)) /// 
+    ylabel(, nogrid glcolor(gs14) glpattern(solid)) /// 
+    graphregion(color(white)) plotregion(color(white)) /// 
+    title("") ///
+    note("")  // 
+
+graph export "附图4_2_2011-2020年专利质押贷款银行分布.png", width(2500) height(1800) replace	
+
+
+
+// 描述性统计 ---附表3
+use 分支机构层面数据,clear
+est clear
+eststo:estpost tabstat $Y $X $c_city $c_pledgee $c_bank $c_fiscalcompensation, stats( count mean sd  p50  min max) c(s)
+esttab using 附表3_主要变量描述性统计表.rtf, cells("count(fmt(%9.0fc)) mean(fmt(%9.4fc)) sd(fmt(%9.4fc)) p50(fmt(%9.4fc)) min(fmt(%9.4fc))  max(fmt(%9.4fc)) ")  ///
+replace title(Summary Statistics: Full Sample)
+
+
+
+// 银行分支机构专利质押贷款数量时间趋势图 ---附图5
+use 特征事实数据,clear
+
+twoway ///
+    (connected PPL_Treated year, ///
+        lcolor(black) mcolor(black) lpattern(solid) lwidth(medium) ///
+        msymbol(circle) msize(small)) ///
+    (connected PPL_Control year, ///
+        lcolor(black) mcolor(black) lpattern(dash) lwidth(medium) ///
+        msymbol(circle) msize(small)), ///
+    xlabel(2011(1)2020, labsize(small)) ///
+    ylabel(0(5)35, angle(0) labsize(small) format(%9.2f)) ///
+    ytitle("专利质押贷款数量（笔）", size(small)) ///
+    xtitle("", size(small)) ///
+    legend(label(1 "设立风险补偿基金城市") label(2 "未设立风险补偿基金城市") ///
+           position(6) ring(1) cols(2) size(small)) ///
+    graphregion(color(white) margin(small)) ///
+    plotregion(margin(small)) ///
+    scheme(s1mono)
+
+graph save "附图5_银行分支机构专利质押贷款数量时间趋势图.png", replace
+graph export "附图5_银行分支机构专利质押贷款数量时间趋势图.png", replace width(2500) height(1500)	
+
+
+
+				 
+************ 事前趋势检验 ************
+use 分支机构层面数据,clear
+// ---附图6_1
+gen  distance = year - start_year 
+tab  distance
+replace distance = -4 if distance <= -4 & distance !=.
+replace distance = 4  if distance >= 4 & distance !=.
+forvalues i=1/4 { 
+      gen d_`i'  = 0 
+  replace d_`i'  = 1 if Treat== 1 & distance== -`i'
+  }
+
+forvalues i=1/4 { 
+        gen     d`i'  = 0 
+        replace d`i'  = 1 if Treat== 1 & distance== `i'
+  }
+gen     d0 = 0
+replace d0 = 1 if Treat== 1 & distance== 0
+replace	d_1=0
+
+reghdfe PPL d_4 d_3 d_2 d_1 d0 d1 d2 d3 d4  $c_city $c_pledgee $c_bank,  absorb(pledgee_id year) vce(cluster pledgee_id)
+
+graph set window fontface "Times New Roman"
+graph set window fontfacesans "宋体" 
+
+coefplot, omitted keep(d_4 d_3 d_2 d_1 d0 d1 d2 d3 ) ///
+    coeflabels(d_4="-4" d_3="-3" d_2="-2" d_1="-1" d0="0" d1="1" d2="2" d3="3" ) ///
+    yline(0, lcolor(black)) ///
+	xline(4,lwidth(vthin) lpattern(solid) lcolor(teal)) ///
+    ylabel(-0.05(0.05)0.10,nogrid labsize(medsmall)) ///
+    vertical addplot(line @b @at, lcolor(black)) ///
+    ytitle("{stSans:估}" "{stSans:计}" "{stSans:系}" "{stSans:数}", ///
+        size(medsmall) orientation(h)) ///
+    xtitle("{stSans:a.专利质押贷款发放概率（{it:PPL}）}", size(medsmall)) ///
+    levels(95) ///
+    ciopts(recast(rcap) lpattern(dash) lcolor(black)) ///
+	msymbol(O) msize(small) mcolor(gs1) ///plot样式
+    mcolor(black) ///
+    graphregion(color(white) lcolor(white)) ///
+    plotregion(color(white) lcolor(white)) ///
+    bgcolor(color(white) lcolor(white))
+	
+graph save "附图6_1_事件分析法检验的动态效应结果.gph", replace
+graph export "附图6_1_事件分析法检验的动态效应结果.png", width(2000) replace
+
+
+// ---附图6_2
+reghdfe  LnPPL_Num   d_4 d_3 d_2 d_1 d0 d1 d2 d3 d4  $c_city $c_pledgee $c_bank , absorb (pledgee_id  year) vce(cluster pledgee_id)
+
+graph set window fontface "Times New Roman"
+graph set window fontfacesans "宋体" 
+
+coefplot, omitted keep(d_4 d_3 d_2 d_1 d0 d1 d2 d3 ) ///
+    coeflabels(d_4="-4" d_3="-3" d_2="-2" d_1="-1" d0="0" d1="1" d2="2" d3="3" ) ///
+    yline(0, lcolor(black)) ///
+	xline(4,lwidth(vthin) lpattern(solid) lcolor(teal)) ///
+    ylabel(-0.05(0.05)0.10,nogrid labsize(medsmall)) ///
+    vertical addplot(line @b @at, lcolor(black)) ///
+    ytitle("{stSans:估}" "{stSans:计}" "{stSans:系}" "{stSans:数}", ///
+        size(medsmall) orientation(h)) ///
+    xtitle("{stSans:b.专利质押贷款发放数量（ln{it:PPL_Num}）}", size(medsmall)) ///
+    levels(95) ///
+    ciopts(recast(rcap) lpattern(dash) lcolor(black)) ///
+	msymbol(O) msize(small) mcolor(gs1) ///plot样式
+    mcolor(black) ///
+    graphregion(color(white) lcolor(white)) ///
+    plotregion(color(white) lcolor(white)) ///
+    bgcolor(color(white) lcolor(white))
+    
+graph save "附图6_2_事件分析法检验的动态效应结果.gph", replace
+graph export "附图6_2_事件分析法检验的动态效应结果.png", width(2000) replace
+
+
+				 
+************ 稳健性检验结果 ************
+// 更换变量度量方式 ---附表4、附表5
+**附表4_惠及企业数量	
+use 分支机构层面数据,clear						 
+eststo clear	
+reghdfe  LnPPL_FNum                DiD   $c_city                    , absorb (pledgee_id       year) vce(cluster pledgee_id)
+estadd scalar fit = e(r2_a)
+eststo r1, t(LnPPL_FNum ) 	
+reghdfe  LnPPL_FNum                DiD   $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster pledgee_id)
+estadd scalar fit = e(r2_a)
+eststo r2, t(LnPPL_FNum ) 	
+	
+tobit  LnPPL_FNum                DiD   $c_city                    i.市_id i.year,ll(0) vce(cluster pledgee_id)
+estadd scalar fit = e(r2_p)
+margins, dydx(DiD) predict(ystar(0,.)) cformat(%6.4f)  sformat(%6.4f)
+eststo r3, t(LnPPL_FNum ) 	
+tobit  LnPPL_FNum                DiD   $c_city $c_pledgee $c_bank i.市_id i.year,ll(0) vce(cluster pledgee_id)
+estadd scalar fit = e(r2_p)
+margins, dydx(DiD) predict(ystar(0,.)) cformat(%6.4f)  sformat(%6.4f)
+eststo r4, t(LnPPL_FNum ) 	
+
+local result " r1 r2 r3 r4 "
+esttab `result'  using  附表4_惠及企业数量.rtf, replace  ///
+                 starlevels(* 0.10 ** 0.05 *** 0.01)          ///
+				 stats(N  fit, labels("Observations" "Adjusted/Pseudo R2") fmt(%9.0fc  %9.4fc)) 	///
+                 nogap b(%6.4f) se(%6.4f)  ///
+                 keep  (   DiD   $c_city $c_pledgee  $c_bank) ///
+                 order (   DiD   $c_city  $c_pledgee $c_bank) ///
+                 mtitles(  )   ///
+                 title({\b  })	 
+
+
+**附表5_盘活专利数量
+reghdfe  LnPPL_PNum      DiD   $c_city                    , absorb (pledgee_id       year) vce(cluster pledgee_id)
+estadd scalar fit = e(r2_a)
+eststo r1, t(LnPPL_PNum ) 
+reghdfe  LnPPL_PNum      DiD   $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster pledgee_id)
+estadd scalar fit = e(r2_a)
+eststo r2, t(LnPPL_PNum ) 
+
+tobit  LnPPL_PNum      DiD   $c_city                    i.市_id i.year,ll(0) vce(cluster pledgee_id)
+estadd scalar fit = e(r2_p)
+margins, dydx(DiD) predict(ystar(0,.)) cformat(%6.4f)  sformat(%6.4f)
+eststo r3, t(LnPPL_PNum ) 
+tobit  LnPPL_PNum      DiD   $c_city $c_pledgee $c_bank i.市_id i.year,ll(0) vce(cluster pledgee_id)
+estadd scalar fit = e(r2_p)
+margins, dydx(DiD) predict(ystar(0,.)) cformat(%6.4f)  sformat(%6.4f)
+eststo r4, t(LnPPL_PNum ) 
+
+local result " r1 r2 r3 r4 "
+esttab `result'  using  附表5_盘活专利数量.rtf, replace  ///
+                 starlevels(* 0.10 ** 0.05 *** 0.01)          ///
+				 stats(N  fit, labels("Observations" "Adjusted/Pseudo R2") fmt(%9.0fc  %9.4fc)) 	///
+                 nogap b(%6.4f) se(%6.4f)  ///
+                 keep  (   DiD   $c_city $c_pledgee  $c_bank) ///
+                 order (   DiD   $c_city  $c_pledgee $c_bank) ///
+                 mtitles(  )   ///
+                 title({\b  })	 
+			 
+
+			 				 				 			 
+// 更换模型估计方法 ---附表6
+use 分支机构层面数据,clear	
+est clear
+logit  PPL                DiD    i.市_id i.year,vce(cluster pledgee_id)
+margins, dydx(DiD) cformat(%6.4f)  sformat(%6.4f)
+eststo r1, t(PPL ) 	
+logit  PPL                DiD    $c_city $c_pledgee $c_bank i.市_id i.year,vce(cluster pledgee_id)
+margins, dydx(DiD) cformat(%6.4f)  sformat(%6.4f)
+eststo r2, t(PPL )
+tobit  LnPPL_Num      DiD   i.市_id i.year,ll(0) vce(cluster pledgee_id)
+margins, dydx(DiD) predict(ystar(0,.)) cformat(%6.4f)  sformat(%6.4f)
+eststo r3, t(LnPPL_Num ) 	
+tobit  LnPPL_Num      DiD   $c_city $c_pledgee $c_bank i.市_id i.year,ll(0) vce(cluster pledgee_id)
+margins, dydx(DiD) predict(ystar(0,.)) cformat(%6.4f)  sformat(%6.4f)
+eststo r4, t(LnPPL_Num ) 
+
+local result " r1 r2 r3 r4"
+esttab `result'  using  附表6_更换模型估计方法.rtf, replace  ///
+                 starlevels(* 0.10 ** 0.05 *** 0.01)          ///
+				 stats(N  r2_p, labels("Observations" "Pseudo R2") fmt(%9.0fc  %9.4fc)) 	///
+                 nogap b(%6.4f) se(%6.4f)  ///
+                 keep  (  DiD   $c_city $c_pledgee  $c_bank) ///
+                 order (  DiD   $c_city  $c_pledgee $c_bank) ///
+                 mtitles(  )   ///
+                 title({\b  })					 
+				 
+				 				 
+
+// 调整标准误聚类层级 ---附表7		
+use 分支机构层面数据,clear				 
+eststo clear	
+reghdfe  PPL                DiD   $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster 市_id)
+eststo r1, t(PPL ) 		
+reghdfe  LnPPL_Num      DiD   $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster 市_id)
+eststo r2, t(LnPPL_Num ) 
+reghdfe  PPL                DiD   $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster bank_name_id)
+eststo r3, t(PPL ) 		
+reghdfe  LnPPL_Num      DiD   $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster bank_name_id)
+eststo r4, t(LnPPL_Num ) 
+local result " r1 r2 r3 r4 "
+esttab `result'  using 附表7_调整标准误聚类层级.rtf, replace  ///
+                 starlevels(* 0.10 ** 0.05 *** 0.01)          ///
+				 stats(N  r2_a, labels("Observations" "Adjusted R2") fmt(%9.0fc  %9.4fc)) 	///
+                 nogap b(%6.4f) se(%6.4f)  ///
+                 keep  (   DiD   $c_city $c_pledgee  $c_bank) ///
+                 order (   DiD   $c_city  $c_pledgee $c_bank) ///
+                 numbers ar2  ///
+                 mtitles(  )   ///
+                 title({\b  })
+
+			 
+//倾向得分匹配 ---附表8
+use 分支机构层面数据,clear
+eststo clear
+set seed 1234
+gen ranorder=runiform()
+sort ranorder
+psmatch2 Treat $c_city $c_pledgee $c_bank , outcome(PPL) neighbor(1) common logit noreplacement ate cal(0.02) 
+gen _weightA=_weight
+psmatch2 Treat $c_city $c_pledgee $c_bank , outcome(LnPPL_Num) neighbor(1) common logit noreplacement ate cal(0.02) 
+gen _weightB=_weight
+	
+reghdfe  PPL                DiD  if _weightA!=. , absorb (pledgee_id       year) vce(cluster pledgee_id) 
+eststo r1, t(PPL )	
+reghdfe  PPL                DiD   $c_city $c_pledgee $c_bank if _weightA!=. , absorb (pledgee_id       year) vce(cluster pledgee_id) 
+eststo r2, t(PPL )
+reghdfe  LnPPL_Num                DiD  if _weightB!=. , absorb (pledgee_id       year) vce(cluster pledgee_id) 
+eststo r3, t(LnPPL_Num )
+reghdfe  LnPPL_Num                DiD   $c_city $c_pledgee $c_bank if _weightB!=. , absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r4, t(LnPPL_Num )
+
+local result " r1 r2 r3 r4 "
+esttab `result'  using  附表8_倾向得分匹配.rtf, replace  ///
+                 starlevels(* 0.10 ** 0.05 *** 0.01)          ///
+				 stats(N  r2_a, labels("Observations" "Adjusted R2") fmt(%9.0fc  %9.4fc)) 	///
+                 nogap b(%6.4f) se(%6.4f)  ///
+                 keep  (  DiD   $c_city $c_pledgee  $c_bank) ///
+                 order (  DiD   $c_city  $c_pledgee $c_bank) ///
+                 numbers ar2  ///
+                 mtitles(  )   ///
+                 title({\b  })	
+
+
+
+//政策预期效应检验 ---附表9
+use 分支机构层面数据,clear
+est clear
+reghdfe  PPL                DiD DiD1  $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r1, t(PPL ) 	
+reghdfe  LnPPL_Num      DiD DiD1  $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r2, t(LnPPL_Num ) 
+reghdfe  PPL                DiD DiD2  $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r3, t(PPL ) 
+reghdfe  LnPPL_Num      DiD DiD2  $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r4, t(LnPPL_Num ) 	
+reghdfe  PPL                DiD DiD1 DiD2  $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r5, t(PPL ) 	
+reghdfe  LnPPL_Num      DiD DiD1 DiD2  $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r6, t(LnPPL_Num ) 
+
+local result " r1 r2 r3 r4 r5 r6 "
+esttab `result'  using 附表9_预期效应检验.rtf, replace  ///
+                 starlevels(* 0.10 ** 0.05 *** 0.01)          ///
+				 stats(N  r2_a, labels("Observations" "Adjusted R2") fmt(%9.0fc  %9.4fc)) 	///
+                 nogap b(%6.4f) se(%6.4f)  ///
+                 keep  (   DiD DiD1 DiD2 $c_city $c_pledgee  $c_bank) ///
+                 order (   DiD DiD1 DiD2 $c_city  $c_pledgee $c_bank) ///
+                 numbers ar2  ///
+                 mtitles(  )   ///
+                 title({\b  })
+
+				 
+				 
+// 特征平衡性检验 ---附表10				 
+use 分支机构层面数据,clear
+keep if year==2015
+
+est clear
+eststo:estpost tabstat City_TotalLoan City_BankHHI City_ST City_Patent City_GDP LnPPL_Num, by(Treat) stats( count mean sd ) c(s)
+esttab using 附表10_1_组间差异.rtf, cells("count(fmt(%9.0fc)) mean(fmt(%9.4fc)) sd(fmt(%9.4fc)) ")  ///
+replace title(Summary Statistics: Full Sample)
+
+ttest City_TotalLoan, by(Treat)
+ttest City_BankHHI, by(Treat)
+ttest City_ST, by(Treat)
+ttest City_Patent, by(Treat)				 
+ttest City_GDP, by(Treat)
+ttest LnPPL_Num , by(Treat)		 
+		
+reg LnPPL_Num Treat ,cformat(%6.4f) pformat(%6.4f) sformat(%6.4f)
+reg LnPPL_Num Treat  City_TotalLoan City_BankHHI City_ST City_Patent City_GDP ,cformat(%6.4f) pformat(%6.4f) sformat(%6.4f)	
+
+
+
+// 控制更多城市特征变量  ---附表11
+use 分支机构层面数据,clear	
+est clear
+reghdfe  PPL                DiD   CityDeficit CityHTFirm, absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r1, t(PPL ) 
+reghdfe  PPL                DiD   $c_city $c_pledgee $c_bank CityDeficit CityHTFirm, absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r2, t(PPL ) 
+reghdfe  LnPPL_Num      DiD   CityDeficit CityHTFirm, absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r3, t(LnPPL_Num )
+reghdfe  LnPPL_Num      DiD   $c_city $c_pledgee $c_bank CityDeficit CityHTFirm, absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r4, t(LnPPL_Num )
+local result " r1 r2 r3 r4 "
+esttab `result'  using  附表11_控制更多城市特征变量.rtf, replace  ///
+                 starlevels(* 0.10 ** 0.05 *** 0.01)          ///
+				 stats(N  r2_a, labels("Observations" "Adjusted R2") fmt(%9.0fc  %9.4fc)) 	///
+                 nogap b(%6.4f) se(%6.4f)  ///
+                 keep  (   DiD CityDeficit CityHTFirm $c_city $c_pledgee  $c_bank) ///
+                 order (   DiD CityDeficit CityHTFirm $c_city  $c_pledgee $c_bank) ///
+                 numbers ar2  ///
+                 mtitles(  )   ///
+                 title({\b  })					 
+				 
+
+
+// 控制异质性时间趋势 ---附表12
+use 分支机构层面数据,clear	
+est clear
+reghdfe  PPL                DiD   $c_city $c_pledgee $c_bank , absorb (pledgee_id       year BankType#year) vce(cluster pledgee_id)
+eststo r1, t(PPL ) 		
+reghdfe  LnPPL_Num      DiD   $c_city $c_pledgee $c_bank , absorb (pledgee_id       year BankType#year) vce(cluster pledgee_id)
+eststo r2, t(LnPPL_Num )
+reghdfe  PPL                DiD   $c_city $c_pledgee $c_bank , absorb (pledgee_id       year c.City_TotalLoan#year) vce(cluster pledgee_id)
+eststo r3, t(PPL ) 		
+reghdfe  LnPPL_Num      DiD   $c_city $c_pledgee $c_bank , absorb (pledgee_id       year c.City_TotalLoan#year) vce(cluster pledgee_id)
+eststo r4, t(LnPPL_Num )
+reghdfe  PPL                DiD   $c_city $c_pledgee $c_bank , absorb (pledgee_id       year c.City_GovInrate#year) vce(cluster pledgee_id)
+eststo r5, t(PPL ) 		
+reghdfe  LnPPL_Num      DiD   $c_city $c_pledgee $c_bank , absorb (pledgee_id       year c.City_GovInrate#year) vce(cluster pledgee_id)
+eststo r6, t(LnPPL_Num ) 
+
+local result " r1 r2 r3 r4 r5 r6 "
+esttab `result'  using  附表12_控制异质性时间趋势.rtf, replace  ///
+                 starlevels(* 0.10 ** 0.05 *** 0.01)          ///
+				 stats(N  r2_a, labels("Observations" "Adjusted R2") fmt(%9.0fc  %9.4fc)) 	///
+                 nogap b(%6.4f) se(%6.4f)  ///
+                 keep  (   DiD   $c_city $c_pledgee  $c_bank) ///
+                 order (   DiD   $c_city  $c_pledgee $c_bank) ///
+                 numbers ar2  ///
+                 mtitles(  )   ///
+                 title({\b  })				 
+
+
+				 
+				 
+// 排除科技金融相关干扰政策 ---附表13
+use 分支机构层面数据,clear		
+eststo clear
+reghdfe  PPL                DiD   $c_city $c_pledgee $c_bank ST_Branch, absorb (pledgee_id        year ) vce(cluster pledgee_id)
+eststo r1, t(PPL ) 
+reghdfe  LnPPL_Num      DiD   $c_city $c_pledgee $c_bank ST_Branch, absorb (pledgee_id        year ) vce(cluster pledgee_id)
+eststo r2, t(LnPPL_Num ) 
+reghdfe  PPL                DiD   $c_city $c_pledgee $c_bank ST_Finance, absorb (pledgee_id        year ) vce(cluster pledgee_id)
+eststo r3, t(PPL ) 
+reghdfe  LnPPL_Num      DiD   $c_city $c_pledgee $c_bank ST_Finance, absorb (pledgee_id        year ) vce(cluster pledgee_id)
+eststo r4, t(LnPPL_Num ) 
+reghdfe  PPL                DiD   $c_city $c_pledgee $c_bank Gov_Fund, absorb (pledgee_id        year ) vce(cluster pledgee_id)
+eststo r5, t(PPL ) 
+reghdfe  LnPPL_Num      DiD   $c_city $c_pledgee $c_bank Gov_Fund, absorb (pledgee_id        year ) vce(cluster pledgee_id)
+eststo r6, t(LnPPL_Num ) 
+reghdfe  PPL                DiD   $c_city $c_pledgee $c_bank VC_Investment, absorb (pledgee_id        year ) vce(cluster pledgee_id)
+eststo r7, t(PPL ) 
+reghdfe  LnPPL_Num      DiD   $c_city $c_pledgee $c_bank VC_Investment, absorb (pledgee_id        year ) vce(cluster pledgee_id)
+eststo r8, t(LnPPL_Num ) 
+
+local result " r1 r2 r3 r4 r5 r6 r7 r8 "
+esttab `result'  using  附表13_排除科技金融相关干扰政策.rtf, replace  ///
+                 starlevels(* 0.10 ** 0.05 *** 0.01)          ///
+				 stats(N  r2_a, labels("Observations" "Adjusted R2") fmt(%9.0fc  %9.4fc)) 	///
+                 nogap b(%6.4f) se(%6.4f)  ///
+                 keep  (   DiD ST_Branch ST_Finance Gov_Fund VC_Investment $c_city $c_pledgee  $c_bank) ///
+                 order (   DiD ST_Branch ST_Finance Gov_Fund VC_Investment $c_city  $c_pledgee $c_bank) ///
+                 numbers ar2  ///
+                 mtitles(  )   ///
+                 title({\b  })
+
+
+				 
+// 排除专利质押相关干扰政策 ---附表14	
+use 分支机构层面数据,clear					 
+est clear
+reghdfe  PPL                DiD  PledgeCity  $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r1, t(PPL ) 		
+reghdfe  LnPPL_Num      DiD  PledgeCity  $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r2, t(LnPPL_Num ) 
+reghdfe  PPL                DiD    ExchangeCity $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r3, t(PPL ) 		
+reghdfe  LnPPL_Num      DiD    ExchangeCity $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r4, t(LnPPL_Num )
+reghdfe  PPL                DiD    InsuranceCity $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r5, t(PPL ) 		
+reghdfe  LnPPL_Num      DiD    InsuranceCity $c_city $c_pledgee $c_bank , absorb (pledgee_id       year) vce(cluster pledgee_id)
+eststo r6, t(LnPPL_Num )
+local result " r1 r2 r3 r4 r5 r6 "
+esttab `result'  using  附表14_排除专利质押相关干扰政策.rtf, replace  ///
+                 starlevels(* 0.10 ** 0.05 *** 0.01)          ///
+				 stats(N  r2_a, labels("Observations" "Adjusted R2") fmt(%9.0fc  %9.4fc)) 	///
+                 nogap b(%6.4f) se(%6.4f)  ///
+                 keep  (   DiD PledgeCity ExchangeCity InsuranceCity $c_city $c_pledgee  $c_bank) ///
+                 order (   DiD PledgeCity ExchangeCity InsuranceCity $c_city  $c_pledgee $c_bank) ///
+                 numbers ar2  ///
+                 mtitles(  )   ///
+                 title({\b  })						 
+				 
+				 
+				 
+// 安慰剂检验 
+**附图7_1		
+use 分支机构层面数据,clear
+set seed 0000	
+permute DiD beta = _b[DiD] se = _se[DiD] df = e(df_r), reps(500)  saving("安慰剂检验数据1.dta", replace): reghdfe  PPL   DiD  $c_city $c_pledgee $c_bank , absorb (pledgee_id     year) vce(cluster pledgee_id) 
+
+use "安慰剂检验数据1.dta", clear
+gen p_value = 2* ttail(df ,abs(beta/se))    
+twoway (kdensity beta , lp(solid) lcolor(black))  (scatter p_value beta, msymbol(smcircle_hollow) mcolor(black*1.5) yaxis(2)) , ///
+       title("{it:PPL}") ///
+       xlabel(-0.01 0 0.01 0.02 0.03 0.04,nogrid labsize(small) angle(0)) ///
+       ylabel(0(0.1)1,   format(%7.1f) angle(0) nogrid axis(2)) ///
+       ylabel(,   angle(0) nogrid axis(1)) ///
+       xtitle("{stSans:系数估计值}"  ,orientation(horizontal) margin(t+2)) ///
+       ytitle("P" "{stSans:值}"               ,orientation(horizontal)  axis(2)) ///
+       ytitle("{stSans:概}"  "{stSans:率}"  "{stSans:密}"  "{stSans:度}" ,orientation(horizontal)  axis(1)) ///
+       xline(0,       lc(black*1.5) lp(dash))  ///
+       xline(0.0381, lc(black*1.5) lp(solid)) ///
+	   legend(order(1 "{stSans:概率密度}" 2 "{stSans:P值}" ) ///  
+       position(6) row(1) cols(2) size(small) ///  
+       region(style(solid) fcolor(white) lcolor(black))) ///  
+       plotregion(style(none)) /// 
+       graphregion(color(white)) 
+graph save   "附图7_1_安慰剂检验图PPL.gph", replace
+graph export "附图7_1_安慰剂检验图PPL.png", width(2400) replace
+
+
+**附图7_2
+use 分支机构层面数据,clear	
+set seed 0000
+permute DiD beta = _b[DiD] se = _se[DiD] df = e(df_r), reps(500)  saving("安慰剂检验数据2.dta", replace): reghdfe  LnPPL_Num   DiD  $c_city $c_pledgee $c_bank , absorb (pledgee_id     year) vce(cluster pledgee_id) 
+
+use "安慰剂检验数据2.dta", clear
+gen p_value = 2* ttail(df ,abs(beta/se))    
+twoway (kdensity beta,lp(solid) lcolor(black)) (scatter p_value beta,msymbol(smcircle_hollow) mcolor(black*1.5)  yaxis(2)), ///
+       title("ln{it:PPL_Num}") ///
+       xlabel( -0.01 0 0.01 0.02 0.03 0.04,nogrid labsize(small) angle(0)) ///
+       ylabel(0(0.1)1,   format(%7.1f) angle(0) nogrid axis(2)) ///
+       ylabel(,   angle(0) nogrid axis(1)) ///
+       xtitle("{stSans:系数估计值}"  ,orientation(horizontal) margin(t+2)) ///
+       ytitle("P" "{stSans:值}"               ,orientation(horizontal)  axis(2)) ///
+       ytitle("{stSans:概}"  "{stSans:率}"  "{stSans:密}"  "{stSans:度}" ,orientation(horizontal)  axis(1)) ///
+       xline(0,       lc(black*1.5) lp(dash))  ///
+       xline(0.0393, lc(black*1.5) lp(solid)) ///
+	   legend(order(1 "{stSans:概率密度}" 2 "{stSans:P值}" ) ///  
+       position(6) row(1) cols(2) size(small) ///  
+       region(style(solid) fcolor(white) lcolor(black))) ///  
+       plotregion(style(none)) /// 
+       graphregion(color(white)) 
+graph save   "附图7_2_安慰剂检验图LnPPLNum.gph",replace
+graph export "附图7_2_安慰剂检验图LnPPLNum.png", width(2400) replace				
+
+
+
+// 银行专利质押经验的影响  ---附表15
+use 分支机构层面数据,clear					 
+eststo clear
+reghdfe  PPL               DiD  $c_city $c_pledgee $c_bank if High_PNum==1, absorb (pledgee_id     year) vce(cluster pledgee_id)
+eststo r1, t(PPL ) 
+reghdfe  LnPPL_Num     DiD  $c_city $c_pledgee $c_bank if High_PNum==1, absorb (pledgee_id   year) vce(cluster pledgee_id)
+eststo r2, t(LnPPL_Num ) 
+reghdfe  PPL             DiD  $c_city $c_pledgee $c_bank   if High_PNum==0, absorb (pledgee_id     year) vce(cluster pledgee_id) 
+eststo r3, t(PPL ) 
+reghdfe  LnPPL_Num    DiD  $c_city $c_pledgee $c_bank  if High_PNum==0, absorb (pledgee_id   year) vce(cluster pledgee_id)
+eststo r4, t(LnPPL_Num ) 
+
+reghdfe  PPL               DiD  $c_city $c_pledgee $c_bank if High_FNum==1, absorb (pledgee_id     year) vce(cluster pledgee_id)
+eststo r5, t(PPL ) 
+reghdfe  LnPPL_Num     DiD  $c_city $c_pledgee $c_bank if High_FNum==1, absorb (pledgee_id   year) vce(cluster pledgee_id)
+eststo r6, t(LnPPL_Num ) 
+reghdfe  PPL             DiD  $c_city $c_pledgee $c_bank   if High_FNum==0, absorb (pledgee_id     year) vce(cluster pledgee_id) 
+eststo r7, t(PPL ) 
+reghdfe  LnPPL_Num    DiD  $c_city $c_pledgee $c_bank  if High_FNum==0, absorb (pledgee_id   year) vce(cluster pledgee_id)
+eststo r8, t(LnPPL_Num ) 
+local result " r1 r2 r3 r4 r5 r6 r7 r8 "
+esttab `result'  using  附表15_银行专利质押经验的异质性影响.rtf, replace  ///
+                 starlevels(* 0.10 ** 0.05 *** 0.01)          ///
+				 stats(N  r2_a, labels("Observations" "Adjusted R2") fmt(%9.0fc  %9.4fc)) 	///
+                 nogap b(%6.4f) se(%6.4f)  ///
+                 keep  (    DiD $c_city $c_pledgee  $c_bank) ///
+                 order (    DiD $c_city  $c_pledgee $c_bank) ///
+                 numbers ar2  ///
+                 mtitles(  )   ///
+                 title({\b  })					 
+				 
+				 
+				 
+// 专利二级市场流动性的影响  ---附表16
+use 分支机构层面数据,clear
+est clear
+reghdfe  PPL           DiD  $c_city $c_pledgee $c_bank if High_Turnover==1 , absorb (pledgee_id     year) vce(cluster pledgee_id) 
+eststo r1, t(PPL ) 
+reghdfe  LnPPL_Num DiD  $c_city $c_pledgee $c_bank if High_Turnover==1  , absorb (pledgee_id   year) vce(cluster pledgee_id)
+eststo r2, t(LnPPL_Num ) 
+reghdfe  PPL           DiD  $c_city $c_pledgee $c_bank if High_Turnover==0 , absorb (pledgee_id     year) vce(cluster pledgee_id) 
+eststo r3, t(PPL ) 
+reghdfe  LnPPL_Num DiD  $c_city $c_pledgee $c_bank if High_Turnover==0  , absorb (pledgee_id   year) vce(cluster pledgee_id)
+eststo r4, t(LnPPL_Num ) 
+local result " r1 r2 r3 r4 "
+
+esttab `result'  using  附表16_专利质押物二级市场流动性的异质性影响.rtf, replace  ///
+                 starlevels(* 0.10 ** 0.05 *** 0.01)          ///
+				 stats(N  r2_a, labels("Observations" "Adjusted R2") fmt(%9.0fc  %9.4fc)) 	///
+                 nogap b(%6.4f) se(%6.4f)  ///
+                 keep  (   DiD  $c_city $c_pledgee  $c_bank) ///
+                 order (   DiD  $c_city  $c_pledgee $c_bank) ///
+                 numbers ar2  ///
+                 mtitles(  )   ///
+                 title({\b  })	
+				 
+log close				 
+				 
+**说明：城市编号82为天津市，样本期间仅在东丽区出台风险补偿政策******************
+				 

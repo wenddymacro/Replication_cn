@@ -1,0 +1,58 @@
+{
+  "specifications": 30,
+  "result_rows": 31,
+  "main_specifications": 1,
+  "secondary_static": 28,
+  "secondary_event": 1,
+  "static_bootstrap_B": 999,
+  "static_bootstrap_specs": 29,
+  "author_static_models": 30,
+  "author_reported_coefficients_exact": 32,
+  "estimator_counts": {
+    "csa": {
+      "points": 6,
+      "with_se": 5
+    },
+    "bjs": {
+      "points": 31,
+      "with_se": 31
+    }
+  },
+  "bjs_opposite_direction_rows": 1,
+  "twfe_sig5_bjs_not_sig5_rows": 13,
+  "sensitivity_separate": true,
+  "upstream_R_unchanged": true
+}
+spec_id window      twfe      csa   csa_se       bjs   bjs_se
+     F1   post  0.049532      NaN      NaN  0.045423 0.025296
+     F1    pre -0.011895      NaN      NaN  0.018166 0.029964
+   T1_2 static  0.074245 0.039468      NaN  0.087863 0.021751
+   T1_3 static  0.059631      NaN      NaN  0.059152 0.020093
+   T1_4 static  0.057120      NaN      NaN  0.045434 0.024924
+   T2_1 static  0.055135 0.007148 0.029455  0.043352 0.033542
+   T2_2 static  0.082888 0.056564 0.027554  0.080366 0.028577
+   T2_3 static  0.144841 5.594056 0.955571  0.134726 0.042999
+   T2_4 static  0.101438 0.048324 0.034146  0.088857 0.039893
+   T2_5 static  0.072627 4.847610 0.584919  0.069627 0.034746
+   T3_1 static  0.041960      NaN      NaN  0.041240 0.019134
+   T3_2 static  0.040824      NaN      NaN  0.032775 0.024298
+   T3_3 static  0.100803      NaN      NaN  0.102502 0.044099
+   T3_4 static  0.046144      NaN      NaN  0.035144 0.023352
+   T4_1 static -0.045376      NaN      NaN -0.045911 0.024907
+   T4_2 static  0.086925      NaN      NaN  0.112769 0.065749
+   T4_3 static  0.202142      NaN      NaN  0.321849 0.090180
+   T4_4 static  0.084804      NaN      NaN  0.089281 0.039810
+   T4_5 static  0.041791      NaN      NaN  0.049823 0.036692
+   T4_6 static  0.033525      NaN      NaN  0.020791 0.021033
+   T5_1 static  0.056473      NaN      NaN  0.080638 0.041225
+   T5_2 static  0.088309      NaN      NaN  0.071507 0.045035
+   T5_3 static  0.073792      NaN      NaN  0.064101 0.056614
+   T5_4 static  0.116670      NaN      NaN  0.079910 0.057274
+   T5_5 static  0.117357      NaN      NaN  0.080319 0.058349
+   T6_1 static  0.058953      NaN      NaN  0.043067 0.037965
+   T6_2 static  0.045012      NaN      NaN  0.023825 0.033776
+   T6_3 static  0.055933      NaN      NaN  0.038775 0.038956
+   T6_4 static  0.048390      NaN      NaN  0.031442 0.031047
+   T6_5 static  0.065843      NaN      NaN  0.134303 0.036728
+   T6_6 static  0.061550      NaN      NaN  0.039485 0.031898
+Sensitivity [{'twfe': 0.0801987468763683, 'csa': 0.0394749648035892, 'csa_se': 0.028584910585984, 'bjs': 0.0926730332531528, 'bjs_se': 0.0222531576865998}]

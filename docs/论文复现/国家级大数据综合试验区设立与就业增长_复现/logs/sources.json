@@ -1,0 +1,10 @@
+{
+  "article_url": "https://ciejournal.ajcass.com/Magazine/show/?id=117612",
+  "pdf_url": "https://ciejournal.ajcass.com/UploadFile/Issue/201606280001/2024/12//20241231103755WU_FILE_1.pdf",
+  "zip_url": "https://ciejournal.ajcass.com/UploadFile/Issue/201606280001/2024/12//20241231103744WU_FILE_0.zip",
+  "file_acquisition": "用户在本聊天提供Downloads中的PDF与ZIP；本次读取并复制本地原件。",
+  "http_status": null,
+  "http_note": "未获取可靠HTTP响应状态；不把文件存在或网页不可访问臆测为HTTP 200、403等。",
+  "completeness": "ZIP CRC通过；全部公开包内文件已解压、分类并校验散列；已核对PDF页数及关键表格。",
+  "date": "2026-11-14"
+}

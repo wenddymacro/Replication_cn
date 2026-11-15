@@ -1,0 +1,25 @@
+{
+  "title": "新城新区建设与地区创业活跃度",
+  "date": "2026-11-15",
+  "author_static_models": 22,
+  "printed_coefficients_exact": 27,
+  "author_event_path_recomputed": true,
+  "table1_numeric_cells_exact": 24,
+  "canonical_main_supported": 1,
+  "implementation_pool_specs": 16,
+  "combined_specs": 17,
+  "combined_result_rows": 18,
+  "static_specs": 16,
+  "static_B": 999,
+  "original_csa_points": 1,
+  "original_csa_with_se": 1,
+  "bjs_points_and_se": 18,
+  "basis_diagnostic_with_se": 17,
+  "main_csa_valid_post_cells": 6,
+  "main_csa_total_post_cells": 44,
+  "core_R_unchanged": true,
+  "canonical_pool_assignment_pending_for_baseline_interactions": true,
+  "event_reported_window_driver_explicit": true,
+  "appendix_not_fully_reproduced": true
+}
+main p-values {'twfe_p_normal': 0.016200495971712758, 'csa_p_normal': 0.17068740831794804, 'bjs_p_normal': 0.07091695431942341}

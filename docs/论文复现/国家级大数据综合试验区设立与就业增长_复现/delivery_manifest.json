@@ -1,0 +1,2577 @@
+[
+  {
+    "file": "复现报告.md",
+    "bytes": 16029,
+    "sha256": "6B248D7262457D1BCD91789E87E83A293A44C138D9B9C41A85A2057B98889835"
+  },
+  {
+    "file": "研究裁定.md",
+    "bytes": 5688,
+    "sha256": "74856A8CC44B1BDF1BCCBE41D10C3076BB91FAAC23C5C5A8FA088867494325EB"
+  },
+  {
+    "file": "ancillary.py",
+    "bytes": 1329,
+    "sha256": "AEF2B6AF1ED36057ED88F2EB8300C7F89D2CFE92C7BE941BC3C6D9E6A845EA5F"
+  },
+  {
+    "file": "build_specs.py",
+    "bytes": 7868,
+    "sha256": "100B6023D10F9560B11F93408EA5A9038444328B06211D6D27CE00B6275533E7"
+  },
+  {
+    "file": "collect.ps1",
+    "bytes": 1254,
+    "sha256": "5E65473B7678CD9855EE42A82C2F64C466BED326754CD040C44D4ABA3A3558A8"
+  },
+  {
+    "file": "finish_report.py",
+    "bytes": 16073,
+    "sha256": "CE78DCF68A020443821B01A362995573092BAE9C8C38B20ABEA0A243B25DF0B9"
+  },
+  {
+    "file": "launch.ps1",
+    "bytes": 1030,
+    "sha256": "937948E87A3184DF9924BDF124455654A81201A084CFF6116B7A98992D5D3A6A"
+  },
+  {
+    "file": "organize_delivery.py",
+    "bytes": 2590,
+    "sha256": "7D5C484A67CA5BEF7AB03CDEF11A756BFFA9DB111C47FE6C2CA5857302A966E6"
+  },
+  {
+    "file": "prepare.py",
+    "bytes": 4698,
+    "sha256": "78F0554684A11A5AC7A94F744437B716316C0E1A8FA0322C2FEB88293315B798"
+  },
+  {
+    "file": "publish.ps1",
+    "bytes": 1669,
+    "sha256": "F15F8E610ABD77D9BD6A68C04F9EDCEFC5E4E293A192DAF2FA54141606ABF761"
+  },
+  {
+    "file": "README.md",
+    "bytes": 1432,
+    "sha256": "F448A4AD32378920B60DBEDF9E674F89739B3E6EF299862721461C37C724C213"
+  },
+  {
+    "file": "rerun_modern.ps1",
+    "bytes": 2148,
+    "sha256": "D47935DE49E3C8D7C2B7FF0F12FB7607BF1733E4F864D7340B2407BFBEF9F979"
+  },
+  {
+    "file": "sensitivity.py",
+    "bytes": 1010,
+    "sha256": "19304C76F842922ABC9C7173288D14463D634318B903163152AF702674DA0928"
+  },
+  {
+    "file": "update_catalog.py",
+    "bytes": 1407,
+    "sha256": "0C67BC2A7DB7850B274FAD3D63AE76ED37CF15EC7A3D917F201C16E1A1868FC6"
+  },
+  {
+    "file": "data\\author_results.csv",
+    "bytes": 2599,
+    "sha256": "376947F01C4B6871E1868C129C73B36C7C46C30078F30F9A4C04C61E5C60BBFB"
+  },
+  {
+    "file": "data\\author_results.dta",
+    "bytes": 6803,
+    "sha256": "6A00AB3260671FF2EDD0ED0752984475ECFEFF6D309218AA89F47D32A4E26420"
+  },
+  {
+    "file": "data\\city_analysis.csv",
+    "bytes": 759116,
+    "sha256": "A8A69C6C52551B9F76FAE4D576EF37D29694940D87F4296325831DD35275DECF"
+  },
+  {
+    "file": "data\\city_flags.csv",
+    "bytes": 53873,
+    "sha256": "E317417251A42A12D53A0ADEF2138D71654F5DFDA4ED96F1E1F5BE325B8463F7"
+  },
+  {
+    "file": "data\\completion_summary.json",
+    "bytes": 567,
+    "sha256": "A9C0A2D2778803E50619F874E53677D868C078CBFC70E751B78A4F77598D3D94"
+  },
+  {
+    "file": "data\\firm_analysis.csv",
+    "bytes": 20498009,
+    "sha256": "FF443618E69828700BFC050FFB47BF041F6EE4062DF28F20FB5151F9D915B13D"
+  },
+  {
+    "file": "data\\firm_flags.csv",
+    "bytes": 1720449,
+    "sha256": "F4C02494170F8BBC03CB2A2214707A0C5EBBCC42160D2AA859B66C9116413A53"
+  },
+  {
+    "file": "data\\modern_results.csv",
+    "bytes": 20879,
+    "sha256": "502E2F801B374711A306B058E620FD2C47746C3055BC339E519DE6798602E087"
+  },
+  {
+    "file": "data\\published_comparison.csv",
+    "bytes": 2688,
+    "sha256": "17B460EAD9490F87B61AB4937942893E3E2802B0FA90C5DAFC41587197AE13F4"
+  },
+  {
+    "file": "data\\stable_city_sensitivity.csv",
+    "bytes": 1248,
+    "sha256": "92D2657E2A288E5D96AD6B2E5E0714AE730A71075A607EA29F5ED03DEAB7AECA"
+  },
+  {
+    "file": "data\\table7_counts.csv",
+    "bytes": 154,
+    "sha256": "5E8C827DD0B79373351D40150EEBD2068D648EBE76A0ABF9709A1B4824932400"
+  },
+  {
+    "file": "dependencies\\stata_ado\\_csdid_engine_load.ado",
+    "bytes": 28572,
+    "sha256": "DB162CC0365FEE9375D1FE7A9A57E6567FC1DDB5FC00C01B1968EDC746858689"
+  },
+  {
+    "file": "dependencies\\stata_ado\\_csdid_post.ado",
+    "bytes": 28687,
+    "sha256": "ED124FB9BD0EA1D0B2C002DA5DE543719402CB2EC1C1B4631073D6ACDE1833A0"
+  },
+  {
+    "file": "dependencies\\stata_ado\\_gcsgvar.ado",
+    "bytes": 7914,
+    "sha256": "59CC0F31A9D41F7E9E6AC2A2A8D089E6D353AEF34784B51EDF9947F4A8DC72A4"
+  },
+  {
+    "file": "dependencies\\stata_ado\\_gmm_dripw.ado",
+    "bytes": 10804,
+    "sha256": "7F061D4663198D92342DAAD61445A8C288C8F43F4F64964FA1B2CA0E5C14B104"
+  },
+  {
+    "file": "dependencies\\stata_ado\\_gmm_regipw.ado",
+    "bytes": 8472,
+    "sha256": "43DC9231F5628B21CCE95071388E5E7D621F9879D72C28FBAD2D26894D64E64E"
+  },
+  {
+    "file": "dependencies\\stata_ado\\_gmm_repeated.ado",
+    "bytes": 10169,
+    "sha256": "F1296928D17DC3AD633991B940872C5BBF27E69CC7CC07FD54F280D1AD9F4D7B"
+  },
+  {
+    "file": "dependencies\\stata_ado\\_het_did_gmm.ado",
+    "bytes": 36749,
+    "sha256": "47CB3C3C7FB0CF7F48C8E3BA54E4D58E6646EDD12D90C39776A996266902EFAC"
+  },
+  {
+    "file": "dependencies\\stata_ado\\abest.do",
+    "bytes": 1593,
+    "sha256": "9BCDE18021FF91FAF146475A4C8B243E33E6387D08CF76A57A9C307EB243B5FA"
+  },
+  {
+    "file": "dependencies\\stata_ado\\acreg.ado",
+    "bytes": 140606,
+    "sha256": "588978790E7317472664EDAA905FD3CFF04188F9C2B6AB696F046DA6A551CF0D"
+  },
+  {
+    "file": "dependencies\\stata_ado\\acreg.pkg",
+    "bytes": 1495,
+    "sha256": "18EBF646CE1854D1616A5D8FDB5A7C8D685CE4201DCB053D2D54FC98881DF83E"
+  },
+  {
+    "file": "dependencies\\stata_ado\\acreg.sthlp",
+    "bytes": 13760,
+    "sha256": "15D2A0B87630D49045163B75C4E9997E8A77039E41076853DD31E52E248DE7D1"
+  },
+  {
+    "file": "dependencies\\stata_ado\\acregpackcheck.ado",
+    "bytes": 1976,
+    "sha256": "B5268B9EE083D5F6D14CBE77F0B1EE0E5817F88AD3F132AAF277F7CBD5C22FD8"
+  },
+  {
+    "file": "dependencies\\stata_ado\\avar.ado",
+    "bytes": 20626,
+    "sha256": "4AE4A50E90CA94916D54FA130946DAB74A9840F2A0A126FFD786E542C1CCC626"
+  },
+  {
+    "file": "dependencies\\stata_ado\\avar.pkg",
+    "bytes": 1302,
+    "sha256": "4C8333147EDD2D3811AF218D8B92821346535C929B1068D1BBA4C7D3B0B3A183"
+  },
+  {
+    "file": "dependencies\\stata_ado\\avar.sthlp",
+    "bytes": 18506,
+    "sha256": "56B7B61ED1BB2F3CF3A49C7B7807B524DB7DC4F92DA7C538C3C9DDD66EDE54A5"
+  },
+  {
+    "file": "dependencies\\stata_ado\\avar9.ado",
+    "bytes": 40770,
+    "sha256": "59BC135CC557989C78F77388A49CB77CCDE9C40B15E315B2F933F356FC99C403"
+  },
+  {
+    "file": "dependencies\\stata_ado\\b.ado",
+    "bytes": 70,
+    "sha256": "DB0EC3A03574FAB013F0DD708B5D8E702009C6F1D03A088BD24E1435FA984458"
+  },
+  {
+    "file": "dependencies\\stata_ado\\b.sthlp",
+    "bytes": 15,
+    "sha256": "85CABB16B503797500583FA9CFA7EFF783E10DB13578C1D8422ACC4A4348EAA1"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ba.ado",
+    "bytes": 71,
+    "sha256": "A00F286B82093C9AEE2CEAB4E39B8CB2D627B7269E82A5BF8F25B97BFAD0102B"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ba.sthlp",
+    "bytes": 15,
+    "sha256": "85CABB16B503797500583FA9CFA7EFF783E10DB13578C1D8422ACC4A4348EAA1"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bac.ado",
+    "bytes": 72,
+    "sha256": "ADEEB9059A9F76CE8024E3BD37CC7631ED61EA214CA7DEE68284367FC591E2D7"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bac.sthlp",
+    "bytes": 15,
+    "sha256": "85CABB16B503797500583FA9CFA7EFF783E10DB13578C1D8422ACC4A4348EAA1"
+  },
+  {
+    "file": "dependencies\\stata_ado\\baco.ado",
+    "bytes": 73,
+    "sha256": "F451957A835173A1C143F48A86490397147B2258A19B4F1EBF4D37C3453EB7DA"
+  },
+  {
+    "file": "dependencies\\stata_ado\\baco.sthlp",
+    "bytes": 15,
+    "sha256": "85CABB16B503797500583FA9CFA7EFF783E10DB13578C1D8422ACC4A4348EAA1"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bacon_example.dta",
+    "bytes": 89717,
+    "sha256": "34CEF2B980F336B64FF4860435B4FF474002A3E168724A3EFBC4C2B4779391B4"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bacon.ado",
+    "bytes": 74,
+    "sha256": "84857571A05B6146424512E953FEE6D6C0A35E9DE5165F52A7B5BC06F65FEF68"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bacon.sthlp",
+    "bytes": 15,
+    "sha256": "85CABB16B503797500583FA9CFA7EFF783E10DB13578C1D8422ACC4A4348EAA1"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bacond.sthlp",
+    "bytes": 15,
+    "sha256": "85CABB16B503797500583FA9CFA7EFF783E10DB13578C1D8422ACC4A4348EAA1"
+  },
+  {
+    "file": "dependencies\\stata_ado\\baconde.ado",
+    "bytes": 76,
+    "sha256": "FFE1C4E1D7F432894D7376DBEDB7765DEC2F83F889F87E51DA63E6D977C1E746"
+  },
+  {
+    "file": "dependencies\\stata_ado\\baconde.sthlp",
+    "bytes": 15,
+    "sha256": "85CABB16B503797500583FA9CFA7EFF783E10DB13578C1D8422ACC4A4348EAA1"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bacondec.ado",
+    "bytes": 77,
+    "sha256": "651F33422A09634199D9EAF70DA8508AE3FB42AE4427206D19BA98B292C09656"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bacondec.sthlp",
+    "bytes": 15,
+    "sha256": "85CABB16B503797500583FA9CFA7EFF783E10DB13578C1D8422ACC4A4348EAA1"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bacondeco.ado",
+    "bytes": 78,
+    "sha256": "43F6A8F1AF13785A0D571912CE56C854A7D0506183F7AC9C70C732D282BF0318"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bacondeco.sthlp",
+    "bytes": 15,
+    "sha256": "85CABB16B503797500583FA9CFA7EFF783E10DB13578C1D8422ACC4A4348EAA1"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bacondecom.ado",
+    "bytes": 79,
+    "sha256": "91F490BFFC5A77C4D6E6C8098F6ABA24EAD7369BADE0F59B0E937E5C34D66E04"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bacondecom.sthlp",
+    "bytes": 15,
+    "sha256": "85CABB16B503797500583FA9CFA7EFF783E10DB13578C1D8422ACC4A4348EAA1"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bacondecomp.ado",
+    "bytes": 51862,
+    "sha256": "94FEDC6ED4EEB52DB4B708D8D7C973D1D0E1DDAC3434ED2D4CE1C680254AB332"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bacondecomp.pkg",
+    "bytes": 1356,
+    "sha256": "5AD5B43FF5DE71B823FE4ACEC8941839AB093DFAD004270AE9B1C2B621DDAFC7"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bacondecomp.sthlp",
+    "bytes": 9079,
+    "sha256": "BBB791287002C6A75B8F9C0A378F424DBC1315FDAF68EE61B7DFDBC891F412C9"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bbest.do",
+    "bytes": 1430,
+    "sha256": "0348F0F62CEABDB697EF67162ABDE2660B83E2D1D601A0869C669270150BB908"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bdiff_fast.ado",
+    "bytes": 11587,
+    "sha256": "88D381C415D0BF278088C0BB87C68094EF2F466822AA7A6B74B7D99BC6C42532"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bdiff.ado",
+    "bytes": 11313,
+    "sha256": "707D09F8D701CD81F1AB3622E3A2EFDC5940515AF9A2D3B17052C22DB5D482D3"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bdiff.pkg",
+    "bytes": 966,
+    "sha256": "6A32AA39CF1774BB36775CB53C03403A60C57812FB494E8C1B9608642A60EC96"
+  },
+  {
+    "file": "dependencies\\stata_ado\\bdiff.sthlp",
+    "bytes": 11411,
+    "sha256": "82DF462B4DDB09DD334D8E633ABB883E05A9B93E7E856CFDE99538FA399A9255"
+  },
+  {
+    "file": "dependencies\\stata_ado\\chain_dependency_receipts.json",
+    "bytes": 38211,
+    "sha256": "2E9DBC4BC5391AF3F8786E25461E3C5AC539F2118415D7CECFC89BAE03E2C6C9"
+  },
+  {
+    "file": "dependencies\\stata_ado\\coefplot.ado",
+    "bytes": 126937,
+    "sha256": "3A8D669947C215996107BCEF4516A7A8E9863B8503C6EEAA7E25850E32BB2973"
+  },
+  {
+    "file": "dependencies\\stata_ado\\coefplot.sthlp",
+    "bytes": 74306,
+    "sha256": "9305BCE09FE1DA1A1902AB26590E5E30D31EF5F170A521D576A1E33B5618B4FA"
+  },
+  {
+    "file": "dependencies\\stata_ado\\cs_avar_1.0.06.do",
+    "bytes": 6516,
+    "sha256": "8DA0F5B748806FFA5AFA9A666BF215A1ED2365D379B67321229A8FF9AA8D70C7"
+  },
+  {
+    "file": "dependencies\\stata_ado\\cs_ivreg2_4.1.12.do",
+    "bytes": 39057,
+    "sha256": "8F8EC7EEEEF22140DF1A06D6523D93E29348BAB6B42A949FFD08113BF99D4D55"
+  },
+  {
+    "file": "dependencies\\stata_ado\\cs_ivreg210_3.1.10.do",
+    "bytes": 25542,
+    "sha256": "702D9DCD57018D5FA82E0860E1344089DC33289158D46428304AF86974DA7158"
+  },
+  {
+    "file": "dependencies\\stata_ado\\cs_ivreg28.do",
+    "bytes": 10803,
+    "sha256": "B73C85451839409A22C57B892B7C80A4229DD68E04B4FD9FA674C8CA53E5F563"
+  },
+  {
+    "file": "dependencies\\stata_ado\\cs_ivreg29.do",
+    "bytes": 19503,
+    "sha256": "06F4B61BF94352843C258A579999A5043413D468AB2668882A1FD85CC5F24A97"
+  },
+  {
+    "file": "dependencies\\stata_ado\\cs_ranktest_2.0.03.do",
+    "bytes": 13898,
+    "sha256": "7267FFB6A50FE69D663D0079DDBF82A464D67A933F1F886FB674183B618A7533"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csdid_estat.ado",
+    "bytes": 52267,
+    "sha256": "C0FBECBA36B609D61EFD42284E421FE162B964988CB4DE8D22504F5132DBCD1A"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csdid_estat.sthlp",
+    "bytes": 32986,
+    "sha256": "9F840D898A2554824701E4AA7AF7FF52BE5D34777FC4C2966BDE32D1170BAC89"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csdid_legacy.sthlp",
+    "bytes": 7759,
+    "sha256": "7823FF05A3CEE5679C94C1ED43A44AC34369D242EA247D2FFE35D83C5FB33065"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csdid_p.ado",
+    "bytes": 2582,
+    "sha256": "ECAEA7A8333993AB47A60D43558C292D9A8F529C404DE0E2DB46BC33A2D1B1BD"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csdid_plot.ado",
+    "bytes": 17136,
+    "sha256": "EA138656E595FBAA13CAAFC08BF4F5255E72682EE59D175C71958596A2508A45"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csdid_plot.sthlp",
+    "bytes": 25605,
+    "sha256": "42A6E972D4239943CD3F3F08C735C2E38A8F87C5EA0A5BF4632EA2439AC7E0C6"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csdid_postestimation.sthlp",
+    "bytes": 19165,
+    "sha256": "E782AEC1B4127E4505692ED7407B89A24BA771D62A91ED514AB6A2B310AD343C"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csdid_rif.ado",
+    "bytes": 14061,
+    "sha256": "02F076FD96EBCBACC8A8DE285EA75992797D3D1D854082AEBBD4E691E0CB8F74"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csdid_rif.sthlp",
+    "bytes": 16,
+    "sha256": "DF2990B8AC579A8F066B7E53AB15E170A457B5A48AADFAE7F62FCCAE6AD738A5"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csdid_stats.ado",
+    "bytes": 101405,
+    "sha256": "7B625B91A0DC91224FD06A046062A8510FB27F07870E321428FB34CCCADBA611"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csdid_stats.sthlp",
+    "bytes": 34128,
+    "sha256": "BE2ADE7405B633A096BEF69362EF9C293C0F51D33470F6AD02909003B7FCB673"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csdid_table.ado",
+    "bytes": 11151,
+    "sha256": "02E0790693380F6E004DD957A5A8AE9FB917BDEA5FEF70E3453A947BC5AC064E"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csdid_table.sthlp",
+    "bytes": 16,
+    "sha256": "DF2990B8AC579A8F066B7E53AB15E170A457B5A48AADFAE7F62FCCAE6AD738A5"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csdid_whatsnew.sthlp",
+    "bytes": 10786,
+    "sha256": "3B2EA2EA710E750E6EC26B18D51B4F4B5C9127ACED1826DA6FADA30990015F16"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csdid.ado",
+    "bytes": 186438,
+    "sha256": "64EBA0160836F606DA87AE8A3CDF92A711C3C1BE1A5B6AA95D130CE3A2EB06D1"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csdid.mata",
+    "bytes": 428713,
+    "sha256": "B5005788EFF6279E50469E1E220D0A53942F2DC8B5BAB5456D454A19F047CCB2"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csdid.pkg",
+    "bytes": 1851,
+    "sha256": "9E2EAF5296E7BFB1680F020982EDB2071E78ABDEF4865F87A6320C66372B6DD6"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csdid.sthlp",
+    "bytes": 117686,
+    "sha256": "DF342505407ECCB917EC6AB603D304B316062B56AD6A6E4694C04AB4F98E5579"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csgvar.ado",
+    "bytes": 1533,
+    "sha256": "65B636636A5AEFC2007476527710515EEAAF23F8BCC2816176D4DE0D1B754A63"
+  },
+  {
+    "file": "dependencies\\stata_ado\\csgvar.sthlp",
+    "bytes": 8433,
+    "sha256": "B360E0C592A3C7CA5F464953EAA21336F2FA6181B81A32A24C407E547D2DC7D2"
+  },
+  {
+    "file": "dependencies\\stata_ado\\deryugina_2017.dta",
+    "bytes": 4204824,
+    "sha256": "B796E5E4AE85F254EEAB08C4EA11809FD46AD3E4480ED49273492619ECEB73A0"
+  },
+  {
+    "file": "dependencies\\stata_ado\\did_multiplegt_dyn.ado",
+    "bytes": 204712,
+    "sha256": "165FCED85197ABA64B6732FF1CA9D081704309AA217C3CE9AB5BA4657EF76CE8"
+  },
+  {
+    "file": "dependencies\\stata_ado\\did_multiplegt_dyn.pkg",
+    "bytes": 1951,
+    "sha256": "3B7E552FF8CF95D03025D99BDC7A1DB4D4189A0BDEBB21CA0F70BFE10466ECCD"
+  },
+  {
+    "file": "dependencies\\stata_ado\\did_multiplegt_dyn.sthlp",
+    "bytes": 51236,
+    "sha256": "4AEE9DD630B931119B77E96F28D36EB5BF00625292BEB2E3AD98E52994B315F4"
+  },
+  {
+    "file": "dependencies\\stata_ado\\did_multiplegt_old.ado",
+    "bytes": 69998,
+    "sha256": "08A47483891311D23B988886424A73FA1B80A47FCDADE055EB40AC9857AF2E11"
+  },
+  {
+    "file": "dependencies\\stata_ado\\did_multiplegt_old.pkg",
+    "bytes": 1389,
+    "sha256": "EE15095AFE9F210F848DDB0D33541FE3604C5A99DD849771DA10921594CADE97"
+  },
+  {
+    "file": "dependencies\\stata_ado\\did_multiplegt_old.sthlp",
+    "bytes": 53847,
+    "sha256": "09ADA6CC554120BFF2E568CDC06604700C42A3146A92FB8EC1277C4C81A2D622"
+  },
+  {
+    "file": "dependencies\\stata_ado\\did_multiplegt_stat.ado",
+    "bytes": 194225,
+    "sha256": "B75DD3BFA0413A0A5C8C489C6D44D767BA0AF6B00CC64E69E3D06565C16C9628"
+  },
+  {
+    "file": "dependencies\\stata_ado\\did_multiplegt_stat.pkg",
+    "bytes": 1289,
+    "sha256": "1AAB81290904D89A3967A735DD9FE5A2BB9C55431B7987813B9C24CA6CEC0C15"
+  },
+  {
+    "file": "dependencies\\stata_ado\\did_multiplegt_stat.sthlp",
+    "bytes": 25066,
+    "sha256": "0579E5A9B4F1448FB7FFA8973E9AE131009D6E1FEE5B2B951FAD4D8DC3D8C6D0"
+  },
+  {
+    "file": "dependencies\\stata_ado\\did_multiplegt.ado",
+    "bytes": 2032,
+    "sha256": "CBD5FEAE231FDB736C13CEC27F9F47493FB2E3C4B8D7EA035F6C58F6AEDACF10"
+  },
+  {
+    "file": "dependencies\\stata_ado\\did_multiplegt.pkg",
+    "bytes": 1564,
+    "sha256": "4C724EEF753FBAC06E408688AE0021E65E132CC41CD43692AD0A5267DFFABD22"
+  },
+  {
+    "file": "dependencies\\stata_ado\\did_multiplegt.sthlp",
+    "bytes": 6946,
+    "sha256": "D8707323283D28B59B28E28D1AE3339470DBEE8DF7E9AF1328C60A58C182C0EA"
+  },
+  {
+    "file": "dependencies\\stata_ado\\dipt.ado",
+    "bytes": 1874,
+    "sha256": "E56DBDDEE13416630E0392DE10F6D6396A60CBC89AFE1315A4496936BE6ED44C"
+  },
+  {
+    "file": "dependencies\\stata_ado\\dipt.sthlp",
+    "bytes": 16,
+    "sha256": "DF2990B8AC579A8F066B7E53AB15E170A457B5A48AADFAE7F62FCCAE6AD738A5"
+  },
+  {
+    "file": "dependencies\\stata_ado\\drdid_display.ado",
+    "bytes": 414,
+    "sha256": "AAE13ADE2B6382C9CE42F08DB01C25A49E181A9FA9BFB66CAC3EFAE6B798C785"
+  },
+  {
+    "file": "dependencies\\stata_ado\\drdid_predict.ado",
+    "bytes": 2049,
+    "sha256": "071F5604DAB87F389C576CA5CF3A2E27D2597CF2E9EFD5D24815163C98470EFC"
+  },
+  {
+    "file": "dependencies\\stata_ado\\drdid.ado",
+    "bytes": 91307,
+    "sha256": "242DD51923580CDA80B28F1B00512B9F95666DB989825C46A9FAD21D87DCFC9F"
+  },
+  {
+    "file": "dependencies\\stata_ado\\drdid.pkg",
+    "bytes": 1333,
+    "sha256": "FB4ECCD99F51142133DCE2F2C309F694CB8B5CFA2D127F71C4286541C67D9004"
+  },
+  {
+    "file": "dependencies\\stata_ado\\drdid.sthlp",
+    "bytes": 11079,
+    "sha256": "8FD3579F24B066E9C951C4FB8FFB310A28DB8B24964F98CBC1C0F808753E6C18"
+  },
+  {
+    "file": "dependencies\\stata_ado\\east_et_al_2023.dta",
+    "bytes": 187141,
+    "sha256": "BCE80DE3165FEA1BA5611D8F51EB5A870644DF7552CD2B6CDD9FDED46B4F4935"
+  },
+  {
+    "file": "dependencies\\stata_ado\\estfe.ado",
+    "bytes": 4771,
+    "sha256": "A2913F84BF90792230B525DE0C495CBDDFC810DC78C83DD351BAC4CF9E353333"
+  },
+  {
+    "file": "dependencies\\stata_ado\\event_plot.ado",
+    "bytes": 13699,
+    "sha256": "1C6D77B8C505DDBA55DB8C786CA123937A40F5B1D6591EB9D0EC722E3C9B7248"
+  },
+  {
+    "file": "dependencies\\stata_ado\\event_plot.pkg",
+    "bytes": 844,
+    "sha256": "DEC7F1D6D81532D154473A4F55876EBE3B0978CA197FA14301A47B27F0C3B615"
+  },
+  {
+    "file": "dependencies\\stata_ado\\event_plot.sthlp",
+    "bytes": 13058,
+    "sha256": "37C47B4D697D5AB0BF90A800364AF10B0DD18404DEDAE39DBC5F7548453C409A"
+  },
+  {
+    "file": "dependencies\\stata_ado\\eventstudyinteract.ado",
+    "bytes": 6497,
+    "sha256": "DCF01A334702E76254527BEFF4DAC522FEF8664327FE505121FCA8651E7C04E9"
+  },
+  {
+    "file": "dependencies\\stata_ado\\eventstudyinteract.pkg",
+    "bytes": 1413,
+    "sha256": "308AFE34319B5CCA591E5BEDDC50360C0197D20CD4D1D09514CC8F561B48F426"
+  },
+  {
+    "file": "dependencies\\stata_ado\\eventstudyinteract.sthlp",
+    "bytes": 17578,
+    "sha256": "E18CE548ACC0BB20292B6A2B4810C368CA63FCAEE12808CA1682E9F68A2E968E"
+  },
+  {
+    "file": "dependencies\\stata_ado\\favara_imbs_did_multiplegt_dyn.dta",
+    "bytes": 719802,
+    "sha256": "163D4CB0219CCAAC292F68B06C53A799E3C3D1B035EAE5EAB2D9FA6FB600B981"
+  },
+  {
+    "file": "dependencies\\stata_ado\\fcollapse_functions.mata",
+    "bytes": 8443,
+    "sha256": "EB282F461A357497508D40A3D2C374E94D5AE4242B99C3B2596F736212614BD5"
+  },
+  {
+    "file": "dependencies\\stata_ado\\fcollapse_main.mata",
+    "bytes": 8377,
+    "sha256": "375EEA05D3E412A0FA2F7406C606F0176F993109BF6E0BFCC7EF2975BA74EA11"
+  },
+  {
+    "file": "dependencies\\stata_ado\\fcollapse.ado",
+    "bytes": 7221,
+    "sha256": "BEC0014C804A413E40451D1A83E5FAEE7766DD442D812FE9549B2F8F878A2004"
+  },
+  {
+    "file": "dependencies\\stata_ado\\fcollapse.sthlp",
+    "bytes": 7893,
+    "sha256": "3CFD14B325A16209B0D6C4276907F15F699BCADA9168BB4BA7E4AC2026256402"
+  },
+  {
+    "file": "dependencies\\stata_ado\\fegen_group.ado",
+    "bytes": 3175,
+    "sha256": "92CA1712B8A2D03574D14529C85D390A5561AF0B7217C0F103C2B764D9D0DD6B"
+  },
+  {
+    "file": "dependencies\\stata_ado\\fegen.ado",
+    "bytes": 1859,
+    "sha256": "C5D1638F193B142E9C7529B3F36FCF53486D68689B320D21FF7E8CDD93C50E25"
+  },
+  {
+    "file": "dependencies\\stata_ado\\fegen.sthlp",
+    "bytes": 2389,
+    "sha256": "9D7662D1C3015361998AB549C7D4A780345EC26268478A86B185D375928ECF7D"
+  },
+  {
+    "file": "dependencies\\stata_ado\\fisid.ado",
+    "bytes": 1119,
+    "sha256": "A889B5FB4C3CD6B0AC90DB7500278B8080F0F66B86C71EB992A4477DB57232C0"
+  },
+  {
+    "file": "dependencies\\stata_ado\\fisid.sthlp",
+    "bytes": 1010,
+    "sha256": "97B7EAA5BAEE4555C0920F3A797A9019E1535FB0C655C30069E580B5ECD5F806"
+  },
+  {
+    "file": "dependencies\\stata_ado\\flevelsof.ado",
+    "bytes": 3133,
+    "sha256": "24CB51B023866ABF04420E43D3333ABEEFD7DB66CFCF5BEB5F6595B012F53192"
+  },
+  {
+    "file": "dependencies\\stata_ado\\flevelsof.sthlp",
+    "bytes": 4769,
+    "sha256": "627333BDA5C89F7E40AEC78EFBEB24ED3C625F588F4F9B6DDE3AA744AE0356F2"
+  },
+  {
+    "file": "dependencies\\stata_ado\\fmerge.ado",
+    "bytes": 2418,
+    "sha256": "1C2D18A8D72A12F68A7F743FB14C7A8186ECE35AE05B0F75093EBC0133BCD697"
+  },
+  {
+    "file": "dependencies\\stata_ado\\fmerge.sthlp",
+    "bytes": 2834,
+    "sha256": "DB75A458E863FDB726E432419B6075E6192040ABA30853DF67B7AFB1D49DD2A6"
+  },
+  {
+    "file": "dependencies\\stata_ado\\fsort.ado",
+    "bytes": 1488,
+    "sha256": "A9EEB9312323C7898A715733D2BACEB46578F5A1A3F698A87108B4CDA053D97C"
+  },
+  {
+    "file": "dependencies\\stata_ado\\fsort.sthlp",
+    "bytes": 1635,
+    "sha256": "6A83DF419F1D3068327560EAF4EA37906C55B27151AED2C5EBD1999A0D69700E"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ftab.ado",
+    "bytes": 4879,
+    "sha256": "7A6E5D40A7F4BEB2CAB3B9FF2A96EDB725AE5CB1CF6B18098847A81ED3C0F531"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ftools_common.mata",
+    "bytes": 5263,
+    "sha256": "CE73EAE9F933F0C670E1D58F7200234414C68F5A19419357622D1E0B3887BCAB"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ftools_hash1.mata",
+    "bytes": 3306,
+    "sha256": "A31BCD5CB93BE191BF235CDF1E81F794BE0F51CEC9A9FB747D615E5C9EE8AF0C"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ftools_main.mata",
+    "bytes": 26731,
+    "sha256": "B836C7E21872691D6B9C9DA84F8407B82365852911D244561CE4BDB1A26E85AF"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ftools_plugin.mata",
+    "bytes": 2036,
+    "sha256": "897146C21A1FC6E899EF19ED01A3251D19E35C7DEB5158DDF3C3F0CAF6450125"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ftools_type_aliases.mata",
+    "bytes": 2223,
+    "sha256": "27338DCF0D0B5F24795B46AA7FDEAB79309BF18C35BACDEE2313FCE5EF739885"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ftools.ado",
+    "bytes": 1428,
+    "sha256": "C7EBA3272B5FCD1DFA157E65C37840A051C6E2BF327D5EE31D42DF65CF330B00"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ftools.mata",
+    "bytes": 1984,
+    "sha256": "4AF859BCA19614684D3DD45566E13E17C6CF44DF951ECCA538BDA5A44EBD1744"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ftools.pkg",
+    "bytes": 1927,
+    "sha256": "7F73DA65AAE103BFA2B0FC033A26849B692A17F2CCADF1F9B3A1326320DB45C2"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ftools.sthlp",
+    "bytes": 21229,
+    "sha256": "988637569F8803E4F2EF2C8DC2F1E9050E7898F1828DA64C2087EEE43F98E001"
+  },
+  {
+    "file": "dependencies\\stata_ado\\gazoline_did_multiplegt_stat.dta",
+    "bytes": 2631310,
+    "sha256": "2378D869C7B252E0CFD2FA084F1C3B582C18996D1A54F6F26860492A3C0E05A2"
+  },
+  {
+    "file": "dependencies\\stata_ado\\gentzkowetal_didtextbook.dta",
+    "bytes": 193853,
+    "sha256": "BD9B430B96B8C0C295808C61B731B0A012A9BA2D8121F2D16A0A8E85BA31F222"
+  },
+  {
+    "file": "dependencies\\stata_ado\\Greene.do",
+    "bytes": 834,
+    "sha256": "1D9FC3C331719FC78082A4DCEE95D3B3505AE28337C3BA8607E68E67781603CA"
+  },
+  {
+    "file": "dependencies\\stata_ado\\hdfe.ado",
+    "bytes": 113790,
+    "sha256": "E98026B5322D2E13219908E2532F122285C2E584F194D9DB56C92A46D4DF1A22"
+  },
+  {
+    "file": "dependencies\\stata_ado\\hdfe.pkg",
+    "bytes": 1231,
+    "sha256": "A2CC0A003A7B251D04D9D93B19776FF4EDBF7E55B94072D39C38FFE7C93917EE"
+  },
+  {
+    "file": "dependencies\\stata_ado\\hdfe.sthlp",
+    "bytes": 9846,
+    "sha256": "CC9F8FAF323B7AED10F0ADDD7ECEA46D1D32092C867E2ACD1BF66A91BA101D90"
+  },
+  {
+    "file": "dependencies\\stata_ado\\hollingsworth_et_al_2022.dta",
+    "bytes": 25124,
+    "sha256": "D48771D202C8172912B6B8C0A5D2AFE8CFA4A4ED83D30EBD92C0DBE37A211299"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ivreg2_p.ado",
+    "bytes": 4314,
+    "sha256": "73CB136D0DC5C908FD0E2F4D3ECE112F71277C417FDA6DF89B90A25F3A3BBB11"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ivreg2.ado",
+    "bytes": 221835,
+    "sha256": "0E93B020DCD4D9B2806DB9E4BB432FA0381756EC2C64DC50275957AD58EF3FB4"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ivreg2.pkg",
+    "bytes": 2636,
+    "sha256": "EA87D62E87518CACED7D9541C5C8873F6E6A1ADF6335CE624A5BDC13DEF953E1"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ivreg2.sthlp",
+    "bytes": 93667,
+    "sha256": "C387F5D743111ED76578D19B6F130ADB71CDCA9CFE1D5F4432CEEED1B6C06848"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ivreg210_p.ado",
+    "bytes": 3276,
+    "sha256": "7587A3D7F1D6A78FCD9EA6CB64293BE2A345717385974E7C8A3DE1F123FEAB7A"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ivreg210.ado",
+    "bytes": 269367,
+    "sha256": "2AC0D12C88783C437E0D9D4ACE219DC66F86DD5534EBD1E1A0242754EA40028D"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ivreg210.sthlp",
+    "bytes": 86588,
+    "sha256": "55C85076A8948A5A1428508F159A17504F806B133E629972D28420031B8138AE"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ivreg28_cue.ado",
+    "bytes": 726,
+    "sha256": "BEDB269CA371866E96DEA7852BAEF2156A70F8262C5DBC6D1216A8C23A47DD3B"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ivreg28_p.ado",
+    "bytes": 2495,
+    "sha256": "B0F61FE020773E7B1BF9A9E5394B7026F3E034486F1A50AE27145A1F2032D3E1"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ivreg28.ado",
+    "bytes": 174509,
+    "sha256": "2782596CF8E4C95EB5B3CB0E147DB92C0269AA2D1EA4188C23703D0917B3970A"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ivreg28.hlp",
+    "bytes": 61146,
+    "sha256": "DB8B4F19FE165A4BE5D6C34A4DD667002989011FFE542A461B6FAD87EC8C9713"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ivreg29_cue.ado",
+    "bytes": 891,
+    "sha256": "5F5E07171741EDCCF55AC9923F8D28461CBE63DEE7890E3822B35AA1ABFD6C7E"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ivreg29_p.ado",
+    "bytes": 2797,
+    "sha256": "29F0BC6C62435592902C2F55E0FA011F16EEC1A9B7CC70C41EB81E68ED0D4466"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ivreg29.ado",
+    "bytes": 242763,
+    "sha256": "899781E7A6E7F861EE54E42D1553EE2E5E2281E3B18358687E17729F20ED43F2"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ivreg29.hlp",
+    "bytes": 78164,
+    "sha256": "FB07204018104318B03CB5CCA33EB6E2A55B253C0B79B2E5F8FFC3FEAACA41CE"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ivreghdfe.ado",
+    "bytes": 351124,
+    "sha256": "EB9EE7E29A9EA10ED4D5F2FDB84D8332DE3F3501F9EE8B06AF08D3BD279B7B8C"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ivreghdfe.pkg",
+    "bytes": 348,
+    "sha256": "C037B7DB729118041DF0BE864BB00D163CAE6EC81C55033494DF84CDE16CA300"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ivreghdfe.sthlp",
+    "bytes": 2662,
+    "sha256": "233A5F0FB040E7731823E794A374824358E3A786F08C7F790CFB94F30E63D65E"
+  },
+  {
+    "file": "dependencies\\stata_ado\\join.ado",
+    "bytes": 18451,
+    "sha256": "34A6141B43E66A25982F9514BDB8721A167091508A525114449DB1648DA3B18A"
+  },
+  {
+    "file": "dependencies\\stata_ado\\join.sthlp",
+    "bytes": 9349,
+    "sha256": "015893B534060334EFECA44AA84F676128357ADEFEDA2E0E8E6BE48598EB600E"
+  },
+  {
+    "file": "dependencies\\stata_ado\\lcsdid_v2.mlib",
+    "bytes": 661768,
+    "sha256": "E773BF35EDBFB5C3214AF7C48C2863A9DB7920CAEC21B3CB950EAA1519FB97D0"
+  },
+  {
+    "file": "dependencies\\stata_ado\\livreg2.do",
+    "bytes": 65629,
+    "sha256": "63950AF1653EA87A7C16BB205D90FF22713873EDF0C782216228169FD679FEA7"
+  },
+  {
+    "file": "dependencies\\stata_ado\\livreg2.mlib",
+    "bytes": 262968,
+    "sha256": "A2E917496F21C00C428B43FF77F6036F9E5B9889C867BCFF33FBF2A494D84161"
+  },
+  {
+    "file": "dependencies\\stata_ado\\lmoremata.mlib",
+    "bytes": 725952,
+    "sha256": "5BB06C33DD0F3C1B274E0612D61C254CCE0E938E92F25128F52640B8EA244574"
+  },
+  {
+    "file": "dependencies\\stata_ado\\lmoremata10.mlib",
+    "bytes": 79268,
+    "sha256": "B076E6BC12B47A689B0B0FD881F266050788B1922AE66234C008D0A17DC3F054"
+  },
+  {
+    "file": "dependencies\\stata_ado\\lmoremata11.mlib",
+    "bytes": 500264,
+    "sha256": "3A06A0B0D6AA460127E977AA74D0224512B1C444E96E87FBAAA1D2918C731BEF"
+  },
+  {
+    "file": "dependencies\\stata_ado\\lmoremata14.mlib",
+    "bytes": 289676,
+    "sha256": "67687FDDADC9F46DAB048DC5084BEF8225EF30CC094F0459A63B97ED7157278C"
+  },
+  {
+    "file": "dependencies\\stata_ado\\local_inlist.ado",
+    "bytes": 1680,
+    "sha256": "C4540D6EF1C85D2EA2FDC5E9EEFCFAF767F9EB2A2CC40CF3E2E5E019714D71C3"
+  },
+  {
+    "file": "dependencies\\stata_ado\\local_inlist.sthlp",
+    "bytes": 1165,
+    "sha256": "9912BA9A104BE9C6130BEB5A387582C6296E3B8D8BF1A3FEC935D92D836AF100"
+  },
+  {
+    "file": "dependencies\\stata_ado\\lxtabond2.mlib",
+    "bytes": 222892,
+    "sha256": "A67A36BE25AEB1119A99C4FD1B70F9D731A23516328543C0B805F0DDEBE79541"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_aqreg.hlp",
+    "bytes": 7381,
+    "sha256": "ACA5ECC8993ABF6AD8B4A01375795A091CE89D3980B34CBE06926A2DB842FCA3"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_areg.hlp",
+    "bytes": 6656,
+    "sha256": "F7AF50AB4AF57D5EC3099697C0646D4EFC4C18CDD2D052D877C03030D9FA8EE6"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_benford.hlp",
+    "bytes": 5156,
+    "sha256": "0BB1DEC018F70E6747CDD1260CE4B3E213369D9CA28B416E018D16ED48236DE7"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_bs.hlp",
+    "bytes": 18383,
+    "sha256": "17CCD821540367E19745ABEE99B0F67FB1142E1E42A412E59E809EF43D6F25C9"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_callf.hlp",
+    "bytes": 5359,
+    "sha256": "CA6C810C120103E1F07CA8EE7206BE9979FC9F3EEEF418B2C6D31EDF2041C980"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_cauchy.hlp",
+    "bytes": 2871,
+    "sha256": "295466598B1050321ECEF3679DCD1C56F1B613BE04B95A40BE3AF961348BDAC2"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_clip.hlp",
+    "bytes": 5160,
+    "sha256": "E5CE28765A617865E2BFFD7148A4087EF1D431E702F4B066EABD48B91F6BD206"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_collapse.hlp",
+    "bytes": 8242,
+    "sha256": "2C3A67B4A94DA080C3A6E1F1D850E01F7B78F7582D81BAD49F3711A891EB2995"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_colrunsum.hlp",
+    "bytes": 1791,
+    "sha256": "C2AC42C41E04690720326F1F196C0D72108DF44CC5B50DE7262FC52DD1E7FA72"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_colvar.hlp",
+    "bytes": 5984,
+    "sha256": "69E241FC7C7AE54A4A92C15BFE246CA78F01B1E39443F7B476CBFF17E77C530A"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_cond.hlp",
+    "bytes": 1593,
+    "sha256": "890857525C5ABFFBDB765014F55EA7E936B1A32D68857372FFCA626394A45A6E"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_crosswalk.sthlp",
+    "bytes": 6040,
+    "sha256": "727788FB392A62F59843350CECE529B06F0E0734D0BB7C2CF7B4653E832D42FF"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_cut.hlp",
+    "bytes": 3037,
+    "sha256": "77B575C34273EE27E0D8ECEE8241A42BC0F30E808D506111FB09A4048ADE338D"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_ddens.hlp",
+    "bytes": 6835,
+    "sha256": "3F89E7B6498F04AE04E0A174530CB3C9B7CEF3303D28C6D6877A33899D05E8D4"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_density.sthlp",
+    "bytes": 13836,
+    "sha256": "F567425AF1E2720F011DC26689122BA387B664EF573239D9161111618259C6F0"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_diff.hlp",
+    "bytes": 3716,
+    "sha256": "22DB159EEA9E13D766ECBCD8933372F4BA8524094FC9119AEBCF8BA624B09EFC"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_ebal.sthlp",
+    "bytes": 16908,
+    "sha256": "030C5CE5882E84AF80AEFD8580F19DADAE884A460776ACFF37DD89837BABA323"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_ebalance.sthlp",
+    "bytes": 16009,
+    "sha256": "8B3AE7C1CC075FA436F818022D331D105CE7E3E5470CA4DB8A94FCC74E049A58"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_ecdf.hlp",
+    "bytes": 6300,
+    "sha256": "2DB6D07BAE818345E6E0B6A29EFB98239BCE5D7F95DE39C9BACD446E97165BEF"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_expand.hlp",
+    "bytes": 5279,
+    "sha256": "BBCB516CE582E8BCDE9A2706B87874BD3B0A361DC0CF899A019E7C0259D1A686"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_finvert.hlp",
+    "bytes": 9597,
+    "sha256": "FAF64CDD46A23EB72A441C9D82778769C02D88B3D885D6756D1D3916092F7CEA"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_freq.hlp",
+    "bytes": 5325,
+    "sha256": "D2AA595415000E0BDD596E18F63B8B6E12CB0443353EB20F242A386983A75AEE"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_gini.hlp",
+    "bytes": 2664,
+    "sha256": "8AE11127959EB41F105D2A80EDBA93553489796CC012C19F7B4C2D97AA651907"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_greedy.hlp",
+    "bytes": 10966,
+    "sha256": "1CC7120EF0D760AED8672A94EC8C99D6DB0085C60848826CEAE99B9E22C7BB40"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_group.hlp",
+    "bytes": 4578,
+    "sha256": "A97BBDB341EE2289B6F189423FE0DE0824192F8C1071E429EE90D6D132659267"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_hdq.hlp",
+    "bytes": 4269,
+    "sha256": "61E94CE33D5D46C5F237BC042C30523A1BDF1D39B134AEB549C9D0A5A0DB4DF4"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_histogram.hlp",
+    "bytes": 3179,
+    "sha256": "0807C335A12C825FD9AA331ABD3B6D94DC698F6F07C68BEA212FEBB18289F020"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_hl.hlp",
+    "bytes": 6403,
+    "sha256": "E53AC013606694B1C950B62B5B8988803511A61B97B9F94209DB2A45264C8277"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_insheet.hlp",
+    "bytes": 4810,
+    "sha256": "C6651886C44C5239DFD34DC436F160798D8F19CA628DA380402ACE5246A0F421"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_integrate.hlp",
+    "bytes": 6752,
+    "sha256": "0B4E35B16C0009F7049BF1D4CD99B09907B1DB53FC8E2ABACB950954BAC527D8"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_invtokens.hlp",
+    "bytes": 2036,
+    "sha256": "5746B897151010979B73D5A28F58FA6E6BDB6EC3D37C498CA5283818AB91D010"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_ipolate.hlp",
+    "bytes": 2495,
+    "sha256": "3EAA13AC7A0324AD765C8F479634B14EFFED2BC91742F7D7B8C56B19531EA4C8"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_isconstant.hlp",
+    "bytes": 1561,
+    "sha256": "2060E678D66849B1485055E7D011286AF26DC633F67A7AB901C705995362CB72"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_jk.hlp",
+    "bytes": 10553,
+    "sha256": "4D7C832F8E5588F1B35AF01F99B5BD2AACDBFE88E99C9F130F9C90846397067F"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_kern.hlp",
+    "bytes": 5099,
+    "sha256": "754B3E3F143E144FCC33AB50B17A4F6B4A6BE0A38466BA2750CB5D0824492131"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_linbin.hlp",
+    "bytes": 6720,
+    "sha256": "47C280A958204B04C08719645490D5DA5B2E1C82A626A9131CE76C3529124A54"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_linbin2.hlp",
+    "bytes": 3516,
+    "sha256": "EFE6D4F93D9A568F7652429F534DDA42A64D66E20C7F108EBB38F2BB3B789051"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_locate.hlp",
+    "bytes": 2563,
+    "sha256": "4A05BCFA61E2A9E3EEB5C710F1E3B44653FA8CF1C7E718E2C8581A3E544BDC44"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_loclin.hlp",
+    "bytes": 5582,
+    "sha256": "FA877AE50159503E16B5E88FFE39E75C0CB19C1D68C2C3F116D0D737FE8742FB"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_ls.hlp",
+    "bytes": 5723,
+    "sha256": "308ED0577731DE37FAAD56CA6D6A206EDA5C845C1F6855894486413E9BCF9A9B"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_matlist.hlp",
+    "bytes": 7881,
+    "sha256": "549E88AD5CEC8F1CA52C42C2383C24EFBCE1BFFCFC51A41FD425E4091567ACB5"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_mgof.hlp",
+    "bytes": 13057,
+    "sha256": "8B20914197AC0805A16875112DFF003DC0956C52BDE382670250F594B9F25E46"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_minim.hlp",
+    "bytes": 3051,
+    "sha256": "E35737835DA03DD77D8E05E9642F097CD927B544280139089CDAC92648DA2E27"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_mloc.hlp",
+    "bytes": 9242,
+    "sha256": "ECA8326688E310F1DF84E0F9172D6A1C8F776A55AA4CDD394EC3EA64B363616D"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_nobs.hlp",
+    "bytes": 1022,
+    "sha256": "E2018F7ABA41501800B9368194CDF6FAC95BC7C10B99237C3205336D85867555"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_nrroot.hlp",
+    "bytes": 3477,
+    "sha256": "FF9212767D7187622808B6810343A490E35C16501CEC65EB567CDB2BCE839E96"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_nunique.hlp",
+    "bytes": 9108,
+    "sha256": "4FAE0F6479298265CA2D52B5B3EAC624ED66B0A61DAFA8F8A19C3ADC082D79FF"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_panels.hlp",
+    "bytes": 6417,
+    "sha256": "FF92D3A224EC4B8CEF9771213B92C0412B1A51ACB149B435E9E364BD03D0AF02"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_pieces.hlp",
+    "bytes": 3976,
+    "sha256": "46E8134208CB0051EB7027A0411C93BA8917731FB8EFF2C621144879AD5676D2"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_plot.hlp",
+    "bytes": 2346,
+    "sha256": "CC9E2488731F6BB88E6AF34E9720C28748304563CA0287FB7C58E3E7CEF2D009"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_polint.hlp",
+    "bytes": 3081,
+    "sha256": "B273C194EDCEA2A60827F8C804D1AF5B206B2E9F6B5BA8D488A8577919BE21D4"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_posof.hlp",
+    "bytes": 1962,
+    "sha256": "4FFA1DECBF4B74969D67000D091AF1905B13CE0230B131286193CC4EED6A93D5"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_prod.hlp",
+    "bytes": 2284,
+    "sha256": "D4A373DFF811910A9B67C4C7FAD5B969E05CCDE4787E75AA6516230903937CE0"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_qr.sthlp",
+    "bytes": 10384,
+    "sha256": "3CBE26D94531B9C019680264DEFA836F28DED0FF781E6231CF56475CDDE31B3F"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_quantile.hlp",
+    "bytes": 16990,
+    "sha256": "15C11F9B21BC05377A445FA95B5BBBFD6CD6BA26713E416C8E1DBF756598115A"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_ranks.hlp",
+    "bytes": 5048,
+    "sha256": "58B8844A9A2321E171D6E9D17E4736A81DA2CFECB1D988CD235653BA24A2BEF5"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_rbinomial.hlp",
+    "bytes": 3712,
+    "sha256": "5548B90ED09E71131F78893D6A84AA48E17484ADA8EC9F62AA1787A6F41571AB"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_read_csv.hlp",
+    "bytes": 2655,
+    "sha256": "7F0CE7C11CB24AD83578EFF37D750AD4DBFF4FF99DD057B23C18C3BC13D555F3"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_realofstr.hlp",
+    "bytes": 1384,
+    "sha256": "193DFD3D3E04B669D3846223E69D594C4F5C58692F4D93652EEF93511A86F3F5"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_regexr.hlp",
+    "bytes": 2519,
+    "sha256": "F8B7FF04F6F167D0E0695EEB8C5547223C2CC7D0A585647473C5CA9E04FE4F0B"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_relrank.hlp",
+    "bytes": 8025,
+    "sha256": "3828E9E23A13D317F9F339340B0EDF0EB0501BC7CF25E4C26C41B46EB13A4210"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_root.hlp",
+    "bytes": 3997,
+    "sha256": "A7927ED29236649C1EDF03478D9273BC3B53B4FCEC63A8C4FBEF60A9B2D07597"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_sample.hlp",
+    "bytes": 26499,
+    "sha256": "3A20139B4B22C4FE4BE69C5CF5B8429A89CD7B4AF75640659D2768139D775B1D"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_seq.hlp",
+    "bytes": 2406,
+    "sha256": "9C53EBBBA335A179B3544992C01EFC619947AADAAFBA66A8AA778AE1FD2DD6B5"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_sort.hlp",
+    "bytes": 3978,
+    "sha256": "113B6679106D42E56755B08BC89BFADB75D97E4713A5422C1EFF45BAD889C3AC"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_sqrt.hlp",
+    "bytes": 2649,
+    "sha256": "26338DC6FBF24DB270669216895F48595A53A34A891AA3D2789CC45936AF91D9"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_strexpand.hlp",
+    "bytes": 4502,
+    "sha256": "F1386860D3A47EFE38587A9BAC5DFEA31199B4A3BE9BFE45B3DAABCF2F13CD73"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_subset.hlp",
+    "bytes": 7926,
+    "sha256": "910CDD64FD3CF29EFCE0D98ECE15A0FCC859AD6EA9216104EEA1F7D6ACACABBC"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_unorder2.hlp",
+    "bytes": 3178,
+    "sha256": "F45EA3061F7AE7C3FC27F1205F6E11CBBC76108845906CAD974C8362B08885B5"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_version.hlp",
+    "bytes": 722,
+    "sha256": "956B6FD60CB76160E31FCD890A43607945D76BD97AC3AA9EE545AAC8967CB872"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_wbal.sthlp",
+    "bytes": 3514,
+    "sha256": "E0268C466749EB56195ABC5E9332D5AAC73B17D75F35C40CAA374A54617C6D1D"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mf_mm_which.hlp",
+    "bytes": 1894,
+    "sha256": "947A7D0B9E9153DC4F432626FAC0305663366529AF9EF6ED5A8128093038EAB9"
+  },
+  {
+    "file": "dependencies\\stata_ado\\moremata_source.hlp",
+    "bytes": 237832,
+    "sha256": "21D8C7DE2374EBD1A68E2C74A186204A08CCCCC9D85A773311CF070A1BA9BF19"
+  },
+  {
+    "file": "dependencies\\stata_ado\\moremata.hlp",
+    "bytes": 16630,
+    "sha256": "162798149ABCACB7AF1E057904BEC47E2A7723C658D2C7C49928E57BE5A24AE3"
+  },
+  {
+    "file": "dependencies\\stata_ado\\moremata.pkg",
+    "bytes": 6066,
+    "sha256": "304B44DF0790B8EF8642F96C205B074FAA9CD08925E9C513559112B7A1C760EC"
+  },
+  {
+    "file": "dependencies\\stata_ado\\moremata.zip",
+    "bytes": 384401,
+    "sha256": "900FE673A3BB4B53BC5097F0FFB3D268A2F3ED4A3409E22060F6B0927A57ADE4"
+  },
+  {
+    "file": "dependencies\\stata_ado\\moremata10_source.hlp",
+    "bytes": 1566,
+    "sha256": "6FD4E0E7F5A6610D170197D2F4BB1EA389D99B9DBF3576EADF686BE075788BCA"
+  },
+  {
+    "file": "dependencies\\stata_ado\\moremata11_source.hlp",
+    "bytes": 149902,
+    "sha256": "A8B681EDBB968301632885B5BC7CEB0DB896882AEF2B2AA2BF3FAAD102DF7DCC"
+  },
+  {
+    "file": "dependencies\\stata_ado\\moremata14_source.hlp",
+    "bytes": 7106,
+    "sha256": "70EEDA006B89D984FDB3C05EEBA9EFC407C6E29E600389EB69D86D1435130518"
+  },
+  {
+    "file": "dependencies\\stata_ado\\mpdta.dta",
+    "bytes": 66922,
+    "sha256": "114E742ED979ADB595E5642EDA0262F00BD27F3570CAA1CEECFFA92D898326AE"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ms_add_comma.ado",
+    "bytes": 703,
+    "sha256": "62C404231453F13F968E7780823D3235E7C3695B72AC1DBE28275478F2E6E208"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ms_compile_mata.ado",
+    "bytes": 6805,
+    "sha256": "4A316F4E00E00CEF93D5CFE151308E1A128A1551FC908DD47EFE6406FF00AB26"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ms_expand_varlist.ado",
+    "bytes": 1623,
+    "sha256": "B862F7BA8F490DC1931B7DDA7A37E6D6C9FD6CFF9435D378B61DA0E353BD91CA"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ms_fvstrip.ado",
+    "bytes": 5209,
+    "sha256": "B272704336522F4EA707948549B542D802AB3EB257C3AD2341A1C543685A51F5"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ms_fvstrip.sthlp",
+    "bytes": 3348,
+    "sha256": "CFE5988BB044628AB33795B04816A5492A8C92917CDF5C7734779D85CBB873DD"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ms_fvunab.ado",
+    "bytes": 1134,
+    "sha256": "A4F47474E6D4CEAD0CF05CF75FD4FA6C36156E997FC2A8AA6584C122BC934900"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ms_get_version.ado",
+    "bytes": 1882,
+    "sha256": "C20215FB7583CAC63083464EF18B402D8382686C7C4C8CEC05CAA6B5A6CA9D91"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ms_parse_absvars.ado",
+    "bytes": 9364,
+    "sha256": "98BEC7D062B656CFC6818D49B6130AF151B76798C33CD7031469FC5125FFE2CC"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ms_parse_varlist.ado",
+    "bytes": 733,
+    "sha256": "BDB27378F1524D332CCA571674C4E48C52A3138EE8183AA56BBEBADB38CDE48F"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ms_parse_vce.ado",
+    "bytes": 2988,
+    "sha256": "99AF53CA13F325A917B7377762FEAB140914A5A6534C0953EA9CE6D55DCFA678"
+  },
+  {
+    "file": "dependencies\\stata_ado\\nwexample.dta",
+    "bytes": 46503,
+    "sha256": "7E0CCA07B4FBE0273A53E09BC8C1E9B6CD1FBA86BBEF61AEC507A7E596CBD991"
+  },
+  {
+    "file": "dependencies\\stata_ado\\parallel_map_template.do.ado",
+    "bytes": 2397,
+    "sha256": "D7FE2ACBB7B97591B91D55760C7FC80B5EC60F5A432D80F670209647463C3D06"
+  },
+  {
+    "file": "dependencies\\stata_ado\\parallel_map.ado",
+    "bytes": 13724,
+    "sha256": "96BEA0DA77AA112275134C77CAD6F06977AE86F55759A2C7459E16D0EACF34DD"
+  },
+  {
+    "file": "dependencies\\stata_ado\\parallel_map.sthlp",
+    "bytes": 2993,
+    "sha256": "B8EA404CE46D53C60EEA67BAEE24257085A3D286772716888DFD30E4702A45FC"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ranktest.ado",
+    "bytes": 80676,
+    "sha256": "197AD146F8937E562C2E04B55A2F78D43F293EA90C5886A6D08069C8C77E6657"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ranktest.pkg",
+    "bytes": 2396,
+    "sha256": "31EEC7D7C26981A62B61EA4386045A1D5A77258F98D1645EA525C8B15E5957D7"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ranktest.sthlp",
+    "bytes": 48265,
+    "sha256": "C5FB691392076C61B4DBCC01BEDC820757AB7895E814DBDAC422EF7EDA1238F7"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ranktest11.ado",
+    "bytes": 31280,
+    "sha256": "FA75C3DCB817DA094E7415AEA2039A542F71DDB33012232A7D29C587385B6720"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ranktest11.sthlp",
+    "bytes": 22230,
+    "sha256": "FA1A5B36EE7596A70839050774AA0A4645428AE0EF749733900607B0227C8894"
+  },
+  {
+    "file": "dependencies\\stata_ado\\ranktest9.ado",
+    "bytes": 47028,
+    "sha256": "D88A927179A8DC8748C96987594271B000D33F5A52B0D869E90178297D0FC6D0"
+  },
+  {
+    "file": "dependencies\\stata_ado\\receipts.json",
+    "bytes": 17541,
+    "sha256": "DC7660C3AB8C1AA07C8F71F96E5B3FB3FA9F0F0A8540950D0A246F8678CCABDE"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe_estat.ado",
+    "bytes": 884,
+    "sha256": "C824D5D2CA8E5BBEEB1916CC80AFD05554C668467EBED96C7A5CA86B8A5A87BB"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe_footnote.ado",
+    "bytes": 1725,
+    "sha256": "39EFCAB7FF05FE00CCFA24E2D6E428A216471BACC7896F97D12544AAE33602AC"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe_header.ado",
+    "bytes": 5138,
+    "sha256": "2D39165ED4363C1FC503B0D599DC942DB55C87415733957E98BA26ECCC66F65D"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe_p.ado",
+    "bytes": 2352,
+    "sha256": "CE736F81CFE3CECBD5D5F66C275582CE0D622EA8E67161DF8BC7855DFD0B1639"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe_programming.sthlp",
+    "bytes": 15516,
+    "sha256": "DB849EE333A5FA269381CF928FDF9C5C465CE13CD3219A31737F8B6299CD67C2"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe.ado",
+    "bytes": 30978,
+    "sha256": "E9B96033602A6F1785F1BE0B6393B44D48EF0974009EE2BFFEE308BC251A6ABC"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe.mata",
+    "bytes": 200358,
+    "sha256": "55827E1E3C9BEC3A0C9310C1147A24C3B997CA0A5DD256A353D98407F876DCF6"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe.pkg",
+    "bytes": 1324,
+    "sha256": "BA312A2115A98951824542901999039BD791F01FDA2C124499BDBDB347427D15"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe.sthlp",
+    "bytes": 48387,
+    "sha256": "5C99C4D0B34EEBE53D6F1158BA093D693CF4D0C74A3F7EB9603C6B0972B072C1"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe3_estat.ado",
+    "bytes": 762,
+    "sha256": "9E9CEAA020BDFD1F6803E671531F162A5194440F14330F4C0FE629D8A878B73A"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe3_footnote.ado",
+    "bytes": 3602,
+    "sha256": "66558AAB202A6345540988CF555037794EACE5E09A17DDEBAACAFA0890BFC4EA"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe3_p.ado",
+    "bytes": 2727,
+    "sha256": "422280314DD7DC48B9A3B6238FACE0ABD698F459160918CA2B0195125587B3D2"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe3.ado",
+    "bytes": 171012,
+    "sha256": "06AE4682AD1421C08DFA520DC98609141006602192D9703AB147310C0AA1DB5B"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe3.sthlp",
+    "bytes": 47324,
+    "sha256": "54BDD8CD01FD4273978D989E29E310D5158461FC72EDD874272DA5CFBB42D62A"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe5_estat.ado",
+    "bytes": 885,
+    "sha256": "911CB9A178F13B6B68A9E3757B57880549E53B64AD9E5D3154EA5DA7E191774B"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe5_footnote.ado",
+    "bytes": 1726,
+    "sha256": "A70AE8289B52D86C28E01FAFDDB10EF381D922E80DA875D4B3907A3DC9FD8D5A"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe5_header.ado",
+    "bytes": 4975,
+    "sha256": "DF5D665C5F504355AC345E87F8C3B3FE0ADCED08B73B5D1E51715F1EAE2BFBA6"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe5_p.ado",
+    "bytes": 2353,
+    "sha256": "7B04D29494F2F8D977DC94FFACA701C6B7EC28768066F4CD3B93A5437E89E003"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe5_parse.ado",
+    "bytes": 4518,
+    "sha256": "13662B3579E740E4233700D0F966B4CF7E03F6109A08CACD44E33FCF098CB20A"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe5.ado",
+    "bytes": 14934,
+    "sha256": "0CCC39E990EFEB8AA6C603AC7FEB89BEC47ED73D5ACE095D13504390CD1BAF2A"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe5.mata",
+    "bytes": 127858,
+    "sha256": "F99D6502E5D5B300041A4C6290DE25EBC5F8C20BC629292ADCDC1CDAA9658187"
+  },
+  {
+    "file": "dependencies\\stata_ado\\reghdfe5.sthlp",
+    "bytes": 42214,
+    "sha256": "0F9B33F8D36BA36DE40E56738F52F7A5EE20AA8296B48D9AE9A699316F1875FA"
+  },
+  {
+    "file": "dependencies\\stata_ado\\require.ado",
+    "bytes": 36955,
+    "sha256": "BFC799167555A9E6BF2BB32DAAC24F49092D64CF3F6701A50F27A3FD1E6AACDC"
+  },
+  {
+    "file": "dependencies\\stata_ado\\require.pkg",
+    "bytes": 456,
+    "sha256": "51D8D5A370BB24E76827342CA02F96DDBDBFB8B18130776E03D181F52930F54C"
+  },
+  {
+    "file": "dependencies\\stata_ado\\require.sthlp",
+    "bytes": 8538,
+    "sha256": "2AFB397D3E8A4B434178618352F350BEEF20EEA25CF1B169B95D1D4BEF2C34A9"
+  },
+  {
+    "file": "dependencies\\stata_ado\\tsvmat.ado",
+    "bytes": 2452,
+    "sha256": "4A60120A02368D16B4D455661159ABD31DCA57AF511A35EC4E8F3681414CD404"
+  },
+  {
+    "file": "dependencies\\stata_ado\\tsvmat.sthlp",
+    "bytes": 16,
+    "sha256": "DF2990B8AC579A8F066B7E53AB15E170A457B5A48AADFAE7F62FCCAE6AD738A5"
+  },
+  {
+    "file": "dependencies\\stata_ado\\xtab2_p.ado",
+    "bytes": 1284,
+    "sha256": "2857867840F5005D5C6A3592AA9BE2A60AF965D9767611CB96D4FF77788BA1C1"
+  },
+  {
+    "file": "dependencies\\stata_ado\\xtabond2.ado",
+    "bytes": 41113,
+    "sha256": "72B3E4E0A3F3B8460D49674ECF75F8B750396586480B0EE7D5B2F5A7A1D550ED"
+  },
+  {
+    "file": "dependencies\\stata_ado\\xtabond2.hlp",
+    "bytes": 44918,
+    "sha256": "6FFD0BE1D93FFE63C90E64FB3D37166F81752ADB3F471B5BCBA22976A1CA609A"
+  },
+  {
+    "file": "dependencies\\stata_ado\\xtabond2.mata",
+    "bytes": 59558,
+    "sha256": "9BC5F5EEFEE650CF582F2C8FD565DF82FB244C52DB5B3DB433AD69EB34EB34AC"
+  },
+  {
+    "file": "dependencies\\stata_ado\\xtabond2.pkg",
+    "bytes": 3093,
+    "sha256": "2EAC6B1D47146FD83CCE03DEE2D32E08572A3A5A225BCB543A3F03A7C173D650"
+  },
+  {
+    "file": "dependencies\\stata_ado\\xtbalance.ado",
+    "bytes": 3464,
+    "sha256": "10B6461CCE3F47B8D9A9F5C6709653FB8A34B66F066493AF2A7FDA29F75DCDA6"
+  },
+  {
+    "file": "dependencies\\stata_ado\\xtbalance.hlp",
+    "bytes": 1439,
+    "sha256": "CEB51684CCC2F3CACD7CB2EB042EACD298669BEA8C6CAC407C68637165E177AD"
+  },
+  {
+    "file": "dependencies\\stata_ado\\xtbalance.pkg",
+    "bytes": 425,
+    "sha256": "66BC016E413276F0253DDC0BD8BFFA1DE7FAFE3910CFC5D42C199AFE0FA726C7"
+  },
+  {
+    "file": "logs\\appendix_text.txt",
+    "bytes": 34445,
+    "sha256": "11A1828261604B2BFEEEDFD765A9A4BFA13F19EF1F67ADE565EAF6CFD98A52CC"
+  },
+  {
+    "file": "logs\\author_body.log",
+    "bytes": 93336,
+    "sha256": "A5381BE2537E68F164724649D446FB361359672795D7AED1555BE73944B68D39"
+  },
+  {
+    "file": "logs\\author_program.txt",
+    "bytes": 16017,
+    "sha256": "4FC7E424FC759A6827BBC0C90FA9FE078FAFCEAD4E7009A81618DB0B04BC1BD2"
+  },
+  {
+    "file": "logs\\completion_check.txt",
+    "bytes": 2742,
+    "sha256": "93AE5207A8ACCC20C1897E829B2EAFB42DAB96CE5627D56D6993032F090D8590"
+  },
+  {
+    "file": "logs\\csa_diagnosis.log",
+    "bytes": 1268,
+    "sha256": "0898A26AB422CA2314646E8A5FB2914B979477CD1C767984A0A6925A856C81F3"
+  },
+  {
+    "file": "logs\\csa_variants.log",
+    "bytes": 1769,
+    "sha256": "29DA4B4E5EBD1DB528C0176B79A7721AE86E0D9E8E5BAAA2AB864C2971C277A5"
+  },
+  {
+    "file": "logs\\paper_text.txt",
+    "bytes": 350,
+    "sha256": "CB35FDC4E741ACA42375B4A11B508ACF13E79F933E9EA8EB4ABF0666071B1767"
+  },
+  {
+    "file": "logs\\sources.json",
+    "bytes": 727,
+    "sha256": "0D89E924DF850F40208B9765D174E8981C73FCAA4CE56DBD58D11A02988B0C68"
+  },
+  {
+    "file": "logs\\treatment_audit.json",
+    "bytes": 742,
+    "sha256": "87CDBADDCADD646F9A9281179743F3509FF24966B6A1FFCDED3EE65C6D0C67F3"
+  },
+  {
+    "file": "logs\\upstream_code_hashes.json",
+    "bytes": 665,
+    "sha256": "8BF2B7A37C66908E2A3694150C9564394D8440E4E9E1DBCF6D472E359F65E616"
+  },
+  {
+    "file": "logs\\modern\\analysis.log",
+    "bytes": 2028,
+    "sha256": "E6611AA183C9098F1C698E6EF9237F0BD4460933A5AA3712D76D519996A9E701"
+  },
+  {
+    "file": "logs\\modern\\cie117612__F1.json.log",
+    "bytes": 637,
+    "sha256": "E8EE303EEBE3A699AC2EFEBFB42C47D921E65CABD30B95AD7A6BF9895EC9827A"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T1_2.json.log",
+    "bytes": 598,
+    "sha256": "C5FA6D72B3649CED7DB076359223DBEBD0F848BA9397CD315078B566F4CA13ED"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T1_3.json.log",
+    "bytes": 599,
+    "sha256": "E2BB1D4D44AD254154D6AF0724758ADEC4EE5D87DEF0128DA5CDEF51EF2000A4"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T1_4.json.log",
+    "bytes": 596,
+    "sha256": "6092AE050E3D0D8E2B46C92557E3E4CD07770E09CF445EF0485694D5A12EC096"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T2_1.json.log",
+    "bytes": 769,
+    "sha256": "D8C351570E58780BB9DA09D979934555C2B561909B57344B47EFB16E94B9335A"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T2_2.json.log",
+    "bytes": 765,
+    "sha256": "142B1B32D40DF37319D2C3405B64CF763EA7CBBEF8B1A1EA8D3E0AEFEFB30CBB"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T2_3.json.log",
+    "bytes": 799,
+    "sha256": "DBDB309A33652D196A21E684BEC93FE7AE0CB9A9D195A380754C78FB2F4F55C6"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T2_4.json.log",
+    "bytes": 764,
+    "sha256": "81EABD795161715F48817198F3E6D6C5560B5126A9845B6744FDA4B396ED12EB"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T2_5.json.log",
+    "bytes": 807,
+    "sha256": "8400B1946CDB75D7C4E78B29FB816C71AA94B76A4354B369586D9757288C23F6"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T3_1.json.log",
+    "bytes": 595,
+    "sha256": "D52D9E8D63933167A3CA8BDAB09AD4E26D6CEBD2623925BDE272BF513094E215"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T3_2.json.log",
+    "bytes": 593,
+    "sha256": "7FC362E3F0D0C3CA1D44E30086BC3DC3F50D4E3683761B40D043072FB8690586"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T3_3.json.log",
+    "bytes": 587,
+    "sha256": "9D2F7538F1E02EB251AE68DAE0B0E89FDE0425E6F4E13CCF18A2C5114497B792"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T3_4.json.log",
+    "bytes": 596,
+    "sha256": "C14DAEF9DF57F1949A0FF58AD23133863BE592C28C5CC7C2C1C614D2C8352DAE"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T4_1.json.log",
+    "bytes": 605,
+    "sha256": "1D8E6F9815F6FF3945092535E914B74C86F4D704456C0CBF965DAF41404FA55C"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T4_2.json.log",
+    "bytes": 592,
+    "sha256": "99413A0999BDA90DC95A40F3D02D6102058BD0629AA6E25D6072E2B2E11AC930"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T4_3.json.log",
+    "bytes": 589,
+    "sha256": "98D592F3FC96A8CE1D167A6855A1B17D129D2C74413C0DDC6EBDB63D14699306"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T4_4.json.log",
+    "bytes": 593,
+    "sha256": "D8D67DAC30F767C54ED93AE440CC4C1273C4D686416189C647EA80CC77A87A38"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T4_5.json.log",
+    "bytes": 596,
+    "sha256": "97786765286D87CEF8038DCC66ED14D51BCAF4C202A07CACD699BC14B7923463"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T4_6.json.log",
+    "bytes": 596,
+    "sha256": "1E9D12B269707D081D7CD02BD400E7AE010BB66E29471C50764144B5725127FD"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T5_1.json.log",
+    "bytes": 596,
+    "sha256": "81F377B183D02393ADF3ED58B34AF5FCF861577143681D201062B22CFF26DF73"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T5_2.json.log",
+    "bytes": 595,
+    "sha256": "DE973C84361621937DA6FBAA98E2261F2191C7C03992A71CBC4F2976E87E81FC"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T5_3.json.log",
+    "bytes": 592,
+    "sha256": "E36F14692F215F6EF794EC610935EB9F18AF6C85843CD454F19EAA5C6A90279D"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T5_4.json.log",
+    "bytes": 593,
+    "sha256": "893A2808D4DF49E8A688F20FCC9493F772214FEF7D2F7675C2AFA32B31214E6C"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T5_5.json.log",
+    "bytes": 591,
+    "sha256": "AE209BB76608A24303416D8B190776784422442682324519BAB4D3F6DEF1E7D0"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T6_1.json.log",
+    "bytes": 595,
+    "sha256": "809AB7446309BB3F613FB7634F36CFC04303C8A057B5F0BF4C811ECA44139322"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T6_2.json.log",
+    "bytes": 596,
+    "sha256": "925AB61D1E17776E20A2B416AF956F3CDD806FA5FB852619AF18AE7A6123BC6D"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T6_3.json.log",
+    "bytes": 596,
+    "sha256": "2076DC3193F779689F878A1692A321C59FD3769301E6459C0DA58BFD8673DB62"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T6_4.json.log",
+    "bytes": 596,
+    "sha256": "84F315D03C7E766D6AB399DF162640DECC630EF180FEA02C59860C43FA9F512D"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T6_5.json.log",
+    "bytes": 592,
+    "sha256": "4E4F040F4E78B22A3133D274646AD364E62B1899F1EF73717CC9664FCC18B896"
+  },
+  {
+    "file": "logs\\modern\\cie117612__T6_6.json.log",
+    "bytes": 592,
+    "sha256": "BCC4A742CE3D196CB08F18496F3CD9A267373A781564C3B2DD774217BEF42379"
+  },
+  {
+    "file": "logs\\modern\\queue_1_status.csv",
+    "bytes": 221,
+    "sha256": "8123CA74CA7C32A46B73CCC143FDDAB9D3A0430073988463E4225EB038A38119"
+  },
+  {
+    "file": "logs\\modern\\queue_1.err",
+    "bytes": 188,
+    "sha256": "B3AAD99A991F98252F3A0842635009F1FBEC82B901A63D11A0168DADC69467CB"
+  },
+  {
+    "file": "logs\\modern\\queue_1.log",
+    "bytes": 1110,
+    "sha256": "34E68F8BA7E39D0070FA9E2891FB583D2F413C8D5AD6B90419ADC61719A733F3"
+  },
+  {
+    "file": "logs\\modern\\queue_2_status.csv",
+    "bytes": 219,
+    "sha256": "20CEC77BE07224647C8C338F1B96517C0F35483C91A4FC9B4296A6875FCD4257"
+  },
+  {
+    "file": "logs\\modern\\queue_2.err",
+    "bytes": 188,
+    "sha256": "B3AAD99A991F98252F3A0842635009F1FBEC82B901A63D11A0168DADC69467CB"
+  },
+  {
+    "file": "logs\\modern\\queue_2.log",
+    "bytes": 1124,
+    "sha256": "12186AF8EF0E3FC11B4CC1FF4890C4D51BA86BF05A1548E2A1B989B4E839D061"
+  },
+  {
+    "file": "logs\\modern\\queue_3_status.csv",
+    "bytes": 195,
+    "sha256": "34ED71D444D69FB6E59820FC86365F2ACF37761E2D0CFC90EC6B10FF68806089"
+  },
+  {
+    "file": "logs\\modern\\queue_3.err",
+    "bytes": 188,
+    "sha256": "B3AAD99A991F98252F3A0842635009F1FBEC82B901A63D11A0168DADC69467CB"
+  },
+  {
+    "file": "logs\\modern\\queue_3.log",
+    "bytes": 987,
+    "sha256": "AF6F57991F6864099CC4BDBB33FBBD331CD21CFE08007781ADDFDFB422E51F10"
+  },
+  {
+    "file": "logs\\modern\\queue_4_status.csv",
+    "bytes": 195,
+    "sha256": "DCEF3CF13615E7142D703A8E107B83F098E206C003EE19F02681A5725E2C1A0A"
+  },
+  {
+    "file": "logs\\modern\\queue_4.err",
+    "bytes": 188,
+    "sha256": "B3AAD99A991F98252F3A0842635009F1FBEC82B901A63D11A0168DADC69467CB"
+  },
+  {
+    "file": "logs\\modern\\queue_4.log",
+    "bytes": 987,
+    "sha256": "C801F115DA4985D9537016E6FDB311C89F8218E3E23576414DD4FBE6FA32BA58"
+  },
+  {
+    "file": "logs\\modern\\sensitivity_status.csv",
+    "bytes": 30,
+    "sha256": "0C144C074DBEF50C3A5BD7C83BFCEAFF96F7840174D2639C4F5E57545B497506"
+  },
+  {
+    "file": "logs\\modern\\sensitivity.log",
+    "bytes": 853,
+    "sha256": "F37F675F57F669DC7D91D5A86552190C40EF1BE2796A3115FCE441C39712F60D"
+  },
+  {
+    "file": "logs\\modern\\sessionInfo.log",
+    "bytes": 1929,
+    "sha256": "AEE4F58E0CFD6585523DB91C720426313AEC9D1C880CEBE2CA37F59DD1D6F959"
+  },
+  {
+    "file": "logs\\pages\\page_10.png",
+    "bytes": 346659,
+    "sha256": "2B366654FAFD152D2BDC8D19F740A08C0ADD46D75990782C66126197C434BAE4"
+  },
+  {
+    "file": "logs\\pages\\page_11.png",
+    "bytes": 303024,
+    "sha256": "7D4A9563BE072386497D643488EC3F225C2F93C44482656A6142843CE7052765"
+  },
+  {
+    "file": "logs\\pages\\page_12.png",
+    "bytes": 255087,
+    "sha256": "F08C034F6A0AEFF20437434136EFCFBD84C18F60FAC393E03190DEE39EEC9A75"
+  },
+  {
+    "file": "logs\\pages\\page_13.png",
+    "bytes": 435818,
+    "sha256": "8406AA89A9553BE2A9E64A8C9C69E74DB3C44F9ED1098F2863ADEA9312B8DC24"
+  },
+  {
+    "file": "logs\\pages\\page_14.png",
+    "bytes": 304707,
+    "sha256": "080C1E307DB7563E597439586D097F21CF8C2C813EE4C2163C87433A43118452"
+  },
+  {
+    "file": "logs\\pages\\page_15.png",
+    "bytes": 262314,
+    "sha256": "7C58271DABACBEBEB9553685DCC29489DB004D08FB518950749E5EA5C90FE23C"
+  },
+  {
+    "file": "logs\\pages\\page_16.png",
+    "bytes": 453407,
+    "sha256": "51DD86D897ED903E2810764C7447E5944722C85817303D9DFA0A510E8CCFD164"
+  },
+  {
+    "file": "logs\\pages\\page_6.png",
+    "bytes": 375767,
+    "sha256": "FD97A362DF23E885E1B3308BF8DF9836AC7BFB6CC48B075641705661FABE38FA"
+  },
+  {
+    "file": "logs\\pages\\page_7.png",
+    "bytes": 364214,
+    "sha256": "669DE6F3DC86047551396E5B9149E11BA35E6CC86F2377A86C21A7F1436BCA00"
+  },
+  {
+    "file": "logs\\pages\\page_8.png",
+    "bytes": 303407,
+    "sha256": "E11B0F49CD4A73DC58E54B8056133D3F9D69FEEBD0C1C4C3CF830D9924F09A45"
+  },
+  {
+    "file": "logs\\pages\\page_9.png",
+    "bytes": 330876,
+    "sha256": "220157C219CC7D8EDE487C440A9DF2EA585FB514FC83C8CC01A9EC06EDCC5A62"
+  },
+  {
+    "file": "materials\\manifest.json",
+    "bytes": 1922,
+    "sha256": "6D8257F17EBAC8A8567BD5EB42379CEF257DD37BB95E9005DE135E34F3EDFAE3"
+  },
+  {
+    "file": "materials\\README.md",
+    "bytes": 809,
+    "sha256": "C2CF02BC737DB0969CD523C83200563D17C35AC3033EFB2E69732D4D96291423"
+  },
+  {
+    "file": "materials\\作者代码\\程序_Code.do",
+    "bytes": 16017,
+    "sha256": "4FC7E424FC759A6827BBC0C90FA9FE078FAFCEAD4E7009A81618DB0B04BC1BD2"
+  },
+  {
+    "file": "materials\\作者代码\\机器学习画图_Code.txt",
+    "bytes": 1417,
+    "sha256": "57FC9EE9F0CEC7CB573BF5E78D29B5ECEA0B26EEAD2526568D8BC86CD685B834"
+  },
+  {
+    "file": "materials\\原始数据\\数据_Ctiydata.dta",
+    "bytes": 351074,
+    "sha256": "8E08C017946810A798B31660F909B10A62D918E35B87790EC3EFC96BC20E8E28"
+  },
+  {
+    "file": "materials\\原始数据\\数据_Firmdata.dta",
+    "bytes": 13982079,
+    "sha256": "9C41328FBCFD5A5A1BE489830AE0F1C162BB13620EE7845C58543202A21541C6"
+  },
+  {
+    "file": "materials\\原始数据\\数据_MLdata.dta",
+    "bytes": 17560,
+    "sha256": "6CE4512E59520B886BA38B75180E157454E35B35929DCC90B3589A5F97EA106D"
+  },
+  {
+    "file": "materials\\原始数据\\数据_MLfiguredata.csv",
+    "bytes": 11022,
+    "sha256": "A660F6EDC49E852FDF84FBC275E4473843BAAA40E6EF6A97C8343DFB4D922592"
+  },
+  {
+    "file": "materials\\论文\\国家级大数据综合试验区设立与就业增长.pdf",
+    "bytes": 10715169,
+    "sha256": "E6AC4BC61406FF546E4835333BEA7C476E22EC1DFEA86D6F532F5F89DCE900AE"
+  },
+  {
+    "file": "materials\\说明\\《中国工业经济》编辑部关于公开数据附件的使用说明.pdf",
+    "bytes": 271110,
+    "sha256": "4A7BB5AACD5E1E023CEDE4BC2CEC026E99B6C4E0A968BB8DE5D4FB9CEF2270E2"
+  },
+  {
+    "file": "materials\\附录\\附录.pdf",
+    "bytes": 1605208,
+    "sha256": "25BA4F0BE4D12A5A4863C9C561DC54252288B59E0ED2A1D90EF250CD7FE595F2"
+  },
+  {
+    "file": "original\\20241231103744WU_FILE_0.zip",
+    "bytes": 7156849,
+    "sha256": "52CBBDFF6A9500E3365718C6F8722550458A4E3079F4EDDAC31A77C989801356"
+  },
+  {
+    "file": "original\\国家级大数据综合试验区设立与就业增长.pdf",
+    "bytes": 10715169,
+    "sha256": "E6AC4BC61406FF546E4835333BEA7C476E22EC1DFEA86D6F532F5F89DCE900AE"
+  },
+  {
+    "file": "original\\manifest.json",
+    "bytes": 1902,
+    "sha256": "A96384F5A032C4316C58352F580A4F0C2B47BFBABB25BDD46FAA3FAF7F262F63"
+  },
+  {
+    "file": "original\\_extracted\\沈坤荣+附件上传\\《中国工业经济》编辑部关于公开数据附件的使用说明.pdf",
+    "bytes": 271110,
+    "sha256": "4A7BB5AACD5E1E023CEDE4BC2CEC026E99B6C4E0A968BB8DE5D4FB9CEF2270E2"
+  },
+  {
+    "file": "original\\_extracted\\沈坤荣+附件上传\\程序_Code.do",
+    "bytes": 16017,
+    "sha256": "4FC7E424FC759A6827BBC0C90FA9FE078FAFCEAD4E7009A81618DB0B04BC1BD2"
+  },
+  {
+    "file": "original\\_extracted\\沈坤荣+附件上传\\附录.pdf",
+    "bytes": 1605208,
+    "sha256": "25BA4F0BE4D12A5A4863C9C561DC54252288B59E0ED2A1D90EF250CD7FE595F2"
+  },
+  {
+    "file": "original\\_extracted\\沈坤荣+附件上传\\机器学习画图_Code.txt",
+    "bytes": 1417,
+    "sha256": "57FC9EE9F0CEC7CB573BF5E78D29B5ECEA0B26EEAD2526568D8BC86CD685B834"
+  },
+  {
+    "file": "original\\_extracted\\沈坤荣+附件上传\\数据_Ctiydata.dta",
+    "bytes": 351074,
+    "sha256": "8E08C017946810A798B31660F909B10A62D918E35B87790EC3EFC96BC20E8E28"
+  },
+  {
+    "file": "original\\_extracted\\沈坤荣+附件上传\\数据_Firmdata.dta",
+    "bytes": 13982079,
+    "sha256": "9C41328FBCFD5A5A1BE489830AE0F1C162BB13620EE7845C58543202A21541C6"
+  },
+  {
+    "file": "original\\_extracted\\沈坤荣+附件上传\\数据_MLdata.dta",
+    "bytes": 17560,
+    "sha256": "6CE4512E59520B886BA38B75180E157454E35B35929DCC90B3589A5F97EA106D"
+  },
+  {
+    "file": "original\\_extracted\\沈坤荣+附件上传\\数据_MLfiguredata.csv",
+    "bytes": 11022,
+    "sha256": "A660F6EDC49E852FDF84FBC275E4473843BAAA40E6EF6A97C8343DFB4D922592"
+  },
+  {
+    "file": "project\\diagnose_csa_variants.R",
+    "bytes": 1092,
+    "sha256": "B0E523674D6C7882A7E0E1ED5F97F412E647548489A92511B35CB3F7797F994A"
+  },
+  {
+    "file": "project\\diagnose_csa.R",
+    "bytes": 1537,
+    "sha256": "14E56F6E27EF36B74C3235498D172A9E1A782E32EFF302136FB9A174EDCAFA16"
+  },
+  {
+    "file": "project\\run_one.R",
+    "bytes": 118,
+    "sha256": "0328F9A950006F1945C6933BEC63FC449E87087CCB845B2DD6628F43A50FD85C"
+  },
+  {
+    "file": "project\\run_queue.R",
+    "bytes": 1092,
+    "sha256": "DB18FF1032DFAA93540C2674ED123DF85989F1B0ED68FEF996E73CA0535CBB20"
+  },
+  {
+    "file": "project\\runtime_info.R",
+    "bytes": 212,
+    "sha256": "D0E2E7D3A652CC214ABFE94C1F0B2378104D9BDF5510FD5A1BD1F427E6A4948D"
+  },
+  {
+    "file": "project\\code\\R\\analysis.R",
+    "bytes": 5878,
+    "sha256": "E5525B316E6B6A0C3178AAD057CFCFA49691A8F3CE5B5CBBDF165235AC448FEA"
+  },
+  {
+    "file": "project\\code\\R\\estimators.R",
+    "bytes": 25665,
+    "sha256": "4A5840BF3752BAE7BB06D30DA479F0AFA79A9A3451811018FD668AF0DECDA1A3"
+  },
+  {
+    "file": "project\\code\\R\\run_spec.R",
+    "bytes": 3631,
+    "sha256": "8D927AA15438FD857509A29902FC14B431A3B8E2799DE5F9692B0BB1A1B3F69C"
+  },
+  {
+    "file": "project\\code\\R\\simulate_example.R",
+    "bytes": 1476,
+    "sha256": "C21CE7BDDEA0CAC75957CA62393EFBB28043DCF9DAFCBB36BA1D1CF1ED8E86D2"
+  },
+  {
+    "file": "project\\code\\R\\test_estimators.R",
+    "bytes": 4479,
+    "sha256": "EBC509C8B781F4190BD95016BBE368BF7773EC0C01F542504124C3454CC7F45E"
+  },
+  {
+    "file": "project\\data\\screening\\by_paper\\cie117612.json",
+    "bytes": 46992,
+    "sha256": "A1E3E4AE6A78D0EFCC5F538D3D65303E91028D3AD77042ECAC3F0F9BCD24948D"
+  },
+  {
+    "file": "project\\data\\sensitivity\\cie117612__STABLE_CITY.json",
+    "bytes": 914,
+    "sha256": "B2BB9EAB3CA448E1007DD9BB3C7AB7DAB8BC73C5E8AB915E27403E422918AB3A"
+  },
+  {
+    "file": "project\\data\\specs\\cie117612__T1_2.json",
+    "bytes": 1115,
+    "sha256": "3E823465BF2912B7A0DEE63C72F73C7992599D1FEE38A87ACCF2B7DFF4A24EE9"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__F1.json",
+    "bytes": 1497,
+    "sha256": "FCE8C1185AD11C65418E0AD496B395F55408F55EB75849EF583633084495AAF0"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T1_3.json",
+    "bytes": 1253,
+    "sha256": "5B1D6378DEF795580B2CEED28961C662BB4980FB0BA09EA04B300935221BDB2A"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T1_4.json",
+    "bytes": 1354,
+    "sha256": "C55DE433460679F703808671BE48820108ED1D50187F7C20CA2F90D488AF8F5F"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T2_1.json",
+    "bytes": 1222,
+    "sha256": "13FF8D44CA42BF134D6055E6F762EFCAAD3968B36E53CA2413BDACE65A5FA560"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T2_2.json",
+    "bytes": 1228,
+    "sha256": "E16D7A2E9CC3ECBE1BB91D0CB08ECB2B04D30BD3348143DEFC837F73480A8B35"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T2_3.json",
+    "bytes": 1228,
+    "sha256": "5C41B0C0BD292B7BE9CB6838D4E99225E9228238DECB6A103993CFFC70172159"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T2_4.json",
+    "bytes": 1230,
+    "sha256": "3319B5DD9A32B55175FEA0E0EC361416C79C9953D6E8209772CEE086D61B3912"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T2_5.json",
+    "bytes": 1230,
+    "sha256": "76B4406CE19C0DA72DAEB90D63B99A56C6F0475ED41FFB291E7FD6B9E7297CC3"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T3_1.json",
+    "bytes": 1354,
+    "sha256": "D42192F042B9C7DF6232DC600AA6F10886D069C18293989A882D5890520437C3"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T3_2.json",
+    "bytes": 1368,
+    "sha256": "C5B5E62F25A4291A3D7E93BBE3F7360EB7D3A5A768BBB40E18621766D49086E7"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T3_3.json",
+    "bytes": 1362,
+    "sha256": "017B77D882B3C6B302B56D13321EAF742DE6C648F9C90D131CD5FE61520439A0"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T3_4.json",
+    "bytes": 1377,
+    "sha256": "065C6AC2B4CA6ED36D95F653C001FDB223DD62FE97956EBBDA02692AE5AD51A5"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T4_1.json",
+    "bytes": 1357,
+    "sha256": "3BFBCD0A773975FAB2BBD24B8BB8D364983BF95E28C7B06F293FE334C2BD0F96"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T4_2.json",
+    "bytes": 1358,
+    "sha256": "8B5204C4C533F1F1461E060CC4FDD45B4D9A0ED6CB5F14FFACA58F3BBD3B4190"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T4_3.json",
+    "bytes": 1359,
+    "sha256": "3BF7E14FD62208DF790680AEEFE94D186061F07028E8117A3289BA3409E1001C"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T4_4.json",
+    "bytes": 1356,
+    "sha256": "6CC879601115779E84A856D870910B410BE86DE650AB67D8DB39BBB9588025D8"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T4_5.json",
+    "bytes": 1356,
+    "sha256": "EB62D0CDECD65E58C49C2A28724919704DFFD12BC985D69BF77CC3CCB1FD3596"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T4_6.json",
+    "bytes": 1354,
+    "sha256": "5D83A0388461B3AC02BBDBC80A2F7E0CF5BCDF08193AB036B3D3D4B0D2BDFB72"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T5_1.json",
+    "bytes": 1361,
+    "sha256": "DDA6E338EDD1196B98A923D0D7C176A5A4A8198BA318534A24BD1F54F8274191"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T5_2.json",
+    "bytes": 1366,
+    "sha256": "BA5ACA8BBF93F3C4F031CC39FEF86EE083EE505B520A993F60CF7E36BE21DE9F"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T5_3.json",
+    "bytes": 1361,
+    "sha256": "A56D5BDEFC8B44410AC1861D403AD5532BAD15272C18A2F4C5D37DA49D98CF73"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T5_4.json",
+    "bytes": 1358,
+    "sha256": "7BDF79BCB79DFF5844DA4A22A64C473E93D7EEE11DE3CD00E7A6CFA9964928FB"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T5_5.json",
+    "bytes": 1360,
+    "sha256": "E6D38E96B4AD85AD3F514DC4C74E1A2EE42A4B35AE64A21DA871A398B1E52441"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T6_1.json",
+    "bytes": 1360,
+    "sha256": "98044FD9D6AA317B961F9D16DB7C66AABA6F20EE040798CCB26C6A3C574D2607"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T6_2.json",
+    "bytes": 1360,
+    "sha256": "CF32CBBB7B8411E9E9BEF681EDFF1357411DB73CEE137E8F33AB3537D142D05F"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T6_3.json",
+    "bytes": 1360,
+    "sha256": "C07C9A7CB185786900F558D9530767225CACB9750B9FDEAB8F6519E33AAB4836"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T6_4.json",
+    "bytes": 1359,
+    "sha256": "E501CE19407BD1E5BC43B1D488A20158239BEE8572AA97494E7ACA622EE790E2"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T6_5.json",
+    "bytes": 1363,
+    "sha256": "63360FB666A717E6D74A3A88BB1C4DCF2D569DD4C775E1A0E9F121B871E2BBCE"
+  },
+  {
+    "file": "project\\data\\specs_controls\\cie117612__T6_6.json",
+    "bytes": 1361,
+    "sha256": "2EF5B7A255B9A189C712AEC913654D9EEE4CB68C74E963250BDC13B3448DC16C"
+  },
+  {
+    "file": "project\\diagnostics\\csa_design.csv",
+    "bytes": 10047,
+    "sha256": "FC75B72AFD30E6336BE4617027B0E34EE25681F1DAC6313D84AF614974DD759F"
+  },
+  {
+    "file": "project\\diagnostics\\csa_variants.csv",
+    "bytes": 746,
+    "sha256": "670D834C645B79BBCEF56283A071F304E40014C5C13D0CBA7A23F1D873D2717B"
+  },
+  {
+    "file": "project\\diagnostics\\sessionInfo.txt",
+    "bytes": 1454,
+    "sha256": "AC98BEA0E900B4CF62B5659A1AE65C28E21C396CFDDC6AE836D97E7BB44DB0DF"
+  },
+  {
+    "file": "project\\diagnostics\\T2_1_cells.csv",
+    "bytes": 967,
+    "sha256": "504DE5EB33090A72945E53900141C753094E3E8D37259E9A0CF3F4E571D941A1"
+  },
+  {
+    "file": "project\\diagnostics\\T2_1_fit.rds",
+    "bytes": 1606871,
+    "sha256": "31178278AD779757780FAF6392B15B2226280AFCE72F1B3539AE7FC32E0760B5"
+  },
+  {
+    "file": "project\\diagnostics\\T2_2_cells.csv",
+    "bytes": 874,
+    "sha256": "64E8E9614DF86A77605C85361832D909F8DB749A550932A09C7F08E358A8944E"
+  },
+  {
+    "file": "project\\diagnostics\\T2_2_fit.rds",
+    "bytes": 1480012,
+    "sha256": "3D1BEF9384D5D1957327D56CF31EE03E750D5B9AC0C07709C5B014BB735C85E1"
+  },
+  {
+    "file": "project\\diagnostics\\T2_3_cells.csv",
+    "bytes": 890,
+    "sha256": "7C01E59859304B19F9DE0CD2448D14BDEC5517747CE9245152B467B33F6D79A5"
+  },
+  {
+    "file": "project\\diagnostics\\T2_3_fit.rds",
+    "bytes": 1769110,
+    "sha256": "C0F9411604AD6CA6A03DD8C11A971A17927B1EA9154067A7B285BDB403C1EC30"
+  },
+  {
+    "file": "project\\diagnostics\\T2_4_cells.csv",
+    "bytes": 961,
+    "sha256": "8B3012885F12DB0C38DC5FA1D8101381A0408AAFB2EA118EC4A5A600F6CCB8C9"
+  },
+  {
+    "file": "project\\diagnostics\\T2_4_fit.rds",
+    "bytes": 1593172,
+    "sha256": "AE4D69C63E63D87839B499493F8F27C59A7C7446F725B61EC3C9D689C56E8A6C"
+  },
+  {
+    "file": "project\\diagnostics\\T2_5_cells.csv",
+    "bytes": 734,
+    "sha256": "7F6B6B6B14D66E9DD216CA064D210D5D4CF9EA45A40BD9C5027382DB386EF83A"
+  },
+  {
+    "file": "project\\diagnostics\\T2_5_fit.rds",
+    "bytes": 1643664,
+    "sha256": "90ED963DA5CC2261F91C7190D92278047072C66CEF9DDF0134D7DB9067C1D60A"
+  },
+  {
+    "file": "project\\output\\specs_main.csv",
+    "bytes": 957,
+    "sha256": "25A4E254CB78D2C8C3DA701DF4AEA12D0C1D18FF62FD4D6CF73B923A9A68C315"
+  },
+  {
+    "file": "project\\output\\figures\\scatter_controls.png",
+    "bytes": 20039,
+    "sha256": "BAE5B8519EF1F47BA64DDBC9D146EC1DED67F54FB6ACB21E2A6521E57BD42F58"
+  },
+  {
+    "file": "project\\output\\figures\\scatter_main.png",
+    "bytes": 19021,
+    "sha256": "CC924A4FC5C135019863DB2BE4982FD442CB814E7E626931969CBF1B647E8999"
+  },
+  {
+    "file": "project\\output\\specs\\cie117612__T1_2.csv",
+    "bytes": 1076,
+    "sha256": "19507ED03E7B3097C324FB3CE9E40CC8DDBA75472AA1A9C806900091DF681A54"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__F1.csv",
+    "bytes": 1196,
+    "sha256": "7E49F096047E47B7C6E5FC7F4C85F63C7E6BEF5BAD2E83A1B85E79DD87BB4A3A"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T1_3.csv",
+    "bytes": 934,
+    "sha256": "0A8BF71C2B29977469548079FE5DCA7EA2EF26AED68F9BE3CC2BDFA03680B244"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T1_4.csv",
+    "bytes": 934,
+    "sha256": "B797FBA3C141B8841AF44B110FC8238E9743D27D2464D738060B444DA9E0BF9A"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T2_1.csv",
+    "bytes": 823,
+    "sha256": "15A85A900A76B2C4E04BF185047147E3424744A1B0B493D671D2EC8036DE0BB8"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T2_2.csv",
+    "bytes": 819,
+    "sha256": "DA7B1BB23EAD8B7CE52ED32392CB3EC1DC9848D4FC4BA032BCA81A1DC16DDF06"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T2_3.csv",
+    "bytes": 821,
+    "sha256": "7DB43D7B29E135AF9A3D5AE57CA5AAB00F11DDC724DC741CAA74550F27D62303"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T2_4.csv",
+    "bytes": 820,
+    "sha256": "77A2672208D88EC371F140C6C59CB02E6CB8E4F3DF9C62C6F6337B9F4A6A4604"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T2_5.csv",
+    "bytes": 821,
+    "sha256": "CEA1B2015B2A0472F2C870A2ACC9F362D8069E443A0BD5ECA585013991E93B3F"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T3_1.csv",
+    "bytes": 931,
+    "sha256": "303E9FADD32F0ED74C5C7201026E59D05CFBD027661E85735F9A0B3FC2B4EC35"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T3_2.csv",
+    "bytes": 936,
+    "sha256": "CA794C6730CC5509271F5D35426BF22AEAA34383DED3AAE4A51E762B4405C8CC"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T3_3.csv",
+    "bytes": 932,
+    "sha256": "8B9CA81454E77AE393E01D2B16F2C67949E5FEBE4FBC3180CB655A6702EC68A8"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T3_4.csv",
+    "bytes": 935,
+    "sha256": "40BD1E4F83439DF17A1506C43816D19A99FE24B7084925BF40B4800DDCD1CE87"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T4_1.csv",
+    "bytes": 941,
+    "sha256": "69A1F12222B5E8C430F05B936A4DA7B3872E7872EB11A63EF04FAA2EE112E74C"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T4_2.csv",
+    "bytes": 931,
+    "sha256": "4BEB17C9E0839D7A577E20CBD105EE9763D5634AE31B1BDCB7106D15BDD70008"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T4_3.csv",
+    "bytes": 927,
+    "sha256": "02FBFB4A2338D7876B0FC2FBB79055D571EE0A3CF9F50B86227C1F1612FC63B8"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T4_4.csv",
+    "bytes": 934,
+    "sha256": "681CB612EA9D84E1044B8D926DD88D28690C3C8BD84FC4CA19C8ED09E966D0D7"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T4_5.csv",
+    "bytes": 933,
+    "sha256": "95ACFE03877B162CD3DF015CDF511B94B4A18C1C95286DB5C91EF53688B1F0EE"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T4_6.csv",
+    "bytes": 935,
+    "sha256": "140BCAAD034BA59D891559DDC08CE729642EFAB055CC3A4B4266520EADFA1BF8"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T5_1.csv",
+    "bytes": 933,
+    "sha256": "7A9D06F4659C599336959884293E82995F516770F5EF396B3EBD062B2A0C36D1"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T5_2.csv",
+    "bytes": 931,
+    "sha256": "5087933B06B11F94340C13AAE236EDB9132BF9C4BB1C74B0B24AA99D42854C0D"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T5_3.csv",
+    "bytes": 931,
+    "sha256": "630A6C0711329EFA02F9142575E0D77143AE64466B1ECC68C53BF6AB61CC0A5E"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T5_4.csv",
+    "bytes": 932,
+    "sha256": "6CC9230DC7F43D0F6422987290D903C028AF26C2A27707B83563EAA675AAB941"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T5_5.csv",
+    "bytes": 926,
+    "sha256": "EFE969D1300091A7EFBCF7F4FAE80EF152A10F88E94AA52880434D840BA20CBC"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T6_1.csv",
+    "bytes": 933,
+    "sha256": "0CDB815611BA2339FF9139A2F5D4B8B354FD15CD6CEC67932B4C829AA5F05770"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T6_2.csv",
+    "bytes": 933,
+    "sha256": "8F67432F65BB393BDF867F320AFFAE18FD904D5E3F284DA69CD796F473AD6017"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T6_3.csv",
+    "bytes": 934,
+    "sha256": "40F5323DB8AA8FBC2512A1EABF64303A223B53A4B6B3C68F90363808D80963D1"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T6_4.csv",
+    "bytes": 934,
+    "sha256": "AD1FD64A6EDA3840F224F26FACABCFDE9245B172EA13B7956057DCF04C0DD87B"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T6_5.csv",
+    "bytes": 932,
+    "sha256": "2C5F8E573701FAF01A461A6DABD7901D12F60C4192750C8AFB1E77E7F0A17183"
+  },
+  {
+    "file": "project\\output\\specs_controls\\cie117612__T6_6.csv",
+    "bytes": 931,
+    "sha256": "57E755883F0665092D9B4B413B0F9CE6AB3663F2054DD62E28FF164532D0844A"
+  },
+  {
+    "file": "project\\output\\tables\\comparison_summary.csv",
+    "bytes": 992,
+    "sha256": "ECD5C9F2A792A840276C88D14A89A6D8E113D403A729EC11A7F01CDF41104D60"
+  },
+  {
+    "file": "project\\output\\tables\\comparison_summary.md",
+    "bytes": 1598,
+    "sha256": "2858A44A9559BC61FE5CE6324E9ABA695DFE3333F34BDFF0125484334FB92DA5"
+  },
+  {
+    "file": "project\\sensitivity_output\\specs\\cie117612__STABLE_CITY.csv",
+    "bytes": 1004,
+    "sha256": "FDC7CBE54206D3B95ECA2C1E2426A95FE1630CE2C03D64DE4F132B2F02928790"
+  },
+  {
+    "file": "project\\upstream_documents\\README.md",
+    "bytes": 5622,
+    "sha256": "3D875CF7457D8416CC630E3D4B07E0880D301532E3DA5DAAC60F004913C989BD"
+  },
+  {
+    "file": "project\\upstream_documents\\docs\\PROTOCOL.md",
+    "bytes": 11319,
+    "sha256": "A6C2F7FA31719323D5F5B5924D2A18389B76BD50DC2EE0CEB3B417436AA15C3F"
+  },
+  {
+    "file": "project\\upstream_documents\\docs\\REPLICATION.md",
+    "bytes": 2622,
+    "sha256": "273EEA585A2738D7BF8930093293DA8A74ACF5A46C06EE92F3AC02DA1FAB99CD"
+  },
+  {
+    "file": "project\\upstream_documents\\docs\\SCREENING.md",
+    "bytes": 3013,
+    "sha256": "BF5A63FE69874128C9A6334326F3B47FA3AF352BCF2ADE77925606FA5F327BBB"
+  },
+  {
+    "file": "project\\upstream_documents\\docs\\SPEC_SCHEMA.md",
+    "bytes": 3401,
+    "sha256": "C407B3516FEFBB68220F8B430719D672253725D41E62C3DF33A09AD760393702"
+  },
+  {
+    "file": "work\\city.dta",
+    "bytes": 351074,
+    "sha256": "8E08C017946810A798B31660F909B10A62D918E35B87790EC3EFC96BC20E8E28"
+  },
+  {
+    "file": "work\\firm.dta",
+    "bytes": 13982079,
+    "sha256": "9C41328FBCFD5A5A1BE489830AE0F1C162BB13620EE7845C58543202A21541C6"
+  },
+  {
+    "file": "work\\ml.dta",
+    "bytes": 17560,
+    "sha256": "6CE4512E59520B886BA38B75180E157454E35B35929DCC90B3589A5F97EA106D"
+  },
+  {
+    "file": "work\\replicate_body.do",
+    "bytes": 8231,
+    "sha256": "5B78D96D7A559ECE9336FBA8DFB91B05B32C6F43847F0772CBB06D6229D6E1A8"
+  },
+  {
+    "file": "work\\replicate_body.log",
+    "bytes": 95218,
+    "sha256": "0135BF7646AC46ED94199522BDC0781EA8EE5506692835EF1E2D72BFFFA6BC20"
+  }
+]

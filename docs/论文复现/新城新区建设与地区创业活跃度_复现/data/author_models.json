@@ -1,0 +1,183 @@
+[
+  {
+    "spec": "T2_1",
+    "command": "reghdfe lnNo_GSmgfper tp  if in_sample==1, absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T2_2",
+    "command": "reghdfe lnNo_GSmgfper tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* if in_sample==1, absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T2_3",
+    "command": "reghdfe lnNo_GSmgfper tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* if in_sample==1, absorb(city_id prov_id##year) vce(cluster prov_id)",
+    "terms": [
+      "tp"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T3_1",
+    "command": "reghdfe lnNo_GSmgfper tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* kfq , absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp",
+      "kfq"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T3_2",
+    "command": "reghdfe lnNo_GSmgfper tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* cx , absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp",
+      "cx"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T4_1",
+    "command": "reghdfe lnNo_GSmgfper tp tpmeanprice_gongye2007 popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp",
+      "tpmeanprice_gongye2007"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T4_2",
+    "command": "reghdfe lnNo_GSmgfper tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* if east==0, absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T4_3",
+    "command": "reghdfe lnNo_GSmgfper tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* if east==1, absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T4_4",
+    "command": "reghdfe hhi5 tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(hylb city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp"
+    ],
+    "data": "city-industry"
+  },
+  {
+    "spec": "T4_5",
+    "command": "reghdfe lnNo_GSmgfper tp tplngdpper2006 popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp",
+      "tplngdpper2006"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T4_6",
+    "command": "reghdfe lnNo_GSmgfper tp tplngdpperpre popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp",
+      "tplngdpperpre"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T5_1",
+    "command": "reghdfe zhuan tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T5_2",
+    "command": "reghdfe duo tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T5_3",
+    "command": "reghdfe density1 tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T5_4",
+    "command": "reghdfe density2 tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T5_5",
+    "command": "reghdfe thirdind tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T5_6",
+    "command": "reghdfe thirdindemp tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T6_1",
+    "command": "reghdfe avglife tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T6_2",
+    "command": "reghdfe life3rate tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T6_3",
+    "command": "reghdfe ksi tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T6_4",
+    "command": "reghdfe Score tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp"
+    ],
+    "data": "city"
+  },
+  {
+    "spec": "T6_5",
+    "command": "reghdfe zhichu tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+    "terms": [
+      "tp"
+    ],
+    "data": "city"
+  }
+]

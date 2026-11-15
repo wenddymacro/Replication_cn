@@ -1,0 +1,32 @@
+{
+  "paper_id": "cie20250307",
+  "spec_id": "T2_1",
+  "journal": "cie",
+  "year": 2025,
+  "issue": 3,
+  "data_path": "$CIE_RAW/data/city_analysis.csv",
+  "id_var": "city_id",
+  "time_var": "year",
+  "y_var": "lnNo_GSmgfper",
+  "gvar": "g_analysis",
+  "treat_var": "tp",
+  "cluster_var": "city_id",
+  "xt_vars": [
+    "prov_id"
+  ],
+  "controls": [],
+  "sample_filter": "sample_T2_1 == 1",
+  "static_or_event": "static",
+  "published_coef": 0.1363,
+  "published_se": 0.0565,
+  "published_n": 1610,
+  "published_source": "原文表2第1列",
+  "table": "2",
+  "column": "1",
+  "preferred": false,
+  "in_abstract_intro": true,
+  "reports_modern_estimator": true,
+  "software": "Stata version16",
+  "replication_status": "exact",
+  "notes": "原文表号为准。省份为固定类别；真实firstyear，不改首次观察日期。50个数值控制列为5个固定2006特征×10年虚拟变量，原样保留。controls字段仅为精确保留数值结构的实现，不能据此自动归为时变控制二级样本；该组的最终主样本登记待解决连续特征支持差异。"
+}

@@ -1,0 +1,211 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      Stata 19.0
+___/   /   /___/   /   /___/       MP—Parallel Edition
+
+ Statistics and Data Science       Copyright 1985-2025 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-782-8272        https://www.stata.com
+                                   979-696-4600        service@stata.com
+
+Stata license: 114514-student 64-core lab perpetual
+Serial number: 9223372036854775807
+  Licensed to: 1
+               1
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. More than 2 billion observations are allowed; see help obs_advice.
+      4. Maximum number of variables is set to 5,000 but can be increased;
+          see help set_maxvar.
+
+
+Running D:\Stata\Stata19\profile.do ...
+
+. do run_spatial.do 
+
+. clear all
+
+. set more off
+
+. set processors 1
+    The maximum number of processors or cores being used is changed from 16 to
+    1.  It can be set to any number between 1 and 16
+
+. adopath ++ "../output/local_ado"
+  [1]              "../output/local_ado"
+  [2]  (BASE)      "D:\Stata\Stata19\ado\base/"
+  [3]  (SITE)      "D:\Stata\Stata19\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "C:\ado\personal/"
+  [6]  (PLUS)      "C:\ado\plus/"
+  [7]  (OLDPLACE)  "C:\ado\myado/"
+  [8]              "C:\ado\plus"
+  [9]              "C:\ado\github"
+  [10]             "C:\ado\personal"
+
+. log using "../output/spatial.log", text replace
+(file
+    C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\work\../o
+    > utput/spatial.log not found)
+---------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\wo
+> rk\../output/spatial.log
+  log type:  text
+ opened on:  13 Nov 2026, 23:46:47
+
+. use "../author/listed.dta", clear
+
+. global xlist "lnage lnasset lnsize lev edu ceo lngdppc secondary govexp ftd"
+
+. egen indid_year=group(indid year)
+
+. drop if missing(纬度) | missing(经度)
+(19 observations deleted)
+
+. postfile spatial int radius double b se N r2 using "../output/spatial.dta", rep
+> lace
+(file ../output/spatial.dta not found)
+
+. foreach radius in 100 200 300 {
+  2. display "SPATIAL_RADIUS `radius'"
+  3. capture noisily acreg TFP chainleader $xlist, spatial latitude(纬度) longitu
+> de(经度) dist(`radius') pfe1(stkcd) pfe2(indid_year) dropsingletons
+  4. local rc=_rc
+  5. display "SPATIAL_RC `radius' `rc'"
+  6. if `rc'==0 {
+  7. post spatial (`radius') (_b[chainleader]) (_se[chainleader]) (e(N)) (e(r2))
+  8. estimates save "../output/spatial_`radius'.ster", replace
+  9. }
+ 10. }
+SPATIAL_RADIUS 100
+SPATIAL CORRECTION
+DistCutoff: 100
+LagCutoff:  0
+No HAC Correction
+Absorbed FE: stkcd and indid_year
+             337 singleton observations dropped
+Included instruments: chainleader lnage lnasset lnsize lev edu ceo lngdppc second
+> ary govexp ftd
+                                                      Number of obs =    23911
+Total (centered) SS     =  2436.314534                Centered R2   =   0.2352
+Total (uncentered) SS   =  2436.314534                Uncentered R2 =   0.2352
+Residual SS             =  1863.275121
+
+------------------------------------------------------------------------------
+         TFP | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |    .035716   .0117099     3.05   0.002      .012765    .0586669
+       lnage |   .2169335   .0954819     2.27   0.023     .0297924    .4040746
+     lnasset |  -.0954496   .0153084    -6.24   0.000    -.1254536   -.0654456
+      lnsize |    .543152   .0244524    22.21   0.000     .4952262    .5910778
+         lev |   .2276799   .0474112     4.80   0.000     .1347558    .3206041
+         edu |   .5322488   .0683786     7.78   0.000     .3982292    .6662685
+         ceo |  -.0253782   .0093997    -2.70   0.007    -.0438013   -.0069552
+     lngdppc |   .1344921   .0352275     3.82   0.000     .0654475    .2035366
+   secondary |  -.0049282   .1407421    -0.04   0.972    -.2807777    .2709214
+      govexp |   .0836246   .1726217     0.48   0.628    -.2547077    .4219569
+         ftd |   .0097666   .0502468     0.19   0.846    -.0887154    .1082486
+       _cons |  -1.17e-15   .0002318    -0.00   1.000    -.0004543    .0004543
+------------------------------------------------------------------------------
+nb: total SS, model and R2s are after partialling out.
+To get the corrected ones use the option correctr2
+SPATIAL_RC 100 0
+(note: file ../output/spatial_100.ster not found)
+file ../output/spatial_100.ster saved
+SPATIAL_RADIUS 200
+SPATIAL CORRECTION
+DistCutoff: 200
+LagCutoff:  0
+No HAC Correction
+Absorbed FE: stkcd and indid_year
+             337 singleton observations dropped
+Included instruments: chainleader lnage lnasset lnsize lev edu ceo lngdppc second
+> ary govexp ftd
+                                                      Number of obs =    23911
+Total (centered) SS     =  2436.314534                Centered R2   =   0.2352
+Total (uncentered) SS   =  2436.314534                Uncentered R2 =   0.2352
+Residual SS             =  1863.275121
+
+------------------------------------------------------------------------------
+         TFP | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |    .035716   .0144332     2.47   0.013     .0074275    .0640045
+       lnage |   .2169335   .0998326     2.17   0.030     .0212653    .4126017
+     lnasset |  -.0954496   .0130763    -7.30   0.000    -.1210788   -.0698204
+      lnsize |    .543152   .0246523    22.03   0.000     .4948343    .5914697
+         lev |   .2276799   .0474158     4.80   0.000     .1347467    .3206131
+         edu |   .5322488   .0645244     8.25   0.000     .4057833    .6587143
+         ceo |  -.0253782   .0086057    -2.95   0.003    -.0422452   -.0085113
+     lngdppc |   .1344921   .0268568     5.01   0.000     .0818538    .1871303
+   secondary |  -.0049282   .1871397    -0.03   0.979    -.3717153     .361859
+      govexp |   .0836246   .1651534     0.51   0.613    -.2400702    .4073193
+         ftd |   .0097666   .0406234     0.24   0.810    -.0698538     .089387
+       _cons |  -1.17e-15   .0003321    -0.00   1.000    -.0006509    .0006509
+------------------------------------------------------------------------------
+nb: total SS, model and R2s are after partialling out.
+To get the corrected ones use the option correctr2
+SPATIAL_RC 200 0
+(note: file ../output/spatial_200.ster not found)
+file ../output/spatial_200.ster saved
+SPATIAL_RADIUS 300
+SPATIAL CORRECTION
+DistCutoff: 300
+LagCutoff:  0
+No HAC Correction
+Absorbed FE: stkcd and indid_year
+             337 singleton observations dropped
+Included instruments: chainleader lnage lnasset lnsize lev edu ceo lngdppc second
+> ary govexp ftd
+                                                      Number of obs =    23911
+Total (centered) SS     =  2436.314534                Centered R2   =   0.2352
+Total (uncentered) SS   =  2436.314534                Uncentered R2 =   0.2352
+Residual SS             =  1863.275121
+
+------------------------------------------------------------------------------
+         TFP | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |    .035716   .0098055     3.64   0.000     .0164976    .0549343
+       lnage |   .2169335   .0883926     2.45   0.014     .0436873    .3901798
+     lnasset |  -.0954496   .0141372    -6.75   0.000     -.123158   -.0677412
+      lnsize |    .543152   .0233877    23.22   0.000      .497313    .5889911
+         lev |   .2276799    .055219     4.12   0.000     .1194528    .3359071
+         edu |   .5322488   .0631527     8.43   0.000     .4084718    .6560259
+         ceo |  -.0253782   .0073525    -3.45   0.001    -.0397888   -.0109677
+     lngdppc |   .1344921    .025762     5.22   0.000     .0839994    .1849847
+   secondary |  -.0049282   .1902193    -0.03   0.979    -.3777511    .3678948
+      govexp |   .0836246   .1421227     0.59   0.556    -.1949308    .3621799
+         ftd |   .0097666   .0470707     0.21   0.836    -.0824902    .1020234
+       _cons |  -1.17e-15          .        .       .            .           .
+------------------------------------------------------------------------------
+nb: total SS, model and R2s are after partialling out.
+To get the corrected ones use the option correctr2
+SPATIAL_RC 300 0
+(note: file ../output/spatial_300.ster not found)
+file ../output/spatial_300.ster saved
+
+. postclose spatial
+
+. use "../output/spatial.dta", clear
+
+. export delimited using "../output/spatial.csv", replace
+(file ../output/spatial.csv not found)
+file ../output/spatial.csv saved
+
+. display "COMPLETE_spatial"
+COMPLETE_spatial
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\wo
+> rk\../output/spatial.log
+  log type:  text
+ closed on:  13 Nov 2026, 23:51:28
+---------------------------------------------------------------------------------
+
+. 
+end of do-file

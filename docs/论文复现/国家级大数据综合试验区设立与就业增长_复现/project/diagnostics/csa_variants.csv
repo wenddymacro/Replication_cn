@@ -1,0 +1,9 @@
+spec,variant,n,n_units,unbalanced,est,se,note
+T2_3,upstream_original,3216,276,TRUE,5.59405585754681,0.955570683888891,unbalanced
+T2_3,no_covariates,3216,276,TRUE,0.180422987832715,0.0715175833877611,unbalanced
+T2_3,controls_fixed_first_observation,3216,276,TRUE,0.164880845857887,0.0726070560419003,unbalanced
+T2_3,complete_panel_only,2664,222,FALSE,0.124185424122197,0.0867209409876795,""
+T2_5,upstream_original,2766,277,TRUE,4.84761016322984,0.584919235127649,unbalanced
+T2_5,no_covariates,2766,277,TRUE,0.0702243112220288,0.0278329965147758,unbalanced
+T2_5,controls_fixed_first_observation,2766,277,TRUE,0.0528013833653599,0.0299583934233458,unbalanced
+T2_5,complete_panel_only,2730,273,FALSE,0.0561346192521131,0.0295588418142363,""

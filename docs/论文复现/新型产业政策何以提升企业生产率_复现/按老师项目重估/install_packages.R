@@ -1,0 +1,8 @@
+lib <- Sys.getenv("R_LIBS_USER")
+dir.create(lib, recursive=TRUE, showWarnings=FALSE)
+.libPaths(c(lib,.libPaths()))
+options(repos=c(CRAN="https://mirrors.tuna.tsinghua.edu.cn/CRAN/"),timeout=300)
+install.packages(c("data.table","jsonlite","haven","fixest","did","did2s"),lib=lib,type="binary",dependencies=c("Depends","Imports","LinkingTo"),Ncpus=4)
+print(sapply(c("data.table","jsonlite","haven","fixest","did","did2s"), requireNamespace,quietly=TRUE))
+write.csv(as.data.frame(installed.packages(lib.loc=lib))[,c("Package","Version","Built")],"logs/package_versions.csv",row.names=FALSE)
+stopifnot(all(sapply(c("data.table","jsonlite","haven","fixest","did","did2s"),requireNamespace,quietly=TRUE)))

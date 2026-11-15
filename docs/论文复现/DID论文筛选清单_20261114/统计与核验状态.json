@@ -1,0 +1,29 @@
+{
+  "as_of": "2026-11-14",
+  "full_historical_census_complete": false,
+  "title_frame": 1153,
+  "did_staged_list": 107,
+  "evidence_levels": {
+    "B": 23,
+    "A": 15,
+    "C": 69
+  },
+  "title_only_candidates": 183,
+  "with_attachment_link": 74,
+  "data_code_packages_verified": 1,
+  "by_year": {
+    "2015": 2,
+    "2016": 1,
+    "2017": 2,
+    "2018": 6,
+    "2019": 9,
+    "2020": 13,
+    "2021": 5,
+    "2022": 6,
+    "2023": 15,
+    "2024": 15,
+    "2025": 10,
+    "2026": 23
+  },
+  "raw_search_batches": 48
+}

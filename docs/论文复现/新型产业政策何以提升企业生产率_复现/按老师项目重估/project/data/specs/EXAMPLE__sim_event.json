@@ -1,0 +1,37 @@
+{
+  "paper_id": "EXAMPLE",
+  "journal": "cie",
+  "data_path": "data/example/sim_panel.csv",
+  "id_var": "firm",
+  "time_var": "year",
+  "y_var": "lnrd",
+  "treat_var": "did",
+  "weight_var": "",
+  "cluster_var": "city",
+  "xt_vars": [],
+  "controls": [],
+  "sample_filter": "",
+  "log_y": "",
+  "static_or_event": "event",
+  "published_coef": null,
+  "published_se": null,
+  "published_n": null,
+  "published_source": "simulated",
+  "table": "sim",
+  "column": "event study, -3..3, ref -1, endpoints binned",
+  "preferred": true,
+  "in_abstract_intro": true,
+  "reports_modern_estimator": false,
+  "software": "R",
+  "replication_status": "not_run",
+  "notes": "Simulated data from code/R/simulate_example.R (pipeline test).",
+  "spec_id": "sim_event",
+  "event_structure": {
+    "pre_min": -3,
+    "post_max": 3,
+    "ref": [
+      -1
+    ],
+    "ends": "bin"
+  }
+}

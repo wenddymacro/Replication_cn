@@ -1,0 +1,50 @@
+#画图用julia软件
+
+
+cd(raw"C:\Machine_learning")
+
+
+#using Pkg
+#Pkg.add("DataFrames")
+#Pkg.add("CSV")
+
+
+using Plots, Random
+using CSV
+using DataFrames
+
+
+# 指定中文字体
+fontname = "Microsoft YaHei"
+fontname = "Times Roman"
+# 设置默认字体
+Plots.default(fontfamily=fontname)
+
+data = DataFrame(CSV.File("数据_MLfiguredata.csv"))
+
+c =  4.003349
+W = data.Y .> c .* data.Z
+
+#using Pkg
+#Pkg.add("Plots") # 如果未安装
+#using Plots
+
+
+# 黑白主题设置
+using Plots
+Plots.theme(:grayscale)
+
+# 绘制处理组的散点图，设置为黑色实心圆点
+plot(data.Z[data.D .== 1], data.Y[data.D .== 1], seriestype=:scatter, framestyle=:origin, 
+    xlabel=("ZCADEᵢ"), ylabel="CADEᵢ", label="受政策直接影响的处理组", 
+    grid=false, xtickfont=font(8, "Times Roman"), marker=:circle, color=:black)
+
+# 绘制控制组的散点图，设置为灰色实心方点
+plot!(data.Z[data.D .== 0], data.Y[data.D .== 0], seriestype=:scatter, framestyle=:origin, 
+    label="不受政策直接影响的控制组", grid=false, marker=:rect, color=:gray, markersize=3)
+
+# 绘制政策最优实施规则的线，设置为黑色虚线
+xs = Vector(-2:0.05:maximum(data.Z))
+ys = xs .* c
+plot!(xs, ys, label="政策最优实施规则", legend=:topleft, linewidth=2.0, 
+    linestyle=:dash, color=:black, ylim=[-10, 30], xlim=[-5, 15], fg_legend=:false, grid=false)

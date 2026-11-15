@@ -1,0 +1,58 @@
+[
+  {
+    "file": "论文\\跨境电商平台与国内就业——基于企业和地区双重视角的考察.pdf",
+    "bytes": 1481475,
+    "sha256": "ac4f3ef86d782e1cf7d36280c493f0a27c2447a6c0867a3facd9afde2c9e9379",
+    "source": "user_supplied:C:\\Users\\ASUS\\Downloads\\跨境电商平台与国内就业——基于企业和地区双重视角的考察.pdf",
+    "zip_member": null
+  },
+  {
+    "file": "原始附件包\\20261027095151221WU_FILE_1.zip",
+    "bytes": 1076683,
+    "sha256": "e89c8fa2d66b6d427733998d9c118f5a07675535a228a95a400ae1b2026ed6b5",
+    "source": "user_supplied:C:\\Users\\ASUS\\Downloads\\20261027095151221WU_FILE_1.zip",
+    "zip_member": null
+  },
+  {
+    "file": "其他说明\\《中国工业经济》编辑部关于公开数据附件的使用说明.pdf",
+    "bytes": 271110,
+    "sha256": "4a7bb5aacd5e1e023cede4bc2cec026e99b6c4e0a968bb8de5d4fb9cef2270e2",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123768\\原始附件包\\20261027095151221WU_FILE_1.zip",
+    "zip_member": "魏浩+附件上传/《中国工业经济》编辑部关于公开数据附件的使用说明.pdf"
+  },
+  {
+    "file": "代码\\正文程序.do",
+    "bytes": 11254,
+    "sha256": "b68b4ce22e9e45429c527cdc906103861068654bfb7bc824789a830c496bc8c6",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123768\\原始附件包\\20261027095151221WU_FILE_1.zip",
+    "zip_member": "魏浩+附件上传/正文程序.do"
+  },
+  {
+    "file": "其他说明\\作者运行日志\\正文程序运行日志.log",
+    "bytes": 108692,
+    "sha256": "055e26e04419ed6a9183feb7a5a708cf156337ac1e630baad4bed22de1434686",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123768\\原始附件包\\20261027095151221WU_FILE_1.zip",
+    "zip_member": "魏浩+附件上传/正文程序运行日志.log"
+  },
+  {
+    "file": "附录\\附录.pdf",
+    "bytes": 821923,
+    "sha256": "2e6877d12739bf581f4f67416a9de59f65b09ca13dc0e9f08860892b068fb135",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123768\\原始附件包\\20261027095151221WU_FILE_1.zip",
+    "zip_member": "魏浩+附件上传/附录.pdf"
+  },
+  {
+    "file": "代码\\附录程序.do",
+    "bytes": 25806,
+    "sha256": "0cec0473383f895a9e1b0d5bf7b81597ad959f084dae287019b5c5120bfc074b",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123768\\原始附件包\\20261027095151221WU_FILE_1.zip",
+    "zip_member": "魏浩+附件上传/附录程序.do"
+  },
+  {
+    "file": "其他说明\\作者运行日志\\附录程序运行日志.log",
+    "bytes": 256939,
+    "sha256": "04b2c03eea15c329c1f0175f1921dbdf08a3a24b56b363096f69d61977a9a0f9",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123768\\原始附件包\\20261027095151221WU_FILE_1.zip",
+    "zip_member": "魏浩+附件上传/附录程序运行日志.log"
+  }
+]

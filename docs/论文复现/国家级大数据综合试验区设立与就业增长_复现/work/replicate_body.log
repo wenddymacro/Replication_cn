@@ -1,0 +1,1629 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      Stata 19.0
+___/   /   /___/   /   /___/       MP—Parallel Edition
+
+ Statistics and Data Science       Copyright 1985-2025 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-782-8272        https://www.stata.com
+                                   979-696-4600        service@stata.com
+
+Stata license: 114514-student 64-core lab perpetual
+Serial number: 9223372036854775807
+  Licensed to: 1
+               1
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. More than 2 billion observations are allowed; see help obs_advice.
+      4. Maximum number of variables is set to 5,000 but can be increased;
+          see help set_maxvar.
+
+
+Running D:\Stata\Stata19\profile.do ...
+
+. do replicate_body.do 
+
+. clear all
+
+. set more off
+
+. set processors 1
+    The maximum number of processors or cores being used is changed from 16
+    to 1.  It can be set to any number between 1 and 16
+
+. adopath ++ "../../chain_policy/output/local_ado"
+  [1]              "../../chain_policy/output/local_ado"
+  [2]  (BASE)      "D:\Stata\Stata19\ado\base/"
+  [3]  (SITE)      "D:\Stata\Stata19\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "C:\ado\personal/"
+  [6]  (PLUS)      "C:\ado\plus/"
+  [7]  (OLDPLACE)  "C:\ado\myado/"
+  [8]              "C:\ado\plus"
+  [9]              "C:\ado\github"
+  [10]             "C:\ado\personal"
+
+. log using "../logs/author_body.log", text replace
+(file
+    C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\bigdata_employment\w
+    > ork\../logs/author_body.log not found)
+-------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\bigdata_emplo
+> yment\work\../logs/author_body.log
+  log type:  text
+ opened on:  14 Nov 2026, 21:51:50
+
+. global Firm_Control "Lev Age Roa Capital Cash Growth Mshrrat Shrholder1 Share
+> _indep"
+
+. global City_Control "Gdpt Popt Secondt Waget Edut Firm_numt Thirdt"
+
+. tempname H
+
+. postfile `H' str12 spec str24 term double b se N r2a using "../data/author_re
+> sults.dta", replace
+(file ../data/author_results.dta not found)
+
+. use firm, clear
+
+. gen long row_id=_n
+
+. reghdfe Labor Bigdata_Post ,absorb(Firm  ) cluster(city)
+(MWFE estimator converged in 1 iterations)
+
+HDFE Linear regression                            Number of obs   =     29,343
+Absorbing 1 HDFE group                            F(   1,    244) =     385.74
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8819
+                                                  Adj R-squared   =     0.8653
+                                                  Within R-sq.    =     0.0595
+Number of clusters (city)    =        245         Root MSE        =     0.4636
+
+                                 (Std. err. adjusted for 245 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       Labor | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .3654206   .0186056    19.64   0.000     .3287725    .4020688
+       _cons |   7.516849   .0053005  1418.13   0.000     7.506408    7.527289
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3618           0        3618     |
+-----------------------------------------------------+
+
+. post `H' ("T1_1") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T1_1=e(sample)
+
+. reghdfe Labor Bigdata_Post ,absorb(Firm year ) cluster(city)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     29,343
+Absorbing 2 HDFE groups                           F(   1,    244) =      10.03
+Statistics robust to heteroskedasticity           Prob > F        =     0.0017
+                                                  R-squared       =     0.8923
+                                                  Adj R-squared   =     0.8771
+                                                  Within R-sq.    =     0.0025
+Number of clusters (city)    =        245         Root MSE        =     0.4429
+
+                                 (Std. err. adjusted for 245 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       Labor | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0937926   .0296144     3.17   0.002     .0354601    .1521251
+       _cons |    7.59209   .0082379   921.60   0.000     7.575863    7.608316
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3618           0        3618     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T1_2") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T1_2=e(sample)
+
+. reghdfe Labor Bigdata_Post  $Firm_Control  ,absorb(Firm year) cluster(city)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     29,343
+Absorbing 2 HDFE groups                           F(  10,    244) =     114.28
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9237
+                                                  Adj R-squared   =     0.9129
+                                                  Within R-sq.    =     0.2934
+Number of clusters (city)    =        245         Root MSE        =     0.3728
+
+                                 (Std. err. adjusted for 245 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       Labor | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0748013    .027637     2.71   0.007     .0203639    .1292388
+         Lev |    .586358   .0559248    10.48   0.000     .4762009     .696515
+         Age |   .0663054   .1009421     0.66   0.512    -.1325236    .2651344
+         Roa |   .7707494   .0965032     7.99   0.000     .5806638    .9608351
+     Capital |   .3474305   .0187465    18.53   0.000     .3105049    .3843561
+        Cash |  -.0963228    .080798    -1.19   0.234    -.2554733    .0628278
+      Growth |  -.0110746   .0046091    -2.40   0.017    -.0201532   -.0019959
+     Mshrrat |  -.0001691   .0008412    -0.20   0.841    -.0018261    .0014879
+  Shrholder1 |   .0004008   .0013342     0.30   0.764    -.0022272    .0030289
+ Share_indep |  -.3193345   .1245643    -2.56   0.011    -.5646931   -.0739759
+       _cons |    .274708   .5193735     0.53   0.597    -.7483196    1.297736
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3618           0        3618     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T1_3") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T1_3=e(sample)
+
+. reghdfe Labor Bigdata_Post  $Firm_Control $City_Control ,absorb(Firm year) cl
+> uster(city)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     29,343
+Absorbing 2 HDFE groups                           F(  17,    244) =      97.33
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9242
+                                                  Adj R-squared   =     0.9135
+                                                  Within R-sq.    =     0.2984
+Number of clusters (city)    =        245         Root MSE        =     0.3715
+
+                                 (Std. err. adjusted for 245 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       Labor | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0713108   .0235693     3.03   0.003     .0248855    .1177361
+         Lev |   .5770759   .0566571    10.19   0.000     .4654764    .6886753
+         Age |   .0716209   .0991564     0.72   0.471    -.1236909    .2669327
+         Roa |   .7783343   .0968985     8.03   0.000       .58747    .9691985
+     Capital |    .346047   .0182832    18.93   0.000     .3100339    .3820601
+        Cash |  -.0919879   .0804591    -1.14   0.254    -.2504709    .0664951
+      Growth |  -.0107972   .0045758    -2.36   0.019    -.0198102   -.0017842
+     Mshrrat |  -.0000146   .0008182    -0.02   0.986    -.0016262     .001597
+  Shrholder1 |   .0005829   .0013377     0.44   0.663    -.0020521    .0032179
+ Share_indep |   -.324915   .1224977    -2.65   0.009    -.5662029   -.0836272
+        Gdpt |  -.0115549   .0074451    -1.55   0.122    -.0262198      .00311
+        Popt |   .0000928   .0049307     0.02   0.985    -.0096194    .0098049
+     Secondt |  -.0002592   .0006042    -0.43   0.668    -.0014493    .0009309
+       Waget |   .0045785   .0153253     0.30   0.765    -.0256083    .0347653
+        Edut |   .0025152   .0007808     3.22   0.001     .0009773    .0040532
+   Firm_numt |   .0149716   .0041241     3.63   0.000     .0068481     .023095
+      Thirdt |  -.0002376   .0006613    -0.36   0.720    -.0015402    .0010651
+       _cons |   .6000993   1.077786     0.56   0.578    -1.522852    2.723051
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3618           0        3618     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T1_4") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T1_4=e(sample)
+
+. reghdfe Labor d_5 d_4 d_3 d_2 d_1 d0 d1 d2 d3 d4 d5 $Firm_Control $City_Contr
+> ol ,absorb(Firm year) cluster(city)
+(MWFE estimator converged in 7 iterations)
+note: d_1 is probably collinear with the fixed effects (all partialled-out valu
+> es are close to zero; tol = 1.0e-09)
+
+HDFE Linear regression                            Number of obs   =     29,343
+Absorbing 2 HDFE groups                           F(  26,    244) =      88.46
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9243
+                                                  Adj R-squared   =     0.9135
+                                                  Within R-sq.    =     0.2985
+Number of clusters (city)    =        245         Root MSE        =     0.3716
+
+                                 (Std. err. adjusted for 245 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       Labor | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         d_5 |   -.024334   .0300845    -0.81   0.419    -.0835925    .0349244
+         d_4 |  -.0226414   .0150692    -1.50   0.134    -.0523237    .0070409
+         d_3 |  -.0164618   .0179291    -0.92   0.359    -.0517774    .0188537
+         d_2 |  -.0015931   .0175279    -0.09   0.928    -.0361184    .0329321
+         d_1 |          0  (omitted)
+          d0 |   .0665515   .0191689     3.47   0.001     .0287938    .1043091
+          d1 |   .0734068   .0234883     3.13   0.002     .0271411    .1196724
+          d2 |   .0501517   .0250428     2.00   0.046     .0008239    .0994794
+          d3 |   .0558766   .0262136     2.13   0.034     .0042428    .1075104
+          d4 |   .0556452   .0280235     1.99   0.048     .0004463    .1108441
+          d5 |   .0606236   .0278344     2.18   0.030     .0057972    .1154499
+         Lev |   .5760899   .0565278    10.19   0.000     .4647453    .6874346
+         Age |   .0713546   .0995289     0.72   0.474    -.1246908       .2674
+         Roa |   .7763844   .0959435     8.09   0.000     .5874013    .9653675
+     Capital |   .3459854   .0182874    18.92   0.000      .309964    .3820068
+        Cash |  -.0908072   .0802811    -1.13   0.259    -.2489396    .0673252
+      Growth |  -.0107456   .0045722    -2.35   0.020    -.0197515   -.0017396
+     Mshrrat |  -.0000141   .0008191    -0.02   0.986    -.0016276    .0015994
+  Shrholder1 |   .0005866   .0013368     0.44   0.661    -.0020466    .0032197
+ Share_indep |  -.3249977   .1222903    -2.66   0.008    -.5658771   -.0841183
+        Gdpt |  -.0115791   .0074396    -1.56   0.121    -.0262331    .0030749
+        Popt |   .0001045   .0048962     0.02   0.983    -.0095397    .0097488
+     Secondt |  -.0002511   .0006028    -0.42   0.677    -.0014385    .0009362
+       Waget |   .0044425   .0153207     0.29   0.772    -.0257352    .0346203
+        Edut |   .0025064   .0007797     3.21   0.001     .0009706    .0040422
+   Firm_numt |   .0149564   .0041434     3.61   0.000      .006795    .0231178
+      Thirdt |  -.0002227   .0006604    -0.34   0.736    -.0015235    .0010781
+       _cons |   .6138403   1.072725     0.57   0.568    -1.499142    2.726822
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3618           0        3618     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("F1") ("d_5") (_b[d_5]) (_se[d_5]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("d_4") (_b[d_4]) (_se[d_4]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("d_3") (_b[d_3]) (_se[d_3]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("d_2") (_b[d_2]) (_se[d_2]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("d_1") (_b[d_1]) (_se[d_1]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("d0") (_b[d0]) (_se[d0]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("d1") (_b[d1]) (_se[d1]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("d2") (_b[d2]) (_se[d2]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("d3") (_b[d3]) (_se[d3]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("d4") (_b[d4]) (_se[d4]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("d5") (_b[d5]) (_se[d5]) (e(N)) (e(r2_a))
+
+. gen byte sample_F1=e(sample)
+
+. reghdfe TFP Bigdata_Post   $Firm_Control $City_Control ,absorb(Firm year) clu
+> ster(city)
+(dropped 197 singleton observations)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     24,582
+Absorbing 2 HDFE groups                           F(  17,    239) =      97.44
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9377
+                                                  Adj R-squared   =     0.9288
+                                                  Within R-sq.    =     0.3270
+Number of clusters (city)    =        240         Root MSE        =     0.3588
+
+                                 (Std. err. adjusted for 240 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+         TFP | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0538075   .0194279     2.77   0.006     .0155358    .0920793
+         Lev |   .7020157   .0565474    12.41   0.000     .5906207    .8134108
+         Age |    .325874   .0869691     3.75   0.000     .1545503    .4971978
+         Roa |   .6026222   .0944682     6.38   0.000     .4165256    .7887189
+     Capital |   .3545765   .0156593    22.64   0.000     .3237287    .3854243
+        Cash |   .1508131   .0590791     2.55   0.011     .0344309    .2671954
+      Growth |  -.0595431   .0048698   -12.23   0.000    -.0691364   -.0499498
+     Mshrrat |  -.0022116   .0008211    -2.69   0.008    -.0038291   -.0005941
+  Shrholder1 |  -.0004017   .0012856    -0.31   0.755    -.0029344    .0021309
+ Share_indep |  -.0752305   .1063232    -0.71   0.480    -.2846807    .1342198
+        Gdpt |   .0103588   .0060089     1.72   0.086    -.0014783    .0221959
+        Popt |  -.0149277   .0037397    -3.99   0.000    -.0222947   -.0075608
+     Secondt |  -.0022371   .0007476    -2.99   0.003    -.0037098   -.0007644
+       Waget |  -.0119608   .0135385    -0.88   0.378    -.0386308    .0147092
+        Edut |   .0012881   .0006146     2.10   0.037     .0000774    .0024988
+   Firm_numt |    .008138   .0042322     1.92   0.056    -.0001992    .0164753
+      Thirdt |  -.0022666   .0007772    -2.92   0.004    -.0037976   -.0007356
+       _cons |    5.30576   .9946096     5.33   0.000     3.346439    7.265081
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3048           0        3048     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T3_1") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T3_1=e(sample)
+
+. reghdfe Labor  Bigdata_Post  TFP $Firm_Control $City_Control ,absorb(Firm yea
+> r) cluster(city)
+(dropped 197 singleton observations)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     24,582
+Absorbing 2 HDFE groups                           F(  18,    239) =     159.82
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9412
+                                                  Adj R-squared   =     0.9328
+                                                  Within R-sq.    =     0.4638
+Number of clusters (city)    =        240         Root MSE        =     0.3260
+
+                                 (Std. err. adjusted for 240 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       Labor | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0512049   .0262467     1.95   0.052    -.0004994    .1029092
+         TFP |   .5119154   .0171668    29.82   0.000     .4780977     .545733
+         Lev |   .2206931    .053688     4.11   0.000      .114931    .3264551
+         Age |  -.1066434   .1079282    -0.99   0.324    -.3192555    .1059686
+         Roa |   .3990901    .083835     4.76   0.000     .2339403    .5642399
+     Capital |   .1814482   .0139138    13.04   0.000     .1540389    .2088575
+        Cash |  -.1596938   .0712524    -2.24   0.026    -.3000567   -.0193309
+      Growth |   .0194284   .0049017     3.96   0.000     .0097723    .0290845
+     Mshrrat |   .0009118   .0007154     1.27   0.204    -.0004975     .002321
+  Shrholder1 |   .0011295   .0011892     0.95   0.343    -.0012132    .0034721
+ Share_indep |  -.2758399   .1060861    -2.60   0.010     -.484823   -.0668568
+        Gdpt |  -.0169238   .0067086    -2.52   0.012    -.0301394   -.0037083
+        Popt |   .0058373   .0050202     1.16   0.246    -.0040521    .0157267
+     Secondt |   .0006297   .0005771     1.09   0.276    -.0005073    .0017666
+       Waget |   .0054608   .0142077     0.38   0.701    -.0225275     .033449
+        Edut |    .001602   .0007072     2.27   0.024     .0002089    .0029951
+   Firm_numt |   .0132417   .0032933     4.02   0.000     .0067541    .0197292
+      Thirdt |   .0007518   .0006178     1.22   0.225    -.0004653     .001969
+       _cons |  -1.881661   .9922598    -1.90   0.059    -3.836353    .0730305
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3048           0        3048     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T3_2") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. post `H' ("T3_2") ("TFP") (_b[TFP]) (_se[TFP]) (e(N)) (e(r2_a))
+
+. gen byte sample_T3_2=e(sample)
+
+. reghdfe Market_share Bigdata_Post   $Firm_Control $City_Control  ,absorb(Firm
+>  year) cluster(city)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     29,343
+Absorbing 2 HDFE groups                           F(  17,    244) =      12.50
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8660
+                                                  Adj R-squared   =     0.8470
+                                                  Within R-sq.    =     0.1816
+Number of clusters (city)    =        245         Root MSE        =     0.0078
+
+                                 (Std. err. adjusted for 245 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+Market_share | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0019669   .0007448     2.64   0.009     .0004999     .003434
+         Lev |   .0028949   .0013036     2.22   0.027     .0003272    .0054625
+         Age |   .0017811   .0018594     0.96   0.339    -.0018815    .0054437
+         Roa |   .0171437   .0036129     4.75   0.000     .0100273    .0242601
+     Capital |   .0018682   .0004124     4.53   0.000      .001056    .0026805
+        Cash |   .0026601   .0013073     2.03   0.043     .0000851    .0052352
+      Growth |    .000072   .0001065     0.68   0.500    -.0001378    .0002817
+     Mshrrat |   9.38e-06   .0000127     0.74   0.462    -.0000157    .0000344
+  Shrholder1 |   .0000525   .0000304     1.73   0.085    -7.34e-06    .0001123
+ Share_indep |   .0021204   .0025047     0.85   0.398    -.0028133     .007054
+        Gdpt |  -.0003237   .0002192    -1.48   0.141    -.0007555    .0001082
+        Popt |  -.0000905   .0001196    -0.76   0.450    -.0003261    .0001451
+     Secondt |  -.0001199   .0000301    -3.98   0.000    -.0001792   -.0000605
+       Waget |   .0017466     .00056     3.12   0.002     .0006435    .0028497
+        Edut |  -.0000657   .0000253    -2.60   0.010    -.0001155   -.0000159
+   Firm_numt |  -.0003108   .0001686    -1.84   0.066    -.0006428    .0000212
+      Thirdt |  -.0001394   .0000311    -4.48   0.000    -.0002006   -.0000781
+       _cons |  -.0197354   .0387033    -0.51   0.611    -.0959705    .0564998
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3618           0        3618     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T3_3") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T3_3=e(sample)
+
+. reghdfe Labor Bigdata_Post Market_share $Firm_Control $City_Control  ,absorb(
+> Firm year) cluster(city)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     29,343
+Absorbing 2 HDFE groups                           F(  18,    244) =     115.80
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9258
+                                                  Adj R-squared   =     0.9153
+                                                  Within R-sq.    =     0.3133
+Number of clusters (city)    =        245         Root MSE        =     0.3676
+
+                                 (Std. err. adjusted for 245 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       Labor | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |    .057575   .0220763     2.61   0.010     .0140905    .1010595
+Market_share |   6.983328   .8085484     8.64   0.000     5.390703    8.575953
+         Lev |   .5568599   .0576457     9.66   0.000     .4433133    .6704065
+         Age |   .0591831   .0984125     0.60   0.548    -.1346633    .2530296
+         Roa |   .6586142   .1007582     6.54   0.000     .4601473    .8570811
+     Capital |   .3330005   .0167865    19.84   0.000     .2999355    .3660654
+        Cash |  -.1105644   .0788235    -1.40   0.162    -.2658258     .044697
+      Growth |  -.0112998   .0045712    -2.47   0.014    -.0203038   -.0022957
+     Mshrrat |  -.0000801    .000817    -0.10   0.922    -.0016893    .0015291
+  Shrholder1 |   .0002166   .0012932     0.17   0.867    -.0023307    .0027638
+ Share_indep |  -.3397223   .1214455    -2.80   0.006    -.5789376    -.100507
+        Gdpt |  -.0092946   .0072115    -1.29   0.199    -.0234994    .0049102
+        Popt |   .0007247   .0046566     0.16   0.876    -.0084476    .0098969
+     Secondt |   .0005779   .0006107     0.95   0.345    -.0006249    .0017807
+       Waget |  -.0076186   .0146093    -0.52   0.602    -.0363951    .0211579
+        Edut |   .0029739   .0007669     3.88   0.000     .0014633    .0044845
+   Firm_numt |   .0171422   .0039194     4.37   0.000     .0094221    .0248623
+      Thirdt |   .0007356    .000668     1.10   0.272    -.0005802    .0020514
+       _cons |   .7379177   1.039484     0.71   0.478    -1.309589    2.785424
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3618           0        3618     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T3_4") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. post `H' ("T3_4") ("Market_share") (_b[Market_share]) (_se[Market_share]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T3_4=e(sample)
+
+. reghdfe Finan Bigdata_Post   $Firm_Control $City_Control  ,absorb(Firm year) 
+> cluster(city)
+(dropped 427 singleton observations)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     24,575
+Absorbing 2 HDFE groups                           F(  17,    242) =     191.33
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.7833
+                                                  Adj R-squared   =     0.7516
+                                                  Within R-sq.    =     0.2285
+Number of clusters (city)    =        243         Root MSE        =     0.0381
+
+                                 (Std. err. adjusted for 243 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       Finan | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |  -.0035197   .0017799    -1.98   0.049    -.0070258   -.0000136
+         Lev |   -.035052   .0055556    -6.31   0.000    -.0459956   -.0241085
+         Age |   .0136178   .0074366     1.83   0.068    -.0010308    .0282665
+         Roa |  -.3032669   .0081488   -37.22   0.000    -.3193185   -.2872153
+     Capital |  -.0184267   .0011382   -16.19   0.000    -.0206687   -.0161847
+        Cash |  -.0750039   .0071284   -10.52   0.000    -.0890454   -.0609623
+      Growth |  -.0070122   .0006208   -11.30   0.000    -.0082351   -.0057893
+     Mshrrat |  -.0002402   .0000673    -3.57   0.000    -.0003727   -.0001077
+  Shrholder1 |  -.0002554   .0001213    -2.10   0.036    -.0004944   -.0000164
+ Share_indep |   .0263498    .009584     2.75   0.006     .0074711    .0452285
+        Gdpt |   .0001394   .0003822     0.36   0.716    -.0006135    .0008923
+        Popt |   .0001395   .0001953     0.71   0.476    -.0002452    .0005242
+     Secondt |   .0000375   .0000451     0.83   0.406    -.0000513    .0001263
+       Waget |   .0010332   .0009074     1.14   0.256    -.0007542    .0028205
+        Edut |  -.0000811   .0000359    -2.26   0.025    -.0001519   -.0000103
+   Firm_numt |  -.0007292   .0002426    -3.01   0.003     -.001207   -.0002514
+      Thirdt |   .0000478   .0000474     1.01   0.314    -.0000456    .0001412
+       _cons |  -.7285453   .0620672   -11.74   0.000    -.8508061   -.6062845
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3110           0        3110     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T4_1") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T4_1=e(sample)
+
+. reghdfe Subsidy Bigdata_Post   $Firm_Control $City_Control ,absorb(Firm year)
+>  cluster(city)
+(dropped 10 singleton observations)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     28,508
+Absorbing 2 HDFE groups                           F(  17,    244) =      50.27
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.7347
+                                                  Adj R-squared   =     0.6959
+                                                  Within R-sq.    =     0.0784
+Number of clusters (city)    =        245         Root MSE        =     0.8617
+
+                                 (Std. err. adjusted for 245 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+     Subsidy | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .1302574   .0653266     1.99   0.047     .0015815    .2589333
+         Lev |   .6893578   .0987221     6.98   0.000     .4949015    .8838141
+         Age |   .0111554   .1351765     0.08   0.934    -.2551064    .2774172
+         Roa |   1.409658   .1601371     8.80   0.000      1.09423    1.725085
+     Capital |   .3450096   .0218128    15.82   0.000     .3020442    .3879751
+        Cash |  -.1197583   .1630811    -0.73   0.463    -.4409848    .2014681
+      Growth |  -.0104583   .0107621    -0.97   0.332    -.0316567    .0107401
+     Mshrrat |   .0008271   .0016699     0.50   0.621    -.0024622    .0041164
+  Shrholder1 |  -.0004538   .0021831    -0.21   0.836    -.0047539    .0038464
+ Share_indep |  -.9131458   .2359136    -3.87   0.000    -1.377833   -.4484587
+        Gdpt |   .0134358   .0125147     1.07   0.284    -.0112149    .0380865
+        Popt |  -.0279143   .0069938    -3.99   0.000    -.0416902   -.0141385
+     Secondt |  -.0018877   .0012394    -1.52   0.129    -.0043289    .0005535
+       Waget |  -.0546826   .0283864    -1.93   0.055    -.1105963    .0012311
+        Edut |   .0012964   .0014081     0.92   0.358    -.0014771      .00407
+   Firm_numt |   .0152839   .0084523     1.81   0.072    -.0013649    .0319326
+      Thirdt |  -.0012249   .0013651    -0.90   0.370    -.0039139     .001464
+       _cons |   13.39993   2.078154     6.45   0.000     9.306523    17.49334
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3606           0        3606     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T4_2") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T4_2=e(sample)
+
+. reghdfe Inno_subsi Bigdata_Post   $Firm_Control $City_Control ,absorb(Firm ye
+> ar) cluster(city)
+(dropped 508 singleton observations)
+(MWFE estimator converged in 8 iterations)
+
+HDFE Linear regression                            Number of obs   =      7,509
+Absorbing 2 HDFE groups                           F(  17,    194) =       7.49
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.4985
+                                                  Adj R-squared   =     0.3517
+                                                  Within R-sq.    =     0.0166
+Number of clusters (city)    =        195         Root MSE        =     1.3247
+
+                                 (Std. err. adjusted for 195 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+  Inno_subsi | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .3409062   .1369696     2.49   0.014     .0707656    .6110469
+         Lev |  -.5081804   .2652174    -1.92   0.057     -1.03126    .0148993
+         Age |   .7265063    .393983     1.84   0.067    -.0505335    1.503546
+         Roa |   .3871378   .4790976     0.81   0.420    -.5577709    1.332046
+     Capital |   .2300446   .0479357     4.80   0.000     .1355026    .3245866
+        Cash |   -.146544    .405479    -0.36   0.718    -.9462571    .6531691
+      Growth |  -.0178503   .0324303    -0.55   0.583    -.0818116    .0461109
+     Mshrrat |   .0062722   .0036516     1.72   0.087    -.0009297    .0134741
+  Shrholder1 |  -.0039581   .0047527    -0.83   0.406    -.0133316    .0054154
+ Share_indep |   -.009023   .6669108    -0.01   0.989    -1.324349    1.306304
+        Gdpt |    .070037   .0325869     2.15   0.033      .005767     .134307
+        Popt |   -.049385   .0187753    -2.63   0.009    -.0864149    -.012355
+     Secondt |   -.001818   .0035499    -0.51   0.609    -.0088194    .0051833
+       Waget |  -.1363016   .0790504    -1.72   0.086    -.2922101    .0196068
+        Edut |  -.0003104   .0035594    -0.09   0.931    -.0073306    .0067098
+   Firm_numt |  -.0215873    .022006    -0.98   0.328    -.0649891    .0218144
+      Thirdt |  -.0005722   .0040176    -0.14   0.887     -.008496    .0073516
+       _cons |   12.48646   5.301037     2.36   0.019     2.031392    22.94152
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      1673           0        1673     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T4_3") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T4_3=e(sample)
+
+. reghdfe Labor Bigdata_Post   $Firm_Control $City_Control if Finance_dum==0 ,a
+> bsorb(Firm year) cluster(city)
+(MWFE estimator converged in 5 iterations)
+
+HDFE Linear regression                            Number of obs   =     11,361
+Absorbing 2 HDFE groups                           F(  17,    197) =      48.30
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9116
+                                                  Adj R-squared   =     0.9020
+                                                  Within R-sq.    =     0.3484
+Number of clusters (city)    =        198         Root MSE        =     0.3616
+
+                                 (Std. err. adjusted for 198 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       Labor | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0976895   .0355026     2.75   0.006     .0276757    .1677034
+         Lev |   .3775156    .082908     4.55   0.000     .2140144    .5410167
+         Age |   .1599901   .0977925     1.64   0.103    -.0328645    .3528447
+         Roa |   .6319096   .1487569     4.25   0.000     .3385493    .9252699
+     Capital |   .3957547   .0223297    17.72   0.000     .3517189    .4397906
+        Cash |  -.0147571   .0967588    -0.15   0.879    -.2055731     .176059
+      Growth |  -.0073707   .0076781    -0.96   0.338    -.0225125    .0077711
+     Mshrrat |  -.0008588   .0010142    -0.85   0.398    -.0028588    .0011411
+  Shrholder1 |   .0013426   .0020228     0.66   0.508    -.0026465    .0053318
+ Share_indep |   -.313765   .1750477    -1.79   0.075    -.6589729    .0314429
+        Gdpt |   .0045151   .0103659     0.44   0.664    -.0159273    .0249576
+        Popt |  -.0052434   .0080306    -0.65   0.515    -.0210803    .0105935
+     Secondt |   .0002172   .0009196     0.24   0.814    -.0015963    .0020307
+       Waget |  -.0100127    .020565    -0.49   0.627    -.0505684     .030543
+        Edut |   .0014616   .0015635     0.93   0.351    -.0016217     .004545
+   Firm_numt |   .0056505   .0066776     0.85   0.398    -.0075182    .0188193
+      Thirdt |   .0000678    .000985     0.07   0.945    -.0018747    .0020103
+       _cons |  -.9112227    1.26201    -0.72   0.471    -3.400006    1.577561
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      1078           0        1078     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T4_4") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T4_4=e(sample)
+
+. reghdfe Labor Bigdata_Post   $Firm_Control $City_Control if Finance_dum==1 ,a
+> bsorb(Firm year) cluster(city)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     12,045
+Absorbing 2 HDFE groups                           F(  17,    167) =      32.06
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9193
+                                                  Adj R-squared   =     0.9106
+                                                  Within R-sq.    =     0.2742
+Number of clusters (city)    =        168         Root MSE        =     0.4193
+
+                                 (Std. err. adjusted for 168 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       Labor | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0582037   .0359073     1.62   0.107     -.012687    .1290944
+         Lev |    .771027   .1110015     6.95   0.000     .5518799     .990174
+         Age |  -.1410568   .1616387    -0.87   0.384    -.4601753    .1780618
+         Roa |   .8421433   .2058947     4.09   0.000     .4356515    1.248635
+     Capital |   .3285196   .0214072    15.35   0.000      .286256    .3707832
+        Cash |   -.145056   .1116618    -1.30   0.196    -.3655065    .0753946
+      Growth |  -.0137141   .0055832    -2.46   0.015    -.0247369   -.0026914
+     Mshrrat |   .0020111   .0016898     1.19   0.236     -.001325    .0053471
+  Shrholder1 |   .0001767    .001732     0.10   0.919    -.0032428    .0035961
+ Share_indep |  -.3512979    .227156    -1.55   0.124    -.7997655    .0971696
+        Gdpt |  -.0259077   .0112471    -2.30   0.022    -.0481126   -.0037028
+        Popt |   .0017385    .005842     0.30   0.766    -.0097952    .0132721
+     Secondt |  -.0011756   .0012262    -0.96   0.339    -.0035965    .0012453
+       Waget |   .0225405   .0229881     0.98   0.328    -.0228443    .0679253
+        Edut |   .0033577   .0008424     3.99   0.000     .0016946    .0050207
+   Firm_numt |   .0242963   .0067319     3.61   0.000     .0110057    .0375869
+      Thirdt |   -.000887   .0012862    -0.69   0.491    -.0034263    .0016523
+       _cons |   1.818782   1.616899     1.12   0.262    -1.373415    5.010978
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      1150           0        1150     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T4_5") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T4_5=e(sample)
+
+. reghdfe Debt Bigdata_Post    $Firm_Control $City_Control  ,absorb(Firm year) 
+> cluster(city)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     29,343
+Absorbing 2 HDFE groups                           F(  17,    244) =     379.62
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9553
+                                                  Adj R-squared   =     0.9490
+                                                  Within R-sq.    =     0.5839
+Number of clusters (city)    =        245         Root MSE        =     0.3789
+
+                                 (Std. err. adjusted for 245 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+        Debt | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0533823   .0240322     2.22   0.027     .0060454    .1007193
+         Lev |   3.454315   .0693487    49.81   0.000     3.317716    3.590913
+         Age |    .193414    .089821     2.15   0.032     .0164906    .3703375
+         Roa |    1.69393   .0911769    18.58   0.000     1.514336    1.873524
+     Capital |   .3244922   .0159798    20.31   0.000     .2930163    .3559682
+        Cash |  -.3406933   .0509085    -6.69   0.000    -.4409695   -.2404171
+      Growth |   .0183791   .0035859     5.13   0.000     .0113158    .0254425
+     Mshrrat |  -.0021736   .0009522    -2.28   0.023    -.0040493    -.000298
+  Shrholder1 |  -.0018358   .0013995    -1.31   0.191    -.0045925     .000921
+ Share_indep |  -.2305909   .1343233    -1.72   0.087     -.495172    .0339903
+        Gdpt |   .0009364   .0062749     0.15   0.881    -.0114234    .0132963
+        Popt |  -.0054283   .0039352    -1.38   0.169    -.0131796    .0023231
+     Secondt |  -.0011815   .0007237    -1.63   0.104    -.0026069     .000244
+       Waget |  -.0133427   .0137605    -0.97   0.333    -.0404471    .0137618
+        Edut |   .0011122   .0006202     1.79   0.074    -.0001094    .0023338
+   Firm_numt |   .0092854   .0044937     2.07   0.040      .000434    .0181369
+      Thirdt |  -.0009689   .0007196    -1.35   0.179    -.0023864    .0004486
+       _cons |   13.80911   .9578552    14.42   0.000     11.92239    15.69583
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3618           0        3618     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T4_6") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T4_6=e(sample)
+
+. reghdfe Total_wage Bigdata_Post    $Firm_Control $City_Control  ,absorb(Firm 
+> year) cluster(city)
+(dropped 55 singleton observations)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     28,680
+Absorbing 2 HDFE groups                           F(  17,    243) =      54.01
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8792
+                                                  Adj R-squared   =     0.8619
+                                                  Within R-sq.    =     0.1652
+Number of clusters (city)    =        244         Root MSE        =     0.6015
+
+                                 (Std. err. adjusted for 244 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+  Total_wage | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0874924   .0491922     1.78   0.077    -.0094053      .18439
+         Lev |   .9210605   .1296092     7.11   0.000     .6657597    1.176361
+         Age |   .2546699   .1497698     1.70   0.090    -.0403428    .5496826
+         Roa |   1.498628   .1801846     8.32   0.000     1.143705    1.853551
+     Capital |   .3345892   .0278152    12.03   0.000     .2797994    .3893789
+        Cash |   .3936581   .0877622     4.49   0.000     .2207863    .5665299
+      Growth |  -.0106832   .0072996    -1.46   0.145    -.0250617    .0036953
+     Mshrrat |  -.0050409   .0013678    -3.69   0.000    -.0077352   -.0023466
+  Shrholder1 |  -.0026713   .0018886    -1.41   0.159    -.0063913    .0010488
+ Share_indep |  -.2268319   .1784182    -1.27   0.205    -.5782756    .1246117
+        Gdpt |  -.0133081   .0131341    -1.01   0.312    -.0391793     .012563
+        Popt |   .0087738   .0099578     0.88   0.379    -.0108409    .0283885
+     Secondt |  -.0006133    .001416    -0.43   0.665    -.0034026     .002176
+       Waget |   .0011268   .0383747     0.03   0.977    -.0744626    .0767163
+        Edut |   .0022671   .0014207     1.60   0.112    -.0005313    .0050656
+   Firm_numt |   .0195072   .0070436     2.77   0.006     .0056329    .0333814
+      Thirdt |  -.0009427   .0015039    -0.63   0.531    -.0039051    .0020197
+       _cons |   9.959984   2.221642     4.48   0.000      5.58385    14.33612
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3559           0        3559     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T5_1") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T5_1=e(sample)
+
+. reghdfe Social_security Bigdata_Post    $Firm_Control $City_Control  ,absorb(
+> Firm year) cluster(city)
+(dropped 147 singleton observations)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     23,709
+Absorbing 2 HDFE groups                           F(  17,    236) =      24.63
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.7843
+                                                  Adj R-squared   =     0.7499
+                                                  Within R-sq.    =     0.0679
+Number of clusters (city)    =        237         Root MSE        =     1.2022
+
+                                 (Std. err. adjusted for 237 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+Social_sec~y | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .1981075   .0921845     2.15   0.033     .0164979     .379717
+         Lev |   1.002322   .1648835     6.08   0.000     .6774905    1.327154
+         Age |   .7691131   .2579155     2.98   0.003     .2610022    1.277224
+         Roa |   -.281587   .2748879    -1.02   0.307    -.8231346    .2599606
+     Capital |   .3795254   .0296842    12.79   0.000     .3210454    .4380053
+        Cash |   .4693694   .2315325     2.03   0.044     .0132349    .9255039
+      Growth |  -.0054226   .0141578    -0.38   0.702    -.0333144    .0224691
+     Mshrrat |  -.0037381   .0026351    -1.42   0.157    -.0089294    .0014533
+  Shrholder1 |  -.0060847   .0039033    -1.56   0.120    -.0137745    .0016051
+ Share_indep |  -.3366033   .3896022    -0.86   0.388    -1.104146     .430939
+        Gdpt |   -.014231   .0233596    -0.61   0.543    -.0602509    .0317889
+        Popt |  -.0123826   .0139931    -0.88   0.377    -.0399499    .0151847
+     Secondt |   .0000426   .0025115     0.02   0.986    -.0049051    .0049904
+       Waget |    .001178   .0467006     0.03   0.980    -.0908252    .0931812
+        Edut |   .0020603   .0021102     0.98   0.330     -.002097    .0062175
+   Firm_numt |   .0392257    .013612     2.88   0.004     .0124091    .0660423
+      Thirdt |   .0006381   .0025973     0.25   0.806    -.0044787    .0057549
+       _cons |    2.52982   3.346194     0.76   0.450    -4.062406    9.122046
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3234           0        3234     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T5_2") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T5_2=e(sample)
+
+. reghdfe Allowances Bigdata_Post    $Firm_Control $City_Control  ,absorb(Firm 
+> year) cluster(city)
+(dropped 349 singleton observations)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     13,923
+Absorbing 2 HDFE groups                           F(  17,    219) =      32.76
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9272
+                                                  Adj R-squared   =     0.9108
+                                                  Within R-sq.    =     0.1579
+Number of clusters (city)    =        220         Root MSE        =     0.4344
+
+                                 (Std. err. adjusted for 220 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+  Allowances | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .1031951   .0354819     2.91   0.004     .0332654    .1731247
+         Lev |   .7789346   .1067328     7.30   0.000     .5685796    .9892895
+         Age |  -.0215149   .1884145    -0.11   0.909    -.3928526    .3498227
+         Roa |   1.173988   .1367817     8.58   0.000     .9044115    1.443566
+     Capital |   .3203649   .0292333    10.96   0.000     .2627502    .3779796
+        Cash |   .3962228    .119186     3.32   0.001     .1613244    .6311212
+      Growth |    .002616    .008365     0.31   0.755    -.0138702    .0191022
+     Mshrrat |  -.0032079   .0013537    -2.37   0.019    -.0058759     -.00054
+  Shrholder1 |   .0010255   .0019676     0.52   0.603    -.0028524    .0049033
+ Share_indep |  -.3490496   .2237123    -1.56   0.120    -.7899541     .091855
+        Gdpt |  -.0093139   .0133356    -0.70   0.486    -.0355963    .0169686
+        Popt |    .005749   .0091681     0.63   0.531      -.01232    .0238179
+     Secondt |   .0001514   .0016121     0.09   0.925    -.0030258    .0033286
+       Waget |  -.0088763   .0267798    -0.33   0.741    -.0616553    .0439027
+        Edut |   .0017541    .001446     1.21   0.226    -.0010958    .0046039
+   Firm_numt |   .0140472   .0081087     1.73   0.085    -.0019339    .0300283
+      Thirdt |  -.0002831   .0017091    -0.17   0.869    -.0036515    .0030853
+       _cons |    11.7565   2.124893     5.53   0.000     7.568647    15.94436
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      2534           0        2534     |
+        year |         9           1           8     |
+-----------------------------------------------------+
+
+. post `H' ("T5_3") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T5_3=e(sample)
+
+. reghdfe ESG_DID  Bigdata_Post    $Firm_Control $City_Control  ,absorb(Firm ye
+> ar) cluster(city)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     29,343
+Absorbing 2 HDFE groups                           F(  17,    244) =      24.30
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.5903
+                                                  Adj R-squared   =     0.5321
+                                                  Within R-sq.    =     0.0309
+Number of clusters (city)    =        245         Root MSE        =     0.2298
+
+                                 (Std. err. adjusted for 245 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+     ESG_DID | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0376976   .0165752     2.27   0.024     .0050488    .0703463
+         Lev |  -.1355077   .0425963    -3.18   0.002    -.2194111   -.0516043
+         Age |   .1066595    .087561     1.22   0.224    -.0658124    .2791315
+         Roa |   .0577085   .0592348     0.97   0.331    -.0589683    .1743852
+     Capital |    .045748   .0057034     8.02   0.000     .0345138    .0569822
+        Cash |   .0169989   .0383054     0.44   0.658    -.0584525    .0924502
+      Growth |  -.0041518   .0024538    -1.69   0.092    -.0089852    .0006817
+     Mshrrat |   .0022321   .0003362     6.64   0.000     .0015698    .0028944
+  Shrholder1 |   .0002708   .0005664     0.48   0.633    -.0008448    .0013864
+ Share_indep |   .0707547   .0829607     0.85   0.395    -.0926558    .2341651
+        Gdpt |   .0032736    .004122     0.79   0.428    -.0048456    .0113928
+        Popt |   .0042973   .0020617     2.08   0.038     .0002363    .0083584
+     Secondt |   .0004735    .000408     1.16   0.247    -.0003301    .0012771
+       Waget |    .000735   .0107841     0.07   0.946    -.0205067    .0219768
+        Edut |  -.0009061   .0004614    -1.96   0.051     -.001815    2.83e-06
+   Firm_numt |  -.0061451    .003083    -1.99   0.047    -.0122177   -.0000725
+      Thirdt |   .0007452   .0004472     1.67   0.097    -.0001356     .001626
+       _cons |   -1.81401   .7202918    -2.52   0.012    -3.232793   -.3952265
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3618           0        3618     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T5_4") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T5_4=e(sample)
+
+. reghdfe ESG_pengbo  Bigdata_Post    $Firm_Control $City_Control  ,absorb(Firm
+>  year) cluster(city)
+(dropped 22 singleton observations)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =      9,821
+Absorbing 2 HDFE groups                           F(  17,    182) =       8.90
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8377
+                                                  Adj R-squared   =     0.8137
+                                                  Within R-sq.    =     0.0232
+Number of clusters (city)    =        183         Root MSE        =     3.8589
+
+                                 (Std. err. adjusted for 183 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+  ESG_pengbo | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |     1.0612   .4196368     2.53   0.012     .2332216    1.889179
+         Lev |  -2.628532   .7631867    -3.44   0.001    -4.134363     -1.1227
+         Age |   3.263169   1.271378     2.57   0.011     .7546329    5.771704
+         Roa |    5.20682   1.561089     3.34   0.001      2.12666    8.286981
+     Capital |   .6726824   .1566119     4.30   0.000      .363674    .9816908
+        Cash |   -.835216   .9652865    -0.87   0.388    -2.739808    1.069375
+      Growth |   .0100676    .066218     0.15   0.879     -.120586    .1407213
+     Mshrrat |   .0244672   .0169574     1.44   0.151    -.0089912    .0579256
+  Shrholder1 |   .0177025   .0128391     1.38   0.170    -.0076302    .0430352
+ Share_indep |   3.604313   1.628941     2.21   0.028     .3902757     6.81835
+        Gdpt |   .0211925   .0978272     0.22   0.829    -.1718289    .2142138
+        Popt |   .0196148   .0497397     0.39   0.694    -.0785258    .1177554
+     Secondt |    .009467   .0106206     0.89   0.374    -.0114882    .0304222
+       Waget |   .0057708   .2336951     0.02   0.980    -.4553294    .4668709
+        Edut |   .0142516   .0099859     1.43   0.155    -.0054514    .0339547
+   Firm_numt |  -.0153743   .0615129    -0.25   0.803    -.1367443    .1059958
+      Thirdt |   .0010701   .0114673     0.09   0.926    -.0215559     .023696
+       _cons |  -4.178555   14.58961    -0.29   0.775    -32.96508    24.60797
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      1239           0        1239     |
+        year |        11           1          10     |
+-----------------------------------------------------+
+
+. post `H' ("T5_5") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T5_5=e(sample)
+
+. reghdfe High_status Bigdata_Post    $Firm_Control $City_Control  ,absorb(Firm
+>  year) cluster(city)
+(dropped 187 singleton observations)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     21,536
+Absorbing 2 HDFE groups                           F(  17,    236) =      40.12
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9243
+                                                  Adj R-squared   =     0.9115
+                                                  Within R-sq.    =     0.2193
+Number of clusters (city)    =        237         Root MSE        =     0.3315
+
+                                 (Std. err. adjusted for 237 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+ High_status | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0630056   .0266368     2.37   0.019     .0105293    .1154819
+         Lev |   .5928473   .0679775     8.72   0.000     .4589272    .7267674
+         Age |    .132897   .1437217     0.92   0.356    -.1502443    .4160383
+         Roa |   .5474308    .104878     5.22   0.000     .3408141    .7540475
+     Capital |   .2835511   .0208348    13.61   0.000     .2425052    .3245971
+        Cash |  -.1517639   .0733205    -2.07   0.040    -.2962101   -.0073177
+      Growth |   .0025149   .0046626     0.54   0.590    -.0066708    .0117006
+     Mshrrat |  -.0003274   .0010064    -0.33   0.745    -.0023101    .0016553
+  Shrholder1 |   .0006631   .0014504     0.46   0.648    -.0021944    .0035206
+ Share_indep |  -.4150756   .1393166    -2.98   0.003    -.6895386   -.1406125
+        Gdpt |  -.0113352   .0084944    -1.33   0.183    -.0280698    .0053994
+        Popt |   .0040031   .0058006     0.69   0.491    -.0074244    .0154307
+     Secondt |   .0005477   .0007065     0.78   0.439    -.0008441    .0019396
+       Waget |  -.0109357   .0171368    -0.64   0.524    -.0446963    .0228249
+        Edut |    .000909   .0007523     1.21   0.228    -.0005731    .0023912
+   Firm_numt |   .0130325   .0042588     3.06   0.002     .0046423    .0214227
+      Thirdt |   .0006854    .000782     0.88   0.382    -.0008551     .002226
+       _cons |   1.281769   1.294856     0.99   0.323    -1.269183    3.832721
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3091           0        3091     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T6_1") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T6_1=e(sample)
+
+. reghdfe Low_status Bigdata_Post    $Firm_Control $City_Control  ,absorb(Firm 
+> year) cluster(city)
+(dropped 68 singleton observations)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     24,730
+Absorbing 2 HDFE groups                           F(  17,    238) =      44.59
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8948
+                                                  Adj R-squared   =     0.8789
+                                                  Within R-sq.    =     0.1893
+Number of clusters (city)    =        239         Root MSE        =     0.4819
+
+                                 (Std. err. adjusted for 239 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+  Low_status | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0621837   .0320788     1.94   0.054     -.001011    .1253784
+         Lev |   .5449541   .0698347     7.80   0.000      .407381    .6825272
+         Age |   .0279298   .0978303     0.29   0.776    -.1647942    .2206537
+         Roa |     .71274   .1280751     5.57   0.000     .4604345    .9650455
+     Capital |   .3683279   .0239446    15.38   0.000     .3211575    .4154984
+        Cash |   .0129634   .0938455     0.14   0.890    -.1719105    .1978374
+      Growth |    -.01367   .0064574    -2.12   0.035     -.026391    -.000949
+     Mshrrat |  -.0000707    .000946    -0.07   0.940    -.0019343    .0017929
+  Shrholder1 |   .0016809   .0018245     0.92   0.358    -.0019134    .0052751
+ Share_indep |  -.0465497   .1607201    -0.29   0.772    -.3631652    .2700659
+        Gdpt |  -.0051738   .0088949    -0.58   0.561    -.0226967     .012349
+        Popt |  -.0056231    .005584    -1.01   0.315    -.0166234    .0053772
+     Secondt |  -.0013846    .000731    -1.89   0.059    -.0028246    .0000555
+       Waget |   .0144471   .0187582     0.77   0.442    -.0225062    .0514005
+        Edut |   .0039156   .0010635     3.68   0.000     .0018205    .0060108
+   Firm_numt |   .0171352   .0050925     3.36   0.001     .0071031    .0271672
+      Thirdt |  -.0016485   .0008144    -2.02   0.044     -.003253   -.0000441
+       _cons |   -.977269    1.22863    -0.80   0.427    -3.397648     1.44311
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3222           0        3222     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T6_2") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T6_2=e(sample)
+
+. reghdfe High_kudos Bigdata_Post    $Firm_Control $City_Control  ,absorb(Firm 
+> year) cluster(city)
+(dropped 184 singleton observations)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     21,747
+Absorbing 2 HDFE groups                           F(  17,    236) =      43.91
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9191
+                                                  Adj R-squared   =     0.9055
+                                                  Within R-sq.    =     0.2053
+Number of clusters (city)    =        237         Root MSE        =     0.3501
+
+                                 (Std. err. adjusted for 237 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+  High_kudos | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0608721    .027713     2.20   0.029     .0062756    .1154685
+         Lev |   .5867502   .0698454     8.40   0.000     .4491501    .7243504
+         Age |   .1551427   .1435126     1.08   0.281    -.1275867     .437872
+         Roa |   .5505035   .1084438     5.08   0.000      .336862    .7641451
+     Capital |   .2863638    .020491    13.98   0.000     .2459952    .3267323
+        Cash |  -.1587693   .0780633    -2.03   0.043    -.3125593   -.0049794
+      Growth |    .002701   .0049146     0.55   0.583     -.006981    .0123831
+     Mshrrat |  -.0002687   .0010174    -0.26   0.792    -.0022731    .0017358
+  Shrholder1 |   .0005776   .0015302     0.38   0.706     -.002437    .0035922
+ Share_indep |  -.4488089   .1457097    -3.08   0.002    -.7358667    -.161751
+        Gdpt |   -.011754    .008791    -1.34   0.182    -.0290729    .0055649
+        Popt |   .0050903   .0058361     0.87   0.384    -.0064073    .0165879
+     Secondt |   .0006571   .0007176     0.92   0.361    -.0007566    .0020708
+       Waget |  -.0116696   .0174066    -0.67   0.503    -.0459617    .0226226
+        Edut |   .0009271   .0007593     1.22   0.223    -.0005687    .0024229
+   Firm_numt |   .0126275   .0044342     2.85   0.005     .0038919    .0213632
+      Thirdt |    .000824   .0008092     1.02   0.310    -.0007701    .0024182
+       _cons |   1.079799   1.345695     0.80   0.423    -1.571309    3.730908
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3102           0        3102     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T6_3") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T6_3=e(sample)
+
+. reghdfe Low_kudos Bigdata_Post    $Firm_Control $City_Control  ,absorb(Firm y
+> ear) cluster(city)
+(dropped 84 singleton observations)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     23,789
+Absorbing 2 HDFE groups                           F(  17,    238) =      41.20
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9015
+                                                  Adj R-squared   =     0.8862
+                                                  Within R-sq.    =     0.2022
+Number of clusters (city)    =        239         Root MSE        =     0.4540
+
+                                 (Std. err. adjusted for 239 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+   Low_kudos | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0650963   .0313173     2.08   0.039     .0034017    .1267908
+         Lev |   .5382295   .0693315     7.76   0.000     .4016477    .6748113
+         Age |   .0042983   .0990288     0.04   0.965    -.1907866    .1993831
+         Roa |   .6968692   .1244972     5.60   0.000     .4516121    .9421263
+     Capital |   .3638121   .0251089    14.49   0.000      .314348    .4132763
+        Cash |   .0182079   .0896188     0.20   0.839    -.1583395    .1947553
+      Growth |     -.0119   .0060935    -1.95   0.052    -.0239042    .0001041
+     Mshrrat |  -.0000924   .0009235    -0.10   0.920    -.0019117    .0017269
+  Shrholder1 |   .0013813   .0018135     0.76   0.447    -.0021912    .0049537
+ Share_indep |  -.0449989   .1557283    -0.29   0.773    -.3517808     .261783
+        Gdpt |  -.0062525   .0086923    -0.72   0.473    -.0233762    .0108713
+        Popt |  -.0037548   .0055841    -0.67   0.502    -.0147553    .0072458
+     Secondt |   -.001252    .000718    -1.74   0.083    -.0026664    .0001625
+       Waget |   .0130095    .018025     0.72   0.471    -.0224994    .0485184
+        Edut |    .003763   .0009806     3.84   0.000     .0018313    .0056947
+   Firm_numt |   .0173496   .0048667     3.56   0.000     .0077624    .0269369
+      Thirdt |  -.0014737    .000796    -1.85   0.065    -.0030417    .0000943
+       _cons |  -.7057329   1.198142    -0.59   0.556     -3.06605    1.654584
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3178           0        3178     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T6_4") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T6_4=e(sample)
+
+. reghdfe Highedu_staff Bigdata_Post    $Firm_Control $City_Control  ,absorb(Fi
+> rm year) cluster(city)
+(dropped 135 singleton observations)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     21,636
+Absorbing 2 HDFE groups                           F(  17,    232) =      41.32
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9163
+                                                  Adj R-squared   =     0.9023
+                                                  Within R-sq.    =     0.1904
+Number of clusters (city)    =        233         Root MSE        =     0.4110
+
+                                 (Std. err. adjusted for 233 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+Highedu_st~f | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0829498     .02827     2.93   0.004      .027251    .1386485
+         Lev |   .6531411   .0738844     8.84   0.000      .507571    .7987112
+         Age |  -.1299006   .1244481    -1.04   0.298    -.3750935    .1152922
+         Roa |   .8738298   .1141461     7.66   0.000     .6489344    1.098725
+     Capital |    .278678   .0178889    15.58   0.000     .2434325    .3139235
+        Cash |  -.1108909   .0917157    -1.21   0.228    -.2915931    .0698112
+      Growth |   .0033081   .0056302     0.59   0.557    -.0077847     .014401
+     Mshrrat |   .0022165   .0012004     1.85   0.066    -.0001485    .0045816
+  Shrholder1 |   .0010743   .0015355     0.70   0.485     -.001951    .0040997
+ Share_indep |  -.4512455   .1513129    -2.98   0.003    -.7493686   -.1531225
+        Gdpt |  -.0189854   .0086754    -2.19   0.030     -.036078   -.0018929
+        Popt |   .0048741   .0046275     1.05   0.293    -.0042432    .0139914
+     Secondt |   .0009628   .0007437     1.29   0.197    -.0005025    .0024281
+       Waget |    .024697   .0217772     1.13   0.258    -.0182094    .0676033
+        Edut |   .0008337   .0010127     0.82   0.411    -.0011616     .002829
+   Firm_numt |   .0115733   .0054416     2.13   0.034      .000852    .0222946
+      Thirdt |    .000305   .0008504     0.36   0.720    -.0013705    .0019806
+       _cons |   .4945195   1.473843     0.34   0.738    -2.409308    3.398347
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3060           0        3060     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T6_5") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T6_5=e(sample)
+
+. reghdfe Senior_staff Bigdata_Post    $Firm_Control $City_Control  ,absorb(Fir
+> m year) cluster(city)
+(dropped 97 singleton observations)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     24,683
+Absorbing 2 HDFE groups                           F(  17,    238) =      52.59
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9238
+                                                  Adj R-squared   =     0.9124
+                                                  Within R-sq.    =     0.2141
+Number of clusters (city)    =        239         Root MSE        =     0.4823
+
+                                 (Std. err. adjusted for 239 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+Senior_staff | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .1015346   .0449837     2.26   0.025     .0129175    .1901516
+         Lev |   .6228154   .0818519     7.61   0.000     .4615686    .7840621
+         Age |   .1992452   .1184107     1.68   0.094    -.0340217    .4325121
+         Roa |   .6310414   .1500878     4.20   0.000     .3353713    .9267116
+     Capital |   .3792578   .0280151    13.54   0.000     .3240687     .434447
+        Cash |  -.0240909   .0993384    -0.24   0.809    -.2197857    .1716038
+      Growth |  -.0132322   .0072531    -1.82   0.069    -.0275206    .0010562
+     Mshrrat |  -.0014106    .001066    -1.32   0.187    -.0035105    .0006893
+  Shrholder1 |   .0025262   .0018644     1.35   0.177    -.0011467    .0061991
+ Share_indep |  -.1248368   .1538199    -0.81   0.418    -.4278592    .1781856
+        Gdpt |  -.0059627    .011664    -0.51   0.610    -.0289406    .0170151
+        Popt |  -.0071542   .0089207    -0.80   0.423    -.0247278    .0104193
+     Secondt |  -.0014905   .0009737    -1.53   0.127    -.0034087    .0004276
+       Waget |   .0088658   .0212448     0.42   0.677    -.0329861    .0507177
+        Edut |   .0033431   .0015669     2.13   0.034     .0002563    .0064299
+   Firm_numt |   .0156758   .0069453     2.26   0.025     .0019938    .0293579
+      Thirdt |  -.0017011   .0010706    -1.59   0.113    -.0038102     .000408
+       _cons |  -1.358702   1.437575    -0.95   0.346    -4.190697    1.473293
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        Firm |      3171           0        3171     |
+        year |        12           1          11     |
+-----------------------------------------------------+
+
+. post `H' ("T6_6") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T6_6=e(sample)
+
+. keep row_id sample_*
+
+. export delimited using "../data/firm_flags.csv", replace
+(file ../data/firm_flags.csv not found)
+file ../data/firm_flags.csv saved
+
+. use city, clear
+
+. gen long row_id=_n
+
+. reghdfe Newfirm Bigdata_Post $City_Control ,absorb(city year  ) cluster(city)
+(MWFE estimator converged in 2 iterations)
+
+HDFE Linear regression                            Number of obs   =      3,312
+Absorbing 2 HDFE groups                           F(   8,    275) =       3.36
+Statistics robust to heteroskedasticity           Prob > F        =     0.0011
+                                                  R-squared       =     0.9649
+                                                  Adj R-squared   =     0.9615
+                                                  Within R-sq.    =     0.0415
+Number of clusters (city)    =        276         Root MSE        =     0.1952
+
+                                 (Std. err. adjusted for 276 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+     Newfirm | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0548161   .0296569     1.85   0.066    -.0035674    .1131995
+        Gdpt |  -.0004804   .0074103    -0.06   0.948    -.0150684    .0141076
+        Popt |   .0156953   .0064202     2.44   0.015     .0030562    .0283343
+     Secondt |   .0011084   .0005335     2.08   0.039     .0000581    .0021587
+       Waget |    .009274   .0184936     0.50   0.616    -.0271329     .045681
+        Edut |   .0018694    .001504     1.24   0.215    -.0010914    .0048301
+   Firm_numt |    -.01279   .0041101    -3.11   0.002    -.0208813   -.0046987
+      Thirdt |   .0007705   .0006674     1.15   0.249    -.0005433    .0020843
+       _cons |    8.56084   1.112824     7.69   0.000     6.370104    10.75158
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        city |       276         276           0    *|
+        year |        12           1          11     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T2_1") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T2_1=e(sample)
+
+. reghdfe Newfirm_score Bigdata_Post $City_Control ,absorb(city year  ) cluster
+> (city)
+(MWFE estimator converged in 2 iterations)
+
+HDFE Linear regression                            Number of obs   =      3,036
+Absorbing 2 HDFE groups                           F(   8,    275) =     129.40
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9584
+                                                  Adj R-squared   =     0.9540
+                                                  Within R-sq.    =     0.4924
+Number of clusters (city)    =        276         Root MSE        =     3.6508
+
+                                 (Std. err. adjusted for 276 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+Newfirm_sc~e | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   1.410155   .4721298     2.99   0.003     .4807069    2.339603
+        Gdpt |  -.7869795   .1152133    -6.83   0.000    -1.013792   -.5601674
+        Popt |   .3918136    .100203     3.91   0.000     .1945511    .5890761
+     Secondt |   .0114358   .0076724     1.49   0.137    -.0036683    .0265399
+       Waget |  -.3997414   .2657727    -1.50   0.134     -.922949    .1234662
+        Edut |  -.0799173   .0238999    -3.34   0.001    -.1269672   -.0328673
+   Firm_numt |  -.3796557   .0676492    -5.61   0.000    -.5128318   -.2464796
+      Thirdt |  -.0060727   .0108865    -0.56   0.577    -.0275041    .0153588
+       _cons |   177.5169   14.47225    12.27   0.000     149.0264    206.0074
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        city |       276         276           0    *|
+        year |        11           1          10     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T2_2") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T2_2=e(sample)
+
+. reghdfe New_affiliate Bigdata_Post   $City_Control ,absorb(city year) cluster
+> (city)
+(MWFE estimator converged in 5 iterations)
+
+HDFE Linear regression                            Number of obs   =      3,216
+Absorbing 2 HDFE groups                           F(   8,    275) =       5.82
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8556
+                                                  Adj R-squared   =     0.8410
+                                                  Within R-sq.    =     0.0255
+Number of clusters (city)    =        276         Root MSE        =     0.4851
+
+                                 (Std. err. adjusted for 276 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+New_affili~e | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .1761852   .0489016     3.60   0.000     .0799161    .2724543
+        Gdpt |  -.0113573   .0129595    -0.88   0.382    -.0368697    .0141551
+        Popt |   .0084466   .0096987     0.87   0.385    -.0106466    .0275397
+     Secondt |  -.0015894   .0007254    -2.19   0.029    -.0030175   -.0001613
+       Waget |   .0272572   .0241346     1.13   0.260    -.0202548    .0747693
+        Edut |   .0002863   .0019066     0.15   0.881     -.003467    .0040397
+   Firm_numt |   .0164549   .0065244     2.52   0.012     .0036109     .029299
+      Thirdt |  -.0028289   .0009384    -3.01   0.003    -.0046762   -.0009815
+       _cons |   1.738747   1.408402     1.23   0.218    -1.033872    4.511366
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        city |       276         276           0    *|
+        year |        12           1          11     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T2_3") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T2_3=e(sample)
+
+. reghdfe Bigdata_newfirm Bigdata_Post $City_Control ,absorb(city year  ) clust
+> er(city)
+(MWFE estimator converged in 2 iterations)
+
+HDFE Linear regression                            Number of obs   =      3,312
+Absorbing 2 HDFE groups                           F(   8,    275) =       4.53
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9469
+                                                  Adj R-squared   =     0.9418
+                                                  Within R-sq.    =     0.0432
+Number of clusters (city)    =        276         Root MSE        =     0.2267
+
+                                 (Std. err. adjusted for 276 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+Bigdata_ne~m | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0952672   .0331597     2.87   0.004     .0299881    .1605464
+        Gdpt |  -.0108836   .0084095    -1.29   0.197    -.0274387    .0056715
+        Popt |   .0084892   .0071662     1.18   0.237    -.0056184    .0225968
+     Secondt |    .001339   .0005616     2.38   0.018     .0002334    .0024446
+       Waget |  -.0134701   .0217461    -0.62   0.536      -.05628    .0293399
+        Edut |   .0048578   .0016294     2.98   0.003     .0016501    .0080655
+   Firm_numt |   .0021231   .0047096     0.45   0.652    -.0071483    .0113945
+      Thirdt |   .0010989   .0007491     1.47   0.144    -.0003758    .0025735
+       _cons |   9.696064   1.227854     7.90   0.000     7.278875    12.11325
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        city |       276         276           0    *|
+        year |        12           1          11     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T2_4") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T2_4=e(sample)
+
+. reghdfe Bigdataindus_emp Bigdata_Post $City_Control ,absorb(city year  ) clus
+> ter(city)
+(dropped 1 singleton observations)
+(MWFE estimator converged in 4 iterations)
+
+HDFE Linear regression                            Number of obs   =      2,766
+Absorbing 2 HDFE groups                           F(   8,    276) =      10.92
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9533
+                                                  Adj R-squared   =     0.9477
+                                                  Within R-sq.    =     0.0963
+Number of clusters (city)    =        277         Root MSE        =     0.2392
+
+                                 (Std. err. adjusted for 277 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+Bigdataind~p | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+Bigdata_Post |   .0759769   .0335711     2.26   0.024      .009889    .1420648
+        Gdpt |   .0176214   .0109498     1.61   0.109    -.0039343    .0391771
+        Popt |  -.0116985   .0100584    -1.16   0.246    -.0314994    .0081024
+     Secondt |  -.0006206   .0004997    -1.24   0.215    -.0016043     .000363
+       Waget |   .0074679   .0167155     0.45   0.655    -.0254382    .0403739
+        Edut |   .0062121   .0018829     3.30   0.001     .0025055    .0099188
+   Firm_numt |   .0064748   .0050937     1.27   0.205    -.0035526    .0165022
+      Thirdt |  -.0008183   .0006737    -1.21   0.226    -.0021445     .000508
+       _cons |  -1.613208   .9173952    -1.76   0.080    -3.419189    .1927724
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        city |       277         277           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T2_5") ("Bigdata_Post") (_b[Bigdata_Post]) (_se[Bigdata_Post]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T2_5=e(sample)
+
+. keep row_id sample_*
+
+. export delimited using "../data/city_flags.csv", replace
+(file ../data/city_flags.csv not found)
+file ../data/city_flags.csv saved
+
+. postclose `H'
+
+. use "../data/author_results.dta", clear
+
+. export delimited using "../data/author_results.csv", replace
+(file ../data/author_results.csv not found)
+file ../data/author_results.csv saved
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\bigdata_emplo
+> yment\work\../logs/author_body.log
+  log type:  text
+ closed on:  14 Nov 2026, 21:51:59
+-------------------------------------------------------------------------------
+
+. 
+end of do-file

@@ -1,0 +1,164 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+NOTE: The fixed-effects are not regular, they cannot be straightforwardly interpreted.
+You have an unbalanced panel. Proceeding as such.
+Warning in did_standardization(data, args) :
+  Some groups in your dataset have very few observations, which may cause estimation problems.
+  Check groups: 6,3,5,0,7,2,8,4,9.
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 2 in time period 2; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 2 in time period 3; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 2 in time period 4; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 2 in time period 5; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 2 in time period 6; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 2 in time period 7; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 2 in time period 8; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 2 in time period 9; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 2 in time period 10; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 3 in time period 2; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 3 in time period 3; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 3 in time period 4; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 3 in time period 5; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 3 in time period 6; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 3 in time period 7; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 3 in time period 8; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 3 in time period 9; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 3 in time period 10; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 4 in time period 2; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 4 in time period 3; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 4 in time period 4; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 4 in time period 5; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 4 in time period 6; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 4 in time period 7; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 4 in time period 8; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 4 in time period 9; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 4 in time period 10; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 5 in time period 2; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 5 in time period 3; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 5 in time period 4; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 5 in time period 5; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 5 in time period 6; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 5 in time period 7; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 5 in time period 8; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 5 in time period 9; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 5 in time period 10; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 6 in time period 2; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 6 in time period 3; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 6 in time period 4; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 6 in time period 5; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 6 in time period 6; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 6 in time period 7; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 6 in time period 8; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 6 in time period 9; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 6 in time period 10; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 7 in time period 2; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 7 in time period 3; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 7 in time period 4; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 7 in time period 5; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 7 in time period 6; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 7 in time period 7; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 7 in time period 8; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 7 in time period 9; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 7 in time period 10; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 8 in time period 2; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 8 in time period 3; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 8 in time period 4; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 8 in time period 5; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 8 in time period 6; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 8 in time period 7; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 8 in time period 8; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 8 in time period 9; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 8 in time period 10; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 9 in time period 2; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 9 in time period 3; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 9 in time period 4; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 9 in time period 5; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 9 in time period 6; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 9 in time period 7; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 9 in time period 8; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 9 in time period 9; consider centering/rescaling covariates or removing collinear terms
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 9 in time period 10; consider centering/rescaling covariates or removing collinear terms
+Warning in did::att_gt(yname = "y", tname = "t", idname = "id_num", gname = "g0",  :
+  No pre-treatment periods available for the Wald pre-test of parallel trends: pre-treatment ATT(g,t) estimates exist, but all of them have missing or zero variance (e.g., because the underlying 2x2 estimation failed for those cells), so they were dropped from the pre-test.
+   window    twfe twfe_se   csa csa_se      bjs bjs_se neg_abs G_eff_twfe
+   <char>   <num>   <num> <num>  <num>    <num>  <num>   <num>      <num>
+1: static 0.06966 0.07039    NA     NA -0.01346 0.1067  0.2137      131.7
+   G_eff_bjs G_eff_csa
+       <num>     <num>
+1:        NA        NA
+TWFE in raw units 0.012919 vs published 0.0129 (ratio 1.0015)
+-> implementation_output/specs_controls/cie20250307__T6_3.csv 

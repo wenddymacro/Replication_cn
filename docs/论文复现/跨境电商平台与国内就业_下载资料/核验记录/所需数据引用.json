@@ -1,0 +1,512 @@
+[
+  {
+    "code": "正文程序.do",
+    "line": 17,
+    "text": "global regdata = \"[存储路径]/Data\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 18,
+    "text": "global result  = \"[存储路径]/Result\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 27,
+    "text": "use $regdata/dataset_benchmark.dta, clear"
+  },
+  {
+    "code": "正文程序.do",
+    "line": 29,
+    "text": "global xlist    \"soe export1 import1 lnwage lnoutput lnklr profit leverage lnconstraints\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 30,
+    "text": "global cityvar  \"lnpergdp lnpopulation lncitywage structure lnperfdi lninternet gov\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 31,
+    "text": "global absorb1  \"absorb(id cic2_code#year) cluster(id)\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 32,
+    "text": "global outreg   \"outreg2 using $result/table1.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 33,
+    "text": "global option   \"addtext(ctrs, yes,firm fe, yes,cic2-year fe, yes)\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 59,
+    "text": "global ivoption  \"absorb(id cic2_code#year) cluster(id) first savefirst\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 60,
+    "text": "global outregs2  \"outreg2 using $result/table2.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 61,
+    "text": "global outregs1  \"outreg2 using $result/table2.xls, append dec(4)\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 62,
+    "text": "global ivaddtext \"addtext(ctrs, yes,firm fe, yes,cic2-year fe, yes)\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 82,
+    "text": "global outreg   \"outreg2 using $result/table3.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 85,
+    "text": "use $regdata/dataset_imp1.dta, clear"
+  },
+  {
+    "code": "正文程序.do",
+    "line": 87,
+    "text": "global xlist    \"soe lntariff imp_processtrade lnrer lnpercgdp lnoutput lnklr profit leverage lnconstraints\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 105,
+    "text": "use $regdata/dataset_exp.dta, clear"
+  },
+  {
+    "code": "正文程序.do",
+    "line": 107,
+    "text": "global xlist    \"soe lntariff exp_processtrade lnrer lnpercgdp lnoutput lnklr profit leverage lnconstraints\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 127,
+    "text": "global outreg   \"outreg2 using $result/table4.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 130,
+    "text": "\tuse $regdata/dataset_benchmark.dta, clear"
+  },
+  {
+    "code": "正文程序.do",
+    "line": 132,
+    "text": "\tglobal xlist    \"soe lnoutput lnklr profit leverage lnconstraints\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 153,
+    "text": "global xlist    \"soe lntariff exp_processtrade lnrer lnpercgdp lnoutput lnklr profit leverage lnconstraints\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 161,
+    "text": "global outreg   \"outreg2 using $result/table5.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 162,
+    "text": "global xlist    \"soe lntariff exp_processtrade lnrer lnpercgdp lnoutput lnklr profit leverage lnconstraints\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 179,
+    "text": "use $regdata/dataset_benchmark.dta, clear"
+  },
+  {
+    "code": "正文程序.do",
+    "line": 181,
+    "text": "global xlist    \"soe export1 import1 lnwage lnoutput lnklr profit leverage lnconstraints\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 182,
+    "text": "global outreg   \"outreg2 using $result/table6.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 222,
+    "text": "use $regdata/dataset_city1.dta, clear"
+  },
+  {
+    "code": "正文程序.do",
+    "line": 224,
+    "text": "global cityvar      \"lnpergdp lnpopulation lncitywage structure lnperfdi internet fiscal_ratio\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 225,
+    "text": "global absorb_city  \"absorb(citycode prov#year) cluster(citycode)\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 226,
+    "text": "global outreg       \"outreg2 using $result/table7.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 227,
+    "text": "global option       \"addtext(ctrs, yes,city fe, yes,prov-year fe, yes)\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 242,
+    "text": "global outreg   \"outreg2 using $result/table8.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "正文程序.do",
+    "line": 244,
+    "text": "use $regdata/dataset_city3.dta, clear"
+  },
+  {
+    "code": "附录程序.do",
+    "line": 17,
+    "text": "global regdata = \"[存储路径]/Data\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 18,
+    "text": "global result  = \"[存储路径]/Result\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 27,
+    "text": "use $regdata/dataset_benchmark.dta, clear"
+  },
+  {
+    "code": "附录程序.do",
+    "line": 29,
+    "text": "global xlist    \"soe export1 import1 lnwage lnoutput lnklr profit leverage lnconstraints\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 30,
+    "text": "global cityvar  \"lnpergdp lnpopulation lncitywage structure lnperfdi lninternet gov\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 70,
+    "text": "global xlist     \"soe export1 import1 lnwage lnoutput lnklr profit leverage lnconstraints\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 71,
+    "text": "global cityvar   \"lnpergdp lnpopulation lncitywage structure lnperfdi lninternet gov\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 72,
+    "text": "global absorb1   \"absorb(id cic2_code#year) cluster(id)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 73,
+    "text": "global option    \"addtext(ctrs, yes,firm fe, yes,cic2-year fe, yes)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 74,
+    "text": "global ivoption  \"absorb(id cic2_code#year) cluster(id) first savefirst\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 75,
+    "text": "global ivaddtext \"addtext(ctrs, yes,firm fe, yes,cic2-year fe, yes)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 78,
+    "text": "global outregs2  \"outreg2 using $result/appendix-table2.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 121,
+    "text": "global outregs2  \"outreg2 using $result/appendix-table3.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 122,
+    "text": "global outregs1  \"outreg2 using $result/appendix-table3.xls, append dec(4)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 160,
+    "text": "global xlist     \"soe export1 import1 lnwage lnoutput lnklr profit leverage lnconstraints\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 161,
+    "text": "global cityvar   \"lnpergdp lnpopulation lncitywage structure lnperfdi lninternet gov\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 162,
+    "text": "global absorb1   \"absorb(id cic2_code#year) cluster(id)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 163,
+    "text": "global outreg    \"outreg2 using $result/appendix-table4.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 166,
+    "text": "use $regdata/dataset_psm1.dta, clear"
+  },
+  {
+    "code": "附录程序.do",
+    "line": 182,
+    "text": "use $regdata/dataset_psm2.dta, clear"
+  },
+  {
+    "code": "附录程序.do",
+    "line": 199,
+    "text": "use $regdata/dataset_benchmark.dta, clear"
+  },
+  {
+    "code": "附录程序.do",
+    "line": 222,
+    "text": "use $regdata/dataset_benchmark.dta, clear"
+  },
+  {
+    "code": "附录程序.do",
+    "line": 224,
+    "text": "global xlist    \"soe export1 import1 lnwage lnoutput lnklr profit leverage lnconstraints\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 225,
+    "text": "global cityvar  \"lnpergdp lnpopulation lncitywage structure lnperfdi lninternet gov\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 226,
+    "text": "global absorb1  \"absorb(id cic2_code#year) cluster(id)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 227,
+    "text": "global outreg   \"outreg2 using $result/appendix-table5.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 228,
+    "text": "global option   \"addtext(ctrs, yes,firm fe, yes,cic2-year fe, yes)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 261,
+    "text": "global absorb2    \"absorb(id cic2_code#year citycode#year) cluster(id)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 262,
+    "text": "global absorb3    \"absorb(id cic2_code#citycode#year) cluster(id)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 269,
+    "text": "global absorb4    \"absorb(id cic2_code#year) cluster(citycode#cic2_code)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 274,
+    "text": "global outreg   \"outreg2 using $result/appendix-table6.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 301,
+    "text": "global outreg   \"outreg2 using $result/appendix-table7.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 322,
+    "text": "use $regdata/dataset_exp.dta, clear"
+  },
+  {
+    "code": "附录程序.do",
+    "line": 338,
+    "text": "use $regdata/dataset_imp1.dta, clear"
+  },
+  {
+    "code": "附录程序.do",
+    "line": 354,
+    "text": "use $regdata/dataset_stk.dta, clear"
+  },
+  {
+    "code": "附录程序.do",
+    "line": 356,
+    "text": "global xlist      \"size age soe liability roa capint wager\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 357,
+    "text": "global absorb_stk \"absorb(fid ind#year citycode#year) cluster(fid)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 369,
+    "text": "use $regdata/dataset_gq.dta, clear"
+  },
+  {
+    "code": "附录程序.do",
+    "line": 371,
+    "text": "global xlist    \"soe age export2 wager abs_scale per_cap_1 profit_ratio liability\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 372,
+    "text": "global cityvar  \"lnpergdp lnpopulation lncitywage structure lnperfdi internet fiscal_ratio\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 373,
+    "text": "global absorb1  \"absorb(id cic2_code#year) cluster(id)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 393,
+    "text": "use $regdata/dataset_benchmark.dta, clear"
+  },
+  {
+    "code": "附录程序.do",
+    "line": 395,
+    "text": "global xlist    \"soe export1 import1 lnwage lnoutput lnklr profit leverage lnconstraints\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 396,
+    "text": "global cityvar  \"lnpergdp lnpopulation lncitywage structure lnperfdi lninternet gov\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 397,
+    "text": "global absorb1  \"absorb(id cic2_code#year) cluster(id)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 398,
+    "text": "global outreg   \"outreg2 using $result/appendix-table8.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 399,
+    "text": "global option   \"addtext(ctrs, yes,firm fe, yes,cic2-year fe, yes)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 436,
+    "text": "use $regdata/dataset_imp1.dta, clear"
+  },
+  {
+    "code": "附录程序.do",
+    "line": 438,
+    "text": "global xlist    \"soe lntariff imp_processtrade lnrer lnpercgdp lnoutput lnklr profit leverage lnconstraints\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 439,
+    "text": "global cityvar  \"lnpergdp lnpopulation lncitywage structure lnperfdi lninternet gov\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 440,
+    "text": "global absorb1  \"absorb(id cic2_code#year) cluster(id)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 441,
+    "text": "global outreg   \"outreg2 using $result/appendix-table9.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 442,
+    "text": "global option   \"addtext(ctrs, yes,firm fe, yes,cic2-year fe, yes)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 463,
+    "text": "use $regdata/dataset_imp2.dta, clear"
+  },
+  {
+    "code": "附录程序.do",
+    "line": 486,
+    "text": "use $regdata/dataset_city2.dta, clear"
+  },
+  {
+    "code": "附录程序.do",
+    "line": 488,
+    "text": "global cityvarA        \"L_lnpergdp_A L_lnpopulation_A L_lncitywage_A L_structure_A L_lnperfdi_A L_internet_A L_fiscal_ratio_A\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 489,
+    "text": "global cityvarB        \"L_lnpergdp_B L_lnpopulation_B L_lncitywage_B L_structure_B L_lnperfdi_B L_internet_B L_fiscal_ratio_B\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 490,
+    "text": "global absorb_adjacent \"absorb(citycode_A#citycode_B year) cluster(citycode_A#citycode_B)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 491,
+    "text": "global outreg          \"outreg2 using $result/appendix-table10.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 492,
+    "text": "global option          \"addtext(ctrs, yes,cityA-cityB fe, yes,year fe, yes)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 508,
+    "text": "use $regdata/dataset_city1.dta, clear"
+  },
+  {
+    "code": "附录程序.do",
+    "line": 510,
+    "text": "global cityvar      \"lnpergdp lnpopulation lncitywage structure lnperfdi internet fiscal_ratio\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 511,
+    "text": "global absorb_city  \"absorb(citycode prov#year) cluster(citycode)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 512,
+    "text": "global outreg       \"outreg2 using $result/appendix-table11.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 513,
+    "text": "global option       \"addtext(ctrs, yes,city fe, yes,prov-year fe, yes)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 539,
+    "text": "use $regdata/dataset_city4.dta, clear"
+  },
+  {
+    "code": "附录程序.do",
+    "line": 541,
+    "text": "global absorb_cic  \"absorb(citycode#year cic2_code#year) cluster(citycode#cic2_code)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 542,
+    "text": "global outreg      \"outreg2 using $result/appendix-table12.xls, append dec(4) ad(4)\""
+  },
+  {
+    "code": "附录程序.do",
+    "line": 543,
+    "text": "global option      \"addtext(ctrs, yes,city-year fe, yes,cic2-year fe, yes)\""
+  }
+]

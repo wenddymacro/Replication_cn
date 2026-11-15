@@ -1,0 +1,38 @@
+{
+  "title": "行政诉讼跨区划管辖与企业社保遵从",
+  "date": "2026-11-15",
+  "author_body_models": 17,
+  "printed_coefficients_exact": 35,
+  "formal_specs": 9,
+  "main_specs": 1,
+  "secondary_specs": 8,
+  "bootstrap_B": 999,
+  "bootstrap_specifications": 9,
+  "csa_points_and_se": 9,
+  "bjs_points_and_se": 9,
+  "csa_opposite_direction_specs": [
+    "T3_1",
+    "T3_3"
+  ],
+  "twfe_sig5_csa_not_sig5": [
+    "T2_2",
+    "T2_3",
+    "T3_1",
+    "T4_1",
+    "T4_2",
+    "T4_3"
+  ],
+  "twfe_sig5_bjs_not_sig5": [
+    "T3_1"
+  ],
+  "adjusted_R2_differences": [
+    "T3_1",
+    "T3_3",
+    "T3_5",
+    "T4_1",
+    "T6_1"
+  ],
+  "upstream_R_byte_identical": true,
+  "unknown_date_rows_excluded": 2,
+  "appendix_not_fully_rerun": true
+}

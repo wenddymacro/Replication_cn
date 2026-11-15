@@ -1,0 +1,148 @@
+#delimit ;
+
+twoway
+
+    (bar p_cum _year,
+        yaxis(2)
+        barwidth(0.45)
+        fcolor(gs14)
+        lcolor(gs11)
+        lwidth(vthin)
+    )
+
+    (line secretariat_id_cum _year
+        if secretariat_acronym=="SAC",
+        sort
+        lcolor(black)
+        lpattern(solid)
+        lwidth(medthick)
+    )
+
+    (line secretariat_id_cum _year
+        if secretariat_acronym=="AFNOR",
+        sort
+        lcolor(gs4)
+        lpattern(longdash)
+        lwidth(medthick)
+    )
+
+    (line secretariat_id_cum _year
+        if secretariat_acronym=="ANSI",
+        sort
+        lcolor(gs2)
+        lpattern(shortdash)
+        lwidth(medthick)
+    )
+
+    (line secretariat_id_cum _year
+        if secretariat_acronym=="BSI",
+        sort
+        lcolor(gs7)
+        lpattern(dot)
+        lwidth(medthick)
+    )
+
+    (line secretariat_id_cum _year
+        if secretariat_acronym=="DIN",
+        sort
+        lcolor(black)
+        lpattern(dash_dot)
+        lwidth(medthick)
+    )
+
+    (line secretariat_id_cum _year
+        if secretariat_acronym=="JISC",
+        sort
+        lcolor(gs5)
+        lpattern(dash)
+        lwidth(medthick)
+    )
+
+    ,
+
+    legend(
+        order(
+            2 "SAC（中国）"
+            3 "AFNOR（法国）"
+            4 "ANSI（美国）"
+            5 "BSI（英国）"
+            6 "DIN（德国）"
+            7 "JISC（日本）"
+            1 "China P-member (cum.)"
+        )
+        rows(2)
+        cols(4)
+        position(6)
+        ring(1)
+        region(lstyle(none))
+        size(small)
+        colgap(1.5)
+        rowgap(1.5)
+        symxsize(*0.85)
+    )
+
+    ytitle(
+        "Secretariats (cum.)",
+        axis(1)
+        margin(medsmall)
+    )
+
+    ytitle(
+        "China P-members (cum.)",
+        axis(2)
+        margin(medsmall)
+    )
+
+    ylabel(
+        ,
+        axis(1)
+        labsize(small)
+        angle(0)
+        nogrid
+    )
+
+    ylabel(
+        ,
+        axis(2)
+        labsize(small)
+        angle(0)
+        nogrid
+    )
+
+    xtitle(
+        "Year",
+        margin(small)
+    )
+
+    xlabel(
+        1980(5)2025,
+        angle(0)
+        labsize(small)
+        nogrid
+    )
+
+    graphregion(
+        color(white)
+        margin(small)
+    )
+
+    plotregion(
+        color(white)
+        margin(4 5 2 4)
+    )
+
+    title(
+        "ISO TC/SC Secretariats vs China P-member (cumulative, dual axis)",
+        size(medsmall)
+    )
+
+    xsize(6.5)
+    ysize(5.2)
+
+    name(fig_cum_dualbar_bw, replace)
+
+;
+
+#delimit cr
+
+graph display fig_cum_dualbar_bw

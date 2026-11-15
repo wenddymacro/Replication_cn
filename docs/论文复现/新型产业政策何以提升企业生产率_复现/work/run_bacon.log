@@ -1,0 +1,205 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      Stata 19.0
+___/   /   /___/   /   /___/       MP—Parallel Edition
+
+ Statistics and Data Science       Copyright 1985-2025 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-782-8272        https://www.stata.com
+                                   979-696-4600        service@stata.com
+
+Stata license: 114514-student 64-core lab perpetual
+Serial number: 9223372036854775807
+  Licensed to: 1
+               1
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. More than 2 billion observations are allowed; see help obs_advice.
+      4. Maximum number of variables is set to 5,000 but can be increased;
+          see help set_maxvar.
+
+
+Running D:\Stata\Stata19\profile.do ...
+
+. do run_bacon.do 
+
+. clear all
+
+. set more off
+
+. set processors 1
+    The maximum number of processors or cores being used is changed from 16 to
+    1.  It can be set to any number between 1 and 16
+
+. set seed 824
+
+. adopath ++ "../output/local_ado"
+  [1]              "../output/local_ado"
+  [2]  (BASE)      "D:\Stata\Stata19\ado\base/"
+  [3]  (SITE)      "D:\Stata\Stata19\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "C:\ado\personal/"
+  [6]  (PLUS)      "C:\ado\plus/"
+  [7]  (OLDPLACE)  "C:\ado\myado/"
+  [8]              "C:\ado\plus"
+  [9]              "C:\ado\github"
+  [10]             "C:\ado\personal"
+
+. use "../author/listed.dta", clear
+
+. global xlist "lnage lnasset lnsize lev edu ceo lngdppc secondary govexp ftd"
+
+. log using "../output/bacon.log", text replace
+(file
+    C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\work\../o
+    > utput/bacon.log not found)
+---------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\wo
+> rk\../output/bacon.log
+  log type:  text
+ opened on:  13 Nov 2026, 23:41:47
+
+. quietly reghdfe TFP chainleader $xlist, absorb(stkcd prv#year indid#year) vce(c
+> luster city)
+
+. gen esample=e(sample)
+
+. preserve
+
+. keep $xlist chainleader_l TFP chainleader stkcd year indid prv city cityname es
+> ample
+
+. xtset stkcd year
+
+Panel variable: stkcd (unbalanced)
+ Time variable: year, 2014 to 2023, but with gaps
+         Delta: 1 unit
+
+. bysort stkcd: egen temp_prv=max(prv)
+(17 missing values generated)
+
+. bysort stkcd: egen temp_indid=max(indid)
+
+. bysort stkcd: egen temp_chainleader_l=max(chainleader_l)
+(20,134 missing values generated)
+
+. bysort stkcd: egen temp_city=max(city)
+(17 missing values generated)
+
+. bysort stkcd: egen temp2_city=min(city)
+(17 missing values generated)
+
+. replace prv=temp_prv if prv==.
+(0 real changes made)
+
+. replace indid=temp_indid if indid==.
+(0 real changes made)
+
+. replace chainleader_l=temp_chainleader_l if chainleader_l==.
+(0 real changes made)
+
+. replace city=temp_city if city==.
+(0 real changes made)
+
+. gen poschange=temp_city-temp2_city
+(17 missing values generated)
+
+. drop if poschange~=0
+(17 observations deleted)
+
+. // 插值
+. foreach var of global xlist{
+  2. by stkcd: ipolate `var' year, gen(ipo_`var') epolate
+  3. }
+(11 missing values generated)
+(8 missing values generated)
+(336 missing values generated)
+(336 missing values generated)
+(336 missing values generated)
+(336 missing values generated)
+
+. by stkcd: ipolate TFP year, gen(TFP_ipo) epolate
+(707 missing values generated)
+
+. // 平衡面板
+. xtbalance , range(2014 2023) miss(ipo_*)
+
+(355 observations deleted due to missing) 
+
+(12653 observations deleted due to discontinues) 
+
+. // 回归+分解
+. bacondecomp TFP_ipo chainleader ipo_* ,ddetail vce(r)
+Computing decomposition across 8 timing groups
+including a never-treated group
+------------------------------------------------------------------------------
+     TFP_ipo | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |   .0474526   .0226672     2.09   0.036     .0030257    .0918794
+------------------------------------------------------------------------------
+
+Bacon Decomposition
+
++---------------------------------------------------+
+|                      |         Beta   TotalWeight |
+|----------------------+----------------------------|
+|        Timing_groups |  .0035545087   .0794113259 |
+|       Never_v_timing |  .0631278586   .9091532666 |
+|               Within | -.8937444687   .0114354075 |
++---------------------------------------------------+
+
+. ereturn list
+
+scalars:
+                  e(N) =  15311
+
+macros:
+         e(properties) : "b V"
+                e(cmd) : "bacondecomp"
+            e(version) : "1.0.0"
+             e(depvar) : "TFP_ipo"
+
+matrices:
+                  e(b) :  1 x 1
+                  e(V) :  1 x 1
+              e(sumdd) :  3 x 2
+                 e(wt) :  1 x 29
+                 e(dd) :  1 x 29
+
+functions:
+             e(sample)   
+
+. return list
+
+. capture estimates save "../output/bacon.ster", replace
+
+. graph export "../output/附图5_Goodman-Bacon分解的权重.png",replace
+(file ../output/附图5_Goodman-Bacon分解的权重.png not found)
+file ../output/附图5_Goodman-Bacon分解的权重.png saved as PNG format
+
+. restore
+
+. *************************************************************
+. ***                                                       ***
+. ***         附图 6 平行趋势检验:异质性效应处理方法        ***
+. ***                                                       ***
+. *************************************************************
+. 
+. display "COMPLETE_bacon"
+COMPLETE_bacon
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\wo
+> rk\../output/bacon.log
+  log type:  text
+ closed on:  13 Nov 2026, 23:42:52
+---------------------------------------------------------------------------------
+
+. 
+end of do-file

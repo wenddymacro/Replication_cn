@@ -1,0 +1,142 @@
+[
+  {
+    "file": "论文\\国际标准对接如何推动中国企业技术出海.pdf",
+    "bytes": 1707703,
+    "sha256": "8891d81df4961de9910b7a11815450431ae5eedcae20ecf3fb150a8a2b0683c2",
+    "source": "C:\\Users\\ASUS\\Downloads\\国际标准对接如何推动中国企业技术出海.pdf",
+    "zip_member": null
+  },
+  {
+    "file": "原始附件包\\20261027100110131WU_FILE_1.zip",
+    "bytes": 14279320,
+    "sha256": "37884fe228129c4ecda955552de27df2deb8d8a5f41d7097f26865f772602fe3",
+    "source": "C:\\Users\\ASUS\\Downloads\\20261027100110131WU_FILE_1.zip",
+    "zip_member": null
+  },
+  {
+    "file": "其他说明\\《中国工业经济》编辑部关于公开数据附件的使用说明.pdf",
+    "bytes": 271110,
+    "sha256": "4a7bb5aacd5e1e023cede4bc2cec026e99b6c4e0a968bb8de5d4fb9cef2270e2",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123771\\原始附件包\\20261027100110131WU_FILE_1.zip",
+    "zip_member": "冯帆+附件上传/《中国工业经济》编辑部关于公开数据附件的使用说明.pdf"
+  },
+  {
+    "file": "处理数据\\主回归数据\\DATA_id_autid_year.dta",
+    "bytes": 25331930,
+    "sha256": "48260979a9f28585b668ae3c3c1e5c821da3b6a9a38c142e3dcb0ca2c9bd987b",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123771\\原始附件包\\20261027100110131WU_FILE_1.zip",
+    "zip_member": "冯帆+附件上传/数据与程序/DATA_id_autid_year.dta"
+  },
+  {
+    "file": "处理数据\\主回归数据\\DATA_id_iso_hs.dta",
+    "bytes": 15238641,
+    "sha256": "423c6e8dc0c9432dc956f2621b5389955407eef458ff2ef6ab8b5f46879f2461",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123771\\原始附件包\\20261027100110131WU_FILE_1.zip",
+    "zip_member": "冯帆+附件上传/数据与程序/DATA_id_iso_hs.dta"
+  },
+  {
+    "file": "其他说明\\主要回归结果日志文件.smcl",
+    "bytes": 243168,
+    "sha256": "4d75d9966cac5376867199da79c778f8f041992cdec1dafe96af36e1904162a5",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123771\\原始附件包\\20261027100110131WU_FILE_1.zip",
+    "zip_member": "冯帆+附件上传/数据与程序/主要回归结果日志文件.smcl"
+  },
+  {
+    "file": "处理数据\\作图数据\\图1_数据.dta",
+    "bytes": 858534,
+    "sha256": "1e64fe83603c6a2cd124a269d32542d4d4d19d7eb5761148be112f0c3e7f7210",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123771\\原始附件包\\20261027100110131WU_FILE_1.zip",
+    "zip_member": "冯帆+附件上传/数据与程序/作图数据与程序/图1_数据.dta"
+  },
+  {
+    "file": "代码\\作图程序\\图1_程序.do",
+    "bytes": 3329,
+    "sha256": "133b903f7127edb447fa5987d032e730eedb21f852bed9ab7cf57b7a89c05713",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123771\\原始附件包\\20261027100110131WU_FILE_1.zip",
+    "zip_member": "冯帆+附件上传/数据与程序/作图数据与程序/图1_程序.do"
+  },
+  {
+    "file": "处理数据\\作图数据\\图2_数据.dta",
+    "bytes": 17102,
+    "sha256": "3b6d4ccbf99240c09e770e58de7b3efe2a90704400fc07174c4aa6e5b816367d",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123771\\原始附件包\\20261027100110131WU_FILE_1.zip",
+    "zip_member": "冯帆+附件上传/数据与程序/作图数据与程序/图2_数据.dta"
+  },
+  {
+    "file": "代码\\作图程序\\图2_程序.do",
+    "bytes": 2666,
+    "sha256": "ef272791a67c65f73a8731a3c937d50f881c6ddda26ef554d8c05321a12f876f",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123771\\原始附件包\\20261027100110131WU_FILE_1.zip",
+    "zip_member": "冯帆+附件上传/数据与程序/作图数据与程序/图2_程序.do"
+  },
+  {
+    "file": "处理数据\\作图数据\\图3_数据.dta",
+    "bytes": 771855,
+    "sha256": "530b200aff03ae4f2b295c7166371cdc71e5b5a3f430aa0436031e1b9a70992d",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123771\\原始附件包\\20261027100110131WU_FILE_1.zip",
+    "zip_member": "冯帆+附件上传/数据与程序/作图数据与程序/图3_数据.dta"
+  },
+  {
+    "file": "代码\\作图程序\\图3_程序.do",
+    "bytes": 5045,
+    "sha256": "376b9e14d446e1a328f0878417d3e42adec140195e046cfdfb4be26838b26079",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123771\\原始附件包\\20261027100110131WU_FILE_1.zip",
+    "zip_member": "冯帆+附件上传/数据与程序/作图数据与程序/图3_程序.do"
+  },
+  {
+    "file": "处理数据\\作图数据\\图4_数据.dta",
+    "bytes": 4571,
+    "sha256": "71f7d8ca288f63a032decc10e141ca2c795313e4f4d3098cdee4f5929de0e0b4",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123771\\原始附件包\\20261027100110131WU_FILE_1.zip",
+    "zip_member": "冯帆+附件上传/数据与程序/作图数据与程序/图4_数据.dta"
+  },
+  {
+    "file": "代码\\作图程序\\图4_程序.py",
+    "bytes": 7940,
+    "sha256": "a63afb376b2bfab613216e8df495fe1299238cee3c476c845babafa882151c9b",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123771\\原始附件包\\20261027100110131WU_FILE_1.zip",
+    "zip_member": "冯帆+附件上传/数据与程序/作图数据与程序/图4_程序.py"
+  },
+  {
+    "file": "代码\\作图程序\\图5_程序.do",
+    "bytes": 4234,
+    "sha256": "63ade5817326e3e371b69259fb1909b697c134b036d64e974fc235184844051d",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123771\\原始附件包\\20261027100110131WU_FILE_1.zip",
+    "zip_member": "冯帆+附件上传/数据与程序/作图数据与程序/图5_程序.do"
+  },
+  {
+    "file": "处理数据\\作图数据\\图6_数据.dta",
+    "bytes": 2258270,
+    "sha256": "644f5355cf429bbb84ccd631500ef5691a97fbbf8189ea5851c2a2a3832b6450",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123771\\原始附件包\\20261027100110131WU_FILE_1.zip",
+    "zip_member": "冯帆+附件上传/数据与程序/作图数据与程序/图6_数据.dta"
+  },
+  {
+    "file": "代码\\作图程序\\图6_程序.do",
+    "bytes": 3442,
+    "sha256": "ae801a79c303e42b9bc946950eb3a60f8f04c51cf5ab20b00591861a53fcb8e0",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123771\\原始附件包\\20261027100110131WU_FILE_1.zip",
+    "zip_member": "冯帆+附件上传/数据与程序/作图数据与程序/图6_程序.do"
+  },
+  {
+    "file": "处理数据\\主回归数据\\数据.dta",
+    "bytes": 12814898,
+    "sha256": "0c1b5405093e55fe474c4b2dcae16a30cab4290f4b01fce7ffed390ace792ea5",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123771\\原始附件包\\20261027100110131WU_FILE_1.zip",
+    "zip_member": "冯帆+附件上传/数据与程序/数据.dta"
+  },
+  {
+    "file": "代码\\主程序\\程序.do",
+    "bytes": 7356,
+    "sha256": "c6e87235bae22df0607a0529fb69160e83c9d6aa3ae9589e04d0d5ace5018cd4",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123771\\原始附件包\\20261027100110131WU_FILE_1.zip",
+    "zip_member": "冯帆+附件上传/数据与程序/程序.do"
+  },
+  {
+    "file": "附录\\附录.pdf",
+    "bytes": 1231170,
+    "sha256": "111e7a626daa4ea905db8a1fcde15ba621a085276457ce055f8f1ba89dd1a473",
+    "source": "C:\\Users\\ASUS\\Documents\\ChatGPT\\论文复现\\downloads\\cie123771\\原始附件包\\20261027100110131WU_FILE_1.zip",
+    "zip_member": "冯帆+附件上传/附录.pdf"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "file": "20250423105511WU_FILE_0.zip",
+    "bytes": 2752428,
+    "sha256": "2a98173ee9e72259035565a7ae0518ca468b8046409806a853e780b9e58253fd"
+  },
+  {
+    "file": "行政诉讼跨区划管辖与企业社保遵从.pdf",
+    "bytes": 9637858,
+    "sha256": "662a8e5af9530ef9a3efa9e455b3135b2211447d13a99b3d39d438dd47d95026"
+  },
+  {
+    "file": "extracted/潘越+论文附件/《中国工业经济》编辑部关于公开数据附件的使用说明.pdf",
+    "bytes": 271110,
+    "sha256": "4a7bb5aacd5e1e023cede4bc2cec026e99b6c4e0a968bb8de5d4fb9cef2270e2"
+  },
+  {
+    "file": "extracted/潘越+论文附件/数据1.dta",
+    "bytes": 5571283,
+    "sha256": "f294393323cdaf376e424c81f33ce8ffa5f39d3af3af5a82882230d6d9a40e25"
+  },
+  {
+    "file": "extracted/潘越+论文附件/数据2.dta",
+    "bytes": 1685558,
+    "sha256": "7357b3bca8d03bbf744dc2a0702fa8070855e3c77c34d963a79a1dc89f4fd8eb"
+  },
+  {
+    "file": "extracted/潘越+论文附件/数据3.dta",
+    "bytes": 25460,
+    "sha256": "60dd7294614ad1a5d60661fa212b0ed493175eecc68e5d1f4be3dbe084bb99e7"
+  },
+  {
+    "file": "extracted/潘越+论文附件/程序.do",
+    "bytes": 14206,
+    "sha256": "c9406fd4b419edf1778221838e2a63f0b4007a3ee13024add87f9f37eee8bd1a"
+  },
+  {
+    "file": "extracted/潘越+论文附件/附录.pdf",
+    "bytes": 1089460,
+    "sha256": "3ef02d6b21e21c5cc25c4a8eddc1438942c3e687148837bb60857506773d3eac"
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "file": "20241231103744WU_FILE_0.zip",
+    "bytes": 7156849,
+    "sha256": "52cbbdff6a9500e3365718c6f8722550458a4e3079f4eddac31a77c989801356"
+  },
+  {
+    "file": "国家级大数据综合试验区设立与就业增长.pdf",
+    "bytes": 10715169,
+    "sha256": "e6ac4bc61406ff546e4835333bea7c476e22ec1dfea86d6f532f5f89dce900ae"
+  },
+  {
+    "file": "_extracted\\沈坤荣+附件上传\\《中国工业经济》编辑部关于公开数据附件的使用说明.pdf",
+    "bytes": 271110,
+    "sha256": "4a7bb5aacd5e1e023cede4bc2cec026e99b6c4e0a968bb8de5d4fb9cef2270e2"
+  },
+  {
+    "file": "_extracted\\沈坤荣+附件上传\\数据_Ctiydata.dta",
+    "bytes": 351074,
+    "sha256": "8e08c017946810a798b31660f909b10a62d918e35b87790ec3efc96bc20e8e28"
+  },
+  {
+    "file": "_extracted\\沈坤荣+附件上传\\数据_Firmdata.dta",
+    "bytes": 13982079,
+    "sha256": "9c41328fbcfd5a5a1be489830ae0f1c162bb13620ee7845c58543202a21541c6"
+  },
+  {
+    "file": "_extracted\\沈坤荣+附件上传\\数据_MLdata.dta",
+    "bytes": 17560,
+    "sha256": "6ce4512e59520b886ba38b75180e157454e35b35929dcc90b3589a5f97ea106d"
+  },
+  {
+    "file": "_extracted\\沈坤荣+附件上传\\数据_MLfiguredata.csv",
+    "bytes": 11022,
+    "sha256": "a660f6edc49e852fdf84fbc275e4473843baaa40e6ef6a97c8343dfb4d922592"
+  },
+  {
+    "file": "_extracted\\沈坤荣+附件上传\\机器学习画图_Code.txt",
+    "bytes": 1417,
+    "sha256": "57fc9ee9f0cec7cb573bf5e78d29b5ecea0b26eead2526568d8bc86cd685b834"
+  },
+  {
+    "file": "_extracted\\沈坤荣+附件上传\\程序_Code.do",
+    "bytes": 16017,
+    "sha256": "4fc7e424fc759a6827bbc0c90fa9fe078fafcead4e7009a81618db0b04bc1bd2"
+  },
+  {
+    "file": "_extracted\\沈坤荣+附件上传\\附录.pdf",
+    "bytes": 1605208,
+    "sha256": "25ba4f0be4d12a5a4863c9c561dc54252288b59e0ed2a1d90ef250cd7fe595f2"
+  }
+]

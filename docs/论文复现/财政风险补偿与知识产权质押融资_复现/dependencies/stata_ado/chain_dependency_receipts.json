@@ -1,0 +1,997 @@
+[
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/e/event_plot.ado",
+    "file": "event_plot.ado",
+    "sha256": "1c6d77b8c505ddba55db8c786ca123937a40f5b1d6591eb9d0ec722e3c9b7248"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/x/xtbalance.ado",
+    "file": "xtbalance.ado",
+    "sha256": "10b6461cce3f47b8d9a9f5c6709653fb8a34b66f066493af2a7fda29f75dcda6"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/e/event_plot.sthlp",
+    "file": "event_plot.sthlp",
+    "sha256": "37c47b4d697d5ab0bf90a800364af10b0dd18404dedae39dbc5f7548453c409a"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/a/acreg.ado",
+    "file": "acreg.ado",
+    "sha256": "588978790e7317472664edaa905fd3cff04188f9c2b6ab696f046da6a551cf0d"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/r/ranktest.ado",
+    "file": "ranktest.ado",
+    "sha256": "197ad146f8937e562c2e04b55a2f78d43f293ea90c5886a6d08069c8c77e6657"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/ivreg2.ado",
+    "file": "ivreg2.ado",
+    "sha256": "0e93b020dcd4d9b2806db9e4bb432fa0381756ec2c64dc50275957ad58ef3fb4"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/x/xtbalance.hlp",
+    "file": "xtbalance.hlp",
+    "sha256": "ceb51684ccc2f3cacd7cb2eb042eacd298669bea8c6cac407c68637165e177ad"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/a/acreg.sthlp",
+    "file": "acreg.sthlp",
+    "sha256": "15d2a0b87630d49045163b75c4e9997e8a77039e41076853dd31e52e248de7d1"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/bacon.sthlp",
+    "file": "bacon.sthlp",
+    "sha256": "85cabb16b503797500583fa9cfa7eff783e10db13578c1d8422acc4a4348eaa1"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/r/ranktest9.ado",
+    "file": "ranktest9.ado",
+    "sha256": "d88a927179a8dc8748c96987594271b000d33f5a52b0d869e90178297d0fc6d0"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/a/acregpackcheck.ado",
+    "file": "acregpackcheck.ado",
+    "sha256": "b5268b9ee083d5f6d14cbe77f0b1ee0e5817f88ad3f132aaf277f7cbd5c22fd8"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/ivreg2.sthlp",
+    "file": "ivreg2.sthlp",
+    "sha256": "c387f5d743111ed76578d19b6f130adb71cdca9cfe1d5f4432ceeed1b6c06848"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/baconde.ado",
+    "file": "baconde.ado",
+    "sha256": "ffe1c4e1d7f432894d7376dbedb7765dec2f83f889f87e51da63e6d977c1e746"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/r/ranktest11.ado",
+    "file": "ranktest11.ado",
+    "sha256": "fa75c3dcb817da094e7415aea2039a542f71ddb33012232a7d29c587385b6720"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csdid.ado",
+    "file": "csdid.ado",
+    "sha256": "64eba0160836f606da87ae8a3cdf92a711c3c1be1a5b6aa95d130ce3a2eb06d1"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/ivreg2_p.ado",
+    "file": "ivreg2_p.ado",
+    "sha256": "73cb136d0dc5c908fd0e2f4d3ece112f71277c417fda6df89b90a25f3a3bbb11"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/bac.sthlp",
+    "file": "bac.sthlp",
+    "sha256": "85cabb16b503797500583fa9cfa7eff783e10db13578c1d8422acc4a4348eaa1"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/a/../n/nwexample.dta",
+    "file": "nwexample.dta",
+    "sha256": "7e0cca07b4fbe0273a53e09bc8c1e9b6cd1fba86bbef61aec507a7e596cbd991"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/bacondecomp.sthlp",
+    "file": "bacondecomp.sthlp",
+    "sha256": "bbb791287002c6a75b8f9c0a378f424dbc1315fdaf68ee61b7dfdbc891f412c9"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/r/ranktest.sthlp",
+    "file": "ranktest.sthlp",
+    "sha256": "c5fb691392076c61b4dbcc01bedc820757ab7895e814dbdac422ef7eda1238f7"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/ba.sthlp",
+    "file": "ba.sthlp",
+    "sha256": "85cabb16b503797500583fa9cfa7eff783e10db13578c1d8422acc4a4348eaa1"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/../l/livreg2.mlib",
+    "file": "livreg2.mlib",
+    "sha256": "a2e917496f21c00c428b43ff77f6036f9e5b9889c867bcff33fbf2a494d84161"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csdid.mata",
+    "file": "csdid.mata",
+    "sha256": "b5005788eff6279e50469e1e220d0a53942f2dc8b5bab5456d454a19f047ccb2"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/r/ranktest11.sthlp",
+    "file": "ranktest11.sthlp",
+    "sha256": "fa1a5b36ee7596a70839050774aa0a4645428ae0ef749733900607b0227c8894"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/drdid.ado",
+    "file": "drdid.ado",
+    "sha256": "242dd51923580cda80b28f1b00512b9f95666db989825c46a9fad21d87dcfc9f"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/b.sthlp",
+    "file": "b.sthlp",
+    "sha256": "85cabb16b503797500583fa9cfa7eff783e10db13578c1d8422acc4a4348eaa1"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/../c/cs_ivreg2_4.1.12.do",
+    "file": "cs_ivreg2_4.1.12.do",
+    "sha256": "8f8ec7eeeef22140df1a06d6523d93e29348bab6b42a949ffd08113bf99d4d55"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/baconde.sthlp",
+    "file": "baconde.sthlp",
+    "sha256": "85cabb16b503797500583fa9cfa7eff783e10db13578c1d8422acc4a4348eaa1"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csdid.sthlp",
+    "file": "csdid.sthlp",
+    "sha256": "df342505407eccb917ec6ab603d304b316062b56ad6a6e4694c04ab4f98e5579"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/bacondec.ado",
+    "file": "bacondec.ado",
+    "sha256": "651f33422a09634199d9eaf70da8508ae3fb42ae4427206d19ba98b292c09656"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csgvar.ado",
+    "file": "csgvar.ado",
+    "sha256": "65b636636a5aefc2007476527710515eeaaf23f8bcc2816176d4de0d1b754a63"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/bacond.sthlp",
+    "file": "bacond.sthlp",
+    "sha256": "85cabb16b503797500583fa9cfa7eff783e10db13578c1d8422acc4a4348eaa1"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/r/../l/livreg2.mlib",
+    "file": "livreg2.mlib",
+    "sha256": "a2e917496f21c00c428b43ff77f6036f9e5b9889c867bcff33fbf2a494d84161"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/bacondecom.ado",
+    "file": "bacondecom.ado",
+    "sha256": "91f490bffc5a77c4d6e6c8098f6aba24ead7369bade0f59b0e937e5c34d66e04"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csgvar.sthlp",
+    "file": "csgvar.sthlp",
+    "sha256": "b360e0c592a3c7ca5f464953eaa21336f2fa6181b81a32a24c407e547d2dc7d2"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/r/../c/cs_ranktest_2.0.03.do",
+    "file": "cs_ranktest_2.0.03.do",
+    "sha256": "7267ffb6a50fe69d663d0079ddbf82a464d67a933f1f886fb674183b618a7533"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/ivreg210.ado",
+    "file": "ivreg210.ado",
+    "sha256": "2ac0d12c88783c437e0d9d4ace219dc66f86dd5534ebd1e1a0242754ea40028d"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/../d/dipt.ado",
+    "file": "dipt.ado",
+    "sha256": "e56dbddee13416630e0392de10f6d6396a60cbc89afe1315a4496936be6ed44c"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/bacondecomp.ado",
+    "file": "bacondecomp.ado",
+    "sha256": "94fedc6ed4eeb52db4b708d8d7c973d1d0e1ddac3434ed2d4ce1c680254ab332"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/ivreg210.sthlp",
+    "file": "ivreg210.sthlp",
+    "sha256": "55c85076a8948a5a1428508f159a17504f806b133e629972d28420031b8138ae"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/../d/dipt.sthlp",
+    "file": "dipt.sthlp",
+    "sha256": "df2990b8ac579a8f066b7e53ab15e170a457b5a48aadfae7f62fccae6ad738a5"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/e/eventstudyinteract.ado",
+    "file": "eventstudyinteract.ado",
+    "sha256": "dcf01a334702e76254527beff4dac522fef8664327fe505121fca8651e7c04e9"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/bacondecom.sthlp",
+    "file": "bacondecom.sthlp",
+    "sha256": "85cabb16b503797500583fa9cfa7eff783e10db13578c1d8422acc4a4348eaa1"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/ivreg210_p.ado",
+    "file": "ivreg210_p.ado",
+    "sha256": "7587a3d7f1d6a78fcd9ea6cb64293be2a345717385974e7c8a3de1f123feab7a"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/e/eventstudyinteract.sthlp",
+    "file": "eventstudyinteract.sthlp",
+    "sha256": "e18ce548acc0bb20292b6a2b4810c368ca63fcaee12808ca1682e9f68a2e968e"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/bacon_example.dta",
+    "file": "bacon_example.dta",
+    "sha256": "34cef2b980f336b64ff4860435b4ff474002a3e168724a3efbc4c2b4779391b4"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/../m/mpdta.dta",
+    "file": "mpdta.dta",
+    "sha256": "114e742ed979adb595e5642eda0262f00bd27f3570caa1ceecffa92d898326ae"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/../c/cs_ivreg210_3.1.10.do",
+    "file": "cs_ivreg210_3.1.10.do",
+    "sha256": "702d9dcd57018d5fa82e0860e1344089dc33289158d46428304af86974da7158"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/ba.ado",
+    "file": "ba.ado",
+    "sha256": "a00f286b82093c9aee2ceab4e39b8cb2d627b7269e82a5bf8f25b97bfad0102b"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/../t/tsvmat.ado",
+    "file": "tsvmat.ado",
+    "sha256": "4a60120a02368d16b4d455661159abd31dca57af511a35ec4e8f3681414cd404"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/a/avar.ado",
+    "file": "avar.ado",
+    "sha256": "4ae4a50e90ca94916d54fa130946dab74a9840f2a0a126ffd786e542c1ccc626"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/baco.ado",
+    "file": "baco.ado",
+    "sha256": "f451957a835173a1c143f48a86490397147b2258a19b4f1ebf4d37c3453eb7da"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/../t/tsvmat.sthlp",
+    "file": "tsvmat.sthlp",
+    "sha256": "df2990b8ac579a8f066b7e53ab15e170a457b5a48aadfae7f62fccae6ad738a5"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/bacon.ado",
+    "file": "bacon.ado",
+    "sha256": "84857571a05b6146424512e953fee6d6c0a35e9de5165f52a7b5bc06f65fef68"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/a/avar9.ado",
+    "file": "avar9.ado",
+    "sha256": "59bc135cc557989c78f77388a49cb77ccde9c40b15e315b2f933f356fc99c403"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/ivreg29.ado",
+    "file": "ivreg29.ado",
+    "sha256": "899781e7a6e7f861ee54e42d1553ee2e5e2281e3b18358687e17729f20ed43f2"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csdid_estat.ado",
+    "file": "csdid_estat.ado",
+    "sha256": "c0fbecba36b609d61efd42284e421fe162b964988cb4de8d22504f5132dbcd1a"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/baco.sthlp",
+    "file": "baco.sthlp",
+    "sha256": "85cabb16b503797500583fa9cfa7eff783e10db13578c1d8422acc4a4348eaa1"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/a/avar.sthlp",
+    "file": "avar.sthlp",
+    "sha256": "56b7b61ed1bb2f3cf3a49c7b7807b524db7dc4f92da7c538c3c9ddd66ede54a5"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/bac.ado",
+    "file": "bac.ado",
+    "sha256": "adeeb9059a9f76ce8024e3bd37cc7631ed61ea214ca7dee68284367fc591e2d7"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/ivreg29.hlp",
+    "file": "ivreg29.hlp",
+    "sha256": "fb07204018104318b03cb5cca33eb6e2a55b253c0b79b2e5f8ffc3feaaca41ce"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csdid_estat.sthlp",
+    "file": "csdid_estat.sthlp",
+    "sha256": "9f840d898a2554824701e4aa7af7ff52be5d34777fc4c2966bde32d1170bac89"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/ivreg29_p.ado",
+    "file": "ivreg29_p.ado",
+    "sha256": "29f0bc6c62435592902c2f55e0fa011f16eec1a9b7cc70c41eb81e68ed0d4466"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csdid_legacy.sthlp",
+    "file": "csdid_legacy.sthlp",
+    "sha256": "7823ff05a3cee5679c94c1ed43a44ac34369d242ea247d2ffe35d83c5fb33065"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/ivreg29_cue.ado",
+    "file": "ivreg29_cue.ado",
+    "sha256": "5f5e07171741edccf55ac9923f8d28461cbe63dee7890e3822b35aa1abfd6c7e"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csdid_p.ado",
+    "file": "csdid_p.ado",
+    "sha256": "ecaea7a8333993ab47a60d43558c292d9a8f529c404de0e2db46bc33a2d1b1bd"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/a/../l/livreg2.mlib",
+    "file": "livreg2.mlib",
+    "sha256": "a2e917496f21c00c428b43ff77f6036f9e5b9889c867bcff33fbf2a494d84161"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/b.ado",
+    "file": "b.ado",
+    "sha256": "db0ec3a03574fab013f0dd708b5d8e702009c6f1d03a088bd24e1435fa984458"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/../c/cs_ivreg29.do",
+    "file": "cs_ivreg29.do",
+    "sha256": "06f4b61bf94352843c258a579999a5043413d468ab2668882a1fd85cc5f24a97"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/bacondeco.sthlp",
+    "file": "bacondeco.sthlp",
+    "sha256": "85cabb16b503797500583fa9cfa7eff783e10db13578c1d8422acc4a4348eaa1"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/a/../c/cs_avar_1.0.06.do",
+    "file": "cs_avar_1.0.06.do",
+    "sha256": "8da0f5b748806ffa5afa9a666bf215a1ed2365d379b67321229a8ff9aa8d70c7"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csdid_plot.ado",
+    "file": "csdid_plot.ado",
+    "sha256": "ea138656e595fbaa13caafc08bf4f5255e72682ee59d175c71958596a2508a45"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/bacondec.sthlp",
+    "file": "bacondec.sthlp",
+    "sha256": "85cabb16b503797500583fa9cfa7eff783e10db13578c1d8422acc4a4348eaa1"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csdid_plot.sthlp",
+    "file": "csdid_plot.sthlp",
+    "sha256": "42a6e972d4239943cd3f3f08c735c2e38a8f87c5ea0a5bf4632ea2439ac7e0c6"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/did_multiplegt.ado",
+    "file": "did_multiplegt.ado",
+    "sha256": "cbd5feae231fdb736c13cec27f9f47493fb2e3c4b8d7ea035f6c58f6aedacf10"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/b/bacondeco.ado",
+    "file": "bacondeco.ado",
+    "sha256": "43f6a8f1af13785a0d571912ce56c854a7d0506183f7ac9c70c732d282bf0318"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/ivreg28.ado",
+    "file": "ivreg28.ado",
+    "sha256": "2782596cf8e4c95eb5b3cb0e147db92c0269aa2d1ea4188c23703d0917b3970a"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/did_multiplegt.sthlp",
+    "file": "did_multiplegt.sthlp",
+    "sha256": "d8707323283d28b59b28e28d1ae3339470dbee8df7e9af1328c60a58c182c0ea"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csdid_postestimation.sthlp",
+    "file": "csdid_postestimation.sthlp",
+    "sha256": "e782aec1b4127e4505692ed7407b89a24ba771d62a91ed514ab6a2b310ad343c"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/ivreg28.hlp",
+    "file": "ivreg28.hlp",
+    "sha256": "db8b4f19fe165a4be5d6c34a4dd667002989011ffe542a461b6fad87ec8c9713"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/ivreg28_p.ado",
+    "file": "ivreg28_p.ado",
+    "sha256": "b0f61fe020773e7b1bf9a9e5394b7026f3e034486f1a50ae27145a1f2032d3e1"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/did_multiplegt_old.ado",
+    "file": "did_multiplegt_old.ado",
+    "sha256": "08a47483891311d23b988886424a73fa1b80a47fcdade055eb40ac9857af2e11"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/ivreg28_cue.ado",
+    "file": "ivreg28_cue.ado",
+    "sha256": "bedb269ca371866e96dea7852baef2156a70f8262c5dbc6d1216a8c23a47dd3b"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csdid_rif.ado",
+    "file": "csdid_rif.ado",
+    "sha256": "02f076fd96ebcbacc8a8de285ea75992797d3d1d854082aebbd4e691e0cb8f74"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/../c/cs_ivreg28.do",
+    "file": "cs_ivreg28.do",
+    "sha256": "b73c85451839409a22c57b892b7c80a4229dd68e04b4fd9fa674c8ca53e5f563"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/did_multiplegt_dyn.ado",
+    "file": "did_multiplegt_dyn.ado",
+    "sha256": "165fced85197aba64b6732ff1ca9d081704309aa217c3ce9ab5ba4657ef76ce8"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/did_multiplegt_old.sthlp",
+    "file": "did_multiplegt_old.sthlp",
+    "sha256": "09ada6cc554120bff2e568cdc06604700c42a3146a92fb8ec1277c4c81a2d622"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csdid_rif.sthlp",
+    "file": "csdid_rif.sthlp",
+    "sha256": "df2990b8ac579a8f066b7e53ab15e170a457b5a48aadfae7f62fccae6ad738a5"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/i/../l/livreg2.do",
+    "file": "livreg2.do",
+    "sha256": "63950af1653ea87a7c16bb205d90ff22713873edf0c782216228169fd679fea7"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/did_multiplegt_dyn.sthlp",
+    "file": "did_multiplegt_dyn.sthlp",
+    "sha256": "4aee9dd630b931119b77e96f28d36eb5bf00625292beb2e3ad98e52994b315f4"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/did_multiplegt_stat.ado",
+    "file": "did_multiplegt_stat.ado",
+    "sha256": "b75dd3bfa0413a0a5c8c489c6d44d767ba0af6b00cc64e69e3d06565c16c9628"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/did_multiplegt_stat.sthlp",
+    "file": "did_multiplegt_stat.sthlp",
+    "sha256": "0579e5a9b4f1448fb7ffa8973e9ae131009d6e1fee5b2b951fad4d8dc3d8c6d0"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csdid_stats.ado",
+    "file": "csdid_stats.ado",
+    "sha256": "7b625b91a0dc91224fd06a046062a8510fb27f07870e321428fb34cccadba611"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/../f/favara_imbs_did_multiplegt_dyn.dta",
+    "file": "favara_imbs_did_multiplegt_dyn.dta",
+    "sha256": "163d4cb0219ccaac292f68b06c53a799e3c3d1b035eae5eab2d9fa6fb600b981"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csdid_stats.sthlp",
+    "file": "csdid_stats.sthlp",
+    "sha256": "be2ade7405b633a096bef69362ef9c293c0f51d33470f6ad02909003b7fcb673"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csdid_table.ado",
+    "file": "csdid_table.ado",
+    "sha256": "02e0790693380f6e004dd957a5a8ae9fb917bdea5fef70e3453a947bc5ac064e"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csdid_table.sthlp",
+    "file": "csdid_table.sthlp",
+    "sha256": "df2990b8ac579a8f066b7e53ab15e170a457b5a48aadfae7f62fccae6ad738a5"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/csdid_whatsnew.sthlp",
+    "file": "csdid_whatsnew.sthlp",
+    "sha256": "3b2ea2ea710e750e6ec26b18d51b4f4b5c9127aced1826da6fada30990015f16"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/../_/_csdid_engine_load.ado",
+    "file": "_csdid_engine_load.ado",
+    "sha256": "db162cc0365fee9375d1fe7a9a57e6567fc1ddb5fc00c01b1968edc746858689"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/../_/_csdid_post.ado",
+    "file": "_csdid_post.ado",
+    "sha256": "ed124fb9bd0ea1d0b2c002da5de543719402cb2ec1c1b4631073d6acde1833a0"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/../_/_gcsgvar.ado",
+    "file": "_gcsgvar.ado",
+    "sha256": "59cc0f31a9d41f7e9e6ac2a2a8d089e6d353aef34784b51edf9947f4a8dc72a4"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/c/../l/lcsdid_v2.mlib",
+    "file": "lcsdid_v2.mlib",
+    "sha256": "e773bf35edbfb5c3214af7c48c2863a9db7920caec21b3cb950eaa1519fb97d0"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/../g/gazoline_did_multiplegt_stat.dta",
+    "file": "gazoline_did_multiplegt_stat.dta",
+    "sha256": "2378d869c7b252e0cfd2fa084f1c3b582c18996d1a54f6f26860492a3c0e05a2"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/deryugina_2017.dta",
+    "file": "deryugina_2017.dta",
+    "sha256": "b796e5e4ae85f254eeab08c4ea11809fd46ad3e4480ed49273492619eceb73a0"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/../e/east_et_al_2023.dta",
+    "file": "east_et_al_2023.dta",
+    "sha256": "bce80de3165fea1ba5611d8f51eb5a870644df7552cd2b6cdd9fded46b4f4935"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/../g/gentzkowetal_didtextbook.dta",
+    "file": "gentzkowetal_didtextbook.dta",
+    "sha256": "bd9b430b96b8c0c295808c61b731b0a012a9ba2d8121f2d16a0a8e85ba31f222"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/../h/hollingsworth_et_al_2022.dta",
+    "file": "hollingsworth_et_al_2022.dta",
+    "sha256": "d48771d202c8172912b6b8c0a5d2afe8cfa4a4ed83d30ebd92c0dbe37a211299"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/drdid.ado",
+    "file": "drdid.ado",
+    "sha256": "242dd51923580cda80b28f1b00512b9f95666db989825c46a9fad21d87dcfc9f"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/h/hdfe.ado",
+    "file": "hdfe.ado",
+    "sha256": "e98026b5322d2e13219908e2532f122285c2e584f194d9db56c92a46d4df1a22"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/h/hdfe.sthlp",
+    "file": "hdfe.sthlp",
+    "sha256": "cc9f8faf323b7aed10f0addd7ecea46d1d32092c867e2acd1bf66a91ba101d90"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/drdid_display.ado",
+    "file": "drdid_display.ado",
+    "sha256": "aae13ade2b6382c9ce42f08db01c25a49e181a9fa9bfb66cac3efae6b798c785"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/drdid_predict.ado",
+    "file": "drdid_predict.ado",
+    "sha256": "071f5604dab87f389c576ca5cf3a2e27d2597cf2e9efd5d24815163c98470efc"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/../_/_gmm_regipw.ado",
+    "file": "_gmm_regipw.ado",
+    "sha256": "43dc9231f5628b21cce95071388e5e7d621f9879d72c28fbad2d26894d64e64e"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/../_/_het_did_gmm.ado",
+    "file": "_het_did_gmm.ado",
+    "sha256": "47cb3c3c7fb0cf7f48c8e3ba54e4d58e6646edd12d90c39776a996266902efac"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/../_/_gmm_dripw.ado",
+    "file": "_gmm_dripw.ado",
+    "sha256": "7f061d4663198d92342daad61445a8c288c8f43f4f64964fa1b2ca0e5c14b104"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/../_/_gmm_repeated.ado",
+    "file": "_gmm_repeated.ado",
+    "sha256": "f1296928d17dc3ad633991b940872c5bbf27e69cc7cc07fd54f280d1ad9f4d7b"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/d/drdid.sthlp",
+    "file": "drdid.sthlp",
+    "sha256": "8fd3579f24b066e9c951c4fb8ffb310a28db8b24964f98cbc1c0f808753e6c18"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/moremata.zip",
+    "file": "moremata.zip",
+    "sha256": "900fe673a3bb4b53bc5097f0ffb3d268a2f3ed4a3409e22060f6b0927a57ade4"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/../l/lmoremata.mlib",
+    "file": "lmoremata.mlib",
+    "sha256": "5bb06c33dd0f3c1b274e0612d61c254cce0e938e92f25128f52640b8ea244574"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/../l/lmoremata10.mlib",
+    "file": "lmoremata10.mlib",
+    "sha256": "b076e6bc12b47a689b0b0fd881f266050788b1922ae66234c008d0a17dc3f054"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/../l/lmoremata11.mlib",
+    "file": "lmoremata11.mlib",
+    "sha256": "3a06a0b0d6aa460127e977aa74d0224512b1c444e96e87fbaaa1d2918c731bef"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/../l/lmoremata14.mlib",
+    "file": "lmoremata14.mlib",
+    "sha256": "67687fddadc9f46dab048dc5084bef8225ef30cc094f0459a63b97ed7157278c"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_sample.hlp",
+    "file": "mf_mm_sample.hlp",
+    "sha256": "3a20139b4b22c4fe4be69c5cf5b8429a89cd7b4af75640659d2768139d775b1d"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/moremata.hlp",
+    "file": "moremata.hlp",
+    "sha256": "162798149abcacb7af1e057904bec47e2a7723c658d2c7c49928e57be5a24ae3"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/moremata_source.hlp",
+    "file": "moremata_source.hlp",
+    "sha256": "21d8c7de2374ebd1a68e2c74a186204a08ccccc9d85a773311cf070a1ba9bf19"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/moremata10_source.hlp",
+    "file": "moremata10_source.hlp",
+    "sha256": "6fd4e0e7f5a6610d170197d2f4bb1ea389d99b9dbf3576eadf686be075788bca"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/moremata11_source.hlp",
+    "file": "moremata11_source.hlp",
+    "sha256": "a8b681edbb968301632885b5bc7ceb0db896882aef2b2aa2bf3faad102df7dcc"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/moremata14_source.hlp",
+    "file": "moremata14_source.hlp",
+    "sha256": "70eeda006b89d984fdb3c05eeba9efc407c6e29e600389eb69d86d1435130518"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_unorder2.hlp",
+    "file": "mf_mm_unorder2.hlp",
+    "sha256": "f45ea3061f7ae7c3fc27f1205f6e11cbbc76108845906cad974c8362b08885b5"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_panels.hlp",
+    "file": "mf_mm_panels.hlp",
+    "sha256": "ff92d3a224ec4b8cef9771213b92c0412b1a51acb149b435e9e364bd03d0af02"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_quantile.hlp",
+    "file": "mf_mm_quantile.hlp",
+    "sha256": "15c11f9b21bc05377a445fa95b5bbbfd6cd6ba26713e416c8e1dbf756598115a"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_strexpand.hlp",
+    "file": "mf_mm_strexpand.hlp",
+    "sha256": "f1386860d3a47efe38587a9bac5dfea31199b4a3be9bfe45b3daabcf2f13cd73"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_realofstr.hlp",
+    "file": "mf_mm_realofstr.hlp",
+    "sha256": "193dfd3d3e04b669d3846223e69d594c4f5c58692f4d93652eef93511a86f3f5"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_posof.hlp",
+    "file": "mf_mm_posof.hlp",
+    "sha256": "4ffa1decbf4b74969d67000d091af1905b13ce0230b131286193cc4eed6a93d5"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_ipolate.hlp",
+    "file": "mf_mm_ipolate.hlp",
+    "sha256": "3eaa13ac7a0324ad765c8f479634b14effed2bc91742f7d7b8c56b19531ea4c8"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_invtokens.hlp",
+    "file": "mf_mm_invtokens.hlp",
+    "sha256": "5746b897151010979b73d5a28f58fa6e6bdb6ec3d37c498ca5283818ab91d010"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_linbin.hlp",
+    "file": "mf_mm_linbin.hlp",
+    "sha256": "47c280a958204b04c08719645490d5da5b2e1c82a626a9131ce76c3529124a54"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_histogram.hlp",
+    "file": "mf_mm_histogram.hlp",
+    "sha256": "0807c335a12c825fd9aa331abd3b6d94dc698f6f07c68bea212febb18289f020"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_ecdf.hlp",
+    "file": "mf_mm_ecdf.hlp",
+    "sha256": "2db6d07bae818345e6e0b6a29efb98239bce5d7f95de39c9bacd446e97165bef"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_colrunsum.hlp",
+    "file": "mf_mm_colrunsum.hlp",
+    "sha256": "c2ac42c41e04690720326f1f196c0d72108df44cc5b50de7262fc52dd1e7fa72"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_rbinomial.hlp",
+    "file": "mf_mm_rbinomial.hlp",
+    "sha256": "5548b90ed09e71131f78893d6a84aa48e17484ada8ec9f62aa1787a6f41571ab"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_insheet.hlp",
+    "file": "mf_mm_insheet.hlp",
+    "sha256": "c6651886c44c5239dfd34dc436f160798d8f19ca628da380402ace5246a0f421"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_cut.hlp",
+    "file": "mf_mm_cut.hlp",
+    "sha256": "77b575c34273ee27e0d8ecee8241a42bc0f30e808d506111fb09a4048ade338d"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_freq.hlp",
+    "file": "mf_mm_freq.hlp",
+    "sha256": "d2aa595415000e0bdd596e18f63b8b6e12cb0443353eb20f242a386983a75aee"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_colvar.hlp",
+    "file": "mf_mm_colvar.hlp",
+    "sha256": "69e241fc7c7ae54a4a92c15bfe246ca78f01b1e39443f7b476cbff17e77c530a"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_gini.hlp",
+    "file": "mf_mm_gini.hlp",
+    "sha256": "8ae11127959eb41f105d2a80edba93553489796cc012c19f7b4c2d97aa651907"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_nunique.hlp",
+    "file": "mf_mm_nunique.hlp",
+    "sha256": "4fae0f6479298265ca2d52b5b3eac624ed66b0a61dafa8f8a19c3adc082d79ff"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_bs.hlp",
+    "file": "mf_mm_bs.hlp",
+    "sha256": "17ccd821540367e19745abee99b0f67fb1142e1e42a412e59e809ef43d6f25c9"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_callf.hlp",
+    "file": "mf_mm_callf.hlp",
+    "sha256": "ca6c810c120103e1f07ca8ee7206be9979fc9f3eeef418b2c6d31edf2041c980"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_expand.hlp",
+    "file": "mf_mm_expand.hlp",
+    "sha256": "bbcb516ce582e8bcde9a2706b87874bd3b0a361dc0cf899a019e7c0259d1a686"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_finvert.hlp",
+    "file": "mf_mm_finvert.hlp",
+    "sha256": "faf64cdd46a23eb72a441c9d82778769c02d88b3d885d6756d1d3916092f7cea"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_greedy.hlp",
+    "file": "mf_mm_greedy.hlp",
+    "sha256": "1cc7120ef0d760aed8672a94ec8c99d6db0085c60848826ceae99b9e22c7bb40"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_jk.hlp",
+    "file": "mf_mm_jk.hlp",
+    "sha256": "4d7c832f8e5588f1b35af01f99b5bd2aacdbfe88e99c9f130f9c90846397067f"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_kern.hlp",
+    "file": "mf_mm_kern.hlp",
+    "sha256": "754b3e3f143e144fcc33ab50b17a4f6b4a6be0a38466ba2750cb5d0824492131"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_locate.hlp",
+    "file": "mf_mm_locate.hlp",
+    "sha256": "4a05bcfa61e2a9e3eeb5c710f1e3b44653fa8cf1c7e718e2c8581a3e544bdc44"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_nobs.hlp",
+    "file": "mf_mm_nobs.hlp",
+    "sha256": "e2018f7aba41501800b9368194cdf6fac95bc7c10b99237c3205336d85867555"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_nrroot.hlp",
+    "file": "mf_mm_nrroot.hlp",
+    "sha256": "ff9212767d7187622808b6810343a490e35c16501cec65eb567cdb2bce839e96"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_polint.hlp",
+    "file": "mf_mm_polint.hlp",
+    "sha256": "b273c194edcea2a60827f8c804d1af5b206b2e9f6b5ba8d488a8577919be21d4"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_root.hlp",
+    "file": "mf_mm_root.hlp",
+    "sha256": "a7927ed29236649c1edf03478d9273bc3b53b4fcec63a8c4fbef60a9b2d07597"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_which.hlp",
+    "file": "mf_mm_which.hlp",
+    "sha256": "947a7d0b9e9153dc4f432626fac0305663366529af9ef6ed5a8128093038eab9"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_plot.hlp",
+    "file": "mf_mm_plot.hlp",
+    "sha256": "cc9e2488731f6bb88e6af34e9720c28748304563ca0287fb7c58e3e7cef2d009"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_pieces.hlp",
+    "file": "mf_mm_pieces.hlp",
+    "sha256": "46e8134208cb0051eb7027a0411c93ba8917731fb8eff2c621144879ad5676d2"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_benford.hlp",
+    "file": "mf_mm_benford.hlp",
+    "sha256": "0bb1dec018f70e6747cdd1260ce4b3e213369d9ca28b416e018d16ed48236de7"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_isconstant.hlp",
+    "file": "mf_mm_isconstant.hlp",
+    "sha256": "2060e678d66849b1485055e7d011286af26dc633f67a7ab901c705995362cb72"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_mgof.hlp",
+    "file": "mf_mm_mgof.hlp",
+    "sha256": "8b20914197ac0805a16875112dff003dc0956c52bde382670250f594b9f25e46"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_subset.hlp",
+    "file": "mf_mm_subset.hlp",
+    "sha256": "910cdd64fd3cf29efce0d98ece15a0fcc859ad6ea9216104eea1f7d6acacabbc"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_cauchy.hlp",
+    "file": "mf_mm_cauchy.hlp",
+    "sha256": "295466598b1050321ecef3679dcd1c56f1b613be04b95a40be3af961348bdac2"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_matlist.hlp",
+    "file": "mf_mm_matlist.hlp",
+    "sha256": "549e88ad5cec8f1ca52c42c2383c24efbce1bffcfc51a41fd425e4091567acb5"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_cond.hlp",
+    "file": "mf_mm_cond.hlp",
+    "sha256": "890857525c5abffbdb765014f55ea7e936b1a32d68857372ffca626394a45a6e"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_collapse.hlp",
+    "file": "mf_mm_collapse.hlp",
+    "sha256": "2c3a67b4a94da080c3a6e1f1d850e01f7b78f7582d81bad49f3711a891eb2995"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_integrate.hlp",
+    "file": "mf_mm_integrate.hlp",
+    "sha256": "0b4e35b16c0009f7049bf1d4cd99b09907b1db53fc8e2abacb950954bac527d8"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_regexr.hlp",
+    "file": "mf_mm_regexr.hlp",
+    "sha256": "f8b7ff04f6f167d0e0695eeb8c5547223c2cc7d0a585647473c5ca9e04fe4f0b"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_sqrt.hlp",
+    "file": "mf_mm_sqrt.hlp",
+    "sha256": "26338dc6fbf24db270669216895f48595a53a34a891aa3d2789cc45936af91d9"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_ebal.sthlp",
+    "file": "mf_mm_ebal.sthlp",
+    "sha256": "030c5ce5882e84af80aefd8580f19dadae884a460776acff37dd89837baba323"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_clip.hlp",
+    "file": "mf_mm_clip.hlp",
+    "sha256": "e5ce28765a617865e2bffd7148a4087ef1d431e702f4b066eabd48b91f6bd206"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_ddens.hlp",
+    "file": "mf_mm_ddens.hlp",
+    "sha256": "3f89e7b6498f04ae04e0a174530cb3c9b7cef3303d28c6d6877a33899d05e8d4"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_density.sthlp",
+    "file": "mf_mm_density.sthlp",
+    "sha256": "f567425af1e2720f011dc26689122ba387b664ef573239d9161111618259c6f0"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_diff.hlp",
+    "file": "mf_mm_diff.hlp",
+    "sha256": "22db159eea9e13d766ecbcd8933372f4ba8524094fc9119aebcf8ba624b09efc"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_group.hlp",
+    "file": "mf_mm_group.hlp",
+    "sha256": "a97bbdb341ee2289b6f189423fe0de0824192f8c1071e429ee90d6d132659267"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_minim.hlp",
+    "file": "mf_mm_minim.hlp",
+    "sha256": "e35737835da03dd77d8e05e9642f097cd927b544280139089cdac92648da2e27"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_prod.hlp",
+    "file": "mf_mm_prod.hlp",
+    "sha256": "d4a373dff811910a9b67c4c7fad5b969e05ccde4787e75aa6516230903937ce0"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_ranks.hlp",
+    "file": "mf_mm_ranks.hlp",
+    "sha256": "58b8844a9a2321e171d6e9d17e4736a81da2cfecb1d988cd235653ba24a2bef5"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_relrank.hlp",
+    "file": "mf_mm_relrank.hlp",
+    "sha256": "3828e9e23a13d317f9f339340b0edf0eb0501bc7cf25e4c26c41b46eb13a4210"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_seq.hlp",
+    "file": "mf_mm_seq.hlp",
+    "sha256": "9c53ebbba335a179b3544992c01efc619947aadaafba66a8aa778ae1fd2dd6b5"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_sort.hlp",
+    "file": "mf_mm_sort.hlp",
+    "sha256": "113b6679106d42e56755b08bc89bfadb75d97e4713a5422c1eff45bad889c3ac"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_hl.hlp",
+    "file": "mf_mm_hl.hlp",
+    "sha256": "e53ac013606694b1c950b62b5b8988803511a61b97b9f94209db2a45264c8277"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_mloc.hlp",
+    "file": "mf_mm_mloc.hlp",
+    "sha256": "eca8326688e310f1df84e0f9172d6a1c8f776a55aa4cdd394ec3ea64b363616d"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_ls.hlp",
+    "file": "mf_mm_ls.hlp",
+    "sha256": "308ed0577731de37faad56ca6d6a206eda5c845c1f6855894486413e9bcf9a9b"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_qr.sthlp",
+    "file": "mf_mm_qr.sthlp",
+    "sha256": "3cbe26d94531b9c019680264defa836f28ded0ff781e6231cf56475cdde31b3f"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_areg.hlp",
+    "file": "mf_mm_areg.hlp",
+    "sha256": "f7af50ab4af57d5ec3099697c0646d4efc4c18cdd2d052d877c03030d9fa8ee6"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_aqreg.hlp",
+    "file": "mf_mm_aqreg.hlp",
+    "sha256": "aca5ecc8993abf6ad8b4a01375795a091ce89d3980b34cbe06926a2db842fca3"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_hdq.hlp",
+    "file": "mf_mm_hdq.hlp",
+    "sha256": "61e94ce33d5d46c5f237bc042c30523a1bdf1d39b134aeb549c9d0a5a0db4df4"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_version.hlp",
+    "file": "mf_mm_version.hlp",
+    "sha256": "956b6fd60cb76160e31fcd890a43607945d76bd97ac3aa9ee545aac8967cb872"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_ebalance.sthlp",
+    "file": "mf_mm_ebalance.sthlp",
+    "sha256": "8b3ae7c1cc075fa436f818022d331d105ce7e3e5470ca4db8a94fcc74e049a58"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_wbal.sthlp",
+    "file": "mf_mm_wbal.sthlp",
+    "sha256": "e0268c466749eb56195abc5e9332d5aac73b17d75f35c40caa374a54617c6d1d"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_crosswalk.sthlp",
+    "file": "mf_mm_crosswalk.sthlp",
+    "sha256": "727788fb392a62f59843350cece529b06f0e0734d0bb7c2cf7b4653e832d42ff"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_read_csv.hlp",
+    "file": "mf_mm_read_csv.hlp",
+    "sha256": "7f0ce7c11cb24ad83578eff37d750ad4dbff4ff99dd057b23c18c3bc13d555f3"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_linbin2.hlp",
+    "file": "mf_mm_linbin2.hlp",
+    "sha256": "efe6d4f93d9a568f7652429f534dda42a64d66e20c7f108ebb38f2bb3b789051"
+  },
+  {
+    "url": "http://fmwww.bc.edu/repec/bocode/m/mf_mm_loclin.hlp",
+    "file": "mf_mm_loclin.hlp",
+    "sha256": "fa877ae50159503e16b5e88ffe39e75c0cb19c1d68c2c3f116d0d737fe8742fb"
+  }
+]

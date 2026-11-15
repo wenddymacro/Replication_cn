@@ -1,0 +1,26 @@
+clear all
+set more off
+set obs 20
+adopath ++ "../output/local_ado"
+log using "../output/modern_plot.log", text replace
+estimates use "../output/T1_4.ster"
+matrix cs_legacy_b = (-0.0095211150368966, 0.0037641255504388, -0.0038284717928637, 0.0205515877180258, 0.0443802040426359, 0.0635231863017997, 0.0615702825447559, 0.0)
+matrix cs_legacy_v = (0.0006395311438362089, 0.00036803130427616405, 0.000193279339420036, 0.00017187448602828102, 0.000216690441127281, 0.000495506665080441, 0.001210607613801369, 0.0)
+matrix colnames cs_legacy_b = Tm4 Tm3 Tm2 Tp0 Tp1 Tp2 Tp3 Tm1
+matrix colnames cs_legacy_v = Tm4 Tm3 Tm2 Tp0 Tp1 Tp2 Tp3 Tm1
+matrix lp_b = (0.0104572707719787, -0.0038523066936784, -0.009876715058769, 0.0, 0.0114365833817727, 0.0256046728822528, 0.0417596869654585, 0.0039199900902033)
+matrix lp_v = (0.0006603368882744411, 0.000274530037826704, 0.0001189881727489, 0.0, 0.00015379764870432401, 0.00028900193800324896, 0.00043840285907718396, 0.000700589009324164)
+matrix colnames lp_b = pre4 pre3 pre2 pre1 post0 post1 post2 post3
+matrix colnames lp_v = pre4 pre3 pre2 pre1 post0 post1 post2 post3
+matrix sa_b = (-0.0087056761532965, -0.0047359967796441, -0.0129136650401906, 0.0191755925030002, 0.0207458696024039, 0.0384625057867566, 0.0154149478870968, 0.0)
+matrix sa_v = (0.000514606457433721, 0.00031494607075840004, 0.00014992212334436102, 0.000136050552293041, 0.000197340656744401, 0.000295861293983161, 0.0003778373990416, 0.0)
+matrix colnames sa_b = pre4 pre3 pre2 post0 post1 post2 post3 pre1
+matrix colnames sa_v = pre4 pre3 pre2 post0 post1 post2 post3 pre1
+matrix dd_b = (0.0278110854438804 \ 0.0402631057128122 \ 0.0540635329225766 \ 0.041408300582146 \ 0.0008724264012537 \ 0.0274802575595639 \ 0.0131540515871879)
+matrix dd_v = (0.000129822852623079 \ 0.0003015683792082631 \ 0.0004913372024963537 \ 0.0005422991002776459 \ 0.00011083766919634056 \ 0.00029696823677448695 \ 0.0006063653668192344)
+matrix rownames dd_b = Effect_0 Effect_1 Effect_2 Effect_3 Placebo_1 Placebo_2 Placebo_3
+matrix rownames dd_v = Effect_0 Effect_1 Effect_2 Effect_3 Placebo_1 Placebo_2 Placebo_3
+event_plot cs_legacy_b#cs_legacy_v lp_b#lp_v sa_b#sa_v dd_b#dd_v, stub_lag(Tp# post# post# Effect_#) stub_lead(Tm# pre# pre# Placebo_#) shift(0) plottype(scatter) together alpha(0.05) noautolegend ciplottype(rcap) graph_opt(xline(0, lcolor(black%45) lpattern(dash)) yline(0, lcolor(black%45)) graphregion(color(white)) bgcolor(white) xlabel(-4(1)3) ylabel(-0.1(0.1)0.2) ytitle("Estimate") xtitle("Event time") legend(order(1 "Callaway & Sant'Anna" 3 "Local projections" 5 "Sun & Abraham" 7 "de Chaisemartin & D'Haultfoeuille") cols(2) pos(6) ring(1) size(vsmall)) xsize(10) ysize(5.5)) lag_opt1(msymbol(Oh) color(black)) lag_ci_opt1(color(black)) lag_opt2(msymbol(Sh) color(black)) lag_ci_opt2(color(black)) lag_opt3(msymbol(d) color(black)) lag_ci_opt3(color(black)) lag_opt4(msymbol(t) color(black)) lag_ci_opt4(color(black))
+graph export "../output/modern_did_comparison.png", width(2000) replace
+display "COMPLETE_modern_plot"
+log close

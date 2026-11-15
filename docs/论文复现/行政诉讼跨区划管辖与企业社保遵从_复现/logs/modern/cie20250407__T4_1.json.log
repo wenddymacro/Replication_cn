@@ -1,0 +1,20 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+Warning in did_standardization(data, args) :
+  Dropped 93 units that were already treated in the first period.
+You have an unbalanced panel. Proceeding as such.
+Warning in did_standardization(data, args) :
+  Some groups in your dataset have very few observations, which may cause estimation problems.
+  Check groups: 14.
+The Wald pre-test is not reported when clustering beyond the unit level (clustervars = 'cl_num') because the analytical variance matrix does not account for between-cluster correlation. Use the bootstrap confidence intervals to assess pre-trends.
+   window    twfe twfe_se     csa  csa_se   bjs  bjs_se neg_abs G_eff_twfe
+   <char>   <num>   <num>   <num>   <num> <num>   <num>   <num>      <num>
+1: static 0.07017 0.03274 0.08863 0.08572  0.19 0.04268  0.1501      66.56
+   G_eff_bjs G_eff_csa
+       <num>     <num>
+1:        NA        NA
+TWFE in raw units 0.00705928 vs published 0.0071 (ratio 0.9943)
+-> output/specs_controls/cie20250407__T4_1.csv 

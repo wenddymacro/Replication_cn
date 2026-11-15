@@ -1,0 +1,163 @@
+{
+  "title": "行政诉讼跨区划管辖与企业社保遵从",
+  "main": 1,
+  "secondary": 8,
+  "body_models": [
+    {
+      "spec_id": "T2_1",
+      "command": "reghdfe sbf court , absorb(codeid year) cluster(cityid) keepsin",
+      "terms": [
+        "court"
+      ],
+      "teacher_status": "main"
+    },
+    {
+      "spec_id": "T2_2",
+      "command": "reghdfe sbf court size wage lev roe ocf age dual indboa nsoe, absorb(codeid year) cluster(cityid) keepsin",
+      "terms": [
+        "court"
+      ],
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "T2_3",
+      "command": "reghdfe sbf court size wage lev roe ocf age dual indboa nsoe gdp second_gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) cluster(cityid) keepsin",
+      "terms": [
+        "court"
+      ],
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "T3_1",
+      "command": "reghdfe percase1 court gdp second_gdp fiscal_balance finlaon foreign_inv, absorb(cityid year) cluster(cityid)",
+      "terms": [
+        "court"
+      ],
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "T3_3",
+      "command": "reghdfe percase2 court gdp second_gdp fiscal_balance finlaon foreign_inv, absorb(cityid year) cluster(cityid)",
+      "terms": [
+        "court"
+      ],
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "T3_5",
+      "command": "reghdfe penalty court gdp second_gdp fiscal_balance finlaon foreign_inv, absorb(cityid year) cluster(cityid)",
+      "terms": [
+        "court"
+      ],
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "T3_2",
+      "command": "logit win court word_length gdp second_gdp fiscal_balance finlaon foreign_inv i.cityid i.year i.typeyg i.typebg , cluster(cityid)",
+      "terms": [
+        "court"
+      ],
+      "teacher_status": "excluded_nonlinear"
+    },
+    {
+      "spec_id": "T3_4",
+      "command": "logit win court word_length gdp second_gdp fiscal_balance finlaon foreign_inv i.cityid i.year i.typeyg i.typebg if ifsbcase==1, cluster(cityid)",
+      "terms": [
+        "court"
+      ],
+      "teacher_status": "excluded_nonlinear"
+    },
+    {
+      "spec_id": "T4_1",
+      "command": "reghdfe sbf court dloan size wage lev roe ocf age dual indboa nsoe gdp second_gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) cluster(cityid) keepsin",
+      "terms": [
+        "court",
+        "dloan"
+      ],
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "T4_2",
+      "command": "reghdfe sbf court dbond size wage lev roe ocf age dual indboa nsoe gdp second_gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) cluster(cityid) keepsin",
+      "terms": [
+        "court",
+        "dbond"
+      ],
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "T4_3",
+      "command": "reghdfe sbf court dloanbond size wage lev roe ocf age dual indboa nsoe gdp second_gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) cluster(cityid) keepsin",
+      "terms": [
+        "court",
+        "dloanbond"
+      ],
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "T5_1",
+      "command": "reghdfe sbf court##c.ct_stress size wage lev roe ocf age dual indboa nsoe gdp second_gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) cluster(cityid) keepsin",
+      "terms": [
+        "1.court",
+        "1.court#c.ct_stress",
+        "ct_stress"
+      ],
+      "teacher_status": "excluded_treatment_interaction"
+    },
+    {
+      "spec_id": "T5_2",
+      "command": "reghdfe sbf court##c.ct_gdpstress size wage lev roe ocf age dual indboa nsoe gdp second_gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) cluster(cityid) keepsin",
+      "terms": [
+        "1.court",
+        "1.court#c.ct_gdpstress",
+        "ct_gdpstress"
+      ],
+      "teacher_status": "excluded_treatment_interaction"
+    },
+    {
+      "spec_id": "T6_1",
+      "command": "reghdfe sbf court##c.ct_liuyan size wage lev roe ocf age dual indboa nsoe gdp second_gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) cluster(cityid) keepsin",
+      "terms": [
+        "1.court",
+        "1.court#c.ct_liuyan",
+        "ct_liuyan",
+        "nsoe"
+      ],
+      "teacher_status": "excluded_treatment_interaction"
+    },
+    {
+      "spec_id": "T6_2",
+      "command": "reghdfe sbf court##c.labor_intensity size wage lev roe ocf age dual indboa nsoe gdp second_gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) cluster(cityid) keepsin",
+      "terms": [
+        "1.court",
+        "1.court#c.labor_intensity",
+        "labor_intensity",
+        "nsoe"
+      ],
+      "teacher_status": "excluded_treatment_interaction"
+    },
+    {
+      "spec_id": "T6_3",
+      "command": "reghdfe sbf court##c.unemployment size wage lev roe ocf age dual indboa nsoe gdp second_gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) cluster(cityid) keepsin",
+      "terms": [
+        "1.court",
+        "1.court#c.unemployment",
+        "unemployment",
+        "nsoe"
+      ],
+      "teacher_status": "excluded_treatment_interaction"
+    },
+    {
+      "spec_id": "T6_4",
+      "command": "reghdfe sbf court##c.nsoe size wage lev roe ocf age dual indboa nsoe gdp second_gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) cluster(cityid) keepsin",
+      "terms": [
+        "1.court",
+        "1.court#c.nsoe",
+        "nsoe"
+      ],
+      "teacher_status": "excluded_treatment_interaction"
+    }
+  ],
+  "appendix_separate": true,
+  "appendix_event_not_in_body_count": true
+}

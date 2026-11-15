@@ -1,0 +1,407 @@
+[
+  {
+    "file": "ftools.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ftools.ado",
+    "sha256": "c7eba3272b5fcd1dfa157e65c37840a051c6e2bf327d5ee31d42df65cf330b00"
+  },
+  {
+    "file": "ftools.sthlp",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ftools.sthlp",
+    "sha256": "988637569f8803e4f2ef2c8dc2f1e9050e7898f1828da64c2087eee43f98e001"
+  },
+  {
+    "file": "fcollapse.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/fcollapse.ado",
+    "sha256": "bec0014c804a413e40451d1a83e5faee7766dd442d812fe9549b2f8f878a2004"
+  },
+  {
+    "file": "fcollapse.sthlp",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/fcollapse.sthlp",
+    "sha256": "3cfd14b325a16209b0d6c4276907f15f699bcada9168bb4ba7e4ac2026256402"
+  },
+  {
+    "file": "fsort.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/fsort.ado",
+    "sha256": "a9eeb9312323c7898a715733d2baceb46578f5a1a3f698a87108b4cda053d97c"
+  },
+  {
+    "file": "fsort.sthlp",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/fsort.sthlp",
+    "sha256": "6a83df419f1d3068327560eaf4ea37906c55b27151aed2c5ebd1999a0d69700e"
+  },
+  {
+    "file": "fisid.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/fisid.ado",
+    "sha256": "a889b5fb4c3cd6b0ac90db7500278b8080f0f66b86c71eb992a4477db57232c0"
+  },
+  {
+    "file": "fisid.sthlp",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/fisid.sthlp",
+    "sha256": "97b7eaa5baee4555c0920f3a797a9019e1535fb0c655c30069e580b5ecd5f806"
+  },
+  {
+    "file": "fegen.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/fegen.ado",
+    "sha256": "c5d1638f193b142e9c7529b3f36fcf53486d68689b320d21ff7e8cdd93c50e25"
+  },
+  {
+    "file": "fegen.sthlp",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/fegen.sthlp",
+    "sha256": "9d7662d1c3015361998ab549c7d4a780345ec26268478a86b185d375928ecf7d"
+  },
+  {
+    "file": "fegen_group.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/fegen_group.ado",
+    "sha256": "92ca1712b8a2d03574d14529c85d390a5561af0b7217c0f103c2b764d9d0dd6b"
+  },
+  {
+    "file": "join.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/join.ado",
+    "sha256": "34a6141b43e66a25982f9514bdb8721a167091508a525114449db1648da3b18a"
+  },
+  {
+    "file": "join.sthlp",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/join.sthlp",
+    "sha256": "015893b534060334efeca44aa84f676128357adefeda2e0e8e6be48598eb600e"
+  },
+  {
+    "file": "fmerge.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/fmerge.ado",
+    "sha256": "1c2d18a8d72a12f68a7f743fb14c7a8186ece35ae05b0f75093ebc0133bcd697"
+  },
+  {
+    "file": "fmerge.sthlp",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/fmerge.sthlp",
+    "sha256": "db75a458e863fdb726e432419b6075e6192040aba30853df67b7afb1d49dd2a6"
+  },
+  {
+    "file": "flevelsof.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/flevelsof.ado",
+    "sha256": "24cb51b023866abf04420e43d3333abeefd7db66cfcf5beb5f6595b012f53192"
+  },
+  {
+    "file": "flevelsof.sthlp",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/flevelsof.sthlp",
+    "sha256": "627333bda5c89f7e40aec78efbeb24ed3c625f588f4f9b6dde3aa744ae0356f2"
+  },
+  {
+    "file": "local_inlist.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/local_inlist.ado",
+    "sha256": "c4540d6ef1c85d2ea2fdc5e9eefcfaf767f9eb2a2cc40cf3e2e5e019714d71c3"
+  },
+  {
+    "file": "local_inlist.sthlp",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/local_inlist.sthlp",
+    "sha256": "9912ba9a104be9c6130beb5a387582c6296e3b8d8bf1a3fec935d92d836af100"
+  },
+  {
+    "file": "ftools.mata",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ftools.mata",
+    "sha256": "4af859bca19614684d3dd45566e13e17c6cf44df951ecca538bda5a44ebd1744"
+  },
+  {
+    "file": "ftools_type_aliases.mata",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ftools_type_aliases.mata",
+    "sha256": "27338dcf0d0b5f24795b46aa7fdeab79309bf18c35bacdee2313fce5ef739885"
+  },
+  {
+    "file": "ftools_common.mata",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ftools_common.mata",
+    "sha256": "ce73eae9f933f0c670e1d58f7200234414c68f5a19419357622d1e0b3887bcab"
+  },
+  {
+    "file": "ftools_main.mata",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ftools_main.mata",
+    "sha256": "b836c7e21872691d6b9c9da84f8407b82365852911d244561ce4bdb1a26e85af"
+  },
+  {
+    "file": "ftools_hash1.mata",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ftools_hash1.mata",
+    "sha256": "a31bcd5cb93be191bf235cdf1e81f794be0f51cec9a9fb747d615e5c9ee8af0c"
+  },
+  {
+    "file": "ftools_plugin.mata",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ftools_plugin.mata",
+    "sha256": "897146c21a1fc6e899ef19ed01a3251d19e35c7deb5158ddf3c3f0caf6450125"
+  },
+  {
+    "file": "fcollapse_main.mata",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/fcollapse_main.mata",
+    "sha256": "375eea05d3e412a0fa2f7406c606f0176f993109bf6e0bfcc7ef2975ba74ea11"
+  },
+  {
+    "file": "fcollapse_functions.mata",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/fcollapse_functions.mata",
+    "sha256": "eb282f461a357497508d40a3d2c374e94d5ae4242b99c3b2596f736212614bd5"
+  },
+  {
+    "file": "ms_compile_mata.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ms_compile_mata.ado",
+    "sha256": "4a316f4e00e00cef93d5cfe151308e1a128a1551fc908dd47efe6406ff00ab26"
+  },
+  {
+    "file": "ms_get_version.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ms_get_version.ado",
+    "sha256": "c20215fb7583cac63083464ef18b402d8382686c7c4c8cec05caa6b5a6ca9d91"
+  },
+  {
+    "file": "ms_fvunab.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ms_fvunab.ado",
+    "sha256": "a4f47474e6d4cead0cf05cf75fd4fa6c36156e997fc2a8aa6584c122bc934900"
+  },
+  {
+    "file": "ms_parse_absvars.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ms_parse_absvars.ado",
+    "sha256": "98bec7d062b656cfc6818d49b6130af151b76798c33cd7031469fc5125ffe2cc"
+  },
+  {
+    "file": "ms_parse_varlist.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ms_parse_varlist.ado",
+    "sha256": "bdb27378f1524d332cca571674c4e48c52a3138ee8183aa56bbebadb38cde48f"
+  },
+  {
+    "file": "ms_parse_vce.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ms_parse_vce.ado",
+    "sha256": "99af53ca13f325a917b7377762feab140914a5a6534c0953ea9ce6d55dcfa678"
+  },
+  {
+    "file": "ms_expand_varlist.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ms_expand_varlist.ado",
+    "sha256": "b862f7ba8f490dc1931b7dda7a37e6d6c9fd6cff9435d378b61da0e353bd91ca"
+  },
+  {
+    "file": "ms_add_comma.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ms_add_comma.ado",
+    "sha256": "62c404231453f13f968e7780823d3235e7c3695b72ac1dbe28275478f2e6e208"
+  },
+  {
+    "file": "ms_fvstrip.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ms_fvstrip.ado",
+    "sha256": "b272704336522f4ea707948549b542d802ab3eb257c3ad2341a1c543685a51f5"
+  },
+  {
+    "file": "ms_fvstrip.sthlp",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ms_fvstrip.sthlp",
+    "sha256": "cfe5988bb044628ab33795b04816a5492a8c92917cdf5c7734779d85cbb873dd"
+  },
+  {
+    "file": "parallel_map.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/parallel_map.ado",
+    "sha256": "96bea0da77aa112275134c77cad6f06977ae86f55759a2c7459e16d0eacf34dd"
+  },
+  {
+    "file": "parallel_map.sthlp",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/parallel_map.sthlp",
+    "sha256": "b8ea404ce46d53c60eea67baee24257085a3d286772716888dfd30e4702a45fc"
+  },
+  {
+    "file": "parallel_map_template.do.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/parallel_map_template.do.ado",
+    "sha256": "d7fe2acbb7b97591b91d55760c7fc80b5ec60f5a432d80f670209647463c3d06"
+  },
+  {
+    "file": "ftab.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ftools/master/src/ftab.ado",
+    "sha256": "7a6e5d40a7f4beb2cab3b9ff2a96edb725ae5cb1cf6b18098847a81ed3c0f531"
+  },
+  {
+    "file": "reghdfe.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe.ado",
+    "sha256": "e9b96033602a6f1785f1be0b6393b44d48ef0974009ee2bffee308bc251a6abc"
+  },
+  {
+    "file": "reghdfe_estat.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe_estat.ado",
+    "sha256": "c824d5d2ca8e5bbeeb1916cc80afd05554c668467ebed96c7a5ca86b8a5a87bb"
+  },
+  {
+    "file": "reghdfe_header.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe_header.ado",
+    "sha256": "2d39165ed4363c1fc503b0d599dc942db55c87415733957e98ba26eccc66f65d"
+  },
+  {
+    "file": "reghdfe_footnote.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe_footnote.ado",
+    "sha256": "39efcab7ff05fe00ccfa24e2d6e428a216471bacc7896f97d12544aae33602ac"
+  },
+  {
+    "file": "reghdfe_p.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe_p.ado",
+    "sha256": "ce736f81cfe3cecbd5d5f66c275582ce0d622ea8e67161df8bc7855dfd0b1639"
+  },
+  {
+    "file": "reghdfe.mata",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe.mata",
+    "sha256": "55827e1e3c9bec3a0c9310c1147a24c3b997ca0a5dd256a353d98407f876dcf6"
+  },
+  {
+    "file": "reghdfe.sthlp",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe.sthlp",
+    "sha256": "5c99c4d0b34eebe53d6f1158ba093d693cf4d0c74a3f7eb9603c6b0972b072c1"
+  },
+  {
+    "file": "reghdfe_programming.sthlp",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe_programming.sthlp",
+    "sha256": "db849ee333a5fa269381cf928fdf9c5c465ce13cd3219a31737f8b6299cd67c2"
+  },
+  {
+    "file": "estfe.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/estfe.ado",
+    "sha256": "a2913f84bf90792230b525de0c495cbddfc810dc78c83dd351bac4cf9e353333"
+  },
+  {
+    "file": "reghdfe3.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe3.ado",
+    "sha256": "06ae4682ad1421c08dfa520dc98609141006602192d9703ab147310c0aa1db5b"
+  },
+  {
+    "file": "reghdfe3.sthlp",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe3.sthlp",
+    "sha256": "54bdd8cd01fd4273978d989e29e310d5158461fc72edd874272da5cfbb42d62a"
+  },
+  {
+    "file": "reghdfe3_estat.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe3_estat.ado",
+    "sha256": "9e9ceaa020bdfd1f6803e671531f162a5194440f14330f4c0fe629d8a878b73a"
+  },
+  {
+    "file": "reghdfe3_footnote.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe3_footnote.ado",
+    "sha256": "66558aab202a6345540988cf555037794eace5e09a17ddebaacafa0890bfc4ea"
+  },
+  {
+    "file": "reghdfe3_p.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe3_p.ado",
+    "sha256": "422280314dd7dc48b9a3b6238face0abd698f459160918ca2b0195125587b3d2"
+  },
+  {
+    "file": "reghdfe5.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe5.ado",
+    "sha256": "0ccc39e990efeb8aa6c603ac7feb89bec47ed73d5ace095d13504390cd1baf2a"
+  },
+  {
+    "file": "reghdfe5.mata",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe5.mata",
+    "sha256": "f99d6502e5d5b300041a4c6290de25ebc5f8c20bc629292adcdc1cdaa9658187"
+  },
+  {
+    "file": "reghdfe5.sthlp",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe5.sthlp",
+    "sha256": "0f9b33f8d36ba36de40e56738f52f7a5ee20aa8296b48d9ae9a699316f1875fa"
+  },
+  {
+    "file": "reghdfe5_estat.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe5_estat.ado",
+    "sha256": "911cb9a178f13b6b68a9e3757b57880549e53b64ad9e5d3154ea5da7e191774b"
+  },
+  {
+    "file": "reghdfe5_footnote.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe5_footnote.ado",
+    "sha256": "a70ae8289b52d86c28e01fafddb10ef381d922e80da875d4b3907a3dc9fd8d5a"
+  },
+  {
+    "file": "reghdfe5_header.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe5_header.ado",
+    "sha256": "df5d665c5f504355ac345e87f8c3b3fe0adced08b73b5d1e51715f1eae2bfba6"
+  },
+  {
+    "file": "reghdfe5_p.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe5_p.ado",
+    "sha256": "7b04d29494f2f8d977dc94ffaca701c6b7ec28768066f4cd3b93a5437e89e003"
+  },
+  {
+    "file": "reghdfe5_parse.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/reghdfe/master/src/reghdfe5_parse.ado",
+    "sha256": "13662b3579e740e4233700d0f966b4cf7e03f6109a08cacd44e33fcf098cb20a"
+  },
+  {
+    "file": "ivreghdfe.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ivreghdfe/1.1.2/src/ivreghdfe.ado",
+    "sha256": "eb9ee7e29a9ea10ed4d5f2fdb84d8332de3f3501f9ee8b06af08d3bd279b7b8c"
+  },
+  {
+    "file": "ivreghdfe.sthlp",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/ivreghdfe/1.1.2/src/ivreghdfe.sthlp",
+    "sha256": "233a5f0fb040e7731823e794a374824358e3a786f08c7f790cfb94f30e63d65e"
+  },
+  {
+    "file": "bdiff.ado",
+    "url": "http://fmwww.bc.edu/repec/bocode/b/bdiff.ado",
+    "sha256": "707d09f8d701cd81f1ab3622e3a2efdc5940515af9a2d3b17052c22db5d482d3"
+  },
+  {
+    "file": "bdiff.sthlp",
+    "url": "http://fmwww.bc.edu/repec/bocode/b/bdiff.sthlp",
+    "sha256": "82df462b4ddb09dd334d8e633abb883e05a9b93e7e856cfde99538fa399a9255"
+  },
+  {
+    "file": "require.ado",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/stata-require/master/src/require.ado",
+    "sha256": "bfc799167555a9e6bf2bb32daac24f49092d64cf3f6701a50f27a3fd1e6aacdc"
+  },
+  {
+    "file": "require.sthlp",
+    "url": "https://raw.githubusercontent.com/sergiocorreia/stata-require/master/src/require.sthlp",
+    "sha256": "2afb397d3e8a4b434178618352f350beef20eea25cf1b169b95d1d4bef2c34a9"
+  },
+  {
+    "file": "xtabond2.ado",
+    "url": "http://fmwww.bc.edu/repec/bocode/x/xtabond2.ado",
+    "sha256": "72b3e4e0a3f3b8460d49674ecf75f8b750396586480b0ee7d5b2f5a7a1d550ed"
+  },
+  {
+    "file": "xtabond2.mata",
+    "url": "http://fmwww.bc.edu/repec/bocode/x/xtabond2.mata",
+    "sha256": "9bc5f5eefee650cf582f2c8fd565df82fb244c52db5b3db433ad69eb34eb34ac"
+  },
+  {
+    "file": "xtabond2.hlp",
+    "url": "http://fmwww.bc.edu/repec/bocode/x/xtabond2.hlp",
+    "sha256": "6ffd0be1d93ffe63c90e64fb3d37166f81752adb3f471b5bcba22976a1ca609a"
+  },
+  {
+    "file": "xtab2_p.ado",
+    "url": "http://fmwww.bc.edu/repec/bocode/x/xtab2_p.ado",
+    "sha256": "2857867840f5005d5c6a3592aa9be2a60af965d9767611cb96d4ff77788ba1c1"
+  },
+  {
+    "file": "xtabond2.ado",
+    "url": "http://fmwww.bc.edu/repec/bocode/x/xtabond2.ado",
+    "sha256": "72b3e4e0a3f3b8460d49674ecf75f8b750396586480b0ee7d5b2f5a7a1d550ed"
+  },
+  {
+    "file": "xtabond2.mata",
+    "url": "http://fmwww.bc.edu/repec/bocode/x/xtabond2.mata",
+    "sha256": "9bc5f5eefee650cf582f2c8fd565df82fb244c52db5b3db433ad69eb34eb34ac"
+  },
+  {
+    "file": "xtabond2.hlp",
+    "url": "http://fmwww.bc.edu/repec/bocode/x/xtabond2.hlp",
+    "sha256": "6ffd0be1d93ffe63c90e64fb3d37166f81752adb3f471b5bcba22976a1ca609a"
+  },
+  {
+    "file": "xtab2_p.ado",
+    "url": "http://fmwww.bc.edu/repec/bocode/x/xtab2_p.ado",
+    "sha256": "2857867840f5005d5c6a3592aa9be2a60af965d9767611cb96d4ff77788ba1c1"
+  },
+  {
+    "file": "../l/lxtabond2.mlib",
+    "url": "http://fmwww.bc.edu/repec/bocode/x/../l/lxtabond2.mlib",
+    "sha256": "a67a36be25aeb1119a99c4fd1b70f9d731a23516328543c0b805f0ddebe79541"
+  },
+  {
+    "file": "../a/abest.do",
+    "url": "http://fmwww.bc.edu/repec/bocode/x/../a/abest.do",
+    "sha256": "9bcde18021ff91faf146475a4c8b243e33e6387d08cf76a57a9c307eb243b5fa"
+  },
+  {
+    "file": "../b/bbest.do",
+    "url": "http://fmwww.bc.edu/repec/bocode/x/../b/bbest.do",
+    "sha256": "0348f0f62ceabdb697ef67162abde2660b83e2d1d601a0869c669270150bb908"
+  },
+  {
+    "file": "../g/Greene.do",
+    "url": "http://fmwww.bc.edu/repec/bocode/x/../g/Greene.do",
+    "sha256": "1d9fc3c331719fc78082a4dcee95d3b3505ae28337c3ba8607e68e67781603ca"
+  }
+]

@@ -1,0 +1,37 @@
+{
+  "paper_id": "cie123767",
+  "spec_id": "T1_7",
+  "journal": "cie",
+  "data_path": "$CIE_RAW/data/analysis.csv",
+  "id_var": "pledgee_id",
+  "time_var": "year",
+  "y_var": "LnPPL_Num",
+  "gvar": "policy_g",
+  "treat_var": "DiD",
+  "weight_var": "",
+  "cluster_var": "pledgee_id",
+  "xt_vars": [
+    "bank_name_id"
+  ],
+  "controls": [
+    "City_TotalLoan",
+    "City_BankHHI",
+    "City_ST",
+    "City_Patent",
+    "City_GDP"
+  ],
+  "sample_filter": "sample_T1_7 == 1",
+  "static_or_event": "static",
+  "published_coef": 0.0408,
+  "published_se": 0.0077,
+  "published_n": 83660,
+  "published_source": "表1第3列Panel B",
+  "table": "1",
+  "column": "3",
+  "preferred": false,
+  "in_abstract_intro": true,
+  "reports_modern_estimator": false,
+  "software": "Stata",
+  "replication_status": "exact",
+  "notes": "原始作者e(sample)锁定；政策日期采用数据start_year，避免不平衡面板首次观测处理年份偏移；对数结果变量已在作者数据生成，不再取对数；银行归属在分支内恒定。"
+}

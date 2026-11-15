@@ -1,0 +1,79 @@
+{
+  "paper_id": "cie123771",
+  "title": "国际标准对接如何推动中国企业技术出海",
+  "year": 2026,
+  "issue": 9,
+  "authors": [
+    "冯帆",
+    "马皓巍"
+  ],
+  "article_url": "https://ciejournal.ajcass.com/Magazine/Show?id=123771",
+  "screened_from": "article_text+package+data",
+  "staggered_design": false,
+  "eligible_design": false,
+  "near_miss_controls_only": false,
+  "package_status": "data_and_code",
+  "data_access": "public",
+  "replication_status": "not_run",
+  "policy_year": 2015,
+  "observed_first_treatment_counts": {
+    "2015": 927
+  },
+  "n_observed_cohorts": 1,
+  "n_data_rows": 57040,
+  "n_firms": 5233,
+  "duplicate_id_year": 0,
+  "switch_offs": 0,
+  "eligible_specs": [],
+  "ineligible_specs": [
+    {
+      "location": "表1第1–2列及其余SIM模型",
+      "reason": "SIM是连续标准对接强度，非二元交错处理"
+    },
+    {
+      "location": "表1第3–4列",
+      "reason": "工具变量一阶段及2SLS"
+    },
+    {
+      "location": "表1第5列及配套动态DID",
+      "reason": "2015年统一政策冲击，仅一个处理批次"
+    }
+  ],
+  "source_locations": [
+    "正文PDF第11页（期刊129页）表1",
+    "正文PDF第12页（期刊130页）内生性处理第（2）部分",
+    "主回归数据did按id计算首次为1的year"
+  ],
+  "notes": "不将不同年份企业进入样本误判为真实政策批次；本包主数据核查显示全部927个处理企业首次处理均为2015。原始底层国家标准、专利记录未作为独立源数据提供；dta按用途归入处理数据。数据和代码可读不等于作者结果已独立复现。",
+  "screener": "Codex",
+  "screen_date": "2026-11-14",
+  "near_miss": false,
+  "near_miss_reason": "单时点DID并非仅有控制变量问题",
+  "policy_or_event": "2015年深化标准化工作改革方案，全国统一实施",
+  "unit": "firm",
+  "assignment_unit": "firm exposure group",
+  "time_unit": "year",
+  "n_cohorts_reported": 1,
+  "estimators_reported": [
+    "twfe_continuous",
+    "2sls",
+    "twfe_single_date_did",
+    "twfe_event_appendix"
+  ],
+  "reports_modern_estimator": false,
+  "main_or_robustness": "robustness",
+  "data_sources": [
+    "国家标准",
+    "企业专利",
+    "上市公司财务数据"
+  ],
+  "near_miss_controls_only_specs": [],
+  "appendix_specs": [
+    {
+      "location": "附录6",
+      "reason": "2015年统一冲击及动态DID，非交错设计"
+    }
+  ],
+  "n_eligible_specs": 0,
+  "priority": 3
+}

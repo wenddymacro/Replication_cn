@@ -1,0 +1,114 @@
+preserve
+keep $xlist chainleader_l TFP chainleader stkcd year indid prv city cityname esample
+xtset stkcd year
+bysort stkcd: egen temp_prv=max(prv)
+bysort stkcd: egen temp_indid=max(indid)
+bysort stkcd: egen temp_chainleader_l=max(chainleader_l)
+bysort stkcd: egen temp_city=max(city)
+bysort stkcd: egen temp2_city=min(city)
+replace prv=temp_prv if prv==.
+replace indid=temp_indid if indid==.
+replace chainleader_l=temp_chainleader_l if chainleader_l==.
+replace city=temp_city if city==.
+gen poschange=temp_city-temp2_city
+drop if poschange~=0
+// 插值
+foreach var of global xlist{
+by stkcd: ipolate `var' year, gen(ipo_`var') epolate
+}
+by stkcd: ipolate TFP year, gen(TFP_ipo) epolate
+// 平衡面板
+xtbalance , range(2014 2023) miss(ipo_*)
+// 回归+分解
+bacondecomp TFP_ipo chainleader ipo_* ,ddetail vce(r)
+graph export "./图表/附图5_Goodman-Bacon分解的权重.png",replace
+restore
+*************************************************************
+***                                                       ***
+***         附图 6 平行趋势检验:异质性效应处理方法        ***
+***                                                       ***
+*************************************************************
+//生成动态效应的变量
+local num1=4
+local num2=3
+replace chainleader_l=. if chainleader_l==0
+gen event=year-chainleader_l
+gen setup_mis=chainleader_l
+replace setup_mis=0 if setup_mis==.
+tab event
+replace event=-`num1' if event<=-`num1'
+replace event=`num2' if event>=`num2'
+forvalues i=`num1'(-1)1{
+gen pre`i'=0
+replace pre`i'=1 if event==-`i'
+}
+forvalues i=0(1)`num2'{
+gen post`i'=0
+replace post`i'=1 if event==`i'
+}
+/* Method 1 组群—时间ATT估计量：Callaway & Sant'Anna (2021) */
+csdid TFP $xlist, ivar(stkcd) time(year) gvar(setup_mis) method(dripw) long2 cluster(city)
+estat event, window(-3 3) estore(cs_est)
+estimates restore cs_est
+matrix cs_b = e(b)
+matrix cs_v = e(V)
+// long2下-1期为基期、不单独估计；若结果中无Tm1，则补0
+if missing(colnumb(cs_b, "Tm1")) {
+local cn : colnames cs_b
+matrix cs_b = cs_b, (0)
+matrix colnames cs_b = `cn' Tm1
+local k = colsof(cs_v)
+matrix cs_v = (cs_v, J(`k', 1, 0)) \ J(1, `k' + 1, 0)
+matrix colnames cs_v = `cn' Tm1
+matrix rownames cs_v = `cn' Tm1
+}
+/* Method 2 局部投影法：Dube et al.(2025) */
+xtset stkcd year
+// new_treat=1 只在企业首次进入处理的当年出现
+gen new_treat = D.chainleader
+matrix lpdid_b = J(1, 8, 0)
+matrix lpdid_v = J(8, 8, 0)
+matrix colnames lpdid_b = pre4 pre3 pre2 pre1 post0 post1 post2 post3
+matrix rownames lpdid_v = pre4 pre3 pre2 pre1 post0 post1 post2 post3
+matrix colnames lpdid_v = pre4 pre3 pre2 pre1 post0 post1 post2 post3
+// 事前安慰剂：Y_(t-h)-Y_(t-1)，h=4,3,2
+foreach h in 4 3 2 {
+gen dy_m`h' = L`h'.TFP - L.TFP
+reghdfe dy_m`h' new_treat L.($xlist)  if new_treat == 1 | chainleader == 0,  absorb(prv#year indid#year) vce(cluster city)
+local p = 5 - `h'
+matrix lpdid_b[1, `p'] = _b[new_treat]
+matrix lpdid_v[`p', `p'] = _se[new_treat]^2
+}
+// 事后动态效应：Y_(t+h)-Y_(t-1)，h=0,1,2,3
+forvalues h = 0/3 {
+if `h' == 0 {
+gen dy_p0 = TFP - L.TFP
+local clean "chainleader == 0"
+}
+else {
+gen dy_p`h' = F`h'.TFP - L.TFP
+local clean "F`h'.chainleader == 0"
+}
+reghdfe dy_p`h' new_treat L.($xlist)  if new_treat == 1 | (`clean'),  absorb(prv#year indid#year) vce(cluster city)
+local p = `h' + 5
+matrix lpdid_b[1, `p'] = _b[new_treat]
+matrix lpdid_v[`p', `p'] = _se[new_treat]^2
+}
+/* Method 3 交叉权重法：Sun & Abraham (2021) */
+gen cohort=chainleader_l
+eventstudyinteract TFP pre4-pre2 post0 post1-post3 pre1, cohort(cohort) control_cohort(no_treat) covariates($xlist) absorb(i.stkcd i.indid#i.year i.prv#i.year) vce(cluster city)
+// 将省略的 -1 期补为 0，同时保留其余系数的完整协方差结构
+matrix temp_sa_b = e(b_iw)
+matrix temp_sa_v = e(V_iw)
+matrix define b_zero=(0)
+matrix colnames b_zero = pre1
+matrix define se_zero=(0)
+matrix sa_b=temp_sa_b[1,1..3],b_zero,temp_sa_b[1,4..8]
+matrix sa_v=temp_sa_v[1,1],temp_sa_v[2,2],temp_sa_v[3,3],se_zero,temp_sa_v[4,4],temp_sa_v[5,5],temp_sa_v[6,6],temp_sa_v[7,7],temp_sa_v[8,8]
+matrix colnames sa_v = pre4 pre3 pre2 pre1 post0 post1 post2 post3
+/* Method 4 跨期处理效应估计量：De Chaisemartin & D'Haultfoeuille (2026) */
+did_multiplegt TFP stkcd year chainleader, controls($xlist) robust_dynamic placebo(3) dynamic(3) breps(200) cluster(city)
+matrix dd_b = e(estimates)
+matrix dd_v = e(variances)
+event_plot cs_b#cs_v lpdid_b#lpdid_v sa_b#sa_v dd_b#dd_v,  stub_lag(Tp# post# post# Effect_#) stub_lead(Tm# pre# pre# Placebo_#)  shift(0) plottype(scatter) together alpha(0.05) noautolegend ciplottype(rcap)  graph_opt(xline(0, lcolor(black%45) lpattern(dash)) yline(0, lcolor(black%45)) graphregion(color(white)) bgcolor(white) xscale(range(-4.5(1)3.5)) xlabel(-4(1)3, labsize(4)) ylabel(-0.1(0.1)0.2, angle(0) format(%3.2f) labsize(4))  ytitle(`"{fontface "宋体":估}"' `"{fontface "宋体":计}"' `"{fontface "宋体":系}"' `"{fontface "宋体":数}"',orientation(horizontal) size(4)) xtitle(`"{fontface "宋体":相对冲击发生时间}"',size(4))  legend(order(1 "Callaway & Sant'Anna(2021)" 3 "Dube et al.(2025)"  5 "Sun & Abraham(2021)" 7 "De Chaisemartin & D'Haultfoeuille(2026)") cols(2) ring(1) pos(6) region(lcolor(black))) xsize(10) ysize(5.5))  lag_opt1(msymbol(Oh) color(black) msize(1.8))    lag_ci_opt1(color(black) lwidth(0.4))  lag_opt2(msymbol(Sh) color(black) msize(1.8))    lag_ci_opt2(color(black) lwidth(0.4))  lag_opt3(msymbol(d)  color(black) msize(1.8))    lag_ci_opt3(color(black) lwidth(0.4))  lag_opt4(msymbol(t)  color(black) msize(1.8))    lag_ci_opt4(color(black) lwidth(0.4))
+graph export "./图表/附图6_平行趋势检验：异质性处理效应稳健估计量.png", as(png) replace

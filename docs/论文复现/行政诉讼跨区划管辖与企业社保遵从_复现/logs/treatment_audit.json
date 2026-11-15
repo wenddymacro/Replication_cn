@@ -1,0 +1,35 @@
+{
+  "rows": 26604,
+  "usable_id_rows": 26595,
+  "missing_id_time_rows": 9,
+  "firms": 3015,
+  "cities": 246,
+  "city_cohorts": {
+    "2003": 1,
+    "2007": 2,
+    "2009": 1,
+    "2013": 25,
+    "2014": 12,
+    "2015": 36,
+    "2016": 32,
+    "2017": 22,
+    "2018": 18,
+    "2019": 16,
+    "2020": 8,
+    "2021": 1,
+    "2022": 5
+  },
+  "never_cities": 64,
+  "D_mismatch": 0,
+  "unmapped_treated": 0,
+  "city_movers": 0,
+  "date_unknown_cities": [
+    145,
+    256
+  ],
+  "date_unknown_single_observation_rows": 2,
+  "always_treated_upper_bound_sentinel": {
+    "51": 2002
+  },
+  "exact_date_not_claimed_for_sentinel": true
+}

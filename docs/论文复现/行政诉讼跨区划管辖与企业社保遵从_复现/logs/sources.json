@@ -1,0 +1,12 @@
+{
+  "date": "2026-11-15",
+  "title": "行政诉讼跨区划管辖与企业社保遵从",
+  "author_page": "https://finance.xmu.edu.cn/info/1019/75704.htm",
+  "pdf_url": "https://ciejournal.ajcass.com/UploadFile/Issue/201606280001/2025/4//20250421095002WU_FILE_0.pdf",
+  "zip_url": "https://ciejournal.ajcass.com/UploadFile/Issue/201606280001/2025/4//20250423105511WU_FILE_0.zip",
+  "acquisition": "已有用户验证的Edge会话下载成功，随后用户附上本地ZIP和桌面PDF；使用用户确认文件。",
+  "http_status": null,
+  "http_note": "浏览器显示下载成功但未获取网络层响应码，不编造200。",
+  "complete": "ZIP CRC通过；6个包内文件全部解压；正文PDF19页，附录8页；原件SHA256已记录。",
+  "upstream_snapshot": "reference/Replication_cn-main；核心文件此前2026-11-14联网核验；本次网页工具访问GitHub及raw返回Cache miss，不能声称重新确认11月15日远程最新状态。"
+}

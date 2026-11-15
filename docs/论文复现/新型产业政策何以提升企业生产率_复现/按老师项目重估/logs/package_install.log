@@ -1,0 +1,194 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+also installing the dependencies 'bit', 'prettyunits', 'checkmate', 'bit64', 'progress', 'utf8', 'farver', 'labeling', 'RColorBrewer', 'viridisLite', 'stringi', 'bigmemory.sri', 'uuid', 'iterators', 'clarabel', 'gmp', 'highs', 'osqp', 'scs', 'slam', 'nleqslv', 'qrng', 'spacefillr', 'alabama', 'glue', 'magrittr', 'pkgconfig', 'clipr', 'crayon', 'R6', 'vroom', 'withr', 'tzdb', 'pillar', 'zoo', 'Formula', 'RcppArmadillo', 'gtable', 'isoband', 'S7', 'scales', 'trust', 'dplyr', 'purrr', 'stringr', 'bigmemory', 'RcppEigen', 'BH', 'backports', 'foreach', 'matrixStats', 'CVXR', 'ECOSolveR', 'latex2exp', 'lpSolveAPI', 'pracma', 'Rglpk', 'mvtnorm', 'TruncatedNormal', 'cli', 'forcats', 'hms', 'lifecycle', 'readr', 'rlang', 'tibble', 'tidyselect', 'vctrs', 'cpp11', 'numDeriv', 'sandwich', 'Rcpp', 'dreamerr', 'stringmagic', 'BMisc', 'pbapply', 'ggplot2', 'DRDID', 'generics', 'tidyr', 'fastglm', 'broom', 'didimputation', 'HonestDiD', 'staggered'
+
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/bit_4.6.0.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/prettyunits_1.2.0.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/checkmate_2.3.4.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/bit64_4.8.6.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/progress_1.2.3.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/utf8_1.2.6.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/farver_2.1.2.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/labeling_0.4.3.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/RColorBrewer_1.1-3.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/viridisLite_0.4.3.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/stringi_1.8.9.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/bigmemory.sri_0.1.8.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/uuid_1.2-2.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/iterators_1.0.14.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/clarabel_0.11.3.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/gmp_0.7-5.1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/highs_1.15.1-2.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/osqp_1.0.0.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/scs_3.3.1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/slam_0.1-56.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/nleqslv_3.3.7.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/qrng_0.0-11.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/spacefillr_0.4.0.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/alabama_2025.1.0.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/glue_1.8.1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/magrittr_2.0.5.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/pkgconfig_2.0.3.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/clipr_0.8.1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/crayon_1.5.3.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/R6_2.6.1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/vroom_1.7.1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/withr_3.0.3.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/tzdb_0.5.0.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/pillar_1.11.1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/zoo_1.9-1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/Formula_1.2-6.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/RcppArmadillo_15.6.2-1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/gtable_0.3.6.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/isoband_0.3.0.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/S7_0.2.2.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/scales_1.4.0.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/trust_0.1-9.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/dplyr_1.2.1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/purrr_1.2.2.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/stringr_1.6.0.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/bigmemory_4.6.6.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/RcppEigen_0.3.4.0.2.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/BH_1.90.0-1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/backports_1.5.1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/foreach_1.5.2.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/matrixStats_1.5.0.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/CVXR_1.9.3.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/ECOSolveR_0.6.2.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/latex2exp_0.9.8.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/lpSolveAPI_5.5.2.0-17.15.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/pracma_2.4.6.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/Rglpk_0.6-5.1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/mvtnorm_1.4-2.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/TruncatedNormal_2.3.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/cli_3.6.6.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/forcats_1.0.1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/hms_1.1.4.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/lifecycle_1.0.5.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/readr_2.2.0.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/rlang_1.3.0.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/tibble_3.3.1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/tidyselect_1.2.1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/vctrs_0.7.3.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/cpp11_0.5.5.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/numDeriv_2016.8-1.1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/sandwich_3.1-3.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/Rcpp_1.1.2.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/dreamerr_1.5.0.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/stringmagic_1.3.0.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/BMisc_1.4.10.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/pbapply_1.7-5.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/ggplot2_4.0.4.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/DRDID_1.4.1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/generics_0.1.4.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/tidyr_1.3.2.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/fastglm_0.1.4.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/broom_1.0.13.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/didimputation_0.5.1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/HonestDiD_0.2.8.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/staggered_1.2.2.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/data.table_1.18.6.1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/jsonlite_2.0.0.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/haven_2.5.5.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/fixest_0.14.2.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/did_2.5.1.zip'
+trying URL 'https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/contrib/4.6/did2s_1.2.1.zip'
+package 'bit' successfully unpacked and MD5 sums checked
+package 'prettyunits' successfully unpacked and MD5 sums checked
+package 'checkmate' successfully unpacked and MD5 sums checked
+package 'bit64' successfully unpacked and MD5 sums checked
+package 'progress' successfully unpacked and MD5 sums checked
+package 'utf8' successfully unpacked and MD5 sums checked
+package 'farver' successfully unpacked and MD5 sums checked
+package 'labeling' successfully unpacked and MD5 sums checked
+package 'RColorBrewer' successfully unpacked and MD5 sums checked
+package 'viridisLite' successfully unpacked and MD5 sums checked
+package 'stringi' successfully unpacked and MD5 sums checked
+package 'bigmemory.sri' successfully unpacked and MD5 sums checked
+package 'uuid' successfully unpacked and MD5 sums checked
+package 'iterators' successfully unpacked and MD5 sums checked
+package 'clarabel' successfully unpacked and MD5 sums checked
+package 'gmp' successfully unpacked and MD5 sums checked
+package 'highs' successfully unpacked and MD5 sums checked
+package 'osqp' successfully unpacked and MD5 sums checked
+package 'scs' successfully unpacked and MD5 sums checked
+package 'slam' successfully unpacked and MD5 sums checked
+package 'nleqslv' successfully unpacked and MD5 sums checked
+package 'qrng' successfully unpacked and MD5 sums checked
+package 'spacefillr' successfully unpacked and MD5 sums checked
+package 'alabama' successfully unpacked and MD5 sums checked
+package 'glue' successfully unpacked and MD5 sums checked
+package 'magrittr' successfully unpacked and MD5 sums checked
+package 'pkgconfig' successfully unpacked and MD5 sums checked
+package 'clipr' successfully unpacked and MD5 sums checked
+package 'crayon' successfully unpacked and MD5 sums checked
+package 'R6' successfully unpacked and MD5 sums checked
+package 'vroom' successfully unpacked and MD5 sums checked
+package 'withr' successfully unpacked and MD5 sums checked
+package 'tzdb' successfully unpacked and MD5 sums checked
+package 'pillar' successfully unpacked and MD5 sums checked
+package 'zoo' successfully unpacked and MD5 sums checked
+package 'Formula' successfully unpacked and MD5 sums checked
+package 'RcppArmadillo' successfully unpacked and MD5 sums checked
+package 'gtable' successfully unpacked and MD5 sums checked
+package 'isoband' successfully unpacked and MD5 sums checked
+package 'S7' successfully unpacked and MD5 sums checked
+package 'scales' successfully unpacked and MD5 sums checked
+package 'trust' successfully unpacked and MD5 sums checked
+package 'dplyr' successfully unpacked and MD5 sums checked
+package 'purrr' successfully unpacked and MD5 sums checked
+package 'stringr' successfully unpacked and MD5 sums checked
+package 'bigmemory' successfully unpacked and MD5 sums checked
+package 'RcppEigen' successfully unpacked and MD5 sums checked
+package 'BH' successfully unpacked and MD5 sums checked
+package 'backports' successfully unpacked and MD5 sums checked
+package 'foreach' successfully unpacked and MD5 sums checked
+package 'matrixStats' successfully unpacked and MD5 sums checked
+package 'CVXR' successfully unpacked and MD5 sums checked
+package 'ECOSolveR' successfully unpacked and MD5 sums checked
+package 'latex2exp' successfully unpacked and MD5 sums checked
+package 'lpSolveAPI' successfully unpacked and MD5 sums checked
+package 'pracma' successfully unpacked and MD5 sums checked
+package 'Rglpk' successfully unpacked and MD5 sums checked
+package 'mvtnorm' successfully unpacked and MD5 sums checked
+package 'TruncatedNormal' successfully unpacked and MD5 sums checked
+package 'cli' successfully unpacked and MD5 sums checked
+package 'forcats' successfully unpacked and MD5 sums checked
+package 'hms' successfully unpacked and MD5 sums checked
+package 'lifecycle' successfully unpacked and MD5 sums checked
+package 'readr' successfully unpacked and MD5 sums checked
+package 'rlang' successfully unpacked and MD5 sums checked
+package 'tibble' successfully unpacked and MD5 sums checked
+package 'tidyselect' successfully unpacked and MD5 sums checked
+package 'vctrs' successfully unpacked and MD5 sums checked
+package 'cpp11' successfully unpacked and MD5 sums checked
+package 'numDeriv' successfully unpacked and MD5 sums checked
+package 'sandwich' successfully unpacked and MD5 sums checked
+package 'Rcpp' successfully unpacked and MD5 sums checked
+package 'dreamerr' successfully unpacked and MD5 sums checked
+package 'stringmagic' successfully unpacked and MD5 sums checked
+package 'BMisc' successfully unpacked and MD5 sums checked
+package 'pbapply' successfully unpacked and MD5 sums checked
+package 'ggplot2' successfully unpacked and MD5 sums checked
+package 'DRDID' successfully unpacked and MD5 sums checked
+package 'generics' successfully unpacked and MD5 sums checked
+package 'tidyr' successfully unpacked and MD5 sums checked
+package 'fastglm' successfully unpacked and MD5 sums checked
+package 'broom' successfully unpacked and MD5 sums checked
+package 'didimputation' successfully unpacked and MD5 sums checked
+package 'HonestDiD' successfully unpacked and MD5 sums checked
+package 'staggered' successfully unpacked and MD5 sums checked
+package 'data.table' successfully unpacked and MD5 sums checked
+package 'jsonlite' successfully unpacked and MD5 sums checked
+package 'haven' successfully unpacked and MD5 sums checked
+package 'fixest' successfully unpacked and MD5 sums checked
+package 'did' successfully unpacked and MD5 sums checked
+package 'did2s' successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\ASUS\AppData\Local\Temp\RtmpGMpBFm\downloaded_packages
+data.table   jsonlite      haven     fixest        did      did2s 
+      TRUE       TRUE       TRUE       TRUE       TRUE       TRUE 

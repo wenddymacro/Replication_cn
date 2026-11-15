@@ -1,0 +1,74 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+Warning in eval(stub[[3L]], x, enclos) :
+  unable to translate '<U+7ECF><U+5EA6>' to native encoding
+Warning in eval(stub[[3L]], x, enclos) :
+  unable to translate '<U+7EAC><U+5EA6>' to native encoding
+NOTE: The fixed-effects are not regular, they cannot be straightforwardly interpreted.
+You have an unbalanced panel. Proceeding as such.
+Warning in did_standardization(data, args) :
+  Some groups in your dataset have very few observations, which may cause estimation problems.
+  Check groups: 4,10,6.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (4, 2): Outcome regression model coefficients have NA components. 
+ Multicollinearity of covariates is probably the reason for it.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (4, 4): Outcome regression model coefficients have NA components. 
+ Multicollinearity (or lack of variation) of covariates is probably the reason for it.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (6, 2): Outcome regression model coefficients have NA components. 
+ Multicollinearity of covariates is probably the reason for it.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (6, 4): Outcome regression model coefficients have NA components. 
+ Multicollinearity (or lack of variation) of covariates is probably the reason for it.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (6, 5): Outcome regression model coefficients have NA components. 
+ Multicollinearity of covariates is probably the reason for it.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (7, 2): Outcome regression model coefficients have NA components. 
+ Multicollinearity of covariates is probably the reason for it.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (7, 4): Outcome regression model coefficients have NA components. 
+ Multicollinearity (or lack of variation) of covariates is probably the reason for it.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (7, 5): Outcome regression model coefficients have NA components. 
+ Multicollinearity of covariates is probably the reason for it.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (8, 2): Outcome regression model coefficients have NA components. 
+ Multicollinearity of covariates is probably the reason for it.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (8, 4): Outcome regression model coefficients have NA components. 
+ Multicollinearity (or lack of variation) of covariates is probably the reason for it.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (8, 5): Outcome regression model coefficients have NA components. 
+ Multicollinearity of covariates is probably the reason for it.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (9, 2): Outcome regression model coefficients have NA components. 
+ Multicollinearity of covariates is probably the reason for it.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (9, 4): Outcome regression model coefficients have NA components. 
+ Multicollinearity (or lack of variation) of covariates is probably the reason for it.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (9, 5): Outcome regression model coefficients have NA components. 
+ Multicollinearity of covariates is probably the reason for it.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (10, 2): Outcome regression model coefficients have NA components. 
+ Multicollinearity of covariates is probably the reason for it.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (10, 4): Outcome regression model coefficients have NA components. 
+ Multicollinearity (or lack of variation) of covariates is probably the reason for it.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (10, 5): Outcome regression model coefficients have NA components. 
+ Multicollinearity of covariates is probably the reason for it.. The ATT for this cell will be set to NA.
+The Wald pre-test is not reported when clustering beyond the unit level (clustervars = 'cl_num') because the analytical variance matrix does not account for between-cluster correlation. Use the bootstrap confidence intervals to assess pre-trends.
+   window    twfe twfe_se      csa  csa_se     bjs  bjs_se neg_abs G_eff_twfe
+   <char>   <num>   <num>    <num>   <num>   <num>   <num>   <num>      <num>
+1: static 0.04082 0.02252 -0.03184 0.05877 0.03498 0.02348 0.01157      29.94
+   G_eff_bjs G_eff_csa
+       <num>     <num>
+1:        NA        NA
+TWFE in raw units 0.0429823 vs published 0.0443 (ratio 0.9703)
+-> output/specs_controls/cie20260904__T4_5.csv 

@@ -1,0 +1,8 @@
+   window    twfe twfe_se       csa  csa_se     bjs  bjs_se  neg_abs G_eff_twfe
+   <char>   <num>   <num>     <num>   <num>   <num>   <num>    <num>      <num>
+1: static 0.04101 0.01735 -0.004413 0.01985 0.04783 0.01689 0.008086      25.12
+   G_eff_bjs G_eff_csa
+       <num>     <num>
+1:      15.8      12.9
+TWFE in raw units 0.0437341 vs published 0.0437 (ratio 1.0008)
+-> output/specs/cie20260904__T1_1.csv 

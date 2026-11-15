@@ -1,0 +1,59 @@
+{
+  "paper_id": "cie000000",
+  "journal": "cie",
+  "year": 2025,
+  "issue": 3,
+  "title": "",
+  "screened_from": "article_text+package",
+  "screener": "",
+  "screen_date": "",
+  "staggered_design": true,
+  "eligible_design": false,
+  "near_miss": false,
+  "near_miss_controls_only": false,
+  "near_miss_reason": "",
+  "policy_or_event": "例：低碳城市试点（2010、2012、2017 三批）",
+  "unit": "firm",
+  "assignment_unit": "city",
+  "time_unit": "year",
+  "n_cohorts_reported": null,
+  "estimators_reported": ["twfe_static", "twfe_event"],
+  "reports_modern_estimator": false,
+  "main_or_robustness": "main",
+  "data_sources": ["CSMAR"],
+  "data_access": "proprietary",
+  "package_status": "data_and_code",
+  "software": "Stata",
+  "eligible_specs": [
+    {
+      "spec_id": "T3_c1",
+      "location": "表3 第(1)列",
+      "static_or_event": "static",
+      "outcome": "",
+      "outcome_transform": "",
+      "treatment_definition": "",
+      "fixed_effects": "企业 + 年份",
+      "xt_vars": [],
+      "weights": "",
+      "clustering": "城市",
+      "event_bins": "",
+      "omitted_period": "",
+      "coef": null,
+      "se": null,
+      "n_obs": null,
+      "preferred": true,
+      "in_abstract_or_intro": true,
+      "notes": ""
+    }
+  ],
+  "near_miss_controls_only_specs": [
+    {"spec_id": "T3_c2", "location": "表3 第(2)列", "controls": ["size", "lev", "roa"], "coef": null, "se": null}
+  ],
+  "ineligible_specs": [
+    {"location": "表5", "reason": "PSM-DID 用匹配权重"}
+  ],
+  "appendix_specs": [],
+  "n_eligible_specs": 1,
+  "priority": 1,
+  "notes": ""
+}

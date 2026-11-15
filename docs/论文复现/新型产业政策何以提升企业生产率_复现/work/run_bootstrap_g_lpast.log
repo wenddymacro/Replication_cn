@@ -1,0 +1,166 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      Stata 19.0
+___/   /   /___/   /   /___/       MP—Parallel Edition
+
+ Statistics and Data Science       Copyright 1985-2025 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-782-8272        https://www.stata.com
+                                   979-696-4600        service@stata.com
+
+Stata license: 114514-student 64-core lab perpetual
+Serial number: 9223372036854775807
+  Licensed to: 1
+               1
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. More than 2 billion observations are allowed; see help obs_advice.
+      4. Maximum number of variables is set to 5,000 but can be increased;
+          see help set_maxvar.
+
+
+Running D:\Stata\Stata19\profile.do ...
+
+. do run_bootstrap_g_lpast.do 
+
+. clear all
+
+. set more off
+
+. set processors 1
+    The maximum number of processors or cores being used is changed from 16 to
+    1.  It can be set to any number between 1 and 16
+
+. adopath ++ "../output/local_ado"
+  [1]              "../output/local_ado"
+  [2]  (BASE)      "D:\Stata\Stata19\ado\base/"
+  [3]  (SITE)      "D:\Stata\Stata19\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "C:\ado\personal/"
+  [6]  (PLUS)      "C:\ado\plus/"
+  [7]  (OLDPLACE)  "C:\ado\myado/"
+  [8]              "C:\ado\plus"
+  [9]              "C:\ado\github"
+  [10]             "C:\ado\personal"
+
+. log using "../output/bootstrap_g_lpast.log", text replace
+(file
+    C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\work\../o
+    > utput/bootstrap_g_lpast.log not found)
+---------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\wo
+> rk\../output/bootstrap_g_lpast.log
+  log type:  text
+ opened on:  13 Nov 2026, 23:48:55
+
+. use "../author/listed.dta", clear
+
+. global xlist "lnage lnasset lnsize lev edu ceo lngdppc secondary govexp ftd"
+
+. xtset city
+
+Panel variable: city (unbalanced)
+
+. bdiff, group(g_lpast) model(reghdfe TFP chainleader $xlist, absorb(stkcd prv#ye
+> ar indid#year) vce(cluster city)) reps(1000) first detail seed(824)
+
+Begin Time: 13 Nov 2026 23:48:55
+.................................................................................
+> ...............................................................................
+> ...............................................................................
+> ...............................................................................
+> ...............................................................................
+> ...............................................................................
+> ...............................................................................
+> ...............................................................................
+> ...............................................................................
+> ...............................................................................
+> ...............................................................................
+> ...............................................................................
+> ..................................................
+
+
+-Permutaion (1000 times)- Test of Group (g_lpast 0 v.s 1) coeficients
+difference
+
+   Variables |      b0-b1    Freq     p-value
+-------------+-------------------------------
+ chainleader |     -0.137     873       0.127
+       lnage |      0.455     128       0.128
+     lnasset |     -0.015     710       0.290
+      lnsize |      0.089      98       0.098
+         lev |     -0.280     716       0.284
+         edu |     -0.060     397       0.397
+         ceo |      0.099      93       0.093
+     lngdppc |      0.145     342       0.342
+   secondary |      0.394     410       0.410
+      govexp |      1.470     203       0.203
+         ftd |      0.200     406       0.406
+       _cons |     -3.751     844       0.156
+---------------------------------------------
+Ho: b0(chainleader) = b1(chainleader)
+  Observed difference = -0.137
+    Empirical p-value =  0.127
+
+--------------------------------------------
+                      (1)             (2)   
+                g_lpast_0       g_lpast_1   
+--------------------------------------------
+chainleader        0.0181           0.155** 
+                   (0.30)          (2.16)   
+lnage              -0.351          -0.806*  
+                  (-0.64)         (-1.69)   
+lnasset            -0.101***      -0.0855** 
+                  (-3.29)         (-2.32)   
+lnsize              0.466***        0.378***
+                   (8.38)          (6.94)   
+lev                -0.120           0.160   
+                  (-0.63)          (0.73)   
+edu                 0.346*          0.406***
+                   (1.86)          (2.66)   
+ceo              -0.00459          -0.104*  
+                  (-0.10)         (-1.74)   
+lngdppc             0.343           0.198   
+                   (1.26)          (1.13)   
+secondary          -0.337          -0.731   
+                  (-0.37)         (-1.11)   
+govexp              1.734           0.264   
+                   (1.13)          (0.32)   
+ftd                 0.143         -0.0574   
+                   (0.65)         (-0.26)   
+_cons               4.169           7.920***
+                   (1.29)          (3.13)   
+--------------------------------------------
+r2                  0.971           0.967   
+N                    1943            1631   
+--------------------------------------------
+t statistics in parentheses
+* p<0.1, ** p<0.05, *** p<0.01
+
+ Over Time:14 Nov 2026 00:12:57   Time used: 1442.663s
+
+. return list
+
+scalars:
+                  r(p) =  .127
+              r(bdiff) =  -.1372665577422847
+
+macros:
+              r(model) : "reghdfe TFP chainleader lnage lnasset lnsize lev ed.."
+
+matrices:
+            r(pvalues) :  12 x 1
+                  r(P) :  12 x 3
+        r(observediff) :  1 x 12
+
+. matrix list r(p)
+matrix r(p) not found
+r(111);
+
+end of do-file
+r(111);

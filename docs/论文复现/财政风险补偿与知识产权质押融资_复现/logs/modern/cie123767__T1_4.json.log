@@ -1,0 +1,18 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+Warning in eval(stub[[3L]], x, enclos) :
+  unable to translate '<U+5E02>_id' to native encoding
+Warning in did_standardization(data, args) :
+  Dropped 17 units that were already treated in the first period.
+You have an unbalanced panel. Proceeding as such.
+   window   twfe twfe_se    csa  csa_se    bjs  bjs_se  neg_abs G_eff_twfe
+   <char>  <num>   <num>  <num>   <num>  <num>   <num>    <num>      <num>
+1: static 0.1294 0.02113 0.1088 0.03674 0.1616 0.02274 0.005175       3878
+   G_eff_bjs G_eff_csa
+       <num>     <num>
+1:        NA        NA
+TWFE in raw units 0.0380935 vs published 0.0381 (ratio 0.9998)
+-> output/specs_controls/cie123767__T1_4.csv 

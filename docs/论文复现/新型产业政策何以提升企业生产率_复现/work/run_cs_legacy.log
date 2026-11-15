@@ -1,0 +1,322 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      Stata 19.0
+___/   /   /___/   /   /___/       MP—Parallel Edition
+
+ Statistics and Data Science       Copyright 1985-2025 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-782-8272        https://www.stata.com
+                                   979-696-4600        service@stata.com
+
+Stata license: 114514-student 64-core lab perpetual
+Serial number: 9223372036854775807
+  Licensed to: 1
+               1
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. More than 2 billion observations are allowed; see help obs_advice.
+      4. Maximum number of variables is set to 5,000 but can be increased;
+          see help set_maxvar.
+
+
+Running D:\Stata\Stata19\profile.do ...
+
+. do run_cs_legacy.do 
+
+. clear all
+
+. set more off
+
+. set processors 1
+    The maximum number of processors or cores being used is changed from 16 to
+    1.  It can be set to any number between 1 and 16
+
+. set seed 824
+
+. adopath ++ "../output/local_ado"
+  [1]              "../output/local_ado"
+  [2]  (BASE)      "D:\Stata\Stata19\ado\base/"
+  [3]  (SITE)      "D:\Stata\Stata19\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "C:\ado\personal/"
+  [6]  (PLUS)      "C:\ado\plus/"
+  [7]  (OLDPLACE)  "C:\ado\myado/"
+  [8]              "C:\ado\plus"
+  [9]              "C:\ado\github"
+  [10]             "C:\ado\personal"
+
+. use "../author/listed.dta", clear
+
+. global xlist "lnage lnasset lnsize lev edu ceo lngdppc secondary govexp ftd"
+
+. log using "../output/cs_legacy.log", text replace
+(file
+    C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\work\../o
+    > utput/cs_legacy.log not found)
+---------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\wo
+> rk\../output/cs_legacy.log
+  log type:  text
+ opened on:  13 Nov 2026, 23:46:18
+
+. adopath ++ "../output/csdid_legacy"
+  [1]              "../output/csdid_legacy"
+  [2]              "../output/local_ado"
+  [3]  (BASE)      "D:\Stata\Stata19\ado\base/"
+  [4]  (SITE)      "D:\Stata\Stata19\ado\site/"
+  [5]              "."
+  [6]  (PERSONAL)  "C:\ado\personal/"
+  [7]  (PLUS)      "C:\ado\plus/"
+  [8]  (OLDPLACE)  "C:\ado\myado/"
+  [9]              "C:\ado\plus"
+  [10]             "C:\ado\github"
+  [11]             "C:\ado\personal"
+
+. //生成动态效应的变量
+. local num1=4
+
+. local num2=3
+
+. replace chainleader_l=. if chainleader_l==0
+(0 real changes made)
+
+. gen event=year-chainleader_l
+(20,134 missing values generated)
+
+. gen setup_mis=chainleader_l
+(20,134 missing values generated)
+
+. replace setup_mis=0 if setup_mis==.
+(20,134 real changes made)
+
+. tab event
+
+      event |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         -9 |         43        0.52        0.52
+         -8 |        121        1.47        2.00
+         -7 |        277        3.37        5.37
+         -6 |        527        6.42       11.79
+         -5 |        589        7.17       18.96
+         -4 |        644        7.84       26.81
+         -3 |        734        8.94       35.74
+         -2 |        787        9.58       45.33
+         -1 |        826       10.06       55.39
+          0 |        945       11.51       66.90
+          1 |        937       11.41       78.31
+          2 |        898       10.94       89.25
+          3 |        662        8.06       97.31
+          4 |        152        1.85       99.16
+          5 |         34        0.41       99.57
+          6 |         35        0.43      100.00
+------------+-----------------------------------
+      Total |      8,211      100.00
+
+. replace event=-`num1' if event<=-`num1'
+(1,557 real changes made)
+
+. replace event=`num2' if event>=`num2'
+(20,355 real changes made)
+
+. forvalues i=`num1'(-1)1{
+  2. gen pre`i'=0
+  3. replace pre`i'=1 if event==-`i'
+  4. }
+(2,201 real changes made)
+(734 real changes made)
+(787 real changes made)
+(826 real changes made)
+
+. forvalues i=0(1)`num2'{
+  2. gen post`i'=0
+  3. replace post`i'=1 if event==`i'
+  4. }
+(945 real changes made)
+(937 real changes made)
+(898 real changes made)
+(21,017 real changes made)
+
+. csdid TFP $xlist, ivar(stkcd) time(year) gvar(setup_mis) method(dripw) long2 cl
+> uster(city)
+Panel is not balanced
+Will use observations with Pair balanced (observed at t0 and t1)
+..................................................
+.............
+Difference-in-difference with Multiple Time Periods
+
+                                                        Number of obs = 22,844
+Outcome model  : least squares
+Treatment model: inverse probability
+                                 (Std. err. adjusted for 258 clusters in city)
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+g2017        |
+ t_2014_2016 |   -.263758   .0510037    -5.17   0.000    -.3637235   -.1637925
+ t_2015_2016 |  -.1185863   .0228817    -5.18   0.000    -.1634337   -.0737389
+ t_2016_2017 |  -.1320458   .0329334    -4.01   0.000     -.196594   -.0674977
+ t_2016_2018 |   .0718121   .0240458     2.99   0.003     .0246832     .118941
+ t_2016_2019 |   .0088058   .0401476     0.22   0.826     -.069882    .0874936
+ t_2016_2020 |   .0947981   .0223448     4.24   0.000     .0510032    .1385931
+ t_2016_2021 |   .0185734   .0318333     0.58   0.560    -.0438188    .0809656
+ t_2016_2022 |  -.3752021   .0408852    -9.18   0.000    -.4553356   -.2950686
+ t_2016_2023 |  -.5374755   .0679073    -7.91   0.000    -.6705714   -.4043796
+-------------+----------------------------------------------------------------
+g2018        |
+ t_2014_2017 |  -.2217368   .2804445    -0.79   0.429    -.7713979    .3279242
+ t_2015_2017 |   .3112706   .0789557     3.94   0.000     .1565202    .4660209
+ t_2016_2017 |   .2080614   .0289788     7.18   0.000      .151264    .2648588
+ t_2017_2018 |   .3774733   .0345826    10.92   0.000     .3096925     .445254
+ t_2017_2019 |  -.2219657   .0425925    -5.21   0.000    -.3054455    -.138486
+ t_2017_2020 |   .6173382   .0960117     6.43   0.000     .4291587    .8055178
+ t_2017_2021 |  -.1639708   .0699418    -2.34   0.019    -.3010542   -.0268874
+ t_2017_2022 |      -.048   .0988947    -0.49   0.627    -.2418299      .14583
+ t_2017_2023 |   .0156265   .0703416     0.22   0.824    -.1222405    .1534935
+-------------+----------------------------------------------------------------
+g2019        |
+ t_2014_2018 |  -.0900735   .0644206    -1.40   0.162    -.2163356    .0361887
+ t_2015_2018 |  -.1053709   .0459338    -2.29   0.022    -.1953996   -.0153423
+ t_2016_2018 |   -.059372    .048652    -1.22   0.222    -.1547281    .0359842
+ t_2017_2018 |  -.0305212   .0115452    -2.64   0.008    -.0531493    -.007893
+ t_2018_2019 |   .0543879   .0323117     1.68   0.092     -.008942    .1177177
+ t_2018_2020 |    .104724   .0178574     5.86   0.000     .0697241    .1397239
+ t_2018_2021 |   .1412628   .0140895    10.03   0.000     .1136478    .1688777
+ t_2018_2022 |    .070174    .027043     2.59   0.009     .0171707    .1231774
+ t_2018_2023 |   .0539881   .0192577     2.80   0.005     .0162436    .0917326
+-------------+----------------------------------------------------------------
+g2020        |
+ t_2014_2019 |  -.0913768   .0452274    -2.02   0.043    -.1800209   -.0027327
+ t_2015_2019 |  -.0561369   .0482694    -1.16   0.245    -.1507432    .0384693
+ t_2016_2019 |  -.0187593   .0449764    -0.42   0.677    -.1069114    .0693928
+ t_2017_2019 |   .0022124   .0316963     0.07   0.944    -.0599113     .064336
+ t_2018_2019 |  -.0148414   .0236396    -0.63   0.530    -.0611742    .0314915
+ t_2019_2020 |   .0085366    .020111     0.42   0.671    -.0308802    .0479533
+ t_2019_2021 |   .0333323   .0159158     2.09   0.036     .0021379    .0645267
+ t_2019_2022 |   .0458586   .0237743     1.93   0.054    -.0007383    .0924554
+ t_2019_2023 |   .0601866   .0436826     1.38   0.168    -.0254298     .145803
+-------------+----------------------------------------------------------------
+g2021        |
+ t_2014_2020 |  -.1205908   .0672346    -1.79   0.073    -.2523682    .0111866
+ t_2015_2020 |  -.0991985   .0603011    -1.65   0.100    -.2173864    .0189894
+ t_2016_2020 |  -.0271404    .046644    -0.58   0.561     -.118561    .0642802
+ t_2017_2020 |   .0258994   .0453707     0.57   0.568    -.0630255    .1148244
+ t_2018_2020 |   .0404699   .0299851     1.35   0.177    -.0182998    .0992396
+ t_2019_2020 |   .0273458   .0194384     1.41   0.159    -.0107528    .0654444
+ t_2020_2021 |   .0323428   .0277409     1.17   0.244    -.0220284    .0867139
+ t_2020_2022 |   .0438548   .0363463     1.21   0.228    -.0273826    .1150922
+ t_2020_2023 |   .0659931   .0478266     1.38   0.168    -.0277453    .1597315
+-------------+----------------------------------------------------------------
+g2022        |
+ t_2014_2021 |   .0080898    .077623     0.10   0.917    -.1440484     .160228
+ t_2015_2021 |  -.0037257   .0645874    -0.06   0.954    -.1303147    .1228634
+ t_2016_2021 |  -.0441866   .0658493    -0.67   0.502    -.1732488    .0848756
+ t_2017_2021 |   .0018592   .0656936     0.03   0.977     -.126898    .1306164
+ t_2018_2021 |   .0036503   .0424863     0.09   0.932    -.0796213    .0869219
+ t_2019_2021 |   .0175603   .0359221     0.49   0.625    -.0528457    .0879663
+ t_2020_2021 |   .0339281   .0281023     1.21   0.227    -.0211513    .0890075
+ t_2021_2022 |   .0379207   .0225763     1.68   0.093    -.0063281    .0821695
+ t_2021_2023 |   .0434369   .0373362     1.16   0.245    -.0297407    .1166145
+-------------+----------------------------------------------------------------
+g2023        |
+ t_2014_2022 |  -.2112992   .1542336    -1.37   0.171    -.5135914    .0909931
+ t_2015_2022 |   -.099298   .1026028    -0.97   0.333    -.3003959    .1017999
+ t_2016_2022 |   -.097968   .0901353    -1.09   0.277    -.2746299    .0786939
+ t_2017_2022 |  -.1096073   .0903656    -1.21   0.225    -.2867205     .067506
+ t_2018_2022 |  -.0654928    .065978    -0.99   0.321    -.1948074    .0638218
+ t_2019_2022 |  -.0239016   .0519061    -0.46   0.645    -.1256356    .0778324
+ t_2020_2022 |  -.0283402   .0373337    -0.76   0.448    -.1015128    .0448324
+ t_2021_2022 |  -.0440819   .0205095    -2.15   0.032    -.0842798   -.0038841
+ t_2022_2023 |   .0091736   .0297353     0.31   0.758    -.0491065    .0674537
+------------------------------------------------------------------------------
+Control: Never Treated
+
+See Callaway and Sant'Anna (2021) for details
+
+. estat event, window(-3 3) estore(cs_est)
+ATT by Periods Before and After treatment
+Event Study:Dynamic effects
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     Pre_avg |  -.0031952   .0167454    -0.19   0.849    -.0360155    .0296252
+    Post_avg |   .0475063   .0174262     2.73   0.006     .0133516     .081661
+         Tm4 |  -.0095211    .025289    -0.38   0.707    -.0590866    .0400443
+         Tm3 |   .0037641   .0191841     0.20   0.844    -.0338361    .0413644
+         Tm2 |  -.0038285   .0139025    -0.28   0.783    -.0310769    .0234199
+         Tp0 |   .0205516   .0131101     1.57   0.117    -.0051437    .0462469
+         Tp1 |   .0443802   .0147204     3.01   0.003     .0155287    .0732317
+         Tp2 |   .0635232     .02226     2.85   0.004     .0198944    .1071519
+         Tp3 |   .0615703   .0347938     1.77   0.077    -.0066243    .1297649
+------------------------------------------------------------------------------
+
+. estimates restore cs_est
+(results cs_est are active now)
+
+. matrix cs_b = e(b)
+
+. matrix cs_v = e(V)
+
+. // long2下-1期为基期、不单独估计；若结果中无Tm1，则补0
+. if missing(colnumb(cs_b, "Tm1")) {
+. local cn : colnames cs_b
+. matrix cs_b = cs_b, (0)
+. matrix colnames cs_b = `cn' Tm1
+. local k = colsof(cs_v)
+. matrix cs_v = (cs_v, J(`k', 1, 0)) \ J(1, `k' + 1, 0)
+. matrix colnames cs_v = `cn' Tm1
+. matrix rownames cs_v = `cn' Tm1
+. }
+
+. 
+. estimates save "../output/cs_legacy.ster", replace
+(note: file ../output/cs_legacy.ster not found)
+file ../output/cs_legacy.ster saved
+
+. 
+. matrix bb=cs_b
+
+. matrix vv=cs_v
+
+. postfile coef str40 term double b se using "../output/cs_legacy.dta", replace
+(file ../output/cs_legacy.dta not found)
+
+. local terms : colnames bb
+
+. local j=0
+
+. foreach term of local terms {
+  2. local ++j
+  3. post coef ("`term'") (bb[1,`j']) (sqrt(vv[`j',`j']))
+  4. }
+
+. postclose coef
+
+. preserve
+
+. use "../output/cs_legacy.dta", clear
+
+. export delimited using "../output/cs_legacy.csv", replace
+(file ../output/cs_legacy.csv not found)
+file ../output/cs_legacy.csv saved
+
+. restore
+
+. 
+. display "COMPLETE_cs_legacy"
+COMPLETE_cs_legacy
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\wo
+> rk\../output/cs_legacy.log
+  log type:  text
+ closed on:  13 Nov 2026, 23:46:37
+---------------------------------------------------------------------------------
+
+. 
+end of do-file

@@ -1,0 +1,22 @@
+[
+  {
+    "file": "code\\R\\analysis.R",
+    "sha256": "e5525b316e6b6a0c3178aad057cfcfa49691a8f3ce5b5cbbdf165235ac448fea"
+  },
+  {
+    "file": "code\\R\\estimators.R",
+    "sha256": "4a5840bf3752bae7bb06d30da479f0afa79a9a3451811018fd668af0decda1a3"
+  },
+  {
+    "file": "code\\R\\run_spec.R",
+    "sha256": "8d927aa15438fd857509a29902fc14b431a3b8e2799de5f9692b0bb1a1b3f69c"
+  },
+  {
+    "file": "code\\R\\simulate_example.R",
+    "sha256": "c21ce7bddea0cac75957ca62393efbb28043dcf9dafcbb36ba1d1cf1ed8e86d2"
+  },
+  {
+    "file": "code\\R\\test_estimators.R",
+    "sha256": "ebc509c8b781f4190bd95016bbe368bf7773ec0c01f542504124c3454cc7f45e"
+  }
+]

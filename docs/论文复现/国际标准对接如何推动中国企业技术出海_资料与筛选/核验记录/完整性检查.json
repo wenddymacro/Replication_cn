@@ -1,0 +1,31 @@
+{
+  "zip_crc": "pass",
+  "zip_file_members": 18,
+  "pdfs": [
+    {
+      "file": "论文\\国际标准对接如何推动中国企业技术出海.pdf",
+      "pages": 22,
+      "nonempty_text_pages": 22,
+      "signature": true,
+      "eof": true
+    },
+    {
+      "file": "附录\\附录.pdf",
+      "pages": 23,
+      "nonempty_text_pages": 23,
+      "signature": true,
+      "eof": true
+    },
+    {
+      "file": "其他说明\\《中国工业经济》编辑部关于公开数据附件的使用说明.pdf",
+      "pages": 2,
+      "nonempty_text_pages": 2,
+      "signature": true,
+      "eof": true
+    }
+  ],
+  "source": "用户提供本地下载文件；本轮没有重新下载",
+  "http_status": null,
+  "attachment_url": null,
+  "sha256_verified": true
+}

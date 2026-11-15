@@ -1,0 +1,1334 @@
+-------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_protoco
+> l\work\../logs/sample_flags.log
+  log type:  text
+ opened on:  14 Nov 2026, 17:54:09
+
+. use "../../chain_policy/author/listed.dta", clear
+
+. gen long row_id=_n
+
+. global clist "lnage lnasset lnsize lev edu ceo"
+
+. global xlist "lnage lnasset lnsize lev edu ceo lngdppc secondary govexp ftd"
+
+. reghdfe TFP chainleader $xlist, absorb(stkcd prv#year indid#year) vce(cluster
+>  city)
+(dropped 337 singleton observations)
+(MWFE estimator converged in 74 iterations)
+
+HDFE Linear regression                            Number of obs   =     23,913
+Absorbing 3 HDFE groups                           F(  11,    256) =      63.64
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9318
+                                                  Adj R-squared   =     0.9163
+                                                  Within R-sq.    =     0.2341
+Number of clusters (city)    =        257         Root MSE        =     0.3067
+
+                                 (Std. err. adjusted for 257 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+         TFP | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |    .040032   .0144636     2.77   0.006     .0115493    .0685147
+       lnage |   .2249482   .0854114     2.63   0.009     .0567498    .3931466
+     lnasset |   -.096786   .0164212    -5.89   0.000    -.1291239   -.0644482
+      lnsize |   .5452723   .0252367    21.61   0.000     .4955742    .5949703
+         lev |   .2192764   .0565216     3.88   0.000     .1079698     .330583
+         edu |   .5327286   .0594819     8.96   0.000     .4155926    .6498647
+         ceo |  -.0245347   .0109127    -2.25   0.025    -.0460248   -.0030446
+     lngdppc |    .088124   .0577934     1.52   0.129    -.0256871    .2019351
+   secondary |   .3817008    .203944     1.87   0.062    -.0199208    .7833223
+      govexp |   .3133287   .2643721     1.19   0.237    -.2072924    .8339498
+         ftd |  -.0575373   .0615609    -0.93   0.351    -.1787676    .0636929
+       _cons |   4.429718   .7655326     5.79   0.000     2.922175    5.937262
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      3487        3487           0    *|
+     prv#year |       270           1         269     |
+   indid#year |       669          10         659     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_initial=e(sample)
+
+. reghdfe TFP chainleader , absorb(stkcd year) vce(cluster city)
+(dropped 276 singleton observations)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     25,082
+Absorbing 2 HDFE groups                           F(   1,    277) =       5.59
+Statistics robust to heteroskedasticity           Prob > F        =     0.0188
+                                                  R-squared       =     0.8916
+                                                  Adj R-squared   =     0.8737
+                                                  Within R-sq.    =     0.0006
+Number of clusters (city)    =        278         Root MSE        =     0.3790
+
+                                 (Std. err. adjusted for 278 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+         TFP | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |   .0437341   .0185007     2.36   0.019     .0073142    .0801541
+       _cons |   8.871475   .0022807  3889.82   0.000     8.866985    8.875965
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       stkcd |      3548        3548           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T1_1=e(sample)
+
+. reghdfe TFP chainleader $clist , absorb(stkcd year) vce(cluster city)
+(dropped 285 singleton observations)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     24,262
+Absorbing 2 HDFE groups                           F(   7,    277) =      92.34
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9190
+                                                  Adj R-squared   =     0.9051
+                                                  Within R-sq.    =     0.2438
+Number of clusters (city)    =        278         Root MSE        =     0.3270
+
+                                 (Std. err. adjusted for 278 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+         TFP | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |   .0422402    .014534     2.91   0.004      .013629    .0708513
+       lnage |   .2563097   .0925157     2.77   0.006     .0741865    .4384329
+     lnasset |   -.091665    .016124    -5.68   0.000    -.1234062   -.0599238
+      lnsize |   .5640489   .0257082    21.94   0.000     .5134406    .6146572
+         lev |   .1827125   .0586444     3.12   0.002     .0672672    .2981578
+         edu |   .6222342   .0677236     9.19   0.000     .4889159    .7555525
+         ceo |  -.0197047   .0103394    -1.91   0.058    -.0400585    .0006491
+       _cons |   5.249459   .3727987    14.08   0.000      4.51558    5.983337
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       stkcd |      3534        3534           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T1_2=e(sample)
+
+. reghdfe TFP chainleader $xlist , absorb(stkcd year) vce(cluster city)
+(dropped 281 singleton observations)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     23,969
+Absorbing 2 HDFE groups                           F(  11,    256) =      76.47
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9195
+                                                  Adj R-squared   =     0.9056
+                                                  Within R-sq.    =     0.2470
+Number of clusters (city)    =        257         Root MSE        =     0.3257
+
+                                 (Std. err. adjusted for 257 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+         TFP | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |   .0511866   .0152367     3.36   0.001     .0211814    .0811918
+       lnage |   .2641122   .0918534     2.88   0.004     .0832276    .4449968
+     lnasset |  -.0897732   .0161497    -5.56   0.000    -.1215764     -.05797
+      lnsize |   .5633618    .025537    22.06   0.000     .5130725    .6136511
+         lev |    .186078   .0589814     3.15   0.002     .0699275    .3022286
+         edu |   .6164416   .0686543     8.98   0.000     .4812425    .7516407
+         ceo |  -.0213967   .0103978    -2.06   0.041    -.0418727   -.0009206
+     lngdppc |   .1571307   .0464876     3.38   0.001     .0655839    .2486775
+   secondary |   .0608119   .1785704     0.34   0.734    -.2908421     .412466
+      govexp |   .3961755   .1998001     1.98   0.048     .0027144    .7896365
+         ftd |    .034564   .0480165     0.72   0.472    -.0599936    .1291216
+       _cons |   3.287786    .651245     5.05   0.000     2.005306    4.570266
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       stkcd |      3492        3492           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T1_3=e(sample)
+
+. reghdfe TFP chainleader $xlist , absorb(stkcd prv#year indid#year) vce(cluste
+> r city)
+(dropped 337 singleton observations)
+(MWFE estimator converged in 74 iterations)
+
+HDFE Linear regression                            Number of obs   =     23,913
+Absorbing 3 HDFE groups                           F(  11,    256) =      63.64
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9318
+                                                  Adj R-squared   =     0.9163
+                                                  Within R-sq.    =     0.2341
+Number of clusters (city)    =        257         Root MSE        =     0.3067
+
+                                 (Std. err. adjusted for 257 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+         TFP | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |    .040032   .0144636     2.77   0.006     .0115493    .0685147
+       lnage |   .2249482   .0854114     2.63   0.009     .0567498    .3931466
+     lnasset |   -.096786   .0164212    -5.89   0.000    -.1291239   -.0644482
+      lnsize |   .5452723   .0252367    21.61   0.000     .4955742    .5949703
+         lev |   .2192764   .0565216     3.88   0.000     .1079698     .330583
+         edu |   .5327286   .0594819     8.96   0.000     .4155926    .6498647
+         ceo |  -.0245347   .0109127    -2.25   0.025    -.0460248   -.0030446
+     lngdppc |    .088124   .0577934     1.52   0.129    -.0256871    .2019351
+   secondary |   .3817008    .203944     1.87   0.062    -.0199208    .7833223
+      govexp |   .3133287   .2643721     1.19   0.237    -.2072924    .8339498
+         ftd |  -.0575373   .0615609    -0.93   0.351    -.1787676    .0636929
+       _cons |   4.429718   .7655326     5.79   0.000     2.922175    5.937262
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      3487        3487           0    *|
+     prv#year |       270           1         269     |
+   indid#year |       669          10         659     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T1_4=e(sample)
+
+. reghdfe local chainleader $xlist, absorb(stkcd prv#year indid#year) vce(clust
+> er city)
+(dropped 603 singleton observations)
+(MWFE estimator converged in 106 iterations)
+
+HDFE Linear regression                            Number of obs   =      4,312
+Absorbing 3 HDFE groups                           F(  11,    190) =       3.18
+Statistics robust to heteroskedasticity           Prob > F        =     0.0006
+                                                  R-squared       =     0.8276
+                                                  Adj R-squared   =     0.7145
+                                                  Within R-sq.    =     0.0165
+Number of clusters (city)    =        191         Root MSE        =     0.1503
+
+                                 (Std. err. adjusted for 191 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       local | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |   .0546362   .0255556     2.14   0.034      .004227    .1050454
+       lnage |   .1603155   .1085711     1.48   0.141    -.0538441    .3744751
+     lnasset |   .0047334   .0078365     0.60   0.547    -.0107243    .0201912
+      lnsize |  -.0289388   .0155462    -1.86   0.064     -.059604    .0017265
+         lev |  -.0509316    .034644    -1.47   0.143    -.1192678    .0174046
+         edu |  -.1342535   .0486171    -2.76   0.006     -.230152    -.038355
+         ceo |  -.0280676   .0114532    -2.45   0.015    -.0506593    -.005476
+     lngdppc |  -.0466509   .0458654    -1.02   0.310    -.1371217      .04382
+   secondary |  -.1546919   .2093459    -0.74   0.461    -.5676325    .2582488
+      govexp |    -.31935    .273976    -1.17   0.245    -.8597753    .2210753
+         ftd |   .0830664   .0787963     1.05   0.293    -.0723615    .2384942
+       _cons |     .58506   .7019621     0.83   0.406      -.79958      1.9697
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |       979         979           0    *|
+     prv#year |       256           1         255     |
+   indid#year |       473          10         463     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T2_1=e(sample)
+
+. reghdfe lnland chainleader $xlist, absorb(stkcd prv#year indid#year) vce(clus
+> ter city)
+(dropped 240 singleton observations)
+(MWFE estimator converged in 69 iterations)
+
+HDFE Linear regression                            Number of obs   =     26,918
+Absorbing 3 HDFE groups                           F(  11,    257) =      12.36
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.4643
+                                                  Adj R-squared   =     0.3489
+                                                  Within R-sq.    =     0.0077
+Number of clusters (city)    =        258         Root MSE        =     0.9184
+
+                                 (Std. err. adjusted for 258 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+      lnland | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |   .0727369   .0412567     1.76   0.079    -.0085074    .1539813
+       lnage |  -.1037053    .183561    -0.56   0.573    -.4651805    .2577698
+     lnasset |  -.0040973   .0144898    -0.28   0.778    -.0326312    .0244367
+      lnsize |   .2460565   .0254334     9.67   0.000     .1959721     .296141
+         lev |  -.0622663   .0788169    -0.79   0.430    -.2174756    .0929429
+         edu |   .1079946   .0885898     1.22   0.224    -.0664597    .2824489
+         ceo |   .0056928   .0242862     0.23   0.815    -.0421324     .053518
+     lngdppc |   -.025073   .1379159    -0.18   0.856    -.2966622    .2465163
+   secondary |  -.3149305   .4653328    -0.68   0.499    -1.231281    .6014203
+      govexp |   .3551615   .5983878     0.59   0.553    -.8232062    1.533529
+         ftd |  -.0604847   .1199697    -0.50   0.615    -.2967335     .175764
+       _cons |  -.5725285   1.703858    -0.34   0.737     -3.92783    2.782773
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      3824        3824           0    *|
+     prv#year |       270           1         269     |
+   indid#year |       676          10         666     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T2_2=e(sample)
+
+. reghdfe local_land chainleader $xlist, absorb(stkcd prv#year indid#year) vce(
+> cluster city)
+(dropped 582 singleton observations)
+(MWFE estimator converged in 101 iterations)
+
+HDFE Linear regression                            Number of obs   =      4,204
+Absorbing 3 HDFE groups                           F(  11,    189) =       2.53
+Statistics robust to heteroskedasticity           Prob > F        =     0.0053
+                                                  R-squared       =     0.7686
+                                                  Adj R-squared   =     0.6154
+                                                  Within R-sq.    =     0.0092
+Number of clusters (city)    =        190         Root MSE        =     0.0798
+
+                                 (Std. err. adjusted for 190 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+  local_land | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |   .0184172   .0103539     1.78   0.077    -.0020068    .0388412
+       lnage |  -.0776961   .0537729    -1.44   0.150    -.1837683    .0283761
+     lnasset |  -.0026728    .003181    -0.84   0.402    -.0089477    .0036021
+      lnsize |  -.0039394   .0067644    -0.58   0.561    -.0172828     .009404
+         lev |  -.0193481    .016641    -1.16   0.246    -.0521741    .0134778
+         edu |   .0063438   .0275905     0.23   0.818    -.0480811    .0607688
+         ceo |  -.0112939   .0056745    -1.99   0.048    -.0224874   -.0001003
+     lngdppc |   .0072442   .0284848     0.25   0.800    -.0489447    .0634332
+   secondary |   .1049864   .1404223     0.75   0.456      -.17201    .3819828
+      govexp |   .1951839   .1494313     1.31   0.193    -.0995836    .4899514
+         ftd |  -.0988832     .04644    -2.13   0.035    -.1904905    -.007276
+       _cons |   .2496369   .4142073     0.60   0.547    -.5674264      1.0667
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |       951         951           0    *|
+     prv#year |       256           1         255     |
+   indid#year |       468          10         458     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T2_3=e(sample)
+
+. reghdfe searcost chainleader $xlist, absorb(stkcd prv#year indid#year) vce(cl
+> uster city)
+(dropped 240 singleton observations)
+(MWFE estimator converged in 69 iterations)
+
+HDFE Linear regression                            Number of obs   =     26,914
+Absorbing 3 HDFE groups                           F(  11,    257) =       5.25
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8912
+                                                  Adj R-squared   =     0.8678
+                                                  Within R-sq.    =     0.0052
+Number of clusters (city)    =        258         Root MSE        =     0.0189
+
+                                 (Std. err. adjusted for 258 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+    searcost | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |  -.0023527   .0008864    -2.65   0.008    -.0040981   -.0006072
+       lnage |    .012331   .0053201     2.32   0.021     .0018545    .0228075
+     lnasset |  -.0010452   .0004133    -2.53   0.012    -.0018592   -.0002313
+      lnsize |   .0015115   .0006535     2.31   0.022     .0002246    .0027983
+         lev |    .003794   .0026481     1.43   0.153    -.0014209    .0090088
+         edu |   .0087385    .002022     4.32   0.000     .0047568    .0127203
+         ceo |    .000482   .0009029     0.53   0.594     -.001296      .00226
+     lngdppc |   -.002104   .0039852    -0.53   0.598    -.0099519    .0057438
+   secondary |  -.0298247   .0150888    -1.98   0.049    -.0595381   -.0001114
+      govexp |   .0014745   .0188594     0.08   0.938    -.0356642    .0386132
+         ftd |   .0046119   .0032175     1.43   0.153    -.0017241    .0109478
+       _cons |   .0198141   .0465163     0.43   0.670    -.0717875    .1114157
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      3823        3823           0    *|
+     prv#year |       270           1         269     |
+   indid#year |       676          10         666     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T2_4=e(sample)
+
+. reghdfe travcost chainleader $xlist, absorb(stkcd prv#year indid#year) vce(cl
+> uster city)
+(dropped 240 singleton observations)
+(MWFE estimator converged in 69 iterations)
+
+HDFE Linear regression                            Number of obs   =     26,914
+Absorbing 3 HDFE groups                           F(  11,    257) =       9.91
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8479
+                                                  Adj R-squared   =     0.8152
+                                                  Within R-sq.    =     0.0151
+Number of clusters (city)    =        258         Root MSE        =     0.0054
+
+                                 (Std. err. adjusted for 258 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+    travcost | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |  -.0005435   .0002596    -2.09   0.037    -.0010548   -.0000322
+       lnage |  -.0006242   .0013745    -0.45   0.650     -.003331    .0020826
+     lnasset |  -.0003475   .0001903    -1.83   0.069    -.0007223    .0000272
+      lnsize |  -.0013336   .0002394    -5.57   0.000     -.001805   -.0008621
+         lev |  -.0007555   .0007793    -0.97   0.333    -.0022901    .0007791
+         edu |   .0021526   .0006847     3.14   0.002     .0008042    .0035009
+         ceo |   .0003971   .0002074     1.91   0.057    -.0000114    .0008056
+     lngdppc |  -.0013169   .0010331    -1.27   0.204    -.0033514    .0007176
+   secondary |   .0048704   .0034535     1.41   0.160    -.0019303    .0116712
+      govexp |   .0023849   .0040813     0.58   0.559    -.0056521     .010422
+         ftd |  -.0000526   .0009767    -0.05   0.957     -.001976    .0018708
+       _cons |   .0413396    .013542     3.05   0.003     .0146722    .0680069
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      3823        3823           0    *|
+     prv#year |       270           1         269     |
+   indid#year |       676          10         666     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T2_5=e(sample)
+
+. reghdfe clawsuit chainleader $xlist , absorb(stkcd prv#year indid#year) vce(c
+> luster city)
+(dropped 240 singleton observations)
+(MWFE estimator converged in 69 iterations)
+
+HDFE Linear regression                            Number of obs   =     26,918
+Absorbing 3 HDFE groups                           F(  11,    257) =       2.07
+Statistics robust to heteroskedasticity           Prob > F        =     0.0229
+                                                  R-squared       =     0.2601
+                                                  Adj R-squared   =     0.1008
+                                                  Within R-sq.    =     0.0028
+Number of clusters (city)    =        258         Root MSE        =     0.2247
+
+                                 (Std. err. adjusted for 258 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+    clawsuit | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |   .0176913    .007224     2.45   0.015     .0034656     .031917
+       lnage |  -.0212504   .0392554    -0.54   0.589    -.0985536    .0560528
+     lnasset |  -.0112331   .0095517    -1.18   0.241    -.0300426    .0075764
+      lnsize |  -.0188044   .0068569    -2.74   0.007    -.0323073   -.0053016
+         lev |   .0563798   .0310269     1.82   0.070    -.0047195     .117479
+         edu |   .0139489   .0160447     0.87   0.385    -.0176469    .0455448
+         ceo |   .0013037    .007929     0.16   0.870    -.0143103    .0169177
+     lngdppc |  -.0263634   .0317843    -0.83   0.408    -.0889541    .0362274
+   secondary |  -.1250499   .1411794    -0.89   0.377    -.4030657    .1529659
+      govexp |   .1044273   .1362138     0.77   0.444      -.16381    .3726646
+         ftd |   .0220206   .0369992     0.60   0.552    -.0508395    .0948808
+       _cons |   .7487595   .4720883     1.59   0.114    -.1808945    1.678414
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      3824        3824           0    *|
+     prv#year |       270           1         269     |
+   indid#year |       676          10         666     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T2_6=e(sample)
+
+. reghdfe refund chainleader $xlist, absorb(stkcd prv#year indid#year) vce(clus
+> ter city)
+(dropped 240 singleton observations)
+(MWFE estimator converged in 69 iterations)
+
+HDFE Linear regression                            Number of obs   =     26,914
+Absorbing 3 HDFE groups                           F(  11,    257) =       2.15
+Statistics robust to heteroskedasticity           Prob > F        =     0.0175
+                                                  R-squared       =     0.2653
+                                                  Adj R-squared   =     0.1071
+                                                  Within R-sq.    =     0.0018
+Number of clusters (city)    =        258         Root MSE        =     0.0098
+
+                                 (Std. err. adjusted for 258 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+      refund | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |  -.0006516   .0002725    -2.39   0.017    -.0011881   -.0001151
+       lnage |   .0016191   .0015804     1.02   0.307     -.001493    .0047313
+     lnasset |   .0001718   .0002552     0.67   0.501    -.0003307    .0006743
+      lnsize |  -.0009951   .0005565    -1.79   0.075    -.0020911    .0001008
+         lev |   .0021931    .000956     2.29   0.023     .0003105    .0040758
+         edu |  -.0001598    .000996    -0.16   0.873    -.0021212    .0018016
+         ceo |   .0002028   .0002364     0.86   0.392    -.0002627    .0006682
+     lngdppc |  -.0028149   .0012948    -2.17   0.031    -.0053648   -.0002651
+   secondary |   .0010742   .0027443     0.39   0.696      -.00433    .0064784
+      govexp |  -.0010217   .0035682    -0.29   0.775    -.0080483     .006005
+         ftd |   .0028202   .0015312     1.84   0.067    -.0001951    .0058355
+       _cons |   .0301376   .0159434     1.89   0.060    -.0012587     .061534
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      3823        3823           0    *|
+     prv#year |       270           1         269     |
+   indid#year |       676          10         666     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T3_1=e(sample)
+
+. reghdfe local_export chainleader $xlist , absorb(stkcd prv#year indid#year) v
+> ce(cluster city)
+(dropped 582 singleton observations)
+(MWFE estimator converged in 101 iterations)
+
+HDFE Linear regression                            Number of obs   =      4,204
+Absorbing 3 HDFE groups                           F(  11,    189) =       1.50
+Statistics robust to heteroskedasticity           Prob > F        =     0.1329
+                                                  R-squared       =     0.8301
+                                                  Adj R-squared   =     0.7176
+                                                  Within R-sq.    =     0.0174
+Number of clusters (city)    =        190         Root MSE        =     0.0596
+
+                                 (Std. err. adjusted for 190 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+local_export | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |   .0320923   .0117524     2.73   0.007     .0089095    .0552751
+       lnage |   .0724936   .0646225     1.12   0.263    -.0549804    .1999675
+     lnasset |   .0058229   .0044539     1.31   0.193    -.0029628    .0146086
+      lnsize |   .0082986   .0095722     0.87   0.387    -.0105835    .0271806
+         lev |  -.0234027   .0244382    -0.96   0.339    -.0716094    .0248039
+         edu |  -.0078567   .0131838    -0.60   0.552     -.033863    .0181497
+         ceo |   .0025254   .0055404     0.46   0.649    -.0084035    .0134543
+     lngdppc |   .0405938   .0271987     1.49   0.137    -.0130582    .0942457
+   secondary |   -.037526   .0792127    -0.47   0.636    -.1937805    .1187286
+      govexp |  -.0650606   .1022646    -0.64   0.525    -.2667872    .1366659
+         ftd |  -.0271989   .0353872    -0.77   0.443    -.0970036    .0426058
+       _cons |  -.7854325   .3049189    -2.58   0.011    -1.386914    -.183951
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |       951         951           0    *|
+     prv#year |       256           1         255     |
+   indid#year |       468          10         458     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T3_2=e(sample)
+
+. reghdfe lninnofee chainleader $xlist , absorb(stkcd prv#year indid#year) vce(
+> cluster city)
+(dropped 240 singleton observations)
+(MWFE estimator converged in 69 iterations)
+
+HDFE Linear regression                            Number of obs   =     26,918
+Absorbing 3 HDFE groups                           F(  11,    257) =      26.04
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9469
+                                                  Adj R-squared   =     0.9354
+                                                  Within R-sq.    =     0.0362
+Number of clusters (city)    =        258         Root MSE        =     2.2136
+
+                                 (Std. err. adjusted for 258 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+   lninnofee | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |   .1562234   .0869413     1.80   0.074    -.0149846    .3274314
+       lnage |   .9098657   .6173577     1.47   0.142    -.3058581     2.12559
+     lnasset |   .1215478   .0695802     1.75   0.082    -.0154721    .2585677
+      lnsize |    1.19135   .0982215    12.13   0.000     .9979285    1.384772
+         lev |  -.4514502   .3449994    -1.31   0.192    -1.130836    .2279355
+         edu |   .6884822   .2776536     2.48   0.014     .1417164    1.235248
+         ceo |  -.0035094   .0773672    -0.05   0.964    -.1558639     .148845
+     lngdppc |  -.2735504   .3860556    -0.71   0.479    -1.033786    .4866847
+   secondary |   2.613195   1.636877     1.60   0.112    -.6102044    5.836595
+      govexp |  -.3051391   2.129182    -0.14   0.886    -4.498005    3.887727
+         ftd |  -.1909212   .5054914    -0.38   0.706    -1.186354    .8045114
+       _cons |  -.6150801   5.020397    -0.12   0.903    -10.50143    9.271273
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      3824        3824           0    *|
+     prv#year |       270           1         269     |
+   indid#year |       676          10         666     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T3_3=e(sample)
+
+. reghdfe patent chainleader $xlist , absorb(stkcd prv#year indid#year) vce(clu
+> ster city)
+(dropped 247 singleton observations)
+(MWFE estimator converged in 69 iterations)
+
+HDFE Linear regression                            Number of obs   =     26,639
+Absorbing 3 HDFE groups                           F(  11,    257) =       9.62
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.7986
+                                                  Adj R-squared   =     0.7549
+                                                  Within R-sq.    =     0.0114
+Number of clusters (city)    =        258         Root MSE        =    26.6190
+
+                                 (Std. err. adjusted for 258 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+      patent | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |   3.307375    1.56588     2.11   0.036     .2237844    6.390965
+       lnage |   5.462526   6.858257     0.80   0.426    -8.043011    18.96806
+     lnasset |   1.596066   .5783806     2.76   0.006     .4570974    2.735035
+      lnsize |   6.756013   1.389718     4.86   0.000     4.019328    9.492698
+         lev |  -12.19041   2.594977    -4.70   0.000    -17.30054   -7.080286
+         edu |   8.049109   2.269917     3.55   0.000     3.579104    12.51911
+         ceo |   .2056946   .8330243     0.25   0.805    -1.434728    1.846117
+     lngdppc |  -.3378635   5.360004    -0.06   0.950    -10.89298    10.21726
+   secondary |  -14.65953   15.88698    -0.92   0.357    -45.94476     16.6257
+      govexp |  -14.90796   22.95791    -0.65   0.517    -60.11754    30.30161
+         ftd |  -4.783747   4.739308    -1.01   0.314    -14.11657    4.549077
+       _cons |  -59.45963   67.98236    -0.87   0.383     -193.333    74.41378
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      3805        3805           0    *|
+     prv#year |       270           1         269     |
+   indid#year |       676          10         666     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T3_4=e(sample)
+
+. reghdfe lpatent chainleader $xlist, absorb(stkcd prv#year indid#year) vce(clu
+> ster city)
+(dropped 240 singleton observations)
+(MWFE estimator converged in 69 iterations)
+
+HDFE Linear regression                            Number of obs   =     26,918
+Absorbing 3 HDFE groups                           F(  11,    257) =       2.75
+Statistics robust to heteroskedasticity           Prob > F        =     0.0022
+                                                  R-squared       =     0.7267
+                                                  Adj R-squared   =     0.6679
+                                                  Within R-sq.    =     0.0034
+Number of clusters (city)    =        258         Root MSE        =     4.3162
+
+                                 (Std. err. adjusted for 258 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+     lpatent | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |   .5614663   .2381258     2.36   0.019     .0925401    1.030392
+       lnage |   1.800071    1.42846     1.26   0.209    -1.012906    4.613048
+     lnasset |   .1285711   .1188181     1.08   0.280      -.10541    .3625522
+      lnsize |   .4481161    .184166     2.43   0.016     .0854494    .8107828
+         lev |  -.3062512   .4214408    -0.73   0.468    -1.136168    .5236658
+         edu |   .7740184   .4213633     1.84   0.067    -.0557461    1.603783
+         ceo |   .0021144   .1665506     0.01   0.990    -.3258633     .330092
+     lngdppc |  -.5212712   .7720468    -0.68   0.500    -2.041615    .9990724
+   secondary |   2.409707   2.223177     1.08   0.279    -1.968257    6.787671
+      govexp |   3.404635   3.078892     1.11   0.270    -2.658434    9.467704
+         ftd |    .842589   .9494807     0.89   0.376    -1.027164    2.712342
+       _cons |  -5.887209   11.21801    -0.52   0.600    -27.97813    16.20371
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      3824        3824           0    *|
+     prv#year |       270           1         269     |
+   indid#year |       676          10         666     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T3_5=e(sample)
+
+. reghdfe lpatent c.chainleader##c.c_lpatent $xlist , absorb(stkcd prv#year ind
+> id#year) vce(cluster city)
+(dropped 96 singleton observations)
+(MWFE estimator converged in 66 iterations)
+note: c_lpatent is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+
+HDFE Linear regression                            Number of obs   =     10,573
+Absorbing 3 HDFE groups                           F(  12,    212) =       2.53
+Statistics robust to heteroskedasticity           Prob > F        =     0.0039
+                                                  R-squared       =     0.7760
+                                                  Adj R-squared   =     0.7129
+                                                  Within R-sq.    =     0.0064
+Number of clusters (city)    =        213         Root MSE        =     3.9045
+
+                                 (Std. err. adjusted for 213 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+     lpatent | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |   .5588174   .3628645     1.54   0.125    -.1564673    1.274102
+   c_lpatent |          0  (omitted)
+             |
+          c. |
+ chainleader#|
+ c.c_lpatent |    .002802   .0009119     3.07   0.002     .0010045    .0045996
+             |
+       lnage |   1.301312   2.129959     0.61   0.542    -2.897301    5.499924
+     lnasset |  -.0514288   .1183306    -0.43   0.664    -.2846841    .1818266
+      lnsize |   .5064707   .2250711     2.25   0.025     .0628068    .9501347
+         lev |  -.9861166   .5559162    -1.77   0.078    -2.081948    .1097149
+         edu |   .6160497   .4574151     1.35   0.179    -.2856147    1.517714
+         ceo |   .2618653   .2416879     1.08   0.280     -.214554    .7382846
+     lngdppc |   .5852626    .962053     0.61   0.544    -1.311153    2.481678
+   secondary |  -2.723599   5.066452    -0.54   0.591    -12.71068    7.263478
+      govexp |    6.23941   4.695556     1.33   0.185     -3.01655    15.49537
+         ftd |   2.125864   1.315156     1.62   0.107    -.4665937    4.718321
+       _cons |   -12.6128   15.52284    -0.81   0.417    -43.21169    17.98608
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      1430        1430           0    *|
+     prv#year |       269           1         268     |
+   indid#year |       622          10         612     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T3_6=e(sample)
+
+. reghdfe TFP chainleader $xlist if g_clus1==1, absorb(stkcd prv#year indid#yea
+> r) vce(cluster city)
+(dropped 156 singleton observations)
+(MWFE estimator converged in 97 iterations)
+
+HDFE Linear regression                            Number of obs   =      8,695
+Absorbing 3 HDFE groups                           F(  11,    121) =      63.99
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9382
+                                                  Adj R-squared   =     0.9183
+                                                  Within R-sq.    =     0.2294
+Number of clusters (city)    =        122         Root MSE        =     0.3071
+
+                                 (Std. err. adjusted for 122 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+         TFP | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |   .0421396   .0143467     2.94   0.004     .0137364    .0705427
+       lnage |   .1661666   .1484526     1.12   0.265    -.1277344    .4600677
+     lnasset |  -.1148684   .0235588    -4.88   0.000    -.1615092   -.0682277
+      lnsize |   .5581266   .0317254    17.59   0.000     .4953178    .6209355
+         lev |   .2297098   .0757008     3.03   0.003       .07984    .3795796
+         edu |   .5302115    .099401     5.33   0.000      .333421    .7270019
+         ceo |  -.0291543    .019169    -1.52   0.131    -.0671044    .0087958
+     lngdppc |   .1777044   .1676016     1.06   0.291    -.1541072    .5095159
+   secondary |   .2545776   .4967035     0.51   0.609    -.7287779    1.237933
+      govexp |   .4050943   .5608306     0.72   0.471    -.7052177    1.515406
+         ftd |  -.2082947   .1119958    -1.86   0.065    -.4300198    .0134305
+       _cons |   3.955129   1.995481     1.98   0.050     .0045486    7.905709
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      1301        1301           0    *|
+     prv#year |       244           1         243     |
+   indid#year |       576          10         566     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T4_1=e(sample)
+
+. reghdfe TFP chainleader $xlist if g_clus1==0, absorb(stkcd prv#year indid#yea
+> r) vce(cluster city)
+(dropped 138 singleton observations)
+(MWFE estimator converged in 51 iterations)
+
+HDFE Linear regression                            Number of obs   =      8,962
+Absorbing 3 HDFE groups                           F(  11,    163) =      37.45
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9426
+                                                  Adj R-squared   =     0.9277
+                                                  Within R-sq.    =     0.2460
+Number of clusters (city)    =        164         Root MSE        =     0.2801
+
+                                 (Std. err. adjusted for 164 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+         TFP | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |  -.0030354   .0233903    -0.13   0.897    -.0492225    .0431517
+       lnage |   .3494775   .1538792     2.27   0.024     .0456239    .6533311
+     lnasset |  -.0662738    .020588    -3.22   0.002    -.1069273   -.0256203
+      lnsize |   .5327966   .0333473    15.98   0.000     .4669481     .598645
+         lev |   .1661953   .0947395     1.75   0.081    -.0208798    .3532703
+         edu |   .4919336   .0775394     6.34   0.000     .3388224    .6450448
+         ceo |  -.0301018   .0173775    -1.73   0.085    -.0644157    .0042122
+     lngdppc |   .2162204   .0717361     3.01   0.003     .0745686    .3578722
+   secondary |   .0641959   .2684504     0.24   0.811    -.4658929    .5942847
+      govexp |   .0162028    .377386     0.04   0.966    -.7289928    .7613984
+         ftd |   .0256499   .0688921     0.37   0.710     -.110386    .1616859
+       _cons |   2.243632   1.009405     2.22   0.028     .2504351    4.236829
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      1299        1299           0    *|
+     prv#year |       260           1         259     |
+   indid#year |       292          10         282     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T4_2=e(sample)
+
+. reghdfe TFP chainleader $xlist if g_gc==1, absorb(stkcd prv#year indid#year) 
+> vce(cluster city)
+(dropped 246 singleton observations)
+(MWFE estimator converged in 75 iterations)
+
+HDFE Linear regression                            Number of obs   =     10,886
+Absorbing 3 HDFE groups                           F(  11,     29) =     109.74
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9413
+                                                  Adj R-squared   =     0.9249
+                                                  Within R-sq.    =     0.2792
+Number of clusters (city)    =         30         Root MSE        =     0.2906
+
+                                  (Std. err. adjusted for 30 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+         TFP | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |   .0576663   .0167298     3.45   0.002       .02345    .0918826
+       lnage |   .4272927   .1221759     3.50   0.002      .177415    .6771704
+     lnasset |  -.1263586   .0207386    -6.09   0.000    -.1687738   -.0839434
+      lnsize |   .6082177   .0234096    25.98   0.000     .5603396    .6560959
+         lev |   .2908569   .0628804     4.63   0.000     .1622521    .4194617
+         edu |   .6079314   .0913608     6.65   0.000     .4210776    .7947853
+         ceo |  -.0304171   .0150772    -2.02   0.053    -.0612534    .0004192
+     lngdppc |   .2226255    .173419     1.28   0.209    -.1320561    .5773072
+   secondary |   .5450981   .3638699     1.50   0.145    -.1990994    1.289296
+      govexp |  -.3521388   .3129356    -1.13   0.270    -.9921641    .2878865
+         ftd |   .0048085   .1054375     0.05   0.964    -.2108353    .2204524
+       _cons |   2.281542   2.219439     1.03   0.312    -2.257721    6.820805
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      1640        1640           0    *|
+     prv#year |       140           1         139     |
+   indid#year |       600          10         590     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T4_3=e(sample)
+
+. reghdfe TFP chainleader $xlist if g_gc==0, absorb(stkcd prv#year indid#year) 
+> vce(cluster city)
+(dropped 179 singleton observations)
+(MWFE estimator converged in 75 iterations)
+
+HDFE Linear regression                            Number of obs   =     12,069
+Absorbing 3 HDFE groups                           F(  11,    203) =      34.58
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9317
+                                                  Adj R-squared   =     0.9132
+                                                  Within R-sq.    =     0.2151
+Number of clusters (city)    =        204         Root MSE        =     0.3113
+
+                                 (Std. err. adjusted for 204 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+         TFP | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |    .025051   .0252156     0.99   0.322    -.0246671    .0747691
+       lnage |   .0804402   .1337227     0.60   0.548    -.1832234    .3441039
+     lnasset |  -.0609451   .0191586    -3.18   0.002    -.0987205   -.0231696
+      lnsize |   .5105297   .0312406    16.34   0.000      .448932    .5721274
+         lev |   .1289601   .0931499     1.38   0.168    -.0547054    .3126256
+         edu |    .488984   .0746815     6.55   0.000     .3417332    .6362349
+         ceo |  -.0141275   .0171511    -0.82   0.411    -.0479447    .0196897
+     lngdppc |   .1045335   .0780833     1.34   0.182    -.0494248    .2584917
+   secondary |   .6200262   .2858009     2.17   0.031     .0565072    1.183545
+      govexp |   .5472673   .4119576     1.33   0.186    -.2649973    1.359532
+         ftd |  -.0748071   .1111781    -0.67   0.502     -.294019    .1444049
+       _cons |   4.137103    .978683     4.23   0.000     2.207415    6.066791
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      1702        1702           0    *|
+     prv#year |       270           1         269     |
+   indid#year |       591          10         581     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T4_4=e(sample)
+
+. reghdfe TFP chainleader $xlist if g_contract==0, absorb(stkcd prv#year indid#
+> year) vce(cluster city)
+(dropped 149 singleton observations)
+(MWFE estimator converged in 54 iterations)
+
+HDFE Linear regression                            Number of obs   =      8,016
+Absorbing 3 HDFE groups                           F(  11,    186) =      39.08
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9406
+                                                  Adj R-squared   =     0.9242
+                                                  Within R-sq.    =     0.2313
+Number of clusters (city)    =        187         Root MSE        =     0.2899
+
+                                 (Std. err. adjusted for 187 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+         TFP | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |   .0443306   .0234982     1.89   0.061    -.0020267    .0906879
+       lnage |   .3639544   .1740251     2.09   0.038     .0206376    .7072712
+     lnasset |  -.1138433   .0306242    -3.72   0.000    -.1742587   -.0534279
+      lnsize |   .5421322   .0490407    11.05   0.000     .4453848    .6388797
+         lev |   .2987369   .0899626     3.32   0.001     .1212587    .4762152
+         edu |   .5284037   .0985003     5.36   0.000     .3340823    .7227251
+         ceo |  -.0064206    .024501    -0.26   0.794    -.0547563     .041915
+     lngdppc |   .2939036   .0998423     2.94   0.004     .0969348    .4908724
+   secondary |   .2460555   .3549733     0.69   0.489    -.4542357    .9463468
+      govexp |   .3985334   .5217789     0.76   0.446    -.6308322    1.427899
+         ftd |   .0821066   .1167616     0.70   0.483    -.1482407    .3124538
+       _cons |   1.930029   1.278034     1.51   0.133    -.5912766    4.451335
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      1255        1255           0    *|
+     prv#year |       270           1         269     |
+   indid#year |       207          10         197     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T4_5=e(sample)
+
+. reghdfe TFP chainleader $xlist if g_contract==1, absorb(stkcd prv#year indid#
+> year) vce(cluster city)
+(dropped 100 singleton observations)
+(MWFE estimator converged in 37 iterations)
+
+HDFE Linear regression                            Number of obs   =      8,127
+Absorbing 3 HDFE groups                           F(  11,    188) =      39.31
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9426
+                                                  Adj R-squared   =     0.9283
+                                                  Within R-sq.    =     0.2739
+Number of clusters (city)    =        189         Root MSE        =     0.2544
+
+                                 (Std. err. adjusted for 189 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+         TFP | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |  -.0232622   .0198627    -1.17   0.243    -.0624446    .0159202
+       lnage |   .2250333   .1479695     1.52   0.130    -.0668607    .5169273
+     lnasset |  -.0475984   .0234101    -2.03   0.043    -.0937785   -.0014182
+      lnsize |   .5496761   .0364265    15.09   0.000     .4778189    .6215334
+         lev |   .0502162   .0692844     0.72   0.469    -.0864585    .1868909
+         edu |    .368086   .0706914     5.21   0.000     .2286357    .5075364
+         ceo |  -.0208352   .0148548    -1.40   0.162    -.0501386    .0084682
+     lngdppc |   .0072414   .0843361     0.09   0.932    -.1591252     .173608
+   secondary |   .1831003   .2482075     0.74   0.462    -.3065295      .67273
+      govexp |   .2191613   .4843551     0.45   0.651    -.7363079     1.17463
+         ftd |   .0601835   .1156017     0.52   0.603    -.1678596    .2882267
+       _cons |   4.502776   1.165689     3.86   0.000     2.203264    6.802288
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      1252        1252           0    *|
+     prv#year |       265           1         264     |
+   indid#year |       110          10         100     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T4_6=e(sample)
+
+. reghdfe TFP c.chainleader#c.res c.chainleader#c.org $xlist, absorb(stkcd prv#
+> year indid#year) vce(cluster city)
+(dropped 299 singleton observations)
+(MWFE estimator converged in 73 iterations)
+
+HDFE Linear regression                            Number of obs   =     21,177
+Absorbing 3 HDFE groups                           F(  12,    248) =      64.10
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9328
+                                                  Adj R-squared   =     0.9170
+                                                  Within R-sq.    =     0.2315
+Number of clusters (city)    =        249         Root MSE        =     0.3076
+
+                                 (Std. err. adjusted for 249 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+         TFP | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          c. |
+ chainleader#|
+       c.res |   .0364584   .0130187     2.80   0.006     .0108171    .0620998
+             |
+          c. |
+ chainleader#|
+       c.org |    .050867   .0278632     1.83   0.069    -.0040117    .1057457
+             |
+       lnage |   .2724335     .08778     3.10   0.002     .0995441     .445323
+     lnasset |  -.1001554   .0166142    -6.03   0.000    -.1328782   -.0674325
+      lnsize |   .5483377   .0266624    20.57   0.000     .4958242    .6008513
+         lev |   .2279498   .0598038     3.81   0.000     .1101617    .3457379
+         edu |   .5142259   .0659275     7.80   0.000     .3843767    .6440751
+         ceo |  -.0260827   .0107317    -2.43   0.016    -.0472197   -.0049458
+     lngdppc |   .1483852   .0611721     2.43   0.016     .0279022    .2688682
+   secondary |   .2815807   .2258225     1.25   0.214    -.1631939    .7263553
+      govexp |   .4105368   .2813442     1.46   0.146     -.143592    .9646655
+         ftd |  -.0197772   .0723598    -0.27   0.785    -.1622953    .1227409
+       _cons |   3.671694   .7901135     4.65   0.000     2.115506    5.227883
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      3094        3094           0    *|
+     prv#year |       270           1         269     |
+   indid#year |       664          10         654     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T5_1=e(sample)
+
+. reghdfe local c.chainleader#c.res c.chainleader#c.org $xlist, absorb(stkcd pr
+> v#year indid#year) vce(cluster city)
+(dropped 554 singleton observations)
+(MWFE estimator converged in 110 iterations)
+
+HDFE Linear regression                            Number of obs   =      3,802
+Absorbing 3 HDFE groups                           F(  12,    177) =       4.16
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8331
+                                                  Adj R-squared   =     0.7161
+                                                  Within R-sq.    =     0.0172
+Number of clusters (city)    =        178         Root MSE        =     0.1516
+
+                                 (Std. err. adjusted for 178 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+       local | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          c. |
+ chainleader#|
+       c.res |   .0923002   .0353904     2.61   0.010     .0224589    .1621416
+             |
+          c. |
+ chainleader#|
+       c.org |   .0512827   .0494025     1.04   0.301    -.0462111    .1487764
+             |
+       lnage |   .1858715   .1245557     1.49   0.137    -.0599337    .4316768
+     lnasset |   .0030709   .0081996     0.37   0.708    -.0131107    .0192525
+      lnsize |  -.0300835   .0177762    -1.69   0.092    -.0651641    .0049971
+         lev |   -.010097   .0409517    -0.25   0.806    -.0909134    .0707194
+         edu |  -.1505776   .0521212    -2.89   0.004    -.2534366   -.0477185
+         ceo |   -.024587   .0125417    -1.96   0.052    -.0493375    .0001635
+     lngdppc |  -.0742137   .0539946    -1.37   0.171    -.1807698    .0323423
+   secondary |  -.1100665    .233735    -0.47   0.638    -.5713325    .3511994
+      govexp |  -.4039314   .2979361    -1.36   0.177    -.9918955    .1840328
+         ftd |   .0805839   .0875185     0.92   0.358    -.0921301    .2532979
+       _cons |   .8589247    .814374     1.05   0.293    -.7482074    2.466057
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |       854         854           0    *|
+     prv#year |       248           1         247     |
+   indid#year |       464          10         454     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T5_2=e(sample)
+
+. reghdfe searcost c.chainleader#c.res c.chainleader#c.org $xlist, absorb(stkcd
+>  prv#year indid#year) vce(cluster city)
+(dropped 219 singleton observations)
+(MWFE estimator converged in 69 iterations)
+
+HDFE Linear regression                            Number of obs   =     23,856
+Absorbing 3 HDFE groups                           F(  12,    250) =       6.23
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8924
+                                                  Adj R-squared   =     0.8685
+                                                  Within R-sq.    =     0.0063
+Number of clusters (city)    =        251         Root MSE        =     0.0187
+
+                                 (Std. err. adjusted for 251 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+    searcost | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          c. |
+ chainleader#|
+       c.res |  -.0021017   .0012816    -1.64   0.102    -.0046258    .0004225
+             |
+          c. |
+ chainleader#|
+       c.org |  -.0037884   .0016879    -2.24   0.026    -.0071127   -.0004642
+             |
+       lnage |   .0157632   .0056862     2.77   0.006     .0045643    .0269621
+     lnasset |  -.0010175   .0004332    -2.35   0.020    -.0018707   -.0001643
+      lnsize |   .0011507    .000765     1.50   0.134     -.000356    .0026574
+         lev |   .0047307   .0027586     1.71   0.088    -.0007024    .0101637
+         edu |   .0093746   .0023471     3.99   0.000     .0047521    .0139971
+         ceo |    .000265   .0010316     0.26   0.797    -.0017666    .0022967
+     lngdppc |  -.0049692   .0042417    -1.17   0.243    -.0133234    .0033849
+   secondary |  -.0268451   .0160853    -1.67   0.096    -.0585251    .0048349
+      govexp |  -.0047788   .0183478    -0.26   0.795    -.0409147    .0313571
+         ftd |   .0050842   .0033928     1.50   0.135    -.0015979    .0117663
+       _cons |   .0435865   .0506228     0.86   0.390    -.0561152    .1432881
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      3387        3387           0    *|
+     prv#year |       270           1         269     |
+   indid#year |       674          10         664     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T5_3=e(sample)
+
+. reghdfe travcost c.chainleader#c.res c.chainleader#c.org $xlist, absorb(stkcd
+>  prv#year indid#year) vce(cluster city)
+(dropped 219 singleton observations)
+(MWFE estimator converged in 69 iterations)
+
+HDFE Linear regression                            Number of obs   =     23,856
+Absorbing 3 HDFE groups                           F(  12,    250) =       9.38
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8475
+                                                  Adj R-squared   =     0.8136
+                                                  Within R-sq.    =     0.0153
+Number of clusters (city)    =        251         Root MSE        =     0.0054
+
+                                 (Std. err. adjusted for 251 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+    travcost | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          c. |
+ chainleader#|
+       c.res |  -.0009075   .0003921    -2.31   0.021    -.0016797   -.0001352
+             |
+          c. |
+ chainleader#|
+       c.org |  -.0011116   .0004737    -2.35   0.020    -.0020446   -.0001787
+             |
+       lnage |  -.0006484   .0014685    -0.44   0.659    -.0035407    .0022438
+     lnasset |  -.0003661   .0002054    -1.78   0.076    -.0007706    .0000384
+      lnsize |  -.0012695   .0002384    -5.32   0.000    -.0017391   -.0007999
+         lev |    -.00061   .0008457    -0.72   0.471    -.0022756    .0010557
+         edu |    .002087   .0007264     2.87   0.004     .0006563    .0035178
+         ceo |   .0004585   .0002268     2.02   0.044     .0000118    .0009051
+     lngdppc |   -.001753   .0011794    -1.49   0.138    -.0040759    .0005698
+   secondary |   .0058242   .0036946     1.58   0.116    -.0014522    .0131006
+      govexp |   .0043228    .004261     1.01   0.311    -.0040692    .0127148
+         ftd |  -.0000971    .001012    -0.10   0.924    -.0020902     .001896
+       _cons |   .0455685   .0150555     3.03   0.003     .0159168    .0752202
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      3387        3387           0    *|
+     prv#year |       270           1         269     |
+   indid#year |       674          10         664     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T5_4=e(sample)
+
+. reghdfe refund c.chainleader#c.res c.chainleader#c.org $xlist, absorb(stkcd p
+> rv#year indid#year) vce(cluster city)
+(dropped 219 singleton observations)
+(MWFE estimator converged in 69 iterations)
+
+HDFE Linear regression                            Number of obs   =     23,856
+Absorbing 3 HDFE groups                           F(  12,    250) =       1.98
+Statistics robust to heteroskedasticity           Prob > F        =     0.0267
+                                                  R-squared       =     0.2814
+                                                  Adj R-squared   =     0.1220
+                                                  Within R-sq.    =     0.0024
+Number of clusters (city)    =        251         Root MSE        =     0.0095
+
+                                 (Std. err. adjusted for 251 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+      refund | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          c. |
+ chainleader#|
+       c.res |  -.0003402   .0003453    -0.99   0.325    -.0010203    .0003399
+             |
+          c. |
+ chainleader#|
+       c.org |  -.0005322   .0002189    -2.43   0.016    -.0009633   -.0001011
+             |
+       lnage |   .0020352   .0017572     1.16   0.248    -.0014256     .005496
+     lnasset |   .0003149    .000253     1.24   0.214    -.0001834    .0008132
+      lnsize |  -.0014149     .00057    -2.48   0.014    -.0025376   -.0002922
+         lev |   .0018179   .0008002     2.27   0.024      .000242    .0033938
+         edu |  -.0011575   .0006162    -1.88   0.061    -.0023711    .0000561
+         ceo |   .0002339   .0002626     0.89   0.374    -.0002832    .0007511
+     lngdppc |  -.0021612   .0008695    -2.49   0.014    -.0038736   -.0004487
+   secondary |   .0013545   .0027426     0.49   0.622    -.0040471    .0067562
+      govexp |  -.0044282   .0033175    -1.33   0.183    -.0109621    .0021057
+         ftd |   .0025811    .001692     1.53   0.128    -.0007512    .0059135
+       _cons |   .0227744   .0103362     2.20   0.028     .0024173    .0431314
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      3387        3387           0    *|
+     prv#year |       270           1         269     |
+   indid#year |       674          10         664     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T5_5=e(sample)
+
+. reghdfe lpatent c.chainleader#c.res c.chainleader#c.org $xlist, absorb(stkcd 
+> prv#year indid#year) vce(cluster city)
+(dropped 220 singleton observations)
+(MWFE estimator converged in 69 iterations)
+
+HDFE Linear regression                            Number of obs   =     23,858
+Absorbing 3 HDFE groups                           F(  12,    250) =       3.08
+Statistics robust to heteroskedasticity           Prob > F        =     0.0004
+                                                  R-squared       =     0.7370
+                                                  Adj R-squared   =     0.6787
+                                                  Within R-sq.    =     0.0046
+Number of clusters (city)    =        251         Root MSE        =     4.3459
+
+                                 (Std. err. adjusted for 251 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+     lpatent | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          c. |
+ chainleader#|
+       c.res |   .3513119   .4181883     0.84   0.402    -.4723092    1.174933
+             |
+          c. |
+ chainleader#|
+       c.org |   .9251012    .405812     2.28   0.023     .1258552    1.724347
+             |
+       lnage |   2.766784    1.52992     1.81   0.072    -.2463903    5.779959
+     lnasset |   .1861575   .1286241     1.45   0.149    -.0671675    .4394825
+      lnsize |   .4772546   .2031628     2.35   0.020     .0771258    .8773833
+         lev |  -.3407516   .4530844    -0.75   0.453    -1.233101    .5515975
+         edu |   .9928646   .4411264     2.25   0.025     .1240668    1.861662
+         ceo |  -.0765219    .184523    -0.41   0.679    -.4399396    .2868958
+     lngdppc |  -.2792455   .8983912    -0.31   0.756    -2.048625    1.490134
+   secondary |   1.413113   2.542427     0.56   0.579    -3.594193     6.42042
+      govexp |   3.695343   3.882928     0.95   0.342    -3.952077    11.34276
+         ftd |   .6273872    .984022     0.64   0.524    -1.310643    2.565417
+       _cons |  -12.44175   12.70158    -0.98   0.328    -37.45749    12.57399
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+        stkcd |      3387        3387           0    *|
+     prv#year |       270           1         269     |
+   indid#year |       674          10         664     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_T5_6=e(sample)
+
+. keep row_id sample_*
+
+. export delimited using "../data/sample_flags.csv", replace
+(file ../data/sample_flags.csv not found)
+file ../data/sample_flags.csv saved
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_protoco
+> l\work\../logs/sample_flags.log
+  log type:  text
+ closed on:  14 Nov 2026, 17:55:00
+-------------------------------------------------------------------------------

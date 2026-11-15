@@ -1,0 +1,48 @@
+{
+  "title": "行政诉讼跨区划管辖与企业社保遵从",
+  "date": "2026-11-15",
+  "author_body_models": 17,
+  "printed_coefficients_exact": 35,
+  "formal_specs": 9,
+  "main_specs": 1,
+  "secondary_specs": 8,
+  "bootstrap_B": 999,
+  "bootstrap_specifications": 9,
+  "csa_points_and_se": 9,
+  "bjs_points_and_se": 9,
+  "csa_opposite_direction_specs": [
+    "T3_1",
+    "T3_3"
+  ],
+  "twfe_sig5_csa_not_sig5": [
+    "T2_2",
+    "T2_3",
+    "T3_1",
+    "T4_1",
+    "T4_2",
+    "T4_3"
+  ],
+  "twfe_sig5_bjs_not_sig5": [
+    "T3_1"
+  ],
+  "adjusted_R2_differences": [
+    "T3_1",
+    "T3_3",
+    "T3_5",
+    "T4_1",
+    "T6_1"
+  ],
+  "upstream_R_byte_identical": true,
+  "unknown_date_rows_excluded": 2,
+  "appendix_not_fully_rerun": true
+}
+spec_id  twfe_original_units  csa_original_units  csa_p_normal  bjs_original_units  bjs_p_normal
+   T2_1             0.006549            0.017335      0.000841            0.018729      0.000016
+   T2_2             0.007262            0.009512      0.124357            0.020071      0.000004
+   T2_3             0.007961            0.008690      0.306242            0.020113      0.000006
+   T3_1             0.009394           -0.006022      0.194551            0.004529      0.252185
+   T3_3             0.003855           -0.001379      0.585659            0.001767      0.425322
+   T3_5             0.015360            0.005269      0.673976            0.022050      0.074956
+   T4_1             0.007059            0.008916      0.301151            0.019112      0.000009
+   T4_2             0.007921            0.008933      0.287960            0.020119      0.000005
+   T4_3             0.007029            0.008830      0.302530            0.019249      0.000006

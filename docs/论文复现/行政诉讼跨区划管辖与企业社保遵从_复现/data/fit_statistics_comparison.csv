@@ -1,0 +1,16 @@
+﻿spec,published_adjR2,replicated_adjR2,status
+T2_1,0.6099,0.60993552,exact_4dp
+T2_2,0.623,0.62300277,exact_4dp
+T2_3,0.624,0.62399805,exact_4dp
+T3_1,0.598,0.59827876,different_4dp
+T3_3,0.4904,0.49075171,different_4dp
+T3_5,0.5226,0.52313495,different_4dp
+T4_1,0.6364,0.63645113,different_4dp
+T4_2,0.6241,0.62407416,exact_4dp
+T4_3,0.6361,0.63608199,exact_4dp
+T5_1,0.6246,0.62462163,exact_4dp
+T5_2,0.6247,0.62474918,exact_4dp
+T6_1,0.6488,0.64885974,different_4dp
+T6_2,0.6248,0.62476933,exact_4dp
+T6_3,0.6265,0.62651968,exact_4dp
+T6_4,0.6264,0.62644023,exact_4dp

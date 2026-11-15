@@ -1,0 +1,40 @@
+[
+  {
+    "name": "新型产业政策何以提升企业生产率——来自产业链链长制的证据.pdf",
+    "sha256": "d1e9331a597091e54a4356e60ac1e94dcf92b491104b702e7b983b2440e34794"
+  },
+  {
+    "name": "20261027095341528WU_FILE_1.zip",
+    "sha256": "17bd9dffba79147794520d4b107c3b36e94a70a694e3e42acde9de518f13f1c8"
+  },
+  {
+    "zip_name": "唐跃桓+附件上传/《中国工业经济》编辑部关于公开数据附件的使用说明.pdf",
+    "local_name": "usage.pdf",
+    "sha256": "4a7bb5aacd5e1e023cede4bc2cec026e99b6c4e0a968bb8de5d4fb9cef2270e2"
+  },
+  {
+    "zip_name": "唐跃桓+附件上传/数据/上市公司数据.dta",
+    "local_name": "listed.dta",
+    "sha256": "975068c0d6601e737829f528d21ef3a6a39200c50428cf6febe79e5821d328f4"
+  },
+  {
+    "zip_name": "唐跃桓+附件上传/数据/上市公司数据_延长窗口期.dta",
+    "local_name": "listed_extended.dta",
+    "sha256": "2e74962db5422f2a1e8708c44b94414da0e7c11f4550ba137e3850278a1b8f6c"
+  },
+  {
+    "zip_name": "唐跃桓+附件上传/数据/城市数据.dta",
+    "local_name": "city.dta",
+    "sha256": "0da655b5271fe28970258a22d9b3a0c99bebd0f0e287889694766826108fb1e8"
+  },
+  {
+    "zip_name": "唐跃桓+附件上传/程序.do",
+    "local_name": "author.do",
+    "sha256": "239feaad117c28c9244dff93b03d3044687c22c9e8f7e4b030ab71f724b97d6f"
+  },
+  {
+    "zip_name": "唐跃桓+附件上传/附录.pdf",
+    "local_name": "appendix.pdf",
+    "sha256": "e6b128a40522875fe9e5533b5b866b39ec00e8ddcdbeecaaf6af28f71e45f05c"
+  }
+]

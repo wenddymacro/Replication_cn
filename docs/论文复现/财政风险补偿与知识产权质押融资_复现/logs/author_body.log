@@ -1,0 +1,1286 @@
+-------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\fiscal_risk\w
+> ork\../logs/author_body.log
+  log type:  text
+ opened on:  14 Nov 2026, 19:50:23
+
+. use branch, clear
+
+. gen long row_id=_n
+
+. global c_city "City_TotalLoan City_BankHHI City_ST City_Patent City_GDP"
+
+. global c_pledgee "Branch_Age"
+
+. global c_bank "Bank_Size Bank_ROA Bank_CAR Bank_Nplra"
+
+. tempname H
+
+. postfile `H' str16 spec str40 term double b se N r2a using "../data/author_re
+> sults.dta", replace
+(file ../data/author_results.dta not found)
+
+. reghdfe  PPL                DiD                              , absorb (pledge
+> e_id       year) vce(cluster pledgee_id)
+(MWFE estimator converged in 5 iterations)
+
+HDFE Linear regression                            Number of obs   =     84,747
+Absorbing 2 HDFE groups                           F(   1,   9107) =      28.38
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3040
+                                                  Adj R-squared   =     0.2201
+                                                  Within R-sq.    =     0.0008
+Number of clusters (pledgee_id) =      9,108      Root MSE        =     0.2531
+
+                         (Std. err. adjusted for 9,108 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+         PPL | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         DiD |   .0264832   .0049715     5.33   0.000     .0167379    .0362285
+       _cons |   .0853862   .0009254    92.27   0.000     .0835722    .0872002
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      9108        9108           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T1_1") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T1_1=e(sample)
+
+. reghdfe  PPL                DiD   $c_city                    , absorb (pledge
+> e_id       year) vce(cluster pledgee_id)
+(MWFE estimator converged in 5 iterations)
+
+HDFE Linear regression                            Number of obs   =     84,747
+Absorbing 2 HDFE groups                           F(   6,   9107) =      17.89
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3053
+                                                  Adj R-squared   =     0.2215
+                                                  Within R-sq.    =     0.0025
+Number of clusters (pledgee_id) =      9,108      Root MSE        =     0.2529
+
+                         (Std. err. adjusted for 9,108 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+         PPL | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         DiD |   .0286455   .0049828     5.75   0.000     .0188781     .038413
+City_Total~n |  -.0175101   .0107475    -1.63   0.103    -.0385777    .0035574
+City_BankHHI |  -.1585014   .1596658    -0.99   0.321    -.4714822    .1544795
+     City_ST |   .0035564    .004422     0.80   0.421    -.0051118    .0122246
+ City_Patent |    .027888   .0038039     7.33   0.000     .0204315    .0353445
+    City_GDP |   .0421258   .0183027     2.30   0.021     .0062485    .0780032
+       _cons |  -.8895615   .3142933    -2.83   0.005    -1.505647    -.273476
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      9108        9108           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T1_2") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T1_2=e(sample)
+
+. reghdfe  PPL                DiD   $c_city                    , absorb (pledge
+> e_id    bank_name_id#year  ) vce(cluster pledgee_id)
+(dropped 1087 singleton observations)
+(MWFE estimator converged in 10 iterations)
+
+HDFE Linear regression                            Number of obs   =     83,660
+Absorbing 2 HDFE groups                           F(   6,   8997) =      14.37
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3543
+                                                  Adj R-squared   =     0.2443
+                                                  Within R-sq.    =     0.0023
+Number of clusters (pledgee_id) =      8,998      Root MSE        =     0.2498
+
+                         (Std. err. adjusted for 8,998 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+         PPL | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         DiD |   .0339531   .0064011     5.30   0.000     .0214054    .0465008
+City_Total~n |   -.028017   .0135702    -2.06   0.039    -.0546177   -.0014163
+City_BankHHI |   .0800122   .1747167     0.46   0.647    -.2624723    .4224967
+     City_ST |   .0017437   .0052708     0.33   0.741    -.0085882    .0120756
+ City_Patent |   .0336959    .004797     7.02   0.000     .0242926    .0430992
+    City_GDP |   .0133067   .0223133     0.60   0.551    -.0304325    .0570459
+       _cons |  -.4209252    .384105    -1.10   0.273    -1.173858     .332008
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-------------------------------------------------------------+
+         Absorbed FE | Categories  - Redundant  = Num. Coefs |
+---------------------+---------------------------------------|
+          pledgee_id |      8998        8998           0    *|
+   bank_name_id#year |      3184           1        3183     |
+-------------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T1_3") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T1_3=e(sample)
+
+. reghdfe  PPL                DiD   $c_city $c_pledgee $c_bank , absorb (pledge
+> e_id       year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     57,391
+Absorbing 2 HDFE groups                           F(  11,   6690) =       8.73
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3225
+                                                  Adj R-squared   =     0.2328
+                                                  Within R-sq.    =     0.0035
+Number of clusters (pledgee_id) =      6,691      Root MSE        =     0.2578
+
+                         (Std. err. adjusted for 6,691 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+         PPL | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         DiD |   .0380935   .0062173     6.13   0.000     .0259056    .0502814
+City_Total~n |  -.0247803   .0136835    -1.81   0.070    -.0516043    .0020436
+City_BankHHI |   .1778256    .187524     0.95   0.343    -.1897813    .5454324
+     City_ST |   .0005065   .0053018     0.10   0.924    -.0098867    .0108997
+ City_Patent |   .0249329   .0048094     5.18   0.000     .0155049    .0343609
+    City_GDP |   .0633898   .0226642     2.80   0.005     .0189607    .1078188
+  Branch_Age |   .0083673   .0076219     1.10   0.272    -.0065741    .0233086
+   Bank_Size |   .0365059   .0167852     2.17   0.030     .0036015    .0694103
+    Bank_ROA |   .0267132   .0142482     1.87   0.061    -.0012179    .0546443
+    Bank_CAR |    .001789   .0018245     0.98   0.327    -.0017876    .0053657
+  Bank_Nplra |   .0025156   .0071798     0.35   0.726    -.0115591    .0165904
+       _cons |   -2.37056   .6251469    -3.79   0.000    -3.596047   -1.145073
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      6691        6691           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T1_4") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T1_4=e(sample)
+
+. reghdfe  LnPPL_Num      DiD                              , absorb (pledgee_id
+>        year) vce(cluster pledgee_id)
+(MWFE estimator converged in 5 iterations)
+
+HDFE Linear regression                            Number of obs   =     84,747
+Absorbing 2 HDFE groups                           F(   1,   9107) =      23.85
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3552
+                                                  Adj R-squared   =     0.2775
+                                                  Within R-sq.    =     0.0008
+Number of clusters (pledgee_id) =      9,108      Root MSE        =     0.2670
+
+                         (Std. err. adjusted for 9,108 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+   LnPPL_Num | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         DiD |   .0286175   .0058603     4.88   0.000     .0171301    .0401049
+       _cons |   .0834379   .0010908    76.49   0.000     .0812996    .0855762
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      9108        9108           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T1_5") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T1_5=e(sample)
+
+. reghdfe  LnPPL_Num      DiD   $c_city                    , absorb (pledgee_id
+>        year) vce(cluster pledgee_id)
+(MWFE estimator converged in 5 iterations)
+
+HDFE Linear regression                            Number of obs   =     84,747
+Absorbing 2 HDFE groups                           F(   6,   9107) =      13.33
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3563
+                                                  Adj R-squared   =     0.2787
+                                                  Within R-sq.    =     0.0024
+Number of clusters (pledgee_id) =      9,108      Root MSE        =     0.2668
+
+                         (Std. err. adjusted for 9,108 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+   LnPPL_Num | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         DiD |   .0314951   .0058734     5.36   0.000     .0199819    .0430082
+City_Total~n |   .0146458   .0132038     1.11   0.267    -.0112367    .0405283
+City_BankHHI |  -.0897264   .1740906    -0.52   0.606    -.4309831    .2515303
+     City_ST |   .0043237   .0049907     0.87   0.386    -.0054591    .0141065
+ City_Patent |   .0251208    .004275     5.88   0.000     .0167408    .0335008
+    City_GDP |   .0718345   .0210007     3.42   0.001     .0306685    .1130006
+       _cons |  -1.449251   .3619815    -4.00   0.000    -2.158816   -.7396862
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      9108        9108           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T1_6") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T1_6=e(sample)
+
+. reghdfe  LnPPL_Num      DiD   $c_city                    , absorb (pledgee_id
+>     bank_name_id#year  ) vce(cluster pledgee_id)
+(dropped 1087 singleton observations)
+(MWFE estimator converged in 10 iterations)
+
+HDFE Linear regression                            Number of obs   =     83,660
+Absorbing 2 HDFE groups                           F(   6,   8997) =      11.40
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.4025
+                                                  Adj R-squared   =     0.3006
+                                                  Within R-sq.    =     0.0025
+Number of clusters (pledgee_id) =      8,998      Root MSE        =     0.2635
+
+                         (Std. err. adjusted for 8,998 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+   LnPPL_Num | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         DiD |   .0408347   .0076501     5.34   0.000     .0258388    .0558305
+City_Total~n |   .0051801   .0162233     0.32   0.750    -.0266212    .0369815
+City_BankHHI |   .2390773   .1912245     1.25   0.211    -.1357663    .6139209
+     City_ST |   .0064106   .0059271     1.08   0.279    -.0052078    .0180291
+ City_Patent |   .0334321   .0055355     6.04   0.000     .0225812     .044283
+    City_GDP |   .0445604   .0248127     1.80   0.073    -.0040781    .0931988
+       _cons |  -1.086599   .4307114    -2.52   0.012    -1.930891   -.2423062
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-------------------------------------------------------------+
+         Absorbed FE | Categories  - Redundant  = Num. Coefs |
+---------------------+---------------------------------------|
+          pledgee_id |      8998        8998           0    *|
+   bank_name_id#year |      3184           1        3183     |
+-------------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T1_7") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T1_7=e(sample)
+
+. reghdfe  LnPPL_Num      DiD   $c_city $c_pledgee $c_bank , absorb (pledgee_id
+>        year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     57,391
+Absorbing 2 HDFE groups                           F(  11,   6690) =       7.37
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3731
+                                                  Adj R-squared   =     0.2901
+                                                  Within R-sq.    =     0.0038
+Number of clusters (pledgee_id) =      6,691      Root MSE        =     0.2760
+
+                         (Std. err. adjusted for 6,691 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+   LnPPL_Num | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         DiD |   .0393079   .0073881     5.32   0.000      .024825    .0537908
+City_Total~n |   .0146803   .0170203     0.86   0.388     -.018685    .0480455
+City_BankHHI |   .3118146    .194807     1.60   0.110    -.0700692    .6936983
+     City_ST |   .0003454   .0060244     0.06   0.954    -.0114644    .0121551
+ City_Patent |   .0224481   .0055453     4.05   0.000     .0115777    .0333186
+    City_GDP |   .1124479   .0263362     4.27   0.000     .0608206    .1640753
+  Branch_Age |   .0036718    .009624     0.38   0.703    -.0151943     .022538
+   Bank_Size |   .0696701   .0215537     3.23   0.001      .027418    .1119223
+    Bank_ROA |   .0461515    .016678     2.77   0.006     .0134573    .0788457
+    Bank_CAR |   .0012858   .0020267     0.63   0.526    -.0026872    .0052588
+  Bank_Nplra |  -.0019446   .0078771    -0.25   0.805    -.0173863    .0134971
+       _cons |  -4.242224   .8130831    -5.22   0.000    -5.836126   -2.648322
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      6691        6691           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T1_8") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T1_8=e(sample)
+
+. reghdfe  PPL                DiD_Fund_Size  DiD $c_city $c_pledgee $c_bank , a
+> bsorb (pledgee_id year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     42,815
+Absorbing 2 HDFE groups                           F(  12,   4921) =       5.17
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3127
+                                                  Adj R-squared   =     0.2230
+                                                  Within R-sq.    =     0.0029
+Number of clusters (pledgee_id) =      4,922      Root MSE        =     0.2522
+
+                         (Std. err. adjusted for 4,922 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+         PPL | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+DiD_Fund_~ze |   .1741124   .0807731     2.16   0.031     .0157611    .3324637
+         DiD |  -.0378227    .018329    -2.06   0.039    -.0737557   -.0018897
+City_Total~n |   .0111278   .0148896     0.75   0.455    -.0180625    .0403181
+City_BankHHI |    .176499   .2199988     0.80   0.422    -.2547967    .6077947
+     City_ST |  -.0023236   .0061912    -0.38   0.707    -.0144611    .0098138
+ City_Patent |   .0257039    .005125     5.02   0.000     .0156566    .0357511
+    City_GDP |   .1000083   .0271723     3.68   0.000     .0467385    .1532782
+  Branch_Age |   .0027477   .0083669     0.33   0.743    -.0136551    .0191506
+   Bank_Size |   .0298171   .0181711     1.64   0.101    -.0058062    .0654405
+    Bank_ROA |    .031776   .0169815     1.87   0.061    -.0015153    .0650673
+    Bank_CAR |    .001113   .0021089     0.53   0.598    -.0030214    .0052474
+  Bank_Nplra |  -.0096085   .0083371    -1.15   0.249    -.0259529    .0067359
+       _cons |   -2.80864   .7134878    -3.94   0.000    -4.207394   -1.409885
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      4922        4922           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T2_1") ("DiD_Fund_Size") (_b[DiD_Fund_Size]) (_se[DiD_Fund_Size]) 
+> (e(N)) (e(r2_a))
+
+. post `H' ("T2_1") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T2_1=e(sample)
+
+. reghdfe  LnPPL_Num      DiD_Fund_Size  DiD $c_city $c_pledgee $c_bank  , abso
+> rb (pledgee_id year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     42,815
+Absorbing 2 HDFE groups                           F(  12,   4921) =       5.03
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3683
+                                                  Adj R-squared   =     0.2858
+                                                  Within R-sq.    =     0.0042
+Number of clusters (pledgee_id) =      4,922      Root MSE        =     0.2741
+
+                         (Std. err. adjusted for 4,922 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+   LnPPL_Num | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+DiD_Fund_~ze |    .276494   .1152869     2.40   0.017     .0504802    .5025078
+         DiD |  -.0446373   .0247404    -1.80   0.071    -.0931397     .003865
+City_Total~n |   .0531878   .0183005     2.91   0.004     .0173107     .089065
+City_BankHHI |   .3013153   .2235834     1.35   0.178    -.1370078    .7396384
+     City_ST |  -.0030011    .006893    -0.44   0.663    -.0165144    .0105121
+ City_Patent |   .0202453   .0059742     3.39   0.001     .0085332    .0319573
+    City_GDP |   .1511303   .0317459     4.76   0.000     .0888941    .2133665
+  Branch_Age |  -.0009176   .0105881    -0.09   0.931     -.021675    .0198397
+   Bank_Size |    .064334   .0236481     2.72   0.007     .0179732    .1106949
+    Bank_ROA |   .0534386    .020181     2.65   0.008     .0138748    .0930024
+    Bank_CAR |   .0013108   .0023704     0.55   0.580    -.0033363    .0059579
+  Bank_Nplra |  -.0176825   .0093212    -1.90   0.058    -.0359562    .0005913
+       _cons |  -4.742687   .9404776    -5.04   0.000    -6.586442   -2.898931
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      4922        4922           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T2_2") ("DiD_Fund_Size") (_b[DiD_Fund_Size]) (_se[DiD_Fund_Size]) 
+> (e(N)) (e(r2_a))
+
+. post `H' ("T2_2") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T2_2=e(sample)
+
+. reghdfe  PPL                DiD_Fund_GovShare  DiD $c_city $c_pledgee $c_bank
+>  , absorb (pledgee_id year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     42,525
+Absorbing 2 HDFE groups                           F(  12,   4894) =       6.04
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3138
+                                                  Adj R-squared   =     0.2241
+                                                  Within R-sq.    =     0.0035
+Number of clusters (pledgee_id) =      4,895      Root MSE        =     0.2537
+
+                         (Std. err. adjusted for 4,895 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+         PPL | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+DiD_Fund_G~e |   .0952116    .026951     3.53   0.000     .0423755    .1480477
+         DiD |  -.0468301   .0180671    -2.59   0.010    -.0822496   -.0114105
+City_Total~n |   .0017563   .0149029     0.12   0.906    -.0274601    .0309727
+City_BankHHI |   .2309138   .2227766     1.04   0.300    -.2058284    .6676559
+     City_ST |   .0001071    .006306     0.02   0.986    -.0122555    .0124697
+ City_Patent |   .0280987   .0051778     5.43   0.000     .0179478    .0382495
+    City_GDP |   .0881587    .027145     3.25   0.001     .0349423     .141375
+  Branch_Age |   .0006903   .0084485     0.08   0.935    -.0158724    .0172531
+   Bank_Size |   .0431586   .0184016     2.35   0.019     .0070832    .0792341
+    Bank_ROA |   .0318663   .0169686     1.88   0.060    -.0013997    .0651322
+    Bank_CAR |   .0012043    .002111     0.57   0.568    -.0029342    .0053428
+  Bank_Nplra |  -.0083674   .0084087    -1.00   0.320    -.0248523    .0081175
+       _cons |   -3.02859   .7182368    -4.22   0.000    -4.436657   -1.620523
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      4895        4895           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T2_3") ("DiD_Fund_GovShare") (_b[DiD_Fund_GovShare]) (_se[DiD_Fund
+> _GovShare]) (e(N)) (e(r2_a))
+
+. post `H' ("T2_3") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T2_3=e(sample)
+
+. reghdfe  LnPPL_Num      DiD_Fund_GovShare  DiD $c_city $c_pledgee $c_bank  , 
+> absorb (pledgee_id year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     42,525
+Absorbing 2 HDFE groups                           F(  12,   4894) =       6.14
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3697
+                                                  Adj R-squared   =     0.2873
+                                                  Within R-sq.    =     0.0055
+Number of clusters (pledgee_id) =      4,895      Root MSE        =     0.2758
+
+                         (Std. err. adjusted for 4,895 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+   LnPPL_Num | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+DiD_Fund_G~e |   .1423268   .0312015     4.56   0.000     .0811578    .2034957
+         DiD |  -.0654374   .0193949    -3.37   0.001    -.1034601   -.0274146
+City_Total~n |   .0421867   .0182347     2.31   0.021     .0064386    .0779348
+City_BankHHI |    .399051   .2274192     1.75   0.079    -.0467927    .8448947
+     City_ST |  -.0000928   .0070204    -0.01   0.989    -.0138559    .0136702
+ City_Patent |   .0224718   .0060246     3.73   0.000     .0106608    .0342829
+    City_GDP |   .1374706    .032071     4.29   0.000      .074597    .2003442
+  Branch_Age |  -.0020699   .0107875    -0.19   0.848    -.0232183    .0190786
+   Bank_Size |   .0810916     .02402     3.38   0.001     .0340016    .1281815
+    Bank_ROA |   .0517697   .0202161     2.56   0.010      .012137    .0914024
+    Bank_CAR |   .0016397   .0023748     0.69   0.490    -.0030159    .0062953
+  Bank_Nplra |  -.0171675   .0094084    -1.82   0.068    -.0356121    .0012771
+       _cons |   -5.03934   .9516618    -5.30   0.000    -6.905024   -3.173656
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      4895        4895           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T2_4") ("DiD_Fund_GovShare") (_b[DiD_Fund_GovShare]) (_se[DiD_Fund
+> _GovShare]) (e(N)) (e(r2_a))
+
+. post `H' ("T2_4") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T2_4=e(sample)
+
+. reghdfe  PPL                DiD_Fund_Manage  DiD $c_city $c_pledgee $c_bank ,
+>  absorb (pledgee_id year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     53,620
+Absorbing 2 HDFE groups                           F(  12,   6253) =       9.20
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3252
+                                                  Adj R-squared   =     0.2358
+                                                  Within R-sq.    =     0.0043
+Number of clusters (pledgee_id) =      6,254      Root MSE        =     0.2586
+
+                         (Std. err. adjusted for 6,254 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+         PPL | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+DiD_Fund_M~e |   .0502151    .013426     3.74   0.000     .0238956    .0765346
+         DiD |   .0060173   .0119458     0.50   0.614    -.0174005    .0294351
+City_Total~n |  -.0251313   .0139326    -1.80   0.071     -.052444    .0021813
+City_BankHHI |   .3011473    .190132     1.58   0.113    -.0715767    .6738713
+     City_ST |   .0089712   .0055293     1.62   0.105    -.0018681    .0198106
+ City_Patent |    .026782    .005083     5.27   0.000     .0168176    .0367464
+    City_GDP |   .0439433    .023838     1.84   0.065    -.0027873     .090674
+  Branch_Age |    .009158   .0078508     1.17   0.243    -.0062322    .0245482
+   Bank_Size |   .0497614   .0175479     2.84   0.005     .0153614    .0841613
+    Bank_ROA |   .0286089   .0147015     1.95   0.052    -.0002112    .0574289
+    Bank_CAR |   .0013908   .0018784     0.74   0.459    -.0022915     .005073
+  Bank_Nplra |   .0018821   .0073414     0.26   0.798    -.0125095    .0162738
+       _cons |  -2.540793   .6566263    -3.87   0.000    -3.828006   -1.253581
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      6254        6254           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T2_5") ("DiD_Fund_Manage") (_b[DiD_Fund_Manage]) (_se[DiD_Fund_Man
+> age]) (e(N)) (e(r2_a))
+
+. post `H' ("T2_5") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T2_5=e(sample)
+
+. reghdfe  LnPPL_Num      DiD_Fund_Manage  DiD $c_city $c_pledgee $c_bank  , ab
+> sorb (pledgee_id year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     53,620
+Absorbing 2 HDFE groups                           F(  12,   6253) =       7.08
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3756
+                                                  Adj R-squared   =     0.2928
+                                                  Within R-sq.    =     0.0042
+Number of clusters (pledgee_id) =      6,254      Root MSE        =     0.2784
+
+                         (Std. err. adjusted for 6,254 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+   LnPPL_Num | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+DiD_Fund_M~e |   .0192355    .018007     1.07   0.285    -.0160644    .0545353
+         DiD |   .0321117   .0167167     1.92   0.055    -.0006587    .0648821
+City_Total~n |   .0088741   .0172536     0.51   0.607    -.0249488     .042697
+City_BankHHI |   .4327645   .1954631     2.21   0.027     .0495897    .8159393
+     City_ST |   .0059666   .0061256     0.97   0.330    -.0060416    .0179748
+ City_Patent |   .0220418   .0058916     3.74   0.000     .0104923    .0335913
+    City_GDP |   .0977408   .0282338     3.46   0.001     .0423929    .1530887
+  Branch_Age |   .0041594   .0099994     0.42   0.677    -.0154429    .0237616
+   Bank_Size |   .0869022   .0228896     3.80   0.000     .0420307    .1317738
+    Bank_ROA |   .0486216   .0173578     2.80   0.005     .0145943    .0826488
+    Bank_CAR |   .0011143   .0021031     0.53   0.596    -.0030085    .0052371
+  Bank_Nplra |  -.0032135   .0081389    -0.39   0.693    -.0191686    .0127416
+       _cons |  -4.554033   .8719742    -5.22   0.000    -6.263402   -2.844665
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      6254        6254           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T2_6") ("DiD_Fund_Manage") (_b[DiD_Fund_Manage]) (_se[DiD_Fund_Man
+> age]) (e(N)) (e(r2_a))
+
+. post `H' ("T2_6") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T2_6=e(sample)
+
+. reghdfe  PPL               DiD_Fund_RiskShare  DiD $c_city $c_pledgee $c_bank
+>  , absorb (pledgee_id  year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     52,532
+Absorbing 2 HDFE groups                           F(  12,   6160) =       9.21
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3242
+                                                  Adj R-squared   =     0.2341
+                                                  Within R-sq.    =     0.0046
+Number of clusters (pledgee_id) =      6,161      Root MSE        =     0.2600
+
+                         (Std. err. adjusted for 6,161 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+         PPL | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+DiD_Fund_R~e |   .1349588   .0472124     2.86   0.004     .0424061    .2275116
+         DiD |  -.0167589   .0221214    -0.76   0.449    -.0601245    .0266068
+City_Total~n |  -.0423074   .0143669    -2.94   0.003    -.0704715   -.0141433
+City_BankHHI |   .3732012   .1935195     1.93   0.054    -.0061645    .7525669
+     City_ST |   .0072858   .0056477     1.29   0.197    -.0037856    .0183573
+ City_Patent |   .0259878   .0050346     5.16   0.000     .0161183    .0358573
+    City_GDP |    .032083   .0241134     1.33   0.183    -.0151877    .0793536
+  Branch_Age |   .0066043   .0079556     0.83   0.406    -.0089914    .0222001
+   Bank_Size |   .0466458   .0177723     2.62   0.009      .011806    .0814856
+    Bank_ROA |   .0362071    .015162     2.39   0.017     .0064842    .0659299
+    Bank_CAR |   .0022251    .001882     1.18   0.237    -.0014642    .0059144
+  Bank_Nplra |   .0043122   .0075012     0.57   0.565    -.0103929    .0190173
+       _cons |  -2.213707    .669559    -3.31   0.001    -3.526276   -.9011373
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      6161        6161           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T3_1") ("DiD_Fund_RiskShare") (_b[DiD_Fund_RiskShare]) (_se[DiD_Fu
+> nd_RiskShare]) (e(N)) (e(r2_a))
+
+. post `H' ("T3_1") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T3_1=e(sample)
+
+. reghdfe  LnPPL_Num    DiD_Fund_RiskShare  DiD $c_city $c_pledgee $c_bank  , a
+> bsorb (pledgee_id  year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     52,532
+Absorbing 2 HDFE groups                           F(  12,   6160) =       7.60
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3718
+                                                  Adj R-squared   =     0.2880
+                                                  Within R-sq.    =     0.0047
+Number of clusters (pledgee_id) =      6,161      Root MSE        =     0.2785
+
+                         (Std. err. adjusted for 6,161 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+   LnPPL_Num | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+DiD_Fund_R~e |   .1330989   .0537214     2.48   0.013     .0277861    .2384117
+         DiD |  -.0134605    .025446    -0.53   0.597    -.0633435    .0364224
+City_Total~n |   .0039284   .0179679     0.22   0.827    -.0312949    .0391518
+City_BankHHI |   .5379818    .201272     2.67   0.008     .1434184    .9325451
+     City_ST |   .0047554   .0063195     0.75   0.452    -.0076329    .0171438
+ City_Patent |    .023551   .0058362     4.04   0.000     .0121101    .0349919
+    City_GDP |   .0960573    .028028     3.43   0.001     .0411126     .151002
+  Branch_Age |   .0017605   .0100574     0.18   0.861    -.0179555    .0214766
+   Bank_Size |   .0821295   .0231843     3.54   0.000     .0366801    .1275788
+    Bank_ROA |   .0602762   .0177979     3.39   0.001      .025386    .0951663
+    Bank_CAR |   .0016354   .0020853     0.78   0.433    -.0024525    .0057233
+  Bank_Nplra |  -.0014039   .0082995    -0.17   0.866    -.0176739    .0148661
+       _cons |  -4.397175   .8839569    -4.97   0.000    -6.130039   -2.664311
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      6161        6161           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T3_2") ("DiD_Fund_RiskShare") (_b[DiD_Fund_RiskShare]) (_se[DiD_Fu
+> nd_RiskShare]) (e(N)) (e(r2_a))
+
+. post `H' ("T3_2") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T3_2=e(sample)
+
+. reghdfe  PPL               DiD_Fund_Structure  DiD $c_city $c_pledgee $c_bank
+>  , absorb (pledgee_id  year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     55,655
+Absorbing 2 HDFE groups                           F(  12,   6482) =       9.48
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3238
+                                                  Adj R-squared   =     0.2343
+                                                  Within R-sq.    =     0.0042
+Number of clusters (pledgee_id) =      6,483      Root MSE        =     0.2570
+
+                         (Std. err. adjusted for 6,483 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+         PPL | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+DiD_Fund~ure |   .0579139   .0116007     4.99   0.000     .0351727    .0806551
+         DiD |   -.000118   .0098766    -0.01   0.990    -.0194794    .0192434
+City_Total~n |  -.0180982   .0138973    -1.30   0.193    -.0453415     .009145
+City_BankHHI |   .2583765   .1902954     1.36   0.175    -.1146654    .6314184
+     City_ST |   .0047623   .0053884     0.88   0.377    -.0058008    .0153254
+ City_Patent |    .024527   .0049145     4.99   0.000     .0148931     .034161
+    City_GDP |   .0587681   .0230933     2.54   0.011     .0134975    .1040387
+  Branch_Age |   .0102686   .0077085     1.33   0.183    -.0048427    .0253799
+   Bank_Size |   .0369985   .0169305     2.19   0.029      .003809    .0701879
+    Bank_ROA |   .0244787   .0142803     1.71   0.087    -.0035153    .0524727
+    Bank_CAR |   .0012387   .0018279     0.68   0.498    -.0023445     .004822
+  Bank_Nplra |   .0031567   .0072581     0.43   0.664    -.0110716    .0173851
+       _cons |  -2.364938   .6319819    -3.74   0.000    -3.603831   -1.126045
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      6483        6483           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T3_3") ("DiD_Fund_Structure") (_b[DiD_Fund_Structure]) (_se[DiD_Fu
+> nd_Structure]) (e(N)) (e(r2_a))
+
+. post `H' ("T3_3") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T3_3=e(sample)
+
+. reghdfe  LnPPL_Num    DiD_Fund_Structure  DiD $c_city $c_pledgee $c_bank  , a
+> bsorb (pledgee_id  year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     55,655
+Absorbing 2 HDFE groups                           F(  12,   6482) =       8.44
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3745
+                                                  Adj R-squared   =     0.2917
+                                                  Within R-sq.    =     0.0050
+Number of clusters (pledgee_id) =      6,483      Root MSE        =     0.2754
+
+                         (Std. err. adjusted for 6,483 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+   LnPPL_Num | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+DiD_Fund~ure |   .0696863   .0142367     4.89   0.000     .0417776    .0975949
+         DiD |  -.0050882    .012013    -0.42   0.672    -.0286377    .0184612
+City_Total~n |   .0247559   .0174897     1.42   0.157    -.0095296    .0590415
+City_BankHHI |    .440287    .196111     2.25   0.025     .0558448    .8247292
+     City_ST |   .0043935   .0061045     0.72   0.472    -.0075733    .0163603
+ City_Patent |   .0221804   .0056636     3.92   0.000     .0110778    .0332829
+    City_GDP |   .1163838   .0272281     4.27   0.000     .0630077    .1697599
+  Branch_Age |   .0050308   .0097807     0.51   0.607    -.0141426    .0242043
+   Bank_Size |   .0718503   .0218517     3.29   0.001     .0290138    .1146868
+    Bank_ROA |   .0457168   .0168458     2.71   0.007     .0126935    .0787401
+    Bank_CAR |   .0005516   .0020454     0.27   0.787    -.0034581    .0045613
+  Bank_Nplra |   -.001449   .0079902    -0.18   0.856    -.0171124    .0142143
+       _cons |  -4.443214   .8301578    -5.35   0.000    -6.070597    -2.81583
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      6483        6483           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T3_4") ("DiD_Fund_Structure") (_b[DiD_Fund_Structure]) (_se[DiD_Fu
+> nd_Structure]) (e(N)) (e(r2_a))
+
+. post `H' ("T3_4") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T3_4=e(sample)
+
+. reghdfe  PPL               DiD_Fund_RC  DiD $c_city $c_pledgee $c_bank , abso
+> rb (pledgee_id  year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     55,551
+Absorbing 2 HDFE groups                           F(  12,   6483) =       9.43
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3235
+                                                  Adj R-squared   =     0.2338
+                                                  Within R-sq.    =     0.0047
+Number of clusters (pledgee_id) =      6,484      Root MSE        =     0.2571
+
+                         (Std. err. adjusted for 6,484 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+         PPL | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ DiD_Fund_RC |    .053982    .012263     4.40   0.000     .0299424    .0780216
+         DiD |   .0253852   .0072728     3.49   0.000     .0111281    .0396424
+City_Total~n |  -.0144127   .0139438    -1.03   0.301    -.0417471    .0129217
+City_BankHHI |   .2185738   .1895874     1.15   0.249    -.1530802    .5902277
+     City_ST |   .0034054   .0053799     0.63   0.527    -.0071409    .0139517
+ City_Patent |   .0208551   .0049132     4.24   0.000     .0112235    .0304867
+    City_GDP |   .0610235   .0232157     2.63   0.009     .0155132    .1065339
+  Branch_Age |   .0094701   .0076424     1.24   0.215    -.0055116    .0244517
+   Bank_Size |    .036944   .0168668     2.19   0.029     .0038795    .0700085
+    Bank_ROA |   .0269915   .0142756     1.89   0.059    -.0009934    .0549763
+    Bank_CAR |   .0016076   .0018414     0.87   0.383    -.0020022    .0052174
+  Bank_Nplra |   .0012618   .0072196     0.17   0.861     -.012891    .0154146
+       _cons |  -2.358189   .6284096    -3.75   0.000    -3.590079   -1.126299
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      6484        6484           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T3_5") ("DiD_Fund_RC") (_b[DiD_Fund_RC]) (_se[DiD_Fund_RC]) (e(N))
+>  (e(r2_a))
+
+. post `H' ("T3_5") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T3_5=e(sample)
+
+. reghdfe  LnPPL_Num    DiD_Fund_RC  DiD $c_city $c_pledgee $c_bank  , absorb (
+> pledgee_id  year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     55,551
+Absorbing 2 HDFE groups                           F(  12,   6483) =       8.31
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3730
+                                                  Adj R-squared   =     0.2899
+                                                  Within R-sq.    =     0.0054
+Number of clusters (pledgee_id) =      6,484      Root MSE        =     0.2753
+
+                         (Std. err. adjusted for 6,484 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+   LnPPL_Num | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ DiD_Fund_RC |   .0658465   .0152099     4.33   0.000     .0360302    .0956629
+         DiD |   .0222722   .0083279     2.67   0.008     .0059468    .0385976
+City_Total~n |   .0252194   .0173573     1.45   0.146    -.0088066    .0592454
+City_BankHHI |    .359167   .1930369     1.86   0.063     -.019249     .737583
+     City_ST |   .0021369   .0061216     0.35   0.727    -.0098635    .0141373
+ City_Patent |    .017895    .005623     3.18   0.001     .0068721    .0289178
+    City_GDP |   .1088161   .0270137     4.03   0.000     .0558604    .1617719
+  Branch_Age |   .0048161   .0096613     0.50   0.618    -.0141232    .0237553
+   Bank_Size |    .069768   .0215829     3.23   0.001     .0274585    .1120776
+    Bank_ROA |   .0460422   .0167113     2.76   0.006     .0132825     .078802
+    Bank_CAR |   .0011601   .0020415     0.57   0.570     -.002842    .0051621
+  Bank_Nplra |  -.0038193    .007915    -0.48   0.629    -.0193352    .0116966
+       _cons |  -4.180126   .8134422    -5.14   0.000    -5.774741   -2.585511
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      6484        6484           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T3_6") ("DiD_Fund_RC") (_b[DiD_Fund_RC]) (_se[DiD_Fund_RC]) (e(N))
+>  (e(r2_a))
+
+. post `H' ("T3_6") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T3_6=e(sample)
+
+. reghdfe  FirstLoan            DiD  $c_city $c_pledgee $c_bank , absorb (pledg
+> ee_id  year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     57,391
+Absorbing 2 HDFE groups                           F(  11,   6690) =       8.79
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.2504
+                                                  Adj R-squared   =     0.1512
+                                                  Within R-sq.    =     0.0029
+Number of clusters (pledgee_id) =      6,691      Root MSE        =     0.2390
+
+                         (Std. err. adjusted for 6,691 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+   FirstLoan | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         DiD |   .0282877   .0053058     5.33   0.000     .0178867    .0386888
+City_Total~n |  -.0044436   .0115916    -0.38   0.701    -.0271669    .0182797
+City_BankHHI |   .4143438    .152505     2.72   0.007     .1153854    .7133023
+     City_ST |   -.004882   .0046382    -1.05   0.293    -.0139744    .0042104
+ City_Patent |    .025172   .0042295     5.95   0.000     .0168807    .0334632
+    City_GDP |   .0346724   .0194677     1.78   0.075    -.0034905    .0728353
+  Branch_Age |   .0048653   .0064788     0.75   0.453    -.0078352    .0175658
+   Bank_Size |   .0266143   .0145759     1.83   0.068    -.0019591    .0551877
+    Bank_ROA |   .0429059   .0123383     3.48   0.001     .0187189    .0670929
+    Bank_CAR |   .0021117   .0016151     1.31   0.191    -.0010544    .0052777
+  Bank_Nplra |  -.0076253   .0060623    -1.26   0.209    -.0195093    .0042588
+       _cons |   -1.58489   .5410909    -2.93   0.003    -2.645601   -.5241797
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      6691        6691           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T4_1") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T4_1=e(sample)
+
+. reghdfe  FirstLoan_Num   DiD  $c_city $c_pledgee $c_bank , absorb (pledgee_id
+>   year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     57,391
+Absorbing 2 HDFE groups                           F(  11,   6690) =       7.58
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.2851
+                                                  Adj R-squared   =     0.1904
+                                                  Within R-sq.    =     0.0029
+Number of clusters (pledgee_id) =      6,691      Root MSE        =     0.2158
+
+                         (Std. err. adjusted for 6,691 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+FirstLoan_~m | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         DiD |   .0241708   .0051492     4.69   0.000     .0140766    .0342649
+City_Total~n |   .0146979   .0112956     1.30   0.193    -.0074451     .036841
+City_BankHHI |   .3781851    .139843     2.70   0.007     .1040483     .652322
+     City_ST |  -.0033528   .0043362    -0.77   0.439    -.0118532    .0051475
+ City_Patent |   .0216131   .0040201     5.38   0.000     .0137325    .0294938
+    City_GDP |   .0443583   .0185526     2.39   0.017     .0079892    .0807274
+  Branch_Age |   .0034145   .0064141     0.53   0.595    -.0091592    .0159882
+   Bank_Size |   .0337995   .0143918     2.35   0.019     .0055871     .062012
+    Bank_ROA |   .0428774   .0115777     3.70   0.000     .0201814    .0655733
+    Bank_CAR |   .0015468   .0014915     1.04   0.300     -.001377    .0044706
+  Bank_Nplra |    -.01005   .0055822    -1.80   0.072    -.0209929    .0008928
+       _cons |  -1.968724   .5399012    -3.65   0.000    -3.027102   -.9103455
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      6691        6691           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T4_2") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T4_2=e(sample)
+
+. reghdfe  NewPatent            DiD  $c_city $c_pledgee $c_bank , absorb (pledg
+> ee_id  year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     57,391
+Absorbing 2 HDFE groups                           F(  11,   6690) =       3.24
+Statistics robust to heteroskedasticity           Prob > F        =     0.0002
+                                                  R-squared       =     0.3011
+                                                  Adj R-squared   =     0.2085
+                                                  Within R-sq.    =     0.0016
+Number of clusters (pledgee_id) =      6,691      Root MSE        =     0.1791
+
+                         (Std. err. adjusted for 6,691 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+   NewPatent | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         DiD |    .012132   .0042531     2.85   0.004     .0037946    .0204694
+City_Total~n |   .0294998   .0092927     3.17   0.002     .0112832    .0477164
+City_BankHHI |   .1135047   .1314454     0.86   0.388    -.1441701    .3711795
+     City_ST |   .0002529   .0035934     0.07   0.944    -.0067914    .0072972
+ City_Patent |   .0043959   .0032424     1.36   0.175    -.0019602     .010752
+    City_GDP |   .0657926   .0148796     4.42   0.000     .0366239    .0949614
+  Branch_Age |   .0047453   .0053328     0.89   0.374    -.0057087    .0151994
+   Bank_Size |   .0219381   .0119191     1.84   0.066    -.0014272    .0453034
+    Bank_ROA |   .0152245   .0097609     1.56   0.119      -.00391     .034359
+    Bank_CAR |    .000585   .0012459     0.47   0.639    -.0018574    .0030275
+  Bank_Nplra |    .000956   .0046566     0.21   0.837    -.0081726    .0100845
+       _cons |  -1.886116   .4453425    -4.24   0.000    -2.759129   -1.013102
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      6691        6691           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T4_3") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T4_3=e(sample)
+
+. reghdfe  NewPatent_Num  DiD  $c_city $c_pledgee $c_bank , absorb (pledgee_id 
+>  year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     57,391
+Absorbing 2 HDFE groups                           F(  11,   6690) =       3.08
+Statistics robust to heteroskedasticity           Prob > F        =     0.0004
+                                                  R-squared       =     0.3214
+                                                  Adj R-squared   =     0.2316
+                                                  Within R-sq.    =     0.0019
+Number of clusters (pledgee_id) =      6,691      Root MSE        =     0.2900
+
+                         (Std. err. adjusted for 6,691 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+NewPatent_~m | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         DiD |   .0157725   .0072835     2.17   0.030     .0014945    .0300505
+City_Total~n |   .0689527   .0162895     4.23   0.000     .0370201    .1008854
+City_BankHHI |   .2884434    .203454     1.42   0.156    -.1103913    .6872781
+     City_ST |  -.0014218   .0059088    -0.24   0.810    -.0130048    .0101613
+ City_Patent |    .005085   .0053719     0.95   0.344    -.0054456    .0156156
+    City_GDP |   .1139484   .0244599     4.66   0.000     .0659991    .1618977
+  Branch_Age |   .0034523     .00914     0.38   0.706     -.014465    .0213696
+   Bank_Size |    .041439   .0205982     2.01   0.044     .0010599    .0818181
+    Bank_ROA |    .022683   .0165581     1.37   0.171    -.0097762    .0551422
+    Bank_CAR |  -.0000569   .0020214    -0.03   0.978    -.0040196    .0039057
+  Bank_Nplra |  -.0006867   .0079513    -0.09   0.931    -.0162738    .0149003
+       _cons |  -3.329764   .7793691    -4.27   0.000    -4.857575   -1.801952
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      6691        6691           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T4_4") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T4_4=e(sample)
+
+. reghdfe  PPL  DiDHighCET1 DiD  $c_city $c_pledgee $c_bank , absorb (pledgee_i
+> d   year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     57,205
+Absorbing 2 HDFE groups                           F(  12,   6653) =       8.98
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3220
+                                                  Adj R-squared   =     0.2325
+                                                  Within R-sq.    =     0.0040
+Number of clusters (pledgee_id) =      6,654      Root MSE        =     0.2577
+
+                         (Std. err. adjusted for 6,654 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+         PPL | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ DiDHighCET1 |   .0488066   .0135932     3.59   0.000     .0221596    .0754535
+         DiD |   .0282929   .0067117     4.22   0.000     .0151359    .0414499
+City_Total~n |  -.0231916   .0137139    -1.69   0.091    -.0500753     .003692
+City_BankHHI |   .1980206   .1874985     1.06   0.291    -.1695367    .5655778
+     City_ST |   .0005331   .0052999     0.10   0.920    -.0098565    .0109226
+ City_Patent |   .0252216   .0048238     5.23   0.000     .0157654    .0346778
+    City_GDP |   .0655506   .0227384     2.88   0.004     .0209761    .1101252
+  Branch_Age |   .0088262    .007658     1.15   0.249    -.0061858    .0238383
+   Bank_Size |   .0348567   .0168439     2.07   0.039     .0018372    .0678763
+    Bank_ROA |   .0343794   .0144502     2.38   0.017     .0060523    .0627065
+    Bank_CAR |   .0017429   .0018337     0.95   0.342    -.0018517    .0053375
+  Bank_Nplra |   .0031262   .0071767     0.44   0.663    -.0109424    .0171949
+       _cons |   -2.37723   .6269157    -3.79   0.000    -3.606186   -1.148275
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      6654        6654           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T5_1") ("DiDHighCET1") (_b[DiDHighCET1]) (_se[DiDHighCET1]) (e(N))
+>  (e(r2_a))
+
+. post `H' ("T5_1") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T5_1=e(sample)
+
+. reghdfe  LnPPL_Num  DiDHighCET1 DiD  $c_city $c_pledgee $c_bank , absorb (ple
+> dgee_id   year) vce(cluster pledgee_id)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =     57,205
+Absorbing 2 HDFE groups                           F(  12,   6653) =       7.58
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3723
+                                                  Adj R-squared   =     0.2894
+                                                  Within R-sq.    =     0.0044
+Number of clusters (pledgee_id) =      6,654      Root MSE        =     0.2759
+
+                         (Std. err. adjusted for 6,654 clusters in pledgee_id)
+------------------------------------------------------------------------------
+             |               Robust
+   LnPPL_Num | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ DiDHighCET1 |   .0554118   .0171736     3.23   0.001      .021746    .0890776
+         DiD |   .0281676   .0079686     3.53   0.000     .0125466    .0437886
+City_Total~n |   .0166147   .0170973     0.97   0.331    -.0169015    .0501309
+City_BankHHI |   .3319821   .1945784     1.71   0.088    -.0494539    .7134181
+     City_ST |   .0006751   .0060301     0.11   0.911    -.0111457     .012496
+ City_Patent |   .0229944    .005567     4.13   0.000     .0120813    .0339076
+    City_GDP |   .1146691   .0263831     4.35   0.000     .0629496    .1663885
+  Branch_Age |   .0039309   .0096583     0.41   0.684    -.0150025    .0228643
+   Bank_Size |    .068461   .0216106     3.17   0.002     .0260974    .1108246
+    Bank_ROA |   .0561772   .0170101     3.30   0.001      .022832    .0895225
+    Bank_CAR |   .0010271   .0020385     0.50   0.614    -.0029689    .0050231
+  Bank_Nplra |  -.0013518   .0078497    -0.17   0.863    -.0167396    .0140361
+       _cons |  -4.268436   .8151447    -5.24   0.000    -5.866381   -2.670491
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  pledgee_id |      6654        6654           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T5_2") ("DiDHighCET1") (_b[DiDHighCET1]) (_se[DiDHighCET1]) (e(N))
+>  (e(r2_a))
+
+. post `H' ("T5_2") ("DiD") (_b[DiD]) (_se[DiD]) (e(N)) (e(r2_a))
+
+. gen byte sample_T5_2=e(sample)
+
+. preserve
+
+. keep row_id sample_*
+
+. export delimited using "../data/sample_flags.csv", replace
+(file ../data/sample_flags.csv not found)
+file ../data/sample_flags.csv saved
+
+. restore
+
+. use bank, clear
+
+. reghdfe  Bank_Nplra  Treat_Ratio  Bank_Size AssetTurnover LDR Leverage , abso
+> rb (bank_name_id   year) vce(cluster bank_name_id)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =        690
+Absorbing 2 HDFE groups                           F(   5,    100) =       3.35
+Statistics robust to heteroskedasticity           Prob > F        =     0.0078
+                                                  R-squared       =     0.7316
+                                                  Adj R-squared   =     0.6783
+                                                  Within R-sq.    =     0.0697
+Number of clusters (bank_name_id) =        101    Root MSE        =     0.3469
+
+                         (Std. err. adjusted for 101 clusters in bank_name_id)
+------------------------------------------------------------------------------
+             |               Robust
+  Bank_Nplra | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ Treat_Ratio |   .0807496   .1223338     0.66   0.511    -.1619573    .3234564
+   Bank_Size |  -.2145971   .2232847    -0.96   0.339    -.6575875    .2283934
+AssetTurno~r |  -20.14767   7.375905    -2.73   0.007    -34.78126   -5.514086
+         LDR |   1.016975   .2886548     3.52   0.001     .4442917    1.589657
+    Leverage |  -1.784956   3.512147    -0.51   0.612    -8.752955    5.183043
+       _cons |   7.126956   6.074649     1.17   0.243    -4.924975    19.17889
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+ bank_name_id |       101         101           0    *|
+         year |        10           1           9     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T5_3") ("Treat_Ratio") (_b[Treat_Ratio]) (_se[Treat_Ratio]) (e(N))
+>  (e(r2_a))
+
+. reghdfe  Z_Score  Treat_Ratio  Bank_Size AssetTurnover LDR Leverage , absorb 
+> (bank_name_id   year) vce(cluster bank_name_id)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =        690
+Absorbing 2 HDFE groups                           F(   5,    100) =       2.39
+Statistics robust to heteroskedasticity           Prob > F        =     0.0434
+                                                  R-squared       =     0.5355
+                                                  Adj R-squared   =     0.4434
+                                                  Within R-sq.    =     0.0468
+Number of clusters (bank_name_id) =        101    Root MSE        =     0.6289
+
+                         (Std. err. adjusted for 101 clusters in bank_name_id)
+------------------------------------------------------------------------------
+             |               Robust
+     Z_Score | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ Treat_Ratio |  -.1820891   .1961965    -0.93   0.356    -.5713374    .2071592
+   Bank_Size |  -.0139176   .3085296    -0.05   0.964    -.6260316    .5981964
+AssetTurno~r |   39.50243    14.8459     2.66   0.009     10.04858    68.95627
+         LDR |  -.0892295   .4601241    -0.19   0.847    -1.002103    .8236436
+    Leverage |   2.658582   4.948477     0.54   0.592    -7.159056    12.47622
+       _cons |   4.027733   8.346501     0.48   0.630    -12.53149    20.58695
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------+
+  Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------+---------------------------------------|
+ bank_name_id |       101         101           0    *|
+         year |        10           1           9     |
+------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T5_4") ("Treat_Ratio") (_b[Treat_Ratio]) (_se[Treat_Ratio]) (e(N))
+>  (e(r2_a))
+
+. postclose `H'
+
+. use "../data/author_results.dta", clear
+
+. export delimited using "../data/author_results.csv", replace
+(file ../data/author_results.csv not found)
+file ../data/author_results.csv saved
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\fiscal_risk\w
+> ork\../logs/author_body.log
+  log type:  text
+ closed on:  14 Nov 2026, 19:50:34
+-------------------------------------------------------------------------------

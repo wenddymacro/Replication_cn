@@ -1,0 +1,37 @@
+[
+  {
+    "file": "20250325100806WU_FILE_0.zip",
+    "bytes": 1124405,
+    "sha256": "9773d14b73eb44767b74e7a8d52c71421c6922bda8cdbeed3b9cd79c93e37245"
+  },
+  {
+    "file": "新城新区建设与地区创业活跃度.pdf",
+    "bytes": 9770525,
+    "sha256": "ecb32e200d77d242a362a90da7cc440b37f8239173b2372562812918c0935eae"
+  },
+  {
+    "file": "extracted/陈勇兵+附件上传/《中国工业经济》编辑部关于公开数据附件的使用说明.pdf",
+    "bytes": 271110,
+    "sha256": "4a7bb5aacd5e1e023cede4bc2cec026e99b6c4e0a968bb8de5d4fb9cef2270e2"
+  },
+  {
+    "file": "extracted/陈勇兵+附件上传/程序.do",
+    "bytes": 11202,
+    "sha256": "c7f4dbd3d3e77be828a33e09300a884692e91e61c74f4b8c7279c5c3a034bc9a"
+  },
+  {
+    "file": "extracted/陈勇兵+附件上传/附录.pdf",
+    "bytes": 289154,
+    "sha256": "0d362b25080f82c288cb1bc407aedc1d1ed1379c35eb0ea1b425095f36f0cfe3"
+  },
+  {
+    "file": "extracted/陈勇兵+附件上传/数据/city-industry.dta",
+    "bytes": 8423293,
+    "sha256": "557dc4e317c970f902dd274749376f20f9c73e3cdc2da20e181007138ecba8e9"
+  },
+  {
+    "file": "extracted/陈勇兵+附件上传/数据/city.dta",
+    "bytes": 2321303,
+    "sha256": "9d8da0bbf0eb0074da751f3e7ea15da8ac6a14ce2900e96b573c4721bc86c771"
+  }
+]

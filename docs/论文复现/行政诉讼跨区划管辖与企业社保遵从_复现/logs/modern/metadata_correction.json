@@ -1,0 +1,16 @@
+{
+  "field": "reports_modern_estimator",
+  "value": true,
+  "reason": "正文及附录报告dCDH；初始录入false更正为true。仅元数据；全部其他CSV字符串字段逐格保持一致，无数值改写；原输出备份另存。",
+  "changed_files": [
+    "cie20250407__T2_1.csv",
+    "cie20250407__T2_2.csv",
+    "cie20250407__T2_3.csv",
+    "cie20250407__T3_1.csv",
+    "cie20250407__T3_3.csv",
+    "cie20250407__T3_5.csv",
+    "cie20250407__T4_1.csv",
+    "cie20250407__T4_2.csv",
+    "cie20250407__T4_3.csv"
+  ]
+}

@@ -1,0 +1,232 @@
+---------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\wo
+> rk\../output/dd.log
+  log type:  text
+ opened on:  13 Nov 2026, 23:45:29
+
+. //生成动态效应的变量
+. local num1=4
+
+. local num2=3
+
+. replace chainleader_l=. if chainleader_l==0
+(0 real changes made)
+
+. gen event=year-chainleader_l
+(20,134 missing values generated)
+
+. gen setup_mis=chainleader_l
+(20,134 missing values generated)
+
+. replace setup_mis=0 if setup_mis==.
+(20,134 real changes made)
+
+. tab event
+
+      event |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         -9 |         43        0.52        0.52
+         -8 |        121        1.47        2.00
+         -7 |        277        3.37        5.37
+         -6 |        527        6.42       11.79
+         -5 |        589        7.17       18.96
+         -4 |        644        7.84       26.81
+         -3 |        734        8.94       35.74
+         -2 |        787        9.58       45.33
+         -1 |        826       10.06       55.39
+          0 |        945       11.51       66.90
+          1 |        937       11.41       78.31
+          2 |        898       10.94       89.25
+          3 |        662        8.06       97.31
+          4 |        152        1.85       99.16
+          5 |         34        0.41       99.57
+          6 |         35        0.43      100.00
+------------+-----------------------------------
+      Total |      8,211      100.00
+
+. replace event=-`num1' if event<=-`num1'
+(1,557 real changes made)
+
+. replace event=`num2' if event>=`num2'
+(20,355 real changes made)
+
+. forvalues i=`num1'(-1)1{
+  2. gen pre`i'=0
+  3. replace pre`i'=1 if event==-`i'
+  4. }
+(2,201 real changes made)
+(734 real changes made)
+(787 real changes made)
+(826 real changes made)
+
+. forvalues i=0(1)`num2'{
+  2. gen post`i'=0
+  3. replace post`i'=1 if event==`i'
+  4. }
+(945 real changes made)
+(937 real changes made)
+(898 real changes made)
+(21,017 real changes made)
+
+. did_multiplegt_old TFP stkcd year chainleader, controls($xlist) robust_dynamic 
+> placebo(3) dynamic(3) breps(200) cluster(city)
+ 
+To estimate event-study/dynamic effects, we strongly recommend using
+the much faster did_multiplegt_dyn command, available from the ssc repository.
+To estimate static effects, we strongly recommend using
+the much faster did_multiplegt_stat command, available from the ssc repository.
+In addition to speed gains, did_multiplegt_dyn and did_multiplegt_stat
+also offer more comprehensive and up-to-date options than did_multiplegt_old.
+
+DID estimators of the instantaneous treatment effect, of dynamic treatment
+effects if the dynamic option is used, and of placebo tests of the parallel
+trends assumption if the placebo option is used. The estimators are robust to
+heterogeneous effects, and to dynamic effects if the robust_dynamic option is
+used.
+
+             |  Estimate         SE      LB CI      UB CI          N  Switchers 
+-------------+-----------------------------------------------------------------
+    Effect_0 |  .0278111    .011394   .0054789   .0501433      14562        691 
+    Effect_1 |  .0402631   .0173657   .0062263   .0742999      11172        588 
+    Effect_2 |  .0540635   .0221661   .0106179   .0975091       8311        489 
+    Effect_3 |  .0414083   .0232873  -.0042348   .0870514       5871        325 
+     Average |  .0395542   .0141035   .0119113   .0671971      39916       2093 
+   Placebo_1 |  .0008724   .0105279  -.0197623   .0215072      12794        623 
+   Placebo_2 |  .0274803   .0172328   -.006296   .0612565       9007        457 
+   Placebo_3 |  .0131541   .0246245  -.0351099    .061418       4738        319 
+
+. matrix dd_b = e(estimates)
+
+. matrix dd_v = e(variances)
+
+. 
+. ereturn list
+
+scalars:
+           e(effect_0) =  .0278110854438804
+        e(se_effect_0) =  .0113939831763558
+         e(N_effect_0) =  14562
+  e(N_switchers_effec
+    t_0)               =  691
+           e(effect_1) =  .0402631057128122
+        e(se_effect_1) =  .0173657242638556
+         e(N_effect_1) =  11172
+  e(N_switchers_effec
+    t_1)               =  588
+           e(effect_2) =  .0540635329225766
+        e(se_effect_2) =  .0221661273680441
+         e(N_effect_2) =  8311
+  e(N_switchers_effec
+    t_2)               =  489
+           e(effect_3) =  .041408300582146
+        e(se_effect_3) =  .0232873162961653
+         e(N_effect_3) =  5871
+  e(N_switchers_effec
+    t_3)               =  325
+          e(placebo_1) =  .0008724264012537
+       e(se_placebo_1) =  .0105279470551642
+        e(N_placebo_1) =  12794
+  e(N_switchers_place
+    bo_1)              =  623
+     e(p_jointplacebo) =  .2493726931104212
+  e(N_switchers_effec
+    t_average)         =  2093
+   e(N_effect_average) =  39916
+  e(se_effect_average) =  .0141035113907193
+     e(effect_average) =  .0395541956470102
+    e(cov_placebo_2_3) =  .000214668290202
+    e(cov_placebo_1_3) =  .0000551366441703
+    e(cov_placebo_1_2) =  .000112381054367
+    e(cov_effects_2_3) =  .0002739351226601
+    e(cov_effects_1_3) =  .0001348130726051
+    e(cov_effects_1_2) =  .000307785461621
+    e(cov_effects_0_3) =  .0000760053696674
+    e(cov_effects_0_2) =  .0001133052289351
+    e(cov_effects_0_1) =  .0001280142617985
+  e(N_switchers_place
+    bo_3)              =  319
+        e(N_placebo_3) =  4738
+       e(se_placebo_3) =  .0246244871381971
+          e(placebo_3) =  .0131540515871879
+  e(N_switchers_place
+    bo_2)              =  457
+        e(N_placebo_2) =  9007
+       e(se_placebo_2) =  .0172327663703332
+          e(placebo_2) =  .0274802575595639
+
+macros:
+                e(cmd) : "did_multiplegt_old"
+
+matrices:
+          e(variances) :  8 x 1
+   e(didmgt_variances) :  8 x 1
+          e(estimates) :  8 x 1
+   e(didmgt_estimates) :  8 x 1
+
+. matrix list dd_b
+
+dd_b[8,1]
+            Estimate
+ Effect_0  .02781109
+ Effect_1  .04026311
+ Effect_2  .05406353
+ Effect_3   .0414083
+  Average   .0395542
+Placebo_1  .00087243
+Placebo_2  .02748026
+Placebo_3  .01315405
+
+. matrix list dd_v
+
+dd_v[8,1]
+                  c1
+ Effect_0  .00012982
+ Effect_1  .00030157
+ Effect_2  .00049134
+ Effect_3   .0005423
+  Average  .00019891
+Placebo_1  .00011084
+Placebo_2  .00029697
+Placebo_3  .00060637
+
+. 
+. matrix bb=dd_b
+
+. matrix vv=dd_v
+
+. postfile coef str40 term double b se using "../output/dd.dta", replace
+(file ../output/dd.dta not found)
+
+. local terms : colnames bb
+
+. local j=0
+
+. foreach term of local terms {
+  2. local ++j
+  3. post coef ("`term'") (bb[1,`j']) (sqrt(vv[1,`j']))
+  4. }
+
+. postclose coef
+
+. preserve
+
+. use "../output/dd.dta", clear
+
+. export delimited using "../output/dd.csv", replace
+(file ../output/dd.csv not found)
+file ../output/dd.csv saved
+
+. restore
+
+. 
+. display "COMPLETE_dd"
+COMPLETE_dd
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\wo
+> rk\../output/dd.log
+  log type:  text
+ closed on:  13 Nov 2026, 23:55:40
+---------------------------------------------------------------------------------

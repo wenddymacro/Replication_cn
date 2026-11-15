@@ -1,0 +1,351 @@
+
+********************************************************************************
+
+*论文标题:行政诉讼跨区划管辖与企业社保遵从
+*论文刊期:2025年第4期
+*程序版本:Stata/SE 17.0
+
+********************************************************************************
+
+	cap log close
+	log using "日志文件", replace
+
+	clear all
+	
+	cd "E:\复现材料\行政诉讼跨区划管辖与企业社保遵从_复现材料"
+
+********************************************************************************
+*正文图表
+********************************************************************************
+
+*定义宏变量
+	global ctrl_code size wage lev roe ocf age dual indboa nsoe
+	global ctrl_city gdp second_gdp fiscal_balance finlaon foreign_inv
+
+	
+/*==============================================================================
+*表1: 描述性统计
+*=============================================================================*/
+	use 数据1, clear
+	 
+	tabstat sbf court $ctrl_code $ctrl_city, stats(N mean sd min p50 max) col(s) f(%10.4f)
+	
+
+/*==============================================================================
+*表2: 基准回归结果
+*=============================================================================*/
+	use 数据1, clear
+	
+	est clear
+	reghdfe sbf court , absorb(codeid year) cluster(cityid) keepsin
+	est sto m1 
+	reghdfe sbf court $ctrl_code, absorb(codeid year) cluster(cityid) keepsin
+	est sto m2
+	reghdfe sbf court $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	est sto m3
+	
+	local models m*
+	esttab `models', b(%6.4f) se(%6.4f) nogap compress  ///
+	   star(* 0.1 ** 0.05 *** 0.01)  ///
+	   scalar(N r2_a) replace         ///
+	   order(court $ctrl_code $ctrl_city) 
+
+	   
+/*==============================================================================
+*表3: 行政诉讼跨区划管辖改革的机制分析
+*=============================================================================*/
+	
+	use 数据1, clear
+	duplicates drop cityid year, force
+
+	est clear
+	reghdfe percase1 court $ctrl_city, absorb(cityid year) cluster(cityid)
+	est sto m1
+	reghdfe percase2 court $ctrl_city, absorb(cityid year) cluster(cityid)
+	est sto m3
+	reghdfe penalty court $ctrl_city, absorb(cityid year) cluster(cityid)
+	est sto m5
+	
+	
+	use 数据2, clear
+	
+	logit win court word_length $ctrl_city i.cityid i.year i.typeyg i.typebg, cluster(cityid)
+	est sto m2
+	logit win court word_length $ctrl_city i.cityid i.year i.typeyg i.typebg if ifsbcase==1, cluster(cityid)
+	est sto m4
+
+	local models m1 m2 m3 m4 m5
+	esttab `models' , b(%6.4f) se(%6.4f) nogap compress  ///
+	   star(* 0.1 ** 0.05 *** 0.01)  ///
+	   scalar(N r2_a r2_p) replace         ///
+	   order(court word_length $ctrl_city) drop(*cityid *year *typeyg *typebg)
+
+/*==============================================================================
+*表4: 控制外部融资环境变化的影响
+*=============================================================================*/
+	use 数据1, clear
+	
+	est clear
+	reghdfe sbf court dloan $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	est sto m1
+	reghdfe sbf court dbond $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin	
+	est sto m2
+	reghdfe sbf court dloanbond $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	est sto m3
+	
+	local models m*
+	esttab `models', b(%6.4f) se(%6.4f) nogap compress  ///
+	   star(* 0.1 ** 0.05 *** 0.01)  ///
+	   scalar(N r2_a) replace         ///
+	   order(court dloan dbond dloanbond $ctrl_code $ctrl_city)  
+
+
+/*==============================================================================
+*表5: 地区劳动保障监察激励的异质性检验
+*=============================================================================*/
+	use 数据1, clear
+	
+	center stress, prefix(ct_)
+	center gdpstress, prefix(ct_)
+	
+	est clear
+	reghdfe sbf court##c.ct_stress $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	est sto m1
+	reghdfe sbf court##c.ct_gdpstress $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	est sto m2
+
+	local models m*
+	esttab `models', b(%6.4f) se(%6.4f) nogap compress  ///
+	   star(* 0.1 ** 0.05 *** 0.01)  ///
+	   scalar(N r2_a) replace   drop(*0.*)      ///
+	   order(1.court 1.court#*ct_stress ct_stress 1.court#*gdpstress ct_gdpstress $ctrl_code $ctrl_city) 
+	
+	
+/*==============================================================================
+*表6: 劳动者特征和企业特征的异质性检验
+*=============================================================================*/
+	use 数据1, clear
+	
+	center liuyan, prefix(ct_)
+	
+	est clear 
+	reghdfe sbf court##c.ct_liuyan $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	est sto m1	
+	reghdfe sbf court##c.labor_intensity $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	est sto m2	
+	reghdfe sbf court##c.unemployment $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	est sto m3	
+	reghdfe sbf court##c.nsoe $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	est sto m4
+	
+	local models m*
+	esttab `models', b(%6.4f) se(%6.4f) nogap compress  ///
+	   star(* 0.1 ** 0.05 *** 0.01)  ///
+	   scalar(N r2_a) replace drop(0.*)        ///
+	   order(1.court 1.court#*ct_liuyan ct_liuyan 1.court#*labor_intensity labor_intensity 1.court#*unemployment unemployment 1.court#*nsoe nsoe $ctrl_code $ctrl_city)  
+
+
+********************************************************************************
+*附录图表
+********************************************************************************
+
+/*==============================================================================
+*附图3: 平行趋势检验
+*=============================================================================*/
+	****************************************************************************	
+	//稳健性检验00：平行趋势检验
+	use 数据1, clear
+	
+	reghdfe sbf prea pre6 pre5 pre4 pre3 pre2 current post1 post2 post3 post4 post5 posta $ctrl_code $ctrl_city year, absorb(codeid year) cluster(cityid) keepsin
+
+		coefplot, ///
+		   keep(prea pre6 pre5 pre4 pre3 pre2 year current post1 post2 post3 post4 post5 posta)   ///
+		   order(prea pre6 pre5 pre4 pre3 pre2 year current post1 post2 post3 post4 post5 posta) ///
+		   coeflabels(prea = "<=-7" pre6 = "-6" pre5 = "-5" pre4 = "-4" ///
+		   pre3 = "-3"   ///
+		   pre2 = "-2"             ///
+		   year = "-1"             ///
+		   current = "0"              ///
+		   post1  = "1"             ///
+		   post2  = "2"             ///
+		   post3  = "3"             ///
+		   post4  = "4"  post5  = "5"   ///
+		   posta  = ">=6" )            ///
+		   vertical                       ///
+		   yline(0)                       ///
+		   ytitle("回归系数")               ///
+		   xtitle("行政异地管辖改革的相对时间") ///
+		   ylabel(-0.02(0.01)0.04, format(%7.2f) angle(0) nogrid axis(1)) ///
+		   addplot(line @b @at) omitted          ///
+		   ciopts(recast(rcap))                 ///
+		   scheme(s1mono) levels(95) 
+		   	   
+/*==============================================================================
+*附表2: 多期DID的稳健估计
+*=============================================================================*/
+
+	use 数据1, clear
+
+	twowayfeweights sbf codeid year court, type(feTR)
+	
+	did_multiplegt sbf codeid year court, placebo(1) breps(100) cluster(cityid) controls($ctrl_code $ctrl_city)
+
+
+/*==============================================================================
+*附表3: 排除同期政策影响
+*=============================================================================*/
+	use 数据1, clear
+	
+	est clear
+	reghdfe sbf court socsup $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	est sto m1
+	reghdfe sbf court sfreform $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	est sto m2
+	reghdfe sbf court socsup sfreform $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	est sto m3
+	
+	local models m*
+	esttab `models', b(%6.4f) se(%6.4f) nogap compress  ///
+	   star(* 0.1 ** 0.05 *** 0.01)  ///
+	   scalar(N r2_a) replace         ///
+	   order(court socsup sfreform $ctrl_code $ctrl_city)  
+	
+	
+/*==============================================================================
+*附表4: 改变样本区间
+*=============================================================================*/
+	use 数据1, clear
+	
+	est clear
+	reghdfe sbf court $ctrl_code $ctrl_city if year>=2011, absorb(codeid year) cluster(cityid) keepsin
+	est sto m1
+	reghdfe sbf court $ctrl_code $ctrl_city if year<=2019, absorb(codeid year) cluster(cityid) keepsin
+	est sto m2
+	reghdfe sbf court $ctrl_code $ctrl_city if year<=2018, absorb(codeid year) cluster(cityid) keepsin
+	est sto m3
+	
+	local models m*
+	esttab `models', b(%6.4f) se(%6.4f) nogap compress  ///
+	   star(* 0.1 ** 0.05 *** 0.01)  ///
+	   scalar(N r2_a) replace         ///
+	   order(court $ctrl_code $ctrl_city)
+	   
+/*==============================================================================
+*附表5: 替换被解释变量测度、调整固定效应以及变换聚类标准误
+*=============================================================================*/
+	use 数据1, clear
+	
+	est clear
+	reghdfe sbf1 court $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin 
+	est sto m1
+	reghdfe sbf2 court $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	est sto m2
+	reghdfe sbf court $ctrl_code $ctrl_city, absorb(codeid bindid##year) cluster(cityid) keepsin
+	est sto m3
+	vce2way reghdfe sbf court $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid year) keepsin
+	est sto m4
+	
+	local models m*
+	esttab `models', b(%6.4f) se(%6.4f) nogap compress  ///
+	   star(* 0.1 ** 0.05 *** 0.01)  ///
+	   scalar(N r2_a) replace         ///
+	   order(court $ctrl_code $ctrl_city) 		
+		
+/*==============================================================================
+*附图4: 安慰剂检验
+*=============================================================================*/
+/*
+	use 数据1, clear	
+	permute court beta = _b[court] se = _se[court] df = e(df_r), reps(1000) rseed(123)  ///
+	saving("数据3.dta", replace): reghdfe sbf court $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid)
+*/
+
+	use 数据3, clear
+	gen t_value = beta / se
+	gen p_value = 2 * ttail(df, abs(beta/se))
+	
+twoway (scatter p_value beta, msymbol(smcircle_hollow) mcolor(black)) (kdensity beta,yaxis(2) lp(solid) ) , ///
+       title("") ///
+       xlabel(-0.004(0.002)0.010,format(%7.3f) angle(0)) ///
+       ylabel(0(0.2)1, format(%7.1f) angle(0) nogrid axis(1)) ///
+       ylabel(0(100)600, format(%7.0f) angle(0)  nogrid axis(2)) ///
+       xtitle("估计系数") ///
+       ytitle("P" "值", orientation(horizontal) axis(1)) ///
+       ytitle("系" "数" "核" "密" "度" "分" "布", orientation(horizontal) axis(2)) ///
+       xline(0, lwidth(0.2) lp(dash))  ///
+       xline(0.0080, lwidth(0.3) lp(solid)) ///
+       yline(0.1,lwidth(0.2) lp(dash)) ///
+       legend(label(1 "回归系数") label( 2 "系数核密度分布")) ///
+       plotregion(style(none)) /// 
+       graphregion(color(white)) 
+
+	   
+/*==============================================================================
+*附图5: 社保支出压力的边际效应
+*=============================================================================*/
+	use 数据1, clear
+	reghdfe sbf i.court##c.stress $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	sum stress
+	margins, dydx(court) at(stress=(0.90(0.2)1.80))
+	marginsplot, graphregion(color(white)) 
+	
+/*==============================================================================
+*附图6: 经济增长压力的边际效应
+*=============================================================================*/
+	use 数据1, clear
+	reghdfe sbf i.court##c.gdpstress $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	sum gdpstress
+	margins, dydx(court) at(gdpstress=(-0.04(0.02)0.08))
+	marginsplot, graphregion(color(white))
+
+/*==============================================================================
+*附图7: 劳动者维权意识的边际效应
+*=============================================================================*/
+	use 数据1, clear
+	reghdfe sbf i.court##c.liuyan $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	sum liuyan
+	margins, dydx(court) at(liuyan=(0.00(0.1)0.60))	
+	marginsplot, graphregion(color(white))
+	
+/*==============================================================================
+*附图8: 劳动密集型的边际效应
+*=============================================================================*/
+	use 数据1, clear
+	reghdfe sbf i.court##i.labor_intensity $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	sum labor_intensity
+	margins, dydx(court) at(labor_intensity=(0 1))
+	marginsplot, graphregion(color(white))
+
+/*==============================================================================
+*附图9: 失业率的边际效应
+*=============================================================================*/
+	use 数据1, clear
+	reghdfe sbf i.court##i.unemployment $ctrl_code $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	sum unemployment
+	margins, dydx(court) at(unemployment=(0 1))
+	marginsplot, graphregion(color(white))	
+	
+/*==============================================================================
+*附图10: 企业性质的边际效应
+*=============================================================================*/
+	use 数据1, clear
+	global ctrl_code1 size wage lev roe ocf age dual indboa //nsoe
+
+	reghdfe sbf i.court##i.nsoe $ctrl_code1 $ctrl_city, absorb(codeid year) cluster(cityid) keepsin
+	sum nsoe
+	margins, dydx(court) at(nsoe=(0 1))
+	marginsplot, graphregion(color(white))	   
+	
+	log close  
+
+		   
+
+
+
+	
+
+	 
+
+	
+	
+

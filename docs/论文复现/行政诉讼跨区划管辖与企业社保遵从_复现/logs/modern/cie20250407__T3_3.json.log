@@ -1,0 +1,67 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+Warning in did_standardization(data, args) :
+  Dropped 4 units that were already treated in the first period.
+You have an unbalanced panel. Proceeding as such.
+Warning in did_standardization(data, args) :
+  Some groups in your dataset have very few observations, which may cause estimation problems.
+  Check groups: 7,12,13,2.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (2, 2): The regression design matrix is singular: fewer observations than covariates. Consider removing some covariates.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (2, 3): The regression design matrix is singular: fewer observations than covariates. Consider removing some covariates.. The ATT for this cell will be set to NA.
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 2 in time period 4
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (2, 5): The regression design matrix is singular: fewer observations than covariates. Consider removing some covariates.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (2, 6): The regression design matrix is singular: fewer observations than covariates. Consider removing some covariates.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (2, 7): The regression design matrix is singular: fewer observations than covariates. Consider removing some covariates.. The ATT for this cell will be set to NA.
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (2, 8): The regression design matrix is singular: fewer observations than covariates. Consider removing some covariates.. The ATT for this cell will be set to NA.
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No available control units for group 2 in time period 1
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No available control units for group 2 in time period 1
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No available control units for group 2 in time period 1
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No available control units for group 2 in time period 1
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No available control units for group 2 in time period 1
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 6 in time period 2; consider centering/rescaling covariates or removing collinear terms
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (6, 3): The regression design matrix is singular: fewer observations than covariates. Consider removing some covariates.. The ATT for this cell will be set to NA.
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 7 in time period 2
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 7 in time period 4
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 7 in time period 4
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 8 in time period 2
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  Covariate matrix for control units is singular or numerically ill-conditioned for group 9 in time period 2; consider centering/rescaling covariates or removing collinear terms
+Warning in value[[3L]](cond) :
+  Error computing internal 2x2 DiD for (g, t) = (9, 3): The regression design matrix is singular: fewer observations than covariates. Consider removing some covariates.. The ATT for this cell will be set to NA.
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 10 in time period 4
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 11 in time period 3
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 12 in time period 4
+Warning in run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 13 in time period 5
+   window   twfe twfe_se     csa csa_se     bjs  bjs_se neg_abs G_eff_twfe
+   <char>  <num>   <num>   <num>  <num>   <num>   <num>   <num>      <num>
+1: static 0.1579 0.09097 -0.0565 0.1036 0.07238 0.09079  0.1362      161.5
+   G_eff_bjs G_eff_csa
+       <num>     <num>
+1:        NA        NA
+TWFE in raw units 0.00385497 vs published 0.0039 (ratio 0.9885)
+-> output/specs_controls/cie20250407__T3_3.csv 

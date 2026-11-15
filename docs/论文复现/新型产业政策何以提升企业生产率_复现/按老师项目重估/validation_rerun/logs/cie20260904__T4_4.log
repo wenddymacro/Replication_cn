@@ -1,0 +1,20 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+Warning in eval(stub[[3L]], x, enclos) :
+  unable to translate '<U+7ECF><U+5EA6>' to native encoding
+Warning in eval(stub[[3L]], x, enclos) :
+  unable to translate '<U+7EAC><U+5EA6>' to native encoding
+NOTE: The fixed-effects are not regular, they cannot be straightforwardly interpreted. The number of references is only approximate.
+Warning in .local(A, ...) :
+  CHOLMOD warning 'not positive definite' at file 'Cholesky/t_cholmod_rowfac_worker.c', line 449
+   window    twfe twfe_se   csa csa_se      bjs  bjs_se  neg_abs G_eff_twfe
+   <char>   <num>   <num> <num>  <num>    <num>   <num>    <num>      <num>
+1: static 0.01336 0.02558    NA     NA 0.008322 0.02452 0.004096      36.68
+   G_eff_bjs G_eff_csa
+       <num>     <num>
+1:        NA        NA
+TWFE in raw units 0.0141256 vs published 0.0251 (ratio 0.5628)
+-> output/specs_controls/cie20260904__T4_4.csv 

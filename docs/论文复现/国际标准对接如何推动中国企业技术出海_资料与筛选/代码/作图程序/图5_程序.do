@@ -1,0 +1,161 @@
+**# use DATA.dta #1
+global cv "Size Lnage Roa Lev Dual Tobin Digital RD LnPatcum"
+
+graph set window fontface "宋体"
+graph set print  fontface "宋体"
+
+*------------------------------------------------------------
+* 1. 基准IV模型
+*------------------------------------------------------------
+ivreghdfe LnPatos $cv (SIM = BartikIV), ///
+    absorb(id ind2code#year provincecode#year) ///
+    cluster(ind2code)
+
+capture drop iv_sample
+gen byte iv_sample = e(sample)
+
+*------------------------------------------------------------
+* 2. 放松严格外生估计
+*------------------------------------------------------------
+reghdfe LnPatos BartikIV $cv if iv_sample, ///
+    absorb(id ind2code#year provincecode#year) ///
+    cluster(ind2code)
+
+local rf = _b[BartikIV]
+
+
+display "工具变量约化型系数 = " %9.6f `rf'
+local z = invnormal(.975)
+* 本文理论设定要求直接效应为非负
+if `rf' <= 0 {
+    display as error "error"
+    exit 498
+}
+
+*============================================================
+* 3.Conley UCI：设定直接效应上限
+*============================================================
+
+local gbar1 = 0.01 * `rf'
+*local gbar1 = 0.05 * `rf'
+*local gbar1 = 0.10 * `rf'
+
+display "1%直接效应上限 = " %9.6f `gbar1'
+
+tempfile uci1
+tempname handle1
+
+postfile `handle1' ///
+    gamma beta se lower upper ///
+    using `uci1', replace
+
+forvalues k = 0/100 {
+
+    local gamma = `gbar1' * `k' / 100
+
+    tempvar y_adjusted
+
+    quietly generate double `y_adjusted' = ///
+        LnPatos - `gamma' * BartikIV if iv_sample
+
+    quietly ivreghdfe `y_adjusted' $cv ///
+        (SIM = BartikIV) if iv_sample, ///
+        absorb(id ind2code#year provincecode#year) ///
+        cluster(ind2code)
+
+    local b  = _b[SIM]
+    local se = _se[SIM]
+    local lb = `b' - `z' * `se'
+    local ub = `b' + `z' * `se'
+
+    post `handle1' ///
+        (`gamma') (`b') (`se') (`lb') (`ub')
+
+    drop `y_adjusted'
+}
+
+postclose `handle1'
+
+*------------------------------------------------------------
+* 4.计算95%联合置信区间
+*------------------------------------------------------------
+preserve
+
+use `uci1', clear
+
+quietly summarize lower
+local UCI1_lower = r(min)
+
+quietly summarize upper
+local UCI1_upper = r(max)
+
+display "直接效应上限为约化型效应1%时："
+display "95% UCI = [" ///
+    %9.4f `UCI1_lower' ", " ///
+    %9.4f `UCI1_upper' "]"
+
+*------------------------------------------------------------
+* 5.绘图
+*------------------------------------------------------------
+twoway ///
+    (rarea lower upper gamma, ///
+        fcolor(gs14) ///
+        lcolor(black) ///
+        lpattern(dash) ///
+        lwidth(medthin)) ///
+    (line beta gamma, ///
+        lcolor(black) ///
+        lpattern(solid) ///
+        lwidth(medthick)), ///
+    scheme(s1mono) ///
+    aspectratio(1) ///
+    xsize(6) ///
+    ysize(6) ///
+    yline(0, ///
+        lcolor(black) ///
+        lpattern(shortdash) ///
+        lwidth(thin)) ///
+    xtitle("工具变量直接效应 {&delta}", ///
+        size(medsmall) ///
+        color(black)) ///
+    ytitle("SIM的估计效应", ///
+        size(medsmall) ///
+        color(black)) ///
+    title("Conley UCI 1%", ///
+        size(medium) ///
+        color(black)) ///
+    xlabel(, ///
+        labsize(small) ///
+        labcolor(black) ///
+        format(%6.3f)) ///
+    ylabel(, ///
+        labsize(small) ///
+        labcolor(black) ///
+        angle(horizontal) ///
+        format(%6.2f)) ///
+    legend( ///
+        order(1 "95%置信区间" 2 "点估计") ///
+        ring(0) ///
+        position(2) ///
+        cols(1) ///
+        size(small) ///
+        region( ///
+            fcolor(white) ///
+            lcolor(black) ///
+            lwidth(thin))) ///
+    graphregion( ///
+        color(white) ///
+        margin(small)) ///
+    plotregion( ///
+        color(white) ///
+        lcolor(black) ///
+        lwidth(thin) ///
+        margin(small)) ///
+    name(Conley_UCI_1, replace)
+
+graph export "Conley_UCI_1pct.png", ///
+    replace width(2400)
+
+graph save "Conley_UCI_1pct.gph", replace
+
+restore

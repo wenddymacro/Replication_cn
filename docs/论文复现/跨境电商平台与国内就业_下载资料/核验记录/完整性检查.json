@@ -1,0 +1,33 @@
+{
+  "zip_crc": "pass",
+  "zip_members": 6,
+  "pdfs": [
+    {
+      "file": "论文\\跨境电商平台与国内就业——基于企业和地区双重视角的考察.pdf",
+      "pages": 24,
+      "encrypted": false,
+      "nonempty_text_pages": 24,
+      "signature": true,
+      "eof": true
+    },
+    {
+      "file": "附录\\附录.pdf",
+      "pages": 13,
+      "encrypted": false,
+      "nonempty_text_pages": 13,
+      "signature": true,
+      "eof": true
+    },
+    {
+      "file": "其他说明\\《中国工业经济》编辑部关于公开数据附件的使用说明.pdf",
+      "pages": 2,
+      "encrypted": false,
+      "nonempty_text_pages": 2,
+      "signature": true,
+      "eof": true
+    }
+  ],
+  "source": "用户人工下载后提供，非本轮浏览器自动下载",
+  "http_status": null,
+  "notes": "文件结构及校验通过不等于已重跑复现；附件没有分析数据"
+}

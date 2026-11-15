@@ -1,0 +1,23 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+   estimator           sample comparisons papers  corr corr_paper_w  flip
+      <char>           <char>       <int>  <int> <num>        <num> <num>
+1:       csa main:pass_screen           1      1    NA           NA     0
+2:       bjs main:pass_screen           1      1    NA           NA     0
+3:       csa         main:all           1      1    NA           NA     0
+4:       bjs         main:all           1      1    NA           NA     0
+   flip_paper_w sig_flip se_ratio_mean se_ratio_median with_boot_cov
+          <num>    <num>         <num>           <num>         <int>
+1:            0        0         0.963           0.963             0
+2:            0        0         1.018           1.018             1
+3:            0        0         0.963           0.963             0
+4:            0        0         1.018           1.018             1
+   screen_twfe_only neg_abs_mean
+              <int>        <num>
+1:                1        0.204
+2:                0        0.204
+3:                1        0.204
+4:                0        0.204

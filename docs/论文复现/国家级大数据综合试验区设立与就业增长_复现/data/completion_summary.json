@@ -1,0 +1,25 @@
+{
+  "specifications": 30,
+  "result_rows": 31,
+  "main_specifications": 1,
+  "secondary_static": 28,
+  "secondary_event": 1,
+  "static_bootstrap_B": 999,
+  "static_bootstrap_specs": 29,
+  "author_static_models": 30,
+  "author_reported_coefficients_exact": 32,
+  "estimator_counts": {
+    "csa": {
+      "points": 6,
+      "with_se": 5
+    },
+    "bjs": {
+      "points": 31,
+      "with_se": 31
+    }
+  },
+  "bjs_opposite_direction_rows": 1,
+  "twfe_sig5_bjs_not_sig5_rows": 13,
+  "sensitivity_separate": true,
+  "upstream_R_unchanged": true
+}

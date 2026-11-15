@@ -1,0 +1,5 @@
+{
+  "reason": "CSA >60类跳过分支缺少杠杆字段，补齐NA以保证输出与汇总schema；估计方法未变",
+  "original_sha256": "4a5840bf3752bae7bb06d30da479f0afa79a9a3451811018fd668af0decda1a3",
+  "patched_sha256": "18ea0c75730ba11a9215c518d28c516923dcc030512b5ced201a5b56a4129ca6"
+}

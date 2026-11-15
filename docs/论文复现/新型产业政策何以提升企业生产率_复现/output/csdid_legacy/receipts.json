@@ -1,0 +1,112 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/csdid.ado",
+    "file": "csdid.ado",
+    "sha256": "2cd3b036552d837262f8323bb6541658ad5a5bfab5f383c29982be058f66d2b2"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/csdid_estat.ado",
+    "file": "csdid_estat.ado",
+    "sha256": "be037cb115ceb25d16cb3f458764a5a5a1274175207c30d8024362426c1539a4"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/csdid_stats.ado",
+    "file": "csdid_stats.ado",
+    "sha256": "48173669480ab6e48f090aa9f112a518161c227e38d9eb65f3e59d18b6b2d4b9"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/csdid_table.ado",
+    "file": "csdid_table.ado",
+    "sha256": "6efaac3e8aee1092c7033dc97625d41ed605892bd4585f26d626afbe33388a88"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/csdid_plot.ado",
+    "file": "csdid_plot.ado",
+    "sha256": "7110521d34b85a675e573818e77400e16916de0107d9478725547df5905f4b72"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/csdid.sthlp",
+    "file": "csdid.sthlp",
+    "sha256": "b818df75dd3327d5cec5dea76759c55e71cd754bf44037fc1918bfb3b32d82b7"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/csdid_postestimation.sthlp",
+    "file": "csdid_postestimation.sthlp",
+    "sha256": "4153557368632a71257b7d453777173284f02dba4435d2a8b9256df9edf26189"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/drdid.ado",
+    "file": "drdid.ado",
+    "sha256": "edee33ec399e39f882b3ec5e5a802f73ced4caeaef67c446943dc114b8c2159a"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/drdid_predict.ado",
+    "file": "drdid_predict.ado",
+    "sha256": "056ec27bdf271589b474c580843f4318d49528af7e13b473e719d7581102a17c"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/drdid_display.ado",
+    "file": "drdid_display.ado",
+    "sha256": "879952ae087e283313df30abbbe944a01d097cecc9859376b0d90a42afe27bce"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/drdid.sthlp",
+    "file": "drdid.sthlp",
+    "sha256": "e96dd24c7dedc975399962c382b719a4269b204974af1427cfbe2f4d6b751c3e"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/tsvmat.ado",
+    "file": "tsvmat.ado",
+    "sha256": "cdc9476da5809d2a3c31ad8bfc249347949702fbeaf7698fe2c6ab69da72140f"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/_gcsgvar.ado",
+    "file": "_gcsgvar.ado",
+    "sha256": "a76f772ffe18f0322faa7b491e234b3404f572b74739f0742a465c44777a355d"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/_gmm_dripw.ado",
+    "file": "_gmm_dripw.ado",
+    "sha256": "33f38f393b0124eeb5a871e9fbcb1b45a660c85f173d02375771516b1cb64068"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/_gmm_regipw.ado",
+    "file": "_gmm_regipw.ado",
+    "sha256": "d90e3b0af56ac7c0795e00506ef40549a66db664d81884aa6e75eba3d522f60a"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/_gmm_repeated.ado",
+    "file": "_gmm_repeated.ado",
+    "sha256": "f7af5faf9ecdfbc47b70a33ece573354e0b8788b2e7587f85fb3b2d181cb1528"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/_het_did_gmm.ado",
+    "file": "_het_did_gmm.ado",
+    "sha256": "a410955086ccfbec101810964e2cc2c6ff27f337e1d5dcf6274c2805e52d3a56"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/drdid.ado",
+    "file": "drdid.ado",
+    "sha256": "edee33ec399e39f882b3ec5e5a802f73ced4caeaef67c446943dc114b8c2159a"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/_gmm_dripw.ado",
+    "file": "_gmm_dripw.ado",
+    "sha256": "33f38f393b0124eeb5a871e9fbcb1b45a660c85f173d02375771516b1cb64068"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/_gmm_regipw.ado",
+    "file": "_gmm_regipw.ado",
+    "sha256": "d90e3b0af56ac7c0795e00506ef40549a66db664d81884aa6e75eba3d522f60a"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/_het_did_gmm.ado",
+    "file": "_het_did_gmm.ado",
+    "sha256": "a410955086ccfbec101810964e2cc2c6ff27f337e1d5dcf6274c2805e52d3a56"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/friosavila/csdid_drdid/main/code/drdid.sthlp",
+    "file": "drdid.sthlp",
+    "sha256": "e96dd24c7dedc975399962c382b719a4269b204974af1427cfbe2f4d6b751c3e"
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "zip_crc": "pass",
+  "zip_file_members": 8,
+  "pdfs": [
+    {
+      "file": "论文\\公共数据开放如何提振企业有效投资——基于产能利用视角.pdf",
+      "pages": 17,
+      "text_pages": 0,
+      "signature": true,
+      "eof": true
+    },
+    {
+      "file": "附录\\附录.pdf",
+      "pages": 15,
+      "text_pages": 15,
+      "signature": true,
+      "eof": true
+    },
+    {
+      "file": "其他说明\\《中国工业经济》编辑部关于公开数据附件的使用说明.pdf",
+      "pages": 2,
+      "text_pages": 2,
+      "signature": true,
+      "eof": true
+    }
+  ],
+  "data_files_readable": 5,
+  "http_status": null
+}

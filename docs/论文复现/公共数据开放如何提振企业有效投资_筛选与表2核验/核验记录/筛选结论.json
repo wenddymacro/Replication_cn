@@ -1,0 +1,337 @@
+{
+  "paper_id": "cie20240808",
+  "title": "公共数据开放如何提振企业有效投资——基于产能利用视角",
+  "year": 2024,
+  "issue": 8,
+  "authors": [
+    "王海",
+    "叶帅",
+    "尹俊雅"
+  ],
+  "screen_date": "2026-11-14",
+  "screened_from": "正文PDF视觉核查+作者程序+作者数据+Stata原模型核验",
+  "staggered_design": true,
+  "package_status": "data_and_code",
+  "data_access": "public",
+  "main_sample_specs": [],
+  "n_eligible_main_specs": 0,
+  "near_miss_controls_only": true,
+  "near_miss_controls_only_specs": [
+    {
+      "spec_id": "T2_1",
+      "location": "表2第1列",
+      "static_or_event": "static",
+      "outcome": "caput",
+      "treatment": "cityp",
+      "controls": [
+        "size",
+        "age",
+        "lev",
+        "cash",
+        "cfo",
+        "top10",
+        "sgr",
+        "msh",
+        "board",
+        "indep",
+        "qturn"
+      ],
+      "baseline_by_year_slopes": [
+        "ecodev",
+        "attention",
+        "internet",
+        "oswitch",
+        "mobile",
+        "fisupport"
+      ],
+      "baseline_characteristics_changing_units": {
+        "ecodev": 6,
+        "attention": 6,
+        "internet": 6,
+        "oswitch": 6,
+        "mobile": 6,
+        "fisupport": 6
+      },
+      "fixed_effects": "id+year+六个2010年前定特征×年份斜率",
+      "clustering": "ids（省份）",
+      "coef": 0.0124,
+      "se": 0.0057,
+      "n_obs": 6918,
+      "replicated_b": 0.0124320356541642,
+      "replicated_se": 0.0056804242,
+      "replicated_N": 6918,
+      "replication_status": "exact",
+      "n_units": 1038,
+      "n_clusters": 31,
+      "first_observed_treated_periods": {
+        "5": 159,
+        "6": 18,
+        "7": 1,
+        "8": 10,
+        "9": 127,
+        "10": 29,
+        "11": 111,
+        "12": 102,
+        "13": 68
+      },
+      "n_observed_cohorts": 9,
+      "n_newly_observed_cohorts": 7,
+      "observed_switch_offs": 0,
+      "unbalanced": true,
+      "never_observed_treated_units": 413,
+      "sample_filter": "cz==1",
+      "notes": "该列仅cityp一个政策变量；不凭原始变量名认定入选。前定连续特征×年斜率须原样保留，不能替换为省份×年全套分类固定效应。移动地区企业的特征变化及处理关闭须按协议处理。",
+      "screen_status": "conditional_secondary_candidate"
+    },
+    {
+      "spec_id": "T2_2",
+      "location": "表2第2列",
+      "static_or_event": "static",
+      "outcome": "caput",
+      "treatment": "cityp",
+      "controls": [
+        "size",
+        "age",
+        "lev",
+        "cash",
+        "cfo",
+        "top10",
+        "sgr",
+        "msh",
+        "board",
+        "indep",
+        "qturn"
+      ],
+      "baseline_by_year_slopes": [
+        "ecodev",
+        "attention",
+        "internet",
+        "oswitch",
+        "mobile",
+        "fisupport"
+      ],
+      "baseline_characteristics_changing_units": {
+        "ecodev": 18,
+        "attention": 18,
+        "internet": 18,
+        "oswitch": 18,
+        "mobile": 18,
+        "fisupport": 18
+      },
+      "fixed_effects": "id+year+六个2010年前定特征×年份斜率",
+      "clustering": "ids（省份）",
+      "coef": 0.0025,
+      "se": 0.0048,
+      "n_obs": 11428,
+      "replicated_b": 0.0024785068552279,
+      "replicated_se": 0.0047920779,
+      "replicated_N": 11428,
+      "replication_status": "exact",
+      "n_units": 1625,
+      "n_clusters": 23,
+      "first_observed_treated_periods": {
+        "5": 1,
+        "7": 31,
+        "8": 56,
+        "9": 61,
+        "10": 69,
+        "11": 399,
+        "12": 211,
+        "13": 312
+      },
+      "n_observed_cohorts": 8,
+      "n_newly_observed_cohorts": 8,
+      "observed_switch_offs": 1,
+      "unbalanced": true,
+      "never_observed_treated_units": 485,
+      "sample_filter": "cz==0",
+      "notes": "该列仅cityp一个政策变量；不凭原始变量名认定入选。前定连续特征×年斜率须原样保留，不能替换为省份×年全套分类固定效应。移动地区企业的特征变化及处理关闭须按协议处理。",
+      "screen_status": "conditional_secondary_candidate"
+    },
+    {
+      "spec_id": "T2_3",
+      "location": "表2第3列",
+      "static_or_event": "static",
+      "outcome": "caput",
+      "treatment": "cityp",
+      "controls": [
+        "size",
+        "age",
+        "lev",
+        "cash",
+        "cfo",
+        "top10",
+        "sgr",
+        "msh",
+        "board",
+        "indep",
+        "qturn"
+      ],
+      "baseline_by_year_slopes": [
+        "ecodev",
+        "attention",
+        "internet",
+        "oswitch",
+        "mobile",
+        "fisupport"
+      ],
+      "baseline_characteristics_changing_units": {
+        "ecodev": 0,
+        "attention": 0,
+        "internet": 0,
+        "oswitch": 0,
+        "mobile": 0,
+        "fisupport": 0
+      },
+      "fixed_effects": "id+year+六个2010年前定特征×年份斜率",
+      "clustering": "ids（省份）",
+      "coef": 0.0201,
+      "se": 0.0091,
+      "n_obs": 3093,
+      "replicated_b": 0.0201151016320267,
+      "replicated_se": 0.0091260066,
+      "replicated_N": 3093,
+      "replication_status": "exact",
+      "n_units": 385,
+      "n_clusters": 25,
+      "first_observed_treated_periods": {
+        "8": 14,
+        "9": 3,
+        "10": 29,
+        "11": 59,
+        "12": 64,
+        "13": 38
+      },
+      "n_observed_cohorts": 6,
+      "n_newly_observed_cohorts": 5,
+      "observed_switch_offs": 0,
+      "unbalanced": true,
+      "never_observed_treated_units": 178,
+      "sample_filter": "xz==1",
+      "notes": "该列仅cityp一个政策变量；不凭原始变量名认定入选。前定连续特征×年斜率须原样保留，不能替换为省份×年全套分类固定效应。移动地区企业的特征变化及处理关闭须按协议处理。",
+      "screen_status": "confirmed_secondary_structure"
+    },
+    {
+      "spec_id": "T2_4",
+      "location": "表2第4列",
+      "static_or_event": "static",
+      "outcome": "caput",
+      "treatment": "cityp",
+      "controls": [
+        "size",
+        "age",
+        "lev",
+        "cash",
+        "cfo",
+        "top10",
+        "sgr",
+        "msh",
+        "board",
+        "indep",
+        "qturn"
+      ],
+      "baseline_by_year_slopes": [
+        "ecodev",
+        "attention",
+        "internet",
+        "oswitch",
+        "mobile",
+        "fisupport"
+      ],
+      "baseline_characteristics_changing_units": {
+        "ecodev": 28,
+        "attention": 28,
+        "internet": 28,
+        "oswitch": 28,
+        "mobile": 28,
+        "fisupport": 28
+      },
+      "fixed_effects": "id+year+六个2010年前定特征×年份斜率",
+      "clustering": "ids（省份）",
+      "coef": 0.0048,
+      "se": 0.0043,
+      "n_obs": 15375,
+      "replicated_b": 0.00475136008859,
+      "replicated_se": 0.0043343166,
+      "replicated_N": 15375,
+      "replication_status": "exact",
+      "n_units": 1930,
+      "n_clusters": 29,
+      "first_observed_treated_periods": {
+        "5": 160,
+        "6": 18,
+        "7": 32,
+        "8": 51,
+        "9": 185,
+        "10": 69,
+        "11": 453,
+        "12": 241,
+        "13": 246
+      },
+      "n_observed_cohorts": 9,
+      "n_newly_observed_cohorts": 9,
+      "observed_switch_offs": 3,
+      "unbalanced": true,
+      "never_observed_treated_units": 475,
+      "sample_filter": "xz==0",
+      "notes": "该列仅cityp一个政策变量；不凭原始变量名认定入选。前定连续特征×年斜率须原样保留，不能替换为省份×年全套分类固定效应。移动地区企业的特征变化及处理关闭须按协议处理。",
+      "screen_status": "conditional_secondary_candidate"
+    }
+  ],
+  "n_secondary_specs": 1,
+  "priority": 1,
+  "modern_reestimation_status": "not_run",
+  "ineligible_specs": [
+    {
+      "location": "表1、表3、表4、表5、表7、表9、表10",
+      "reason": "原模型同时包含provp和cityp两个政策处理；表9另有非冗余额外可加固定效应"
+    },
+    {
+      "location": "表6、表8",
+      "reason": "处理×特征交互或多组处理变量，且含额外政策变量"
+    }
+  ],
+  "appendix_specs": [
+    {
+      "location": "附录",
+      "notes": "另存，不混入正文合格计数"
+    }
+  ],
+  "calendar_mapping": {
+    "year_index_1": 2008,
+    "year_index_13": 2020,
+    "source": "正文第5页样本2008–2020及包内year取1–13；按连续年度映射，未来需保留映射记录"
+  },
+  "execution_caveats": [
+    "上游xt_vars实现为分类交互固定效应，不直接支持连续基期特征×年斜率；现代重估须明确适配或记为暂不能估，不能偷偷改变原设定",
+    "不平衡面板中个体首次可观察处理期不一定是真实政策年份；必须结合城市/省份政策状态推断和核对，不能把下表九个观察期直接当作九个真实批次",
+    "仅4列作者TWFE原模型已复现，未完成全文原模型、现代CSA/BJS或999次联合自助。"
+  ],
+  "n_secondary_specs_confirmed": 1,
+  "confirmed_secondary_specs": [
+    "T2_3"
+  ],
+  "conditional_secondary_candidates": [
+    "T2_1",
+    "T2_2",
+    "T2_4"
+  ],
+  "n_secondary_candidates": 4,
+  "notes": "已确认至少表2第3列符合二级样本结构，其余三列须处理时变前定特征或处理关闭；不将四列候选均宣称最终合格。严格主样本0。",
+  "confirmed_adjacent_year_0_to_1_firm_counts_T2_3": {
+    "2015": 11,
+    "2017": 25,
+    "2018": 34,
+    "2019": 51,
+    "2020": 37
+  },
+  "screener": "Codex",
+  "eligible_design": true,
+  "n_eligible_specs": 0,
+  "eligible_specs": [],
+  "unit": "firm",
+  "assignment_unit": "city",
+  "time_unit": "year",
+  "main_or_robustness": "main",
+  "reports_modern_estimator": false
+}

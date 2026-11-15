@@ -1,0 +1,75 @@
+{
+  "city.dta": {
+    "rows": 2919,
+    "variables": 19,
+    "years": [
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "duplicate_panel_years": 0
+  },
+  "listed.dta": {
+    "rows": 28345,
+    "variables": 141,
+    "years": [
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "duplicate_panel_years": 0,
+    "firms": 4068,
+    "cities": 279,
+    "treatment_values": [
+      0.0,
+      1.0
+    ],
+    "treatment_reversals": 0,
+    "firms_with_changing_cohort": 0,
+    "treatment_cohort_inconsistent_rows": 0,
+    "treated_cohorts": [
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  "listed_extended.dta": {
+    "rows": 43193,
+    "variables": 18,
+    "years": [
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "duplicate_panel_years": 0
+  }
+}

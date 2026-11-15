@@ -1,0 +1,27 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+Warning messages:
+1: In eval(stub[[3L]], x, enclos) :
+  unable to translate '<U+7ECF><U+5EA6>' to native encoding
+2: In eval(stub[[3L]], x, enclos) :
+  unable to translate '<U+7EAC><U+5EA6>' to native encoding
+Warning messages:
+1: In eval(lhs_call, data) :
+  unable to translate '<U+7ECF><U+5EA6>' to native encoding
+2: In eval(lhs_call, data) :
+  unable to translate '<U+7EAC><U+5EA6>' to native encoding
+3: In eval(all_vars_call, base) :
+  unable to translate '<U+7ECF><U+5EA6>' to native encoding
+4: In eval(all_vars_call, base) :
+  unable to translate '<U+7EAC><U+5EA6>' to native encoding
+5: In eval(all_vars_call, data) :
+  unable to translate '<U+7ECF><U+5EA6>' to native encoding
+6: In eval(all_vars_call, data) :
+  unable to translate '<U+7EAC><U+5EA6>' to native encoding
+7: In eval(str2expression(vname), data) :
+  unable to translate '<U+7ECF><U+5EA6>' to native encoding
+8: In eval(str2expression(vname), data) :
+  unable to translate '<U+7EAC><U+5EA6>' to native encoding

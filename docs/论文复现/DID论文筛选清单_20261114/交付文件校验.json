@@ -1,0 +1,37 @@
+[
+  {
+    "file": "DID待核候选_题名线索不是确认名单.csv",
+    "bytes": 64621,
+    "sha256": "f7e0ba28b846717ea36a97a854454d18488ca3365d3362897b56edc81e79dacf"
+  },
+  {
+    "file": "中国工业经济_DID论文名单_阶段核验版.csv",
+    "bytes": 69488,
+    "sha256": "2e9fa7243ab57edabbe5d640be4ff31141f4c9fb7015b452d2d2946de91065ef"
+  },
+  {
+    "file": "中国工业经济_DID论文名单_阶段核验版.md",
+    "bytes": 22319,
+    "sha256": "8df1b4e915ecaed2845260d17b5fc99af597285aeb7fb93e1b3701cea15159a0"
+  },
+  {
+    "file": "优先下载_原文或摘要支持DID.csv",
+    "bytes": 25638,
+    "sha256": "89194206680c9ad25660a8dd731645f2b552a3ac5ec2ff8d0c1ad2befdd21f91"
+  },
+  {
+    "file": "先读_范围与缺口.md",
+    "bytes": 3100,
+    "sha256": "7fd6d9ec1447be8b2015f98e0f9317377fa7b6b419eb5c629cd5bae707b4d670"
+  },
+  {
+    "file": "全部已收集题录_方法核验台账.csv",
+    "bytes": 371468,
+    "sha256": "5c09b21d4421634c1838ecfb3af3da98ce52bfb7e87e0d439fd9a64ce473bfec"
+  },
+  {
+    "file": "统计与核验状态.json",
+    "bytes": 544,
+    "sha256": "a7cccea6ca0d00ed9f8826c0b762915c6253d31900943f3382ddccec5eb057d1"
+  }
+]

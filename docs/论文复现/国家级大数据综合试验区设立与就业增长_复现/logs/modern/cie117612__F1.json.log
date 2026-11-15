@@ -1,0 +1,14 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+   window     twfe twfe_se    csa csa_se     bjs  bjs_se neg_abs G_eff_twfe
+   <char>    <num>   <num> <lgcl> <lgcl>   <num>   <num>   <num>      <num>
+1:   post  0.04953 0.01843     NA     NA 0.04542 0.02530 0.07868      39.14
+2:    pre -0.01190 0.01120     NA     NA 0.01817 0.02996 0.07868      39.14
+   G_eff_bjs G_eff_csa
+       <num>     <num>
+1:        NA        NA
+2:        NA        NA
+-> output/specs_controls/cie117612__F1.csv 

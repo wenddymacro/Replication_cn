@@ -1,0 +1,153 @@
+log using "D:\主要回归结果日志文件.smcl", replace
+use "C:\Users\admin\Desktop\DATA.dta",clear
+global cv "Size Lnage Roa Lev Dual Tobin Digital RD LnPatcum"
+
+**# 正文表1 #
+reghdfe LnPatos SIM,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m1
+reghdfe LnPatos SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m2
+reghdfe SIM BartikIV $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m3
+ivreghdfe LnPatos $cv (SIM=BartikIV),abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m4
+reghdfe LnPatos did $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m5
+outreg2 [m1 m2 m3 m4 m5] using $result\tab1,word replace dec(4)
+
+**# 正文表2 #
+reghdfe SSP SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m1
+reghdfe DSP SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m2
+reghdfe TFP_LP SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m3
+reghdfe RDR SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m4
+reghdfe LnPatos c.SIM##c.SSP $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m5
+reghdfe LnPatos c.SIM##c.DSP $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m6
+outreg2 [m1 m2 m3 m4 m5 m6] using $result\tab2,word replace dec(4)
+
+**# 正文表3a #
+reghdfe LnPatos c.SIM##c.cv_i_cited $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m1
+reghdfe LnPatos c.SIM##c.cv_j_cited $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m2
+reghdfe LnPatos c.SIM##c.cv_i_claim $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m3
+reghdfe LnPatos c.SIM##c.cv_j_claim $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m4
+outreg2 [m1 m2 m3 m4] using $result\tab6a,word replace dec(4)
+
+**# 正文表3b #
+use "C:\Users\admin\Desktop\DATA_id_autid_year.dta",clear
+reghdfe LnPatos c.SIM##c.RQ Size Lnage Roa Lev Dual Tobin Digital RD LnPatcum,abs(id autid ind2code#year provincecode#year) cluster(ind2code)
+est store m1
+reghdfe LnPatos c.SIM##c.IPR Size Lnage Roa Lev Dual Tobin Digital RD LnPatcum,abs(id autid ind2code#year provincecode#year) cluster(ind2code)
+est store m2
+outreg2 [m1 m2] using $result\tab6b,word replace dec(4)
+
+**# 正文表4 #
+use "C:\Users\admin\Desktop\DATA.dta",clear
+reghdfe Reexam SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m1
+reghdfe Rej112 SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m2
+reghdfe RejTotal SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m3
+reghdfe GrantRate SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m4
+outreg2 [m1 m2 m3 m4] using $result\tab7,word replace dec(4)
+
+**# 正文表5 #
+reghdfe LnPatos c.SIM##c.Techstd $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m1
+reghdfe LnPatos c.SIM##c.Foreign $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m2
+reghdfe LnPatos c.SIM##c.Overseas $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m3
+reghdfe LnPatos c.SIM##c.Techabs $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m4
+reghdfe LnPatos c.SIM##c.SEPs $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m5
+reghdfe LnPatos c.SIM##c.GVC $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m6
+outreg2 [m1 m2 m3 m4 m5 m6] using $result\tab9,word replace dec(4)
+
+**# 附录表2 #
+outreg2 using $result\tabA2,word replace dec(4) sum(log) keep(LnPatos SIM $cv)
+
+**# 附录表3 #
+reghdfe LnPatos SIMw $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m1
+reghdfe LnPatos SIM_m $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m2
+reghdfe LnPatos_p SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m3
+reghdfe Patos_d SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m4
+reghdfe LnPatos SIM $cv PCT Osacq Osfin ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m5
+reghdfe LnPatos SIM $cv if year!=2008&year!=2009,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m6
+reghdfe LnPatos SIM $cv if year!=2018&year!=2019&year!=2020,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m7
+outreg2 [m1 m2 m3 m4 m5 m6 m7] using $result\tabA3,word replace dec(4)
+
+
+**# 附录表4a #
+use "C:\Users\admin\Desktop\DATA_id_autid_year.dta",clear
+reghdfe LnPatos c.SIM##c.GDP Size Lnage Roa Lev Dual Tobin Digital RD LnPatcum,abs(id autid ind2code#year provincecode#year) cluster(ind2code)
+est store m1
+reghdfe LnPatos c.SIM##c.Imp Size Lnage Roa Lev Dual Tobin Digital RD LnPatcum,abs(id autid ind2code#year provincecode#year) cluster(ind2code)
+est store m2
+outreg2 [m1 m2] using $result\tab8a,word replace dec(4)
+**# 附录表4b #
+use "C:\Users\admin\Desktop\DATA_id_iso_hs.dta",clear
+reghdfe lnexport SIM Size Lnage Roa Lev Dual Tobin Digital RD LnPatcum if ifPat==1,abs(id  ISO ind2code#year provincecode#year) cluster(ind2code)
+est store m1
+reghdfe lnexport SIM Size Lnage Roa Lev Dual Tobin Digital RD LnPatcum if ifPat==0,abs(id  ISO ind2code#year provincecode#year) cluster(ind2code)
+est store m2
+reghdfe lnexport SIM Size Lnage Roa Lev Dual Tobin Digital RD LnPatcum if ifpdt==1,abs(id  ISO ind2code#year provincecode#year) cluster(ind2code)
+est store m3
+reghdfe lnexport SIM Size Lnage Roa Lev Dual Tobin Digital RD LnPatcum if ifpdt==0,abs(id  ISO ind2code#year provincecode#year) cluster(ind2code)
+est store m4
+outreg2 [m1 m2 m3 m4] using $result\tab8b,word replace dec(4)
+
+**# 附录表5 #
+use "C:\Users\admin\Desktop\DATA.dta",clear
+reghdfe ForInv SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m1
+reghdfe ForCite SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m2
+reghdfe ForCited SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m3
+reghdfe PatCite5 SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m4
+outreg2 [m1 m2 m3 m4] using $result\tab10,word replace dec(4)
+
+**# 附录表6 #
+reghdfe Linkage SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m1
+reghdfe ForCus SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m2
+reghdfe ForCusC SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m3
+reghdfe Degree SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m4
+outreg2 [m1 m2 m3 m4] using $result\tab11,word replace dec(4)
+
+**# 附录表7 #
+reghdfe CoPat SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m1
+reghdfe Osfd SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m2
+reghdfe Osfw SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m3
+reghdfe Bosi SIM $cv ,abs(id ind2code#year provincecode#year) cluster(ind2code)
+est store m4
+outreg2 [m1 m2 m3 m4] using $result\tab12,word replace dec(4)
+
+log close

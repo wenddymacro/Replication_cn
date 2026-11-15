@@ -1,0 +1,35 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+The Wald pre-test is not reported when clustering beyond the unit level (clustervars = 'cl_num') because the analytical variance matrix does not account for between-cluster correlation. Use the bootstrap confidence intervals to assess pre-trends.
+constant effect: TWFE 0.970  BJS 0.984  CSA 1.086
+PASS constant effect recovered by all estimators 
+The Wald pre-test is not reported when clustering beyond the unit level (clustervars = 'cl_num') because the analytical variance matrix does not account for between-cluster correlation. Use the bootstrap confidence intervals to assess pre-trends.
+heterogeneous: truth 1.118  TWFE 0.290  BJS 1.093  CSA 1.096 (CSA weights = treated obs; BJS = all treated obs)
+PASS BJS recovers the treated-observation ATT 
+PASS static TWFE is biased under heterogeneous dynamic effects (as designed) 
+PASS TWFE influence: sum(a*y) = estimate 
+PASS BJS influence: sum(a*y) = estimate 
+PASS leverage computed for BJS and CSA 
+The Wald pre-test is not reported when clustering beyond the unit level (clustervars = 'cl_num') because the analytical variance matrix does not account for between-cluster correlation. Use the bootstrap confidence intervals to assess pre-trends.
+PASS Hull and did weights coincide on a balanced panel 
+balanced: CSA cells 1.09635243  did 1.09635243
+PASS CSA cells = did (balanced) 
+You have an unbalanced panel. Proceeding as such.
+The Wald pre-test is not reported when clustering beyond the unit level (clustervars = 'cl_num') because the analytical variance matrix does not account for between-cluster correlation. Use the bootstrap confidence intervals to assess pre-trends.
+unbalanced: CSA cells, did weights 1.33443133; did allow_unbalanced 1.33443133; Hull treated-count weights 1.306447
+PASS CSA cells = did (unbalanced, allow_unbalanced_panel) 
+There were 18 warnings (use warnings() to see them)
+NOTE: The fixed-effects are not regular, they cannot be straightforwardly interpreted.
+PASS province x year FE: TWFE 0.970 BJS 0.985 
+The Wald pre-test is not reported when clustering beyond the unit level (clustervars = 'cl_num') because the analytical variance matrix does not account for between-cluster correlation. Use the bootstrap confidence intervals to assess pre-trends.
+   window   twfe   csa    bjs
+   <char>  <num> <num>  <num>
+1:   post 1.1128 1.130 1.0608
+2:    pre 0.0775 0.113 0.0917
+PASS event post averages close to 1 
+PASS event pre averages close to 0 
+
+all checks passed

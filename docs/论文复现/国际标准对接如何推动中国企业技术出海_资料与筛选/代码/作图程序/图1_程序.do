@@ -1,0 +1,141 @@
+preserve
+tempfile counts lagfile
+
+*------------------------------------------------------------*
+* (1) 每年-采用方式的数量
+*------------------------------------------------------------*
+
+collapse (count) n=id, by(year adopt)
+
+reshape wide n, i(year) j(adopt) string
+
+foreach v in nIDT nEQV nMOD nNEQ {
+    capture confirm var `v'
+    if _rc generate `v' = 0
+    replace `v' = 0 if missing(`v')
+}
+
+egen total = rowtotal(nIDT nEQV nMOD nNEQ)
+
+* 为堆叠柱准备上下边界
+gen c1 = nIDT
+gen c2 = c1 + nEQV
+gen c3 = c2 + nMOD
+gen c4 = c3 + nNEQ
+
+gen low1 = 0
+gen upp1 = c1
+
+gen low2 = c1
+gen upp2 = c2
+
+gen low3 = c2
+gen upp3 = c3
+
+gen low4 = c3
+gen upp4 = c4
+
+save `counts', replace
+restore
+
+
+*------------------------------------------------------------*
+* (2) 每年平均采用时滞
+*------------------------------------------------------------*
+
+collapse (mean) lag, by(year)
+
+rename lag avg_lag
+
+save `lagfile', replace
+
+
+*------------------------------------------------------------*
+* (3) 合并
+*------------------------------------------------------------*
+
+use `counts', clear
+
+merge 1:1 year using `lagfile', nogen
+
+
+*------------------------------------------------------------*
+* (4) 绘图
+*------------------------------------------------------------*
+
+twoway ///
+    (rbar low1 upp1 year, ///
+        fcolor(gs4) ///
+        lcolor(gs3) ///
+        lwidth(vthin)) ///
+    (rbar low2 upp2 year, ///
+        fcolor(gs8) ///
+        lcolor(gs6) ///
+        lwidth(vthin)) ///
+    (rbar low3 upp3 year, ///
+        fcolor(gs12) ///
+        lcolor(gs9) ///
+        lwidth(vthin)) ///
+    (rbar low4 upp4 year, ///
+        fcolor(gs15) ///
+        lcolor(gs10) ///
+        lwidth(vthin)) ///
+    (line avg_lag year, ///
+        yaxis(2) ///
+        lcolor(black) ///
+        lpattern(solid) ///
+        lwidth(medthick)), ///
+    ///
+    xlabel(1980(2)2024, ///
+        angle(0) ///
+        labsize(small) ///
+        grid ///
+        glcolor(gs14) ///
+        glpattern(dash) ///
+        glwidth(vthin)) ///
+    ///
+    ylabel(, ///
+        axis(1) ///
+        labsize(small) ///
+        grid ///
+        glcolor(gs14) ///
+        glpattern(dash) ///
+        glwidth(vthin)) ///
+    ///
+    ylabel(, ///
+        axis(2) ///
+        labsize(small) ///
+        nogrid) ///
+    ///
+    ytitle("年""度""采""标""数""量", ///
+        orientation(horizontal) ///
+        margin(medsmall) ///
+        axis(1)) ///
+    ///
+    ytitle("年""度""采""标""时""滞", ///
+        orientation(horizontal) ///
+        margin(medsmall) ///
+        axis(2)) ///
+    ///
+    xtitle("年份") ///
+    ///
+    legend( ///
+        order(1 "IDT(等同采用)" ///
+              2 "EQV(等效采用)" ///
+              3 "MOD(修改采用)" ///
+              4 "NEQ(非等效采用)" ///
+              5 "平均时滞") ///
+        cols(1) ///
+        size(small) ///
+        ring(0) ///
+        position(11) ///
+        region( ///
+            fcolor(white) ///
+            lcolor(gs10) ///
+            lw(vthin) ///
+            margin(tiny)) ///
+        symxsize(*0.9) ///
+        keygap(2)) ///
+    ///
+    graphregion(color(white)) ///
+    plotregion(color(white) margin(small))

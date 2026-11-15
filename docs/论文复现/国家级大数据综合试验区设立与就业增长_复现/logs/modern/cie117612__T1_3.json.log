@@ -1,0 +1,13 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+   window    twfe twfe_se   csa csa_se     bjs  bjs_se  neg_abs G_eff_twfe
+   <char>   <num>   <num> <num>  <num>   <num>   <num>    <num>      <num>
+1: static 0.05963 0.02212    NA     NA 0.05915 0.02009 0.007109      23.86
+   G_eff_bjs G_eff_csa
+       <num>     <num>
+1:        NA        NA
+TWFE in raw units 0.0753084 vs published 0.0748 (ratio 1.0068)
+-> output/specs_controls/cie117612__T1_3.csv 

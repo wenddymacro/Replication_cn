@@ -1,0 +1,39 @@
+{
+  "rows": 1740,
+  "cities": 174,
+  "years": [
+    2006.0,
+    2007.0,
+    2008.0,
+    2009.0,
+    2010.0,
+    2011.0,
+    2012.0,
+    2013.0,
+    2014.0,
+    2015.0
+  ],
+  "never_cities": 15,
+  "cohort_cities": {
+    "0": 15,
+    "2007": 21,
+    "2008": 23,
+    "2009": 22,
+    "2010": 31,
+    "2011": 24,
+    "2012": 25,
+    "2013": 12,
+    "2014": 1
+  },
+  "D_mismatch": 0,
+  "switch_off_rows": 0,
+  "baseline_features_fixed": true,
+  "interaction_max_abs_error": 0.0,
+  "interaction_basis_vs_named_baseline_max_diff": {
+    "popdensity2006": 0.0,
+    "agriareaper2006": 0.47,
+    "consratio2006": 3.94,
+    "lnindp2006": 0.0,
+    "jinrong2006": 0.0
+  }
+}

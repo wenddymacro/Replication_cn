@@ -1,0 +1,35 @@
+[
+  {
+    "dataset": "firm",
+    "rows": 29343,
+    "n_units": 3618,
+    "policy_year_changes": 41,
+    "assignment_locations_changing_units": 100,
+    "closed_rows_dropped": 34,
+    "g_analysis_counts": {
+      "0.0": 15890,
+      "2015.0": 222,
+      "2016.0": 13110,
+      "2017.0": 24,
+      "2018.0": 29,
+      "2019.0": 38,
+      "2020.0": 11,
+      "2021.0": 19
+    },
+    "duplicate_unit_year": 0
+  },
+  {
+    "dataset": "city",
+    "rows": 3432,
+    "n_units": 286,
+    "policy_year_changes": 0,
+    "assignment_locations_changing_units": 0,
+    "closed_rows_dropped": 0,
+    "g_analysis_counts": {
+      "0.0": 2628,
+      "2015.0": 48,
+      "2016.0": 756
+    },
+    "duplicate_unit_year": 0
+  }
+]

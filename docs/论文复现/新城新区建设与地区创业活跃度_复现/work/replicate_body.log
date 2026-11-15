@@ -1,0 +1,2375 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      Stata 19.0
+___/   /   /___/   /   /___/       MP—Parallel Edition
+
+ Statistics and Data Science       Copyright 1985-2025 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-782-8272        https://www.stata.com
+                                   979-696-4600        service@stata.com
+
+Stata license: 114514-student 64-core lab perpetual
+Serial number: 9223372036854775807
+  Licensed to: 1
+               1
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. More than 2 billion observations are allowed; see help obs_advice.
+      4. Maximum number of variables is set to 5,000 but can be increased;
+          see help set_maxvar.
+
+
+Running D:\Stata\Stata19\profile.do ...
+
+. do replicate_body.do 
+
+. version 16
+
+. clear all
+
+. set more off
+
+. set processors 1
+    The maximum number of processors or cores being used is changed from 16
+    to 1.  It can be set to any number between 1 and 16
+
+. adopath ++ "../dependencies/stata_ado"
+  [1]              "../dependencies/stata_ado"
+  [2]  (BASE)      "D:\Stata\Stata19\ado\base/"
+  [3]  (SITE)      "D:\Stata\Stata19\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "C:\ado\personal/"
+  [6]  (PLUS)      "C:\ado\plus/"
+  [7]  (OLDPLACE)  "C:\ado\myado/"
+  [8]              "C:\ado\plus"
+  [9]              "C:\ado\github"
+  [10]             "C:\ado\personal"
+
+. log using "../logs/author_body.log", text replace
+-------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\newarea_start
+> up\work\../logs/author_body.log
+  log type:  text
+ opened on:  15 Nov 2026, 01:49:00
+
+. global cyear popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006
+> yr* jinrong2006yr*
+
+. tempname H
+
+. postfile `H' str12 spec str32 term double b se N r2a using "../data/author_re
+> sults.dta", replace
+
+. use "city.dta", clear
+
+. gen long row_id=_n
+
+. reghdfe lnNo_GSmgfper tp $cyear, absorb(city_id prov_id##year) vce(cluster ci
+> ty_id)
+(MWFE estimator converged in 2 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,610
+Absorbing 2 HDFE groups                           F(  46,    160) =       5.84
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8809
+                                                  Adj R-squared   =     0.8382
+                                                  Within R-sq.    =     0.0905
+Number of clusters (city_id) =        161         Root MSE        =     0.3890
+
+                              (Std. err. adjusted for 161 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+lnNo_GSmgf~r | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |   .1331033    .053202     2.50   0.013     .0280346     .238172
+popdens~6yr1 |  -.0001246   .0001018    -1.22   0.223    -.0003256    .0000764
+popdens~6yr2 |  -.0000813   .0001153    -0.71   0.482     -.000309    .0001464
+popdens~6yr3 |  -.0000319   .0001061    -0.30   0.764    -.0002415    .0001777
+popdens~6yr4 |  -1.60e-06   .0000962    -0.02   0.987    -.0001916    .0001884
+popdens~6yr5 |   .0001029   .0001097     0.94   0.349    -.0001137    .0003196
+popdens~6yr6 |   .0004252    .000226     1.88   0.062    -.0000211    .0008714
+popdens~6yr7 |   .0001032   .0000734     1.41   0.162    -.0000418    .0002482
+popdens~6yr8 |    .000017   .0000789     0.21   0.830    -.0001389    .0001729
+popdens~6yr9 |   .0000546   .0000673     0.81   0.418    -.0000783    .0001875
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |  -.0034802   .0596305    -0.06   0.954    -.1212446    .1142841
+agriare~6yr2 |  -.0704815   .0401906    -1.75   0.081     -.149854    .0088911
+agriare~6yr3 |   .0157657   .0453715     0.35   0.729    -.0738385    .1053699
+agriare~6yr4 |    .026601    .050501     0.53   0.599    -.0731334    .1263354
+agriare~6yr5 |   .0045878   .0471645     0.10   0.923    -.0885573     .097733
+agriare~6yr6 |  -.0046279   .0511795    -0.09   0.928    -.1057023    .0964465
+agriare~6yr7 |  -.0411765   .0333865    -1.23   0.219    -.1071116    .0247586
+agriare~6yr8 |   .0148415   .0558667     0.27   0.791    -.0954898    .1251727
+agriare~6yr9 |   .0282533   .0404715     0.70   0.486    -.0516738    .1081805
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |   .0140458   .0136428     1.03   0.305    -.0128973     .040989
+consratio2~2 |   .0098542   .0141383     0.70   0.487    -.0180676    .0377759
+consratio2~3 |   .0051354     .01182     0.43   0.665     -.018208    .0284789
+consratio2~4 |   .0040898    .010092     0.41   0.686    -.0158409    .0240206
+consratio2~5 |   -.005406   .0119056    -0.45   0.650    -.0289184    .0181063
+consrat~6yr6 |  -.0476062   .0275785    -1.73   0.086     -.102071    .0068587
+consratio2~7 |  -.0090504   .0084541    -1.07   0.286    -.0257464    .0076457
+consratio2~8 |  -.0083798   .0083663    -1.00   0.318    -.0249025    .0081429
+consratio2~9 |  -.0079897   .0070332    -1.14   0.258    -.0218796    .0059002
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |   .1492254   .0644975     2.31   0.022     .0218492    .2766015
+lnindp2006~2 |   .1091791   .0672113     1.62   0.106    -.0235565    .2419148
+lnindp2006~3 |    .116157   .0542219     2.14   0.034     .0090741    .2232399
+lnindp2006~4 |   .0526425   .0465063     1.13   0.259     -.039203     .144488
+lnindp2006~5 |   .0549219   .0466461     1.18   0.241    -.0371995    .1470434
+lnindp2006~6 |   .1309356   .0848286     1.54   0.125    -.0365925    .2984638
+lnindp2006~7 |   .0153461   .0347994     0.44   0.660    -.0533793    .0840715
+lnindp2006~8 |    .033581   .0405302     0.83   0.409    -.0464622    .1136242
+lnindp2006~9 |   .0180758   .0307594     0.59   0.558     -.042671    .0788226
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |   .2058548   .0616502     3.34   0.001     .0841018    .3276078
+jinrong200~2 |     .11998   .0678936     1.77   0.079    -.0141031    .2540631
+jinrong200~3 |   .1036061   .0573147     1.81   0.073    -.0095848    .2167969
+jinrong200~4 |   .1000569    .053157     1.88   0.062    -.0049229    .2050367
+jinrong200~5 |   .0790346     .05757     1.37   0.172    -.0346606    .1927298
+jinrong20~r6 |   .1285939   .0695777     1.85   0.066    -.0088152     .266003
+jinrong200~7 |   .0935996   .0467117     2.00   0.047     .0013485    .1858506
+jinrong200~8 |   .0568757   .0508398     1.12   0.265    -.0435279    .1572794
+jinrong200~9 |   .0778376   .0319717     2.43   0.016     .0146966    .1409787
+jinrong20~10 |          0  (omitted)
+       _cons |   -.969479   .5536872    -1.75   0.082    -2.062957    .1239986
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       161         161           0    *|
+   prov_id#year |       220           1         219     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte in_sample=e(sample)
+
+. gen double tpmeanprice_gongye2007=tp*meanprice_gongye2007
+(690 missing values generated)
+
+. gen double tplngdpper2006=tp*lngdpper2006
+
+. gen double tplngdpperpre=tp*lngdpperpre
+
+. reghdfe lnNo_GSmgfper tp  if in_sample==1, absorb(city_id prov_id##year) vce(
+> cluster city_id)
+(MWFE estimator converged in 2 iterations)
+
+HDFE Linear regression                            Number of obs   =      1,610
+Absorbing 2 HDFE groups                           F(   1,    160) =       5.82
+Statistics robust to heteroskedasticity           Prob > F        =     0.0170
+                                                  R-squared       =     0.8703
+                                                  Adj R-squared   =     0.8301
+                                                  Within R-sq.    =     0.0091
+Number of clusters (city_id) =        161         Root MSE        =     0.3986
+
+                              (Std. err. adjusted for 161 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+lnNo_GSmgf~r | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |   .1363278   .0565161     2.41   0.017     .0247141    .2479415
+       _cons |   .2416033   .0314875     7.67   0.000     .1794185    .3037881
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       161         161           0    *|
+   prov_id#year |       220           1         219     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T2_1") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. gen byte sample_T2_1=e(sample)
+
+. reghdfe lnNo_GSmgfper tp popdensity2006yr* agriareaper2006yr* consratio2006yr
+> * lnindp2006yr* jinrong2006yr* if in_sample==1, absorb(city_id prov_id##year)
+>  vce(cluster city_id)
+(MWFE estimator converged in 2 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,610
+Absorbing 2 HDFE groups                           F(  46,    160) =       5.84
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8809
+                                                  Adj R-squared   =     0.8382
+                                                  Within R-sq.    =     0.0905
+Number of clusters (city_id) =        161         Root MSE        =     0.3890
+
+                              (Std. err. adjusted for 161 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+lnNo_GSmgf~r | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |   .1331033    .053202     2.50   0.013     .0280346     .238172
+popdens~6yr1 |  -.0001246   .0001018    -1.22   0.223    -.0003256    .0000764
+popdens~6yr2 |  -.0000813   .0001153    -0.71   0.482     -.000309    .0001464
+popdens~6yr3 |  -.0000319   .0001061    -0.30   0.764    -.0002415    .0001777
+popdens~6yr4 |  -1.60e-06   .0000962    -0.02   0.987    -.0001916    .0001884
+popdens~6yr5 |   .0001029   .0001097     0.94   0.349    -.0001137    .0003196
+popdens~6yr6 |   .0004252    .000226     1.88   0.062    -.0000211    .0008714
+popdens~6yr7 |   .0001032   .0000734     1.41   0.162    -.0000418    .0002482
+popdens~6yr8 |    .000017   .0000789     0.21   0.830    -.0001389    .0001729
+popdens~6yr9 |   .0000546   .0000673     0.81   0.418    -.0000783    .0001875
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |  -.0034802   .0596305    -0.06   0.954    -.1212446    .1142841
+agriare~6yr2 |  -.0704815   .0401906    -1.75   0.081     -.149854    .0088911
+agriare~6yr3 |   .0157657   .0453715     0.35   0.729    -.0738385    .1053699
+agriare~6yr4 |    .026601    .050501     0.53   0.599    -.0731334    .1263354
+agriare~6yr5 |   .0045878   .0471645     0.10   0.923    -.0885573     .097733
+agriare~6yr6 |  -.0046279   .0511795    -0.09   0.928    -.1057023    .0964465
+agriare~6yr7 |  -.0411765   .0333865    -1.23   0.219    -.1071116    .0247586
+agriare~6yr8 |   .0148415   .0558667     0.27   0.791    -.0954898    .1251727
+agriare~6yr9 |   .0282533   .0404715     0.70   0.486    -.0516738    .1081805
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |   .0140458   .0136428     1.03   0.305    -.0128973     .040989
+consratio2~2 |   .0098542   .0141383     0.70   0.487    -.0180676    .0377759
+consratio2~3 |   .0051354     .01182     0.43   0.665     -.018208    .0284789
+consratio2~4 |   .0040898    .010092     0.41   0.686    -.0158409    .0240206
+consratio2~5 |   -.005406   .0119056    -0.45   0.650    -.0289184    .0181063
+consrat~6yr6 |  -.0476062   .0275785    -1.73   0.086     -.102071    .0068587
+consratio2~7 |  -.0090504   .0084541    -1.07   0.286    -.0257464    .0076457
+consratio2~8 |  -.0083798   .0083663    -1.00   0.318    -.0249025    .0081429
+consratio2~9 |  -.0079897   .0070332    -1.14   0.258    -.0218796    .0059002
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |   .1492254   .0644975     2.31   0.022     .0218492    .2766015
+lnindp2006~2 |   .1091791   .0672113     1.62   0.106    -.0235565    .2419148
+lnindp2006~3 |    .116157   .0542219     2.14   0.034     .0090741    .2232399
+lnindp2006~4 |   .0526425   .0465063     1.13   0.259     -.039203     .144488
+lnindp2006~5 |   .0549219   .0466461     1.18   0.241    -.0371995    .1470434
+lnindp2006~6 |   .1309356   .0848286     1.54   0.125    -.0365925    .2984638
+lnindp2006~7 |   .0153461   .0347994     0.44   0.660    -.0533793    .0840715
+lnindp2006~8 |    .033581   .0405302     0.83   0.409    -.0464622    .1136242
+lnindp2006~9 |   .0180758   .0307594     0.59   0.558     -.042671    .0788226
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |   .2058548   .0616502     3.34   0.001     .0841018    .3276078
+jinrong200~2 |     .11998   .0678936     1.77   0.079    -.0141031    .2540631
+jinrong200~3 |   .1036061   .0573147     1.81   0.073    -.0095848    .2167969
+jinrong200~4 |   .1000569    .053157     1.88   0.062    -.0049229    .2050367
+jinrong200~5 |   .0790346     .05757     1.37   0.172    -.0346606    .1927298
+jinrong20~r6 |   .1285939   .0695777     1.85   0.066    -.0088152     .266003
+jinrong200~7 |   .0935996   .0467117     2.00   0.047     .0013485    .1858506
+jinrong200~8 |   .0568757   .0508398     1.12   0.265    -.0435279    .1572794
+jinrong200~9 |   .0778376   .0319717     2.43   0.016     .0146966    .1409787
+jinrong20~10 |          0  (omitted)
+       _cons |   -.969479   .5536872    -1.75   0.082    -2.062957    .1239986
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       161         161           0    *|
+   prov_id#year |       220           1         219     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T2_2") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. gen byte sample_T2_2=e(sample)
+
+. reghdfe lnNo_GSmgfper tp popdensity2006yr* agriareaper2006yr* consratio2006yr
+> * lnindp2006yr* jinrong2006yr* if in_sample==1, absorb(city_id prov_id##year)
+>  vce(cluster prov_id)
+(MWFE estimator converged in 2 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+warning: missing F statistic; dropped variables due to collinearity or too few 
+> clusters
+
+HDFE Linear regression                            Number of obs   =      1,610
+Absorbing 2 HDFE groups                           F(  46,     21) =          .
+Statistics robust to heteroskedasticity           Prob > F        =          .
+                                                  R-squared       =     0.8809
+                                                  Adj R-squared   =     0.8380
+                                                  Within R-sq.    =     0.0905
+Number of clusters (prov_id) =         22         Root MSE        =     0.3892
+
+                               (Std. err. adjusted for 22 clusters in prov_id)
+------------------------------------------------------------------------------
+             |               Robust
+lnNo_GSmgf~r | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |   .1331033   .0513413     2.59   0.017     .0263332    .2398734
+popdens~6yr1 |  -.0001246   .0000936    -1.33   0.197    -.0003192    .0000701
+popdens~6yr2 |  -.0000813   .0000905    -0.90   0.379    -.0002695    .0001069
+popdens~6yr3 |  -.0000319   .0000943    -0.34   0.738    -.0002281    .0001643
+popdens~6yr4 |  -1.60e-06   .0000816    -0.02   0.985    -.0001712     .000168
+popdens~6yr5 |   .0001029   .0000942     1.09   0.287     -.000093    .0002989
+popdens~6yr6 |   .0004252   .0000981     4.33   0.000     .0002211    .0006292
+popdens~6yr7 |   .0001032   .0000507     2.03   0.055    -2.34e-06    .0002087
+popdens~6yr8 |    .000017   .0000634     0.27   0.792     -.000115    .0001489
+popdens~6yr9 |   .0000546    .000048     1.14   0.268    -.0000452    .0001545
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |  -.0034802   .0490742    -0.07   0.944    -.1055357    .0985752
+agriare~6yr2 |  -.0704815   .0357385    -1.97   0.062    -.1448038    .0038409
+agriare~6yr3 |   .0157657   .0351013     0.45   0.658    -.0572315    .0887629
+agriare~6yr4 |    .026601   .0379909     0.70   0.491    -.0524055    .1056075
+agriare~6yr5 |   .0045878   .0276895     0.17   0.870    -.0529956    .0621712
+agriare~6yr6 |  -.0046279   .0541823    -0.09   0.933    -.1173062    .1080504
+agriare~6yr7 |  -.0411765   .0325823    -1.26   0.220    -.1089351    .0265821
+agriare~6yr8 |   .0148415   .0400198     0.37   0.714    -.0683844    .0980673
+agriare~6yr9 |   .0282533   .0205914     1.37   0.185    -.0145688    .0710755
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |   .0140458   .0139842     1.00   0.327    -.0150359    .0431276
+consratio2~2 |   .0098542   .0122268     0.81   0.429    -.0155728    .0352811
+consratio2~3 |   .0051354   .0108979     0.47   0.642    -.0175279    .0277988
+consratio2~4 |   .0040898   .0098795     0.41   0.683    -.0164558    .0246354
+consratio2~5 |   -.005406   .0105318    -0.51   0.613    -.0273081    .0164961
+consrat~6yr6 |  -.0476062   .0173082    -2.75   0.012    -.0836004   -.0116119
+consratio2~7 |  -.0090504   .0071461    -1.27   0.219    -.0239116    .0058108
+consratio2~8 |  -.0083798   .0071205    -1.18   0.252    -.0231876     .006428
+consratio2~9 |  -.0079897   .0047439    -1.68   0.107    -.0178552    .0018757
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |   .1492254   .0658534     2.27   0.034     .0122757     .286175
+lnindp2006~2 |   .1091791   .0758472     1.44   0.165    -.0485537     .266912
+lnindp2006~3 |    .116157   .0543319     2.14   0.044     .0031677    .2291463
+lnindp2006~4 |   .0526425   .0483548     1.09   0.289    -.0479169    .1532019
+lnindp2006~5 |   .0549219   .0520838     1.05   0.304    -.0533923    .1632361
+lnindp2006~6 |   .1309356    .068197     1.92   0.069    -.0108877     .272759
+lnindp2006~7 |   .0153461     .03484     0.44   0.664    -.0571077    .0877998
+lnindp2006~8 |    .033581   .0414877     0.81   0.427    -.0526974    .1198594
+lnindp2006~9 |   .0180758   .0308881     0.59   0.565    -.0461594     .082311
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |   .2058548   .0545542     3.77   0.001      .092403    .3193065
+jinrong200~2 |     .11998   .0732618     1.64   0.116    -.0323764    .2723363
+jinrong200~3 |   .1036061   .0579787     1.79   0.088    -.0169672    .2241793
+jinrong200~4 |   .1000569   .0586046     1.71   0.103     -.021818    .2219318
+jinrong200~5 |   .0790346   .0601898     1.31   0.203     -.046137    .2042062
+jinrong20~r6 |   .1285939   .0680478     1.89   0.073    -.0129192     .270107
+jinrong200~7 |   .0935996   .0412985     2.27   0.034     .0077147    .1794844
+jinrong200~8 |   .0568757    .056825     1.00   0.328    -.0612983    .1750498
+jinrong200~9 |   .0778376    .028107     2.77   0.011     .0193859    .1362894
+jinrong20~10 |          0  (omitted)
+       _cons |   -.969479    .519739    -1.87   0.076    -2.050335    .1113774
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       161         161           0    *|
+   prov_id#year |       220         220           0    *|
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T2_3") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. gen byte sample_T2_3=e(sample)
+
+. reghdfe lnNo_GSmgfper tp popdensity2006yr* agriareaper2006yr* consratio2006yr
+> * lnindp2006yr* jinrong2006yr* kfq , absorb(city_id prov_id##year) vce(cluste
+> r city_id)
+(MWFE estimator converged in 2 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,610
+Absorbing 2 HDFE groups                           F(  47,    160) =       5.67
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8813
+                                                  Adj R-squared   =     0.8386
+                                                  Within R-sq.    =     0.0937
+Number of clusters (city_id) =        161         Root MSE        =     0.3885
+
+                              (Std. err. adjusted for 161 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+lnNo_GSmgf~r | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |   .1332221   .0529472     2.52   0.013     .0286566    .2377877
+popdens~6yr1 |  -.0001221   .0000989    -1.23   0.219    -.0003174    .0000733
+popdens~6yr2 |  -.0000788   .0001115    -0.71   0.481    -.0002989    .0001413
+popdens~6yr3 |  -.0000294   .0001028    -0.29   0.775    -.0002324    .0001737
+popdens~6yr4 |   1.31e-06   .0000951     0.01   0.989    -.0001865    .0001892
+popdens~6yr5 |   .0001057   .0001082     0.98   0.330     -.000108    .0003193
+popdens~6yr6 |   .0004279   .0002269     1.89   0.061    -.0000203    .0008761
+popdens~6yr7 |   .0001007   .0000723     1.39   0.166    -.0000421    .0002436
+popdens~6yr8 |   .0000209   .0000787     0.27   0.791    -.0001345    .0001764
+popdens~6yr9 |   .0000587   .0000662     0.89   0.377     -.000072    .0001894
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |  -.0102583    .061327    -0.17   0.867    -.1313732    .1108566
+agriare~6yr2 |  -.0772595   .0402568    -1.92   0.057    -.1567627    .0022438
+agriare~6yr3 |   .0089906   .0470469     0.19   0.849    -.0839224    .1019036
+agriare~6yr4 |   .0196904   .0518696     0.38   0.705    -.0827469    .1221277
+agriare~6yr5 |   .0019011   .0483411     0.04   0.969    -.0935678    .0973701
+agriare~6yr6 |  -.0076595   .0513512    -0.15   0.882     -.109073     .093754
+agriare~6yr7 |  -.0447675    .034815    -1.29   0.200    -.1135236    .0239887
+agriare~6yr8 |   .0138292   .0569303     0.24   0.808    -.0986025    .1262609
+agriare~6yr9 |   .0287437   .0404965     0.71   0.479    -.0512328    .1087203
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |   .0142655    .013636     1.05   0.297    -.0126643    .0411954
+consratio2~2 |   .0100726    .013932     0.72   0.471    -.0174417    .0375869
+consratio2~3 |   .0053551   .0116555     0.46   0.647    -.0176635    .0283736
+consratio2~4 |   .0044393   .0101933     0.44   0.664    -.0156914      .02457
+consratio2~5 |  -.0047936   .0117208    -0.41   0.683     -.027941    .0183538
+consrat~6yr6 |  -.0472035     .02775    -1.70   0.091    -.1020071    .0076001
+consratio2~7 |  -.0085958   .0082756    -1.04   0.301    -.0249394    .0077478
+consratio2~8 |   -.008466   .0083132    -1.02   0.310    -.0248839    .0079518
+consratio2~9 |  -.0080485   .0068547    -1.17   0.242     -.021586    .0054889
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |    .142466   .0640231     2.23   0.027     .0160267    .2689054
+lnindp2006~2 |   .1024203    .066454     1.54   0.125    -.0288198    .2336604
+lnindp2006~3 |    .109399   .0538085     2.03   0.044     .0031325    .2156655
+lnindp2006~4 |   .0447941   .0461623     0.97   0.333    -.0463719      .13596
+lnindp2006~5 |   .0533005    .045765     1.16   0.246    -.0370808    .1436818
+lnindp2006~6 |   .1294613   .0838051     1.54   0.124    -.0360454    .2949681
+lnindp2006~7 |   .0147143   .0346829     0.42   0.672    -.0537809    .0832096
+lnindp2006~8 |   .0331244    .040514     0.82   0.415    -.0468868    .1131356
+lnindp2006~9 |   .0177674   .0309113     0.57   0.566    -.0432794    .0788141
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |   .2085742   .0617384     3.38   0.001     .0866468    .3305015
+jinrong200~2 |   .1226992   .0678957     1.81   0.073    -.0113881    .2567865
+jinrong200~3 |   .1063286   .0574462     1.85   0.066    -.0071221    .2197792
+jinrong200~4 |   .1014358   .0533797     1.90   0.059    -.0039839    .2068555
+jinrong200~5 |   .0782277   .0571198     1.37   0.173    -.0345783    .1910336
+jinrong20~r6 |   .1259141   .0684822     1.84   0.068    -.0093315    .2611598
+jinrong200~7 |    .093726   .0469519     2.00   0.048     .0010005    .1864514
+jinrong200~8 |   .0574603   .0509188     1.13   0.261    -.0430992    .1580198
+jinrong200~9 |    .078492   .0319275     2.46   0.015     .0154383    .1415458
+jinrong20~10 |          0  (omitted)
+         kfq |  -.0851473   .0606316    -1.40   0.162    -.2048888    .0345942
+       _cons |  -.8907933   .5416222    -1.64   0.102    -1.960444    .1788573
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       161         161           0    *|
+   prov_id#year |       220           1         219     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T3_1") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. post `H' ("T3_1") ("kfq") (_b[kfq]) (_se[kfq]) (e(N)) (e(r2_a))
+
+. gen byte sample_T3_1=e(sample)
+
+. reghdfe lnNo_GSmgfper tp popdensity2006yr* agriareaper2006yr* consratio2006yr
+> * lnindp2006yr* jinrong2006yr* cx , absorb(city_id prov_id##year) vce(cluster
+>  city_id)
+(MWFE estimator converged in 2 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,610
+Absorbing 2 HDFE groups                           F(  47,    160) =       5.65
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8835
+                                                  Adj R-squared   =     0.8415
+                                                  Within R-sq.    =     0.1102
+Number of clusters (city_id) =        161         Root MSE        =     0.3850
+
+                              (Std. err. adjusted for 161 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+lnNo_GSmgf~r | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |   .1256513    .052646     2.39   0.018     .0216806    .2296219
+popdens~6yr1 |   -.000146    .000098    -1.49   0.138    -.0003396    .0000476
+popdens~6yr2 |  -.0001036   .0001057    -0.98   0.328    -.0003123    .0001051
+popdens~6yr3 |  -.0000536   .0001105    -0.49   0.628    -.0002717    .0001646
+popdens~6yr4 |  -.0000226   .0000969    -0.23   0.816     -.000214    .0001687
+popdens~6yr5 |   .0000815   .0000982     0.83   0.407    -.0001123    .0002754
+popdens~6yr6 |   .0004042   .0002562     1.58   0.117    -.0001019    .0009102
+popdens~6yr7 |    .000081   .0000725     1.12   0.265    -.0000622    .0002242
+popdens~6yr8 |   .0000382   .0000725     0.53   0.599     -.000105    .0001814
+popdens~6yr9 |   .0000698   .0000633     1.10   0.271    -.0000551    .0001947
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |   .0017378   .0602811     0.03   0.977    -.1173114     .120787
+agriare~6yr2 |   -.065319   .0396295    -1.65   0.101    -.1435834    .0129455
+agriare~6yr3 |   .0207499   .0452053     0.46   0.647    -.0685262     .110026
+agriare~6yr4 |   .0313359   .0506537     0.62   0.537    -.0687002    .1313721
+agriare~6yr5 |   .0093139   .0477473     0.20   0.846    -.0849823    .1036102
+agriare~6yr6 |   .0002435   .0515778     0.00   0.996    -.1016177    .1021046
+agriare~6yr7 |  -.0358395   .0331878    -1.08   0.282    -.1013821    .0297032
+agriare~6yr8 |   .0207634   .0562908     0.37   0.713    -.0904055    .1319322
+agriare~6yr9 |   .0310963   .0404629     0.77   0.443    -.0488141    .1110066
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |   .0114545   .0121762     0.94   0.348    -.0125923    .0355013
+consratio2~2 |   .0071695   .0118079     0.61   0.545      -.01615     .030489
+consratio2~3 |   .0023724   .0101573     0.23   0.816    -.0176872     .022432
+consratio2~4 |      .0013   .0092904     0.14   0.889    -.0170477    .0196476
+consratio2~5 |  -.0080735   .0100447    -0.80   0.423    -.0279107    .0117637
+consrat~6yr6 |  -.0503612    .030799    -1.64   0.104    -.1111861    .0104638
+consratio2~7 |  -.0103347    .006923    -1.49   0.137     -.024007    .0033376
+consratio2~8 |  -.0115806   .0077652    -1.49   0.138    -.0269161    .0037548
+consratio2~9 |  -.0091108   .0063759    -1.43   0.155    -.0217026    .0034809
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |   .1625391   .0609583     2.67   0.008     .0421525    .2829257
+lnindp2006~2 |   .1232297   .0646787     1.91   0.059    -.0045043    .2509637
+lnindp2006~3 |   .1301554   .0514515     2.53   0.012     .0285438     .231767
+lnindp2006~4 |   .0666274   .0435052     1.53   0.128     -.019291    .1525458
+lnindp2006~5 |   .0690914    .043756     1.58   0.116    -.0173223    .1555052
+lnindp2006~6 |   .1452051    .082477     1.76   0.080    -.0176788     .308089
+lnindp2006~7 |   .0297625   .0315639     0.94   0.347    -.0325731    .0920981
+lnindp2006~8 |   .0445992   .0393875     1.13   0.259    -.0331872    .1223856
+lnindp2006~9 |   .0214522   .0302061     0.71   0.479    -.0382018    .0811062
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |   .1826374    .056991     3.20   0.002     .0700858    .2951891
+jinrong200~2 |    .104524   .0648303     1.61   0.109    -.0235095    .2325575
+jinrong200~3 |   .0879445   .0546474     1.61   0.110    -.0199788    .1958678
+jinrong200~4 |   .0846057   .0493884     1.71   0.089    -.0129315    .1821428
+jinrong200~5 |   .0634248   .0546268     1.16   0.247    -.0444578    .1713074
+jinrong20~r6 |   .1131907   .0688918     1.64   0.102    -.0228637    .2492452
+jinrong200~7 |   .0744857    .043714     1.70   0.090    -.0118452    .1608166
+jinrong200~8 |   .0411131   .0503253     0.82   0.415    -.0582744    .1405006
+jinrong200~9 |   .0746827   .0317621     2.35   0.020     .0119557    .1374097
+jinrong20~10 |          0  (omitted)
+          cx |  -.4669591   .1597833    -2.92   0.004    -.7825154   -.1514028
+       _cons |  -.8697694   .5419125    -1.60   0.110    -1.939993    .2004545
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       161         161           0    *|
+   prov_id#year |       220           1         219     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T3_2") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. post `H' ("T3_2") ("cx") (_b[cx]) (_se[cx]) (e(N)) (e(r2_a))
+
+. gen byte sample_T3_2=e(sample)
+
+. reghdfe lnNo_GSmgfper tp tpmeanprice_gongye2007 popdensity2006yr* agriareaper
+> 2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_i
+> d##year) vce(cluster city_id)
+(dropped 10 singleton observations)
+(MWFE estimator converged in 2 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =        980
+Absorbing 2 HDFE groups                           F(  47,     97) =       6.28
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8804
+                                                  Adj R-squared   =     0.8159
+                                                  Within R-sq.    =     0.1089
+Number of clusters (city_id) =         98         Root MSE        =     0.3895
+
+                               (Std. err. adjusted for 98 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+lnNo_GSmgf~r | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |   .0126598   .0803909     0.16   0.875    -.1468938    .1722134
+tpmeanp~2007 |   .2460641   .1321076     1.86   0.066    -.0161329    .5082611
+popdens~6yr1 |  -.0002367   .0001356    -1.75   0.084    -.0005058    .0000324
+popdens~6yr2 |   -.000219   .0001331    -1.64   0.103    -.0004832    .0000453
+popdens~6yr3 |  -.0000847   .0001349    -0.63   0.531    -.0003525     .000183
+popdens~6yr4 |  -.0001001   .0001392    -0.72   0.474    -.0003763    .0001761
+popdens~6yr5 |  -.0000332   .0001216    -0.27   0.786    -.0002744    .0002081
+popdens~6yr6 |   .0003341    .000367     0.91   0.365    -.0003943    .0010626
+popdens~6yr7 |   .0000975    .000086     1.13   0.259    -.0000731    .0002682
+popdens~6yr8 |   .0000271   .0000824     0.33   0.743    -.0001365    .0001907
+popdens~6yr9 |   .0000609    .000062     0.98   0.329    -.0000622    .0001839
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |  -.1763751   .0847053    -2.08   0.040    -.3444917   -.0082586
+agriare~6yr2 |  -.1499097   .0856112    -1.75   0.083    -.3198241    .0200048
+agriare~6yr3 |  -.1282754   .0765611    -1.68   0.097     -.280228    .0236772
+agriare~6yr4 |  -.0902261   .0662445    -1.36   0.176    -.2217031    .0412509
+agriare~6yr5 |  -.1095331   .0654733    -1.67   0.098    -.2394796    .0204134
+agriare~6yr6 |   -.075853   .0743971    -1.02   0.310    -.2235106    .0718047
+agriare~6yr7 |   -.118637   .0596756    -1.99   0.050    -.2370765   -.0001974
+agriare~6yr8 |  -.0693413   .0808531    -0.86   0.393    -.2298123    .0911298
+agriare~6yr9 |  -.1069929   .0648657    -1.65   0.102    -.2357333    .0217476
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |    .038579   .0142113     2.71   0.008     .0103735    .0667845
+consratio2~2 |   .0303551   .0139663     2.17   0.032     .0026358    .0580744
+consratio2~3 |   .0208064    .010481     1.99   0.050     4.44e-06    .0416083
+consratio2~4 |   .0237554   .0122968     1.93   0.056    -.0006503    .0481612
+consratio2~5 |   .0146785   .0101203     1.45   0.150    -.0054075    .0347644
+consrat~6yr6 |  -.0291427   .0418338    -0.70   0.488    -.1121712    .0538857
+consratio2~7 |  -.0018052   .0072381    -0.25   0.804    -.0161707    .0125604
+consratio2~8 |  -.0057051   .0087322    -0.65   0.515    -.0230361    .0116258
+consratio2~9 |  -.0024356   .0065645    -0.37   0.711    -.0154642    .0105931
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |  -.0402395   .0973769    -0.41   0.680    -.2335057    .1530268
+lnindp2006~2 |  -.0650323   .0963531    -0.67   0.501    -.2562666     .126202
+lnindp2006~3 |  -.0529282   .0762164    -0.69   0.489    -.2041967    .0983403
+lnindp2006~4 |  -.1071893   .0716633    -1.50   0.138    -.2494211    .0350426
+lnindp2006~5 |  -.0967346   .0649389    -1.49   0.140    -.2256204    .0321511
+lnindp2006~6 |   .0251392   .1327395     0.19   0.850     -.238312    .2885903
+lnindp2006~7 |  -.0904285   .0572687    -1.58   0.118    -.2040911     .023234
+lnindp2006~8 |  -.0168993    .056682    -0.30   0.766    -.1293973    .0955987
+lnindp2006~9 |  -.0686329   .0355183    -1.93   0.056    -.1391269    .0018611
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |   .1874772   .0872546     2.15   0.034      .014301    .3606534
+jinrong200~2 |   .1602807   .0962339     1.67   0.099    -.0307169    .3512782
+jinrong200~3 |   .1037268   .0808713     1.28   0.203    -.0567802    .2642339
+jinrong200~4 |    .064246   .0797854     0.81   0.423    -.0941059    .2225979
+jinrong200~5 |   .0407249   .0790679     0.52   0.608    -.1162029    .1976527
+jinrong20~r6 |   .1467347   .0830874     1.77   0.081    -.0181709    .3116402
+jinrong200~7 |   .0800976   .0639275     1.25   0.213    -.0467808    .2069759
+jinrong200~8 |   .0026929   .0694694     0.04   0.969    -.1351847    .1405704
+jinrong200~9 |   .0457307   .0451153     1.01   0.313    -.0438107    .1352721
+jinrong20~10 |          0  (omitted)
+       _cons |   1.101456   .8063854     1.37   0.175    -.4989953    2.701908
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |        98          98           0    *|
+   prov_id#year |       200           1         199     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T4_1") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. post `H' ("T4_1") ("tpmeanprice_gongye2007") (_b[tpmeanprice_gongye2007]) (_s
+> e[tpmeanprice_gongye2007]) (e(N)) (e(r2_a))
+
+. gen byte sample_T4_1=e(sample)
+
+. reghdfe lnNo_GSmgfper tp popdensity2006yr* agriareaper2006yr* consratio2006yr
+> * lnindp2006yr* jinrong2006yr* if east==0, absorb(city_id prov_id##year) vce(
+> cluster city_id)
+(MWFE estimator converged in 2 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,140
+Absorbing 2 HDFE groups                           F(  46,    113) =       4.11
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8711
+                                                  Adj R-squared   =     0.8212
+                                                  Within R-sq.    =     0.1231
+Number of clusters (city_id) =        114         Root MSE        =     0.3686
+
+                              (Std. err. adjusted for 114 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+lnNo_GSmgf~r | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |   .1078648   .0579888     1.86   0.065    -.0070214    .2227511
+popdens~6yr1 |   .0003072   .0003165     0.97   0.334    -.0003199    .0009342
+popdens~6yr2 |   .0003979   .0002754     1.44   0.151    -.0001477    .0009434
+popdens~6yr3 |   .0005874    .000236     2.49   0.014     .0001198     .001055
+popdens~6yr4 |   .0003146   .0002612     1.20   0.231    -.0002028    .0008321
+popdens~6yr5 |   .0005548   .0002734     2.03   0.045     .0000131    .0010966
+popdens~6yr6 |   .0008172   .0003197     2.56   0.012     .0001838    .0014507
+popdens~6yr7 |   .0003518    .000211     1.67   0.098    -.0000662    .0007698
+popdens~6yr8 |   .0002061   .0002547     0.81   0.420    -.0002985    .0007108
+popdens~6yr9 |   .0002304   .0001762     1.31   0.194    -.0001187    .0005795
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |   .0267348   .0632458     0.42   0.673    -.0985665     .152036
+agriare~6yr2 |  -.0379392   .0380553    -1.00   0.321    -.1133336    .0374552
+agriare~6yr3 |   .0462892   .0440921     1.05   0.296    -.0410651    .1336436
+agriare~6yr4 |   .0457791   .0502916     0.91   0.365    -.0538576    .1454158
+agriare~6yr5 |   .0299181   .0515524     0.58   0.563    -.0722164    .1320526
+agriare~6yr6 |   .0048595   .0503703     0.10   0.923    -.0949332    .1046522
+agriare~6yr7 |  -.0300662   .0352251    -0.85   0.395    -.0998535     .039721
+agriare~6yr8 |   .0282548   .0594217     0.48   0.635    -.0894703    .1459798
+agriare~6yr9 |   .0459837   .0439348     1.05   0.298    -.0410591    .1330265
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |   -.038554   .0336738    -1.14   0.255    -.1052679    .0281599
+consratio2~2 |  -.0424658   .0277792    -1.53   0.129    -.0975015    .0125699
+consratio2~3 |  -.0542847   .0253619    -2.14   0.034    -.1045312   -.0040382
+consratio2~4 |  -.0353993   .0269999    -1.31   0.192    -.0888909    .0180924
+consratio2~5 |  -.0517643   .0291555    -1.78   0.079    -.1095267    .0059981
+consrat~6yr6 |   -.104844   .0321592    -3.26   0.001    -.1685572   -.0411307
+consratio2~7 |  -.0397387   .0211545    -1.88   0.063    -.0816495    .0021721
+consratio2~8 |  -.0349688   .0264323    -1.32   0.189     -.087336    .0173984
+consratio2~9 |  -.0191796   .0184574    -1.04   0.301    -.0557471    .0173878
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |   .2502247   .0485848     5.15   0.000     .1539696    .3464799
+lnindp2006~2 |   .2190667   .0628633     3.48   0.001     .0945232    .3436101
+lnindp2006~3 |   .1897534   .0514417     3.69   0.000     .0878382    .2916687
+lnindp2006~4 |   .1310879   .0449987     2.91   0.004     .0419375    .2202384
+lnindp2006~5 |   .1481744   .0481033     3.08   0.003     .0528731    .2434756
+lnindp2006~6 |   .1875751   .0772899     2.43   0.017     .0344499    .3407004
+lnindp2006~7 |   .0812531   .0339669     2.39   0.018     .0139585    .1485477
+lnindp2006~8 |   .0835703    .052746     1.58   0.116     -.020929    .1880697
+lnindp2006~9 |   .0433677   .0389745     1.11   0.268    -.0338479    .1205832
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |   .2672407   .0678647     3.94   0.000     .1327885     .401693
+jinrong200~2 |    .167869   .0690135     2.43   0.017     .0311408    .3045971
+jinrong200~3 |   .1317036   .0632904     2.08   0.040      .006314    .2570932
+jinrong200~4 |   .1532681   .0579079     2.65   0.009     .0385421    .2679941
+jinrong200~5 |   .1177116   .0636338     1.85   0.067    -.0083585    .2437816
+jinrong20~r6 |   .1962432   .0831469     2.36   0.020     .0315142    .3609722
+jinrong200~7 |   .1249297   .0482621     2.59   0.011     .0293138    .2205456
+jinrong200~8 |   .1046458   .0604251     1.73   0.086    -.0150672    .2243589
+jinrong200~9 |    .078806   .0377554     2.09   0.039     .0040058    .1536062
+jinrong20~10 |          0  (omitted)
+       _cons |  -2.167061   .5132362    -4.22   0.000    -3.183874   -1.150247
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       114         114           0    *|
+   prov_id#year |       160           1         159     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T4_2") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. gen byte sample_T4_2=e(sample)
+
+. reghdfe lnNo_GSmgfper tp popdensity2006yr* agriareaper2006yr* consratio2006yr
+> * lnindp2006yr* jinrong2006yr* if east==1, absorb(city_id prov_id##year) vce(
+> cluster city_id)
+(MWFE estimator converged in 2 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =        470
+Absorbing 2 HDFE groups                           F(  46,     46) =  175352.84
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8832
+                                                  Adj R-squared   =     0.8278
+                                                  Within R-sq.    =     0.1447
+Number of clusters (city_id) =         47         Root MSE        =     0.4333
+
+                               (Std. err. adjusted for 47 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+lnNo_GSmgf~r | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |   .1359428   .1142649     1.19   0.240    -.0940606    .3659462
+popdens~6yr1 |  -.0002529   .0001238    -2.04   0.047     -.000502   -3.78e-06
+popdens~6yr2 |   -.000245   .0001242    -1.97   0.055    -.0004949    4.98e-06
+popdens~6yr3 |  -.0002304   .0001252    -1.84   0.072    -.0004823    .0000216
+popdens~6yr4 |  -.0000896   .0001362    -0.66   0.514    -.0003638    .0001846
+popdens~6yr5 |  -.0000506   .0001251    -0.40   0.688    -.0003024    .0002011
+popdens~6yr6 |   .0003857   .0002651     1.45   0.153     -.000148    .0009194
+popdens~6yr7 |    .000033   .0000895     0.37   0.714    -.0001471     .000213
+popdens~6yr8 |  -.0000323   .0000972    -0.33   0.742     -.000228    .0001635
+popdens~6yr9 |  -.0000383   .0000581    -0.66   0.513    -.0001553    .0000787
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |  -.1147347   .2121532    -0.54   0.591     -.541777    .3123076
+agriare~6yr2 |  -.1350058   .2188786    -0.62   0.540    -.5755856     .305574
+agriare~6yr3 |  -.0865152   .2204252    -0.39   0.697    -.5302081    .3571778
+agriare~6yr4 |  -.0170521   .2164995    -0.08   0.938    -.4528429    .4187387
+agriare~6yr5 |  -.0080049   .1809692    -0.04   0.965    -.3722769    .3562672
+agriare~6yr6 |  -.0160178   .2597675    -0.06   0.951    -.5389027    .5068671
+agriare~6yr7 |   .0272629   .1294043     0.21   0.834    -.2332144    .2877402
+agriare~6yr8 |  -.0619141   .1019837    -0.61   0.547    -.2671966    .1433685
+agriare~6yr9 |  -.1083105   .0853231    -1.27   0.211    -.2800569    .0634359
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |   .0401158   .0157648     2.54   0.014     .0083829    .0718488
+consratio2~2 |   .0336191   .0151285     2.22   0.031     .0031671    .0640711
+consratio2~3 |   .0238779   .0144531     1.65   0.105    -.0052147    .0529705
+consratio2~4 |   .0241214    .013235     1.82   0.075    -.0025193     .050762
+consratio2~5 |   .0139519   .0092637     1.51   0.139     -.004695    .0325988
+consrat~6yr6 |  -.0187292   .0363944    -0.51   0.609    -.0919874     .054529
+consratio2~7 |   .0067922   .0091256     0.74   0.460    -.0115766    .0251611
+consratio2~8 |   .0065593   .0097125     0.68   0.503     -.012991    .0261095
+consratio2~9 |   -.006837   .0055617    -1.23   0.225    -.0180322    .0043582
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |  -.0654106   .1599707    -0.41   0.685    -.3874148    .2565937
+lnindp2006~2 |   -.129111   .1475405    -0.88   0.386    -.4260945    .1678726
+lnindp2006~3 |  -.0588126   .1267185    -0.46   0.645    -.3138836    .1962584
+lnindp2006~4 |  -.1072589   .1123523    -0.95   0.345    -.3334124    .1188945
+lnindp2006~5 |  -.1443374   .0973872    -1.48   0.145    -.3403676    .0516929
+lnindp2006~6 |   .0404855   .2182564     0.19   0.854    -.3988419    .4798128
+lnindp2006~7 |  -.1117078   .0852934    -1.31   0.197    -.2833946     .059979
+lnindp2006~8 |  -.0679826   .0593282    -1.15   0.258    -.1874042    .0514389
+lnindp2006~9 |  -.0623771   .0401546    -1.55   0.127    -.1432042      .01845
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |   .0698076   .1657529     0.42   0.676    -.2638357    .4034509
+jinrong200~2 |   .0257059   .1842941     0.14   0.890     -.345259    .3966707
+jinrong200~3 |   .0204971   .1521951     0.13   0.893    -.2858558    .3268499
+jinrong200~4 |  -.0194272   .1546877    -0.13   0.901    -.3307975     .291943
+jinrong200~5 |   .0023745   .1439511     0.02   0.987     -.287384    .2921329
+jinrong20~r6 |  -.0189243   .1820392    -0.10   0.918    -.3853503    .3475017
+jinrong200~7 |   .0578659   .1311327     0.44   0.661    -.2060904    .3218222
+jinrong200~8 |  -.0642321   .0974505    -0.66   0.513    -.2603898    .1319256
+jinrong200~9 |   .0525725   .0669764     0.78   0.437     -.082244    .1873889
+jinrong20~10 |          0  (omitted)
+       _cons |    1.72376   1.354376     1.27   0.210    -1.002457    4.449976
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |        47          47           0    *|
+   prov_id#year |        60           1          59     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T4_3") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. gen byte sample_T4_3=e(sample)
+
+. reghdfe lnNo_GSmgfper tp tplngdpper2006 popdensity2006yr* agriareaper2006yr* 
+> consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year)
+>  vce(cluster city_id)
+(MWFE estimator converged in 2 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,610
+Absorbing 2 HDFE groups                           F(  47,    160) =       5.77
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8817
+                                                  Adj R-squared   =     0.8391
+                                                  Within R-sq.    =     0.0966
+Number of clusters (city_id) =        161         Root MSE        =     0.3879
+
+                              (Std. err. adjusted for 161 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+lnNo_GSmgf~r | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |   1.486046   .6686138     2.22   0.028        .1656    2.806493
+tplngdp~2006 |  -.1377092    .068719    -2.00   0.047    -.2734225    -.001996
+popdens~6yr1 |   -.000102   .0000948    -1.08   0.284    -.0002893    .0000852
+popdens~6yr2 |  -.0000871   .0001039    -0.84   0.403    -.0002923    .0001181
+popdens~6yr3 |  -.0000333   .0000996    -0.33   0.738      -.00023    .0001633
+popdens~6yr4 |  -2.70e-06    .000097    -0.03   0.978    -.0001942    .0001888
+popdens~6yr5 |   .0000968   .0001073     0.90   0.369    -.0001152    .0003088
+popdens~6yr6 |   .0004225   .0002318     1.82   0.070    -.0000352    .0008803
+popdens~6yr7 |   .0001045   .0000727     1.44   0.153    -.0000391    .0002481
+popdens~6yr8 |    .000017    .000079     0.22   0.830     -.000139     .000173
+popdens~6yr9 |   .0000546   .0000673     0.81   0.418    -.0000783    .0001875
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |  -.0135714   .0557668    -0.24   0.808    -.1237052    .0965625
+agriare~6yr2 |   -.079738   .0402885    -1.98   0.050    -.1593037   -.0001722
+agriare~6yr3 |   .0086579   .0442895     0.20   0.845    -.0788095    .0961253
+agriare~6yr4 |    .023191   .0502202     0.46   0.645     -.075989    .1223709
+agriare~6yr5 |   .0039529   .0452576     0.09   0.931    -.0854264    .0933322
+agriare~6yr6 |  -.0048409   .0506917    -0.10   0.924     -.104952    .0952701
+agriare~6yr7 |  -.0406936   .0331485    -1.23   0.221    -.1061585    .0247714
+agriare~6yr8 |   .0148843   .0558906     0.27   0.790    -.0954941    .1252627
+agriare~6yr9 |   .0282533   .0404865     0.70   0.486    -.0517036    .1082102
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |   .0103364   .0127783     0.81   0.420    -.0148996    .0355724
+consratio2~2 |   .0094329   .0126528     0.75   0.457    -.0155551    .0344209
+consratio2~3 |   .0043801   .0107807     0.41   0.685    -.0169108    .0256709
+consratio2~4 |    .002883   .0098334     0.29   0.770     -.016537    .0223031
+consratio2~5 |  -.0053233   .0113897    -0.47   0.641    -.0278169    .0171703
+consrat~6yr6 |  -.0468278    .028291    -1.66   0.100    -.1026997    .0090442
+consratio2~7 |  -.0088161    .008383    -1.05   0.295    -.0253717    .0077396
+consratio2~8 |  -.0083976   .0083689    -1.00   0.317    -.0249254    .0081301
+consratio2~9 |  -.0079897   .0070358    -1.14   0.258    -.0218848    .0059053
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |   .1033873   .0689895     1.50   0.136    -.0328602    .2396348
+lnindp2006~2 |   .0669429   .0708828     0.94   0.346    -.0730436    .2069295
+lnindp2006~3 |   .0798449   .0570564     1.40   0.164    -.0328359    .1925258
+lnindp2006~4 |   .0297935   .0494278     0.60   0.548    -.0678215    .1274085
+lnindp2006~5 |   .0393592   .0484598     0.81   0.418    -.0563442    .1350626
+lnindp2006~6 |   .1185216   .0863873     1.37   0.172    -.0520849     .289128
+lnindp2006~7 |    .012407    .034976     0.35   0.723    -.0566672    .0814811
+lnindp2006~8 |   .0337132   .0405442     0.83   0.407    -.0463576     .113784
+lnindp2006~9 |   .0180758   .0307709     0.59   0.558    -.0426936    .0788452
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |   .2124858   .0609045     3.49   0.001     .0922053    .3327662
+jinrong200~2 |   .1267216   .0675283     1.88   0.062    -.0066401    .2600834
+jinrong200~3 |   .1080134    .057685     1.87   0.063    -.0059089    .2219356
+jinrong200~4 |   .1086823   .0534291     2.03   0.044     .0031651    .2141995
+jinrong200~5 |   .0836653   .0576305     1.45   0.149    -.0301492    .1974799
+jinrong20~r6 |   .1315028   .0690749     1.90   0.059    -.0049133    .2679188
+jinrong200~7 |   .0907509   .0458486     1.98   0.049     .0002045    .1812974
+jinrong200~8 |   .0569132   .0508562     1.12   0.265    -.0435228    .1573491
+jinrong200~9 |   .0778376   .0319836     2.43   0.016     .0146731    .1410022
+jinrong20~10 |          0  (omitted)
+       _cons |   -.705773   .5837894    -1.21   0.228      -1.8587    .4471537
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       161         161           0    *|
+   prov_id#year |       220           1         219     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T4_5") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. post `H' ("T4_5") ("tplngdpper2006") (_b[tplngdpper2006]) (_se[tplngdpper2006
+> ]) (e(N)) (e(r2_a))
+
+. gen byte sample_T4_5=e(sample)
+
+. reghdfe lnNo_GSmgfper tp tplngdpperpre popdensity2006yr* agriareaper2006yr* c
+> onsratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) 
+> vce(cluster city_id)
+(MWFE estimator converged in 2 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,610
+Absorbing 2 HDFE groups                           F(  47,    160) =       5.83
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8817
+                                                  Adj R-squared   =     0.8391
+                                                  Within R-sq.    =     0.0963
+Number of clusters (city_id) =        161         Root MSE        =     0.3880
+
+                              (Std. err. adjusted for 161 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+lnNo_GSmgf~r | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |    1.43493   .7030089     2.04   0.043     .0465565    2.823303
+tplngdpper~e |  -.1345395   .0735817    -1.83   0.069    -.2798562    .0107772
+popdens~6yr1 |  -.0001059   .0000948    -1.12   0.266    -.0002932    .0000814
+popdens~6yr2 |  -.0000902   .0001048    -0.86   0.390    -.0002972    .0001167
+popdens~6yr3 |   -.000036   .0000999    -0.36   0.719    -.0002332    .0001613
+popdens~6yr4 |  -4.53e-06   .0000973    -0.05   0.963    -.0001967    .0001877
+popdens~6yr5 |   .0000957   .0001079     0.89   0.377    -.0001174    .0003088
+popdens~6yr6 |   .0004231   .0002317     1.83   0.070    -.0000346    .0008807
+popdens~6yr7 |   .0001045   .0000727     1.44   0.152     -.000039    .0002479
+popdens~6yr8 |    .000017    .000079     0.22   0.830     -.000139     .000173
+popdens~6yr9 |   .0000546   .0000673     0.81   0.418    -.0000783    .0001875
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |  -.0125906   .0557516    -0.23   0.822    -.1226946    .0975133
+agriare~6yr2 |   -.078774   .0403306    -1.95   0.053     -.158423     .000875
+agriare~6yr3 |   .0095846   .0442249     0.22   0.829    -.0777551    .0969244
+agriare~6yr4 |   .0245388   .0498195     0.49   0.623    -.0738498    .1229273
+agriare~6yr5 |   .0037742   .0454481     0.08   0.934    -.0859814    .0935297
+agriare~6yr6 |  -.0053316   .0507671    -0.11   0.916    -.1055916    .0949284
+agriare~6yr7 |  -.0407429   .0331505    -1.23   0.221    -.1062119    .0247262
+agriare~6yr8 |    .014881   .0558905     0.27   0.790    -.0954973    .1252592
+agriare~6yr9 |   .0282533   .0404865     0.70   0.486    -.0517036    .1082102
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |   .0106882   .0129678     0.82   0.411    -.0149219    .0362983
+consratio2~2 |   .0098058   .0126836     0.77   0.441    -.0152431    .0348548
+consratio2~3 |   .0046979    .010836     0.43   0.665    -.0167021     .026098
+consratio2~4 |   .0032321    .009889     0.33   0.744    -.0162976    .0227619
+consratio2~5 |  -.0051221   .0114463    -0.45   0.655    -.0277274    .0174832
+consrat~6yr6 |  -.0468278   .0282822    -1.66   0.100    -.1026823    .0090267
+consratio2~7 |  -.0088562   .0083799    -1.06   0.292    -.0254056    .0076932
+consratio2~8 |  -.0083962   .0083691    -1.00   0.317    -.0249245     .008132
+consratio2~9 |  -.0079897   .0070358    -1.14   0.258    -.0218848    .0059053
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |   .1032959   .0667377     1.55   0.124    -.0285045    .2350962
+lnindp2006~2 |   .0669037   .0689552     0.97   0.333    -.0692761    .2030835
+lnindp2006~3 |   .0797235    .055555     1.44   0.153    -.0299922    .1894392
+lnindp2006~4 |   .0297356   .0487269     0.61   0.543    -.0664951    .1259664
+lnindp2006~5 |   .0390964    .048327     0.81   0.420    -.0563447    .1345374
+lnindp2006~6 |   .1183369   .0859809     1.38   0.171    -.0514669    .2881406
+lnindp2006~7 |   .0124091   .0348642     0.36   0.722    -.0564442    .0812624
+lnindp2006~8 |   .0337028   .0405464     0.83   0.407    -.0463723     .113778
+lnindp2006~9 |   .0180758   .0307709     0.59   0.558    -.0426936    .0788452
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |   .2101916   .0606603     3.47   0.001     .0903934    .3299898
+jinrong200~2 |   .1244625   .0674795     1.84   0.067    -.0088029    .2577278
+jinrong200~3 |   .1059398   .0573788     1.85   0.067    -.0073778    .2192574
+jinrong200~4 |   .1068825   .0530835     2.01   0.046     .0020477    .2117173
+jinrong200~5 |   .0836361   .0576051     1.45   0.148    -.0301284    .1974006
+jinrong20~r6 |   .1313072   .0690593     1.90   0.059    -.0050781    .2676926
+jinrong200~7 |   .0906686   .0456699     1.99   0.049      .000475    .1808621
+jinrong200~8 |   .0569102   .0508564     1.12   0.265    -.0435262    .1573466
+jinrong200~9 |   .0778376   .0319836     2.43   0.016     .0146731    .1410022
+jinrong20~10 |          0  (omitted)
+       _cons |    -.70288   .5733412    -1.23   0.222    -1.835172    .4294123
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       161         161           0    *|
+   prov_id#year |       220           1         219     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T4_6") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. post `H' ("T4_6") ("tplngdpperpre") (_b[tplngdpperpre]) (_se[tplngdpperpre]) 
+> (e(N)) (e(r2_a))
+
+. gen byte sample_T4_6=e(sample)
+
+. reghdfe zhuan tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp
+> 2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)
+(MWFE estimator converged in 2 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,610
+Absorbing 2 HDFE groups                           F(  46,    160) =       2.32
+Statistics robust to heteroskedasticity           Prob > F        =     0.0001
+                                                  R-squared       =     0.7751
+                                                  Adj R-squared   =     0.6943
+                                                  Within R-sq.    =     0.0628
+Number of clusters (city_id) =        161         Root MSE        =     4.4197
+
+                              (Std. err. adjusted for 161 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+       zhuan | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |  -.0110182   .6193815    -0.02   0.986    -1.234236    1.212199
+popdens~6yr1 |   .0006779   .0009262     0.73   0.465    -.0011514    .0025071
+popdens~6yr2 |   .0004863   .0009027     0.54   0.591    -.0012964     .002269
+popdens~6yr3 |   .0001871   .0008986     0.21   0.835    -.0015876    .0019617
+popdens~6yr4 |  -.0001056    .000914    -0.12   0.908    -.0019107    .0016994
+popdens~6yr5 |  -.0004188    .001019    -0.41   0.682    -.0024313    .0015937
+popdens~6yr6 |  -.0008642   .0012212    -0.71   0.480     -.003276    .0015476
+popdens~6yr7 |  -.0005063   .0010112    -0.50   0.617    -.0025033    .0014907
+popdens~6yr8 |  -.0010804   .0012115    -0.89   0.374    -.0034731    .0013122
+popdens~6yr9 |   .0003139   .0002507     1.25   0.212    -.0001812    .0008089
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |    3.30652   2.326679     1.42   0.157    -1.288442    7.901482
+agriare~6yr2 |   2.927185   2.094361     1.40   0.164    -1.208972    7.063342
+agriare~6yr3 |   2.343423   1.792329     1.31   0.193    -1.196249    5.883096
+agriare~6yr4 |   1.917905   1.473479     1.30   0.195     -.992072    4.827882
+agriare~6yr5 |   1.319326   1.236014     1.07   0.287    -1.121681    3.760333
+agriare~6yr6 |   1.448597   1.350643     1.07   0.285     -1.21879    4.115984
+agriare~6yr7 |    1.46737   1.054234     1.39   0.166    -.6146386    3.549379
+agriare~6yr8 |   .4788368   .6271436     0.76   0.446      -.75971    1.717384
+agriare~6yr9 |   .5813738   .5920203     0.98   0.328    -.5878079    1.750556
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |    .004554   .0697414     0.07   0.948    -.1331783    .1422864
+consratio2~2 |   .0182708   .0748184     0.24   0.807     -.129488    .1660297
+consratio2~3 |   .0538101   .0820336     0.66   0.513    -.1081983    .2158184
+consratio2~4 |   .0763296   .0914723     0.83   0.405    -.1043191    .2569783
+consratio2~5 |   .1034877   .1132642     0.91   0.362    -.1201978    .3271733
+consrat~6yr6 |   .1155705   .0956486     1.21   0.229    -.0733262    .3044672
+consratio2~7 |   .0829229   .0864618     0.96   0.339    -.0878306    .2536764
+consratio2~8 |   .0568816   .0797098     0.71   0.477    -.1005374    .2143007
+consratio2~9 |  -.0246345   .0204606    -1.20   0.230    -.0650422    .0157732
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |    .994187   1.006309     0.99   0.325    -.9931751    2.981549
+lnindp2006~2 |   .9417072   .9090133     1.04   0.302    -.8535045    2.736919
+lnindp2006~3 |   .6757872   .7777044     0.87   0.386    -.8601024    2.211677
+lnindp2006~4 |   .5591774   .6432592     0.87   0.386    -.7111962    1.829551
+lnindp2006~5 |   .3172484   .5391936     0.59   0.557     -.747606    1.382103
+lnindp2006~6 |  -.2480671   .7897485    -0.31   0.754    -1.807743    1.311608
+lnindp2006~7 |  -.2433289   .6270239    -0.39   0.698    -1.481639    .9949816
+lnindp2006~8 |  -.3438377   .6562889    -0.52   0.601    -1.639944    .9522683
+lnindp2006~9 |   .2475249   .2879183     0.86   0.391    -.3210853    .8161351
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |   .9592274   .4837508     1.98   0.049     .0038672    1.914588
+jinrong200~2 |   .8873065   .4548543     1.95   0.053     -.010986    1.785599
+jinrong200~3 |   .7773875   .3952456     1.97   0.051    -.0031836    1.557959
+jinrong200~4 |   .6608936   .3590042     1.84   0.067    -.0481043    1.369892
+jinrong200~5 |   .5633063   .3236628     1.74   0.084    -.0758958    1.202508
+jinrong20~r6 |   .2181424   .5040678     0.43   0.666    -.7773419    1.213627
+jinrong200~7 |   .1530524   .4594495     0.33   0.739    -.7543151     1.06042
+jinrong200~8 |   -.030892   .4854345    -0.06   0.949    -.9895773    .9277933
+jinrong200~9 |   .3043542   .1751564     1.74   0.084    -.0415624    .6502707
+jinrong20~10 |          0  (omitted)
+       _cons |  -2.659223   9.953239    -0.27   0.790    -22.31589    16.99744
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       161         161           0    *|
+   prov_id#year |       220           1         219     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T5_1") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. gen byte sample_T5_1=e(sample)
+
+. reghdfe duo tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp20
+> 06yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)
+(MWFE estimator converged in 2 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,610
+Absorbing 2 HDFE groups                           F(  46,    160) =       1.21
+Statistics robust to heteroskedasticity           Prob > F        =     0.1973
+                                                  R-squared       =     0.8578
+                                                  Adj R-squared   =     0.8067
+                                                  Within R-sq.    =     0.0323
+Number of clusters (city_id) =        161         Root MSE        =     0.3792
+
+                              (Std. err. adjusted for 161 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+         duo | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |   .0098533   .0500351     0.20   0.844    -.0889611    .1086677
+popdens~6yr1 |   .0001892   .0001008     1.88   0.062    -9.81e-06    .0003881
+popdens~6yr2 |   .0001783   .0001128     1.58   0.116    -.0000445    .0004012
+popdens~6yr3 |   .0001429   .0001021     1.40   0.164    -.0000587    .0003445
+popdens~6yr4 |   .0001179   .0000979     1.20   0.230    -.0000754    .0003113
+popdens~6yr5 |   .0000948   .0000937     1.01   0.313    -.0000903    .0002799
+popdens~6yr6 |   .0000299   .0000931     0.32   0.748    -.0001539    .0002137
+popdens~6yr7 |  -.0000144   .0000739    -0.20   0.846    -.0001603    .0001315
+popdens~6yr8 |   .0000312   .0000621     0.50   0.616    -.0000914    .0001538
+popdens~6yr9 |  -.0000104   .0000292    -0.36   0.723    -.0000682    .0000474
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |  -.0274486   .0414707    -0.66   0.509    -.1093492    .0544519
+agriare~6yr2 |  -.0384058   .0401099    -0.96   0.340    -.1176188    .0408073
+agriare~6yr3 |  -.0392923   .0405787    -0.97   0.334    -.1194312    .0408466
+agriare~6yr4 |  -.0223954   .0372992    -0.60   0.549    -.0960577    .0512669
+agriare~6yr5 |  -.0542661    .041457    -1.31   0.192    -.1361395    .0276074
+agriare~6yr6 |  -.0363761   .0323918    -1.12   0.263    -.1003467    .0275945
+agriare~6yr7 |  -.0648615   .0398129    -1.63   0.105     -.143488     .013765
+agriare~6yr8 |  -.0431787    .027995    -1.54   0.125    -.0984661    .0121086
+agriare~6yr9 |  -.0226239   .0149834    -1.51   0.133    -.0522145    .0069668
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |  -.0059395   .0116912    -0.51   0.612    -.0290284    .0171495
+consratio2~2 |  -.0064254   .0128385    -0.50   0.617    -.0317801    .0189293
+consratio2~3 |  -.0066036   .0113434    -0.58   0.561    -.0290057    .0157986
+consratio2~4 |  -.0095376   .0108798    -0.88   0.382    -.0310241    .0119488
+consratio2~5 |   .0027498    .010382     0.26   0.791    -.0177535    .0232532
+consrat~6yr6 |  -.0002649   .0108422    -0.02   0.981    -.0216771    .0211474
+consratio2~7 |   .0091538   .0088916     1.03   0.305    -.0084063    .0267139
+consratio2~8 |  -.0069725     .00513    -1.36   0.176    -.0171038    .0031588
+consratio2~9 |  -.0012332   .0046865    -0.26   0.793    -.0104885    .0080221
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |   .0403803   .0599835     0.67   0.502    -.0780813    .1588419
+lnindp2006~2 |   .0245497   .0522427     0.47   0.639    -.0786245    .1277239
+lnindp2006~3 |   .0093538   .0471793     0.20   0.843    -.0838207    .1025282
+lnindp2006~4 |   .0241555   .0467389     0.52   0.606    -.0681493    .1164603
+lnindp2006~5 |  -.0197252   .0470148    -0.42   0.675    -.1125749    .0731244
+lnindp2006~6 |   -.016219   .0450916    -0.36   0.720    -.1052704    .0728324
+lnindp2006~7 |  -.0433284   .0444014    -0.98   0.331    -.1310167    .0443599
+lnindp2006~8 |  -.0069701   .0296056    -0.24   0.814    -.0654383    .0514981
+lnindp2006~9 |  -.0091747   .0191351    -0.48   0.632    -.0469648    .0286153
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |   .1261954   .0893337     1.41   0.160    -.0502299    .3026207
+jinrong200~2 |   .0646291   .0788339     0.82   0.414    -.0910601    .2203184
+jinrong200~3 |   .0562907    .070741     0.80   0.427    -.0834158    .1959973
+jinrong200~4 |   .0402913   .0668824     0.60   0.548    -.0917949    .1723775
+jinrong200~5 |  -.0000913   .0636516    -0.00   0.999     -.125797    .1256144
+jinrong20~r6 |    .032475   .0579544     0.56   0.576    -.0819792    .1469292
+jinrong200~7 |   .0022155   .0496926     0.04   0.964    -.0959224    .1003534
+jinrong200~8 |   .0230544    .032065     0.72   0.473    -.0402709    .0863797
+jinrong200~9 |  -.0134471   .0187208    -0.72   0.474    -.0504187    .0235246
+jinrong20~10 |          0  (omitted)
+       _cons |   2.029942   .5187563     3.91   0.000     1.005449    3.054434
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       161         161           0    *|
+   prov_id#year |       220           1         219     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T5_2") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. gen byte sample_T5_2=e(sample)
+
+. reghdfe density1 tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lni
+> ndp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id
+> )
+(dropped 2 singleton observations)
+(MWFE estimator converged in 7 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,561
+Absorbing 2 HDFE groups                           F(  46,    163) =       1.49
+Statistics robust to heteroskedasticity           Prob > F        =     0.0364
+                                                  R-squared       =     0.7919
+                                                  Adj R-squared   =     0.7138
+                                                  Within R-sq.    =     0.0306
+Number of clusters (city_id) =        164         Root MSE        =     6.6015
+
+                              (Std. err. adjusted for 164 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+    density1 | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |  -1.098601   .7048627    -1.56   0.121     -2.49044    .2932382
+popdens~6yr1 |   .0042191   .0023855     1.77   0.079    -.0004915    .0089296
+popdens~6yr2 |   .0032905   .0020715     1.59   0.114       -.0008     .007381
+popdens~6yr3 |   .0037402   .0022418     1.67   0.097    -.0006866     .008167
+popdens~6yr4 |   .0026471   .0027273     0.97   0.333    -.0027382    .0080324
+popdens~6yr5 |   .0026129   .0018324     1.43   0.156    -.0010053    .0062312
+popdens~6yr6 |   .0010553   .0018343     0.58   0.566    -.0025667    .0046772
+popdens~6yr7 |   .0021652   .0022884     0.95   0.345    -.0023536    .0066839
+popdens~6yr8 |   .0013906   .0018848     0.74   0.462    -.0023312    .0051124
+popdens~6yr9 |   -.000137   .0021897    -0.06   0.950    -.0044608    .0041867
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |   .2808394   .8585107     0.33   0.744    -1.414397    1.976076
+agriare~6yr2 |   .1254192   .8182772     0.15   0.878    -1.490371     1.74121
+agriare~6yr3 |   .4714627   .9145616     0.52   0.607    -1.334453    2.277379
+agriare~6yr4 |   .8465327   .8192812     1.03   0.303      -.77124    2.464305
+agriare~6yr5 |   .1047986    .700093     0.15   0.881    -1.277622     1.48722
+agriare~6yr6 |    .415359    .755026     0.55   0.583    -1.075534    1.906252
+agriare~6yr7 |   .8070372   .7977162     1.01   0.313    -.7681528    2.382227
+agriare~6yr8 |   .3818426   .6889199     0.55   0.580    -.9785157    1.742201
+agriare~6yr9 |   .9107824   .5458441     1.67   0.097    -.1670548     1.98862
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |  -.6352377   .2993709    -2.12   0.035    -1.226383   -.0440925
+consratio2~2 |  -.7214093   .3315867    -2.18   0.031    -1.376169     -.06665
+consratio2~3 |  -.7667112   .3750885    -2.04   0.043     -1.50737   -.0260522
+consratio2~4 |  -.6278706   .3794785    -1.65   0.100    -1.377198    .1214571
+consratio2~5 |  -.5094123   .3237602    -1.57   0.118    -1.148717    .1298925
+consrat~6yr6 |  -.3136221   .3223534    -0.97   0.332    -.9501491    .3229049
+consratio2~7 |  -.4141444    .408988    -1.01   0.313    -1.221742    .3934535
+consratio2~8 |  -.3834014   .3106623    -1.23   0.219    -.9968428    .2300401
+consratio2~9 |  -.0890251   .2346935    -0.38   0.705    -.5524566    .3744065
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |    .035539   1.318772     0.03   0.979     -2.56854    2.639618
+lnindp2006~2 |   .8907375   1.593931     0.56   0.577    -2.256679    4.038154
+lnindp2006~3 |   .2807507   1.684415     0.17   0.868    -3.045337    3.606839
+lnindp2006~4 |   .1417859   1.476588     0.10   0.924    -2.773922    3.057494
+lnindp2006~5 |   .3782158   1.406781     0.27   0.788    -2.399648     3.15608
+lnindp2006~6 |    .030258   1.332101     0.02   0.982    -2.600141    2.660656
+lnindp2006~7 |   .5433662   1.619325     0.34   0.738    -2.654194    3.740926
+lnindp2006~8 |   .4947768   1.290147     0.38   0.702    -2.052778    3.042332
+lnindp2006~9 |  -.2003212   .6518432    -0.31   0.759    -1.487467    1.086824
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |    .762327   1.277181     0.60   0.551    -1.759625    3.284279
+jinrong200~2 |   1.491607   1.339624     1.11   0.267    -1.153648    4.136861
+jinrong200~3 |   1.171323   1.257409     0.93   0.353    -1.311588    3.654234
+jinrong200~4 |   .9720521     1.2083     0.80   0.422    -1.413887    3.357991
+jinrong200~5 |   1.145039   1.153224     0.99   0.322    -1.132146    3.422224
+jinrong20~r6 |    1.38403   1.190742     1.16   0.247    -.9672389    3.735299
+jinrong200~7 |   1.499005    1.34242     1.12   0.266    -1.151771    4.149782
+jinrong200~8 |   1.224338   1.002529     1.22   0.224    -.7552798    3.203956
+jinrong200~9 |   1.208515   .8784163     1.38   0.171     -.526028    2.943057
+jinrong20~10 |          0  (omitted)
+       _cons |   12.73398   17.34542     0.73   0.464     -21.5167    46.98467
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       164         164           0    *|
+   prov_id#year |       218           1         217     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T5_3") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. gen byte sample_T5_3=e(sample)
+
+. reghdfe density2 tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lni
+> ndp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id
+> )
+(dropped 2 singleton observations)
+(MWFE estimator converged in 7 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,561
+Absorbing 2 HDFE groups                           F(  46,    163) =       1.54
+Statistics robust to heteroskedasticity           Prob > F        =     0.0269
+                                                  R-squared       =     0.7901
+                                                  Adj R-squared   =     0.7113
+                                                  Within R-sq.    =     0.0308
+Number of clusters (city_id) =        164         Root MSE        =     6.6533
+
+                              (Std. err. adjusted for 164 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+    density2 | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |  -1.068478   .7127561    -1.50   0.136    -2.475904    .3389473
+popdens~6yr1 |   .0042444   .0023994     1.77   0.079    -.0004935    .0089824
+popdens~6yr2 |   .0033097    .002081     1.59   0.114    -.0007995    .0074188
+popdens~6yr3 |   .0037237    .002251     1.65   0.100    -.0007211    .0081685
+popdens~6yr4 |   .0026445   .0027414     0.96   0.336    -.0027688    .0080578
+popdens~6yr5 |   .0026269   .0018424     1.43   0.156    -.0010112    .0062651
+popdens~6yr6 |   .0009493   .0018418     0.52   0.607    -.0026876    .0045862
+popdens~6yr7 |   .0021813   .0022975     0.95   0.344    -.0023553    .0067179
+popdens~6yr8 |   .0013541   .0018966     0.71   0.476    -.0023909    .0050991
+popdens~6yr9 |  -.0001334   .0022002    -0.06   0.952     -.004478    .0042113
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |   .3438387   .8801499     0.39   0.697    -1.394127    2.081804
+agriare~6yr2 |   .1542356   .8382168     0.18   0.854    -1.500928    1.809399
+agriare~6yr3 |   .5032833   .9454144     0.53   0.595    -1.363555    2.370122
+agriare~6yr4 |   .9199224   .8237643     1.12   0.266    -.7067029    2.546548
+agriare~6yr5 |   .1369411   .7078568     0.19   0.847     -1.26081    1.534693
+agriare~6yr6 |   .4658023   .7828757     0.59   0.553    -1.080083    2.011688
+agriare~6yr7 |   .8662854   .8097964     1.07   0.286    -.7327585    2.465329
+agriare~6yr8 |   .3850632   .6971232     0.55   0.581    -.9914934     1.76162
+agriare~6yr9 |   .9478486   .5444017     1.74   0.084    -.1271404    2.022838
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |  -.6343526   .3009631    -2.11   0.037    -1.228642   -.0400634
+consratio2~2 |   -.721772   .3328606    -2.17   0.032    -1.379047   -.0644972
+consratio2~3 |  -.7642111   .3767413    -2.03   0.044    -1.508134   -.0202884
+consratio2~4 |  -.6238921   .3809542    -1.64   0.103    -1.376134    .1283495
+consratio2~5 |  -.5077472   .3250426    -1.56   0.120    -1.149584    .1340899
+consrat~6yr6 |   -.291588   .3252328    -0.90   0.371    -.9338006    .3506247
+consratio2~7 |  -.4145511   .4102356    -1.01   0.314    -1.224612    .3955102
+consratio2~8 |  -.3796715    .311718    -1.22   0.225    -.9951976    .2358546
+consratio2~9 |  -.0863068   .2350671    -0.37   0.714    -.5504761    .3778626
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |   .0146745    1.33618     0.01   0.991     -2.62378    2.653129
+lnindp2006~2 |   .8862817   1.605761     0.55   0.582    -2.284494    4.057058
+lnindp2006~3 |   .2530431   1.695187     0.15   0.882    -3.094315    3.600401
+lnindp2006~4 |   .1073087    1.48731     0.07   0.943    -2.829571    3.044189
+lnindp2006~5 |   .3484187   1.415964     0.25   0.806    -2.447579    3.144416
+lnindp2006~6 |  -.0993061   1.355842    -0.07   0.942    -2.776585    2.577973
+lnindp2006~7 |     .51862   1.625534     0.32   0.750    -2.691199    3.728439
+lnindp2006~8 |   .4656285   1.296705     0.36   0.720    -2.094878    3.026134
+lnindp2006~9 |   -.225298   .6490684    -0.35   0.729    -1.506964    1.056368
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |   .7576014   1.283642     0.59   0.556     -1.77711    3.292313
+jinrong200~2 |   1.511642   1.346955     1.12   0.263    -1.148088    4.171372
+jinrong200~3 |   1.155189   1.265058     0.91   0.363    -1.342825    3.653203
+jinrong200~4 |   .9472895   1.214903     0.78   0.437    -1.451688    3.346267
+jinrong200~5 |   1.148559   1.159715     0.99   0.323    -1.141443    3.438561
+jinrong20~r6 |   1.348517   1.201075     1.12   0.263    -1.023155    3.720188
+jinrong200~7 |   1.526877   1.347985     1.13   0.259    -1.134886    4.188641
+jinrong200~8 |   1.261637   1.005985     1.25   0.212    -.7248056     3.24808
+jinrong200~9 |   1.250899   .8785982     1.42   0.156    -.4840022    2.985801
+jinrong20~10 |          0  (omitted)
+       _cons |   13.34973   17.49318     0.76   0.446    -21.19273    47.89218
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       164         164           0    *|
+   prov_id#year |       218           1         217     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T5_4") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. gen byte sample_T5_4=e(sample)
+
+. reghdfe thirdind tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lni
+> ndp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id
+> )
+(MWFE estimator converged in 5 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,636
+Absorbing 2 HDFE groups                           F(  46,    163) =       3.58
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8978
+                                                  Adj R-squared   =     0.8616
+                                                  Within R-sq.    =     0.0935
+Number of clusters (city_id) =        164         Root MSE        =     4.0307
+
+                              (Std. err. adjusted for 164 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+    thirdind | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |    .910686   .5788353     1.57   0.118    -.2322965    2.053668
+popdens~6yr1 |    .005265    .001341     3.93   0.000     .0026171    .0079129
+popdens~6yr2 |   .0054372   .0015001     3.62   0.000     .0024751    .0083992
+popdens~6yr3 |   .0045586   .0014243     3.20   0.002     .0017461    .0073712
+popdens~6yr4 |   .0030833    .001324     2.33   0.021     .0004688    .0056978
+popdens~6yr5 |   .0032761    .001285     2.55   0.012     .0007388    .0058134
+popdens~6yr6 |   .0034243   .0010059     3.40   0.001      .001438    .0054106
+popdens~6yr7 |   .0030798   .0010855     2.84   0.005     .0009364    .0052232
+popdens~6yr8 |   .0015117   .0010086     1.50   0.136    -.0004798    .0035033
+popdens~6yr9 |   .0007345   .0005517     1.33   0.185    -.0003548    .0018238
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |   .4866225   1.387342     0.35   0.726    -2.252856    3.226101
+agriare~6yr2 |   .5079049    1.21398     0.42   0.676     -1.88925     2.90506
+agriare~6yr3 |   .6689534   1.276169     0.52   0.601    -1.851002    3.188909
+agriare~6yr4 |   .8596074   1.072746     0.80   0.424    -1.258664    2.977879
+agriare~6yr5 |   .9088274   1.146226     0.79   0.429    -1.354539    3.172194
+agriare~6yr6 |   .7432915   1.260911     0.59   0.556    -1.746534    3.233117
+agriare~6yr7 |  -.1443284   .8154865    -0.18   0.860    -1.754608    1.465951
+agriare~6yr8 |  -.1042186   .6733197    -0.15   0.877    -1.433772    1.225335
+agriare~6yr9 |  -.1361482   .2895924    -0.47   0.639    -.7079846    .4356882
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |  -.2728119     .18341    -1.49   0.139    -.6349778    .0893541
+consratio2~2 |  -.2785256   .1937904    -1.44   0.153    -.6611889    .1041376
+consratio2~3 |  -.2845585   .1963232    -1.45   0.149    -.6722231    .1031061
+consratio2~4 |  -.2308539   .1530218    -1.51   0.133    -.5330145    .0713068
+consratio2~5 |  -.2244027   .1651747    -1.36   0.176    -.5505608    .1017554
+consrat~6yr6 |  -.2427376   .1318011    -1.84   0.067    -.5029953    .0175201
+consratio2~7 |  -.2007495   .1311802    -1.53   0.128    -.4597812    .0582822
+consratio2~8 |  -.1204259   .1218571    -0.99   0.324    -.3610479    .1201961
+consratio2~9 |  -.0568385   .0491961    -1.16   0.250    -.1539824    .0403054
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |  -1.196981   .7273474    -1.65   0.102    -2.633219    .2392573
+lnindp2006~2 |  -1.041303   .6305114    -1.65   0.101    -2.286326    .2037202
+lnindp2006~3 |  -.6966684   .5833194    -1.19   0.234    -1.848505    .4551684
+lnindp2006~4 |  -.5143287   .4491989    -1.14   0.254    -1.401328    .3726705
+lnindp2006~5 |  -.4750931   .4493213    -1.06   0.292    -1.362334    .4121479
+lnindp2006~6 |  -.2177268   .4131211    -0.53   0.599    -1.033486    .5980324
+lnindp2006~7 |  -.1388668   .4057591    -0.34   0.733    -.9400886    .6623551
+lnindp2006~8 |  -.0623186   .3533076    -0.18   0.860    -.7599686    .6353313
+lnindp2006~9 |  -.3549915   .2254678    -1.57   0.117    -.8002059    .0902228
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |   2.292179   .8212743     2.79   0.006     .6704709    3.913888
+jinrong200~2 |   1.923037   .7151599     2.69   0.008     .5108642    3.335209
+jinrong200~3 |   2.169723   .7037585     3.08   0.002     .7800642    3.559382
+jinrong200~4 |   2.108095   .6237873     3.38   0.001     .8763493    3.339841
+jinrong200~5 |   1.807353   .6599184     2.74   0.007     .5042624    3.110445
+jinrong20~r6 |   1.762624   .6035357     2.92   0.004     .5708677     2.95438
+jinrong200~7 |   1.445764   .5279452     2.74   0.007     .4032702    2.488257
+jinrong200~8 |   1.315874   .4899683     2.69   0.008     .3483705    2.283377
+jinrong200~9 |   .8202221   .3124659     2.62   0.009     .2032191    1.437225
+jinrong20~10 |          0  (omitted)
+       _cons |    41.4552   5.701654     7.27   0.000     30.19658    52.71383
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       164         164           0    *|
+   prov_id#year |       220           1         219     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T5_5") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. gen byte sample_T5_5=e(sample)
+
+. reghdfe thirdindemp tp popdensity2006yr* agriareaper2006yr* consratio2006yr* 
+> lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city
+> _id)
+(MWFE estimator converged in 3 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,639
+Absorbing 2 HDFE groups                           F(  46,    163) =       1.97
+Statistics robust to heteroskedasticity           Prob > F        =     0.0010
+                                                  R-squared       =     0.8896
+                                                  Adj R-squared   =     0.8505
+                                                  Within R-sq.    =     0.0527
+Number of clusters (city_id) =        164         Root MSE        =     5.7118
+
+                              (Std. err. adjusted for 164 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+ thirdindemp | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |   .6874037   .7461597     0.92   0.358    -.7859815    2.160789
+popdens~6yr1 |    .004848   .0016551     2.93   0.004     .0015798    .0081163
+popdens~6yr2 |   .0045738   .0017054     2.68   0.008     .0012062    .0079414
+popdens~6yr3 |   .0045871    .001806     2.54   0.012     .0010209    .0081533
+popdens~6yr4 |   .0043249   .0019716     2.19   0.030     .0004317    .0082181
+popdens~6yr5 |    .004708   .0017398     2.71   0.008     .0012725    .0081434
+popdens~6yr6 |   .0050404   .0017744     2.84   0.005     .0015367    .0085441
+popdens~6yr7 |   .0030211   .0019213     1.57   0.118    -.0007728    .0068149
+popdens~6yr8 |   .0018447   .0007861     2.35   0.020     .0002925    .0033969
+popdens~6yr9 |   .0006079   .0004251     1.43   0.155    -.0002316    .0014474
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |   .1849937    .637911     0.29   0.772    -1.074641    1.444629
+agriare~6yr2 |   .2286386     .64621     0.35   0.724    -1.047384    1.504661
+agriare~6yr3 |    .263257   .5496191     0.48   0.633    -.8220344    1.348548
+agriare~6yr4 |   .0437946   .6570779     0.07   0.947    -1.253688    1.341277
+agriare~6yr5 |   .4054238   .6050882     0.67   0.504    -.7893983    1.600246
+agriare~6yr6 |   .4060882   .6956488     0.58   0.560    -.9675571    1.779733
+agriare~6yr7 |    .732635    .806322     0.91   0.365    -.8595482    2.324818
+agriare~6yr8 |  -.6013091   .5378988    -1.12   0.265    -1.663457    .4608391
+agriare~6yr9 |  -.0747668   .3450166    -0.22   0.829     -.756045    .6065114
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |   -.285986   .2066208    -1.38   0.168    -.6939844    .1220125
+consratio2~2 |  -.2751224    .218152    -1.26   0.209    -.7058907    .1556459
+consratio2~3 |  -.2152019   .2282124    -0.94   0.347    -.6658358    .2354319
+consratio2~4 |  -.2063587   .2452909    -0.84   0.401    -.6907162    .2779987
+consratio2~5 |  -.2389972   .2244755    -1.06   0.289     -.682252    .2042576
+consrat~6yr6 |  -.2227062   .2176081    -1.02   0.308    -.6524006    .2069882
+consratio2~7 |  -.0338404   .2382332    -0.14   0.887    -.5042615    .4365808
+consratio2~8 |   .1575499   .1573293     1.00   0.318    -.1531165    .4682163
+consratio2~9 |  -.0504478   .0751045    -0.67   0.503    -.1987511    .0978555
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |  -1.280347   1.035492    -1.24   0.218    -3.325055    .7643608
+lnindp2006~2 |  -1.225893   1.034171    -1.19   0.238    -3.267993    .8162075
+lnindp2006~3 |  -1.663916   1.087133    -1.53   0.128    -3.810595    .4827627
+lnindp2006~4 |  -2.199376   1.065852    -2.06   0.041    -4.304033   -.0947188
+lnindp2006~5 |  -1.745904   1.076668    -1.62   0.107    -3.871919    .3801101
+lnindp2006~6 |  -.8722146   1.191235    -0.73   0.465    -3.224456    1.480027
+lnindp2006~7 |  -1.588706   1.166695    -1.36   0.175    -3.892491    .7150787
+lnindp2006~8 |  -1.802259   .5686426    -3.17   0.002    -2.925115   -.6794031
+lnindp2006~9 |   .0546959   .6190219     0.09   0.930     -1.16764    1.277032
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |   -1.26398   .8677613    -1.46   0.147    -2.977482    .4495232
+jinrong200~2 |  -.7667356   .8170839    -0.94   0.349     -2.38017    .8466984
+jinrong200~3 |  -.7702832   .8463384    -0.91   0.364    -2.441484    .9009175
+jinrong200~4 |  -1.184338   .7759368    -1.53   0.129    -2.716522    .3478455
+jinrong200~5 |  -1.125148   .7819306    -1.44   0.152    -2.669168    .4188711
+jinrong20~r6 |  -1.018767     .83628    -1.22   0.225    -2.670106    .6325722
+jinrong200~7 |  -.9316098   .7794897    -1.20   0.234    -2.470809    .6075898
+jinrong200~8 |  -.6597967   .6284731    -1.05   0.295    -1.900795    .5812018
+jinrong200~9 |   .3328673   .2987763     1.11   0.267    -.2571038    .9228384
+jinrong20~10 |          0  (omitted)
+       _cons |   68.53171   11.24364     6.10   0.000     46.32974    90.73369
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       164         164           0    *|
+   prov_id#year |       220           1         219     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T5_6") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. gen byte sample_T5_6=e(sample)
+
+. reghdfe avglife tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnin
+> dp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)
+(MWFE estimator converged in 2 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,640
+Absorbing 2 HDFE groups                           F(  46,    163) =       2.34
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9648
+                                                  Adj R-squared   =     0.9523
+                                                  Within R-sq.    =     0.0426
+Number of clusters (city_id) =        164         Root MSE        =     0.4031
+
+                              (Std. err. adjusted for 164 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+     avglife | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |  -.1413639   .0616184    -2.29   0.023     -.263037   -.0196907
+popdens~6yr1 |   .0002975   .0001166     2.55   0.012     .0000673    .0005277
+popdens~6yr2 |   .0002039   .0001317     1.55   0.124    -.0000562    .0004639
+popdens~6yr3 |   .0001658   .0000989     1.68   0.095    -.0000294    .0003611
+popdens~6yr4 |   .0000775   .0000795     0.97   0.331    -.0000795    .0002346
+popdens~6yr5 |   .0000672   .0000731     0.92   0.359    -.0000772    .0002115
+popdens~6yr6 |   .0000916   .0000582     1.57   0.117    -.0000233    .0002066
+popdens~6yr7 |   .0000338   .0000421     0.80   0.424    -.0000494    .0001169
+popdens~6yr8 |   5.03e-06   .0000306     0.16   0.870    -.0000555    .0000655
+popdens~6yr9 |   5.59e-06   .0000135     0.41   0.680    -.0000212    .0000323
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |   -.045133    .069169    -0.65   0.515    -.1817158    .0914498
+agriare~6yr2 |  -.1006258   .0538649    -1.87   0.064    -.2069889    .0057372
+agriare~6yr3 |   -.026951   .0482785    -0.56   0.577    -.1222829    .0683808
+agriare~6yr4 |  -.0359173   .0425752    -0.84   0.400    -.1199873    .0481527
+agriare~6yr5 |  -.0153294   .0355599    -0.43   0.667    -.0855469     .054888
+agriare~6yr6 |   .0063963   .0315927     0.20   0.840    -.0559874    .0687799
+agriare~6yr7 |   .0018365   .0203415     0.09   0.928    -.0383304    .0420034
+agriare~6yr8 |  -.0232685   .0196493    -1.18   0.238    -.0620684    .0155315
+agriare~6yr9 |   -.006456   .0096123    -0.67   0.503    -.0254366    .0125247
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |   -.012384    .012444    -1.00   0.321    -.0369563    .0121883
+consratio2~2 |  -.0182148   .0126826    -1.44   0.153    -.0432583    .0068286
+consratio2~3 |   -.010606   .0104212    -1.02   0.310     -.031184     .009972
+consratio2~4 |  -.0060299    .007661    -0.79   0.432    -.0211574    .0090977
+consratio2~5 |   .0025162   .0065068     0.39   0.699    -.0103323    .0153648
+consrat~6yr6 |   .0014046   .0055458     0.25   0.800    -.0095463    .0123555
+consratio2~7 |    .002247   .0039941     0.56   0.574    -.0056398    .0101338
+consratio2~8 |   .0050995   .0038042     1.34   0.182    -.0024125    .0126114
+consratio2~9 |   .0010055     .00103     0.98   0.330    -.0010282    .0030393
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |  -.0920696   .0747542    -1.23   0.220     -.239681    .0555418
+lnindp2006~2 |  -.0699438     .07111    -0.98   0.327    -.2103593    .0704717
+lnindp2006~3 |  -.0622787   .0556455    -1.12   0.265    -.1721576    .0476002
+lnindp2006~4 |   .0072704   .0503086     0.14   0.885    -.0920702     .106611
+lnindp2006~5 |   .0232142   .0403706     0.58   0.566    -.0565025    .1029309
+lnindp2006~6 |   .0264163   .0329357     0.80   0.424    -.0386194    .0914519
+lnindp2006~7 |   .0194442   .0212816     0.91   0.362     -.022579    .0614674
+lnindp2006~8 |  -.0159098   .0206708    -0.77   0.443    -.0567268    .0249072
+lnindp2006~9 |   .0015372   .0072625     0.21   0.833    -.0128035    .0158778
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |  -.0313964   .0919591    -0.34   0.733    -.2129811    .1501883
+jinrong200~2 |  -.0048975   .0908113    -0.05   0.957    -.1842158    .1744209
+jinrong200~3 |  -.0653531   .0661982    -0.99   0.325    -.1960698    .0653636
+jinrong200~4 |  -.0190119   .0647734    -0.29   0.770     -.146915    .1088912
+jinrong200~5 |  -.0272815   .0508366    -0.54   0.592    -.1276646    .0731017
+jinrong20~r6 |  -.0340783   .0410254    -0.83   0.407    -.1150881    .0469316
+jinrong200~7 |   .0053919   .0274421     0.20   0.844     -.048796    .0595799
+jinrong200~8 |   .0019305   .0254654     0.08   0.940    -.0483541    .0522151
+jinrong200~9 |  -.0100489   .0127494    -0.79   0.432    -.0352241    .0151263
+jinrong20~10 |          0  (omitted)
+       _cons |   5.318278   .4998277    10.64   0.000     4.331306     6.30525
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       164         164           0    *|
+   prov_id#year |       220           1         219     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T6_1") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. gen byte sample_T6_1=e(sample)
+
+. reghdfe life3rate tp popdensity2006yr* agriareaper2006yr* consratio2006yr* ln
+> indp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_i
+> d)
+(MWFE estimator converged in 2 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,640
+Absorbing 2 HDFE groups                           F(  46,    163) =       2.17
+Statistics robust to heteroskedasticity           Prob > F        =     0.0002
+                                                  R-squared       =     0.9740
+                                                  Adj R-squared   =     0.9648
+                                                  Within R-sq.    =     0.0398
+Number of clusters (city_id) =        164         Root MSE        =     0.0642
+
+                              (Std. err. adjusted for 164 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+   life3rate | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |   -.015489    .008225    -1.88   0.061    -.0317302    .0007522
+popdens~6yr1 |   .0000338   .0000135     2.51   0.013     7.26e-06    .0000604
+popdens~6yr2 |   .0000238   .0000156     1.52   0.129    -7.02e-06    .0000546
+popdens~6yr3 |   .0000234   .0000135     1.73   0.085    -3.30e-06      .00005
+popdens~6yr4 |   1.06e-06   .0000132     0.08   0.936     -.000025    .0000271
+popdens~6yr5 |   9.11e-06    .000016     0.57   0.569    -.0000224    .0000406
+popdens~6yr6 |   .0000118   .0000136     0.87   0.385     -.000015    .0000387
+popdens~6yr7 |   7.43e-06   .0000124     0.60   0.549     -.000017    .0000319
+popdens~6yr8 |  -3.30e-06   .0000139    -0.24   0.812    -.0000307    .0000241
+popdens~6yr9 |   4.63e-08   9.60e-08     0.48   0.630    -1.43e-07    2.36e-07
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |  -.0032581   .0089508    -0.36   0.716    -.0209326    .0144164
+agriare~6yr2 |  -.0081965   .0078818    -1.04   0.300    -.0237601    .0073671
+agriare~6yr3 |   .0045854    .007904     0.58   0.563     -.011022    .0201928
+agriare~6yr4 |  -.0014106   .0089401    -0.16   0.875    -.0190639    .0162427
+agriare~6yr5 |  -.0029853   .0066193    -0.45   0.653    -.0160559    .0100853
+agriare~6yr6 |   .0025727    .007242     0.36   0.723    -.0117275    .0168728
+agriare~6yr7 |  -.0019742   .0069303    -0.28   0.776     -.015659    .0117106
+agriare~6yr8 |  -.0131708   .0081123    -1.62   0.106    -.0291896    .0028481
+agriare~6yr9 |   .0001136   .0001105     1.03   0.305    -.0001046    .0003318
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |  -.0023131   .0013692    -1.69   0.093    -.0050168    .0003906
+consratio2~2 |  -.0030356    .001723    -1.76   0.080    -.0064378    .0003667
+consratio2~3 |  -.0028043   .0014348    -1.95   0.052    -.0056374    .0000288
+consratio2~4 |  -.0006829   .0012848    -0.53   0.596    -.0032198    .0018541
+consratio2~5 |    .001344   .0012699     1.06   0.291    -.0011636    .0038515
+consrat~6yr6 |   .0011343   .0014411     0.79   0.432    -.0017114    .0039799
+consratio2~7 |   .0007068   .0012321     0.57   0.567    -.0017262    .0031398
+consratio2~8 |   .0018853   .0016452     1.15   0.254    -.0013634     .005134
+consratio2~9 |   .0000105   .0000157     0.67   0.505    -.0000205    .0000414
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |  -.0049096   .0079787    -0.62   0.539    -.0206646    .0108454
+lnindp2006~2 |  -.0104125   .0077109    -1.35   0.179    -.0256386    .0048135
+lnindp2006~3 |  -.0031957   .0072743    -0.44   0.661    -.0175597    .0111682
+lnindp2006~4 |   .0018615   .0077079     0.24   0.809    -.0133587    .0170817
+lnindp2006~5 |   .0019322   .0073324     0.26   0.792    -.0125465     .016411
+lnindp2006~6 |   .0030026   .0073104     0.41   0.682    -.0114326    .0174379
+lnindp2006~7 |   .0042166    .006144     0.69   0.493    -.0079155    .0163487
+lnindp2006~8 |  -.0029161   .0091963    -0.32   0.752    -.0210752    .0152431
+lnindp2006~9 |  -.0001432   .0001589    -0.90   0.369    -.0004569    .0001705
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |  -.0021665   .0101109    -0.21   0.831    -.0221317    .0177988
+jinrong200~2 |   .0032776   .0099877     0.33   0.743    -.0164443    .0229995
+jinrong200~3 |  -.0009849   .0080707    -0.12   0.903    -.0169214    .0149517
+jinrong200~4 |   .0029819   .0097249     0.31   0.760    -.0162211    .0221849
+jinrong200~5 |  -.0038631   .0096038    -0.40   0.688    -.0228269    .0151008
+jinrong20~r6 |  -.0090988   .0091614    -0.99   0.322    -.0271891    .0089914
+jinrong200~7 |   .0002657   .0078153     0.03   0.973    -.0151666    .0156979
+jinrong200~8 |   .0001351   .0107029     0.01   0.990     -.020999    .0212693
+jinrong200~9 |  -.0004091   .0003601    -1.14   0.258    -.0011203     .000302
+jinrong20~10 |          0  (omitted)
+       _cons |   .6434025   .0765695     8.40   0.000     .4922064    .7945986
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       164         164           0    *|
+   prov_id#year |       220           1         219     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T6_2") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. gen byte sample_T6_2=e(sample)
+
+. reghdfe ksi tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp20
+> 06yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)
+(dropped 2 singleton observations)
+(MWFE estimator converged in 6 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,610
+Absorbing 2 HDFE groups                           F(  46,    163) =       2.81
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8608
+                                                  Adj R-squared   =     0.8107
+                                                  Within R-sq.    =     0.0340
+Number of clusters (city_id) =        164         Root MSE        =     0.0807
+
+                              (Std. err. adjusted for 164 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+         ksi | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |    .012919   .0130113     0.99   0.322    -.0127735    .0386114
+popdens~6yr1 |  -.0000106   .0000273    -0.39   0.698    -.0000645    .0000433
+popdens~6yr2 |   4.43e-06   .0000255     0.17   0.862    -.0000459    .0000548
+popdens~6yr3 |   7.45e-06   .0000257     0.29   0.773    -.0000434    .0000583
+popdens~6yr4 |  -1.26e-06   .0000231    -0.05   0.957    -.0000469    .0000444
+popdens~6yr5 |   6.96e-06   .0000241     0.29   0.773    -.0000406    .0000545
+popdens~6yr6 |   5.25e-06   .0000255     0.21   0.837     -.000045    .0000555
+popdens~6yr7 |   .0000342   .0000187     1.83   0.069    -2.73e-06     .000071
+popdens~6yr8 |  -.0000156   .0000106    -1.48   0.142    -.0000366    5.28e-06
+popdens~6yr9 |  -1.11e-06   7.44e-06    -0.15   0.881    -.0000158    .0000136
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |   .0034053   .0164759     0.21   0.837    -.0291285     .035939
+agriare~6yr2 |   .0123447   .0186935     0.66   0.510     -.024568    .0492573
+agriare~6yr3 |   .0169453   .0173416     0.98   0.330    -.0172979    .0511885
+agriare~6yr4 |   .0210257    .015731     1.34   0.183    -.0100372    .0520886
+agriare~6yr5 |   .0210525    .014738     1.43   0.155    -.0080495    .0501546
+agriare~6yr6 |   .0053598   .0087637     0.61   0.542    -.0119452    .0226647
+agriare~6yr7 |   .0066219   .0089239     0.74   0.459    -.0109995    .0242433
+agriare~6yr8 |   .0036672   .0062258     0.59   0.557    -.0086264    .0159608
+agriare~6yr9 |   .0087035   .0039026     2.23   0.027     .0009974    .0164096
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |   .0026961   .0031288     0.86   0.390    -.0034821    .0088742
+consratio2~2 |   .0013727   .0030489     0.45   0.653    -.0046477    .0073932
+consratio2~3 |   .0018254   .0031474     0.58   0.563    -.0043895    .0080404
+consratio2~4 |   .0021555   .0030059     0.72   0.474      -.00378    .0080909
+consratio2~5 |   .0013945   .0030315     0.46   0.646    -.0045915    .0073805
+consrat~6yr6 |   .0003857   .0031232     0.12   0.902    -.0057814    .0065527
+consratio2~7 |   -.002126   .0024892    -0.85   0.394    -.0070412    .0027892
+consratio2~8 |   .0024665    .001872     1.32   0.189    -.0012299     .006163
+consratio2~9 |   .0026051   .0017924     1.45   0.148    -.0009342    .0061445
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |  -.0049274   .0155655    -0.32   0.752    -.0356633    .0258085
+lnindp2006~2 |  -.0091483   .0141816    -0.65   0.520    -.0371517    .0188551
+lnindp2006~3 |  -.0133743   .0138644    -0.96   0.336    -.0407513    .0140027
+lnindp2006~4 |  -.0148153   .0148572    -1.00   0.320    -.0441527    .0145221
+lnindp2006~5 |  -.0125035   .0144125    -0.87   0.387    -.0409628    .0159557
+lnindp2006~6 |  -.0144649   .0128511    -1.13   0.262     -.039841    .0109112
+lnindp2006~7 |  -.0086154   .0126422    -0.68   0.497    -.0335791    .0163482
+lnindp2006~8 |  -.0000911   .0062521    -0.01   0.988    -.0124366    .0122544
+lnindp2006~9 |  -.0044635   .0082622    -0.54   0.590    -.0207781    .0118512
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |  -.0249585   .0154015    -1.62   0.107    -.0553706    .0054536
+jinrong200~2 |  -.0209028   .0154341    -1.35   0.178    -.0513794    .0095737
+jinrong200~3 |  -.0206677   .0157386    -1.31   0.191    -.0517456    .0104101
+jinrong200~4 |  -.0195251   .0151321    -1.29   0.199    -.0494053    .0103551
+jinrong200~5 |  -.0160164   .0158651    -1.01   0.314    -.0473441    .0153112
+jinrong20~r6 |  -.0150914   .0150708    -1.00   0.318    -.0448505    .0146677
+jinrong200~7 |  -.0158604   .0148408    -1.07   0.287    -.0451653    .0134446
+jinrong200~8 |  -.0128992   .0087529    -1.47   0.142    -.0301829    .0043844
+jinrong200~9 |  -.0043333    .005749    -0.75   0.452    -.0156854    .0070189
+jinrong20~10 |          0  (omitted)
+       _cons |   .3730073   .1530079     2.44   0.016     .0708742    .6751404
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       164         164           0    *|
+   prov_id#year |       218           1         217     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T6_3") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. gen byte sample_T6_3=e(sample)
+
+. reghdfe Score tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp
+> 2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)
+(MWFE estimator converged in 2 iterations)
+note: popdensity2006yr1 omitted because of collinearity
+note: popdensity2006yr2 omitted because of collinearity
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr1 omitted because of collinearity
+note: agriareaper2006yr2 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr1 omitted because of collinearity
+note: consratio2006yr2 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr1 omitted because of collinearity
+note: lnindp2006yr2 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr1 omitted because of collinearity
+note: jinrong2006yr2 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,288
+Absorbing 2 HDFE groups                           F(  36,    160) =       2.35
+Statistics robust to heteroskedasticity           Prob > F        =     0.0002
+                                                  R-squared       =     0.9529
+                                                  Adj R-squared   =     0.9338
+                                                  Within R-sq.    =     0.1793
+Number of clusters (city_id) =        161         Root MSE        =     0.0089
+
+                              (Std. err. adjusted for 161 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+       Score | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |  -.0023658   .0014439    -1.64   0.103    -.0052172    .0004857
+popdens~6yr1 |          0  (omitted)
+popdens~6yr2 |          0  (omitted)
+popdens~6yr3 |   7.78e-06   4.87e-06     1.60   0.112    -1.83e-06    .0000174
+popdens~6yr4 |   9.41e-06   5.29e-06     1.78   0.077    -1.04e-06    .0000199
+popdens~6yr5 |   .0000103   5.66e-06     1.82   0.071    -9.00e-07    .0000215
+popdens~6yr6 |   9.39e-06   4.95e-06     1.90   0.059    -3.77e-07    .0000192
+popdens~6yr7 |   5.20e-06   2.75e-06     1.89   0.061    -2.34e-07    .0000106
+popdens~6yr8 |  -2.60e-06   3.23e-06    -0.81   0.421    -8.97e-06    3.77e-06
+popdens~6yr9 |  -5.35e-06   4.47e-06    -1.20   0.233    -.0000142    3.48e-06
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |          0  (omitted)
+agriare~6yr2 |          0  (omitted)
+agriare~6yr3 |  -.0013887   .0014072    -0.99   0.325    -.0041677    .0013903
+agriare~6yr4 |  -.0021471   .0013905    -1.54   0.125    -.0048932    .0005989
+agriare~6yr5 |  -.0023081   .0016616    -1.39   0.167    -.0055896    .0009735
+agriare~6yr6 |  -.0015662   .0015916    -0.98   0.327    -.0047095    .0015771
+agriare~6yr7 |  -.0022061   .0014658    -1.51   0.134    -.0051008    .0006886
+agriare~6yr8 |  -.0025179   .0015775    -1.60   0.112    -.0056333    .0005976
+agriare~6yr9 |  -.0014653   .0016512    -0.89   0.376    -.0047262    .0017957
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |          0  (omitted)
+consratio2~2 |          0  (omitted)
+consratio2~3 |  -.0006643   .0006286    -1.06   0.292    -.0019058    .0005772
+consratio2~4 |  -.0007436   .0006632    -1.12   0.264    -.0020533     .000566
+consratio2~5 |  -.0008307    .000696    -1.19   0.234    -.0022052    .0005439
+consrat~6yr6 |  -.0009078   .0005972    -1.52   0.130    -.0020872    .0002715
+consratio2~7 |  -.0003604    .000329    -1.10   0.275    -.0010101    .0002893
+consratio2~8 |   .0003789   .0004149     0.91   0.363    -.0004405    .0011982
+consratio2~9 |   .0008394   .0005737     1.46   0.145    -.0002936    .0019723
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |          0  (omitted)
+lnindp2006~2 |          0  (omitted)
+lnindp2006~3 |  -.0065923   .0025716    -2.56   0.011    -.0116709   -.0015136
+lnindp2006~4 |  -.0062172   .0024695    -2.52   0.013    -.0110942   -.0013402
+lnindp2006~5 |  -.0055962   .0024371    -2.30   0.023    -.0104093   -.0007831
+lnindp2006~6 |  -.0045351   .0022559    -2.01   0.046    -.0089903   -.0000799
+lnindp2006~7 |  -.0044144   .0019324    -2.28   0.024    -.0082307   -.0005981
+lnindp2006~8 |  -.0037637   .0019393    -1.94   0.054    -.0075936    .0000663
+lnindp2006~9 |  -.0027847   .0018908    -1.47   0.143    -.0065189    .0009494
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |          0  (omitted)
+jinrong200~2 |          0  (omitted)
+jinrong200~3 |  -.0023148   .0013436    -1.72   0.087    -.0049683    .0003387
+jinrong200~4 |  -.0028451   .0015465    -1.84   0.068    -.0058993    .0002091
+jinrong200~5 |  -.0020723   .0014792    -1.40   0.163    -.0049936     .000849
+jinrong20~r6 |  -.0003167   .0014107    -0.22   0.823    -.0031027    .0024693
+jinrong200~7 |  -.0005684   .0011943    -0.48   0.635    -.0029269    .0017902
+jinrong200~8 |    .000246   .0010742     0.23   0.819    -.0018754    .0023674
+jinrong200~9 |  -.0009403   .0013579    -0.69   0.490     -.003622    .0017414
+jinrong20~10 |          0  (omitted)
+       _cons |   .1492586   .0266915     5.59   0.000     .0965455    .2019717
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       161         161           0    *|
+   prov_id#year |       176           1         175     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T6_4") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. gen byte sample_T6_4=e(sample)
+
+. reghdfe zhichu tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnind
+> p2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)
+(dropped 27 singleton observations)
+(MWFE estimator converged in 9 iterations)
+note: popdensity2006yr1 omitted because of collinearity
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr1 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr1 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr1 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr1 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,035
+Absorbing 2 HDFE groups                           F(  41,    162) =      16.06
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9560
+                                                  Adj R-squared   =     0.9328
+                                                  Within R-sq.    =     0.3537
+Number of clusters (city_id) =        163         Root MSE        =     1.9060
+
+                              (Std. err. adjusted for 163 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+      zhichu | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |   -.617037   .4177436    -1.48   0.142    -1.441962    .2078879
+popdens~6yr1 |          0  (omitted)
+popdens~6yr2 |   .0022962   .0025509     0.90   0.369    -.0027411    .0073335
+popdens~6yr3 |   .0004817   .0028545     0.17   0.866    -.0051551    .0061184
+popdens~6yr4 |   .0013662    .002298     0.59   0.553    -.0031718    .0059041
+popdens~6yr5 |  -.0005291   .0013497    -0.39   0.696    -.0031943    .0021362
+popdens~6yr6 |   .0015644   .0015879     0.99   0.326    -.0015714    .0047001
+popdens~6yr7 |   .0009488   .0010806     0.88   0.381    -.0011851    .0030826
+popdens~6yr8 |  -.0002285   .0005727    -0.40   0.690    -.0013595    .0009025
+popdens~6yr9 |  -.0003472   .0003768    -0.92   0.358    -.0010912    .0003968
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |          0  (omitted)
+agriare~6yr2 |  -.3328845    .425863    -0.78   0.436    -1.173843    .5080738
+agriare~6yr3 |   .1480096   1.093217     0.14   0.892    -2.010783    2.306802
+agriare~6yr4 |    1.22497   2.667743     0.46   0.647    -4.043064    6.493003
+agriare~6yr5 |  -.1287287   .3197425    -0.40   0.688    -.7601292    .5026718
+agriare~6yr6 |  -.2314234   .2342706    -0.99   0.325    -.6940413    .2311945
+agriare~6yr7 |  -.1184289   .1917601    -0.62   0.538    -.4971007    .2602428
+agriare~6yr8 |  -.1470475   .1473669    -1.00   0.320    -.4380553    .1439603
+agriare~6yr9 |  -.0378618   .0990035    -0.38   0.703    -.2333655    .1576419
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |          0  (omitted)
+consratio2~2 |  -.2922486   .3158788    -0.93   0.356    -.9160194    .3315222
+consratio2~3 |  -.2970759   .4303946    -0.69   0.491    -1.146983    .5528312
+consratio2~4 |  -.1917268   .3163998    -0.61   0.545    -.8165266    .4330729
+consratio2~5 |   .0526743    .145117     0.36   0.717    -.2338905     .339239
+consrat~6yr6 |  -.1951348    .191982    -1.02   0.311    -.5742447    .1839751
+consratio2~7 |  -.1117625   .1285806    -0.87   0.386    -.3656727    .1421476
+consratio2~8 |   .0152751   .0624884     0.24   0.807    -.1081218     .138672
+consratio2~9 |   .0252195   .0451494     0.56   0.577    -.0639377    .1143766
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |          0  (omitted)
+lnindp2006~2 |  -2.137584   .5821302    -3.67   0.000    -3.287125   -.9880422
+lnindp2006~3 |  -2.476714   .7382492    -3.35   0.001    -3.934547   -1.018882
+lnindp2006~4 |  -2.653219   .6240113    -4.25   0.000    -3.885464   -1.420974
+lnindp2006~5 |  -1.429517   .4177748    -3.42   0.001    -2.254504   -.6045309
+lnindp2006~6 |  -1.175324   .3508144    -3.35   0.001    -1.868083    -.482565
+lnindp2006~7 |  -.9130835   .2722251    -3.35   0.001    -1.450651   -.3755162
+lnindp2006~8 |  -.8163551   .2412265    -3.38   0.001    -1.292709   -.3400012
+lnindp2006~9 |  -.5360025   .1401625    -3.82   0.000    -.8127835   -.2592215
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |          0  (omitted)
+jinrong200~2 |  -2.980737    .654314    -4.56   0.000    -4.272821   -1.688653
+jinrong200~3 |  -3.101194   .7228901    -4.29   0.000    -4.528696   -1.673691
+jinrong200~4 |  -2.175728   1.004528    -2.17   0.032    -4.159386   -.1920699
+jinrong200~5 |  -2.538205   .5707634    -4.45   0.000    -3.665301    -1.41111
+jinrong20~r6 |   -1.93634   .4316021    -4.49   0.000    -2.788631   -1.084048
+jinrong200~7 |  -1.558926    .353731    -4.41   0.000    -2.257444   -.8604076
+jinrong200~8 |  -1.293565   .3497133    -3.70   0.000    -1.984149   -.6029802
+jinrong200~9 |  -.8426427    .210113    -4.01   0.000    -1.257556   -.4277292
+jinrong20~10 |          0  (omitted)
+       _cons |   28.99902   4.644769     6.24   0.000     19.82692    38.17112
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       163         163           0    *|
+   prov_id#year |       155           1         154     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T6_5") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. gen byte sample_T6_5=e(sample)
+
+. gen double dist=year-firstyear
+(150 missing values generated)
+
+. gen byte evpre2=dist==-2
+
+. gen byte evpre3=dist==-3
+
+. gen byte evpre4=dist==-4
+
+. gen byte evpre5=dist==-5
+
+. gen byte evpre6=dist==-6
+
+. gen byte evpre7=dist==-7
+
+. gen byte evpre8=dist==-8
+
+. gen byte evpost0=dist==0
+
+. gen byte evpost1=dist==1
+
+. gen byte evpost2=dist==2
+
+. gen byte evpost3=dist==3
+
+. gen byte evpost4=dist==4
+
+. gen byte evpost5=dist==5
+
+. gen byte evpost6=dist==6
+
+. gen byte evpost7=dist==7
+
+. gen byte evpost8=dist==8
+
+. reghdfe lnNo_GSmgfper $cyear evpre8 evpre7 evpre6 evpre5 evpre4 evpre3 evpre2
+>  evpost0 evpost1 evpost2 evpost3 evpost4 evpost5 evpost6 evpost7 evpost8, abs
+> orb(city_id prov_id##year) vce(cluster city_id)
+(MWFE estimator converged in 2 iterations)
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      1,610
+Absorbing 2 HDFE groups                           F(  61,    160) =       6.35
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8840
+                                                  Adj R-squared   =     0.8404
+                                                  Within R-sq.    =     0.1144
+Number of clusters (city_id) =        161         Root MSE        =     0.3863
+
+                              (Std. err. adjusted for 161 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+lnNo_GSmgf~r | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+popdens~6yr1 |  -.0001293   .0000952    -1.36   0.176    -.0003173    .0000587
+popdens~6yr2 |  -.0001075   .0001186    -0.91   0.366    -.0003418    .0001267
+popdens~6yr3 |  -.0000479   .0001106    -0.43   0.665    -.0002663    .0001705
+popdens~6yr4 |   9.16e-07   .0000888     0.01   0.992    -.0001744    .0001762
+popdens~6yr5 |    .000102    .000105     0.97   0.333    -.0001053    .0003092
+popdens~6yr6 |   .0004239   .0002224     1.91   0.058    -.0000153     .000863
+popdens~6yr7 |    .000087   .0000731     1.19   0.236    -.0000575    .0002314
+popdens~6yr8 |   2.81e-06   .0000862     0.03   0.974    -.0001675    .0001731
+popdens~6yr9 |   .0000488   .0000632     0.77   0.441    -.0000761    .0001737
+popden~6yr10 |          0  (omitted)
+agriare~6yr1 |   -.009244   .0522744    -0.18   0.860    -.1124807    .0939928
+agriare~6yr2 |  -.0808532    .044838    -1.80   0.073    -.1694039    .0076974
+agriare~6yr3 |    .005863   .0465019     0.13   0.900    -.0859736    .0976996
+agriare~6yr4 |   .0185234   .0526983     0.35   0.726    -.0855506    .1225974
+agriare~6yr5 |  -.0006032    .046827    -0.01   0.990    -.0930819    .0918755
+agriare~6yr6 |  -.0042665   .0534134    -0.08   0.936    -.1097527    .1012197
+agriare~6yr7 |  -.0362744   .0367963    -0.99   0.326    -.1089433    .0363946
+agriare~6yr8 |   .0182955   .0538048     0.34   0.734    -.0879637    .1245546
+agriare~6yr9 |   .0291155   .0390031     0.75   0.456    -.0479119    .1061429
+agriar~6yr10 |          0  (omitted)
+consratio2~1 |   .0098619   .0130512     0.76   0.451    -.0159129    .0356367
+consratio2~2 |   .0079504   .0146742     0.54   0.589    -.0210298    .0369305
+consratio2~3 |   .0040674   .0122298     0.33   0.740    -.0200851      .02822
+consratio2~4 |   .0015727   .0098847     0.16   0.874    -.0179486    .0210939
+consratio2~5 |  -.0066298   .0119704    -0.55   0.580    -.0302702    .0170106
+consrat~6yr6 |  -.0493196   .0266657    -1.85   0.066    -.1019818    .0033425
+consratio2~7 |   -.009952   .0083766    -1.19   0.237     -.026495    .0065909
+consratio2~8 |  -.0104368   .0083395    -1.25   0.213    -.0269064    .0060329
+consratio2~9 |  -.0091684   .0069243    -1.32   0.187    -.0228433    .0045064
+consratio2~0 |          0  (omitted)
+lnindp2006~1 |   .1536048   .0605742     2.54   0.012     .0339768    .2732328
+lnindp2006~2 |   .0997571   .0658043     1.52   0.132    -.0301998    .2297141
+lnindp2006~3 |   .1058068   .0549385     1.93   0.056    -.0026912    .2143049
+lnindp2006~4 |   .0480927   .0464742     1.03   0.302    -.0436892    .1398746
+lnindp2006~5 |   .0541399   .0455912     1.19   0.237    -.0358982    .1441781
+lnindp2006~6 |   .1327054   .0841678     1.58   0.117    -.0335177    .2989284
+lnindp2006~7 |   .0167437   .0347934     0.48   0.631    -.0519698    .0854572
+lnindp2006~8 |   .0310737   .0417859     0.74   0.458    -.0514494    .1135968
+lnindp2006~9 |   .0129349   .0298387     0.43   0.665    -.0459936    .0718634
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |    .234833   .0581152     4.04   0.000     .1200611    .3496048
+jinrong200~2 |   .1421092   .0664589     2.14   0.034     .0108594     .273359
+jinrong200~3 |   .1159952   .0571178     2.03   0.044     .0031931    .2287973
+jinrong200~4 |   .1130316   .0519391     2.18   0.031     .0104569    .2156062
+jinrong200~5 |   .0923947   .0566967     1.63   0.105    -.0195757    .2043652
+jinrong20~r6 |   .1402927   .0680183     2.06   0.041     .0059632    .2746222
+jinrong200~7 |   .1102216   .0456829     2.41   0.017     .0200024    .2004408
+jinrong200~8 |   .0653077    .051742     1.26   0.209    -.0368776     .167493
+jinrong200~9 |   .0882836    .032372     2.73   0.007     .0243521    .1522151
+jinrong20~10 |          0  (omitted)
+      evpre8 |  -.5298944   .2000234    -2.65   0.009    -.9249209    -.134868
+      evpre7 |  -.0983833   .1954612    -0.50   0.615    -.4843999    .2876333
+      evpre6 |  -.3091188    .142688    -2.17   0.032    -.5909135   -.0273241
+      evpre5 |  -.3126063    .118763    -2.63   0.009    -.5471515   -.0780612
+      evpre4 |  -.1552059   .0872614    -1.78   0.077    -.3275386    .0171269
+      evpre3 |  -.0797152   .0674592    -1.18   0.239    -.2129405    .0535101
+      evpre2 |  -.0436788   .0515872    -0.85   0.398    -.1455584    .0582008
+     evpost0 |    .110197   .0605043     1.82   0.070    -.0092931    .2296871
+     evpost1 |   .1176951   .0678099     1.74   0.085    -.0162227    .2516129
+     evpost2 |   .2087516   .0878815     2.38   0.019     .0351942     .382309
+     evpost3 |   .2600713   .1152932     2.26   0.025     .0323785     .487764
+     evpost4 |   .3587594   .1381089     2.60   0.010     .0860079    .6315109
+     evpost5 |   .2461892    .162113     1.52   0.131     -.073968    .5663463
+     evpost6 |   .3080346   .1921849     1.60   0.111    -.0715116    .6875807
+     evpost7 |   .1956646   .2243876     0.87   0.385    -.2474789    .6388081
+     evpost8 |   .2706535   .2697422     1.00   0.317    -.2620609    .8033679
+       _cons |  -.9527763   .5477946    -1.74   0.084    -2.034617    .1290641
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+        city_id |       161         161           0    *|
+   prov_id#year |       220           1         219     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte sample_F1=e(sample)
+
+. post `H' ("F1") ("evpre8") (_b[evpre8]) (_se[evpre8]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("evpre7") (_b[evpre7]) (_se[evpre7]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("evpre6") (_b[evpre6]) (_se[evpre6]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("evpre5") (_b[evpre5]) (_se[evpre5]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("evpre4") (_b[evpre4]) (_se[evpre4]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("evpre3") (_b[evpre3]) (_se[evpre3]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("evpre2") (_b[evpre2]) (_se[evpre2]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("evpost0") (_b[evpost0]) (_se[evpost0]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("evpost1") (_b[evpost1]) (_se[evpost1]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("evpost2") (_b[evpost2]) (_se[evpost2]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("evpost3") (_b[evpost3]) (_se[evpost3]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("evpost4") (_b[evpost4]) (_se[evpost4]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("evpost5") (_b[evpost5]) (_se[evpost5]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("evpost6") (_b[evpost6]) (_se[evpost6]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("evpost7") (_b[evpost7]) (_se[evpost7]) (e(N)) (e(r2_a))
+
+. post `H' ("F1") ("evpost8") (_b[evpost8]) (_se[evpost8]) (e(N)) (e(r2_a))
+
+. lincom (evpre4+evpre3+evpre2)/3
+
+ ( 1)  .3333333*evpre4 + .3333333*evpre3 + .3333333*evpre2 = 0
+
+------------------------------------------------------------------------------
+lnNo_GSmgf~r | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         (1) |  -.0928666   .0627137    -1.48   0.141      -.21672    .0309867
+------------------------------------------------------------------------------
+
+. post `H' ("F1") ("pre_reported") (r(estimate)) (r(se)) (e(N)) (e(r2_a))
+
+. lincom (evpost0+evpost1+evpost2+evpost3+evpost4)/5
+
+ ( 1)  .2*evpost0 + .2*evpost1 + .2*evpost2 + .2*evpost3 + .2*evpost4 = 0
+
+------------------------------------------------------------------------------
+lnNo_GSmgf~r | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         (1) |   .2110949   .0856929     2.46   0.015     .0418599    .3803299
+------------------------------------------------------------------------------
+
+. post `H' ("F1") ("post_reported") (r(estimate)) (r(se)) (e(N)) (e(r2_a))
+
+. keep row_id sample_*
+
+. export delimited using "../data/city_flags.csv", replace
+file ../data/city_flags.csv saved
+
+. use "city-industry.dta", clear
+
+. gen long row_id=_n
+
+. reghdfe hhi5 tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2
+> 006yr* jinrong2006yr* , absorb(hylb city_id prov_id##year) vce(cluster city_i
+> d)
+(dropped 22 singleton observations)
+(MWFE estimator converged in 9 iterations)
+note: popdensity2006yr1 omitted because of collinearity
+note: popdensity2006yr5 omitted because of collinearity
+note: popdensity2006yr6 omitted because of collinearity
+note: popdensity2006yr8 omitted because of collinearity
+note: popdensity2006yr9 omitted because of collinearity
+note: popdensity2006yr10 omitted because of collinearity
+note: agriareaper2006yr1 omitted because of collinearity
+note: agriareaper2006yr5 omitted because of collinearity
+note: agriareaper2006yr6 omitted because of collinearity
+note: agriareaper2006yr8 omitted because of collinearity
+note: agriareaper2006yr9 omitted because of collinearity
+note: agriareaper2006yr10 omitted because of collinearity
+note: consratio2006yr1 omitted because of collinearity
+note: consratio2006yr5 omitted because of collinearity
+note: consratio2006yr6 omitted because of collinearity
+note: consratio2006yr8 omitted because of collinearity
+note: consratio2006yr9 omitted because of collinearity
+note: consratio2006yr10 omitted because of collinearity
+note: lnindp2006yr1 omitted because of collinearity
+note: lnindp2006yr5 omitted because of collinearity
+note: lnindp2006yr6 omitted because of collinearity
+note: lnindp2006yr8 omitted because of collinearity
+note: lnindp2006yr9 omitted because of collinearity
+note: lnindp2006yr10 omitted because of collinearity
+note: jinrong2006yr1 omitted because of collinearity
+note: jinrong2006yr5 omitted because of collinearity
+note: jinrong2006yr6 omitted because of collinearity
+note: jinrong2006yr8 omitted because of collinearity
+note: jinrong2006yr9 omitted because of collinearity
+note: jinrong2006yr10 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     18,236
+Absorbing 3 HDFE groups                           F(  21,    163) =       2.86
+Statistics robust to heteroskedasticity           Prob > F        =     0.0001
+                                                  R-squared       =     0.6742
+                                                  Adj R-squared   =     0.6583
+                                                  Within R-sq.    =     0.0013
+Number of clusters (city_id) =        164         Root MSE        =     0.0484
+
+                              (Std. err. adjusted for 164 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+        hhi5 | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          tp |   .0024193   .0014285     1.69   0.092    -.0004014    .0052401
+popdensity~1 |          0  (omitted)
+popdensity~2 |   8.97e-07   2.28e-06     0.39   0.695    -3.61e-06    5.40e-06
+popdensity~3 |   8.00e-07   1.81e-06     0.44   0.658    -2.77e-06    4.37e-06
+popdensity~4 |  -5.45e-06   4.44e-06    -1.23   0.221    -.0000142    3.31e-06
+popdensity~5 |          0  (omitted)
+popdensity~6 |          0  (omitted)
+popdensity~7 |  -1.04e-06   2.15e-06    -0.48   0.631    -5.29e-06    3.21e-06
+popdensity~8 |          0  (omitted)
+popdensity~9 |          0  (omitted)
+popdensit~10 |          0  (omitted)
+agriareape~1 |          0  (omitted)
+agriareape~2 |  -.0003527   .0020814    -0.17   0.866    -.0044626    .0037572
+agriareape~3 |   .0012226   .0017324     0.71   0.481    -.0021982    .0046435
+agriareape~4 |   .0026224   .0030128     0.87   0.385    -.0033266    .0085715
+agriareape~5 |          0  (omitted)
+agriareape~6 |          0  (omitted)
+agriareape~7 |   .0009755   .0016826     0.58   0.563    -.0023469     .004298
+agriareape~8 |          0  (omitted)
+agriareape~9 |          0  (omitted)
+agriareap~10 |          0  (omitted)
+consratio2~1 |          0  (omitted)
+consratio2~2 |  -.0001348   .0002627    -0.51   0.609    -.0006536     .000384
+consratio2~3 |   -.000259   .0001753    -1.48   0.142    -.0006052    .0000872
+consratio2~4 |   .0004581    .000426     1.08   0.284     -.000383    .0012993
+consratio2~5 |          0  (omitted)
+consratio2~6 |          0  (omitted)
+consratio2~7 |   .0001624   .0002248     0.72   0.471    -.0002815    .0006062
+consratio2~8 |          0  (omitted)
+consratio2~9 |          0  (omitted)
+consratio~10 |          0  (omitted)
+lnindp2006~1 |          0  (omitted)
+lnindp2006~2 |  -.0011314   .0018859    -0.60   0.549    -.0048554    .0025925
+lnindp2006~3 |   -.000869   .0015043    -0.58   0.564    -.0038394    .0021013
+lnindp2006~4 |   .0009107   .0022444     0.41   0.685    -.0035212    .0053426
+lnindp2006~5 |          0  (omitted)
+lnindp2006~6 |          0  (omitted)
+lnindp2006~7 |    -.00088   .0016169    -0.54   0.587    -.0040727    .0023128
+lnindp2006~8 |          0  (omitted)
+lnindp2006~9 |          0  (omitted)
+lnindp200~10 |          0  (omitted)
+jinrong200~1 |          0  (omitted)
+jinrong200~2 |  -.0003672   .0024786    -0.15   0.882    -.0052615    .0045271
+jinrong200~3 |  -.0015069    .002124    -0.71   0.479     -.005701    .0026872
+jinrong200~4 |   .0024657     .00269     0.92   0.361    -.0028461    .0077776
+jinrong200~5 |          0  (omitted)
+jinrong200~6 |          0  (omitted)
+jinrong200~7 |  -.0026799   .0022026    -1.22   0.225    -.0070291    .0016694
+jinrong200~8 |          0  (omitted)
+jinrong200~9 |          0  (omitted)
+jinrong20~10 |          0  (omitted)
+       _cons |   .0935852   .0230958     4.05   0.000     .0479795    .1391908
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+--------------------------------------------------------+
+    Absorbed FE | Categories  - Redundant  = Num. Coefs |
+----------------+---------------------------------------|
+           hylb |       557           1         556     |
+        city_id |       164         164           0    *|
+   prov_id#year |       109           1         108     |
+--------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T4_4") ("tp") (_b[tp]) (_se[tp]) (e(N)) (e(r2_a))
+
+. gen byte sample_T4_4=e(sample)
+
+. keep row_id sample_*
+
+. export delimited using "../data/city-industry_flags.csv", replace
+file ../data/city-industry_flags.csv saved
+
+. postclose `H'
+
+. use "../data/author_results.dta", clear
+
+. export delimited using "../data/author_results.csv", replace
+file ../data/author_results.csv saved
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\newarea_start
+> up\work\../logs/author_body.log
+  log type:  text
+ closed on:  15 Nov 2026, 01:49:04
+-------------------------------------------------------------------------------
+
+. 
+end of do-file

@@ -1,0 +1,82 @@
+
+**************************基于数据1的回归结果*************************
+use C:\Users\Desktop\数据1.dta,clear
+global control_tfe "c.ecodev#i.year c.attention#i.year c.internet#i.year c.oswitch#i.year c.mobile#i.year c.fisupport#i.year"
+
+*表1#基准回归*
+reghdfe caput provp cityp $control_tfe, absorb(id year) vce(cl ids)
+reghdfe caput provp cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe, absorb(id year) vce(cl ids)
+
+*表2#省市差异*
+reghdfe caput cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe if cz==1, absorb(id year) vce(cl ids)
+reghdfe caput cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe if cz==0, absorb(id year) vce(cl ids)
+reghdfe caput cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe if xz==1, absorb(id year) vce(cl ids)
+reghdfe caput cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe if xz==0, absorb(id year) vce(cl ids)
+
+*表4#经营效率提升与竞争环境改善渠道（第1—3列）*
+reghdfe octo provp cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe, absorb(id year) vce(cl ids)
+reghdfe fato provp cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe, absorb(id year) vce(cl ids)
+reghdfe costgr provp cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe, absorb(id year) vce(cl ids)
+
+*表5#信息摩擦缓解渠道*
+reghdfe caput provp cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe if zq==1, absorb(id year) vce(cl ids)
+reghdfe caput provp cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe if zq==0, absorb(id year) vce(cl ids)
+reghdfe match provp cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe, absorb(id year) vce(cl ids)
+reghdfe trancost provp cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe, absorb(id year) vce(cl ids)
+
+*表6#基于媒体舆论和数字化水平的讨论*
+reghdfe caput provp_news provp news cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe, absorb(id year) vce(cl ids)
+reghdfe caput provp_digital provp digital cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe, absorb(id year) vce(cl ids)
+
+*表9#地理层面的溢出效应分析*
+reghdfe caput provp cityp $control_tfe radius, absorb(id year idh#idc) vce(cl ids)
+reghdfe caput provp cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe radius, absorb(id year idh#idc) vce(cl ids)
+
+*表10#行业层面的溢出效应分析*
+reghdfe caput provp cityp peer size age lev cash cfo top10 sgr msh board indep qturn $control_tfe, absorb(id year) vce(cl ids)
+reghdfe caput provp cityp peer1 size age lev cash cfo top10 sgr msh board indep qturn $control_tfe, absorb(id year) vce(cl ids)
+reghdfe caput provp cityp peer2 size age lev cash cfo top10 sgr msh board indep qturn $control_tfe, absorb(id year) vce(cl ids)
+
+
+**************************基于数据2的回归结果*************************
+use C:\Users\Desktop\数据2.dta,clear
+global control_tfe "c.ecodev#i.year c.attention#i.year c.internet#i.year c.oswitch#i.year c.mobile#i.year c.fisupport#i.year"
+
+*表3#关于平台开放次序的讨论*
+reghdfe caput provp cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe if (tong==1| qian==1| ctlgroup==1), absorb(id year) vce(cl ids)
+reghdfe caput provp cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe if (hou==1| ctlgroup==1), absorb(id year) vce(cl ids)
+
+
+**************************基于数据3的回归结果*************************
+use C:\Users\Desktop\数据3.dta,clear
+global control_tfe "c.ecodev#i.year c.attention#i.year c.internet#i.year c.oswitch#i.year c.mobile#i.year c.fisupport#i.year"
+
+*表4#经营效率提升与竞争环境改善渠道（第4—5列）*
+reghdfe newin provp cityp gdp structure pop finance $control_tfe, absorb(idc year) vce(cl ids)
+reghdfe ie provp cityp gdp structure pop finance $control_tfe, absorb(idc year) vce(cl ids)
+
+
+**************************基于数据4的回归结果*************************
+use C:\Users\Desktop\数据4.dta,clear
+global control_tfe "c.ecodev#i.year c.attention#i.year c.internet#i.year c.oswitch#i.year c.mobile#i.year c.fisupport#i.year"
+
+*表4#经营效率提升与竞争环境改善渠道（第6列）*
+reghdfe hhi provp cityp gdp structure pop finance ind_size ind_cash ind_lev ind_sgr ind_num $control_tfe, absorb(idc year idh) vce(cl ids)
+
+
+**************************基于数据5的回归结果*************************
+use C:\Users\Desktop\数据5.dta,clear
+global control_tfe "c.ecodev#i.year c.attention#i.year c.internet#i.year c.oswitch#i.year c.mobile#i.year c.fisupport#i.year"
+
+*表7#有关不同主题的讨论*
+reghdfe caput provp cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe if theme0==1| theme1==1, absorb(id year) vce(cl ids)
+reghdfe caput provp cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe if theme0==1| theme2==1, absorb(id year) vce(cl ids)
+reghdfe caput provp cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe if theme0==1| theme3==1, absorb(id year) vce(cl ids)
+
+*表8#有关主题集中度的讨论*
+reghdfe caput provp_hhihigh provp_hhilow cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe, absorb(id year) vce(cl ids)
+reghdfe caput provp_crhigh provp_crlow cityp size age lev cash cfo top10 sgr msh board indep qturn $control_tfe, absorb(id year) vce(cl ids)
+
+
+
+

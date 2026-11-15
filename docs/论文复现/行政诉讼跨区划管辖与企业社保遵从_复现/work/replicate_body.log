@@ -1,0 +1,1640 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      Stata 19.0
+___/   /   /___/   /   /___/       MP—Parallel Edition
+
+ Statistics and Data Science       Copyright 1985-2025 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-782-8272        https://www.stata.com
+                                   979-696-4600        service@stata.com
+
+Stata license: 114514-student 64-core lab perpetual
+Serial number: 9223372036854775807
+  Licensed to: 1
+               1
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. More than 2 billion observations are allowed; see help obs_advice.
+      4. Maximum number of variables is set to 5,000 but can be increased;
+          see help set_maxvar.
+
+
+Running D:\Stata\Stata19\profile.do ...
+
+. do replicate_body.do 
+
+. clear all
+
+. set more off
+
+. set processors 1
+    The maximum number of processors or cores being used is changed from 16
+    to 1.  It can be set to any number between 1 and 16
+
+. adopath ++ "../dependencies/stata_ado"
+  [1]              "../dependencies/stata_ado"
+  [2]  (BASE)      "D:\Stata\Stata19\ado\base/"
+  [3]  (SITE)      "D:\Stata\Stata19\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "C:\ado\personal/"
+  [6]  (PLUS)      "C:\ado\plus/"
+  [7]  (OLDPLACE)  "C:\ado\myado/"
+  [8]              "C:\ado\plus"
+  [9]              "C:\ado\github"
+  [10]             "C:\ado\personal"
+
+. log using "../logs/author_body.log", text replace
+(file
+    C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\jurisdiction_social\
+    > work\../logs/author_body.log not found)
+-------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\jurisdiction_
+> social\work\../logs/author_body.log
+  log type:  text
+ opened on:  15 Nov 2026, 00:41:02
+
+. tempname H
+
+. postfile `H' str12 spec str36 term double b se N r2a using "../data/author_re
+> sults.dta", replace
+(file ../data/author_results.dta not found)
+
+. use data1, clear
+
+. gen long row_id=_n
+
+. quietly sum stress, meanonly
+
+. gen double ct_stress=stress-r(mean)
+(9 missing values generated)
+
+. quietly sum gdpstress, meanonly
+
+. gen double ct_gdpstress=gdpstress-r(mean)
+(15 missing values generated)
+
+. quietly sum liuyan, meanonly
+
+. gen double ct_liuyan=liuyan-r(mean)
+(7,343 missing values generated)
+
+. reghdfe sbf court , absorb(codeid year) cluster(cityid) keepsin
+WARNING: Singleton observations not dropped; statistical significance is biased
+>  (link)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     26,595
+Absorbing 2 HDFE groups                           F(   1,    245) =       3.97
+Statistics robust to heteroskedasticity           Prob > F        =     0.0474
+                                                  R-squared       =     0.6543
+                                                  Adj R-squared   =     0.6099
+                                                  Within R-sq.    =     0.0008
+Number of clusters (cityid)  =        246         Root MSE        =     0.0628
+
+                               (Std. err. adjusted for 246 clusters in cityid)
+------------------------------------------------------------------------------
+             |               Robust
+         sbf | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       court |   .0065491   .0032872     1.99   0.047     .0000744    .0130238
+       _cons |   .1685786   .0016644   101.28   0.000     .1653002     .171857
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+      codeid |      3015        3015           0    *|
+        year |        14           1          13     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T2_1") ("court") (_b[court]) (_se[court]) (e(N)) (e(r2_a))
+
+. gen byte sample_T2_1=e(sample)
+
+. reghdfe sbf court size wage lev roe ocf age dual indboa nsoe, absorb(codeid y
+> ear) cluster(cityid) keepsin
+WARNING: Singleton observations not dropped; statistical significance is biased
+>  (link)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     26,595
+Absorbing 2 HDFE groups                           F(  10,    245) =      13.75
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6661
+                                                  Adj R-squared   =     0.6230
+                                                  Within R-sq.    =     0.0346
+Number of clusters (cityid)  =        246         Root MSE        =     0.0618
+
+                               (Std. err. adjusted for 246 clusters in cityid)
+------------------------------------------------------------------------------
+             |               Robust
+         sbf | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       court |   .0072621   .0032092     2.26   0.025      .000941    .0135832
+        size |  -.0112078   .0024151    -4.64   0.000    -.0159648   -.0064508
+        wage |  -.0023834    .000254    -9.38   0.000    -.0028836   -.0018831
+         lev |  -.0017539   .0070429    -0.25   0.804    -.0156263    .0121186
+         roe |   .0096627   .0046231     2.09   0.038     .0005567    .0187687
+         ocf |  -.0186712   .0092067    -2.03   0.044    -.0368055   -.0005369
+         age |   .0259402   .0098835     2.62   0.009     .0064728    .0454077
+        dual |   .0002316   .0020013     0.12   0.908    -.0037103    .0041734
+      indboa |   .0314166   .0158472     1.98   0.049     .0002025    .0626307
+        nsoe |  -.0213857   .0052756    -4.05   0.000     -.031777   -.0109944
+       _cons |   .3696422   .0558478     6.62   0.000     .2596392    .4796452
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+      codeid |      3015        3015           0    *|
+        year |        14           1          13     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T2_2") ("court") (_b[court]) (_se[court]) (e(N)) (e(r2_a))
+
+. gen byte sample_T2_2=e(sample)
+
+. reghdfe sbf court size wage lev roe ocf age dual indboa nsoe gdp second_gdp f
+> iscal_balance finlaon foreign_inv, absorb(codeid year) cluster(cityid) keepsi
+> n
+WARNING: Singleton observations not dropped; statistical significance is biased
+>  (link)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     26,595
+Absorbing 2 HDFE groups                           F(  15,    245) =      12.54
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6670
+                                                  Adj R-squared   =     0.6240
+                                                  Within R-sq.    =     0.0374
+Number of clusters (cityid)  =        246         Root MSE        =     0.0617
+
+                               (Std. err. adjusted for 246 clusters in cityid)
+------------------------------------------------------------------------------
+             |               Robust
+         sbf | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       court |   .0079609   .0033588     2.37   0.019     .0013451    .0145766
+        size |  -.0114576   .0023565    -4.86   0.000    -.0160993    -.006816
+        wage |  -.0024012   .0002518    -9.53   0.000    -.0028972   -.0019051
+         lev |  -.0025061   .0069391    -0.36   0.718    -.0161739    .0111617
+         roe |   .0093375   .0045682     2.04   0.042     .0003396    .0183353
+         ocf |  -.0180821   .0091306    -1.98   0.049    -.0360665   -.0000976
+         age |    .025349   .0098128     2.58   0.010     .0060208    .0446773
+        dual |   .0001057   .0020005     0.05   0.958    -.0038346    .0040459
+      indboa |   .0320443   .0157868     2.03   0.043     .0009492    .0631394
+        nsoe |  -.0205922   .0052823    -3.90   0.000    -.0309967   -.0101877
+         gdp |   .0230086   .0125541     1.83   0.068    -.0017191    .0477362
+  second_gdp |   .0099571   .0065464     1.52   0.130    -.0029374    .0228516
+fiscal_bal~e |   .0053945    .015382     0.35   0.726    -.0249034    .0356924
+     finlaon |  -.0030037   .0073709    -0.41   0.684    -.0175222    .0115148
+ foreign_inv |   .4797916   .2200817     2.18   0.030     .0462981    .9132851
+       _cons |  -.2471121   .3563567    -0.69   0.489    -.9490257    .4548015
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+      codeid |      3015        3015           0    *|
+        year |        14           1          13     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T2_3") ("court") (_b[court]) (_se[court]) (e(N)) (e(r2_a))
+
+. gen byte sample_T2_3=e(sample)
+
+. reghdfe sbf court dloan size wage lev roe ocf age dual indboa nsoe gdp second
+> _gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) cluster(cityid) 
+> keepsin
+WARNING: Singleton observations not dropped; statistical significance is biased
+>  (link)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     26,595
+Absorbing 2 HDFE groups                           F(  16,    245) =      25.72
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6780
+                                                  Adj R-squared   =     0.6365
+                                                  Within R-sq.    =     0.0693
+Number of clusters (cityid)  =        246         Root MSE        =     0.0607
+
+                               (Std. err. adjusted for 246 clusters in cityid)
+------------------------------------------------------------------------------
+             |               Robust
+         sbf | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       court |   .0070593   .0032938     2.14   0.033     .0005716     .013547
+       dloan |    .118994   .0085421    13.93   0.000     .1021687    .1358194
+        size |  -.0091763   .0022859    -4.01   0.000    -.0136788   -.0046738
+        wage |  -.0024151   .0002516    -9.60   0.000    -.0029107   -.0019196
+         lev |   .0157335    .007103     2.22   0.028     .0017427    .0297243
+         roe |   .0039056   .0045253     0.86   0.389    -.0050079    .0128191
+         ocf |  -.0106759   .0086537    -1.23   0.219     -.027721    .0063693
+         age |   .0216772   .0098228     2.21   0.028     .0023293     .041025
+        dual |   .0001298   .0019754     0.07   0.948     -.003761    .0040207
+      indboa |    .033698   .0158579     2.12   0.035     .0024627    .0649333
+        nsoe |  -.0209853   .0051454    -4.08   0.000    -.0311202   -.0108505
+         gdp |   .0207539   .0125083     1.66   0.098    -.0038836    .0453914
+  second_gdp |    .010064   .0066992     1.50   0.134    -.0031313    .0232593
+fiscal_bal~e |   .0063451   .0155484     0.41   0.684    -.0242806    .0369707
+     finlaon |  -.0022161   .0073143    -0.30   0.762    -.0166229    .0121908
+ foreign_inv |   .4531522   .2243871     2.02   0.045     .0111783    .8951261
+       _cons |  -.2386336   .3539614    -0.67   0.501    -.9358293     .458562
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+      codeid |      3015        3015           0    *|
+        year |        14           1          13     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T4_1") ("court") (_b[court]) (_se[court]) (e(N)) (e(r2_a))
+
+. post `H' ("T4_1") ("dloan") (_b[dloan]) (_se[dloan]) (e(N)) (e(r2_a))
+
+. gen byte sample_T4_1=e(sample)
+
+. reghdfe sbf court dbond size wage lev roe ocf age dual indboa nsoe gdp second
+> _gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) cluster(cityid) 
+> keepsin
+WARNING: Singleton observations not dropped; statistical significance is biased
+>  (link)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     26,595
+Absorbing 2 HDFE groups                           F(  16,    245) =      12.27
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6671
+                                                  Adj R-squared   =     0.6241
+                                                  Within R-sq.    =     0.0376
+Number of clusters (cityid)  =        246         Root MSE        =     0.0617
+
+                               (Std. err. adjusted for 246 clusters in cityid)
+------------------------------------------------------------------------------
+             |               Robust
+         sbf | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       court |   .0079205   .0033566     2.36   0.019     .0013091     .014532
+       dbond |   .0311817   .0149707     2.08   0.038     .0016941    .0606693
+        size |  -.0115028   .0023584    -4.88   0.000    -.0161482   -.0068574
+        wage |  -.0024006    .000252    -9.53   0.000     -.002897   -.0019042
+         lev |  -.0020571   .0069362    -0.30   0.767    -.0157193    .0116051
+         roe |   .0091813   .0045784     2.01   0.046     .0001632    .0181993
+         ocf |  -.0179442   .0091717    -1.96   0.052    -.0360096    .0001212
+         age |   .0251611   .0098061     2.57   0.011     .0058461     .044476
+        dual |   .0001247    .001995     0.06   0.950    -.0038048    .0040542
+      indboa |   .0319856   .0157667     2.03   0.044     .0009301    .0630411
+        nsoe |  -.0206424   .0052848    -3.91   0.000    -.0310518    -.010233
+         gdp |   .0229432   .0125412     1.83   0.069    -.0017591    .0476456
+  second_gdp |   .0100096   .0065474     1.53   0.128    -.0028866    .0229059
+fiscal_bal~e |   .0053614   .0154102     0.35   0.728    -.0249919    .0357146
+     finlaon |  -.0030158   .0073642    -0.41   0.683     -.017521    .0114893
+ foreign_inv |   .4783334   .2201368     2.17   0.031     .0447312    .9119355
+       _cons |  -.2440522   .3560359    -0.69   0.494    -.9453339    .4572295
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+      codeid |      3015        3015           0    *|
+        year |        14           1          13     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T4_2") ("court") (_b[court]) (_se[court]) (e(N)) (e(r2_a))
+
+. post `H' ("T4_2") ("dbond") (_b[dbond]) (_se[dbond]) (e(N)) (e(r2_a))
+
+. gen byte sample_T4_2=e(sample)
+
+. reghdfe sbf court dloanbond size wage lev roe ocf age dual indboa nsoe gdp se
+> cond_gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) cluster(city
+> id) keepsin
+WARNING: Singleton observations not dropped; statistical significance is biased
+>  (link)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     26,595
+Absorbing 2 HDFE groups                           F(  16,    245) =      25.41
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6777
+                                                  Adj R-squared   =     0.6361
+                                                  Within R-sq.    =     0.0684
+Number of clusters (cityid)  =        246         Root MSE        =     0.0607
+
+                               (Std. err. adjusted for 246 clusters in cityid)
+------------------------------------------------------------------------------
+             |               Robust
+         sbf | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       court |   .0070288   .0032828     2.14   0.033     .0005626     .013495
+   dloanbond |   .1101561   .0078233    14.08   0.000     .0947467    .1255655
+        size |  -.0094416   .0023049    -4.10   0.000    -.0139815   -.0049017
+        wage |  -.0024158   .0002533    -9.54   0.000    -.0029148   -.0019169
+         lev |   .0164546   .0070861     2.32   0.021     .0024971     .030412
+         roe |   .0037368   .0045313     0.82   0.410    -.0051885    .0126621
+         ocf |  -.0107909   .0087778    -1.23   0.220    -.0280804    .0064986
+         age |   .0210739   .0097754     2.16   0.032     .0018193    .0403285
+        dual |   .0002298   .0019558     0.12   0.907    -.0036225     .004082
+      indboa |   .0333214    .015752     2.12   0.035     .0022948    .0643481
+        nsoe |   -.021143   .0051519    -4.10   0.000    -.0312907   -.0109952
+         gdp |    .020622   .0124422     1.66   0.099    -.0038854    .0451294
+  second_gdp |   .0101568   .0066762     1.52   0.129    -.0029933    .0233069
+fiscal_bal~e |   .0060149    .015675     0.38   0.702    -.0248599    .0368898
+     finlaon |  -.0022658   .0072739    -0.31   0.756    -.0165932    .0120616
+ foreign_inv |    .449953   .2244866     2.00   0.046     .0077831     .892123
+       _cons |  -.2275671   .3525473    -0.65   0.519    -.9219773    .4668431
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+      codeid |      3015        3015           0    *|
+        year |        14           1          13     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T4_3") ("court") (_b[court]) (_se[court]) (e(N)) (e(r2_a))
+
+. post `H' ("T4_3") ("dloanbond") (_b[dloanbond]) (_se[dloanbond]) (e(N)) (e(r2
+> _a))
+
+. gen byte sample_T4_3=e(sample)
+
+. reghdfe sbf court##c.ct_stress size wage lev roe ocf age dual indboa nsoe gdp
+>  second_gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) cluster(c
+> ityid) keepsin
+WARNING: Singleton observations not dropped; statistical significance is biased
+>  (link)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     26,595
+Absorbing 2 HDFE groups                           F(  17,    245) =      12.36
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6676
+                                                  Adj R-squared   =     0.6246
+                                                  Within R-sq.    =     0.0391
+Number of clusters (cityid)  =        246         Root MSE        =     0.0616
+
+                               (Std. err. adjusted for 246 clusters in cityid)
+------------------------------------------------------------------------------
+             |               Robust
+         sbf | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     1.court |   .0080215   .0032787     2.45   0.015     .0015635    .0144794
+   ct_stress |  -.0367173   .0119604    -3.07   0.002    -.0602757   -.0131589
+             |
+       court#|
+ c.ct_stress |
+          1  |   .0262446   .0150633     1.74   0.083    -.0034254    .0559147
+             |
+        size |  -.0114503   .0023502    -4.87   0.000    -.0160794   -.0068212
+        wage |  -.0024075   .0002526    -9.53   0.000    -.0029052   -.0019099
+         lev |  -.0033319   .0070618    -0.47   0.637    -.0172415    .0105776
+         roe |   .0090507   .0045635     1.98   0.048      .000062    .0180395
+         ocf |  -.0184203   .0092457    -1.99   0.047    -.0366315   -.0002091
+         age |   .0256726   .0097003     2.65   0.009      .006566    .0447793
+        dual |   .0001425   .0019805     0.07   0.943    -.0037585    .0040435
+      indboa |   .0314207   .0156846     2.00   0.046     .0005268    .0623146
+        nsoe |  -.0201902      .0053    -3.81   0.000    -.0306295   -.0097508
+         gdp |   .0209648   .0109327     1.92   0.056    -.0005692    .0424989
+  second_gdp |   .0067337   .0063459     1.06   0.290    -.0057659    .0192332
+fiscal_bal~e |   .0088584   .0189024     0.47   0.640    -.0283736    .0460903
+     finlaon |  -.0028369   .0064606    -0.44   0.661    -.0155624    .0098886
+ foreign_inv |   .2880735     .22105     1.30   0.194    -.1473272    .7234743
+       _cons |  -.1928843   .3052084    -0.63   0.528    -.7940513    .4082828
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+      codeid |      3015        3015           0    *|
+        year |        14           1          13     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T5_1") ("1.court") (_b[1.court]) (_se[1.court]) (e(N)) (e(r2_a))
+
+. post `H' ("T5_1") ("1.court#c.ct_stress") (_b[1.court#c.ct_stress]) (_se[1.co
+> urt#c.ct_stress]) (e(N)) (e(r2_a))
+
+. post `H' ("T5_1") ("ct_stress") (_b[ct_stress]) (_se[ct_stress]) (e(N)) (e(r2
+> _a))
+
+. gen byte sample_T5_1=e(sample)
+
+. reghdfe sbf court##c.ct_gdpstress size wage lev roe ocf age dual indboa nsoe 
+> gdp second_gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) cluste
+> r(cityid) keepsin
+WARNING: Singleton observations not dropped; statistical significance is biased
+>  (link)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     26,589
+Absorbing 2 HDFE groups                           F(  17,    245) =      12.83
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6677
+                                                  Adj R-squared   =     0.6247
+                                                  Within R-sq.    =     0.0380
+Number of clusters (cityid)  =        246         Root MSE        =     0.0616
+
+                               (Std. err. adjusted for 246 clusters in cityid)
+------------------------------------------------------------------------------
+             |               Robust
+         sbf | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     1.court |    .007262   .0033878     2.14   0.033     .0005891    .0139348
+ct_gdpstress |  -.1202869   .0500853    -2.40   0.017    -.2189397   -.0216342
+             |
+       court#|
+          c. |
+ct_gdpstress |
+          1  |   .1579947   .0813377     1.94   0.053    -.0022157     .318205
+             |
+        size |   -.011442   .0023552    -4.86   0.000    -.0160811   -.0068029
+        wage |  -.0024054   .0002515    -9.56   0.000    -.0029008     -.00191
+         lev |  -.0026757   .0068968    -0.39   0.698    -.0162604    .0109089
+         roe |   .0090221   .0045793     1.97   0.050     2.21e-06    .0180419
+         ocf |  -.0179788   .0091122    -1.97   0.050     -.035927   -.0000306
+         age |   .0248815    .009685     2.57   0.011      .005805     .043958
+        dual |   .0003356   .0019871     0.17   0.866    -.0035783    .0042494
+      indboa |   .0340893   .0156527     2.18   0.030     .0032583    .0649203
+        nsoe |  -.0206572   .0052861    -3.91   0.000    -.0310693   -.0102452
+         gdp |   .0245169   .0126859     1.93   0.054    -.0004705    .0495043
+  second_gdp |   .0105385   .0065131     1.62   0.107    -.0022904    .0233673
+fiscal_bal~e |   .0024256   .0155129     0.16   0.876    -.0281301    .0329812
+     finlaon |  -.0031034    .007548    -0.41   0.681    -.0179706    .0117638
+ foreign_inv |   .4740648   .2205403     2.15   0.033     .0396679    .9084618
+       _cons |  -.2852442   .3597496    -0.79   0.429    -.9938408    .4233523
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+      codeid |      3015        3015           0    *|
+        year |        14           1          13     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T5_2") ("1.court") (_b[1.court]) (_se[1.court]) (e(N)) (e(r2_a))
+
+. post `H' ("T5_2") ("1.court#c.ct_gdpstress") (_b[1.court#c.ct_gdpstress]) (_s
+> e[1.court#c.ct_gdpstress]) (e(N)) (e(r2_a))
+
+. post `H' ("T5_2") ("ct_gdpstress") (_b[ct_gdpstress]) (_se[ct_gdpstress]) (e(
+> N)) (e(r2_a))
+
+. gen byte sample_T5_2=e(sample)
+
+. reghdfe sbf court##c.ct_liuyan size wage lev roe ocf age dual indboa nsoe gdp
+>  second_gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) cluster(c
+> ityid) keepsin
+WARNING: Singleton observations not dropped; statistical significance is biased
+>  (link)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     19,261
+Absorbing 2 HDFE groups                           F(  17,    232) =      16.07
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.7032
+                                                  Adj R-squared   =     0.6489
+                                                  Within R-sq.    =     0.0565
+Number of clusters (cityid)  =        233         Root MSE        =     0.0538
+
+                               (Std. err. adjusted for 233 clusters in cityid)
+------------------------------------------------------------------------------
+             |               Robust
+         sbf | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     1.court |    .009585   .0023908     4.01   0.000     .0048747    .0142954
+   ct_liuyan |  -.0624706   .0273029    -2.29   0.023    -.1162639   -.0086772
+             |
+       court#|
+ c.ct_liuyan |
+          1  |   .0941502   .0352429     2.67   0.008     .0247131    .1635873
+             |
+        size |   -.014861   .0027348    -5.43   0.000    -.0202493   -.0094727
+        wage |   -.002895   .0003264    -8.87   0.000    -.0035382   -.0022519
+         lev |  -.0002602   .0063988    -0.04   0.968    -.0128674     .012347
+         roe |   .0095439   .0049197     1.94   0.054     -.000149    .0192368
+         ocf |  -.0230043   .0096894    -2.37   0.018    -.0420948   -.0039137
+         age |   .0302996   .0100328     3.02   0.003     .0105324    .0500667
+        dual |   .0010641   .0016213     0.66   0.512    -.0021302    .0042584
+      indboa |   .0365678   .0177493     2.06   0.040     .0015973    .0715383
+        nsoe |  -.0095922   .0060119    -1.60   0.112    -.0214372    .0022527
+         gdp |   .0318158   .0117268     2.71   0.007     .0087111    .0549205
+  second_gdp |   .0105498   .0062949     1.68   0.095    -.0018526    .0229523
+fiscal_bal~e |    .007003   .0141627     0.49   0.621    -.0209009    .0349069
+     finlaon |  -.0081808   .0066208    -1.24   0.218    -.0212255    .0048638
+ foreign_inv |   .3419338   .2935934     1.16   0.245    -.2365162    .9203838
+       _cons |  -.4417188   .3260941    -1.35   0.177    -1.084203    .2007655
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+      codeid |      2958        2958           0    *|
+        year |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T6_1") ("1.court") (_b[1.court]) (_se[1.court]) (e(N)) (e(r2_a))
+
+. post `H' ("T6_1") ("1.court#c.ct_liuyan") (_b[1.court#c.ct_liuyan]) (_se[1.co
+> urt#c.ct_liuyan]) (e(N)) (e(r2_a))
+
+. post `H' ("T6_1") ("ct_liuyan") (_b[ct_liuyan]) (_se[ct_liuyan]) (e(N)) (e(r2
+> _a))
+
+. post `H' ("T6_1") ("nsoe") (_b[nsoe]) (_se[nsoe]) (e(N)) (e(r2_a))
+
+. gen byte sample_T6_1=e(sample)
+
+. reghdfe sbf court##c.labor_intensity size wage lev roe ocf age dual indboa ns
+> oe gdp second_gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) clu
+> ster(cityid) keepsin
+WARNING: Singleton observations not dropped; statistical significance is biased
+>  (link)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     26,595
+Absorbing 2 HDFE groups                           F(  17,    245) =      15.34
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6677
+                                                  Adj R-squared   =     0.6248
+                                                  Within R-sq.    =     0.0394
+Number of clusters (cityid)  =        246         Root MSE        =     0.0616
+
+                               (Std. err. adjusted for 246 clusters in cityid)
+------------------------------------------------------------------------------
+             |               Robust
+         sbf | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     1.court |   .0036122   .0034102     1.06   0.291    -.0031048    .0103293
+labor_inte~y |  -.0110688   .0026445    -4.19   0.000    -.0162776     -.00586
+             |
+       court#|
+          c. |
+labor_inte~y |
+          1  |   .0089285   .0032364     2.76   0.006     .0025538    .0153032
+             |
+        size |  -.0119316   .0023277    -5.13   0.000    -.0165164   -.0073467
+        wage |  -.0024987   .0002499   -10.00   0.000     -.002991   -.0020065
+         lev |   -.003585   .0069976    -0.51   0.609    -.0173682    .0101982
+         roe |   .0101158   .0045101     2.24   0.026     .0012323    .0189994
+         ocf |   -.018704    .009133    -2.05   0.042    -.0366933   -.0007148
+         age |   .0236963   .0099655     2.38   0.018     .0040672    .0433253
+        dual |   .0002808   .0020205     0.14   0.890     -.003699    .0042606
+      indboa |   .0313978   .0160157     1.96   0.051    -.0001482    .0629437
+        nsoe |  -.0210332   .0052434    -4.01   0.000     -.031361   -.0107054
+         gdp |   .0222072   .0122413     1.81   0.071    -.0019043    .0463188
+  second_gdp |   .0104177   .0065109     1.60   0.111    -.0024068    .0232423
+fiscal_bal~e |   .0048446   .0156723     0.31   0.757    -.0260251    .0357143
+     finlaon |  -.0038022   .0071806    -0.53   0.597    -.0179457    .0103413
+ foreign_inv |   .4673356     .22048     2.12   0.035     .0330575    .9016136
+       _cons |  -.2018262    .346372    -0.58   0.561     -.884073    .4804206
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+      codeid |      3015        3015           0    *|
+        year |        14           1          13     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T6_2") ("1.court") (_b[1.court]) (_se[1.court]) (e(N)) (e(r2_a))
+
+. post `H' ("T6_2") ("1.court#c.labor_intensity") (_b[1.court#c.labor_intensity
+> ]) (_se[1.court#c.labor_intensity]) (e(N)) (e(r2_a))
+
+. post `H' ("T6_2") ("labor_intensity") (_b[labor_intensity]) (_se[labor_intens
+> ity]) (e(N)) (e(r2_a))
+
+. post `H' ("T6_2") ("nsoe") (_b[nsoe]) (_se[nsoe]) (e(N)) (e(r2_a))
+
+. gen byte sample_T6_2=e(sample)
+
+. reghdfe sbf court##c.unemployment size wage lev roe ocf age dual indboa nsoe 
+> gdp second_gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) cluste
+> r(cityid) keepsin
+WARNING: Singleton observations not dropped; statistical significance is biased
+>  (link)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     25,159
+Absorbing 2 HDFE groups                           F(  17,    231) =      12.99
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6702
+                                                  Adj R-squared   =     0.6265
+                                                  Within R-sq.    =     0.0396
+Number of clusters (cityid)  =        232         Root MSE        =     0.0609
+
+                               (Std. err. adjusted for 232 clusters in cityid)
+------------------------------------------------------------------------------
+             |               Robust
+         sbf | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     1.court |   .0007581   .0038633     0.20   0.845    -.0068536    .0083699
+unemployment |  -.0034159   .0037675    -0.91   0.366    -.0108389    .0040072
+             |
+       court#|
+          c. |
+unemployment |
+          1  |   .0128226   .0054871     2.34   0.020     .0020114    .0236337
+             |
+        size |  -.0117526   .0024732    -4.75   0.000    -.0166255   -.0068797
+        wage |  -.0023073   .0002479    -9.31   0.000    -.0027958   -.0018188
+         lev |  -.0025832   .0072536    -0.36   0.722    -.0168749    .0117084
+         roe |   .0101813   .0047885     2.13   0.035     .0007465    .0196161
+         ocf |  -.0183179   .0093698    -1.95   0.052    -.0367791    .0001432
+         age |   .0221263   .0099043     2.23   0.026      .002612    .0416406
+        dual |  -.0002047   .0020313    -0.10   0.920    -.0042069    .0037974
+      indboa |   .0273242   .0165152     1.65   0.099    -.0052154    .0598639
+        nsoe |  -.0217364   .0053567    -4.06   0.000    -.0322907   -.0111822
+         gdp |   .0224453   .0119566     1.88   0.062    -.0011126    .0460032
+  second_gdp |   .0090726   .0065773     1.38   0.169    -.0038866    .0220317
+fiscal_bal~e |   .0000647   .0179373     0.00   0.997    -.0352768    .0354062
+     finlaon |  -.0060856   .0077114    -0.79   0.431    -.0212794    .0091081
+ foreign_inv |   .5074391   .2240201     2.27   0.024     .0660553    .9488229
+       _cons |  -.2081556   .3407998    -0.61   0.542     -.879629    .4633178
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+      codeid |      2916        2916           0    *|
+        year |        14           1          13     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T6_3") ("1.court") (_b[1.court]) (_se[1.court]) (e(N)) (e(r2_a))
+
+. post `H' ("T6_3") ("1.court#c.unemployment") (_b[1.court#c.unemployment]) (_s
+> e[1.court#c.unemployment]) (e(N)) (e(r2_a))
+
+. post `H' ("T6_3") ("unemployment") (_b[unemployment]) (_se[unemployment]) (e(
+> N)) (e(r2_a))
+
+. post `H' ("T6_3") ("nsoe") (_b[nsoe]) (_se[nsoe]) (e(N)) (e(r2_a))
+
+. gen byte sample_T6_3=e(sample)
+
+. reghdfe sbf court##c.nsoe size wage lev roe ocf age dual indboa nsoe gdp seco
+> nd_gdp fiscal_balance finlaon foreign_inv, absorb(codeid year) cluster(cityid
+> ) keepsin
+WARNING: Singleton observations not dropped; statistical significance is biased
+>  (link)
+(MWFE estimator converged in 7 iterations)
+note: nsoe omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     26,595
+Absorbing 2 HDFE groups                           F(  16,    245) =      19.97
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6692
+                                                  Adj R-squared   =     0.6264
+                                                  Within R-sq.    =     0.0437
+Number of clusters (cityid)  =        246         Root MSE        =     0.0615
+
+                               (Std. err. adjusted for 246 clusters in cityid)
+------------------------------------------------------------------------------
+             |               Robust
+         sbf | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     1.court |  -.0081274   .0037013    -2.20   0.029     -.015418   -.0008369
+        nsoe |  -.0323828   .0058215    -5.56   0.000    -.0438493   -.0209163
+             |
+court#c.nsoe |
+          1  |   .0251817     .00372     6.77   0.000     .0178545    .0325089
+             |
+        size |   -.012335   .0022691    -5.44   0.000    -.0168045   -.0078654
+        wage |   -.002427   .0002431    -9.98   0.000    -.0029058   -.0019482
+         lev |  -.0049432   .0070813    -0.70   0.486    -.0188913    .0090049
+         roe |   .0103491    .004522     2.29   0.023     .0014421    .0192561
+         ocf |  -.0203067   .0091859    -2.21   0.028       -.0384   -.0022134
+         age |   .0147361   .0107026     1.38   0.170    -.0063448     .035817
+        dual |   .0000986   .0019771     0.05   0.960    -.0037957    .0039929
+      indboa |   .0325265   .0156679     2.08   0.039     .0016655    .0633875
+        nsoe |          0  (omitted)
+         gdp |   .0248765   .0122171     2.04   0.043     .0008125    .0489405
+  second_gdp |   .0090674   .0064302     1.41   0.160    -.0035982     .021733
+fiscal_bal~e |   .0059335   .0155251     0.38   0.703    -.0246461    .0365132
+     finlaon |  -.0011413   .0070757    -0.16   0.872    -.0150783    .0127958
+ foreign_inv |   .4502661    .217956     2.07   0.040     .0209596    .8795726
+       _cons |  -.2432605   .3407847    -0.71   0.476    -.9145022    .4279811
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+      codeid |      3015        3015           0    *|
+        year |        14           1          13     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T6_4") ("1.court") (_b[1.court]) (_se[1.court]) (e(N)) (e(r2_a))
+
+. post `H' ("T6_4") ("1.court#c.nsoe") (_b[1.court#c.nsoe]) (_se[1.court#c.nsoe
+> ]) (e(N)) (e(r2_a))
+
+. post `H' ("T6_4") ("nsoe") (_b[nsoe]) (_se[nsoe]) (e(N)) (e(r2_a))
+
+. gen byte sample_T6_4=e(sample)
+
+. keep row_id sample_*
+
+. export delimited using "../data/firm_flags.csv", replace
+(file ../data/firm_flags.csv not found)
+file ../data/firm_flags.csv saved
+
+. use data1, clear
+
+. duplicates drop cityid year, force
+
+Duplicates in terms of cityid year
+
+(23,430 observations deleted)
+
+. gen long row_id=_n
+
+. reghdfe percase1 court gdp second_gdp fiscal_balance finlaon foreign_inv, abs
+> orb(cityid year) cluster(cityid)
+(dropped 3 singleton observations)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =      1,579
+Absorbing 2 HDFE groups                           F(   6,    217) =       1.70
+Statistics robust to heteroskedasticity           Prob > F        =     0.1220
+                                                  R-squared       =     0.6581
+                                                  Adj R-squared   =     0.5983
+                                                  Within R-sq.    =     0.0140
+Number of clusters (cityid)  =        218         Root MSE        =     0.0304
+
+                               (Std. err. adjusted for 218 clusters in cityid)
+------------------------------------------------------------------------------
+             |               Robust
+    percase1 | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       court |   .0093944   .0039669     2.37   0.019     .0015758    .0172129
+         gdp |   -.023368   .0110838    -2.11   0.036    -.0452138   -.0015222
+  second_gdp |   .0057247   .0074186     0.77   0.441    -.0088971    .0203465
+fiscal_bal~e |   .0112714    .029896     0.38   0.707    -.0476523    .0701951
+     finlaon |  -.0009909   .0075519    -0.13   0.896    -.0158753    .0138935
+ foreign_inv |   .1796127   .7410665     0.24   0.809    -1.280997    1.640222
+       _cons |   .6372478   .2911063     2.19   0.030       .06349    1.211006
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+      cityid |       218         218           0    *|
+        year |        13           1          12     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T3_1") ("court") (_b[court]) (_se[court]) (e(N)) (e(r2_a))
+
+. gen byte sample_T3_1=e(sample)
+
+. reghdfe percase2 court gdp second_gdp fiscal_balance finlaon foreign_inv, abs
+> orb(cityid year) cluster(cityid)
+(dropped 3 singleton observations)
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =      1,579
+Absorbing 2 HDFE groups                           F(   6,    217) =       1.60
+Statistics robust to heteroskedasticity           Prob > F        =     0.1478
+                                                  R-squared       =     0.5666
+                                                  Adj R-squared   =     0.4908
+                                                  Within R-sq.    =     0.0125
+Number of clusters (cityid)  =        218         Root MSE        =     0.0174
+
+                               (Std. err. adjusted for 218 clusters in cityid)
+------------------------------------------------------------------------------
+             |               Robust
+    percase2 | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       court |    .003855   .0022207     1.74   0.084    -.0005219    .0082319
+         gdp |  -.0131991   .0062818    -2.10   0.037    -.0255802    -.000818
+  second_gdp |  -.0000788   .0039516    -0.02   0.984    -.0078672    .0077096
+fiscal_bal~e |   .0132878   .0181101     0.73   0.464    -.0224065     .048982
+     finlaon |   .0027174   .0038837     0.70   0.485    -.0049372     .010372
+ foreign_inv |   .0795146   .4443502     0.18   0.858    -.7962802    .9553094
+       _cons |   .3496406    .164348     2.13   0.035     .0257179    .6735633
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+      cityid |       218         218           0    *|
+        year |        13           1          12     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T3_3") ("court") (_b[court]) (_se[court]) (e(N)) (e(r2_a))
+
+. gen byte sample_T3_3=e(sample)
+
+. reghdfe penalty court gdp second_gdp fiscal_balance finlaon foreign_inv, abso
+> rb(cityid year) cluster(cityid)
+(dropped 28 singleton observations)
+(MWFE estimator converged in 8 iterations)
+
+HDFE Linear regression                            Number of obs   =      1,042
+Absorbing 2 HDFE groups                           F(   6,    193) =       2.87
+Statistics robust to heteroskedasticity           Prob > F        =     0.0105
+                                                  R-squared       =     0.6193
+                                                  Adj R-squared   =     0.5231
+                                                  Within R-sq.    =     0.0279
+Number of clusters (cityid)  =        194         Root MSE        =     0.0614
+
+                               (Std. err. adjusted for 194 clusters in cityid)
+------------------------------------------------------------------------------
+             |               Robust
+     penalty | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       court |   .0153598   .0087486     1.76   0.081    -.0018954     .032615
+         gdp |   .0349685   .0214952     1.63   0.105    -.0074272    .0773642
+  second_gdp |   .0271816   .0114227     2.38   0.018     .0046522    .0497109
+fiscal_bal~e |  -.1821942    .106773    -1.71   0.090     -.392786    .0283977
+     finlaon |   .0246199   .0174606     1.41   0.160    -.0098183    .0590581
+ foreign_inv |   1.026362   1.518315     0.68   0.500    -1.968259    4.020984
+       _cons |  -.8295007   .5719223    -1.45   0.149    -1.957521    .2985197
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+      cityid |       194         194           0    *|
+        year |        12           1          11     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. post `H' ("T3_5") ("court") (_b[court]) (_se[court]) (e(N)) (e(r2_a))
+
+. gen byte sample_T3_5=e(sample)
+
+. save "../data/city_author.dta", replace
+(file ../data/city_author.dta not found)
+file ../data/city_author.dta saved
+
+. keep row_id sample_*
+
+. export delimited using "../data/city_flags.csv", replace
+(file ../data/city_flags.csv not found)
+file ../data/city_flags.csv saved
+
+. use data2, clear
+
+. gen long row_id=_n
+
+. logit win court word_length gdp second_gdp fiscal_balance finlaon foreign_inv
+>  i.cityid i.year i.typeyg i.typebg , cluster(cityid)
+
+note: 2008.year != 0 predicts failure perfectly;
+      2008.year omitted and 10 obs not used.
+
+Iteration 0:  Log pseudolikelihood = -17940.472  
+Iteration 1:  Log pseudolikelihood =   -15045.1  
+Iteration 2:  Log pseudolikelihood = -14734.723  
+Iteration 3:  Log pseudolikelihood = -14712.981  
+Iteration 4:  Log pseudolikelihood = -14712.072  
+Iteration 5:  Log pseudolikelihood = -14712.053  
+Iteration 6:  Log pseudolikelihood = -14712.053  
+
+Logistic regression                                     Number of obs = 33,415
+                                                        Wald chi2(21) =      .
+                                                        Prob > chi2   =      .
+Log pseudolikelihood = -14712.053                       Pseudo R2     = 0.1800
+
+                               (Std. err. adjusted for 286 clusters in cityid)
+------------------------------------------------------------------------------
+             |               Robust
+         win | Coefficient  std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       court |    .156841   .0918083     1.71   0.088    -.0230999     .336782
+ word_length |   .0420297    .082261     0.51   0.609    -.1191988    .2032582
+         gdp |  -.1572596   .3013044    -0.52   0.602    -.7478054    .4332862
+  second_gdp |   -.361772   .2593032    -1.40   0.163    -.8699969     .146453
+fiscal_bal~e |   .4351294   .7809906     0.56   0.577    -1.095584    1.965843
+     finlaon |  -.1350084    .212952    -0.63   0.526    -.5523868    .2823699
+ foreign_inv |  -40.77427   30.46936    -1.34   0.181    -100.4931    18.94457
+             |
+      cityid |
+          2  |  -.3358626   .5165524    -0.65   0.516    -1.348287    .6765615
+          3  |   .3720748   .4537541     0.82   0.412     -.517267    1.261417
+          4  |   .1992568   .3879492     0.51   0.608    -.5611096    .9596233
+          5  |    .952807   .4475527     2.13   0.033     .0756197    1.829994
+          6  |  -1.303409    .914165    -1.43   0.154     -3.09514    .4883213
+          7  |  -.0025851   .7082983    -0.00   0.997    -1.390824    1.385654
+          8  |   1.741662   .0892403    19.52   0.000     1.566754     1.91657
+          9  |  -2.439099   .6777033    -3.60   0.000    -3.767373   -1.110825
+         10  |   .8968737   .3254477     2.76   0.006     .2590078     1.53474
+         11  |   -.234015    .671756    -0.35   0.728    -1.550633    1.082603
+         12  |  -.7559585   .1375773    -5.49   0.000    -1.025605   -.4863119
+         13  |   .9392413   .2651843     3.54   0.000     .4194895    1.458993
+         14  |  -1.594499     .35542    -4.49   0.000     -2.29111   -.8978889
+         15  |   1.161824   .1173848     9.90   0.000     .9317539    1.391894
+         16  |   1.938712   .2353287     8.24   0.000     1.477476    2.399947
+         17  |  -.7973705   .2547907    -3.13   0.002    -1.296751   -.2979899
+         18  |  -.3636234   .7768916    -0.47   0.640    -1.886303    1.159056
+         19  |   1.281432   .3713319     3.45   0.001     .5536347    2.009229
+         20  |  -.4506231   .5116293    -0.88   0.378    -1.453398    .5521519
+         21  |  -.3544768   .1994589    -1.78   0.076    -.7454091    .0364554
+         22  |   .7511835   .3141116     2.39   0.017     .1355361    1.366831
+         23  |  -.0201253   .1763766    -0.11   0.909    -.3658171    .3255666
+         24  |  -1.260068   .9692364    -1.30   0.194    -3.159737    .6396004
+         25  |  -1.263839   .2650785    -4.77   0.000    -1.783383   -.7442947
+         26  |  -.3110032   .6103616    -0.51   0.610     -1.50729    .8852835
+         27  |   .3699715   .1622682     2.28   0.023     .0519316    .6880113
+         28  |   .0587012   .4663437     0.13   0.900    -.8553157     .972718
+         29  |  -1.332871   .4536443    -2.94   0.003    -2.221998   -.4437449
+         30  |   .1131992   .3236827     0.35   0.727    -.5212072    .7476055
+         31  |   .7649819    .330245     2.32   0.021     .1177136     1.41225
+         32  |   1.355886   .8241841     1.65   0.100    -.2594853    2.971257
+         33  |   .8497348   .3393356     2.50   0.012     .1846493     1.51482
+         34  |   -.605551   .6098598    -0.99   0.321    -1.800854    .5897522
+         35  |  -.3275713    .260158    -1.26   0.208    -.8374717     .182329
+         36  |  -.3752671   .3664585    -1.02   0.306    -1.093513    .3429783
+         37  |  -.7263143   1.126156    -0.64   0.519    -2.933539     1.48091
+         38  |   .0685377   .4335068     0.16   0.874      -.78112    .9181953
+         39  |  -1.028358   .8432102    -1.22   0.223    -2.681019    .6243038
+         40  |  -.7316006    .379068    -1.93   0.054     -1.47456    .0113589
+         41  |   .7068592   .8482733     0.83   0.405    -.9557259    2.369444
+         42  |  -1.808626    .871406    -2.08   0.038    -3.516551   -.1007022
+         43  |  -.5368163   .5650328    -0.95   0.342     -1.64426    .5706278
+         44  |  -1.088558   .9035353    -1.20   0.228    -2.859455    .6823381
+         45  |    .129992   .1972361     0.66   0.510    -.2565837    .5165677
+         46  |  -1.754163   .7488576    -2.34   0.019    -3.221897   -.2864294
+         47  |   -.000133   .9118552    -0.00   1.000    -1.787336     1.78707
+         48  |   .4605994   .3913768     1.18   0.239    -.3064851    1.227684
+         49  |   .4779325    .441999     1.08   0.280    -.3883696    1.344235
+         50  |   -.669903   .1425073    -4.70   0.000    -.9492122   -.3905937
+         51  |   .0422942   .3178204     0.13   0.894    -.5806223    .6652107
+         52  |   .4422325   .0983333     4.50   0.000     .2495028    .6349622
+         53  |   .4176026   .4969159     0.84   0.401    -.5563348     1.39154
+         54  |   .4240846   .3927985     1.08   0.280    -.3457864    1.193956
+         55  |   .0147202   .7341733     0.02   0.984    -1.424233    1.453673
+         56  |   .2521542   .2936667     0.86   0.391     -.323422    .8277304
+         57  |  -.7326424   .4511929    -1.62   0.104    -1.616964    .1516795
+         58  |   .3398965   .1777603     1.91   0.056    -.0085073    .6883002
+         59  |   -.724074   .8181197    -0.89   0.376    -2.327559    .8794111
+         60  |   .4130616   .8061893     0.51   0.608     -1.16704    1.993163
+         61  |   .2295178   .4509231     0.51   0.611    -.6542752    1.113311
+         62  |   .6557681   .2010356     3.26   0.001     .2617457    1.049791
+         63  |  -3.382431   .8209775    -4.12   0.000    -4.991517   -1.773345
+         64  |   -.935626   .4785929    -1.95   0.051    -1.873651    .0023988
+         65  |   .0343303   .2896689     0.12   0.906    -.5334104     .602071
+         66  |   1.064955   .1873428     5.68   0.000       .69777     1.43214
+         67  |  -.2833261   .2921066    -0.97   0.332    -.8558445    .2891923
+         68  |  -1.285616   .5334554    -2.41   0.016     -2.33117    -.240063
+         69  |   -.229324   .9052818    -0.25   0.800    -2.003644    1.544996
+         70  |   .1826181   .1689876     1.08   0.280    -.1485915    .5138277
+         71  |   .8417798    .922284     0.91   0.361    -.9658635    2.649423
+         72  |  -.0851697   .6291312    -0.14   0.892    -1.318244    1.147905
+         73  |   .7192178   .3436388     2.09   0.036     .0456982    1.392738
+         74  |   .2876406   .3963207     0.73   0.468    -.4891338    1.064415
+         75  |  -.5668674   .4246154    -1.34   0.182    -1.399098    .2653634
+         76  |  -1.651541   1.044716    -1.58   0.114    -3.699146    .3960648
+         77  |   .1904382   .4291293     0.44   0.657    -.6506397    1.031516
+         78  |   .8766047   .2736675     3.20   0.001     .3402263    1.412983
+         79  |   .4076925   .4354425     0.94   0.349    -.4457592    1.261144
+         80  |  -.4429293   .1980977    -2.24   0.025    -.8311937   -.0546649
+         81  |   .0877687   .1920087     0.46   0.648    -.2885615    .4640989
+         82  |   .5588315   .4439033     1.26   0.208     -.311203    1.428866
+         83  |  -.2003368   .6401488    -0.31   0.754    -1.455005    1.054332
+         84  |   .4482387   .4451688     1.01   0.314    -.4242762    1.320754
+         85  |  -.5663723   .4294256    -1.32   0.187    -1.408031    .2752864
+         86  |  -.3587099   .3887013    -0.92   0.356     -1.12055    .4031307
+         87  |  -.1509222   .3580057    -0.42   0.673    -.8526005     .550756
+         88  |  -1.517835   .5152049    -2.95   0.003    -2.527618   -.5080523
+         89  |    1.19001   .5774578     2.06   0.039     .0582139    2.321807
+         90  |  -.3603437   .1922729    -1.87   0.061    -.7371917    .0165043
+         91  |    .067151   .1281023     0.52   0.600     -.183925    .3182269
+         92  |   .0590964   .1993631     0.30   0.767    -.3316481    .4498409
+         93  |  -2.471239   .8922461    -2.77   0.006    -4.220009   -.7224684
+         94  |   .9828416   .5531236     1.78   0.076    -.1012607    2.066944
+         95  |  -.8872775   .1285584    -6.90   0.000    -1.139247   -.6353077
+         96  |    1.46597   .4320177     3.39   0.001     .6192313     2.31271
+         97  |  -.6634881   .1767066    -3.75   0.000    -1.009827   -.3171495
+         98  |  -.4904136   .2797806    -1.75   0.080    -1.038774    .0579464
+         99  |  -.4956753   1.196747    -0.41   0.679    -2.841257    1.849906
+        100  |  -.9892517   .1813716    -5.45   0.000    -1.344733     -.63377
+        101  |   .3941414   .6564705     0.60   0.548    -.8925171      1.6808
+        102  |   .0063965   .3668521     0.02   0.986    -.7126203    .7254134
+        103  |  -.0354891   .4005852    -0.09   0.929    -.8206216    .7496434
+        104  |   1.001417   .4135537     2.42   0.015     .1908663    1.811967
+        105  |   .1413306   .1031176     1.37   0.171    -.0607761    .3434374
+        106  |   .3929368   .1154346     3.40   0.001     .1666891    .6191845
+        107  |  -2.319754   .7745764    -2.99   0.003    -3.837896   -.8016122
+        108  |   .0636551   .5623374     0.11   0.910    -1.038506    1.165816
+        109  |   .3309521   .4327446     0.76   0.444    -.5172117    1.179116
+        110  |   .8015804   .1898071     4.22   0.000     .4295653    1.173596
+        111  |   .3341988   .3601616     0.93   0.353     -.371705    1.040103
+        112  |   .4863211   .6881593     0.71   0.480    -.8624464    1.835089
+        113  |  -.3413738   1.142181    -0.30   0.765    -2.580007    1.897259
+        114  |  -.8156117   .7243774    -1.13   0.260    -2.235365    .6041418
+        115  |   1.203123   .3772899     3.19   0.001     .4636482    1.942598
+        116  |   .9015267   .3139934     2.87   0.004     .2861109    1.516943
+        117  |  -.5884079    .244592    -2.41   0.016    -1.067799   -.1090164
+        118  |  -.3959827   .4646342    -0.85   0.394    -1.306649    .5146835
+        119  |   1.420975   .4755194     2.99   0.003     .4889744    2.352976
+        120  |  -.8828064   .2790855    -3.16   0.002    -1.429804   -.3358089
+        121  |   .9358381   .4765223     1.96   0.050     .0018715    1.869805
+        122  |  -1.309884    .336912    -3.89   0.000    -1.970219   -.6495485
+        123  |  -2.198102   1.028383    -2.14   0.033    -4.213697   -.1825078
+        124  |  -.0855293   .4969294    -0.17   0.863    -1.059493    .8884345
+        125  |  -.0018546   1.019987    -0.00   0.999    -2.000991    1.997282
+        126  |  -1.240283   .2501138    -4.96   0.000    -1.730498   -.7500693
+        127  |   .7425184   .3492392     2.13   0.033     .0580222    1.427015
+        128  |   .0286275   .3589287     0.08   0.936    -.6748598    .7321149
+        129  |  -2.193371   .1753641   -12.51   0.000    -2.537079   -1.849664
+        130  |   .0870722   .2375483     0.37   0.714     -.378514    .5526584
+        131  |   .0681294   .4518627     0.15   0.880    -.8175053     .953764
+        132  |    .792592   .2625157     3.02   0.003     .2780706    1.307113
+        133  |  -.1105828   .1826846    -0.61   0.545     -.468638    .2474723
+        134  |  -.9556053    .321369    -2.97   0.003    -1.585477   -.3257337
+        135  |   -.734551   .1307322    -5.62   0.000    -.9907814   -.4783207
+        136  |  -1.907579   1.242053    -1.54   0.125    -4.341959       .5268
+        137  |    .264307   .4120679     0.64   0.521    -.5433311    1.071945
+        138  |  -.7961002   .4885807    -1.63   0.103    -1.753701    .1615004
+        139  |  -1.934195   .5519852    -3.50   0.000    -3.016066   -.8523241
+        140  |   .1837722   .5154768     0.36   0.721    -.8265438    1.194088
+        141  |  -.9053022   .4622673    -1.96   0.050    -1.811329    .0007251
+        142  |  -1.436262   .2632899    -5.46   0.000    -1.952301   -.9202236
+        143  |  -1.185961   .2895543    -4.10   0.000    -1.753477   -.6184446
+        144  |  -.2167209   .6072619    -0.36   0.721    -1.406932    .9734907
+        145  |   1.605097   .1662499     9.65   0.000     1.279253    1.930941
+        146  |   .0741368   1.111332     0.07   0.947    -2.104033    2.252307
+        147  |   .5137547   .3875508     1.33   0.185    -.2458308     1.27334
+        148  |   .5338116   .3877175     1.38   0.169    -.2261007    1.293724
+        149  |  -.5044785   .3513777    -1.44   0.151    -1.193166    .1842091
+        150  |  -.7445066   .4845526    -1.54   0.124    -1.694212    .2051991
+        151  |  -.3572044   .2020271    -1.77   0.077    -.7531702    .0387614
+        152  |  -.7706043   .5877036    -1.31   0.190    -1.922482    .3812736
+        153  |  -1.414456   .2263334    -6.25   0.000    -1.858061   -.9708508
+        154  |   .0424344   .9504624     0.04   0.964    -1.820438    1.905306
+        155  |    .788313   .5986367     1.32   0.188    -.3849935    1.961619
+        156  |   .1879092   .2025397     0.93   0.354    -.2090613    .5848798
+        157  |   .4898917   .2446321     2.00   0.045     .0104215    .9693618
+        158  |  -.4185151   .8614132    -0.49   0.627    -2.106854    1.269824
+        159  |   .4275303   .5623001     0.76   0.447    -.6745578    1.529618
+        160  |  -4.390447   .7086342    -6.20   0.000    -5.779345    -3.00155
+        161  |  -.5971324   .3898255    -1.53   0.126    -1.361176    .1669116
+        162  |    .143553   .6565165     0.22   0.827    -1.143196    1.430302
+        163  |  -1.443393   .9574601    -1.51   0.132     -3.31998    .4331946
+        164  |  -.3054098   .7016567    -0.44   0.663    -1.680632    1.069812
+        165  |  -1.511539   .7387136    -2.05   0.041    -2.959391   -.0636866
+        166  |  -.4940868   .7355611    -0.67   0.502     -1.93576    .9475864
+        167  |  -1.268684   .2655671    -4.78   0.000    -1.789186   -.7481818
+        168  |  -2.035646   .3393623    -6.00   0.000    -2.700784   -1.370508
+        169  |  -2.109575    .592134    -3.56   0.000    -3.270137    -.949014
+        170  |  -.8668908    1.22452    -0.71   0.479    -3.266905    1.533124
+        171  |  -1.314099    .358362    -3.67   0.000    -2.016475   -.6117223
+        172  |  -1.276581   .8300472    -1.54   0.124    -2.903444    .3502812
+        173  |   .9473244   .3941119     2.40   0.016     .1748793     1.71977
+        174  |  -1.242184   .6232411    -1.99   0.046    -2.463714   -.0206536
+        175  |   .6480204   .4564569     1.42   0.156    -.2466186    1.542659
+        176  |  -.4181758   .5453886    -0.77   0.443    -1.487118    .6507662
+        177  |   -.806001   .4574208    -1.76   0.078    -1.702529    .0905273
+        178  |  -.2341856   .5619157    -0.42   0.677     -1.33552    .8671489
+        179  |   .2414417   .3446647     0.70   0.484    -.4340887    .9169721
+        180  |  -2.416656    .593922    -4.07   0.000    -3.580722    -1.25259
+        181  |   -.228645    .797103    -0.29   0.774    -1.790938    1.333648
+        182  |   .3060903   .2656075     1.15   0.249    -.2144908    .8266714
+        183  |   1.052733   .3442473     3.06   0.002     .3780208    1.727445
+        184  |  -.2306049   .8588051    -0.27   0.788    -1.913832    1.452622
+        185  |  -.2365256   .4604617    -0.51   0.607    -1.139014    .6659627
+        186  |  -.4044671   .2993521    -1.35   0.177    -.9911865    .1822523
+        187  |   .3189443   .3756787     0.85   0.396    -.4173725    1.055261
+        188  |   .1126884   .3888072     0.29   0.772    -.6493596    .8747365
+        189  |  -1.024796   .6923849    -1.48   0.139    -2.381845     .332254
+        190  |  -.1479082   .1503164    -0.98   0.325     -.442523    .1467065
+        191  |  -1.159973    .132556    -8.75   0.000    -1.419778   -.9001675
+        192  |   1.685413   .1118622    15.07   0.000     1.466167    1.904659
+        193  |  -.4670326   .2897587    -1.61   0.107    -1.034949     .100884
+        194  |   .5399945   .3780815     1.43   0.153    -.2010317    1.281021
+        195  |  -3.611131   .7039399    -5.13   0.000    -4.990828   -2.231434
+        196  |   .7219359   .3797266     1.90   0.057    -.0223147    1.466186
+        197  |   .7676674   .3048262     2.52   0.012     .1702191    1.365116
+        198  |   .2326635   .1255864     1.85   0.064    -.0134814    .4788083
+        199  |   .3372954   .7951799     0.42   0.671    -1.221228    1.895819
+        200  |  -.2187148   .9404352    -0.23   0.816    -2.061934    1.624504
+        201  |   .5901151   .4288437     1.38   0.169    -.2504031    1.430633
+        202  |  -.4291482   .8543494    -0.50   0.615    -2.103642    1.245346
+        203  |   1.394965   .3392335     4.11   0.000     .7300794     2.05985
+        204  |   .6015984   .4550452     1.32   0.186    -.2902738    1.493471
+        205  |    .466769   .5427483     0.86   0.390    -.5969981    1.530536
+        206  |   .2595088   .4628995     0.56   0.575    -.6477575    1.166775
+        207  |  -.9961036    .312962    -3.18   0.001    -1.609498   -.3827092
+        208  |   -.039428   .3911782    -0.10   0.920    -.8061231    .7272671
+        209  |   .4792338   .6451099     0.74   0.458    -.7851585    1.743626
+        210  |  -3.219552   1.204715    -2.67   0.008    -5.580749   -.8583551
+        211  |   .4113572   .5461149     0.75   0.451    -.6590084    1.481723
+        212  |  -.0416963   .4276966    -0.10   0.922    -.8799662    .7965736
+        213  |  -.1303978   .3692226    -0.35   0.724    -.8540607    .5932651
+        214  |  -.4419758   .4861593    -0.91   0.363    -1.394831     .510879
+        215  |  -.1449178   .3045833    -0.48   0.634    -.7418901    .4520545
+        216  |   .7701438   .5367722     1.43   0.151    -.2819103    1.822198
+        217  |   1.245876   .2604943     4.78   0.000     .7353165    1.756436
+        218  |  -.2084839   .4505587    -0.46   0.644    -1.091563    .6745949
+        219  |   .8003902   .2527647     3.17   0.002     .3049805      1.2958
+        220  |   .5258581   .4409382     1.19   0.233     -.338365    1.390081
+        221  |   .3689935   .3407965     1.08   0.279    -.2989554    1.036942
+        222  |   .2818861   .5330015     0.53   0.597    -.7627777     1.32655
+        223  |  -2.701699   .3733136    -7.24   0.000     -3.43338   -1.970017
+        224  |  -.5629212   .6298751    -0.89   0.371    -1.797454    .6716114
+        225  |   .3817253   .6232628     0.61   0.540    -.8398473    1.603298
+        226  |   .8739306   .9834567     0.89   0.374    -1.053609     2.80147
+        227  |  -.3647272   .4967175    -0.73   0.463    -1.338276    .6088212
+        228  |  -.6617727   .2596492    -2.55   0.011    -1.170676   -.1528697
+        229  |   1.318007   .9102812     1.45   0.148    -.4661116    3.102125
+        230  |   .1496236   .1290063     1.16   0.246    -.1032242    .4024713
+        231  |  -.6577069   .2939208    -2.24   0.025    -1.233781   -.0816328
+        232  |   .1702604   .5265476     0.32   0.746    -.8617539    1.202275
+        233  |   .3204879   .4435078     0.72   0.470    -.5487714    1.189747
+        234  |  -.3277569   .1031649    -3.18   0.001    -.5299565   -.1255574
+        235  |   .1721645   .4752085     0.36   0.717     -.759227    1.103556
+        236  |   .2557818   .3898204     0.66   0.512    -.5082522    1.019816
+        237  |   .3644816   .3514202     1.04   0.300    -.3242893    1.053252
+        238  |   -1.12258   .5446482    -2.06   0.039    -2.190071   -.0550891
+        239  |   .7183984   .2153633     3.34   0.001     .2962941    1.140503
+        240  |  -.2008347   .4220606    -0.48   0.634    -1.028058    .6263889
+        241  |  -.3014303   .2702467    -1.12   0.265    -.8311042    .2282436
+        242  |   .1693574   .5229454     0.32   0.746    -.8555967    1.194311
+        243  |   .0695796   .4555551     0.15   0.879     -.823292    .9624512
+        244  |   .1867862   .6069598     0.31   0.758    -1.002833    1.376406
+        245  |   .5198074   .3895933     1.33   0.182    -.2437815    1.283396
+        246  |  -.3332658   .9974497    -0.33   0.738    -2.288231      1.6217
+        247  |   .6004104    .471465     1.27   0.203     -.323644    1.524465
+        248  |   .2685034   .7004766     0.38   0.701    -1.104406    1.641412
+        249  |   .5797633   .2385882     2.43   0.015      .112139    1.047388
+        250  |   1.040615   .1322159     7.87   0.000     .7814769    1.299754
+        251  |  -1.704796   .7651369    -2.23   0.026    -3.204436   -.2051548
+        252  |   .8122393   .1308169     6.21   0.000     .5558428    1.068636
+        253  |  -.3460102   .2889062    -1.20   0.231    -.9122559    .2202355
+        254  |   -1.28169   .2617717    -4.90   0.000    -1.794754   -.7686273
+        255  |   .5231447   .2669755     1.96   0.050    -.0001177    1.046407
+        256  |  -.3526556   .1151827    -3.06   0.002    -.5784096   -.1269016
+        257  |  -.5963764   .3137646    -1.90   0.057    -1.211344    .0185908
+        258  |  -.5156481   .6211057    -0.83   0.406    -1.732993    .7016967
+        259  |    1.21205   .4120366     2.94   0.003     .4044735    2.019627
+        260  |  -1.624332   .7126484    -2.28   0.023    -3.021098   -.2275672
+        261  |  -.5374911   .8508975    -0.63   0.528    -2.205219    1.130237
+        262  |   .1637557   .9950622     0.16   0.869     -1.78653    2.114042
+        263  |   .4352299   .3936004     1.11   0.269    -.3362126    1.206672
+        264  |  -.1165001   .2140348    -0.54   0.586    -.5360005    .3030003
+        265  |  -.3159211   .4103217    -0.77   0.441    -1.120137    .4882946
+        266  |  -.3912764     .15914    -2.46   0.014    -.7031852   -.0793677
+        267  |   .2973905   .3098542     0.96   0.337    -.3099125    .9046935
+        268  |    .185045   .2565789     0.72   0.471    -.3178405    .6879304
+        269  |   1.006786    .210613     4.78   0.000     .5939921     1.41958
+        270  |   .2322679   .2033759     1.14   0.253    -.1663414    .6308773
+        271  |   -.035775   .1124704    -0.32   0.750     -.256213     .184663
+        272  |   -.339395   1.000486    -0.34   0.734    -2.300311    1.621521
+        273  |  -.6157898   .4661616    -1.32   0.187     -1.52945    .2978701
+        274  |  -.3363038   .3187807    -1.05   0.291    -.9611024    .2884948
+        275  |  -.7829108   .5234208    -1.50   0.135    -1.808797    .2429751
+        276  |   .8646486     .44831     1.93   0.054    -.0140227     1.74332
+        277  |   .6389824    .127168     5.02   0.000     .3897377    .8882272
+        278  |  -.1676237   .3703633    -0.45   0.651    -.8935225    .5582751
+        279  |   2.051134   .1713597    11.97   0.000     1.715275    2.386993
+        280  |  -.4503244   .2980305    -1.51   0.131    -1.034453    .1338045
+        281  |   .0988555   .4284661     0.23   0.818    -.7409226    .9386336
+        282  |    -.37216   .2002519    -1.86   0.063    -.7646465    .0203265
+        283  |  -.6712052   .3636863    -1.85   0.065    -1.384017    .0416069
+        284  |   .1201814   .1380359     0.87   0.384     -.150364    .3907268
+        285  |   .9046093   .3411687     2.65   0.008     .2359309    1.573288
+        286  |   .0809667   .4695734     0.17   0.863    -.8393803    1.001314
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |    .687121   .3580961     1.92   0.055    -.0147346    1.388976
+       2010  |  -.4792659   .5542578    -0.86   0.387    -1.565591    .6070594
+       2011  |  -.6453539   .6084884    -1.06   0.289    -1.837969    .5472614
+       2012  |  -.4524663   .7346073    -0.62   0.538     -1.89227    .9873375
+       2013  |   -.387288   .5913158    -0.65   0.512    -1.546246    .7716698
+       2014  |   -.127144   .6270456    -0.20   0.839    -1.356131    1.101843
+       2015  |  -.1996243   .6383316    -0.31   0.754    -1.450731    1.051483
+       2016  |  -.1541304   .6475348    -0.24   0.812    -1.423275    1.115014
+       2017  |  -.1874065   .6562672    -0.29   0.775    -1.473667    1.098854
+       2018  |  -.1698168   .6606696    -0.26   0.797    -1.464705    1.125072
+       2019  |  -.2174649   .6782566    -0.32   0.748    -1.546823    1.111894
+       2020  |  -.0678021   .6993047    -0.10   0.923    -1.438414     1.30281
+             |
+    2.typeyg |  -1.253456   .0549689   -22.80   0.000    -1.361193   -1.145719
+    2.typebg |  -.4631781   .0955959    -4.85   0.000    -.6505425   -.2758136
+       _cons |   3.546777   7.253784     0.49   0.625    -10.67038    17.76393
+------------------------------------------------------------------------------
+
+. post `H' ("T3_2") ("court") (_b[court]) (_se[court]) (e(N)) (e(r2_a))
+
+. gen byte sample_T3_2=e(sample)
+
+. logit win court word_length gdp second_gdp fiscal_balance finlaon foreign_inv
+>  i.cityid i.year i.typeyg i.typebg if ifsbcase==1, cluster(cityid)
+
+note: 63.cityid != 0 predicts failure perfectly;
+      63.cityid omitted and 39 obs not used.
+
+note: 95.cityid != 0 predicts failure perfectly;
+      95.cityid omitted and 3 obs not used.
+
+note: 118.cityid != 0 predicts failure perfectly;
+      118.cityid omitted and 2 obs not used.
+
+note: 192.cityid != 0 predicts success perfectly;
+      192.cityid omitted and 3 obs not used.
+
+note: 279.cityid != 0 predicts success perfectly;
+      279.cityid omitted and 4 obs not used.
+
+note: 2008.year != 0 predicts failure perfectly;
+      2008.year omitted and 4 obs not used.
+
+note: 1.typeyg omitted because of collinearity.
+Iteration 0:  Log pseudolikelihood =  -8907.276  
+Iteration 1:  Log pseudolikelihood = -7684.5339  
+Iteration 2:  Log pseudolikelihood = -7623.9455  
+Iteration 3:  Log pseudolikelihood = -7621.4333  
+Iteration 4:  Log pseudolikelihood = -7621.3814  
+Iteration 5:  Log pseudolikelihood = -7621.3812  
+
+Logistic regression                                     Number of obs = 13,928
+                                                        Wald chi2(19) =      .
+                                                        Prob > chi2   =      .
+Log pseudolikelihood = -7621.3812                       Pseudo R2     = 0.1444
+
+                               (Std. err. adjusted for 281 clusters in cityid)
+------------------------------------------------------------------------------
+             |               Robust
+         win | Coefficient  std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       court |   .2183532   .1296041     1.68   0.092    -.0356661    .4723726
+ word_length |   -.263128    .091006    -2.89   0.004    -.4414965   -.0847595
+         gdp |  -.0869826   .4328136    -0.20   0.841    -.9352816    .7613164
+  second_gdp |  -.2553071   .3285548    -0.78   0.437    -.8992626    .3886485
+fiscal_bal~e |   .4130216    1.06062     0.39   0.697    -1.665756    2.491799
+     finlaon |  -.1092663   .3113159    -0.35   0.726    -.7194342    .5009017
+ foreign_inv |  -16.42685   32.38603    -0.51   0.612    -79.90231     47.0486
+             |
+      cityid |
+          2  |  -.1769268   .6496713    -0.27   0.785    -1.450259    1.096406
+          3  |   .0421244   .6213343     0.07   0.946    -1.175668    1.259917
+          4  |  -.1329206   .4507131    -0.29   0.768    -1.016302    .7504608
+          5  |  -.1483511   .5857426    -0.25   0.800    -1.296385    .9996833
+          6  |  -1.824947   1.241338    -1.47   0.142    -4.257924    .6080308
+          7  |   .0568937    .972299     0.06   0.953    -1.848777    1.962565
+          8  |   1.801829   .1307517    13.78   0.000      1.54556    2.058097
+          9  |  -2.963853   .8967198    -3.31   0.001    -4.721392   -1.206315
+         10  |   .1761512   .4223916     0.42   0.677    -.6517211    1.004024
+         11  |  -.4592772   .9186593    -0.50   0.617    -2.259816    1.341262
+         12  |  -1.011797   .1871238    -5.41   0.000    -1.378552   -.6450406
+         13  |     .92054   .3467666     2.65   0.008     .2408901     1.60019
+         14  |  -1.974781   .4356767    -4.53   0.000    -2.828691    -1.12087
+         15  |   1.045869   .1550039     6.75   0.000     .7420668    1.349671
+         16  |   1.584059   .3011593     5.26   0.000     .9937975     2.17432
+         17  |  -1.067022   .3474764    -3.07   0.002    -1.748063   -.3859804
+         18  |  -.9688897    1.01481    -0.95   0.340     -2.95788    1.020101
+         19  |   .8926503    .485716     1.84   0.066    -.0593355    1.844636
+         20  |  -1.208976   .6659754    -1.82   0.069    -2.514263    .0963121
+         21  |  -.2802572   .2397314    -1.17   0.242    -.7501221    .1896078
+         22  |   .3487126   .3869066     0.90   0.367    -.4096103    1.107036
+         23  |  -.0520459   .2371009    -0.22   0.826    -.5167552    .4126634
+         24  |  -1.495812   1.313301    -1.14   0.255    -4.069835    1.078211
+         25  |   -.874889   .3531158    -2.48   0.013    -1.566983   -.1827947
+         26  |  -1.183281   .8203923    -1.44   0.149    -2.791221    .4246578
+         27  |  -.0337841   .2004803    -0.17   0.866    -.4267183    .3591501
+         28  |  -.8095881   .6242413    -1.30   0.195    -2.033079    .4139023
+         29  |  -1.085081   .6101223    -1.78   0.075    -2.280898    .1107369
+         30  |   .3001207   .4468277     0.67   0.502    -.5756455    1.175887
+         31  |   .0744717    .416697     0.18   0.858    -.7422393    .8911827
+         32  |   .9879128   1.085664     0.91   0.363     -1.13995    3.115775
+         33  |    .373401   .4781696     0.78   0.435    -.5637942    1.310596
+         34  |  -1.377742   .8289878    -1.66   0.097    -3.002528    .2470442
+         35  |  -.5784171    .357356    -1.62   0.106    -1.278822    .1219879
+         36  |  -.5430394   .5078924    -1.07   0.285     -1.53849    .4524114
+         37  |  -1.395066    1.50911    -0.92   0.355    -4.352868    1.562736
+         38  |  -.3356104   .5923473    -0.57   0.571     -1.49659    .8253689
+         39  |  -1.411494    1.11054    -1.27   0.204    -3.588113    .7651255
+         40  |  -.8011656   .5016016    -1.60   0.110    -1.784287    .1819555
+         41  |   .2357417    1.10726     0.21   0.831    -1.934449    2.405932
+         42  |  -2.446601    1.17151    -2.09   0.037    -4.742718   -.1504844
+         43  |   -1.22872   .7812404    -1.57   0.116    -2.759923    .3024832
+         44  |  -1.652074   1.183025    -1.40   0.163    -3.970761    .6666124
+         45  |   .0922936   .2282349     0.40   0.686    -.3550386    .5396258
+         46  |  -2.540943   .9867534    -2.58   0.010    -4.474944   -.6069423
+         47  |  -.9128313   1.245023    -0.73   0.463    -3.353032    1.527369
+         48  |   .0776191   .4850958     0.16   0.873    -.8731513    1.028389
+         49  |   .1690896   .6071838     0.28   0.781    -1.020969    1.359148
+         50  |  -1.500157   .1905946    -7.87   0.000    -1.873716   -1.126599
+         51  |   .1219716    .402842     0.30   0.762    -.6675842    .9115274
+         52  |   .5849413    .145313     4.03   0.000      .300133    .8697496
+         53  |  -.6983158   .7016204    -1.00   0.320    -2.073466    .6768349
+         54  |  -.2922097   .5220587    -0.56   0.576    -1.315426    .7310066
+         55  |  -.2556178   .9727887    -0.26   0.793    -2.162249    1.651013
+         56  |  -.4487123   .4100116    -1.09   0.274     -1.25232    .3548956
+         57  |  -1.337325   .6210637    -2.15   0.031    -2.554587   -.1200624
+         58  |   .3823322   .2309262     1.66   0.098    -.0702748    .8349392
+         59  |  -1.275999   1.115833    -1.14   0.253    -3.462991    .9109933
+         60  |   .2267583   1.123471     0.20   0.840    -1.975204     2.42872
+         61  |  -.1492676   .6144418    -0.24   0.808    -1.353551    1.055016
+         62  |  -.1726803    .265231    -0.65   0.515    -.6925236     .347163
+         63  |          0  (empty)
+         64  |  -1.104998    .662563    -1.67   0.095    -2.403598    .1936012
+         65  |  -.8507449   .3910279    -2.18   0.030    -1.617146   -.0843443
+         66  |  -1.305086   .2014988    -6.48   0.000    -1.700016   -.9101554
+         67  |  -2.551645   .3643996    -7.00   0.000    -3.265855   -1.837435
+         68  |  -.5542232   .7468364    -0.74   0.458    -2.017996    .9095492
+         69  |  -1.092463    1.20715    -0.90   0.365    -3.458433    1.273507
+         70  |  -.6834997   .1957318    -3.49   0.000    -1.067127   -.2998724
+         71  |  -.0710662   1.223844    -0.06   0.954    -2.469757    2.327625
+         72  |  -.5354798   .8406038    -0.64   0.524    -2.183033    1.112073
+         73  |   .1034628   .4790603     0.22   0.829    -.8354781    1.042404
+         74  |   .3017309   .5564462     0.54   0.588    -.7888837    1.392345
+         75  |  -.3028177   .5633391    -0.54   0.591    -1.406942    .8013066
+         76  |   -2.12836   1.394691    -1.53   0.127    -4.861904    .6051832
+         77  |     -.3801   .5883874    -0.65   0.518    -1.533318    .7731182
+         78  |  -.2744026   .3718398    -0.74   0.461    -1.003195    .4543899
+         79  |   .0956527   .5849854     0.16   0.870    -1.050898    1.242203
+         80  |  -.8028424   .2108162    -3.81   0.000    -1.216035   -.3896501
+         81  |   .7267389   .2599451     2.80   0.005     .2172558    1.236222
+         82  |   .3885445   .6213144     0.63   0.532    -.8292094    1.606298
+         83  |  -.6623275   .8957129    -0.74   0.460    -2.417893    1.093238
+         84  |   .2123403   .5939028     0.36   0.721    -.9516878    1.376368
+         85  |  -.2209591   .6158521    -0.36   0.720    -1.428007    .9860888
+         86  |  -.5369881    .479104    -1.12   0.262    -1.476015    .4020385
+         87  |  -.0601798   .4846768    -0.12   0.901    -1.010129    .8897693
+         88  |   -1.92671   .6931092    -2.78   0.005    -3.285179   -.5682412
+         89  |   .8461117   .8166525     1.04   0.300    -.7544978    2.446721
+         90  |   -.506891   .2732244    -1.86   0.064    -1.042401     .028619
+         91  |   .0980233   .1730787     0.57   0.571    -.2412046    .4372513
+         92  |   .0683119   .2788465     0.24   0.806    -.4782172     .614841
+         93  |  -3.148844   1.206977    -2.61   0.009    -5.514476   -.7832128
+         94  |   .4137753    .772206     0.54   0.592    -1.099721    1.927271
+         95  |          0  (empty)
+         96  |  -.1980156   .5693252    -0.35   0.728    -1.313872    .9178412
+         97  |  -.8745812   .2481879    -3.52   0.000    -1.361021   -.3881418
+         98  |  -.3405091   .3766246    -0.90   0.366     -1.07868    .3976615
+         99  |  -.8149232   1.632759    -0.50   0.618    -4.015071    2.385225
+        100  |   -1.08059   .2395209    -4.51   0.000    -1.550042   -.6111371
+        101  |   1.103079   .8906831     1.24   0.216    -.6426279    2.848786
+        102  |  -.4111579   .4970979    -0.83   0.408    -1.385452    .5631361
+        103  |  -1.582087   .5348304    -2.96   0.003    -2.630335   -.5338386
+        104  |    .375503    .554265     0.68   0.498    -.7108365    1.461843
+        105  |  -.5805105   .1151976    -5.04   0.000    -.8062937   -.3547272
+        106  |  -.2537815   .1598545    -1.59   0.112    -.5670906    .0595277
+        107  |  -2.439021   1.064873    -2.29   0.022    -4.526133   -.3519088
+        108  |  -.0904177   .7817923    -0.12   0.908    -1.622702    1.441867
+        109  |   .3700798   .6146327     0.60   0.547    -.8345781    1.574738
+        110  |   .6433231   .2586972     2.49   0.013     .1362859     1.15036
+        111  |  -.0555158   .4974552    -0.11   0.911     -1.03051    .9194786
+        112  |  -.3049811   .9115171    -0.33   0.738    -2.091522     1.48156
+        113  |  -.9394745    1.51467    -0.62   0.535    -3.908172    2.029223
+        114  |  -1.271649   .9802096    -1.30   0.195    -3.192824    .6495268
+        115  |   1.174263   .5067101     2.32   0.020     .1811296    2.167397
+        116  |   .3413837   .3895161     0.88   0.381    -.4220538    1.104821
+        117  |  -.2999677   .3219124    -0.93   0.351    -.9309045     .330969
+        118  |          0  (empty)
+        119  |  -.3849044   .6554799    -0.59   0.557    -1.669621    .8998127
+        120  |  -.7936406   .3710548    -2.14   0.032    -1.520895   -.0663866
+        121  |   .8165432   .6193756     1.32   0.187    -.3974105    2.030497
+        122  |  -1.485846   .4298674    -3.46   0.001     -2.32837   -.6433209
+        123  |  -2.564628    1.39099    -1.84   0.065    -5.290919    .1616633
+        124  |  -.3144011   .6513787    -0.48   0.629     -1.59108    .9622778
+        125  |  -.4324548   1.346123    -0.32   0.748    -3.070807    2.205898
+        126  |  -2.121728   .3248676    -6.53   0.000    -2.758457      -1.485
+        127  |   .6617901   .4488883     1.47   0.140    -.2180148    1.541595
+        128  |  -.6472986   .4595399    -1.41   0.159     -1.54798    .2533831
+        129  |  -2.153184    .208761   -10.31   0.000    -2.562349    -1.74402
+        130  |  -.4965261   .3110499    -1.60   0.110    -1.106173    .1131206
+        131  |  -.1683517   .6179224    -0.27   0.785    -1.379457    1.042754
+        132  |    .888822   .3490743     2.55   0.011      .204649    1.572995
+        133  |  -.9714373   .2360599    -4.12   0.000    -1.434106   -.5087684
+        134  |  -1.504353   .4130267    -3.64   0.000     -2.31387   -.6948356
+        135  |  -.4778575   .1776899    -2.69   0.007    -.8261233   -.1295917
+        136  |  -1.914943   1.649448    -1.16   0.246    -5.147801    1.317915
+        137  |  -.5552037   .6013799    -0.92   0.356    -1.733887    .6234792
+        138  |  -.8569702   .6522703    -1.31   0.189    -2.135397    .4214561
+        139  |  -2.214562   .7675255    -2.89   0.004    -3.718884   -.7102392
+        140  |  -.1138246   .7069339    -0.16   0.872     -1.49939     1.27174
+        141  |  -1.888805   .6455768    -2.93   0.003    -3.154112   -.6234979
+        142  |  -1.573376   .3488088    -4.51   0.000    -2.257029   -.8897237
+        143  |  -.9414506   .3871938    -2.43   0.015    -1.700336   -.1825647
+        144  |  -.8392868   .8220685    -1.02   0.307    -2.450512    .7719379
+        145  |   1.266106   .2104454     6.02   0.000     .8536403    1.678571
+        146  |  -.4892382   1.498151    -0.33   0.744    -3.425559    2.447083
+        147  |   .0743847   .5242992     0.14   0.887    -.9532229    1.101992
+        148  |   .1952604   .5118546     0.38   0.703    -.8079562    1.198477
+        149  |  -.1798279   .4846304    -0.37   0.711    -1.129686    .7700301
+        150  |  -1.337455   .6650105    -2.01   0.044    -2.640852   -.0340588
+        151  |  -1.673383   .3016513    -5.55   0.000    -2.264608   -1.082157
+        152  |  -.9303104   .7653154    -1.22   0.224    -2.430301    .5696803
+        153  |  -1.344189   .2510222    -5.35   0.000    -1.836183   -.8521947
+        154  |  -.2431887   1.258969    -0.19   0.847    -2.710722    2.224345
+        155  |   .5805097   .8365218     0.69   0.488    -1.059043    2.220062
+        156  |  -.2465791   .2665393    -0.93   0.355    -.7689864    .2758283
+        157  |  -.3178396   .2917885    -1.09   0.276    -.8897345    .2540553
+        158  |  -.6566463   1.186266    -0.55   0.580    -2.981684    1.668392
+        159  |   .0625866    .753291     0.08   0.934    -1.413837     1.53901
+        160  |  -4.333058   .9563572    -4.53   0.000    -6.207484   -2.458633
+        161  |  -.7432235   .5376891    -1.38   0.167    -1.797075    .3106279
+        162  |  -.5456037   .8789373    -0.62   0.535    -2.268289    1.177082
+        163  |  -2.687772   1.286342    -2.09   0.037    -5.208957   -.1665879
+        164  |   -.274774   .9524458    -0.29   0.773    -2.141533    1.591985
+        165  |  -2.609511   .9829844    -2.65   0.008    -4.536125    -.682897
+        166  |  -1.214663   1.003712    -1.21   0.226    -3.181903    .7525761
+        167  |  -1.783972   .3268795    -5.46   0.000    -2.424644     -1.1433
+        168  |  -2.900205   .4109332    -7.06   0.000     -3.70562   -2.094791
+        169  |  -2.201561   .7938197    -2.77   0.006    -3.757419   -.6457027
+        170  |  -1.636239   1.665297    -0.98   0.326    -4.900161    1.627682
+        171  |  -1.151885   .4603966    -2.50   0.012    -2.054246   -.2495239
+        172  |  -1.359132   1.099519    -1.24   0.216     -3.51415    .7958866
+        173  |  -.2003179   .5368238    -0.37   0.709    -1.252473    .8518374
+        174  |  -2.033835   .8013964    -2.54   0.011    -3.604543   -.4631268
+        175  |  -.0003496   .6062498    -0.00   1.000    -1.188577    1.187878
+        176  |  -.5179352   .7353165    -0.70   0.481    -1.959129    .9232587
+        177  |  -1.396765   .6180434    -2.26   0.024    -2.608107    -.185422
+        178  |  -.0376556   .7622143    -0.05   0.961    -1.531568    1.456257
+        179  |   .2152487   .4022704     0.54   0.593    -.5731868    1.003684
+        180  |  -2.693728   .8195486    -3.29   0.001    -4.300014   -1.087442
+        181  |  -.1491575   1.086556    -0.14   0.891    -2.278769    1.980454
+        182  |  -.4801677   .3659867    -1.31   0.190    -1.197489    .2371531
+        183  |     .96504    .437173     2.21   0.027     .1081967    1.821883
+        184  |  -.6853885    1.18171    -0.58   0.562    -3.001498    1.630721
+        185  |  -.3394258   .6153907    -0.55   0.581    -1.545569    .8667178
+        186  |  -2.103864   .4308205    -4.88   0.000    -2.948257   -1.259471
+        187  |   .4048825   .5255061     0.77   0.441    -.6250905    1.434856
+        188  |  -.0656045   .5338783    -0.12   0.902    -1.111987    .9807778
+        189  |  -2.049608   .8618486    -2.38   0.017      -3.7388   -.3604156
+        190  |  -.4337831   .1395173    -3.11   0.002    -.7072321   -.1603342
+        191  |  -2.373941   .2107115   -11.27   0.000    -2.786928   -1.960954
+        192  |          0  (empty)
+        193  |  -.5337482     .39935    -1.34   0.181     -1.31646    .2489634
+        194  |  -.0631678   .5329158    -0.12   0.906    -1.107664    .9813279
+        195  |  -3.651632    .963954    -3.79   0.000    -5.540947   -1.762316
+        196  |    .195854   .4879535     0.40   0.688    -.7605173    1.152225
+        197  |   .4591451   .3903398     1.18   0.239    -.3059068    1.224197
+        198  |  -1.201756   .1661822    -7.23   0.000    -1.527467   -.8760445
+        199  |    .073995   1.087976     0.07   0.946    -2.058398    2.206388
+        200  |  -.7295206   1.255473    -0.58   0.561    -3.190203    1.731162
+        201  |   .3509892   .5380507     0.65   0.514    -.7035707    1.405549
+        202  |  -.9847007   1.130515    -0.87   0.384    -3.200469    1.231067
+        203  |   1.529873   .4560644     3.35   0.001      .636003    2.423743
+        204  |   .3909038   .6454252     0.61   0.545    -.8741063    1.655914
+        205  |   .3117899   .7610909     0.41   0.682    -1.179921    1.803501
+        206  |  -.0162715   .6124304    -0.03   0.979    -1.216613     1.18407
+        207  |  -1.515017   .4515722    -3.35   0.001    -2.400082   -.6299518
+        208  |  -.1205705    .500593    -0.24   0.810    -1.101715    .8605738
+        209  |   .1123717   .8380609     0.13   0.893    -1.530198    1.754941
+        210  |  -3.231695   1.625923    -1.99   0.047    -6.418445   -.0449438
+        211  |   .2881324   .7619042     0.38   0.705    -1.205172    1.781437
+        212  |   -.191323   .5999269    -0.32   0.750    -1.367158    .9845122
+        213  |  -.6368315   .4940117    -1.29   0.197    -1.605077    .3314136
+        214  |  -.8677333   .6507819    -1.33   0.182    -2.143242    .4077758
+        215  |   .3790399   .4010395     0.95   0.345    -.4069831    1.165063
+        216  |   .2689389   .7432223     0.36   0.717     -1.18775    1.725628
+        217  |    .981172   .3212694     3.05   0.002     .3514955    1.610848
+        218  |  -1.021125   .5887364    -1.73   0.083    -2.175028    .1327769
+        219  |   .2082435   .2955608     0.70   0.481    -.3710451     .787532
+        220  |  -.2028783   .5284846    -0.38   0.701    -1.238689    .8329326
+        221  |   .1500993   .4645552     0.32   0.747    -.7604121    1.060611
+        222  |  -1.040791   .7392783    -1.41   0.159    -2.489749    .4081683
+        223  |  -2.496775   .4733481    -5.27   0.000     -3.42452    -1.56903
+        224  |  -.7384295   .8877237    -0.83   0.406    -2.478336    1.001477
+        225  |    .014715   .8214348     0.02   0.986    -1.595268    1.624698
+        226  |  -.1965847   1.302984    -0.15   0.880    -2.750386    2.357216
+        227  |  -1.113219   .6649968    -1.67   0.094    -2.416589    .1901503
+        228  |  -1.501956   .3584756    -4.19   0.000    -2.204555   -.7993564
+        229  |   1.063697   1.177015     0.90   0.366    -1.243209    3.370603
+        230  |   .1863258   .1667785     1.12   0.264     -.140554    .5132055
+        231  |   -1.08364   .4082681    -2.65   0.008    -1.883831   -.2834495
+        232  |  -.0484682   .6873616    -0.07   0.944    -1.395672    1.298736
+        233  |   .0093915   .5948269     0.02   0.987    -1.156448    1.175231
+        234  |   -.694924   .1380629    -5.03   0.000    -.9655223   -.4243256
+        235  |  -.7142398   .6893342    -1.04   0.300     -2.06531    .6368304
+        236  |   .2142229   .5282651     0.41   0.685    -.8211576    1.249603
+        237  |   .2508634    .446255     0.56   0.574    -.6237802    1.125507
+        238  |  -1.030824   .7147974    -1.44   0.149    -2.431801    .3701535
+        239  |  -.1189828   .2661286    -0.45   0.655    -.6405853    .4026196
+        240  |  -.2478001   .5778942    -0.43   0.668    -1.380452    .8848517
+        241  |  -.4378808   .3655121    -1.20   0.231    -1.154271    .2785098
+        242  |  -.3625515   .6961412    -0.52   0.603    -1.726963     1.00186
+        243  |  -.2191662   .5974887    -0.37   0.714    -1.390223    .9518901
+        244  |  -.1426568   .8388489    -0.17   0.865     -1.78677    1.501457
+        245  |  -.0216463   .5503241    -0.04   0.969    -1.100262    1.056969
+        246  |  -.5347788   1.321731    -0.40   0.686    -3.125323    2.055766
+        247  |   .0911955   .6289278     0.15   0.885     -1.14148    1.323871
+        248  |  -.8462666   .9491412    -0.89   0.373    -2.706549    1.014016
+        249  |   .8738979   .3030903     2.88   0.004     .2798518    1.467944
+        250  |   .8555608    .138123     6.19   0.000     .5848447    1.126277
+        251  |  -2.548429    1.01587    -2.51   0.012    -4.539497   -.5573616
+        252  |   -.002719    .159016    -0.02   0.986    -.3143846    .3089467
+        253  |  -.2553198   .3827256    -0.67   0.505    -1.005448    .4948086
+        254  |  -.9526755   .3062695    -3.11   0.002    -1.552953   -.3523984
+        255  |  -.4305357   .3146479    -1.37   0.171    -1.047234    .1861628
+        256  |  -1.192931   .2101133    -5.68   0.000    -1.604746   -.7811165
+        257  |  -.8937597   .3968787    -2.25   0.024    -1.671628   -.1158917
+        258  |  -.7792749   .8039627    -0.97   0.332    -2.355013    .7964629
+        259  |     .68638   .5467157     1.26   0.209    -.3851632    1.757923
+        260  |  -1.598578   .9513929    -1.68   0.093    -3.463274    .2661178
+        261  |  -1.529528   1.141186    -1.34   0.180    -3.766212    .7071563
+        262  |  -.5014651    1.34789    -0.37   0.710    -3.143282    2.140351
+        263  |   .2273098   .4981176     0.46   0.648    -.7489827    1.203602
+        264  |  -.4052904   .3091759    -1.31   0.190    -1.011264    .2006831
+        265  |  -1.809205   .5703095    -3.17   0.002    -2.926992   -.6914194
+        266  |  -.5589854   .1945196    -2.87   0.004    -.9402368    -.177734
+        267  |  -.2615879   .4102539    -0.64   0.524    -1.065671    .5424949
+        268  |   -.243698   .3143698    -0.78   0.438    -.8598515    .3724555
+        269  |   .4452476   .2763129     1.61   0.107    -.0963158     .986811
+        270  |   .0529973   .2955396     0.18   0.858    -.5262496    .6322442
+        271  |   .3579078   .1378488     2.60   0.009     .0877292    .6280864
+        272  |  -.8187791   1.359773    -0.60   0.547    -3.483885    1.846327
+        273  |  -1.106931   .6035102    -1.83   0.067    -2.289789    .0759276
+        274  |  -.9263044   .4295315    -2.16   0.031    -1.768171   -.0844382
+        275  |  -1.255865   .6512555    -1.93   0.054    -2.532302    .0205722
+        276  |   .5191921   .6191771     0.84   0.402    -.6943727    1.732757
+        277  |   2.241189   .1696204    13.21   0.000     1.908739    2.573639
+        278  |  -.6188309   .3808024    -1.63   0.104     -1.36519    .1275282
+        279  |          0  (empty)
+        280  |  -1.653019   .3862925    -4.28   0.000    -2.410138   -.8958992
+        281  |  -.4099125    .572567    -0.72   0.474    -1.532123    .7122982
+        282  |   .1853215   .2506353     0.74   0.460    -.3059146    .6765576
+        283  |  -1.433325   .5040763    -2.84   0.004    -2.421296   -.4453535
+        284  |   .9250979    .227792     4.06   0.000     .4786339    1.371562
+        285  |   .3051559   .4678079     0.65   0.514    -.6117308    1.222042
+        286  |  -.1296036    .629509    -0.21   0.837    -1.363419    1.104211
+             |
+        year |
+       2008  |          0  (empty)
+       2009  |   .5003145   .3151851     1.59   0.112    -.1174369    1.118066
+       2010  |  -1.930906   1.382091    -1.40   0.162    -4.639755    .7779437
+       2011  |  -1.418099   1.232383    -1.15   0.250    -3.833524    .9973269
+       2012  |   -1.27114   .8339339    -1.52   0.127     -2.90562    .3633408
+       2013  |  -.7609878   .6146273    -1.24   0.216    -1.965635    .4436596
+       2014  |  -.7220887   .6457255    -1.12   0.263    -1.987687      .54351
+       2015  |  -.8442001   .6753681    -1.25   0.211    -2.167897     .479497
+       2016  |  -.7548549   .6865697    -1.10   0.272    -2.100507     .590797
+       2017  |  -.8735667    .721832    -1.21   0.226    -2.288331    .5411979
+       2018  |  -.7411824   .7315236    -1.01   0.311    -2.174942    .6925776
+       2019  |   -.800184   .7572156    -1.06   0.291    -2.284299    .6839314
+       2020  |  -.6391033   .7931826    -0.81   0.420    -2.193713     .915506
+             |
+    1.typeyg |          0  (omitted)
+    2.typebg |  -.3389074   .1265259    -2.68   0.007    -.5868935   -.0909212
+       _cons |   5.132373   10.25828     0.50   0.617    -14.97349    25.23824
+------------------------------------------------------------------------------
+
+. post `H' ("T3_4") ("court") (_b[court]) (_se[court]) (e(N)) (e(r2_a))
+
+. gen byte sample_T3_4=e(sample)
+
+. keep row_id sample_*
+
+. export delimited using "../data/case_flags.csv", replace
+(file ../data/case_flags.csv not found)
+file ../data/case_flags.csv saved
+
+. postclose `H'
+
+. use "../data/author_results.dta", clear
+
+. export delimited using "../data/author_results.csv", replace
+(file ../data/author_results.csv not found)
+file ../data/author_results.csv saved
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\jurisdiction_
+> social\work\../logs/author_body.log
+  log type:  text
+ closed on:  15 Nov 2026, 00:41:17
+-------------------------------------------------------------------------------
+
+. 
+end of do-file

@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-15",
+  "title": "新城新区建设与地区创业活跃度",
+  "author_page": "https://econpub.xmu.edu.cn/research/index.php?p_id=5018&ser_id=2",
+  "pdf_url": "https://ciejournal.ajcass.com/UploadFile/Issue/201606280001/2025/3//20250325100816WU_FILE_1.pdf",
+  "zip_url": "https://ciejournal.ajcass.com/UploadFile/Issue/201606280001/2025/3//20250325100806WU_FILE_0.zip",
+  "acquisition": "优先已有用户验证Edge会话；ZIP下载完成且用户再次附上；PDF已在浏览器成功加载，随后用户提供桌面文件，本轮使用用户确认的PDF。未重复提交下载请求，未出现或操作验证码。",
+  "http_status": null,
+  "http_note": "浏览器显示成功，但未读取网络层响应头，不编造HTTP200。",
+  "complete": "ZIP CRC通过；5个包内文件全解压；正文19页、附录4页。",
+  "upstream_snapshot": "reference/Replication_cn-main，核心文件此前2026-11-14核验；本轮保持字节一致，不声称11月15日重新核验远程最新版本。",
+  "eventdd_reference": "https://github.com/damiancclarke/eventdd/blob/main/eventdd.ado",
+  "eventdd_observation": "inrange只限制绘图显示，不限制回归中完整lead/lag范围；按作者dist全范围-8..8重算，报告-4..4。"
+}

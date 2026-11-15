@@ -1,0 +1,2020 @@
+-----------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/minnie/Result/正文程序运行日志.log
+  log type:  text
+ opened on:  12 Oct 2026, 13:37:06
+
+. display "程序开始时间：$S_DATE $S_TIME"
+程序开始时间：12 Oct 2026 13:37:06
+
+. 
+. 
+. *-------------------------------------------------------------------------------
+. **#                    基 准 回 归 —— 表1  
+. *-------------------------------------------------------------------------------
+. use $regdata/dataset_benchmark.dta, clear
+
+. // 统一设置
+. global xlist    "soe export1 import1 lnwage lnoutput lnklr profit leverage lnconstraints"
+
+. global cityvar  "lnpergdp lnpopulation lncitywage structure lnperfdi lninternet gov"
+
+. global absorb1  "absorb(id cic2_code#year) cluster(id)"
+
+. global outreg   "outreg2 using $result/table1.xls, append dec(4) ad(4)"
+
+. global option   "addtext(ctrs, yes,firm fe, yes,cic2-year fe, yes)"
+
+. // 缩尾
+. local vars outcome lnwage lnoutput lnklr profit leverage lnconstraints 
+
+. foreach i of local vars {
+  2.         winsor2 `i', cut(1 99) replace
+  3. }
+
+. local vars lnpergdp lnpopulation lncitywage structure lnperfdi lninternet gov
+
+. foreach i of local vars {
+  2.         winsor2 `i', cut(1 99) replace
+  3. }
+
+. // 回归
+. reghdfe outcome dd, absorb(id year)
+(dropped 338758 singleton observations)
+(MWFE estimator converged in 8 iterations)
+
+HDFE Linear regression                            Number of obs   =  1,830,389
+Absorbing 2 HDFE groups                           F(   1,1364865) =     508.84
+                                                  Prob > F        =     0.0000
+                                                  R-squared       =     0.9236
+                                                  Adj R-squared   =     0.8975
+                                                  Within R-sq.    =     0.0004
+                                                  Root MSE        =     0.4526
+
+------------------------------------------------------------------------------
+     outcome | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          dd |   .2177452   .0096529    22.56   0.000     .1988259    .2366645
+       _cons |   4.223018   .0003602  1.2e+04   0.000     4.222312    4.223724
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+          id |    465514           0      465514     |
+        year |        10           1           9     |
+-----------------------------------------------------+
+
+.         $outreg ctitle(Employ) keep(dd) addtext(firm fe, yes,year fe, yes) adds(adjusted R2, `e(r2_a)')
+/Users/minnie/Result/table1.xls
+dir : seeout
+
+. reghdfe outcome dd, $absorb1
+(dropped 338758 singleton observations)
+(MWFE estimator converged in 45 iterations)
+
+HDFE Linear regression                            Number of obs   =  1,830,389
+Absorbing 2 HDFE groups                           F(   1, 465513) =     323.34
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9242
+                                                  Adj R-squared   =     0.8983
+                                                  Within R-sq.    =     0.0004
+Number of clusters (id)      =    465,514         Root MSE        =     0.4509
+
+                               (Std. err. adjusted for 465,514 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+     outcome | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          dd |   .2144245   .0119245    17.98   0.000     .1910527    .2377962
+       _cons |   4.223064   .0001651  2.6e+04   0.000     4.222741    4.223388
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    465514      465514           0    *|
+   cic2_code#year |       301           1         300     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(Employ) keep(dd) addtext(firm fe, yes,cic2-year fe, yes) adds(adjusted R2, `e(r2_a)')
+/Users/minnie/Result/table1.xls
+dir : seeout
+
+. reghdfe outcome dd $xlist, $absorb1
+(dropped 337758 singleton observations)
+(MWFE estimator converged in 47 iterations)
+
+HDFE Linear regression                            Number of obs   =  1,760,055
+Absorbing 2 HDFE groups                           F(  10, 452351) =    5217.14
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9386
+                                                  Adj R-squared   =     0.9173
+                                                  Within R-sq.    =     0.1675
+Number of clusters (id)      =    452,352         Root MSE        =     0.4049
+
+                                (Std. err. adjusted for 452,352 clusters in id)
+-------------------------------------------------------------------------------
+              |               Robust
+      outcome | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+           dd |   .1685815   .0111495    15.12   0.000     .1467289    .1904342
+          soe |   .0297026   .0072857     4.08   0.000     .0154229    .0439824
+      export1 |   .1463051   .0027164    53.86   0.000     .1409811    .1516291
+      import1 |   .1427047   .0025643    55.65   0.000     .1376787    .1477306
+       lnwage |    .489445   .0086066    56.87   0.000     .4725764    .5063136
+     lnoutput |   .0318034    .000264   120.47   0.000      .031286    .0323208
+        lnklr |  -.1756615   .0011891  -147.73   0.000    -.1779921    -.173331
+       profit |   .3206532   .0036884    86.94   0.000     .3134241    .3278823
+     leverage |   .0664814   .0029351    22.65   0.000     .0607288    .0722341
+lnconstraints |  -.0246139   .0065393    -3.76   0.000    -.0374307   -.0117972
+        _cons |   4.454154   .0058046   767.34   0.000     4.442777     4.46553
+-------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    452352      452352           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(Employ) keep(dd) addtext(firm ctrs, yes,firm fe, yes,cic2-year fe, yes) adds(adjusted R2, `e(r2_a)')
+/Users/minnie/Result/table1.xls
+dir : seeout
+
+. reghdfe outcome dd $xlist $cityvar, $absorb1
+(dropped 331972 singleton observations)
+(MWFE estimator converged in 50 iterations)
+
+HDFE Linear regression                            Number of obs   =  1,724,395
+Absorbing 2 HDFE groups                           F(  17, 443584) =    3017.18
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9388
+                                                  Adj R-squared   =     0.9176
+                                                  Within R-sq.    =     0.1677
+Number of clusters (id)      =    443,585         Root MSE        =     0.4044
+
+                                (Std. err. adjusted for 443,585 clusters in id)
+-------------------------------------------------------------------------------
+              |               Robust
+      outcome | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+           dd |   .1670729   .0111333    15.01   0.000     .1452521    .1888938
+          soe |   .0299324   .0074242     4.03   0.000     .0153812    .0444837
+      export1 |   .1458719   .0027364    53.31   0.000     .1405087     .151235
+      import1 |   .1428814   .0025744    55.50   0.000     .1378357    .1479271
+       lnwage |   .4929151    .008796    56.04   0.000     .4756751    .5101551
+     lnoutput |   .0318591   .0002678   118.97   0.000     .0313342    .0323839
+        lnklr |  -.1758656   .0012094  -145.42   0.000     -.178236   -.1734953
+       profit |   .3235725   .0037782    85.64   0.000     .3161674    .3309776
+     leverage |   .0682935   .0029874    22.86   0.000     .0624382    .0741487
+lnconstraints |   -.024322    .006664    -3.65   0.000    -.0373834   -.0112607
+     lnpergdp |  -.0005356   .0038431    -0.14   0.889    -.0080679    .0069967
+ lnpopulation |   .0427776   .0039055    10.95   0.000      .035123    .0504322
+   lncitywage |  -.0258538   .0071682    -3.61   0.000    -.0399034   -.0118043
+    structure |   .1803393   .0216753     8.32   0.000     .1378564    .2228222
+     lnperfdi |  -.0068288   .0011582    -5.90   0.000    -.0090989   -.0045586
+   lninternet |   -.000983   .0004443    -2.21   0.027    -.0018538   -.0001123
+          gov |  -.0000771   .0003768    -0.20   0.838    -.0008155    .0006614
+        _cons |    4.41062   .0814799    54.13   0.000     4.250922    4.570318
+-------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    443585      443585           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(Employ) keep(dd) $option adds(adjusted R2, `e(r2_a)')
+/Users/minnie/Result/table1.xls
+dir : seeout
+
+. 
+.         
+. 
+. *-------------------------------------------------------------------------------
+. **#                    内生性处理 —— 表2 
+. *-------------------------------------------------------------------------------
+. // 统一设置
+. global ivoption  "absorb(id cic2_code#year) cluster(id) first savefirst"
+
+. global outregs2  "outreg2 using $result/table2.xls, append dec(4) ad(4)"
+
+. global outregs1  "outreg2 using $result/table2.xls, append dec(4)"
+
+. global ivaddtext "addtext(ctrs, yes,firm fe, yes,cic2-year fe, yes)"
+
+. 
+. // IV1: Bartik 
+. ivreghdfe outcome (dd = iv1) $xlist $cityvar, $ivoption
+(dropped 331972 singleton observations)
+(MWFE estimator converged in 50 iterations)
+
+Stored estimation results
+-------------------------
+-------------------------------------------------------------------------
+             |           Dependent  Number of        
+        Name | Command    variable     param.  Title 
+-------------+-----------------------------------------------------------
+  _ivreg2_dd | ivreg2           dd         17  First-stage regression: dd
+-------------------------------------------------------------------------
+
+First-stage regressions
+-----------------------
+
+
+First-stage regression of dd:
+
+Statistics robust to heteroskedasticity and clustering on id
+Number of obs =                1724395
+Number of clusters (id) =       443585
+-------------------------------------------------------------------------------
+              |               Robust
+           dd | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+          iv1 |   .0020277   .0002286     8.87   0.000     .0015797    .0024758
+          soe |   .0001374   .0007022     0.20   0.845    -.0012388    .0015137
+      export1 |   .0088863   .0004719    18.83   0.000     .0079614    .0098113
+      import1 |   .0008722     .00033     2.64   0.008     .0002254     .001519
+       lnwage |  -.0001621   .0003242    -0.50   0.617    -.0007975    .0004733
+     lnoutput |   8.51e-06   .0000139     0.61   0.541    -.0000188    .0000358
+        lnklr |   .0001962   .0000575     3.41   0.001     .0000836    .0003089
+       profit |   .0006901     .00011     6.27   0.000     .0004745    .0009057
+     leverage |   -.000161    .000223    -0.72   0.470    -.0005981    .0002761
+lnconstraints |    .000578   .0004123     1.40   0.161    -.0002301    .0013861
+     lnpergdp |  -.0021144   .0003892    -5.43   0.000    -.0028773   -.0013515
+ lnpopulation |   .0000212   .0004055     0.05   0.958    -.0007735     .000816
+   lncitywage |    .005683   .0008941     6.36   0.000     .0039306    .0074355
+    structure |   .0053405   .0026212     2.04   0.042      .000203    .0104779
+     lnperfdi |   .0001013   .0001148     0.88   0.378    -.0001237    .0003263
+   lninternet |  -.0001634   .0000465    -3.52   0.000    -.0002544   -.0000723
+          gov |  -.0000431   .0000327    -1.32   0.188    -.0001072    .0000211
+-------------------------------------------------------------------------------
+F test of excluded instruments:
+  F(  1,443584) =    78.67
+  Prob > F      =   0.0000
+Sanderson-Windmeijer multivariate F test of excluded instruments:
+  F(  1,443584) =    78.67
+  Prob > F      =   0.0000
+
+
+
+Summary results for first-stage regressions
+-------------------------------------------
+
+                                           (Underid)            (Weak id)
+Variable     | F(  1,443584)  P-val | SW Chi-sq(  1) P-val | SW F(  1,443584)
+dd           |      78.67    0.0000 |       78.69   0.0000 |       78.67
+
+NB: first-stage test statistics cluster-robust
+
+Stock-Yogo weak ID F test critical values for single endogenous regressor:
+                                   10% maximal IV size             16.38
+                                   15% maximal IV size              8.96
+                                   20% maximal IV size              6.66
+                                   25% maximal IV size              5.53
+Source: Stock-Yogo (2005).  Reproduced by permission.
+NB: Critical values are for i.i.d. errors only.
+
+Underidentification test
+Ho: matrix of reduced form coefficients has rank=K1-1 (underidentified)
+Ha: matrix has rank=K1 (identified)
+Kleibergen-Paap rk LM statistic          Chi-sq(1)=78.60    P-val=0.0000
+
+Weak identification test
+Ho: equation is weakly identified
+Cragg-Donald Wald F statistic                                     208.86
+Kleibergen-Paap Wald rk F statistic                                78.67
+
+Stock-Yogo weak ID test critical values for K1=1 and L1=1:
+                                   10% maximal IV size             16.38
+                                   15% maximal IV size              8.96
+                                   20% maximal IV size              6.66
+                                   25% maximal IV size              5.53
+Source: Stock-Yogo (2005).  Reproduced by permission.
+NB: Critical values are for Cragg-Donald F statistic and i.i.d. errors.
+
+Weak-instrument-robust inference
+Tests of joint significance of endogenous regressors B1 in main equation
+Ho: B1=0 and orthogonality conditions are valid
+Anderson-Rubin Wald test           F(1,443584)=    4.78     P-val=0.0288
+Anderson-Rubin Wald test           Chi-sq(1)=      4.78     P-val=0.0287
+Stock-Wright LM S statistic        Chi-sq(1)=      4.89     P-val=0.0270
+
+NB: Underidentification, weak identification and weak-identification-robust
+    test statistics cluster-robust
+
+Number of clusters             N_clust  =     443585
+Number of observations               N  =    1724395
+Number of regressors                 K  =         17
+Number of endogenous regressors      K1 =          1
+Number of instruments                L  =         17
+Number of excluded instruments       L1 =          1
+
+IV (2SLS) estimation
+--------------------
+
+Estimates efficient for homoskedasticity only
+Statistics robust to heteroskedasticity and clustering on id
+
+Number of clusters (id) =       443585                Number of obs =  1724395
+                                                      F( 17,443584) =  2974.20
+                                                      Prob > F      =   0.0000
+Total (centered) SS     =  251659.1166                Centered R2   =   0.1332
+Total (uncentered) SS   =  251659.1166                Uncentered R2 =   0.1332
+Residual SS             =   218133.963                Root MSE      =    .3557
+
+-------------------------------------------------------------------------------
+              |               Robust
+      outcome | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+           dd |   2.196218   1.028343     2.14   0.033     .1806975    4.211739
+          soe |   .0296756   .0075761     3.92   0.000     .0148266    .0445246
+      export1 |   .1278225   .0096178    13.29   0.000     .1089718    .1466731
+      import1 |    .141144   .0028106    50.22   0.000     .1356354    .1466526
+       lnwage |   .4932808   .0088211    55.92   0.000     .4759917    .5105699
+     lnoutput |   .0318414   .0002693   118.25   0.000     .0313136    .0323692
+        lnklr |    -.17625    .001226  -143.76   0.000     -.178653   -.1738471
+       profit |   .3221637   .0038521    83.63   0.000     .3146137    .3297137
+     leverage |   .0686956   .0030275    22.69   0.000     .0627618    .0746293
+lnconstraints |  -.0254331   .0067309    -3.78   0.000    -.0386255   -.0122408
+     lnpergdp |   .0022938   .0041807     0.55   0.583    -.0059003    .0104879
+ lnpopulation |    .041141   .0040433    10.18   0.000     .0332162    .0490658
+   lncitywage |  -.0372373   .0095752    -3.89   0.000    -.0560044   -.0184701
+    structure |   .1722215   .0226953     7.59   0.000     .1277394    .2167037
+     lnperfdi |  -.0073179   .0012013    -6.09   0.000    -.0096724   -.0049634
+   lninternet |  -.0007798   .0004515    -1.73   0.084    -.0016648    .0001051
+          gov |   .0000547   .0003884     0.14   0.888    -.0007066     .000816
+-------------------------------------------------------------------------------
+Underidentification test (Kleibergen-Paap rk LM statistic):             78.601
+                                                   Chi-sq(1) P-val =    0.0000
+------------------------------------------------------------------------------
+Weak identification test (Cragg-Donald Wald F statistic):              208.856
+                         (Kleibergen-Paap rk Wald F statistic):         78.671
+Stock-Yogo weak ID test critical values: 10% maximal IV size             16.38
+                                         15% maximal IV size              8.96
+                                         20% maximal IV size              6.66
+                                         25% maximal IV size              5.53
+Source: Stock-Yogo (2005).  Reproduced by permission.
+NB: Critical values are for Cragg-Donald F statistic and i.i.d. errors.
+------------------------------------------------------------------------------
+Hansen J statistic (overidentification test of all instruments):         0.000
+                                                 (equation exactly identified)
+------------------------------------------------------------------------------
+Instrumented:         dd
+Included instruments: soe export1 import1 lnwage lnoutput lnklr profit leverage
+                      lnconstraints lnpergdp lnpopulation lncitywage structure
+                      lnperfdi lninternet gov
+Excluded instruments: iv1
+Partialled-out:       _cons
+                      nb: total SS, model F and R2s are after partialling-out;
+                          any small-sample adjustments include partialled-out
+                          variables in regressor count K
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    443585      443585           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outregs2 ctitle(Employ-2nd stage) keep(dd) adds(F-test, `e(rkf)',KP-F, `e(widstat)',KP-LM, `e(idstat)',KP-LM-p, `e
+> (idp)') $ivaddtext
+/Users/minnie/Result/table2.xls
+dir : seeout
+
+.         estimates restore _ivreg2_dd  
+(results _ivreg2_dd are active now)
+
+.         $outregs1 ctitle(Employ-1st stage) keep(iv1) 
+/Users/minnie/Result/table2.xls
+dir : seeout
+
+. 
+. // IV2: 地形坡度
+. ivreghdfe outcome (dd = iv2) $xlist $cityvar, $ivoption
+(dropped 277222 singleton observations)
+(MWFE estimator converged in 50 iterations)
+
+Stored estimation results
+-------------------------
+-------------------------------------------------------------------------
+             |           Dependent  Number of        
+        Name | Command    variable     param.  Title 
+-------------+-----------------------------------------------------------
+  _ivreg2_dd | ivreg2           dd         17  First-stage regression: dd
+-------------------------------------------------------------------------
+
+First-stage regressions
+-----------------------
+
+
+First-stage regression of dd:
+
+Statistics robust to heteroskedasticity and clustering on id
+Number of obs =                1700540
+Number of clusters (id) =       432519
+-------------------------------------------------------------------------------
+              |               Robust
+           dd | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+          iv2 |   .0052912   .0005017    10.55   0.000     .0043078    .0062745
+          soe |   .0001436   .0007259     0.20   0.843    -.0012791    .0015663
+      export1 |   .0088729   .0004705    18.86   0.000     .0079507    .0097952
+      import1 |   .0008208   .0003282     2.50   0.012     .0001774    .0014641
+       lnwage |  -.0001869   .0003285    -0.57   0.569    -.0008307     .000457
+     lnoutput |   9.66e-06   .0000139     0.69   0.488    -.0000176    .0000369
+        lnklr |   .0001924   .0000577     3.33   0.001     .0000792    .0003055
+       profit |   .0006877   .0001123     6.12   0.000     .0004676    .0009078
+     leverage |   -.000181   .0002248    -0.81   0.421    -.0006216    .0002595
+lnconstraints |   .0004833   .0004143     1.17   0.243    -.0003287    .0012954
+     lnpergdp |  -.0012354    .000377    -3.28   0.001    -.0019742   -.0004965
+ lnpopulation |   .0007575   .0003905     1.94   0.052    -7.81e-06    .0015228
+   lncitywage |   .0055732    .000893     6.24   0.000     .0038229    .0073234
+    structure |   .0057818   .0026098     2.22   0.027     .0006667    .0108969
+     lnperfdi |   .0002427   .0001149     2.11   0.035     .0000174     .000468
+   lninternet |  -.0000676   .0000445    -1.52   0.129    -.0001548    .0000197
+          gov |  -.0000647   .0000324    -1.99   0.046    -.0001283   -1.13e-06
+-------------------------------------------------------------------------------
+F test of excluded instruments:
+  F(  1,432518) =   111.22
+  Prob > F      =   0.0000
+Sanderson-Windmeijer multivariate F test of excluded instruments:
+  F(  1,432518) =   111.22
+  Prob > F      =   0.0000
+
+
+
+Summary results for first-stage regressions
+-------------------------------------------
+
+                                           (Underid)            (Weak id)
+Variable     | F(  1,432518)  P-val | SW Chi-sq(  1) P-val | SW F(  1,432518)
+dd           |     111.22    0.0000 |      111.24   0.0000 |      111.22
+
+NB: first-stage test statistics cluster-robust
+
+Stock-Yogo weak ID F test critical values for single endogenous regressor:
+                                   10% maximal IV size             16.38
+                                   15% maximal IV size              8.96
+                                   20% maximal IV size              6.66
+                                   25% maximal IV size              5.53
+Source: Stock-Yogo (2005).  Reproduced by permission.
+NB: Critical values are for i.i.d. errors only.
+
+Underidentification test
+Ho: matrix of reduced form coefficients has rank=K1-1 (underidentified)
+Ha: matrix has rank=K1 (identified)
+Kleibergen-Paap rk LM statistic          Chi-sq(1)=489.51   P-val=0.0000
+
+Weak identification test
+Ho: equation is weakly identified
+Cragg-Donald Wald F statistic                                   13113.00
+Kleibergen-Paap Wald rk F statistic                               111.22
+
+Stock-Yogo weak ID test critical values for K1=1 and L1=1:
+                                   10% maximal IV size             16.38
+                                   15% maximal IV size              8.96
+                                   20% maximal IV size              6.66
+                                   25% maximal IV size              5.53
+Source: Stock-Yogo (2005).  Reproduced by permission.
+NB: Critical values are for Cragg-Donald F statistic and i.i.d. errors.
+
+Weak-instrument-robust inference
+Tests of joint significance of endogenous regressors B1 in main equation
+Ho: B1=0 and orthogonality conditions are valid
+Anderson-Rubin Wald test           F(1,432518)=   10.77     P-val=0.0010
+Anderson-Rubin Wald test           Chi-sq(1)=     10.77     P-val=0.0010
+Stock-Wright LM S statistic        Chi-sq(1)=     12.59     P-val=0.0004
+
+NB: Underidentification, weak identification and weak-identification-robust
+    test statistics cluster-robust
+
+Number of clusters             N_clust  =     432519
+Number of observations               N  =    1700540
+Number of regressors                 K  =         17
+Number of endogenous regressors      K1 =          1
+Number of instruments                L  =         17
+Number of excluded instruments       L1 =          1
+
+IV (2SLS) estimation
+--------------------
+
+Estimates efficient for homoskedasticity only
+Statistics robust to heteroskedasticity and clustering on id
+
+Number of clusters (id) =       432519                Number of obs =  1700540
+                                                      F( 17,432518) =  2976.17
+                                                      Prob > F      =   0.0000
+Total (centered) SS     =  249305.8794                Centered R2   =   0.1671
+Total (uncentered) SS   =  249305.8794                Uncentered R2 =   0.1671
+Residual SS             =  207650.3657                Root MSE      =    .3495
+
+-------------------------------------------------------------------------------
+              |               Robust
+      outcome | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+           dd |   .4973196   .1402469     3.55   0.000       .22244    .7721993
+          soe |   .0297236   .0074457     3.99   0.000     .0151302     .044317
+      export1 |   .1425317   .0030292    47.05   0.000     .1365946    .1484689
+      import1 |   .1425767    .002579    55.28   0.000      .137522    .1476315
+       lnwage |   .4978464   .0089309    55.74   0.000     .4803421    .5153507
+     lnoutput |   .0317137   .0002684   118.15   0.000     .0311876    .0322398
+        lnklr |  -.1760456   .0012188  -144.44   0.000    -.1784344   -.1736568
+       profit |    .326821   .0038339    85.24   0.000     .3193067    .3343354
+     leverage |   .0680378   .0030168    22.55   0.000     .0621249    .0739507
+lnconstraints |   -.025661   .0067262    -3.82   0.000    -.0388441   -.0124778
+     lnpergdp |  -.0012478   .0038969    -0.32   0.749    -.0088856    .0063899
+ lnpopulation |   .0426194   .0039099    10.90   0.000     .0349561    .0502826
+   lncitywage |  -.0276568   .0072612    -3.81   0.000    -.0418885    -.013425
+    structure |   .1811879   .0217472     8.33   0.000     .1385641    .2238117
+     lnperfdi |  -.0069897   .0011674    -5.99   0.000    -.0092777   -.0047017
+   lninternet |  -.0009623   .0004449    -2.16   0.031    -.0018342   -.0000903
+          gov |  -.0001091   .0003806    -0.29   0.774     -.000855    .0006368
+-------------------------------------------------------------------------------
+Underidentification test (Kleibergen-Paap rk LM statistic):            489.511
+                                                   Chi-sq(1) P-val =    0.0000
+------------------------------------------------------------------------------
+Weak identification test (Cragg-Donald Wald F statistic):              1.3e+04
+                         (Kleibergen-Paap rk Wald F statistic):        111.218
+Stock-Yogo weak ID test critical values: 10% maximal IV size             16.38
+                                         15% maximal IV size              8.96
+                                         20% maximal IV size              6.66
+                                         25% maximal IV size              5.53
+Source: Stock-Yogo (2005).  Reproduced by permission.
+NB: Critical values are for Cragg-Donald F statistic and i.i.d. errors.
+------------------------------------------------------------------------------
+Hansen J statistic (overidentification test of all instruments):         0.000
+                                                 (equation exactly identified)
+------------------------------------------------------------------------------
+Instrumented:         dd
+Included instruments: soe export1 import1 lnwage lnoutput lnklr profit leverage
+                      lnconstraints lnpergdp lnpopulation lncitywage structure
+                      lnperfdi lninternet gov
+Excluded instruments: iv2
+Partialled-out:       _cons
+                      nb: total SS, model F and R2s are after partialling-out;
+                          any small-sample adjustments include partialled-out
+                          variables in regressor count K
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    432519      432519           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outregs2 ctitle(Employ-2nd stage) keep(dd) adds(F-test, `e(rkf)',KP-F, `e(widstat)',KP-LM, `e(idstat)',KP-LM-p, `e
+> (idp)') $ivaddtext
+/Users/minnie/Result/table2.xls
+dir : seeout
+
+.         estimates restore _ivreg2_dd  
+(results _ivreg2_dd are active now)
+
+.         $outregs1 ctitle(Employ-1st stage) keep(iv2) 
+/Users/minnie/Result/table2.xls
+dir : seeout
+
+. 
+. 
+. 
+. *-------------------------------------------------------------------------------
+. **#                    机 制 检 验 —— 表3～表6 
+. *-------------------------------------------------------------------------------
+. **##   1. 贸易规模扩张效应 —— 表3
+. global outreg   "outreg2 using $result/table3.xls, append dec(4) ad(4)"
+
+. 
+. // (1) 进口企业
+. use $regdata/dataset_imp1.dta, clear
+
+. * 统一设置
+. global xlist    "soe lntariff imp_processtrade lnrer lnpercgdp lnoutput lnklr profit leverage lnconstraints"
+
+. * 缩尾
+. local vars outcome lnoutput lnklr profit leverage lnconstraints lnimp lntariff imp_processtrade lnrer lnpercgdp lndist
+
+. foreach i of local vars {
+  2.         winsor2 `i', cut(1 99) replace
+  3. }
+
+. local vars lnpergdp lnpopulation lncitywage structure lnperfdi lninternet gov
+
+. foreach i of local vars {
+  2.         winsor2 `i', cut(1 99) replace
+  3. }
+
+. * 回归
+. reghdfe lnimp ddlist $xlist $cityvar, $absorb1 
+(dropped 40757 singleton observations)
+(MWFE estimator converged in 47 iterations)
+
+HDFE Linear regression                            Number of obs   =    292,352
+Absorbing 2 HDFE groups                           F(  18,  68549) =     416.07
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8812
+                                                  Adj R-squared   =     0.8445
+                                                  Within R-sq.    =     0.0746
+Number of clusters (id)      =     68,550         Root MSE        =     0.9622
+
+                                    (Std. err. adjusted for 68,550 clusters in id)
+----------------------------------------------------------------------------------
+                 |               Robust
+           lnimp | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-----------------+----------------------------------------------------------------
+          ddlist |   .0360829   .0085704     4.21   0.000     .0192848    .0528809
+             soe |   .0084704    .055914     0.15   0.880    -.1011209    .1180617
+        lntariff |  -.0986197   .0077243   -12.77   0.000    -.1137592   -.0834801
+imp_processtrade |   .0682628   .0072461     9.42   0.000     .0540604    .0824652
+           lnrer |    .517778   .0172929    29.94   0.000     .4838839    .5516721
+       lnpercgdp |   .1093834   .0026786    40.84   0.000     .1041333    .1146335
+        lnoutput |   .0714695   .0021853    32.70   0.000     .0671863    .0757526
+           lnklr |   .0126298   .0044454     2.84   0.004     .0039168    .0213428
+          profit |    .990185   .0296093    33.44   0.000     .9321507    1.048219
+        leverage |   .1911573   .0158799    12.04   0.000     .1600326    .2222819
+   lnconstraints |   .0413744   .0315053     1.31   0.189     -.020376    .1031248
+        lnpergdp |  -.0018045   .0183838    -0.10   0.922    -.0378367    .0342278
+    lnpopulation |   .0030705    .017481     0.18   0.861    -.0311923    .0373332
+      lncitywage |   .0919927   .0429528     2.14   0.032     .0078054    .1761801
+       structure |    .515906   .1403378     3.68   0.000     .2408441    .7909679
+        lnperfdi |  -.0180545   .0097982    -1.84   0.065     -.037259      .00115
+      lninternet |  -.0005574   .0031273    -0.18   0.859    -.0066869    .0055722
+             gov |   .0022138   .0020736     1.07   0.286    -.0018506    .0062781
+           _cons |   1.194152   .5120188     2.33   0.020     .1905962    2.197708
+----------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |     68550       68550           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(Import) keep(ddlist) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table3.xls
+dir : seeout
+
+. reghdfe outcome lnimp $xlist $cityvar, $absorb1 
+(dropped 40757 singleton observations)
+(MWFE estimator converged in 47 iterations)
+
+HDFE Linear regression                            Number of obs   =    292,352
+Absorbing 2 HDFE groups                           F(  18,  68549) =     504.96
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9433
+                                                  Adj R-squared   =     0.9258
+                                                  Within R-sq.    =     0.1932
+Number of clusters (id)      =     68,550         Root MSE        =     0.3584
+
+                                    (Std. err. adjusted for 68,550 clusters in id)
+----------------------------------------------------------------------------------
+                 |               Robust
+         outcome | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-----------------+----------------------------------------------------------------
+           lnimp |   .0695872   .0012961    53.69   0.000     .0670469    .0721274
+             soe |   .0104739   .0194765     0.54   0.591       -.0277    .0486479
+        lntariff |   .0117456   .0022445     5.23   0.000     .0073463    .0161449
+imp_processtrade |  -.0049155   .0024962    -1.97   0.049    -.0098081    -.000023
+           lnrer |  -.0065256   .0054221    -1.20   0.229    -.0171529    .0041017
+       lnpercgdp |   .0075237   .0008385     8.97   0.000     .0058802    .0091672
+        lnoutput |   .0451038   .0010742    41.99   0.000     .0429983    .0472093
+           lnklr |  -.2132911   .0040136   -53.14   0.000    -.2211578   -.2054245
+          profit |   .2727747   .0131212    20.79   0.000      .247057    .2984923
+        leverage |   .0482992     .00766     6.31   0.000     .0332857    .0633127
+   lnconstraints |  -.0322978   .0142078    -2.27   0.023    -.0601451   -.0044504
+        lnpergdp |  -.0102441    .006751    -1.52   0.129    -.0234761     .002988
+    lnpopulation |   .0143772   .0068169     2.11   0.035     .0010161    .0277383
+      lncitywage |   .0225489   .0164309     1.37   0.170    -.0096556    .0547534
+       structure |     .31514    .052975     5.95   0.000     .2113091    .4189708
+        lnperfdi |   .0031844    .003686     0.86   0.388    -.0040402     .010409
+      lninternet |   .0044686   .0011317     3.95   0.000     .0022505    .0066866
+             gov |  -.0025171    .000842    -2.99   0.003    -.0041675   -.0008667
+           _cons |   4.884383   .1948894    25.06   0.000     4.502399    5.266366
+----------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |     68550       68550           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(Employ) keep(lnimp) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table3.xls
+dir : seeout
+
+. 
+. 
+. // (2) 出口企业
+. use $regdata/dataset_exp.dta, clear
+
+. * 统一设置
+. global xlist    "soe lntariff exp_processtrade lnrer lnpercgdp lnoutput lnklr profit leverage lnconstraints"
+
+. * 缩尾
+. local vars outcome lnoutput lnklr profit leverage lnconstraints lnexp lntariff exp_processtrade lnrer lnpercgdp lndist
+
+. foreach i of local vars {
+  2.         winsor2 `i', cut(1 99) replace
+  3. }
+
+. local vars lnpergdp lnpopulation lncitywage structure lnperfdi lninternet gov
+
+. foreach i of local vars {
+  2.         winsor2 `i', cut(1 99) replace
+  3. }
+
+. * 回归
+. reghdfe lnexp   dd $xlist $cityvar, $absorb1
+(dropped 52749 singleton observations)
+(MWFE estimator converged in 52 iterations)
+
+HDFE Linear regression                            Number of obs   =    438,176
+Absorbing 2 HDFE groups                           F(  18, 103843) =    1211.01
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8790
+                                                  Adj R-squared   =     0.8413
+                                                  Within R-sq.    =     0.1482
+Number of clusters (id)      =    103,844         Root MSE        =     0.8447
+
+                                   (Std. err. adjusted for 103,844 clusters in id)
+----------------------------------------------------------------------------------
+                 |               Robust
+           lnexp | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-----------------+----------------------------------------------------------------
+              dd |    .333157   .0319243    10.44   0.000     .2705858    .3957281
+             soe |   -.013948   .0389758    -0.36   0.720    -.0903399     .062444
+        lntariff |   .1028916   .0042283    24.33   0.000     .0946042     .111179
+exp_processtrade |   .0351153   .0056262     6.24   0.000     .0240881    .0461426
+           lnrer |   .3311316   .0094899    34.89   0.000     .3125315    .3497317
+       lnpercgdp |   .2270915   .0037836    60.02   0.000     .2196757    .2345074
+        lnoutput |     .18429   .0025754    71.56   0.000     .1792422    .1893378
+           lnklr |  -.0290107   .0031164    -9.31   0.000    -.0351189   -.0229025
+          profit |   1.161435    .020141    57.67   0.000     1.121959    1.200911
+        leverage |   .0980296   .0106218     9.23   0.000     .0772109    .1188482
+   lnconstraints |   .0000751   .0232726     0.00   0.997    -.0455389     .045689
+        lnpergdp |  -.0257729   .0140054    -1.84   0.066    -.0532232    .0016775
+    lnpopulation |   .0441579   .0120785     3.66   0.000     .0204843    .0678315
+      lncitywage |    .081471    .031725     2.57   0.010     .0192905    .1436515
+       structure |   .6892914   .0974065     7.08   0.000     .4983759    .8802068
+        lnperfdi |  -.0091597   .0060734    -1.51   0.132    -.0210634    .0027441
+      lninternet |   .0079429   .0021814     3.64   0.000     .0036674    .0122185
+             gov |    .000961   .0015491     0.62   0.535    -.0020752    .0039972
+           _cons |  -.6879572   .3677617    -1.87   0.061    -1.408765    .0328508
+----------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    103844      103844           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(Export) keep(dd) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table3.xls
+dir : seeout
+
+. reghdfe outcome lnexp $xlist $cityvar, $absorb1
+(dropped 52749 singleton observations)
+(MWFE estimator converged in 52 iterations)
+
+HDFE Linear regression                            Number of obs   =    438,176
+Absorbing 2 HDFE groups                           F(  18, 103843) =    1125.84
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9421
+                                                  Adj R-squared   =     0.9241
+                                                  Within R-sq.    =     0.2408
+Number of clusters (id)      =    103,844         Root MSE        =     0.3577
+
+                                   (Std. err. adjusted for 103,844 clusters in id)
+----------------------------------------------------------------------------------
+                 |               Robust
+         outcome | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-----------------+----------------------------------------------------------------
+           lnexp |   .0874239    .001202    72.73   0.000      .085068    .0897798
+             soe |   .0075631   .0159174     0.48   0.635    -.0236348    .0387609
+        lntariff |    .001673   .0014245     1.17   0.240    -.0011189     .004465
+exp_processtrade |  -.0037107   .0021719    -1.71   0.088    -.0079676    .0005462
+           lnrer |   .0055257   .0036208     1.53   0.127     -.001571    .0126224
+       lnpercgdp |   .0065398   .0012294     5.32   0.000     .0041302    .0089494
+        lnoutput |   .0896955    .001316    68.16   0.000      .087116    .0922749
+           lnklr |  -.2187399   .0030237   -72.34   0.000    -.2246662   -.2128135
+          profit |    .208257   .0104634    19.90   0.000      .187749    .2287651
+        leverage |    .037191   .0058477     6.36   0.000     .0257296    .0486523
+   lnconstraints |  -.0501998    .012132    -4.14   0.000    -.0739783   -.0264214
+        lnpergdp |  -.0055164   .0057637    -0.96   0.339    -.0168133    .0057805
+    lnpopulation |    .014157   .0053652     2.64   0.008     .0036412    .0246728
+      lncitywage |   .0251737   .0133965     1.88   0.060    -.0010832    .0514306
+       structure |   .2941163   .0414028     7.10   0.000     .2129674    .3752653
+        lnperfdi |   .0003351   .0026461     0.13   0.899    -.0048512    .0055214
+      lninternet |   .0025991   .0009159     2.84   0.005      .000804    .0043942
+             gov |  -.0021137   .0006974    -3.03   0.002    -.0034806   -.0007468
+           _cons |   3.982723   .1546298    25.76   0.000      3.67965    4.285795
+----------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    103844      103844           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(Employ) keep(lnexp) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table3.xls
+dir : seeout
+
+. 
+. 
+. *------------------------------------
+. **##   2. 经营范围扩张效应 —— 表4～表5
+. // (1) 市场范围
+. global outreg   "outreg2 using $result/table4.xls, append dec(4) ad(4)"
+
+. *- 1> 内销企业开始出口
+. preserve
+
+.         use $regdata/dataset_benchmark.dta, clear
+
+.         * 统一设置
+.         global xlist    "soe lnoutput lnklr profit leverage lnconstraints"
+
+.         * 缩尾
+.         local vars outcome lnwage lnoutput lnklr profit leverage lnconstraints 
+
+.         foreach i of local vars {
+  2.                 winsor2 `i', cut(1 99) replace
+  3.         }
+
+.         local vars lnpergdp lnpopulation lncitywage structure lnperfdi lninternet gov
+
+.         foreach i of local vars {
+  2.                 winsor2 `i', cut(1 99) replace
+  3.         }
+
+.         * 回归
+.         drop if (firstyear_exp < start_year) & !mi(firstyear_exp)&!mi(start_year)  //剔除首次参与出口年份早于加入电商平台年
+> 份的企业
+(14,217 observations deleted)
+
+.         drop if (firstyear_exp < 2007) & !mi(firstyear_exp)  //仅保留首次参与出口年份在2007年之后的企业
+(272,976 observations deleted)
+
+.         gen start_exp = (firstyear_exp <= year & !mi(firstyear_exp))
+
+.         reghdfe start_exp dd $xlist $cityvar, $absorb1
+(dropped 322432 singleton observations)
+(MWFE estimator converged in 51 iterations)
+
+HDFE Linear regression                            Number of obs   =  1,485,658
+Absorbing 2 HDFE groups                           F(  14, 401953) =     308.98
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8407
+                                                  Adj R-squared   =     0.7815
+                                                  Within R-sq.    =     0.0092
+Number of clusters (id)      =    401,954         Root MSE        =     0.1556
+
+                                (Std. err. adjusted for 401,954 clusters in id)
+-------------------------------------------------------------------------------
+              |               Robust
+    start_exp | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+           dd |   .3813129    .015558    24.51   0.000     .3508197    .4118061
+          soe |  -.0007841   .0021821    -0.36   0.719    -.0050609    .0034927
+     lnoutput |   .0035234   .0000649    54.33   0.000     .0033963    .0036505
+        lnklr |  -.0007215    .000216    -3.34   0.001    -.0011449   -.0002981
+       profit |    .019681   .0008428    23.35   0.000     .0180292    .0213328
+     leverage |   .0015469   .0008245     1.88   0.061     -.000069    .0031629
+lnconstraints |  -.0111625   .0021007    -5.31   0.000    -.0152798   -.0070452
+     lnpergdp |  -.0079737   .0016816    -4.74   0.000    -.0112696   -.0046779
+ lnpopulation |   .0164813   .0020493     8.04   0.000     .0124648    .0204979
+   lncitywage |  -.0021697    .002839    -0.76   0.445    -.0077341    .0033947
+    structure |   -.078698   .0091002    -8.65   0.000    -.0965341   -.0608619
+     lnperfdi |  -.0002723   .0004121    -0.66   0.509    -.0010801    .0005355
+   lninternet |  -.0009564    .000165    -5.80   0.000    -.0012798    -.000633
+          gov |   .0004254    .000134     3.18   0.001     .0001628    .0006881
+        _cons |   .1458355   .0337545     4.32   0.000     .0796778    .2119932
+-------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    401954      401954           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.                 $outreg ctitle(Start Exp) keep(dd) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table4.xls
+dir : seeout
+
+.         reghdfe outcome start_exp $xlist $cityvar, $absorb1 
+(dropped 322432 singleton observations)
+(MWFE estimator converged in 51 iterations)
+
+HDFE Linear regression                            Number of obs   =  1,485,658
+Absorbing 2 HDFE groups                           F(  14, 401953) =    2847.05
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9347
+                                                  Adj R-squared   =     0.9104
+                                                  Within R-sq.    =     0.1447
+Number of clusters (id)      =    401,954         Root MSE        =     0.4092
+
+                                (Std. err. adjusted for 401,954 clusters in id)
+-------------------------------------------------------------------------------
+              |               Robust
+      outcome | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+    start_exp |   .1742972   .0035148    49.59   0.000     .1674084     .181186
+          soe |    .035194   .0078167     4.50   0.000     .0198735    .0505146
+     lnoutput |   .0286965   .0002664   107.72   0.000     .0281743    .0292186
+        lnklr |  -.1729657   .0012481  -138.59   0.000    -.1754119   -.1705195
+       profit |   .2105875   .0033367    63.11   0.000     .2040477    .2171273
+     leverage |   .0663818   .0031104    21.34   0.000     .0602855    .0724781
+lnconstraints |  -.0052657   .0073956    -0.71   0.476    -.0197607    .0092294
+     lnpergdp |  -.0006787   .0042842    -0.16   0.874    -.0090755    .0077181
+ lnpopulation |   .0508766   .0049813    10.21   0.000     .0411135    .0606397
+   lncitywage |  -.0366311   .0077538    -4.72   0.000    -.0518283   -.0214338
+    structure |   .1105006   .0238836     4.63   0.000     .0636895    .1573118
+     lnperfdi |  -.0078957     .00122    -6.47   0.000    -.0102868   -.0055046
+   lninternet |  -.0020365   .0004809    -4.23   0.000     -.002979    -.001094
+          gov |   .0006037   .0003999     1.51   0.131    -.0001801    .0013875
+        _cons |   4.472137   .0890875    50.20   0.000     4.297528    4.646746
+-------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    401954      401954           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.                 $outreg ctitle(Employ) keep(start_exp) adds(adjusted R2, `e(r2_a)') $option     
+/Users/minnie/Result/table4.xls
+dir : seeout
+
+. restore
+
+. 
+. *- 2> 出口市场多元化
+. global xlist    "soe lntariff exp_processtrade lnrer lnpercgdp lnoutput lnklr profit leverage lnconstraints"
+
+. reghdfe lncoun dd $xlist $cityvar, $absorb1
+(dropped 52749 singleton observations)
+(MWFE estimator converged in 52 iterations)
+
+HDFE Linear regression                            Number of obs   =    438,176
+Absorbing 2 HDFE groups                           F(  18, 103843) =    1731.56
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9002
+                                                  Adj R-squared   =     0.8691
+                                                  Within R-sq.    =     0.2130
+Number of clusters (id)      =    103,844         Root MSE        =     0.3364
+
+                                   (Std. err. adjusted for 103,844 clusters in id)
+----------------------------------------------------------------------------------
+                 |               Robust
+          lncoun | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-----------------+----------------------------------------------------------------
+              dd |   .2753531   .0154575    17.81   0.000     .2450566    .3056496
+             soe |  -.0039292   .0134005    -0.29   0.769     -.030194    .0223356
+        lntariff |   .1093629    .001649    66.32   0.000     .1061309    .1125949
+exp_processtrade |   .0182022   .0021117     8.62   0.000     .0140632    .0223411
+           lnrer |    .267683   .0041965    63.79   0.000      .259458    .2759081
+       lnpercgdp |   .1525902   .0014312   106.61   0.000      .149785    .1553954
+        lnoutput |   .0450977   .0008661    52.07   0.000     .0434002    .0467952
+           lnklr |  -.0021834   .0011962    -1.83   0.068     -.004528    .0001611
+          profit |   .2133867   .0069503    30.70   0.000     .1997642    .2270092
+        leverage |   .0246988   .0041752     5.92   0.000     .0165155    .0328821
+   lnconstraints |  -.0467426    .008964    -5.21   0.000     -.064312   -.0291732
+        lnpergdp |  -.0045522   .0053239    -0.86   0.393    -.0149869    .0058826
+    lnpopulation |  -.0100553   .0049558    -2.03   0.042    -.0197687    -.000342
+      lncitywage |   .0147403    .012981     1.14   0.256    -.0107023     .040183
+       structure |   .2727605    .039825     6.85   0.000     .1947041    .3508169
+        lnperfdi |  -.0135665   .0024958    -5.44   0.000    -.0184582   -.0086749
+      lninternet |   .0081853    .000914     8.96   0.000     .0063939    .0099768
+             gov |   .0010619   .0005889     1.80   0.071    -.0000922    .0022161
+           _cons |  -.6638124   .1490355    -4.45   0.000    -.9559201   -.3717046
+----------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    103844      103844           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(Country num) keep(dd) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table4.xls
+dir : seeout
+
+. reghdfe outcome lncoun $xlist $cityvar, $absorb1
+(dropped 52749 singleton observations)
+(MWFE estimator converged in 52 iterations)
+
+HDFE Linear regression                            Number of obs   =    438,176
+Absorbing 2 HDFE groups                           F(  18, 103843) =    1021.38
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9412
+                                                  Adj R-squared   =     0.9228
+                                                  Within R-sq.    =     0.2281
+Number of clusters (id)      =    103,844         Root MSE        =     0.3606
+
+                                   (Std. err. adjusted for 103,844 clusters in id)
+----------------------------------------------------------------------------------
+                 |               Robust
+         outcome | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-----------------+----------------------------------------------------------------
+          lncoun |   .1711367   .0027025    63.33   0.000     .1658399    .1764335
+             soe |   .0069606   .0158461     0.44   0.660    -.0240975    .0380186
+        lntariff |  -.0080634   .0014393    -5.60   0.000    -.0108843   -.0052425
+exp_processtrade |  -.0037599   .0021901    -1.72   0.086    -.0080525    .0005327
+           lnrer |  -.0113283   .0036902    -3.07   0.002     -.018561   -.0040955
+       lnpercgdp |   .0002606   .0012592     0.21   0.836    -.0022074    .0027286
+        lnoutput |   .0980731   .0013628    71.96   0.000      .095402    .1007442
+           lnklr |  -.2209134   .0030457   -72.53   0.000    -.2268829   -.2149438
+          profit |   .2732158   .0105298    25.95   0.000     .2525775    .2938541
+        leverage |   .0415395   .0059449     6.99   0.000     .0298877    .0531914
+   lnconstraints |  -.0421952   .0123209    -3.42   0.001     -.066344   -.0180464
+        lnpergdp |  -.0070182   .0057777    -1.21   0.224    -.0183425    .0043061
+    lnpopulation |   .0197155   .0054281     3.63   0.000     .0090765    .0303546
+      lncitywage |   .0295598   .0135104     2.19   0.029     .0030797      .05604
+       structure |   .3065979   .0418335     7.33   0.000     .2246048    .3885911
+        lnperfdi |   .0018324   .0026662     0.69   0.492    -.0033933     .007058
+      lninternet |   .0018812   .0009257     2.03   0.042     .0000669    .0036955
+             gov |  -.0022068   .0007023    -3.14   0.002    -.0035834   -.0008303
+           _cons |   4.039261   .1558196    25.92   0.000     3.733857    4.344665
+----------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    103844      103844           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(Employ) keep(lncoun) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table4.xls
+dir : seeout
+
+. 
+. 
+. // (2) 产品范围
+. global outreg   "outreg2 using $result/table5.xls, append dec(4) ad(4)"
+
+. global xlist    "soe lntariff exp_processtrade lnrer lnpercgdp lnoutput lnklr profit leverage lnconstraints"
+
+. * 出口产品种类数量
+. reghdfe lnhs6n dd $xlist $cityvar, $absorb1
+(dropped 52749 singleton observations)
+(MWFE estimator converged in 52 iterations)
+
+HDFE Linear regression                            Number of obs   =    438,176
+Absorbing 2 HDFE groups                           F(  18, 103843) =     502.81
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8615
+                                                  Adj R-squared   =     0.8183
+                                                  Within R-sq.    =     0.0521
+Number of clusters (id)      =    103,844         Root MSE        =     0.3562
+
+                                   (Std. err. adjusted for 103,844 clusters in id)
+----------------------------------------------------------------------------------
+                 |               Robust
+          lnhs6n | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-----------------+----------------------------------------------------------------
+              dd |   .0937639   .0138602     6.76   0.000     .0665981    .1209297
+             soe |  -.0044329   .0149909    -0.30   0.767     -.033815    .0249491
+        lntariff |   .0405531   .0014829    27.35   0.000     .0376466    .0434595
+exp_processtrade |  -.0019504   .0021198    -0.92   0.358    -.0061051    .0022043
+           lnrer |   .1104641   .0037505    29.45   0.000     .1031132    .1178151
+       lnpercgdp |   .0662725   .0012222    54.22   0.000     .0638771     .068668
+        lnoutput |   .0362078   .0008851    40.91   0.000     .0344731    .0379425
+           lnklr |  -.0085892   .0012358    -6.95   0.000    -.0110114    -.006167
+          profit |   .1583753   .0074232    21.34   0.000      .143826    .1729246
+        leverage |   .0135445   .0044044     3.08   0.002     .0049121     .022177
+   lnconstraints |  -.0448595   .0096294    -4.66   0.000     -.063733    -.025986
+        lnpergdp |   -.025028   .0058176    -4.30   0.000    -.0364304   -.0136255
+    lnpopulation |  -.0056514   .0050743    -1.11   0.265    -.0155968    .0042941
+      lncitywage |    .005476   .0131894     0.42   0.678    -.0203749     .031327
+       structure |  -.1184971   .0398153    -2.98   0.003    -.1965346   -.0404595
+        lnperfdi |   .0017519   .0025092     0.70   0.485    -.0031661    .0066699
+      lninternet |   .0025344   .0008935     2.84   0.005     .0007833    .0042856
+             gov |   .0008847   .0006521     1.36   0.175    -.0003933    .0021627
+           _cons |   .7501766   .1524001     4.92   0.000     .4514745    1.048879
+----------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    103844      103844           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(HS6 num) keep(dd) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table5.xls
+dir : seeout
+
+. * 差异化产品出口种类数量
+. reghdfe lnheten dd $xlist $cityvar, $absorb1
+(dropped 52156 singleton observations)
+(MWFE estimator converged in 52 iterations)
+
+HDFE Linear regression                            Number of obs   =    428,362
+Absorbing 2 HDFE groups                           F(  18, 101772) =     407.90
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8856
+                                                  Adj R-squared   =     0.8498
+                                                  Within R-sq.    =     0.0427
+Number of clusters (id)      =    101,773         Root MSE        =     0.3535
+
+                                   (Std. err. adjusted for 101,773 clusters in id)
+----------------------------------------------------------------------------------
+                 |               Robust
+         lnheten | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-----------------+----------------------------------------------------------------
+              dd |   .0864008   .0135932     6.36   0.000     .0597583    .1130432
+             soe |  -.0094615   .0153109    -0.62   0.537    -.0394706    .0205476
+        lntariff |    .038184   .0014805    25.79   0.000     .0352822    .0410858
+exp_processtrade |  -.0014029   .0021243    -0.66   0.509    -.0055665    .0027606
+           lnrer |   .0972966    .003719    26.16   0.000     .0900074    .1045858
+       lnpercgdp |   .0583215   .0012191    47.84   0.000     .0559321    .0607108
+        lnoutput |   .0336262   .0008842    38.03   0.000     .0318932    .0353592
+           lnklr |  -.0096464   .0012325    -7.83   0.000    -.0120621   -.0072307
+          profit |   .1414398   .0074486    18.99   0.000     .1268407    .1560389
+        leverage |   .0153921   .0043577     3.53   0.000      .006851    .0239331
+   lnconstraints |  -.0374657     .00966    -3.88   0.000    -.0563991   -.0185322
+        lnpergdp |  -.0212993   .0058253    -3.66   0.000    -.0327169   -.0098817
+    lnpopulation |  -.0099462   .0050589    -1.97   0.049    -.0198616   -.0000308
+      lncitywage |   .0104072    .013249     0.79   0.432    -.0155606     .036375
+       structure |  -.1523209   .0398454    -3.82   0.000    -.2304173   -.0742245
+        lnperfdi |  -.0007421   .0025046    -0.30   0.767    -.0056512     .004167
+      lninternet |   .0026595   .0008934     2.98   0.003     .0009085    .0044105
+             gov |    .001675    .000657     2.55   0.011     .0003872    .0029627
+           _cons |    .625777   .1525491     4.10   0.000     .3267826    .9247714
+----------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    101773      101773           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(Hete HS6 num) keep(dd) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table5.xls
+dir : seeout
+
+. reghdfe lnhomon dd $xlist $cityvar, $absorb1 
+(dropped 52156 singleton observations)
+(MWFE estimator converged in 52 iterations)
+
+HDFE Linear regression                            Number of obs   =    428,362
+Absorbing 2 HDFE groups                           F(  18, 101772) =     105.55
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.8080
+                                                  Adj R-squared   =     0.7479
+                                                  Within R-sq.    =     0.0080
+Number of clusters (id)      =    101,773         Root MSE        =     0.7211
+
+                                   (Std. err. adjusted for 101,773 clusters in id)
+----------------------------------------------------------------------------------
+                 |               Robust
+         lnhomon | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-----------------+----------------------------------------------------------------
+              dd |   .0285047   .0255739     1.11   0.265    -.0216198    .0786292
+             soe |   .0067347    .025684     0.26   0.793    -.0436056    .0570751
+        lntariff |    .017514   .0026848     6.52   0.000     .0122518    .0227762
+exp_processtrade |  -.0007221   .0040389    -0.18   0.858    -.0086383    .0071942
+           lnrer |   .0812125    .007003    11.60   0.000     .0674867    .0949384
+       lnpercgdp |    .052257   .0020675    25.28   0.000     .0482047    .0563092
+        lnoutput |   .0305438   .0016475    18.54   0.000     .0273147    .0337728
+           lnklr |  -.0026374   .0022475    -1.17   0.241    -.0070425    .0017677
+          profit |   .1315496   .0125741    10.46   0.000     .1069045    .1561946
+        leverage |   .0029826   .0082063     0.36   0.716    -.0131015    .0190668
+   lnconstraints |  -.0214168   .0186215    -1.15   0.250    -.0579146    .0150811
+        lnpergdp |  -.0313709   .0117469    -2.67   0.008    -.0543947   -.0083471
+    lnpopulation |  -.0101441   .0098465    -1.03   0.303    -.0294432    .0091549
+      lncitywage |  -.0195184    .025337    -0.77   0.441    -.0691785    .0301417
+       structure |  -.2390244   .0742933    -3.22   0.001    -.3846384   -.0934104
+        lnperfdi |   .0013465   .0046181     0.29   0.771     -.007705     .010398
+      lninternet |   .0008579   .0017268     0.50   0.619    -.0025265    .0042423
+             gov |  -.0009735   .0012827    -0.76   0.448    -.0034877    .0015406
+           _cons |  -1.513917   .2926134    -5.17   0.000    -2.087436   -.9403989
+----------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    101773      101773           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(Homo HS6 num) keep(dd) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table5.xls
+dir : seeout
+
+. * employ
+. reghdfe outcome lnhs6n $xlist $cityvar, $absorb1
+(dropped 52749 singleton observations)
+(MWFE estimator converged in 52 iterations)
+
+HDFE Linear regression                            Number of obs   =    438,176
+Absorbing 2 HDFE groups                           F(  18, 103843) =     947.86
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9404
+                                                  Adj R-squared   =     0.9219
+                                                  Within R-sq.    =     0.2187
+Number of clusters (id)      =    103,844         Root MSE        =     0.3628
+
+                                   (Std. err. adjusted for 103,844 clusters in id)
+----------------------------------------------------------------------------------
+                 |               Robust
+         outcome | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-----------------+----------------------------------------------------------------
+          lnhs6n |    .116738   .0025663    45.49   0.000      .111708    .1217679
+             soe |   .0069173   .0160694     0.43   0.667    -.0245786    .0384132
+        lntariff |   .0059499   .0014348     4.15   0.000     .0031377     .008762
+exp_processtrade |   -.000409   .0022014    -0.19   0.853    -.0047237    .0039056
+           lnrer |   .0215715   .0036802     5.86   0.000     .0143582    .0287847
+       lnpercgdp |   .0186753   .0012536    14.90   0.000     .0162182    .0211325
+        lnoutput |    .101596   .0013901    73.09   0.000     .0988715    .1043205
+           lnklr |  -.2202623   .0030617   -71.94   0.000    -.2262633   -.2142614
+          profit |   .2913664    .010631    27.41   0.000     .2705297    .3122031
+        leverage |   .0441746   .0059907     7.37   0.000     .0324329    .0559162
+   lnconstraints |  -.0449552   .0124118    -3.62   0.000    -.0692821   -.0206283
+        lnpergdp |  -.0048199   .0058191    -0.83   0.408    -.0162253    .0065856
+    lnpopulation |   .0187001   .0054708     3.42   0.001     .0079774    .0294228
+      lncitywage |   .0318729   .0136195     2.34   0.019     .0051788    .0585669
+       structure |   .3693207   .0421954     8.75   0.000     .2866182    .4520232
+        lnperfdi |  -.0006463   .0026851    -0.24   0.810    -.0059091    .0046164
+      lninternet |   .0030093    .000932     3.23   0.001     .0011825     .004836
+             gov |  -.0021375   .0007084    -3.02   0.003     -.003526   -.0007491
+           _cons |   3.831894   .1571086    24.39   0.000     3.523963    4.139825
+----------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    103844      103844           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(Employ) keep(lnhs6n) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table5.xls
+dir : seeout
+
+. 
+. 
+. 
+. *------------------------------------
+. **##   3. 生产效率提升效应 —— 表6
+. use $regdata/dataset_benchmark.dta, clear
+
+. // 统一设置
+. global xlist    "soe export1 import1 lnwage lnoutput lnklr profit leverage lnconstraints"
+
+. global outreg   "outreg2 using $result/table6.xls, append dec(4) ad(4)"
+
+. // 缩尾
+. local vars outcome lnwage lnoutput lnklr profit leverage lnconstraints 
+
+. foreach i of local vars {
+  2.         winsor2 `i', cut(1 99) replace
+  3. }
+
+. local vars lnpergdp lnpopulation lncitywage structure lnperfdi lninternet gov
+
+. foreach i of local vars {
+  2.         winsor2 `i', cut(1 99) replace
+  3. }
+
+. // 回归
+. *- LP
+. cap drop tfp
+
+. winsor2 tfp_lp, cut(1 99)
+
+. ren tfp_lp_w tfp
+
+. * CBEC → TFP
+. reghdfe tfp dd $xlist $cityvar, $absorb1
+(dropped 327820 singleton observations)
+(MWFE estimator converged in 50 iterations)
+
+HDFE Linear regression                            Number of obs   =  1,484,751
+Absorbing 2 HDFE groups                           F(  17, 392908) =   13271.67
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.5843
+                                                  Adj R-squared   =     0.4345
+                                                  Within R-sq.    =     0.2100
+Number of clusters (id)      =    392,909         Root MSE        =     2.3361
+
+                                (Std. err. adjusted for 392,909 clusters in id)
+-------------------------------------------------------------------------------
+              |               Robust
+          tfp | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+           dd |   .1279641   .0611157     2.09   0.036     .0081792    .2477491
+          soe |  -.0774248   .0352774    -2.19   0.028    -.1465676   -.0082821
+      export1 |  -.3443537   .0134719   -25.56   0.000    -.3707582   -.3179492
+      import1 |  -.1348911   .0133634   -10.09   0.000    -.1610829   -.1086994
+       lnwage |   .1919675   .0298296     6.44   0.000     .1335024    .2504327
+     lnoutput |    .526756   .0011495   458.26   0.000     .5245031    .5290089
+        lnklr |   .0944067   .0034369    27.47   0.000     .0876704     .101143
+       profit |    .059318   .0126946     4.67   0.000      .034437     .084199
+     leverage |  -.1981479   .0131632   -15.05   0.000    -.2239473   -.1723485
+lnconstraints |   1.459178   .0336293    43.39   0.000     1.393265     1.52509
+     lnpergdp |  -.4987324   .0207824   -24.00   0.000    -.5394652   -.4579995
+ lnpopulation |   -.486354   .0295939   -16.43   0.000    -.5443572   -.4283508
+   lncitywage |  -.3522342    .036043    -9.77   0.000    -.4228774   -.2815911
+    structure |   1.183796    .112013    10.57   0.000     .9642534    1.403338
+     lnperfdi |  -.0057127   .0066637    -0.86   0.391    -.0187734     .007348
+   lninternet |    .022738   .0026995     8.42   0.000      .017447    .0280289
+          gov |   .0735198   .0022712    32.37   0.000     .0690683    .0779713
+        _cons |   3.102104   .4458411     6.96   0.000     2.228269     3.97594
+-------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    392909      392909           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(TFP_LP) keep(dd) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table6.xls
+dir : seeout
+
+. * TFP → employ
+. reghdfe outcome tfp $xlist $cityvar, $absorb1
+(dropped 327820 singleton observations)
+(MWFE estimator converged in 50 iterations)
+
+HDFE Linear regression                            Number of obs   =  1,484,751
+Absorbing 2 HDFE groups                           F(  17, 392908) =    2987.81
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9423
+                                                  Adj R-squared   =     0.9215
+                                                  Within R-sq.    =     0.1749
+Number of clusters (id)      =    392,909         Root MSE        =     0.3939
+
+                                (Std. err. adjusted for 392,909 clusters in id)
+-------------------------------------------------------------------------------
+              |               Robust
+      outcome | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+          tfp |  -.0241735    .000209  -115.65   0.000    -.0245832   -.0237638
+          soe |   .0291638   .0077805     3.75   0.000     .0139142    .0444134
+      export1 |   .1363405   .0028445    47.93   0.000     .1307653    .1419156
+      import1 |   .1297312   .0026635    48.71   0.000     .1245109    .1349515
+       lnwage |   .5001861   .0095439    52.41   0.000     .4814803    .5188919
+     lnoutput |   .0421386   .0003086   136.56   0.000     .0415338    .0427434
+        lnklr |  -.1663159   .0012503  -133.02   0.000    -.1687665   -.1638653
+       profit |   .3288261   .0042997    76.48   0.000     .3203989    .3372534
+     leverage |   .0723641   .0031435    23.02   0.000     .0662029    .0785253
+lnconstraints |   .0076273   .0072351     1.05   0.292    -.0065532    .0218078
+     lnpergdp |  -.0174508   .0039631    -4.40   0.000    -.0252185   -.0096832
+ lnpopulation |   .0330207    .004606     7.17   0.000     .0239931    .0420483
+   lncitywage |   -.035266   .0072917    -4.84   0.000    -.0495575   -.0209745
+    structure |   .1935023   .0225373     8.59   0.000     .1493298    .2376748
+     lnperfdi |  -.0055936   .0012488    -4.48   0.000    -.0080412    -.003146
+   lninternet |  -.0001554   .0004566    -0.34   0.734    -.0010504    .0007396
+          gov |   .0017036   .0004036     4.22   0.000     .0009126    .0024946
+        _cons |   4.552764   .0839931    54.20   0.000      4.38814    4.717388
+-------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    392909      392909           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(Employ) keep(tfp) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table6.xls
+dir : seeout
+
+. 
+. *- OP
+. cap drop tfp
+
+. winsor2 tfp_op, cut(1 99)
+
+. ren tfp_op_w tfp
+
+. * CBEC → TFP
+. reghdfe tfp dd $xlist $cityvar, $absorb1
+(dropped 327820 singleton observations)
+(MWFE estimator converged in 50 iterations)
+
+HDFE Linear regression                            Number of obs   =  1,484,751
+Absorbing 2 HDFE groups                           F(  17, 392908) =   13488.68
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.5857
+                                                  Adj R-squared   =     0.4364
+                                                  Within R-sq.    =     0.2120
+Number of clusters (id)      =    392,909         Root MSE        =     2.3328
+
+                                (Std. err. adjusted for 392,909 clusters in id)
+-------------------------------------------------------------------------------
+              |               Robust
+          tfp | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+           dd |   .1236374   .0608992     2.03   0.042     .0042768     .242998
+          soe |  -.0755324   .0352363    -2.14   0.032    -.1445946   -.0064702
+      export1 |  -.3342145   .0134369   -24.87   0.000    -.3605504   -.3078787
+      import1 |  -.1247728   .0133437    -9.35   0.000     -.150926   -.0986197
+       lnwage |   .2393748   .0296427     8.08   0.000     .1812761    .2974736
+     lnoutput |   .5292664   .0011455   462.04   0.000     .5270212    .5315115
+        lnklr |   .0785938   .0034126    23.03   0.000     .0719053    .0852823
+       profit |    .087761      .0126     6.97   0.000     .0630654    .1124566
+     leverage |  -.1934403    .013114   -14.75   0.000    -.2191433   -.1677373
+lnconstraints |   1.458037   .0335375    43.47   0.000     1.392305     1.52377
+     lnpergdp |  -.4994081    .020745   -24.07   0.000    -.5400677   -.4587486
+ lnpopulation |  -.4829351   .0295655   -16.33   0.000    -.5408827   -.4249875
+   lncitywage |  -.3554017   .0359738    -9.88   0.000    -.4259094   -.2848941
+    structure |   1.183377   .1118176    10.58   0.000     .9642181    1.402536
+     lnperfdi |  -.0063665   .0066511    -0.96   0.338    -.0194026    .0066695
+   lninternet |   .0226906   .0026968     8.41   0.000      .017405    .0279761
+          gov |   .0734917   .0022676    32.41   0.000     .0690473    .0779361
+        _cons |   3.370432   .4451193     7.57   0.000     2.498012    4.242853
+-------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    392909      392909           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(TFP_OP) keep(dd) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table6.xls
+dir : seeout
+
+. * TFP → employ
+. reghdfe outcome tfp $xlist $cityvar, $absorb1 
+(dropped 327820 singleton observations)
+(MWFE estimator converged in 50 iterations)
+
+HDFE Linear regression                            Number of obs   =  1,484,751
+Absorbing 2 HDFE groups                           F(  17, 392908) =    2904.10
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9421
+                                                  Adj R-squared   =     0.9212
+                                                  Within R-sq.    =     0.1719
+Number of clusters (id)      =    392,909         Root MSE        =     0.3947
+
+                                (Std. err. adjusted for 392,909 clusters in id)
+-------------------------------------------------------------------------------
+              |               Robust
+      outcome | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+          tfp |  -.0219351   .0002057  -106.65   0.000    -.0223382   -.0215319
+          soe |   .0293784   .0078009     3.77   0.000      .014089    .0446679
+      export1 |   .1373302   .0028521    48.15   0.000     .1317403    .1429201
+      import1 |   .1302548   .0026693    48.80   0.000     .1250231    .1354865
+       lnwage |   .5007963   .0095744    52.31   0.000     .4820308    .5195618
+     lnoutput |   .0410146   .0003074   133.42   0.000     .0404121    .0416171
+        lnklr |  -.1668742   .0012543  -133.04   0.000    -.1693325   -.1644159
+       profit |    .329317   .0043134    76.35   0.000     .3208629    .3377711
+     leverage |   .0729109   .0031536    23.12   0.000     .0667299    .0790919
+lnconstraints |   .0043359   .0072548     0.60   0.550    -.0098832     .018555
+     lnpergdp |  -.0163487   .0039719    -4.12   0.000    -.0241335    -.008564
+ lnpopulation |    .034184    .004613     7.41   0.000     .0251427    .0432253
+   lncitywage |  -.0345491    .007309    -4.73   0.000    -.0488746   -.0202236
+    structure |   .1908427   .0225894     8.45   0.000     .1465682    .2351172
+     lnperfdi |  -.0055952   .0012516    -4.47   0.000    -.0080484    -.003142
+   lninternet |  -.0002073   .0004574    -0.45   0.650    -.0011038    .0006892
+          gov |   .0015385   .0004044     3.80   0.000     .0007458    .0023312
+        _cons |    4.55172   .0841745    54.07   0.000     4.386741      4.7167
+-------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+----------------------------------------------------------+
+      Absorbed FE | Categories  - Redundant  = Num. Coefs |
+------------------+---------------------------------------|
+               id |    392909      392909           0    *|
+   cic2_code#year |       300           1         299     |
+----------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(Employ) keep(tfp) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table6.xls
+dir : seeout
+
+. 
+. 
+. 
+. 
+. *-------------------------------------------------------------------------------
+. **#                    城市层面的进一步分析 —— 表7～表8
+. *-------------------------------------------------------------------------------
+. ***   1. 跨境电商发展对城市就业总量的影响 —— 表7
+. use $regdata/dataset_city1.dta, clear
+
+. // 统一设置
+. global cityvar      "lnpergdp lnpopulation lncitywage structure lnperfdi internet fiscal_ratio"
+
+. global absorb_city  "absorb(citycode prov#year) cluster(citycode)"
+
+. global outreg       "outreg2 using $result/table7.xls, append dec(4) ad(4)"
+
+. global option       "addtext(ctrs, yes,city fe, yes,prov-year fe, yes)"
+
+. // 回归
+. xtset citycode year
+
+Panel variable: citycode (unbalanced)
+ Time variable: year, 2001 to 2019, but with gaps
+         Delta: 1 unit
+
+. reghdfe city_employment1 L.lncbec_city, $absorb_city
+(dropped 95 singleton observations)
+(MWFE estimator converged in 8 iterations)
+
+HDFE Linear regression                            Number of obs   =      5,078
+Absorbing 2 HDFE groups                           F(   1,    295) =      18.04
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9520
+                                                  Adj R-squared   =     0.9436
+                                                  Within R-sq.    =     0.0288
+Number of clusters (citycode) =        296        Root MSE        =     0.1762
+
+                             (Std. err. adjusted for 296 clusters in citycode)
+------------------------------------------------------------------------------
+             |               Robust
+city_emplo~1 | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ lncbec_city |
+         L1. |   .0452633    .010657     4.25   0.000       .02429    .0662366
+             |
+       _cons |   3.412443   .0162925   209.45   0.000     3.380378    3.444507
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+    citycode |       296         296           0    *|
+   prov#year |       459           1         458     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(City Employ1) keep(L.lncbec_city) adds(adjusted R2, `e(r2_a)') addtext(city fe, yes,prov-year fe, ye
+> s) 
+/Users/minnie/Result/table7.xls
+dir : seeout
+
+. reghdfe city_employment1 L.lncbec_city L.($cityvar), $absorb_city
+(dropped 85 singleton observations)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =      5,056
+Absorbing 2 HDFE groups                           F(   8,    289) =       3.95
+Statistics robust to heteroskedasticity           Prob > F        =     0.0002
+                                                  R-squared       =     0.9519
+                                                  Adj R-squared   =     0.9435
+                                                  Within R-sq.    =     0.0399
+Number of clusters (citycode) =        290        Root MSE        =     0.1752
+
+                             (Std. err. adjusted for 290 clusters in citycode)
+------------------------------------------------------------------------------
+             |               Robust
+city_emplo~1 | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ lncbec_city |
+         L1. |   .0466776   .0106098     4.40   0.000     .0257953      .06756
+             |
+    lnpergdp |
+         L1. |  -.0190259   .0530388    -0.36   0.720    -.1234173    .0853655
+             |
+lnpopulation |
+         L1. |   .1419509   .0735804     1.93   0.055    -.0028705    .2867723
+             |
+  lncitywage |
+         L1. |  -.0437182    .040773    -1.07   0.285    -.1239678    .0365314
+             |
+   structure |
+         L1. |   .1610036   .1748967     0.92   0.358    -.1832292    .5052364
+             |
+    lnperfdi |
+         L1. |    .015079   .0077483     1.95   0.053    -.0001713    .0303293
+             |
+    internet |
+         L1. |  -.0107346   .0048312    -2.22   0.027    -.0202434   -.0012259
+             |
+fiscal_ratio |
+         L1. |  -.0011178   .0020072    -0.56   0.578    -.0050684    .0028328
+             |
+       _cons |    3.15582   .8612231     3.66   0.000     1.460755    4.850885
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+    citycode |       290         290           0    *|
+   prov#year |       456           1         455     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(City Employ1) keep(L.lncbec_city) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table7.xls
+dir : seeout
+
+. reghdfe city_employment2 L.lncbec_city, $absorb_city
+(dropped 95 singleton observations)
+(MWFE estimator converged in 8 iterations)
+
+HDFE Linear regression                            Number of obs   =      5,078
+Absorbing 2 HDFE groups                           F(   1,    295) =      15.28
+Statistics robust to heteroskedasticity           Prob > F        =     0.0001
+                                                  R-squared       =     0.9658
+                                                  Adj R-squared   =     0.9598
+                                                  Within R-sq.    =     0.0205
+Number of clusters (citycode) =        296        Root MSE        =     0.1479
+
+                             (Std. err. adjusted for 296 clusters in citycode)
+------------------------------------------------------------------------------
+             |               Robust
+city_emplo~2 | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ lncbec_city |
+         L1. |   .0318982   .0081612     3.91   0.000     .0158367    .0479598
+             |
+       _cons |    3.35444   .0124769   268.85   0.000     3.329885    3.378995
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+    citycode |       296         296           0    *|
+   prov#year |       459           1         458     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(City Employ2) keep(L.lncbec_city) adds(adjusted R2, `e(r2_a)') addtext(city fe, yes,prov-year fe, ye
+> s)
+/Users/minnie/Result/table7.xls
+dir : seeout
+
+. reghdfe city_employment2 L.lncbec_city L.($cityvar), $absorb_city
+(dropped 85 singleton observations)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =      5,056
+Absorbing 2 HDFE groups                           F(   8,    289) =       3.50
+Statistics robust to heteroskedasticity           Prob > F        =     0.0007
+                                                  R-squared       =     0.9660
+                                                  Adj R-squared   =     0.9600
+                                                  Within R-sq.    =     0.0420
+Number of clusters (citycode) =        290        Root MSE        =     0.1463
+
+                             (Std. err. adjusted for 290 clusters in citycode)
+------------------------------------------------------------------------------
+             |               Robust
+city_emplo~2 | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ lncbec_city |
+         L1. |   .0327093   .0080619     4.06   0.000     .0168418    .0485768
+             |
+    lnpergdp |
+         L1. |   .0262269   .0385692     0.68   0.497    -.0496852    .1021391
+             |
+lnpopulation |
+         L1. |    .145301    .075222     1.93   0.054    -.0027515    .2933535
+             |
+  lncitywage |
+         L1. |  -.0886519   .0440217    -2.01   0.045    -.1752957    -.002008
+             |
+   structure |
+         L1. |   .0291369   .1227457     0.24   0.813    -.2124521    .2707259
+             |
+    lnperfdi |
+         L1. |   .0097307    .006637     1.47   0.144    -.0033323    .0227936
+             |
+    internet |
+         L1. |  -.0093188   .0043977    -2.12   0.035    -.0179744   -.0006632
+             |
+fiscal_ratio |
+         L1. |  -.0025465   .0017799    -1.43   0.154    -.0060498    .0009568
+             |
+       _cons |   3.158769    .899175     3.51   0.001     1.389007    4.928531
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+    citycode |       290         290           0    *|
+   prov#year |       456           1         455     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(City Employ2) keep(L.lncbec_city) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table7.xls
+dir : seeout
+
+. xtset, clear
+
+. 
+. 
+. ***   2. 跨境电商发展与城市内企业间的就业结构 —— 表8
+. global outreg   "outreg2 using $result/table8.xls, append dec(4) ad(4)"
+
+. 
+. use $regdata/dataset_city3.dta, clear
+
+. // 回归
+. xtset citycode year
+
+Panel variable: citycode (unbalanced)
+ Time variable: year, 2007 to 2016, but with gaps
+         Delta: 1 unit
+
+. reghdfe lnemp_cbec L.(lncbec_city $cityvar), $absorb_city 
+(dropped 47 singleton observations)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =      2,473
+Absorbing 2 HDFE groups                           F(   8,    282) =       7.80
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.9618
+                                                  Adj R-squared   =     0.9518
+                                                  Within R-sq.    =     0.0641
+Number of clusters (citycode) =        283        Root MSE        =     0.2195
+
+                             (Std. err. adjusted for 283 clusters in citycode)
+------------------------------------------------------------------------------
+             |               Robust
+  lnemp_cbec | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ lncbec_city |
+         L1. |    .191089   .0266061     7.18   0.000     .1387171    .2434608
+             |
+    lnpergdp |
+         L1. |   .0767808   .0451182     1.70   0.090    -.0120304    .1655921
+             |
+lnpopulation |
+         L1. |  -.0877961   .0934206    -0.94   0.348    -.2716863    .0960942
+             |
+  lncitywage |
+         L1. |  -.1270291    .095199    -1.33   0.183    -.3144199    .0603618
+             |
+   structure |
+         L1. |  -.2996153   .2635683    -1.14   0.257    -.8184262    .2191956
+             |
+    lnperfdi |
+         L1. |   .0099532   .0094862     1.05   0.295    -.0087196     .028626
+             |
+    internet |
+         L1. |   .0116625   .0070749     1.65   0.100    -.0022638    .0255888
+             |
+fiscal_ratio |
+         L1. |   .0018915    .002719     0.70   0.487    -.0034607    .0072436
+             |
+       _cons |   1.576937   1.220791     1.29   0.198    -.8260821    3.979956
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+    citycode |       283         283           0    *|
+   prov#year |       224           1         223     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(CBEC Employ) keep(L.lncbec_city) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table8.xls
+dir : seeout
+
+. reghdfe lnemp_nocbec L.(lncbec_city $cityvar), $absorb_city 
+(dropped 47 singleton observations)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =      2,473
+Absorbing 2 HDFE groups                           F(   8,    282) =       1.82
+Statistics robust to heteroskedasticity           Prob > F        =     0.0724
+                                                  R-squared       =     0.9577
+                                                  Adj R-squared   =     0.9467
+                                                  Within R-sq.    =     0.0154
+Number of clusters (citycode) =        283        Root MSE        =     0.2838
+
+                             (Std. err. adjusted for 283 clusters in citycode)
+------------------------------------------------------------------------------
+             |               Robust
+lnemp_nocbec | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ lncbec_city |
+         L1. |   .0473528   .0270785     1.75   0.081    -.0059489    .1006545
+             |
+    lnpergdp |
+         L1. |   .0929851   .1006997     0.92   0.357    -.1052333    .2912035
+             |
+lnpopulation |
+         L1. |   .1422254   .1182098     1.20   0.230    -.0904602     .374911
+             |
+  lncitywage |
+         L1. |   .0495394   .0606764     0.82   0.415    -.0698967    .1689754
+             |
+   structure |
+         L1. |   .2307781   .3677197     0.63   0.531    -.4930458     .954602
+             |
+    lnperfdi |
+         L1. |  -.0300516    .015115    -1.99   0.048    -.0598041   -.0002991
+             |
+    internet |
+         L1. |   -.014965   .0079122    -1.89   0.060    -.0305394    .0006095
+             |
+fiscal_ratio |
+         L1. |   .0130197   .0067667     1.92   0.055       -.0003    .0263394
+             |
+       _cons |   1.919718   1.420781     1.35   0.178    -.8769631      4.7164
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+    citycode |       283         283           0    *|
+   prov#year |       224           1         223     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(nonCBEC Employ) keep(L.lncbec_city) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table8.xls
+dir : seeout
+
+. reghdfe pr_cbec   L.(lncbec_city $cityvar), $absorb_city 
+(dropped 47 singleton observations)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =      2,473
+Absorbing 2 HDFE groups                           F(   8,    282) =       2.81
+Statistics robust to heteroskedasticity           Prob > F        =     0.0051
+                                                  R-squared       =     0.7907
+                                                  Adj R-squared   =     0.7358
+                                                  Within R-sq.    =     0.0154
+Number of clusters (citycode) =        283        Root MSE        =     0.0160
+
+                             (Std. err. adjusted for 283 clusters in citycode)
+------------------------------------------------------------------------------
+             |               Robust
+     pr_cbec | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ lncbec_city |
+         L1. |   .0059151   .0019114     3.09   0.002     .0021528    .0096775
+             |
+    lnpergdp |
+         L1. |   .0023862   .0033077     0.72   0.471    -.0041248    .0088972
+             |
+lnpopulation |
+         L1. |  -.0072427   .0037629    -1.92   0.055    -.0146496    .0001643
+             |
+  lncitywage |
+         L1. |  -.0063946   .0050636    -1.26   0.208    -.0163619    .0035727
+             |
+   structure |
+         L1. |  -.0149454   .0156592    -0.95   0.341    -.0457691    .0158782
+             |
+    lnperfdi |
+         L1. |   .0010977   .0007875     1.39   0.164    -.0004525    .0026479
+             |
+    internet |
+         L1. |  -.0003469   .0003539    -0.98   0.328    -.0010435    .0003496
+             |
+fiscal_ratio |
+         L1. |   .0000756    .000215     0.35   0.726    -.0003477    .0004988
+             |
+       _cons |   .0989637    .062046     1.60   0.112    -.0231684    .2210958
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+    citycode |       283         283           0    *|
+   prov#year |       224           1         223     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(CBEC Employ ratio) keep(L.lncbec_city) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table8.xls
+dir : seeout
+
+. reghdfe pr_emp L.(lncbec_city $cityvar), $absorb_city 
+(dropped 47 singleton observations)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =      2,473
+Absorbing 2 HDFE groups                           F(   8,    282) =       1.68
+Statistics robust to heteroskedasticity           Prob > F        =     0.1031
+                                                  R-squared       =     0.7105
+                                                  Adj R-squared   =     0.6347
+                                                  Within R-sq.    =     0.0128
+Number of clusters (citycode) =        283        Root MSE        =     0.0255
+
+                             (Std. err. adjusted for 283 clusters in citycode)
+------------------------------------------------------------------------------
+             |               Robust
+      pr_emp | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ lncbec_city |
+         L1. |   .0080148   .0035151     2.28   0.023     .0010957     .014934
+             |
+    lnpergdp |
+         L1. |    .006101   .0062767     0.97   0.332    -.0062542    .0184561
+             |
+lnpopulation |
+         L1. |  -.0075202   .0044049    -1.71   0.089     -.016191    .0011505
+             |
+  lncitywage |
+         L1. |  -.0097544   .0068505    -1.42   0.156     -.023239    .0037303
+             |
+   structure |
+         L1. |  -.0246662    .019035    -1.30   0.196    -.0621349    .0128025
+             |
+    lnperfdi |
+         L1. |   .0018782   .0012979     1.45   0.149    -.0006765     .004433
+             |
+    internet |
+         L1. |  -.0007635    .000456    -1.67   0.095     -.001661    .0001341
+             |
+fiscal_ratio |
+         L1. |   .0001297   .0002459     0.53   0.598    -.0003543    .0006137
+             |
+       _cons |   .1017359   .0835555     1.22   0.224    -.0627357    .2662075
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+    citycode |       283         283           0    *|
+   prov#year |       224           1         223     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+.         $outreg ctitle(CBEC / nonCBEC) keep(L.lncbec_city) adds(adjusted R2, `e(r2_a)') $option
+/Users/minnie/Result/table8.xls
+dir : seeout
+
+. 
+. xtset, clear
+
+. 
+. 
+. display "程序结束时间：$S_DATE $S_TIME"
+程序结束时间：12 Oct 2026 13:50:24
+
+. log close
+      name:  <unnamed>
+       log:  /Users/minnie/Result/正文程序运行日志.log
+  log type:  text
+ closed on:  12 Oct 2026, 13:50:24
+-----------------------------------------------------------------------------------------------------------------------------

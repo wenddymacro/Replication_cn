@@ -1,0 +1,16 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+Warning in did_standardization(data, args) :
+  Some groups in your dataset have very few observations, which may cause estimation problems.
+  Check groups: 6.
+   window   twfe twfe_se     csa  csa_se     bjs  bjs_se neg_abs G_eff_twfe
+   <char>  <num>   <num>   <num>   <num>   <num>   <num>   <num>      <num>
+1: static 0.1014 0.03531 0.04832 0.03415 0.08886 0.03989       0        110
+   G_eff_bjs G_eff_csa
+       <num>     <num>
+1:        NA        NA
+TWFE in raw units 0.0952672 vs published 0.0953 (ratio 0.9997)
+-> output/specs_controls/cie117612__T2_4.csv 

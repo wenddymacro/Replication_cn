@@ -1,0 +1,22 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+Warning in eval(stub[[3L]], x, enclos) :
+  unable to translate '<U+7ECF><U+5EA6>' to native encoding
+Warning in eval(stub[[3L]], x, enclos) :
+  unable to translate '<U+7EAC><U+5EA6>' to native encoding
+You have an unbalanced panel. Proceeding as such.
+Warning in did_standardization(data, args) :
+  Some groups in your dataset have very few observations, which may cause estimation problems.
+  Check groups: 5.
+The Wald pre-test is not reported when clustering beyond the unit level (clustervars = 'cl_num') because the analytical variance matrix does not account for between-cluster correlation. Use the bootstrap confidence intervals to assess pre-trends.
+   window    twfe twfe_se     csa  csa_se     bjs  bjs_se  neg_abs G_eff_twfe
+   <char>   <num>   <num>   <num>   <num>   <num>   <num>    <num>      <num>
+1: static 0.04828 0.01437 0.01968 0.02076 0.05026 0.01429 0.009789      26.03
+   G_eff_bjs G_eff_csa
+       <num>     <num>
+1:        NA        NA
+TWFE in raw units 0.0511866 vs published 0.0512 (ratio 0.9997)
+-> output/specs_controls/cie20260904__T1_3.csv 

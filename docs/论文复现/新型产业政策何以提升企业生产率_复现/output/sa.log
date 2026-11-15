@@ -1,0 +1,167 @@
+---------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\wo
+> rk\../output/sa.log
+  log type:  text
+ opened on:  13 Nov 2026, 23:41:47
+
+. //生成动态效应的变量
+. local num1=4
+
+. local num2=3
+
+. replace chainleader_l=. if chainleader_l==0
+(0 real changes made)
+
+. gen event=year-chainleader_l
+(20,134 missing values generated)
+
+. gen setup_mis=chainleader_l
+(20,134 missing values generated)
+
+. replace setup_mis=0 if setup_mis==.
+(20,134 real changes made)
+
+. tab event
+
+      event |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         -9 |         43        0.52        0.52
+         -8 |        121        1.47        2.00
+         -7 |        277        3.37        5.37
+         -6 |        527        6.42       11.79
+         -5 |        589        7.17       18.96
+         -4 |        644        7.84       26.81
+         -3 |        734        8.94       35.74
+         -2 |        787        9.58       45.33
+         -1 |        826       10.06       55.39
+          0 |        945       11.51       66.90
+          1 |        937       11.41       78.31
+          2 |        898       10.94       89.25
+          3 |        662        8.06       97.31
+          4 |        152        1.85       99.16
+          5 |         34        0.41       99.57
+          6 |         35        0.43      100.00
+------------+-----------------------------------
+      Total |      8,211      100.00
+
+. replace event=-`num1' if event<=-`num1'
+(1,557 real changes made)
+
+. replace event=`num2' if event>=`num2'
+(20,355 real changes made)
+
+. forvalues i=`num1'(-1)1{
+  2. gen pre`i'=0
+  3. replace pre`i'=1 if event==-`i'
+  4. }
+(2,201 real changes made)
+(734 real changes made)
+(787 real changes made)
+(826 real changes made)
+
+. forvalues i=0(1)`num2'{
+  2. gen post`i'=0
+  3. replace post`i'=1 if event==`i'
+  4. }
+(945 real changes made)
+(937 real changes made)
+(898 real changes made)
+(21,017 real changes made)
+
+. gen cohort=chainleader_l
+(20,134 missing values generated)
+
+. eventstudyinteract TFP pre4-pre2 post0 post1-post3 pre1, cohort(cohort) control
+> _cohort(no_treat) covariates($xlist) absorb(i.stkcd i.indid#i.year i.prv#i.year
+> ) vce(cluster city)
+(obs=7,042)
+
+IW estimates for dynamic effects                        Number of obs = 23,913
+Absorbing 3 HDFE groups                                 F(52, 256)    =  48.59
+                                                        Prob > F      = 0.0000
+                                                        R-squared     = 0.9319
+                                                        Adj R-squared = 0.9163
+                                                        Root MSE      = 0.3068
+                                 (Std. err. adjusted for 257 clusters in city)
+------------------------------------------------------------------------------
+             |               Robust
+         TFP | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        pre4 |  -.0087057   .0226849    -0.38   0.701    -.0533785    .0359672
+        pre3 |   -.004736   .0177467    -0.27   0.790    -.0396841    .0302122
+        pre2 |  -.0129137   .0122443    -1.05   0.293     -.037026    .0111987
+       post0 |   .0191756   .0116641     1.64   0.101    -.0037942    .0421453
+       post1 |   .0207459   .0140478     1.48   0.141    -.0069181    .0484098
+       post2 |   .0384625   .0172006     2.24   0.026     .0045898    .0723352
+       post3 |   .0154149    .019438     0.79   0.428    -.0228639    .0536938
+        pre1 |          0  (omitted)
+------------------------------------------------------------------------------
+
+. 
+. matrix list e(b_iw)
+
+e(b_iw)[1,8]
+          pre4        pre3        pre2       post0       post1       post2
+r1  -.00870568    -.004736  -.01291367   .01917559   .02074587   .03846251
+
+         post3        pre1
+r1   .01541495           0
+
+. matrix list e(V_iw)
+
+symmetric e(V_iw)[8,8]
+             pre4        pre3        pre2       post0       post1       post2
+ pre4   .00051461
+ pre3   .00019864   .00031495
+ pre2   .00007945   .00016086   .00014992
+post0   .00003945   .00005903   .00003108   .00013605
+post1   .00006373   .00002532  -4.152e-06   .00008799   .00019734
+post2   .00008245   .00001198  -.00001098   .00006791   .00018871   .00029586
+post3   .00002211   .00003985  -.00001103   .00008287   .00012869   .00019427
+ pre1           0           0           0           0           0           0
+
+            post3        pre1
+post3   .00037784
+ pre1           0           0
+
+. 
+. matrix bb=e(b_iw)
+
+. matrix vv=e(V_iw)
+
+. postfile coef str40 term double b se using "../output/sa.dta", replace
+(file ../output/sa.dta not found)
+
+. local terms : colnames bb
+
+. local j=0
+
+. foreach term of local terms {
+  2. local ++j
+  3. post coef ("`term'") (bb[1,`j']) (sqrt(vv[`j',`j']))
+  4. }
+
+. postclose coef
+
+. preserve
+
+. use "../output/sa.dta", clear
+
+. export delimited using "../output/sa.csv", replace
+(file ../output/sa.csv not found)
+file ../output/sa.csv saved
+
+. restore
+
+. 
+. display "COMPLETE_sa"
+COMPLETE_sa
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\wo
+> rk\../output/sa.log
+  log type:  text
+ closed on:  13 Nov 2026, 23:41:57
+---------------------------------------------------------------------------------

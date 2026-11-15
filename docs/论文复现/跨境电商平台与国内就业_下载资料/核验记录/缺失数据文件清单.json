@@ -1,0 +1,184 @@
+[
+  {
+    "file": "dataset_benchmark.dta",
+    "status": "not_in_supplied_zip",
+    "references": [
+      {
+        "code": "正文程序.do",
+        "line": 27,
+        "text": "use $regdata/dataset_benchmark.dta, clear"
+      },
+      {
+        "code": "正文程序.do",
+        "line": 130,
+        "text": "\tuse $regdata/dataset_benchmark.dta, clear"
+      },
+      {
+        "code": "正文程序.do",
+        "line": 179,
+        "text": "use $regdata/dataset_benchmark.dta, clear"
+      },
+      {
+        "code": "附录程序.do",
+        "line": 27,
+        "text": "use $regdata/dataset_benchmark.dta, clear"
+      },
+      {
+        "code": "附录程序.do",
+        "line": 199,
+        "text": "use $regdata/dataset_benchmark.dta, clear"
+      },
+      {
+        "code": "附录程序.do",
+        "line": 222,
+        "text": "use $regdata/dataset_benchmark.dta, clear"
+      },
+      {
+        "code": "附录程序.do",
+        "line": 393,
+        "text": "use $regdata/dataset_benchmark.dta, clear"
+      }
+    ]
+  },
+  {
+    "file": "dataset_city1.dta",
+    "status": "not_in_supplied_zip",
+    "references": [
+      {
+        "code": "正文程序.do",
+        "line": 222,
+        "text": "use $regdata/dataset_city1.dta, clear"
+      },
+      {
+        "code": "附录程序.do",
+        "line": 508,
+        "text": "use $regdata/dataset_city1.dta, clear"
+      }
+    ]
+  },
+  {
+    "file": "dataset_city2.dta",
+    "status": "not_in_supplied_zip",
+    "references": [
+      {
+        "code": "附录程序.do",
+        "line": 486,
+        "text": "use $regdata/dataset_city2.dta, clear"
+      }
+    ]
+  },
+  {
+    "file": "dataset_city3.dta",
+    "status": "not_in_supplied_zip",
+    "references": [
+      {
+        "code": "正文程序.do",
+        "line": 244,
+        "text": "use $regdata/dataset_city3.dta, clear"
+      }
+    ]
+  },
+  {
+    "file": "dataset_city4.dta",
+    "status": "not_in_supplied_zip",
+    "references": [
+      {
+        "code": "附录程序.do",
+        "line": 539,
+        "text": "use $regdata/dataset_city4.dta, clear"
+      }
+    ]
+  },
+  {
+    "file": "dataset_exp.dta",
+    "status": "not_in_supplied_zip",
+    "references": [
+      {
+        "code": "正文程序.do",
+        "line": 105,
+        "text": "use $regdata/dataset_exp.dta, clear"
+      },
+      {
+        "code": "附录程序.do",
+        "line": 322,
+        "text": "use $regdata/dataset_exp.dta, clear"
+      }
+    ]
+  },
+  {
+    "file": "dataset_gq.dta",
+    "status": "not_in_supplied_zip",
+    "references": [
+      {
+        "code": "附录程序.do",
+        "line": 369,
+        "text": "use $regdata/dataset_gq.dta, clear"
+      }
+    ]
+  },
+  {
+    "file": "dataset_imp1.dta",
+    "status": "not_in_supplied_zip",
+    "references": [
+      {
+        "code": "正文程序.do",
+        "line": 85,
+        "text": "use $regdata/dataset_imp1.dta, clear"
+      },
+      {
+        "code": "附录程序.do",
+        "line": 338,
+        "text": "use $regdata/dataset_imp1.dta, clear"
+      },
+      {
+        "code": "附录程序.do",
+        "line": 436,
+        "text": "use $regdata/dataset_imp1.dta, clear"
+      }
+    ]
+  },
+  {
+    "file": "dataset_imp2.dta",
+    "status": "not_in_supplied_zip",
+    "references": [
+      {
+        "code": "附录程序.do",
+        "line": 463,
+        "text": "use $regdata/dataset_imp2.dta, clear"
+      }
+    ]
+  },
+  {
+    "file": "dataset_psm1.dta",
+    "status": "not_in_supplied_zip",
+    "references": [
+      {
+        "code": "附录程序.do",
+        "line": 166,
+        "text": "use $regdata/dataset_psm1.dta, clear"
+      }
+    ]
+  },
+  {
+    "file": "dataset_psm2.dta",
+    "status": "not_in_supplied_zip",
+    "references": [
+      {
+        "code": "附录程序.do",
+        "line": 182,
+        "text": "use $regdata/dataset_psm2.dta, clear"
+      }
+    ]
+  },
+  {
+    "file": "dataset_stk.dta",
+    "status": "not_in_supplied_zip",
+    "references": [
+      {
+        "code": "附录程序.do",
+        "line": 354,
+        "text": "use $regdata/dataset_stk.dta, clear"
+      }
+    ]
+  }
+]

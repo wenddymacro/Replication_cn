@@ -1,0 +1,110 @@
+**# use 图3_数据.dta #1
+
+*=========================*
+* 1) 汇总到行业层面
+*=========================*
+local VAR_ID   "rand_id"
+local VAR_INDY "ssc_ind"      
+local VAR_CBE  "cbe_std"
+
+collapse (count) n_std=`VAR_ID' (sum) cbe_sum=`VAR_CBE', by(`VAR_INDY')
+gen eff = cbe_sum / n_std
+rename `VAR_INDY' industry
+
+*=========================*
+* 2) 行业中文名称
+*=========================*
+gen str20 industry_cn = ""
+replace industry_cn = "综合"                         if industry=="A"
+replace industry_cn = "农业、林业"                   if industry=="B"
+replace industry_cn = "医药、卫生、劳动保护"         if industry=="C"
+replace industry_cn = "矿业"                         if industry=="D"
+replace industry_cn = "石油"                         if industry=="E"
+replace industry_cn = "能源、核技术"                 if industry=="F"
+replace industry_cn = "化工"                         if industry=="G"
+replace industry_cn = "冶金"                         if industry=="H"
+replace industry_cn = "机械"                         if industry=="J"
+replace industry_cn = "电工"                         if industry=="K"
+replace industry_cn = "电子元器件与信息技术"         if industry=="L"
+replace industry_cn = "通信、广播"                   if industry=="M"
+replace industry_cn = "仪器、仪表"                   if industry=="N"
+replace industry_cn = "工程建设"                     if industry=="P"
+replace industry_cn = "建材"                         if industry=="Q"
+replace industry_cn = "公路、水路运输"               if industry=="R"
+replace industry_cn = "铁路"                         if industry=="S"
+replace industry_cn = "车辆"                         if industry=="T"
+replace industry_cn = "船舶"                         if industry=="U"
+replace industry_cn = "航空、航天"                   if industry=="V"
+replace industry_cn = "纺织"                         if industry=="W"
+replace industry_cn = "食品"                         if industry=="X"
+replace industry_cn = "轻工、文化与生活用品"         if industry=="Y"
+replace industry_cn = "环境保护"                     if industry=="Z"
+
+*=========================*
+* 3) 用中位数做象限阈值 
+*=========================*
+quietly summarize n_std, detail
+scalar x_thr = r(p50)     // 总量中位数
+quietly summarize eff, detail
+scalar y_thr = r(p50)     // 效率中位数
+
+gen byte quadrant = .
+replace quadrant = 1 if n_std>=x_thr & eff>=y_thr     // 高量×高效
+replace quadrant = 2 if n_std<  x_thr & eff>=y_thr     // 低量×高效
+replace quadrant = 3 if n_std<  x_thr & eff<  y_thr     // 低量×低效
+replace quadrant = 4 if n_std>=x_thr & eff<  y_thr     // 高量×低效
+label define q 1 "高量×高效" 2 "低量×高效" 3 "低量×低效" 4 "高量×低效", replace
+label values quadrant q
+
+*=========================*
+* 4) 轴变换与上限裁剪
+*=========================*
+gen x_sqrt = sqrt(n_std)
+scalar y_cap = 0.65
+gen  y_clip = cond(eff>y_cap, y_cap, eff)
+
+*=========================*
+* 5) 横轴刻度
+*=========================*
+local xticks 0 50 200 500 1000 2000 4000 8000
+local xlabelspec
+foreach v of local xticks {
+    local xlabelspec `xlabelspec' `=sqrt(`v')' "`v'"
+}
+
+*=========================*
+* 6) 第三象限行业清单
+*=========================*
+levelsof industry_cn if quadrant==3, local(q3labs)
+local q3note : subinstr local q3labs " " "、", all
+if `"`q3note'"'=="" local q3note "（无）"
+local note3 `"第三象限（低量×低效）：`q3note'"'
+
+* ——作图
+twoway ///
+ (scatter y_clip x_sqrt if quadrant==1, msymbol(O)  msize(large)) || ///
+ (scatter y_clip x_sqrt if quadrant==2, msymbol(Th) msize(large)) || ///
+ (scatter y_clip x_sqrt if quadrant==3, msymbol(+)  msize(large)) || ///
+ (scatter y_clip x_sqrt if quadrant==4, msymbol(D)  msize(large)) || ///
+ (scatter y_clip x_sqrt if quadrant==1, msymbol(i) ///
+     mlabel(industry_cn) mlabpos(9)  mlabgap(2) mlabsize(medium)) || ///
+ (scatter y_clip x_sqrt if quadrant==2, msymbol(i) ///
+     mlabel(industry_cn) mlabpos(9)  mlabgap(2) mlabsize(medium)) || ///
+ (scatter y_clip x_sqrt if quadrant==3, msymbol(i) ///
+     mlabel(industry_cn) mlabpos(3)  mlabgap(2) mlabsize(medium)) || ///
+ (scatter y_clip x_sqrt if quadrant==4, msymbol(i) ///
+     mlabel(industry_cn) mlabpos(11) mlabgap(2) mlabsize(medium)) ///
+, ///
+ xline(`=sqrt(x_thr)', lpattern(dash) lwidth(medthin)) ///
+ yline(`=min(y_thr,y_cap)', lpattern(dash) lwidth(medthin)) ///
+ xlabel(`xlabelspec', noticks labsize(small)) ///
+ aspectratio(0.85) ///
+ yscale(range(0 `=y_cap')) ///
+ ylabel(0(.05)0.35 0.4(.1)`=y_cap', grid) ///
+ xtitle("行业标准总量") ///
+ ytitle("采标效率") ///
+ legend(order(1 "高量×高效" 2 "低量×高效" 3 "低量×低效" 4 "高量×低效") ///
+        pos(3) ring(0) col(1) region(lstyle(none))) ///
+ title("行业采标效率象限图")
+
+

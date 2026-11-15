@@ -1,0 +1,225 @@
+{
+  "title": "新城新区建设与地区创业活跃度",
+  "author_static_models": 22,
+  "eligible_static": 16,
+  "eligible_event": 1,
+  "canonical_main_currently_supported": 1,
+  "implementation_comparisons_pending_pool": 16,
+  "near_miss_controls_only": false,
+  "models": [
+    {
+      "spec": "T2_1",
+      "command": "reghdfe lnNo_GSmgfper tp  if in_sample==1, absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp"
+      ],
+      "data": "city",
+      "teacher_status": "canonical_main_supported"
+    },
+    {
+      "spec": "T2_2",
+      "command": "reghdfe lnNo_GSmgfper tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* if in_sample==1, absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp"
+      ],
+      "data": "city",
+      "teacher_status": "eligible_baseline_interactions_implementation_pool_pending"
+    },
+    {
+      "spec": "T2_3",
+      "command": "reghdfe lnNo_GSmgfper tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* if in_sample==1, absorb(city_id prov_id##year) vce(cluster prov_id)",
+      "terms": [
+        "tp"
+      ],
+      "data": "city",
+      "teacher_status": "eligible_baseline_interactions_implementation_pool_pending"
+    },
+    {
+      "spec": "T3_1",
+      "command": "reghdfe lnNo_GSmgfper tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* kfq , absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp",
+        "kfq"
+      ],
+      "data": "city",
+      "teacher_status": "excluded_extra_treatment"
+    },
+    {
+      "spec": "T3_2",
+      "command": "reghdfe lnNo_GSmgfper tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* cx , absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp",
+        "cx"
+      ],
+      "data": "city",
+      "teacher_status": "excluded_extra_treatment"
+    },
+    {
+      "spec": "T4_1",
+      "command": "reghdfe lnNo_GSmgfper tp tpmeanprice_gongye2007 popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp",
+        "tpmeanprice_gongye2007"
+      ],
+      "data": "city",
+      "teacher_status": "excluded_treatment_interaction"
+    },
+    {
+      "spec": "T4_2",
+      "command": "reghdfe lnNo_GSmgfper tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* if east==0, absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp"
+      ],
+      "data": "city",
+      "teacher_status": "eligible_baseline_interactions_implementation_pool_pending"
+    },
+    {
+      "spec": "T4_3",
+      "command": "reghdfe lnNo_GSmgfper tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* if east==1, absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp"
+      ],
+      "data": "city",
+      "teacher_status": "eligible_baseline_interactions_implementation_pool_pending"
+    },
+    {
+      "spec": "T4_4",
+      "command": "reghdfe hhi5 tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(hylb city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp"
+      ],
+      "data": "city-industry",
+      "teacher_status": "excluded_nonredundant_additive_FE"
+    },
+    {
+      "spec": "T4_5",
+      "command": "reghdfe lnNo_GSmgfper tp tplngdpper2006 popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp",
+        "tplngdpper2006"
+      ],
+      "data": "city",
+      "teacher_status": "excluded_treatment_interaction"
+    },
+    {
+      "spec": "T4_6",
+      "command": "reghdfe lnNo_GSmgfper tp tplngdpperpre popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp",
+        "tplngdpperpre"
+      ],
+      "data": "city",
+      "teacher_status": "excluded_treatment_interaction"
+    },
+    {
+      "spec": "T5_1",
+      "command": "reghdfe zhuan tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp"
+      ],
+      "data": "city",
+      "teacher_status": "eligible_baseline_interactions_implementation_pool_pending"
+    },
+    {
+      "spec": "T5_2",
+      "command": "reghdfe duo tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp"
+      ],
+      "data": "city",
+      "teacher_status": "eligible_baseline_interactions_implementation_pool_pending"
+    },
+    {
+      "spec": "T5_3",
+      "command": "reghdfe density1 tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp"
+      ],
+      "data": "city",
+      "teacher_status": "eligible_baseline_interactions_implementation_pool_pending"
+    },
+    {
+      "spec": "T5_4",
+      "command": "reghdfe density2 tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp"
+      ],
+      "data": "city",
+      "teacher_status": "eligible_baseline_interactions_implementation_pool_pending"
+    },
+    {
+      "spec": "T5_5",
+      "command": "reghdfe thirdind tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp"
+      ],
+      "data": "city",
+      "teacher_status": "eligible_baseline_interactions_implementation_pool_pending"
+    },
+    {
+      "spec": "T5_6",
+      "command": "reghdfe thirdindemp tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp"
+      ],
+      "data": "city",
+      "teacher_status": "eligible_baseline_interactions_implementation_pool_pending"
+    },
+    {
+      "spec": "T6_1",
+      "command": "reghdfe avglife tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp"
+      ],
+      "data": "city",
+      "teacher_status": "eligible_baseline_interactions_implementation_pool_pending"
+    },
+    {
+      "spec": "T6_2",
+      "command": "reghdfe life3rate tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp"
+      ],
+      "data": "city",
+      "teacher_status": "eligible_baseline_interactions_implementation_pool_pending"
+    },
+    {
+      "spec": "T6_3",
+      "command": "reghdfe ksi tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp"
+      ],
+      "data": "city",
+      "teacher_status": "eligible_baseline_interactions_implementation_pool_pending"
+    },
+    {
+      "spec": "T6_4",
+      "command": "reghdfe Score tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp"
+      ],
+      "data": "city",
+      "teacher_status": "eligible_baseline_interactions_implementation_pool_pending"
+    },
+    {
+      "spec": "T6_5",
+      "command": "reghdfe zhichu tp popdensity2006yr* agriareaper2006yr* consratio2006yr* lnindp2006yr* jinrong2006yr* , absorb(city_id prov_id##year) vce(cluster city_id)",
+      "terms": [
+        "tp"
+      ],
+      "data": "city",
+      "teacher_status": "eligible_baseline_interactions_implementation_pool_pending"
+    }
+  ],
+  "event": {
+    "spec": "F1",
+    "estimation_window": [
+      -8,
+      8
+    ],
+    "display_window": [
+      -4,
+      4
+    ]
+  }
+}

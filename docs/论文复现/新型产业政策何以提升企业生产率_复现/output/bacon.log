@@ -1,0 +1,143 @@
+---------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\wo
+> rk\../output/bacon.log
+  log type:  text
+ opened on:  13 Nov 2026, 23:41:47
+
+. quietly reghdfe TFP chainleader $xlist, absorb(stkcd prv#year indid#year) vce(c
+> luster city)
+
+. gen esample=e(sample)
+
+. preserve
+
+. keep $xlist chainleader_l TFP chainleader stkcd year indid prv city cityname es
+> ample
+
+. xtset stkcd year
+
+Panel variable: stkcd (unbalanced)
+ Time variable: year, 2014 to 2023, but with gaps
+         Delta: 1 unit
+
+. bysort stkcd: egen temp_prv=max(prv)
+(17 missing values generated)
+
+. bysort stkcd: egen temp_indid=max(indid)
+
+. bysort stkcd: egen temp_chainleader_l=max(chainleader_l)
+(20,134 missing values generated)
+
+. bysort stkcd: egen temp_city=max(city)
+(17 missing values generated)
+
+. bysort stkcd: egen temp2_city=min(city)
+(17 missing values generated)
+
+. replace prv=temp_prv if prv==.
+(0 real changes made)
+
+. replace indid=temp_indid if indid==.
+(0 real changes made)
+
+. replace chainleader_l=temp_chainleader_l if chainleader_l==.
+(0 real changes made)
+
+. replace city=temp_city if city==.
+(0 real changes made)
+
+. gen poschange=temp_city-temp2_city
+(17 missing values generated)
+
+. drop if poschange~=0
+(17 observations deleted)
+
+. // 插值
+. foreach var of global xlist{
+  2. by stkcd: ipolate `var' year, gen(ipo_`var') epolate
+  3. }
+(11 missing values generated)
+(8 missing values generated)
+(336 missing values generated)
+(336 missing values generated)
+(336 missing values generated)
+(336 missing values generated)
+
+. by stkcd: ipolate TFP year, gen(TFP_ipo) epolate
+(707 missing values generated)
+
+. // 平衡面板
+. xtbalance , range(2014 2023) miss(ipo_*)
+
+(355 observations deleted due to missing) 
+
+(12653 observations deleted due to discontinues) 
+
+. // 回归+分解
+. bacondecomp TFP_ipo chainleader ipo_* ,ddetail vce(r)
+Computing decomposition across 8 timing groups
+including a never-treated group
+------------------------------------------------------------------------------
+     TFP_ipo | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ chainleader |   .0474526   .0226672     2.09   0.036     .0030257    .0918794
+------------------------------------------------------------------------------
+
+Bacon Decomposition
+
++---------------------------------------------------+
+|                      |         Beta   TotalWeight |
+|----------------------+----------------------------|
+|        Timing_groups |  .0035545087   .0794113259 |
+|       Never_v_timing |  .0631278586   .9091532666 |
+|               Within | -.8937444687   .0114354075 |
++---------------------------------------------------+
+
+. ereturn list
+
+scalars:
+                  e(N) =  15311
+
+macros:
+         e(properties) : "b V"
+                e(cmd) : "bacondecomp"
+            e(version) : "1.0.0"
+             e(depvar) : "TFP_ipo"
+
+matrices:
+                  e(b) :  1 x 1
+                  e(V) :  1 x 1
+              e(sumdd) :  3 x 2
+                 e(wt) :  1 x 29
+                 e(dd) :  1 x 29
+
+functions:
+             e(sample)   
+
+. return list
+
+. capture estimates save "../output/bacon.ster", replace
+
+. graph export "../output/附图5_Goodman-Bacon分解的权重.png",replace
+(file ../output/附图5_Goodman-Bacon分解的权重.png not found)
+file ../output/附图5_Goodman-Bacon分解的权重.png saved as PNG format
+
+. restore
+
+. *************************************************************
+. ***                                                       ***
+. ***         附图 6 平行趋势检验:异质性效应处理方法        ***
+. ***                                                       ***
+. *************************************************************
+. 
+. display "COMPLETE_bacon"
+COMPLETE_bacon
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\chain_policy\wo
+> rk\../output/bacon.log
+  log type:  text
+ closed on:  13 Nov 2026, 23:42:52
+---------------------------------------------------------------------------------

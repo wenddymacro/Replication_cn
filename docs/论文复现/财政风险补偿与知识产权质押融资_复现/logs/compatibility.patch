@@ -1,0 +1,11 @@
+--- upstream/estimators.R
++++ R/estimators.R
+@@ -237,7 +237,7 @@
+ }
+ csa_static <- function(d, xt, ctrl) {
+   big <- vapply(xt, function(v) uniqueN(d[[v]]) > XT_MAX_LEVELS, TRUE)
+-  if (any(big)) return(list(est = NA_real_, se = NA_real_, note = paste0("csa_skipped_xt_levels>", XT_MAX_LEVELS, ":", paste(xt[big], collapse = ","))))
++  if (any(big)) return(list(est = NA_real_, se = NA_real_, note = paste0("csa_skipped_xt_levels>", XT_MAX_LEVELS, ":", paste(xt[big], collapse = ",")), G_eff = NA_real_, L_max = NA_real_))
+   nocov <- !length(xt) && !length(ctrl)
+   cs <- if (nocov) csa_static_cells(d, "did") else list(est = NA_real_, a = NULL, note = "")
+   hw <- if (nocov) csa_static_cells(d, "hull")$est else NA_real_
