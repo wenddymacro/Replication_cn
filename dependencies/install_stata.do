@@ -6,7 +6,7 @@ if "`mode'" != "" & "`mode'" != "install-current" {
     display as error "Usage: do dependencies/install_stata.do [install-current]"
     exit 198
 }
-local packages csdid drdid acreg avar
+local packages moremata ftools reghdfe ranktest ivreg2 ivreghdfe drdid csdid acreg avar bacondecomp bdiff did_multiplegt did_multiplegt_dyn did_multiplegt_old did_multiplegt_stat event_plot eventstudyinteract hdfe require xtabond2 xtbalance
 foreach package of local packages {
     capture noisily which `package'
 }

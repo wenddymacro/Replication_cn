@@ -15,3 +15,5 @@ __pycache__/
 ~$*
 # Isolated optional Stata installation; retained research dependencies stay tracked
 /.local-stata-ado/
+
+# Verified migrated dependencies use exact per-file rules in their own directories.
