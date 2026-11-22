@@ -1,0 +1,136 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\patent_quality
+> _signal_2025\logs/baseline_author.log
+  log type:  text
+ opened on:  21 Nov 2026, 21:20:51
+
+. use "data/author_data.dta", clear
+
+. display "Panel observations: " _N
+Panel observations: 83036
+
+. xtset pt_id year
+
+Panel variable: pt_id (unbalanced)
+ Time variable: year, 1985 to 2023, but with gaps
+         Delta: 1 unit
+
+. reghdfe ln_transaction_freq uphold, absorb(pt_id year) cluster(ipc4)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =     83,036
+Absorbing 2 HDFE groups                           F(   1,    370) =      11.72
+Statistics robust to heteroskedasticity           Prob > F        =     0.0007
+                                                  R-squared       =     0.1496
+                                                  Adj R-squared   =     0.0823
+                                                  Within R-sq.    =     0.0002
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1087
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0054929   .0016046     3.42   0.001     .0023377    .0086481
+       _cons |   .0151158   .0004048    37.35   0.000     .0143199    .0159117
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+        year |        39           0          39     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. estimates store baseline1
+
+. reghdfe ln_transaction_freq uphold, absorb(pt_id ipc4 year age) cluster(ipc4)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =     83,036
+Absorbing 4 HDFE groups                           F(   1,    370) =      12.51
+Statistics robust to heteroskedasticity           Prob > F        =     0.0005
+                                                  R-squared       =     0.1521
+                                                  Adj R-squared   =     0.0803
+                                                  Within R-sq.    =     0.0002
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1089
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0055752   .0015765     3.54   0.000     .0024753    .0086752
+       _cons |    .015095   .0003977    37.96   0.000     .0143131     .015877
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+   ipc4_code |       371         371           0    *|
+        year |        39           0          39     |
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. estimates store baseline2
+
+. reghdfe ln_transaction_freq uphold, absorb(pt_id ipc_year age) cluster(ipc4)
+(MWFE estimator converged in 41 iterations)
+
+HDFE Linear regression                            Number of obs   =     83,036
+Absorbing 3 HDFE groups                           F(   1,    370) =      10.58
+Statistics robust to heteroskedasticity           Prob > F        =     0.0012
+                                                  R-squared       =     0.2523
+                                                  Adj R-squared   =     0.1046
+                                                  Within R-sq.    =     0.0002
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1074
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0052146   .0016031     3.25   0.001     .0020623    .0083669
+       _cons |    .015186   .0004044    37.55   0.000     .0143908    .0159812
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+    ipc_year |      7616        7616           0    *|
+         age |        21           0          21     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. estimates store baseline3
+
+. estimates table baseline1 baseline2 baseline3, b se stats(N r2)
+
+-----------------------------------------------------
+    Variable | baseline1    baseline2    baseline3   
+-------------+---------------------------------------
+      uphold |  .00549289    .00557522    .00521458  
+             |  .00160457    .00157647    .00160309  
+       _cons |   .0151158    .01509503      .015186  
+             |  .00040476    .00039767    .00040438  
+-------------+---------------------------------------
+           N |      83036        83036        83036  
+          r2 |  .14957659     .1520508    .25225333  
+-----------------------------------------------------
+                                         Legend: b/se
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\patent_quality
+> _signal_2025\logs/baseline_author.log
+  log type:  text
+ closed on:  21 Nov 2026, 21:20:54
+--------------------------------------------------------------------------------

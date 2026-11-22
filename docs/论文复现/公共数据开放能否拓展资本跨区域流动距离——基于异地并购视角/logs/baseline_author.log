@@ -1,0 +1,184 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\public_data_di
+> stance\logs/baseline_author.log
+  log type:  text
+ opened on:  21 Nov 2026, 20:41:13
+
+. use "data/data1.dta", clear
+
+. describe
+
+Contains data from data/data1.dta
+ Observations:         8,251                  
+    Variables:            44                  11 Oct 2024 13:09
+--------------------------------------------------------------------------------
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+--------------------------------------------------------------------------------
+EventID         str12   %12s                  事件ID
+Symbol          long    %10.0g                证券代码
+year            float   %10.0g                年
+BuyerPro        str24   %24s                  所属省份
+BuyerCity       str30   %30s                  所属城市
+UnderlyingPro   str24   %24s                  省
+UnderlyingCity  str33   %33s                  市
+Pop             double  %10.0g                自然增长率-全市(‰)
+GdpGrowth       double  %10.0g                地区生产总值增长率-全市(%)
+Trade           float   %9.0g                 undertrade
+Gdp             float   %9.0g                 undergdp
+Soe             float   %9.0g                 
+Age             float   %9.0g                 age
+Size            float   %9.0g                 总资产规模取对数
+Leverage        double  %10.0g                资产负债率
+Roa             double  %10.0g                总资产收益率
+Cash            float   %9.0g                 现金及现金等价物/资产总额
+Growth          double  %10.0g                营业总收入增长率
+Independent     double  %10.0g                独董占比
+Board           float   %9.0g                 董事会规模
+MaDist          float   %9.0g                 dis
+did             float   %9.0g                 
+did_TtlNum      float   %9.0g                 
+did_UnlimitNum  float   %9.0g                 
+did_LimitNum    float   %9.0g                 
+did_Frequency~e float   %9.0g                 
+did_livelyhood  float   %9.0g                 
+did_gov         float   %9.0g                 
+did_environment float   %9.0g                 
+did_finance     float   %9.0g                 
+did_law         float   %9.0g                 
+did_FirstMA     float   %9.0g                 
+did_MixedMA     float   %9.0g                 
+did_Mng         float   %9.0g                 
+did_Uncertainty float   %9.0g                 
+Uncertainty     float   %9.0g                 
+did_Business    float   %9.0g                 
+Business        float   %9.0g                 
+did_Energy      float   %9.0g                 
+did_Wage        float   %9.0g                 
+Innovation      float   %9.0g                 
+premium         float   %9.0g                 premium1
+did_Digital     float   %9.0g                 
+did_DigitalDiff float   %9.0g                 
+--------------------------------------------------------------------------------
+Sorted by: EventID
+
+. count
+  8,251
+
+. summarize MaDist did
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+      MaDist |      8,251    6.376719    1.042693   3.568957   7.929381
+         did |      8,251    .3203248    .4666296          0          1
+
+. duplicates report Symbol year
+
+Duplicates in terms of Symbol year
+
+--------------------------------------
+   Copies | Observations       Surplus
+----------+---------------------------
+        1 |         4573             0
+        2 |         1978           989
+        3 |          870           580
+        4 |          368           276
+        5 |          180           144
+        6 |           72            60
+        7 |           63            54
+        8 |           48            42
+        9 |           18            16
+       10 |           30            27
+       12 |           24            22
+       13 |           13            12
+       14 |           14            13
+--------------------------------------
+
+. global xlist "Age Soe Size Leverage Roa Cash Growth Board Independent Gdp GdpG
+> rowth Pop Trade"
+
+. reghdfe MaDist did, absorb(year Symbol) vce(cluster Symbol)
+(dropped 816 singleton observations)
+(MWFE estimator converged in 8 iterations)
+
+HDFE Linear regression                            Number of obs   =      7,435
+Absorbing 2 HDFE groups                           F(   1,   1677) =       8.72
+Statistics robust to heteroskedasticity           Prob > F        =     0.0032
+                                                  R-squared       =     0.5009
+                                                  Adj R-squared   =     0.3537
+                                                  Within R-sq.    =     0.0024
+Number of clusters (Symbol)  =      1,678         Root MSE        =     0.8310
+
+                             (Std. err. adjusted for 1,678 clusters in Symbol)
+------------------------------------------------------------------------------
+             |               Robust
+      MaDist | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         did |   .1135911   .0384718     2.95   0.003     .0381333     .189049
+       _cons |   6.357937   .0117873   539.39   0.000     6.334818    6.381056
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        15           0          15     |
+      Symbol |      1678        1678           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. estimates store col1
+
+. reghdfe MaDist did $xlist, absorb(year Symbol) vce(cluster Symbol)
+(dropped 816 singleton observations)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =      7,435
+Absorbing 2 HDFE groups                           F(  14,   1677) =       1.90
+Statistics robust to heteroskedasticity           Prob > F        =     0.0220
+                                                  R-squared       =     0.5038
+                                                  Adj R-squared   =     0.3560
+                                                  Within R-sq.    =     0.0082
+Number of clusters (Symbol)  =      1,678         Root MSE        =     0.8295
+
+                             (Std. err. adjusted for 1,678 clusters in Symbol)
+------------------------------------------------------------------------------
+             |               Robust
+      MaDist | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         did |    .189693   .0439374     4.32   0.000     .1035151    .2758708
+         Age |  -.0395067   .0569389    -0.69   0.488    -.1511855    .0721721
+         Soe |   .0176572   .0874823     0.20   0.840    -.1539287    .1892431
+        Size |  -.0089578   .0329478    -0.27   0.786    -.0735809    .0556653
+    Leverage |   .2047585   .1376343     1.49   0.137    -.0651946    .4747116
+         Roa |  -.0669134   .3144666    -0.21   0.832    -.6837018    .5498749
+        Cash |  -.0197627   .1340915    -0.15   0.883     -.282767    .2432416
+      Growth |   .0069852   .0231634     0.30   0.763    -.0384471    .0524175
+       Board |   .1657507   .1610275     1.03   0.303    -.1500854    .4815868
+ Independent |   .0882641   .4972678     0.18   0.859    -.8870668    1.063595
+         Gdp |   .0175686    .039383     0.45   0.656    -.0596765    .0948137
+   GdpGrowth |  -.0091412    .007737    -1.18   0.238    -.0243164    .0060339
+         Pop |   .0015113   .0037127     0.41   0.684    -.0057707    .0087933
+       Trade |  -.2092964   .0616629    -3.39   0.001    -.3302407    -.088352
+       _cons |   6.120764   .9134264     6.70   0.000     4.329189     7.91234
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        15           0          15     |
+      Symbol |      1678        1678           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. estimates store col2
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\public_data_di
+> stance\logs/baseline_author.log
+  log type:  text
+ closed on:  21 Nov 2026, 20:41:14
+--------------------------------------------------------------------------------

@@ -1,0 +1,191 @@
+{
+  "spec": "KeyTech ~ DID + county FE + year FE; full 435-county balanced panel; no time-varying controls",
+  "N": 9570,
+  "counties": 435,
+  "years": [
+    2000,
+    2021
+  ],
+  "treatment_cohort_counts_from_Benchmark_DID": {
+    "0": 381,
+    "2013": 14,
+    "2014": 6,
+    "2017": 10,
+    "2021": 24
+  },
+  "published_TWFE_raw": 5.29243920043759,
+  "published_TWFE_standardized": 0.5339644737168671,
+  "CSA_all_DID_implied_cohorts_raw": 2.923991773770431,
+  "CSA_all_DID_implied_cohorts_standardized": 0.29500721113710376,
+  "CSA_2013_2014_2017_waves_raw": 3.450999349592387,
+  "CSA_2013_2014_2017_waves_standardized": 0.34817802939521536,
+  "BJS_all_DID_implied_cohorts_raw": 4.845558782508324,
+  "BJS_all_DID_implied_cohorts_standardized": 0.4888778400991876,
+  "SD_KeyTech": 9.9115942369677,
+  "BJS_FE_iterations": 8,
+  "CSA_cell_count_all": 23,
+  "CSA_cell_count_3wave": 22,
+  "CSA_cells_all": [
+    {
+      "cohort": 2013,
+      "year": 2013,
+      "att": -0.28792285740878154,
+      "n_treated": 14,
+      "n_control": 421
+    },
+    {
+      "cohort": 2013,
+      "year": 2014,
+      "att": -0.9635125355615877,
+      "n_treated": 14,
+      "n_control": 415
+    },
+    {
+      "cohort": 2013,
+      "year": 2015,
+      "att": 1.1686697014076866,
+      "n_treated": 14,
+      "n_control": 415
+    },
+    {
+      "cohort": 2013,
+      "year": 2016,
+      "att": 4.2578781805611055,
+      "n_treated": 14,
+      "n_control": 415
+    },
+    {
+      "cohort": 2013,
+      "year": 2017,
+      "att": 1.6428203704976188,
+      "n_treated": 14,
+      "n_control": 405
+    },
+    {
+      "cohort": 2013,
+      "year": 2018,
+      "att": 6.030105223092551,
+      "n_treated": 14,
+      "n_control": 405
+    },
+    {
+      "cohort": 2013,
+      "year": 2019,
+      "att": 4.409702513032158,
+      "n_treated": 14,
+      "n_control": 405
+    },
+    {
+      "cohort": 2013,
+      "year": 2020,
+      "att": 3.5844255725626013,
+      "n_treated": 14,
+      "n_control": 405
+    },
+    {
+      "cohort": 2013,
+      "year": 2021,
+      "att": 5.785848271027648,
+      "n_treated": 14,
+      "n_control": 381
+    },
+    {
+      "cohort": 2014,
+      "year": 2014,
+      "att": 1.214512192626658,
+      "n_treated": 6,
+      "n_control": 415
+    },
+    {
+      "cohort": 2014,
+      "year": 2015,
+      "att": -1.0543368920236251,
+      "n_treated": 6,
+      "n_control": 415
+    },
+    {
+      "cohort": 2014,
+      "year": 2016,
+      "att": 4.421215893592411,
+      "n_treated": 6,
+      "n_control": 415
+    },
+    {
+      "cohort": 2014,
+      "year": 2017,
+      "att": 1.6648789262863395,
+      "n_treated": 6,
+      "n_control": 405
+    },
+    {
+      "cohort": 2014,
+      "year": 2018,
+      "att": 7.119924974268516,
+      "n_treated": 6,
+      "n_control": 405
+    },
+    {
+      "cohort": 2014,
+      "year": 2019,
+      "att": 8.383340640043308,
+      "n_treated": 6,
+      "n_control": 405
+    },
+    {
+      "cohort": 2014,
+      "year": 2020,
+      "att": 11.486712002329192,
+      "n_treated": 6,
+      "n_control": 405
+    },
+    {
+      "cohort": 2014,
+      "year": 2021,
+      "att": 8.710004553128261,
+      "n_treated": 6,
+      "n_control": 381
+    },
+    {
+      "cohort": 2017,
+      "year": 2017,
+      "att": 6.336434458514212,
+      "n_treated": 10,
+      "n_control": 405
+    },
+    {
+      "cohort": 2017,
+      "year": 2018,
+      "att": 3.710234530250407,
+      "n_treated": 10,
+      "n_control": 405
+    },
+    {
+      "cohort": 2017,
+      "year": 2019,
+      "att": 2.718249763124768,
+      "n_treated": 10,
+      "n_control": 405
+    },
+    {
+      "cohort": 2017,
+      "year": 2020,
+      "att": 1.7569145357040679,
+      "n_treated": 10,
+      "n_control": 405
+    },
+    {
+      "cohort": 2017,
+      "year": 2021,
+      "att": 1.7335805542299743,
+      "n_treated": 10,
+      "n_control": 381
+    },
+    {
+      "cohort": 2021,
+      "year": 2021,
+      "att": -1.9947456005678261,
+      "n_treated": 24,
+      "n_control": 381
+    }
+  ]
+}

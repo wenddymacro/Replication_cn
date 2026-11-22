@@ -1,0 +1,85 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\patent_quality
+> _signal_2025\logs/eventstudy_author.log
+  log type:  text
+ opened on:  21 Nov 2026, 21:23:07
+
+. use "data/author_data.dta", clear
+
+. forvalues i = 6(-1)1 {
+  2.     gen pre_`i' = (eventyear == -`i')
+  3. }
+
+. forvalues i = 0/6 {
+  2.     gen post_`i' = (eventyear == `i')
+  3. }
+
+. replace pre_1 = 0
+(3,011 real changes made)
+
+. reghdfe ln_transaction_freq pre_* post_*, absorb(pt_id ipc_year age) cluster(i
+> pc4)
+(MWFE estimator converged in 39 iterations)
+note: pre_1 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     83,036
+Absorbing 3 HDFE groups                           F(  12,    370) =       1.67
+Statistics robust to heteroskedasticity           Prob > F        =     0.0710
+                                                  R-squared       =     0.2524
+                                                  Adj R-squared   =     0.1046
+                                                  Within R-sq.    =     0.0003
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1074
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       pre_6 |   .0005413   .0031014     0.17   0.862    -.0055573    .0066398
+       pre_5 |  -.0009955   .0022768    -0.44   0.662    -.0054725    .0034815
+       pre_4 |   .0032852   .0030295     1.08   0.279     -.002672    .0092424
+       pre_3 |   .0024097   .0023905     1.01   0.314     -.002291    .0071105
+       pre_2 |  -.0035837   .0023532    -1.52   0.129    -.0082111    .0010437
+       pre_1 |          0  (omitted)
+      post_0 |   .0064619   .0034461     1.88   0.062    -.0003145    .0132384
+      post_1 |   .0068403   .0033552     2.04   0.042     .0002425     .013438
+      post_2 |   .0053517   .0030795     1.74   0.083    -.0007037    .0114071
+      post_3 |   .0031207   .0029814     1.05   0.296     -.002742    .0089833
+      post_4 |     .00303   .0033265     0.91   0.363    -.0035112    .0095711
+      post_5 |   .0033532   .0027556     1.22   0.224    -.0020655    .0087718
+      post_6 |   .0024223   .0046526     0.52   0.603    -.0067266    .0115712
+       _cons |   .0154865   .0005581    27.75   0.000     .0143891    .0165839
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+    ipc_year |      7616        7616           0    *|
+         age |        21           0          21     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. estimates store event
+
+. coefplot event, keep(pre_* post_*) level(90) aseq swapnames noeqlabels vertica
+> l omitted ciopts(recast(rcap) lc(gs0) lp(solid) lw(thin)) scale(1.2) xscale(ti
+> tlegap(tiny)) msize(*0.5) color(gs0) xlabel(1 "-6" 2 "-5" 3 "-4" 4 "-3" 5 "-2"
+>  6 "-1" 7 "0" 8 "1" 9 "2" 10 "3" 11 "4" 12 "5" 13 "6", labsize(*0.85)) ylabel(
+> -0.01(0.01)0.02, angle(0) format(%4.2f) labsize(*0.85) grid) xline(6, lp(dash)
+> ) yline(0, lp(dash)) legend(off) xsize(6.5) ysize(4.5) graphregion(fcolor(gs16
+> ) lcolor(gs16)) plotregion(lcolor("white") lwidth(*0.9))
+
+. graph save "output/eventstudy_author.gph", replace
+(file output/eventstudy_author.gph not found)
+file output/eventstudy_author.gph saved
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\patent_quality
+> _signal_2025\logs/eventstudy_author.log
+  log type:  text
+ closed on:  21 Nov 2026, 21:23:12
+--------------------------------------------------------------------------------

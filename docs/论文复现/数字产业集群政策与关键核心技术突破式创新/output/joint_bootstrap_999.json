@@ -1,0 +1,71 @@
+{
+  "bootstrap": "999 joint Bayesian bootstrap draws; county-level Dirichlet(1) weights; seed 12345",
+  "standardization_sd": 9.9115942369677,
+  "estimator_draws_standardized": {
+    "TWFE": {
+      "mean": 0.5244608628537787,
+      "sd": 0.3070560807177741,
+      "ci95_percentile": [
+        -0.1017846740242252,
+        1.101097403890746
+      ]
+    },
+    "CSA": {
+      "mean": 0.2885312910464178,
+      "sd": 0.15828767690843448,
+      "ci95_percentile": [
+        0.005287073274930076,
+        0.6180061482946374
+      ]
+    },
+    "BJS": {
+      "mean": 0.4789454496724764,
+      "sd": 0.3240843701706349,
+      "ci95_percentile": [
+        -0.18876428671202125,
+        1.0826821618662248
+      ]
+    }
+  },
+  "joint_covariance_standardized": [
+    [
+      0.09428343670576021,
+      0.036235682305263826,
+      0.09895615284034674
+    ],
+    [
+      0.036235682305263826,
+      0.025054988661068946,
+      0.038421270230818816
+    ],
+    [
+      0.09895615284034674,
+      0.038421270230818816,
+      0.10503067898889706
+    ]
+  ],
+  "twfe_minus_csa": {
+    "mean": 0.23592957180736077,
+    "sd": 0.21648801527175013,
+    "ci95_percentile": [
+      -0.21536550569393892,
+      0.6181956713066775
+    ]
+  },
+  "twfe_minus_bjs": {
+    "mean": 0.04551541318130217,
+    "sd": 0.03744075338403127,
+    "ci95_percentile": [
+      -0.02190180288806237,
+      0.12493183362199209
+    ]
+  },
+  "point_estimate_sign_reversal_twfe_vs_csa": false,
+  "point_estimate_sign_reversal_twfe_vs_bjs": false,
+  "bootstrap_sign_disagreement_probability_twfe_vs_csa": 0.05105105105105105,
+  "bootstrap_sign_disagreement_probability_twfe_vs_bjs": 0.01901901901901902,
+  "twfe_csa_difference_excludes_zero": false,
+  "twfe_bjs_difference_excludes_zero": false,
+  "standard_error_ratio_twfe_to_csa_bootstrap": 1.9398609336808859,
+  "standard_error_ratio_twfe_to_bjs_bootstrap": 0.9474572333004052
+}

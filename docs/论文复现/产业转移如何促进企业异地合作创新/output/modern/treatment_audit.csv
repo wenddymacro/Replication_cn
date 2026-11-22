@@ -1,0 +1,2 @@
+source_rows,entities,cities,movers,approval_varying_ids,source_treated_rows,approval_min_treated_rows,approval_min_mismatches,approval_min_false_positive,first_exposure_switchoff_rows,switchoff_entities,duplicate_id_years
+16499,2849,203,38,4,727,744,17,17,1,1,0

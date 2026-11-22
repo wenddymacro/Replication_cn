@@ -1,0 +1,3 @@
+column,outcome,treatment,coef,se,n
+1,RD_expense,DID_buyall_own,0.111693349733914,0.03797496253383,18358
+3,RD_labor,DID_buyall_own,0.542095202327572,0.260343631612191,12162

@@ -1,0 +1,34 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\public_data_di
+> stance\logs/dependencies.log
+  log type:  text
+ opened on:  21 Nov 2026, 20:42:20
+
+. foreach cmd in reghdfe sum2docx logout pwcorr_a coefplot dpplot psmatch2 {
+  2.     capture noisily which `cmd'
+  3. }
+C:\ado\plus\r\reghdfe.ado
+*! version 5.7.3 13nov2019
+C:\ado\plus\s\sum2docx.ado
+C:\ado\plus\l\logout.ado
+*! version 1.0.4 05nov2009 logout by roywada@hotmail.com
+*! Converts log or ASCII files into various output formats
+C:\ado\plus\p\pwcorr_a.ado
+*! version 1.0.8  2013-06-22
+*! Modified by Arlion, 2005.7.12
+*! To add star at 1% , 5% , 10% significant levels
+C:\ado\plus\c\coefplot.ado
+*! version 1.8.1  18sep2017  Ben Jann
+C:\ado\plus\d\dpplot.ado
+*! 2.0.6 NJC 2 Dec 2007
+C:\ado\plus\p\psmatch2.ado
+*! version 4.0.11 22oct2014 E. Leuven, B. Sianesi
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\public_data_di
+> stance\logs/dependencies.log
+  log type:  text
+ closed on:  21 Nov 2026, 20:42:20
+--------------------------------------------------------------------------------

@@ -1,0 +1,1753 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\patent_quality
+> _signal_2025\logs/author_run.log
+  log type:  text
+ opened on:  21 Nov 2026, 21:48:18
+
+. do "code/author_runnable.do"
+
+. * 结果复现
+. clear all
+
+. cd  "C:/Users/ASUS/Documents/ChatGPT/论文复现/replication/patent_quality_signa
+> l_2025"
+C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\patent_quality_signal_2025
+
+. 
+. use "data/author_data.dta", clear
+
+. global fe ",absorb(pt_id ipc_year age) cluster(ipc4)"
+
+. 
+. *================================*
+. ***             正文图表           ***
+. *================================*
+. 
+. *=========== [> 表1 <] ============
+. 
+. // 面板A: 专利-年层级描述性统计
+. global panel_a_vars  transaction_dummy transaction_freq ln_transaction_freq tr
+> eat
+
+. sum  $panel_a_vars
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+transactio~y |     83,036    .0219182    .1464174          0          1
+transactio~q |     83,036    .0256515    .1965366          0         17
+ln_transac~q |     83,036    .0165014     .113509          0   2.890372
+       treat |     83,036    .5360085    .4987047          0          1
+
+. 
+. // 面板B: 专利层级描述性统计
+. preserve
+
+.         collapse (sum) transaction_freq (max) transaction_dummy treat, by(pt_i
+> d)
+
+.         gen ln_transaction_freq = ln(transaction_freq + 1)
+
+.         sum  $panel_a_vars
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+transactio~y |      6,052    .2192664    .4137837          0          1
+transactio~q |      6,052    .3519498    1.195233          0         42
+ln_transac~q |      6,052    .1910423    .3926175          0     3.7612
+       treat |      6,052          .5    .5000413          0          1
+
+. restore
+
+. 
+. 
+. 
+. *=========== [> 表2：基准回归结果 <] ============
+. reghdfe ln_transaction_freq uphold, absorb(pt_id year) cluster(ipc4)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =     83,036
+Absorbing 2 HDFE groups                           F(   1,    370) =      11.72
+Statistics robust to heteroskedasticity           Prob > F        =     0.0007
+                                                  R-squared       =     0.1496
+                                                  Adj R-squared   =     0.0823
+                                                  Within R-sq.    =     0.0002
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1087
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0054929   .0016046     3.42   0.001     .0023377    .0086481
+       _cons |   .0151158   .0004048    37.35   0.000     .0143199    .0159117
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+        year |        39           1          38     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. reghdfe ln_transaction_freq uphold, absorb(pt_id ipc4 year age) cluster(ipc4)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =     83,036
+Absorbing 4 HDFE groups                           F(   1,    370) =      12.51
+Statistics robust to heteroskedasticity           Prob > F        =     0.0005
+                                                  R-squared       =     0.1521
+                                                  Adj R-squared   =     0.0803
+                                                  Within R-sq.    =     0.0002
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1089
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0055752   .0015765     3.54   0.000     .0024753    .0086752
+       _cons |    .015095   .0003977    37.96   0.000     .0143131     .015877
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+   ipc4_code |       371         371           0    *|
+        year |        39           1          38     |
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. reghdfe ln_transaction_freq uphold $fe
+(MWFE estimator converged in 41 iterations)
+
+HDFE Linear regression                            Number of obs   =     83,036
+Absorbing 3 HDFE groups                           F(   1,    370) =      10.58
+Statistics robust to heteroskedasticity           Prob > F        =     0.0012
+                                                  R-squared       =     0.2523
+                                                  Adj R-squared   =     0.1047
+                                                  Within R-sq.    =     0.0002
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1074
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0052146   .0016031     3.25   0.001     .0020623    .0083669
+       _cons |    .015186   .0004044    37.55   0.000     .0143908    .0159812
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+    ipc_year |      7616        7616           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. 
+. 
+. *=========== [> 图1 <] ============
+. graph set window fontface "Times New Roman"     
+
+. graph set window fontface "华文仿宋"        
+
+. 
+. preserve
+
+. forvalues i = 6(-1)1{
+  2.         g pre_`i' = (eventyear == -`i')
+  3. }
+
+. 
+. forvalues i = 0(1)6{
+  2.         g post_`i' = (eventyear == `i')
+  3. }
+
+. 
+. replace pre_1 = 0
+(3,011 real changes made)
+
+. 
+. reghdfe ln_transaction_freq pre_* post_* $fe
+(MWFE estimator converged in 39 iterations)
+note: pre_1 omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     83,036
+Absorbing 3 HDFE groups                           F(  12,    370) =       1.67
+Statistics robust to heteroskedasticity           Prob > F        =     0.0710
+                                                  R-squared       =     0.2524
+                                                  Adj R-squared   =     0.1047
+                                                  Within R-sq.    =     0.0003
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1074
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       pre_6 |   .0005413   .0031014     0.17   0.862    -.0055573    .0066398
+       pre_5 |  -.0009955   .0022768    -0.44   0.662    -.0054725    .0034815
+       pre_4 |   .0032852   .0030295     1.08   0.279     -.002672    .0092424
+       pre_3 |   .0024097   .0023905     1.01   0.314     -.002291    .0071105
+       pre_2 |  -.0035837   .0023532    -1.52   0.129    -.0082111    .0010437
+       pre_1 |          0  (omitted)
+      post_0 |   .0064619   .0034461     1.88   0.062    -.0003145    .0132384
+      post_1 |   .0068403   .0033552     2.04   0.042     .0002425     .013438
+      post_2 |   .0053517   .0030795     1.74   0.083    -.0007037    .0114071
+      post_3 |   .0031207   .0029814     1.05   0.296     -.002742    .0089833
+      post_4 |     .00303   .0033265     0.91   0.363    -.0035112    .0095711
+      post_5 |   .0033532   .0027556     1.22   0.224    -.0020655    .0087718
+      post_6 |   .0024223   .0046526     0.52   0.603    -.0067266    .0115712
+       _cons |   .0154865   .0005581    27.75   0.000     .0143891    .0165839
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+    ipc_year |      7616        7616           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store  event
+
+. 
+. 
+. #delimit ;
+delimiter now ;
+. coefplot event, keep(pre_* post_*)
+>     level(90)
+>     aseq swapnames noeqlabels vertical omitted
+>     ciopts(recast(rcap) lc(gs0) lp(solid) lw(thin)) scale(1.2)  xscale(titlega
+> p(tiny))      
+>     msize(*0.5) color(gs0)  //c(l) 
+>     xlabel(1 "-6" 2 "-5" 3 "-4" 4 "-3" 5 "-2" 6 "-1" 7 "0"
+>            8 "1"  9 "2"  10 "3"  11 "4" 12 "5"  13 "6", labsize(*0.85))
+>     ylabel(-0.01(0.01)0.02, angle(0) format(%4.2f) labsize(*0.85) grid)
+>     xline(6, lp(dash))
+>     yline(0, lp(dash))
+>     legend(off)
+>     xsize(6.5) ysize(4.5)
+>     graphregion(fcolor(gs16) lcolor(gs16)) 
+>     plotregion(lcolor("white") lwidth(*0.9));
+
+. #delimit cr
+delimiter now cr
+. 
+. 
+. restore
+
+. 
+. 
+. *=========== [> 表3：工具变量内生性检验 <] ============
+. 
+. ivreghdfe ln_transaction_freq (uphold = iv_panel ) $fe  keepsingletons first
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 41 iterations)
+
+First-stage regressions
+-----------------------
+
+
+First-stage regression of uphold:
+
+Statistics robust to heteroskedasticity and clustering on ipc4_code
+Number of obs =                  83036
+Number of clusters (ipc4_code) =    371
+------------------------------------------------------------------------------
+             |               Robust
+      uphold | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    iv_panel |   .0013277    .000253     5.25   0.000     .0008319    .0018235
+------------------------------------------------------------------------------
+F test of excluded instruments:
+  F(  1,   370) =    27.55
+  Prob > F      =   0.0000
+Sanderson-Windmeijer multivariate F test of excluded instruments:
+  F(  1,   370) =    27.55
+  Prob > F      =   0.0000
+
+
+
+Summary results for first-stage regressions
+-------------------------------------------
+
+                                           (Underid)            (Weak id)
+Variable     | F(  1,   370)  P-val | SW Chi-sq(  1) P-val | SW F(  1,   370)
+uphold       |      27.55    0.0000 |       27.63   0.0000 |       27.55
+
+NB: first-stage test statistics cluster-robust
+
+Stock-Yogo weak ID F test critical values for single endogenous regressor:
+                                   10% maximal IV size             16.38
+                                   15% maximal IV size              8.96
+                                   20% maximal IV size              6.66
+                                   25% maximal IV size              5.53
+Source: Stock-Yogo (2005).  Reproduced by permission.
+NB: Critical values are for i.i.d. errors only.
+
+Underidentification test
+Ho: matrix of reduced form coefficients has rank=K1-1 (underidentified)
+Ha: matrix has rank=K1 (identified)
+Kleibergen-Paap rk LM statistic          Chi-sq(1)=2.94     P-val=0.0867
+
+Weak identification test
+Ho: equation is weakly identified
+Cragg-Donald Wald F statistic                                      43.58
+Kleibergen-Paap Wald rk F statistic                                27.55
+
+Stock-Yogo weak ID test critical values for K1=1 and L1=1:
+                                   10% maximal IV size             16.38
+                                   15% maximal IV size              8.96
+                                   20% maximal IV size              6.66
+                                   25% maximal IV size              5.53
+Source: Stock-Yogo (2005).  Reproduced by permission.
+NB: Critical values are for Cragg-Donald F statistic and i.i.d. errors.
+
+Weak-instrument-robust inference
+Tests of joint significance of endogenous regressors B1 in main equation
+Ho: B1=0 and orthogonality conditions are valid
+Anderson-Rubin Wald test           F(1,370)=       2.26     P-val=0.1332
+Anderson-Rubin Wald test           Chi-sq(1)=      2.27     P-val=0.1318
+Stock-Wright LM S statistic        Chi-sq(1)=      6.61     P-val=0.0102
+
+NB: Underidentification, weak identification and weak-identification-robust
+    test statistics cluster-robust
+
+Number of clusters             N_clust  =        371
+Number of observations               N  =      83036
+Number of regressors                 K  =          1
+Number of endogenous regressors      K1 =          1
+Number of instruments                L  =          1
+Number of excluded instruments       L1 =          1
+
+IV (2SLS) estimation
+--------------------
+
+Estimates efficient for homoskedasticity only
+Statistics robust to heteroskedasticity and clustering on ipc4_code
+
+Number of clusters (ipc4_code) =    371               Number of obs =    83036
+                                                      F(  1,   370) =     3.14
+                                                      Prob > F      =   0.0773
+Total (centered) SS     =  800.1254562                Centered R2   =  -0.0061
+Total (uncentered) SS   =  800.1254562                Uncentered R2 =  -0.0061
+Residual SS             =   805.012862                Root MSE      =   .09847
+
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |    .035382   .0199703     1.77   0.077    -.0038876    .0746516
+------------------------------------------------------------------------------
+Underidentification test (Kleibergen-Paap rk LM statistic):              2.935
+                                                   Chi-sq(1) P-val =    0.0867
+------------------------------------------------------------------------------
+Weak identification test (Cragg-Donald Wald F statistic):               43.584
+                         (Kleibergen-Paap rk Wald F statistic):         27.548
+Stock-Yogo weak ID test critical values: 10% maximal IV size             16.38
+                                         15% maximal IV size              8.96
+                                         20% maximal IV size              6.66
+                                         25% maximal IV size              5.53
+Source: Stock-Yogo (2005).  Reproduced by permission.
+NB: Critical values are for Cragg-Donald F statistic and i.i.d. errors.
+------------------------------------------------------------------------------
+Hansen J statistic (overidentification test of all instruments):         0.000
+                                                 (equation exactly identified)
+------------------------------------------------------------------------------
+Instrumented:         uphold
+Excluded instruments: iv_panel
+Partialled-out:       _cons
+                      nb: total SS, model F and R2s are after partialling-out;
+                          any small-sample adjustments include partialled-out
+                          variables in regressor count K
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+    ipc_year |      7616        7616           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+.         
+. 
+. *=========== [> 表4：搜寻成本检验 <] ============
+. * 技术领域新买家
+. reghdfe is_first_transaction_party uphold  $fe keepsing
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 41 iterations)
+
+HDFE Linear regression                            Number of obs   =     83,036
+Absorbing 3 HDFE groups                           F(   1,    370) =      15.67
+Statistics robust to heteroskedasticity           Prob > F        =     0.0001
+                                                  R-squared       =     0.2286
+                                                  Adj R-squared   =     0.0763
+                                                  Within R-sq.    =     0.0003
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1293
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+is_first_t~y | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0078396   .0019805     3.96   0.000     .0039451    .0117341
+       _cons |   .0164602   .0004996    32.95   0.000     .0154778    .0174426
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+    ipc_year |      7616        7616           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. * 技术领域原有买家
+. reghdfe is_not_first_transaction_party uphold  $fe keepsing
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 41 iterations)
+
+HDFE Linear regression                            Number of obs   =     83,036
+Absorbing 3 HDFE groups                           F(   1,    370) =       0.28
+Statistics robust to heteroskedasticity           Prob > F        =     0.5969
+                                                  R-squared       =     0.1677
+                                                  Adj R-squared   =     0.0035
+                                                  Within R-sq.    =     0.0000
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.0593
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+is_not_fir~y | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0004087   .0007722     0.53   0.597    -.0011097    .0019272
+       _cons |   .0034375   .0001948    17.65   0.000     .0030545    .0038206
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+    ipc_year |      7616        7616           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. 
+. * 新交易网络
+. reghdfe is_new_transaction_pair uphold $fe keepsing
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 41 iterations)
+
+HDFE Linear regression                            Number of obs   =     83,036
+Absorbing 3 HDFE groups                           F(   1,    370) =      11.30
+Statistics robust to heteroskedasticity           Prob > F        =     0.0009
+                                                  R-squared       =     0.2305
+                                                  Adj R-squared   =     0.0786
+                                                  Within R-sq.    =     0.0002
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1315
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+is_new_tra~r | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |    .007174   .0021338     3.36   0.001     .0029781    .0113698
+       _cons |   .0173266   .0005382    32.19   0.000     .0162682     .018385
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+    ipc_year |      7616        7616           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. * 原有交易网络
+. reghdfe is_existing_transaction_pair uphold $fe keepsing
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 41 iterations)
+
+HDFE Linear regression                            Number of obs   =     83,036
+Absorbing 3 HDFE groups                           F(   1,    370) =       1.89
+Statistics robust to heteroskedasticity           Prob > F        =     0.1696
+                                                  R-squared       =     0.1806
+                                                  Adj R-squared   =     0.0189
+                                                  Within R-sq.    =     0.0000
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.0524
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+is_existin~r | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0011305   .0008215     1.38   0.170    -.0004849    .0027459
+       _cons |   .0025208   .0002072    12.16   0.000     .0021133    .0029283
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+    ipc_year |      7616        7616           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. 
+. * 专利生命周期早期
+. reghdfe ln_transaction_freq  uphold if early_age==1  $fe keepsing
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 43 iterations)
+
+HDFE Linear regression                            Number of obs   =     44,040
+Absorbing 3 HDFE groups                           F(   1,    370) =      18.95
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3315
+                                                  Adj R-squared   =     0.0809
+                                                  Within R-sq.    =     0.0011
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1079
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0166982    .003836     4.35   0.000     .0091551    .0242413
+       _cons |   .0152354   .0003328    45.78   0.000     .0145809    .0158899
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+    ipc_year |      5949        5949           0    *|
+         age |        10           1           9     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. * 专利生命周期后期
+. reghdfe ln_transaction_freq  uphold if early_age ==0  $fe keepsing
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 43 iterations)
+
+HDFE Linear regression                            Number of obs   =     38,996
+Absorbing 3 HDFE groups                           F(   1,    370) =       0.21
+Statistics robust to heteroskedasticity           Prob > F        =     0.6442
+                                                  R-squared       =     0.4138
+                                                  Adj R-squared   =     0.1972
+                                                  Within R-sq.    =     0.0000
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1027
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0015854   .0034302     0.46   0.644    -.0051597    .0083305
+       _cons |   .0155987   .0015064    10.36   0.000     .0126366    .0185608
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      5538        5538           0    *|
+    ipc_year |      4964        4964           0    *|
+         age |        19           1          18     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. 
+. 
+. *=========== [> 表5：契约成本检验 <] ============
+. * 契约成本较高的买方
+. reghdfe firm_buyer  uphold  $fe keepsing
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 41 iterations)
+
+HDFE Linear regression                            Number of obs   =     83,036
+Absorbing 3 HDFE groups                           F(   1,    370) =      14.03
+Statistics robust to heteroskedasticity           Prob > F        =     0.0002
+                                                  R-squared       =     0.2240
+                                                  Adj R-squared   =     0.0708
+                                                  Within R-sq.    =     0.0002
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1331
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+  firm_buyer | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0072783    .001943     3.75   0.000     .0034575    .0110991
+       _cons |   .0176134   .0004901    35.94   0.000     .0166496    .0185772
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+    ipc_year |      7616        7616           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. * 契约成本较低的买方
+. reghdfe not_firm_buyer  uphold  $fe keepsing
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 41 iterations)
+
+HDFE Linear regression                            Number of obs   =     83,036
+Absorbing 3 HDFE groups                           F(   1,    370) =       1.59
+Statistics robust to heteroskedasticity           Prob > F        =     0.2076
+                                                  R-squared       =     0.1968
+                                                  Adj R-squared   =     0.0382
+                                                  Within R-sq.    =     0.0000
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.0487
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+not_firm_b~r | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0009069   .0007183     1.26   0.208    -.0005056    .0023194
+       _cons |     .00224   .0001812    12.36   0.000     .0018837    .0025963
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+    ipc_year |      7616        7616           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. 
+. * 契约复杂度高
+. reghdfe ln_transaction_freq  uphold if secrecy == 1  $fe keepsing
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 31 iterations)
+
+HDFE Linear regression                            Number of obs   =     41,048
+Absorbing 3 HDFE groups                           F(   1,    198) =      16.70
+Statistics robust to heteroskedasticity           Prob > F        =     0.0001
+                                                  R-squared       =     0.2667
+                                                  Adj R-squared   =     0.1120
+                                                  Within R-sq.    =     0.0005
+Number of clusters (ipc4_code) =        199       Root MSE        =     0.1091
+
+                            (Std. err. adjusted for 199 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0086723   .0021221     4.09   0.000     .0044874    .0128571
+       _cons |   .0152674   .0005431    28.11   0.000     .0141963    .0163385
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      3010        3010           0    *|
+    ipc_year |      4119        4119           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. * 契约复杂度低
+. reghdfe ln_transaction_freq  uphold if secrecy == 0  $fe keepsing
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 34 iterations)
+
+HDFE Linear regression                            Number of obs   =     41,988
+Absorbing 3 HDFE groups                           F(   1,    171) =       0.79
+Statistics robust to heteroskedasticity           Prob > F        =     0.3756
+                                                  R-squared       =     0.2375
+                                                  Adj R-squared   =     0.0963
+                                                  Within R-sq.    =     0.0000
+Number of clusters (ipc4_code) =        172       Root MSE        =     0.1057
+
+                            (Std. err. adjusted for 172 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |    .001856   .0020894     0.89   0.376    -.0022683    .0059803
+       _cons |   .0150763   .0005195    29.02   0.000     .0140509    .0161018
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      3042        3042           0    *|
+    ipc_year |      3497        3497           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. local m "reghdfe ln_transaction_freq uphold, absorb(pt_id ipc_year age) cluste
+> r(ipc4)"
+
+. bdiff,group(secrecy) model(`m') reps(500) bs first detail  
+
+Begin Time: 21 Nov 2026 21:48:34
+................................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................
+
+
+-Bootstrap (500 times)- Test of Group (secrecy 0 v.s 1) coeficients difference
+
+   Variables |      b0-b1    Freq     p-value
+-------------+-------------------------------
+      uphold |     -0.007     484       0.032
+       _cons |     -0.000     319       0.362
+---------------------------------------------
+Ho: b0(uphold) = b1(uphold)
+  Observed difference = -0.007
+    Empirical p-value =  0.032
+
+--------------------------------------------
+                      (1)             (2)   
+                secrecy_0       secrecy_1   
+--------------------------------------------
+uphold            0.00186         0.00867***
+                   (0.89)          (4.09)   
+_cons              0.0151***       0.0153***
+                  (29.02)         (28.11)   
+--------------------------------------------
+r2                  0.237           0.267   
+N                   41988           41048   
+--------------------------------------------
+t statistics in parentheses
+* p<0.1, ** p<0.05, *** p<0.01
+
+ Over Time:21 Nov 2026 21:52:45   Time used: 250.624s
+
+. 
+. 
+. * 技术领域诉讼风险高
+. reghdfe ln_transaction_freq  uphold if high_risk ==1  $fe keepsing
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 34 iterations)
+
+HDFE Linear regression                            Number of obs   =     27,276
+Absorbing 3 HDFE groups                           F(   1,    148) =       7.29
+Statistics robust to heteroskedasticity           Prob > F        =     0.0077
+                                                  R-squared       =     0.2824
+                                                  Adj R-squared   =     0.1212
+                                                  Within R-sq.    =     0.0003
+Number of clusters (ipc4_code) =        149       Root MSE        =     0.1141
+
+                            (Std. err. adjusted for 149 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0072247   .0026758     2.70   0.008     .0019369    .0125124
+       _cons |   .0175831   .0007053    24.93   0.000     .0161892     .018977
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      2046        2046           0    *|
+    ipc_year |      2936        2936           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. * 技术领域诉讼风险低
+. reghdfe ln_transaction_freq  uphold if high_risk  ==0  $fe keepsing
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 31 iterations)
+
+HDFE Linear regression                            Number of obs   =     55,760
+Absorbing 3 HDFE groups                           F(   1,    221) =       4.91
+Statistics robust to heteroskedasticity           Prob > F        =     0.0277
+                                                  R-squared       =     0.2340
+                                                  Adj R-squared   =     0.0922
+                                                  Within R-sq.    =     0.0001
+Number of clusters (ipc4_code) =        222       Root MSE        =     0.1041
+
+                            (Std. err. adjusted for 222 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0042746   .0019288     2.22   0.028     .0004735    .0080757
+       _cons |   .0139861   .0004758    29.39   0.000     .0130484    .0149238
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      4006        4006           0    *|
+    ipc_year |      4680        4680           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. local m "reghdfe ln_transaction_freq uphold, absorb(pt_id ipc_year age) cluste
+> r(ipc4)"
+
+. bdiff,group(high_risk) model(`m') reps(500) bs first detail   
+
+Begin Time: 21 Nov 2026 21:52:45
+................................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................
+
+
+-Bootstrap (500 times)- Test of Group (high_risk 0 v.s 1) coeficients
+difference
+
+   Variables |      b0-b1    Freq     p-value
+-------------+-------------------------------
+      uphold |     -0.003     385       0.230
+       _cons |     -0.004     498       0.004
+---------------------------------------------
+Ho: b0(uphold) = b1(uphold)
+  Observed difference = -0.003
+    Empirical p-value =  0.230
+
+--------------------------------------------
+                      (1)             (2)   
+              high_risk_0     high_risk_1   
+--------------------------------------------
+uphold            0.00427**       0.00722***
+                   (2.22)          (2.70)   
+_cons              0.0140***       0.0176***
+                  (29.39)         (24.93)   
+--------------------------------------------
+r2                  0.234           0.282   
+N                   55760           27276   
+--------------------------------------------
+t statistics in parentheses
+* p<0.1, ** p<0.05, *** p<0.01
+
+ Over Time:21 Nov 2026 21:57:12   Time used: 267.029s
+
+. 
+. 
+. *=========== [> 表6:异质性检验 <] ============
+. 
+. * 个人专利
+. reghdfe ln_transaction_freq uphold if aplct_person==1  $fe keepsing
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 28 iterations)
+
+HDFE Linear regression                            Number of obs   =     15,046
+Absorbing 3 HDFE groups                           F(   1,    253) =       6.30
+Statistics robust to heteroskedasticity           Prob > F        =     0.0127
+                                                  R-squared       =     0.4266
+                                                  Adj R-squared   =     0.0834
+                                                  Within R-sq.    =     0.0007
+Number of clusters (ipc4_code) =        254       Root MSE        =     0.1589
+
+                            (Std. err. adjusted for 254 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0144796   .0057705     2.51   0.013     .0031153     .025844
+       _cons |   .0331203   .0018601    17.81   0.000      .029457    .0367835
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      1168        1168           0    *|
+    ipc_year |      4446        4446           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. * 非个人权利人
+. reghdfe ln_transaction_freq uphold if aplct_person==0  $fe keepsing
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 40 iterations)
+
+HDFE Linear regression                            Number of obs   =     67,990
+Absorbing 3 HDFE groups                           F(   1,    355) =       3.37
+Statistics robust to heteroskedasticity           Prob > F        =     0.0673
+                                                  R-squared       =     0.2726
+                                                  Adj R-squared   =     0.1148
+                                                  Within R-sq.    =     0.0001
+Number of clusters (ipc4_code) =        356       Root MSE        =     0.0918
+
+                            (Std. err. adjusted for 356 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0030544   .0016646     1.83   0.067    -.0002192     .006328
+       _cons |   .0110677   .0003941    28.09   0.000     .0102927    .0118427
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      4884        4884           0    *|
+    ipc_year |      7213        7213           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. local m "reghdfe ln_transaction_freq uphold, absorb(pt_id ipc_year age) cluste
+> r(ipc4)"
+
+. bdiff,group(aplct_person) model(`m') reps(500) bs first detail 
+
+Begin Time: 21 Nov 2026 21:57:13
+................................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................
+
+
+-Bootstrap (500 times)- Test of Group (aplct_person 0 v.s 1) coeficients
+difference
+
+   Variables |      b0-b1    Freq     p-value
+-------------+-------------------------------
+      uphold |     -0.011     490       0.020
+       _cons |     -0.024     500       0.000
+---------------------------------------------
+Ho: b0(uphold) = b1(uphold)
+  Observed difference = -0.011
+    Empirical p-value =  0.020
+
+--------------------------------------------
+                      (1)             (2)   
+             aplct_pers~0    aplct_pers~1   
+--------------------------------------------
+uphold            0.00305*         0.0145** 
+                   (1.83)          (2.51)   
+_cons              0.0111***       0.0347***
+                  (28.08)         (18.46)   
+--------------------------------------------
+r2                  0.269           0.387   
+N                   67266           13462   
+--------------------------------------------
+t statistics in parentheses
+* p<0.1, ** p<0.05, *** p<0.01
+
+ Over Time:21 Nov 2026 22:03:12   Time used: 359.811s
+
+. 
+. 
+. * 权利保护范围大
+. reghdfe ln_transaction_freq uphold if claim_group==1  $fe keepsing
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 28 iterations)
+
+HDFE Linear regression                            Number of obs   =     30,200
+Absorbing 3 HDFE groups                           F(   1,    358) =       0.00
+Statistics robust to heteroskedasticity           Prob > F        =     0.9554
+                                                  R-squared       =     0.3959
+                                                  Adj R-squared   =     0.1470
+                                                  Within R-sq.    =     0.0000
+Number of clusters (ipc4_code) =        359       Root MSE        =     0.0854
+
+                            (Std. err. adjusted for 359 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0001457   .0026054     0.06   0.955    -.0049782    .0052695
+       _cons |   .0109348   .0006479    16.88   0.000     .0096606     .012209
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      2087        2087           0    *|
+    ipc_year |      6704        6704           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. * 权利保护范围小
+. reghdfe ln_transaction_freq uphold if claim_group==0  $fe keepsing
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 37 iterations)
+
+HDFE Linear regression                            Number of obs   =     52,836
+Absorbing 3 HDFE groups                           F(   1,    370) =      11.92
+Statistics robust to heteroskedasticity           Prob > F        =     0.0006
+                                                  R-squared       =     0.2864
+                                                  Adj R-squared   =     0.0932
+                                                  Within R-sq.    =     0.0003
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1179
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0075359   .0021826     3.45   0.001     .0032441    .0118278
+       _cons |   .0177461    .000555    31.97   0.000     .0166547    .0188375
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      3965        3965           0    *|
+    ipc_year |      7274        7274           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. local m "reghdfe ln_transaction_freq uphold, absorb(pt_id ipc_year age) cluste
+> r(ipc4)"
+
+. bdiff,group(claim_group) model(`m') reps(500) bs first detail  
+
+Begin Time: 21 Nov 2026 22:03:13
+................................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................
+
+
+-Bootstrap (500 times)- Test of Group (claim_group 0 v.s 1) coeficients
+difference
+
+   Variables |      b0-b1    Freq     p-value
+-------------+-------------------------------
+      uphold |      0.007      13       0.026
+       _cons |      0.007       0       0.000
+---------------------------------------------
+Ho: b0(uphold) = b1(uphold)
+  Observed difference =  0.007
+    Empirical p-value =  0.026
+
+--------------------------------------------
+                      (1)             (2)   
+             claim_grou~0    claim_grou~1   
+--------------------------------------------
+uphold            0.00754***     0.000146   
+                   (3.45)          (0.06)   
+_cons              0.0178***       0.0112***
+                  (31.77)         (17.03)   
+--------------------------------------------
+r2                  0.261           0.364   
+N                   51156           27982   
+--------------------------------------------
+t statistics in parentheses
+* p<0.1, ** p<0.05, *** p<0.01
+
+ Over Time:21 Nov 2026 22:07:33   Time used: 260.308s
+
+. 
+. 
+. * 技术复杂度高
+. reghdfe ln_transaction_freq uphold if ipc_group==1 $fe keepsing  
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 31 iterations)
+
+HDFE Linear regression                            Number of obs   =     31,237
+Absorbing 3 HDFE groups                           F(   1,    343) =       6.86
+Statistics robust to heteroskedasticity           Prob > F        =     0.0092
+                                                  R-squared       =     0.3621
+                                                  Adj R-squared   =     0.1061
+                                                  Within R-sq.    =     0.0004
+Number of clusters (ipc4_code) =        344       Root MSE        =     0.1027
+
+                            (Std. err. adjusted for 344 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |    .007729   .0029505     2.62   0.009     .0019256    .0135323
+       _cons |   .0129195   .0007027    18.39   0.000     .0115374    .0143015
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      2140        2140           0    *|
+    ipc_year |      6785        6785           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. * 技术复杂度低
+. reghdfe ln_transaction_freq uphold if ipc_group==0 $fe keepsing  
+WARNING: Singleton observations not dropped; statistical significance is biased 
+> (link)
+(MWFE estimator converged in 34 iterations)
+
+HDFE Linear regression                            Number of obs   =     51,799
+Absorbing 3 HDFE groups                           F(   1,    370) =       1.65
+Statistics robust to heteroskedasticity           Prob > F        =     0.1991
+                                                  R-squared       =     0.2892
+                                                  Adj R-squared   =     0.0982
+                                                  Within R-sq.    =     0.0001
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1105
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0028581   .0022219     1.29   0.199     -.001511    .0072273
+       _cons |   .0168062   .0005794    29.01   0.000     .0156669    .0179455
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      3912        3912           0    *|
+    ipc_year |      7041        7041           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. local m "reghdfe ln_transaction_freq uphold, absorb(pt_id ipc_year age) cluste
+> r(ipc4)"
+
+. bdiff,group(ipc_group) model(`m') reps(500) bs first detail   
+
+Begin Time: 21 Nov 2026 22:07:34
+................................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................................................................
+> ..............................
+
+
+-Bootstrap (500 times)- Test of Group (ipc_group 0 v.s 1) coeficients
+difference
+
+   Variables |      b0-b1    Freq     p-value
+-------------+-------------------------------
+      uphold |     -0.005     452       0.096
+       _cons |      0.004       0       0.000
+---------------------------------------------
+Ho: b0(uphold) = b1(uphold)
+  Observed difference = -0.005
+    Empirical p-value =  0.096
+
+--------------------------------------------
+                      (1)             (2)   
+              ipc_group_0     ipc_group_1   
+--------------------------------------------
+uphold            0.00286         0.00773***
+                   (1.29)          (2.62)   
+_cons              0.0169***       0.0130***
+                  (29.02)         (18.29)   
+--------------------------------------------
+r2                  0.272           0.327   
+N                   50229           29246   
+--------------------------------------------
+t statistics in parentheses
+* p<0.1, ** p<0.05, *** p<0.01
+
+ Over Time:21 Nov 2026 22:11:58   Time used: 264.414s
+
+. 
+. 
+. 
+. *================================*
+. ***             附录图表           ***
+. *================================*
+. 
+. *=========== [> 附图2  <] ============
+. * Placebo test               
+. xtset pt_id year
+
+Panel variable: pt_id (unbalanced)
+ Time variable: year, 1985 to 2023, but with gaps
+         Delta: 1 unit
+
+. 
+. reghdfe ln_transaction_freq uphold $fe
+(MWFE estimator converged in 41 iterations)
+
+HDFE Linear regression                            Number of obs   =     83,036
+Absorbing 3 HDFE groups                           F(   1,    370) =      10.58
+Statistics robust to heteroskedasticity           Prob > F        =     0.0012
+                                                  R-squared       =     0.2523
+                                                  Adj R-squared   =     0.1047
+                                                  Within R-sq.    =     0.0002
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1074
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0052146   .0016031     3.25   0.001     .0020623    .0083669
+       _cons |    .015186   .0004044    37.55   0.000     .0143908    .0159812
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+    ipc_year |      7616        7616           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store did
+
+. 
+. didplacebo did, treatvar(uphold) pbounit rep(500) seed(1)
+
+Implementing in-space placebo test using fake treatment units:
+Simulations (500):.........10.........20.........30.........40.........50.......
+> ..60.........70.........80.........90.........100.........110.........120.....
+> ....130.........140.........150.........160.........170.........180.........19
+> 0.........200.........210.........220.........230.........240.........250.....
+> ....260.........270.........280.........290.........300.........310.........32
+> 0.........330.........340.........350.........360.........370.........380.....
+> ....390.........400.........410.........420.........430.........440.........45
+> 0.........460.........470.........480.........490.........500
+Results of in-space placebo test results using fake treatment units:
+--------------------------------------------------------------
+           |             |               P-value             
+           | Coefficient |  Two-sided  Left-sided  right-sided
+-----------+-------------+------------------------------------
+    uphold |    0.005215 |     0.0040      0.9960       0.0040
+--------------------------------------------------------------
+Note: (1) The two-sided p-value is the frequency that the absolute values of
+      the placebo effects are greater than or equal to the absolute value of
+      estimated treatment effect.
+      (2) The left-sided (right-sided) p-value is the frequency that the
+      placebo effects are smaller (greater) than or equal to the estimated
+      treatment effect.
+
+Finished.
+
+. 
+. 
+. *=========== [> 附图3  <] ============
+. *  Sun and Abraham (2020)
+. preserve
+
+. keep ln_transaction_freq uphold pt_id ipc_year age  ipc4_code treat treat_year
+>  year
+
+. replace treat_year=. if treat_year==0
+(0 real changes made)
+
+. gen never = (treat_year== .) 
+
+. gen eventyear= year - treat_year 
+(38,528 missing values generated)
+
+. 
+. * Estimation
+. tsset pt_id year
+
+Panel variable: pt_id (unbalanced)
+ Time variable: year, 1985 to 2023, but with gaps
+         Delta: 1 unit
+
+. sum treat_year
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+  treat_year |     44,508    2014.471    4.790947       1990       2020
+
+. 
+. forvalues l = 0/6 {
+  2.         gen L`l'event = eventyear==`l'
+  3. }
+
+. forvalues l = 1/6 {
+  2.         gen F`l'event = eventyear==-`l'
+  3. }
+
+. replace F1event =0 
+(3,011 real changes made)
+
+. 
+. eventstudyinteract ln_transaction_freq F*event L*event , cohort(treat) control
+> _cohort(never) absorb(pt_id ipc_year age) vce(cluster ipc4_code)
+(obs=44,508)
+
+IW estimates for dynamic effects                        Number of obs = 83,036
+Absorbing 3 HDFE groups                                 F(12, 370)    =   1.67
+                                                        Prob > F      = 0.0710
+                                                        R-squared     = 0.2524
+                                                        Adj R-squared = 0.1047
+                                                        Root MSE      = 0.1074
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     F1event |          0  (omitted)
+     F2event |  -.0035837   .0023532    -1.52   0.129    -.0082111    .0010437
+     F3event |   .0024097   .0023905     1.01   0.314     -.002291    .0071105
+     F4event |   .0032852   .0030295     1.08   0.279     -.002672    .0092424
+     F5event |  -.0009955   .0022768    -0.44   0.662    -.0054725    .0034815
+     F6event |   .0005413   .0031014     0.17   0.862    -.0055573    .0066398
+     L0event |   .0064619   .0034461     1.88   0.062    -.0003145    .0132384
+     L1event |   .0068403   .0033552     2.04   0.042     .0002425     .013438
+     L2event |   .0053517   .0030795     1.74   0.083    -.0007037    .0114071
+     L3event |   .0031207   .0029814     1.05   0.296     -.002742    .0089833
+     L4event |     .00303   .0033265     0.91   0.363    -.0035112    .0095711
+     L5event |   .0033532   .0027556     1.22   0.224    -.0020655    .0087718
+     L6event |   .0024223   .0046526     0.52   0.603    -.0067266    .0115712
+------------------------------------------------------------------------------
+
+. estimates store sa   
+
+. 
+. * Plotting 
+. event_plot e(b_iw)#e(V_iw), stub_lag(L#event) stub_lead(F#event) together ///
+>         plottype(scatter)   alpha(0.1) ///
+>         graph_opt(xline(-1, lcolor(gs8) lpattern(dash)) yline(0, lcolor(gs8) l
+> pattern(dash)) xlabel(-6(1)6)) ///
+>         lag_ci_opt(color(black%45 black%45)) ///
+>         lag_opt(color(black) msize(small))
+
+. 
+. restore
+
+. 
+. 
+. *=========== [> 附表2：稳健性检验  <] ============
+. 
+. * 剔除部分无效
+. reghdfe ln_transaction_freq uphold if first_decision_code_pair ==1 $fe
+(dropped 133 singleton observations)
+(MWFE estimator converged in 38 iterations)
+
+HDFE Linear regression                            Number of obs   =     61,409
+Absorbing 3 HDFE groups                           F(   1,    350) =       6.78
+Statistics robust to heteroskedasticity           Prob > F        =     0.0096
+                                                  R-squared       =     0.2666
+                                                  Adj R-squared   =     0.0985
+                                                  Within R-sq.    =     0.0002
+Number of clusters (ipc4_code) =        351       Root MSE        =     0.1148
+
+                            (Std. err. adjusted for 351 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0049922   .0019168     2.60   0.010     .0012223    .0087621
+       _cons |   .0171924   .0004956    34.69   0.000     .0162177    .0181672
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      4546        4546           0    *|
+    ipc_year |      6888        6888           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. * 剔除多次无效
+. reghdfe ln_transaction_freq uphold if pair_invalidation_count ==1 $fe
+(dropped 114 singleton observations)
+(MWFE estimator converged in 34 iterations)
+
+HDFE Linear regression                            Number of obs   =     58,958
+Absorbing 3 HDFE groups                           F(   1,    340) =       7.54
+Statistics robust to heteroskedasticity           Prob > F        =     0.0063
+                                                  R-squared       =     0.2617
+                                                  Adj R-squared   =     0.0934
+                                                  Within R-sq.    =     0.0002
+Number of clusters (ipc4_code) =        341       Root MSE        =     0.1048
+
+                            (Std. err. adjusted for 341 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0053732   .0019563     2.75   0.006     .0015252    .0092211
+       _cons |   .0146014   .0004928    29.63   0.000     .0136321    .0155706
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      4352        4352           0    *|
+    ipc_year |      6575        6575           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. * 剔除专利法影响
+. reghdfe ln_transaction_freq uphold if ayear >= 2009 $fe
+(dropped 54 singleton observations)
+(MWFE estimator converged in 13 iterations)
+
+HDFE Linear regression                            Number of obs   =     29,727
+Absorbing 3 HDFE groups                           F(   1,    311) =       3.37
+Statistics robust to heteroskedasticity           Prob > F        =     0.0672
+                                                  R-squared       =     0.2769
+                                                  Adj R-squared   =     0.0686
+                                                  Within R-sq.    =     0.0002
+Number of clusters (ipc4_code) =        312       Root MSE        =     0.1207
+
+                            (Std. err. adjusted for 312 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0050789   .0027651     1.84   0.067    -.0003617    .0105195
+       _cons |   .0192041   .0007547    25.45   0.000     .0177191    .0206891
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      2724        2724           0    *|
+    ipc_year |      3908        3908           0    *|
+         age |        15           1          14     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. * 因变量：是否发生交易
+. reghdfe transaction_dummy uphold $fe
+(MWFE estimator converged in 41 iterations)
+
+HDFE Linear regression                            Number of obs   =     83,036
+Absorbing 3 HDFE groups                           F(   1,    370) =      15.13
+Statistics robust to heteroskedasticity           Prob > F        =     0.0001
+                                                  R-squared       =     0.2277
+                                                  Adj R-squared   =     0.0753
+                                                  Within R-sq.    =     0.0003
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1408
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+transactio~y | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0081852   .0021044     3.89   0.000     .0040471    .0123233
+       _cons |   .0198535   .0005308    37.40   0.000     .0188096    .0208973
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+    ipc_year |      7616        7616           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. * 因变量:交易次数（原值）
+. reghdfe transaction_freq uphold $fe
+(MWFE estimator converged in 41 iterations)
+
+HDFE Linear regression                            Number of obs   =     83,036
+Absorbing 3 HDFE groups                           F(   1,    370) =       8.11
+Statistics robust to heteroskedasticity           Prob > F        =     0.0047
+                                                  R-squared       =     0.2835
+                                                  Adj R-squared   =     0.1421
+                                                  Within R-sq.    =     0.0001
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1820
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+transactio~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0076481   .0026864     2.85   0.005     .0023655    .0129307
+       _cons |   .0237223   .0006777    35.01   0.000     .0223897    .0250548
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+    ipc_year |      7616        7616           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. *因变量：反正弦双曲变换
+. reghdfe transaction_freq_asinh uphold $fe
+(MWFE estimator converged in 41 iterations)
+
+HDFE Linear regression                            Number of obs   =     83,036
+Absorbing 3 HDFE groups                           F(   1,    370) =      10.09
+Statistics robust to heteroskedasticity           Prob > F        =     0.0016
+                                                  R-squared       =     0.2532
+                                                  Adj R-squared   =     0.1059
+                                                  Within R-sq.    =     0.0002
+Number of clusters (ipc4_code) =        371       Root MSE        =     0.1376
+
+                            (Std. err. adjusted for 371 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+transactio~h | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0065402   .0020587     3.18   0.002     .0024919    .0105885
+       _cons |   .0194502   .0005193    37.45   0.000     .0184291    .0204714
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      6052        6052           0    *|
+    ipc_year |      7616        7616           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. * 泊松回归
+. ppmlhdfe transaction_freq uphold,absorb(ipc_year age pt_id) irr nolog cluster(
+> ipc4_code)
+(dropped 73803 observations that are either singletons or separated by a fixed e
+> ffect)
+(ReLU separation check: maximum number of iterations reached; aborting)
+Converged in 16 iterations and 184 HDFE sub-iterations (tol = 1.0e-08)
+
+HDFE PPML regression                              No. of obs      =      9,233
+Absorbing 3 HDFE groups                           Residual df     =        157
+Statistics robust to heteroskedasticity           Wald chi2(1)    =       4.30
+Deviance             =  4510.112866               Prob > chi2     =     0.0382
+Log pseudolikelihood = -3965.583997               Pseudo R2       =     0.2376
+
+Number of clusters (ipc4_code)=       158
+                            (Std. err. adjusted for 158 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+transactio~q |     exp(b)   std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   1.312035   .1719041     2.07   0.038     1.014893    1.696175
+       _cons |   .3592896   .0168508   -21.83   0.000     .3277352    .3938822
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+    ipc_year |       919         919           0    *|
+         age |        21           1          20     |
+       pt_id |      1186        1186           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. 
+. 
+. *=========== [> 附表3: 使用不同相似度匹配稳健性检验 <] ============
+. 
+. *控制组相似度大于0.7
+. reghdfe ln_transaction_freq uphold if similarity > 0.7 $fe 
+(dropped 31 singleton observations)
+(MWFE estimator converged in 36 iterations)
+
+HDFE Linear regression                            Number of obs   =     77,621
+Absorbing 3 HDFE groups                           F(   1,    364) =       9.40
+Statistics robust to heteroskedasticity           Prob > F        =     0.0023
+                                                  R-squared       =     0.2490
+                                                  Adj R-squared   =     0.0981
+                                                  Within R-sq.    =     0.0002
+Number of clusters (ipc4_code) =        365       Root MSE        =     0.1084
+
+                            (Std. err. adjusted for 365 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0050051   .0016326     3.07   0.002     .0017945    .0082156
+       _cons |   .0155302   .0004122    37.67   0.000     .0147196    .0163409
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      5672        5672           0    *|
+    ipc_year |      7293        7293           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. *控制组相似度大于0.5
+. reghdfe ln_transaction_freq uphold if similarity > 0.75 $fe
+(dropped 75 singleton observations)
+(MWFE estimator converged in 28 iterations)
+
+HDFE Linear regression                            Number of obs   =     66,729
+Absorbing 3 HDFE groups                           F(   1,    344) =      10.85
+Statistics robust to heteroskedasticity           Prob > F        =     0.0011
+                                                  R-squared       =     0.2683
+                                                  Adj R-squared   =     0.1162
+                                                  Within R-sq.    =     0.0002
+Number of clusters (ipc4_code) =        345       Root MSE        =     0.1082
+
+                            (Std. err. adjusted for 345 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0060124   .0018254     3.29   0.001     .0024221    .0096027
+       _cons |   .0153899   .0004595    33.49   0.000     .0144861    .0162938
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      4832        4832           0    *|
+    ipc_year |      6633        6633           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. *控制组相似度大于0.8
+. reghdfe ln_transaction_freq uphold if similarity > 0.8 $fe
+(dropped 97 singleton observations)
+(MWFE estimator converged in 28 iterations)
+
+HDFE Linear regression                            Number of obs   =     49,387
+Absorbing 3 HDFE groups                           F(   1,    292) =       6.20
+Statistics robust to heteroskedasticity           Prob > F        =     0.0133
+                                                  R-squared       =     0.2858
+                                                  Adj R-squared   =     0.1279
+                                                  Within R-sq.    =     0.0002
+Number of clusters (ipc4_code) =        293       Root MSE        =     0.1066
+
+                            (Std. err. adjusted for 293 clusters in ipc4_code)
+------------------------------------------------------------------------------
+             |               Robust
+ln_transac~q | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0053596   .0021521     2.49   0.013      .001124    .0095952
+       _cons |   .0155804   .0005301    29.39   0.000     .0145371    .0166236
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+       pt_id |      3502        3502           0    *|
+    ipc_year |      5421        5421           0    *|
+         age |        21           1          20     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. 
+. 
+end of do-file
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\patent_quality
+> _signal_2025\logs/author_run.log
+  log type:  text
+ closed on:  21 Nov 2026, 22:16:58
+--------------------------------------------------------------------------------

@@ -1,0 +1,111 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\patent_quality
+> _signal_2025\logs/preflight.log
+  log type:  text
+ opened on:  21 Nov 2026, 21:19:40
+
+. about
+
+Stata/MP 19.0 for Windows (64-bit x86-64)
+Revision 08 Apr 2025
+Copyright 1985-2025 StataCorp LLC
+
+Total physical memory:       32.00 GB
+Available physical memory:   18.09 GB
+
+Stata license: 114514-student 64-core lab perpetual
+Serial number: 9223372036854775807
+  Licensed to: 1
+               1
+
+. foreach cmd in reghdfe ivreghdfe bdiff didplacebo eventstudyinteract event_plo
+> t ppmlhdfe {
+  2.     capture noisily which `cmd'
+  3. }
+C:\ado\plus\r\reghdfe.ado
+*! version 5.7.3 13nov2019
+command ivreghdfe not found as either built-in or ado-file
+command bdiff not found as either built-in or ado-file
+command didplacebo not found as either built-in or ado-file
+command eventstudyinteract not found as either built-in or ado-file
+command event_plot not found as either built-in or ado-file
+command ppmlhdfe not found as either built-in or ado-file
+
+. use "data/author_data.dta", clear
+
+. describe
+
+Contains data from data/author_data.dta
+ Observations:        83,036                  
+    Variables:            30                  15 Jul 2025 11:20
+--------------------------------------------------------------------------------
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+--------------------------------------------------------------------------------
+pt_id           float   %9.0g                 
+year            float   %9.0g                 
+treat_year      float   %9.0g                 
+uphold          float   %9.0g                 
+transaction_f~q float   %9.0g                 
+ayear           float   %10.0g                
+similarity      float   %9.0g                 
+treat           float   %9.0g                 
+eventyear       float   %9.0g                 
+first_decisio~r float   %9.0g                 
+ipc4_code       long    %8.0g      ipc4_code
+                                              
+ipc_year        float   %9.0g                 group(ipc4 year)
+age             float   %9.0g                 
+transaction_d~y float   %9.0g                 
+ln_transactio~q float   %9.0g                 
+transaction_f~h float   %9.0g                 
+aplct_person    float   %9.0g                 
+pair_invalida~t float   %9.0g                 
+iv_panel        float   %9.0g                 
+firm_buyer      float   %9.0g                 
+not_firm_buyer  float   %9.0g                 
+is_first_tran~y float   %9.0g                 
+is_not_first_~y float   %9.0g                 
+is_new_transa~r float   %9.0g                 
+is_existing_t~r float   %9.0g                 
+early_age       float   %9.0g                 
+ipc_group       float   %9.0g                 
+claim_group     float   %9.0g                 
+high_risk       float   %9.0g                 
+secrecy         float   %9.0g                 
+--------------------------------------------------------------------------------
+Sorted by: 
+
+. summarize ln_transaction_freq uphold transaction_dummy transaction_freq treat 
+> treat_year year eventyear ipc4
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+ln_transac~q |     83,036    .0165014     .113509          0   2.890372
+      uphold |     83,036     .252252    .4343077          0          1
+transactio~y |     83,036    .0219182    .1464174          0          1
+transactio~q |     83,036    .0256515    .1965366          0         17
+       treat |     83,036    .5360085    .4987047          0          1
+-------------+---------------------------------------------------------
+  treat_year |     44,508    2014.471    4.790947       1990       2020
+        year |     83,036    2013.097    6.667148       1985       2023
+   eventyear |     44,508   -1.141525     5.72712        -20         16
+   ipc4_code |     83,036     236.663    131.8207          1        415
+
+. count
+  83,036
+
+. xtset pt_id year
+
+Panel variable: pt_id (unbalanced)
+ Time variable: year, 1985 to 2023, but with gaps
+         Delta: 1 unit
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\patent_quality
+> _signal_2025\logs/preflight.log
+  log type:  text
+ closed on:  21 Nov 2026, 21:19:40
+--------------------------------------------------------------------------------

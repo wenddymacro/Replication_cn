@@ -1,0 +1,297 @@
+{
+  "paper_id": "cie202606",
+  "journal": "cie",
+  "year": 2026,
+  "issue": 6,
+  "title": "产业转移如何促进企业异地合作创新——基于产业链供应链优化视角",
+  "screened_from": "article_text+package",
+  "screener": "Codex",
+  "screen_date": "2026-11-20",
+  "staggered_design": true,
+  "eligible_design": true,
+  "near_miss": true,
+  "near_miss_controls_only": true,
+  "near_miss_reason": "作者偏好的控制变量设定及表5结果含随时间变化的控制变量，单独作为控制变量次级样本。",
+  "policy_or_event": "国家级承接产业转移示范区：2010—2014年分批批准；样本企业首次实际暴露时间从城市—年份did取首次1值。",
+  "unit": "firm",
+  "assignment_unit": "city",
+  "time_unit": "year",
+  "n_cohorts_reported": 5,
+  "estimators_reported": [
+    "twfe_static",
+    "csdid"
+  ],
+  "reports_modern_estimator": true,
+  "main_or_robustness": "main",
+  "data_sources": [
+    "CSMAR",
+    "CNRDS",
+    "国家知识产权局专利数据",
+    "中国统计年鉴"
+  ],
+  "data_access": "partial",
+  "package_status": "data_and_code",
+  "software": "Stata 16",
+  "eligible_specs": [
+    {
+      "location": "表1 第(1)列",
+      "fixed_effects": "企业 + 年份",
+      "coef": 0.2625,
+      "omitted_period": "",
+      "treatment_definition": "城市示范区政策，firm首次did=1 cohort；作者原始逐年城市处理",
+      "xt_vars": [],
+      "weights": "",
+      "se": null,
+      "outcome": "lnapp",
+      "notes": "括号内印刷t=2.4718；协议样本剔除一条处理关闭行后N=15996。",
+      "clustering": "城市（作者当前城市；现代规格固定为企业样本首期城市）",
+      "preferred": false,
+      "spec_id": "T1_c1_lnapp",
+      "event_bins": "",
+      "outcome_transform": "ln(合作专利数+1)",
+      "in_abstract_or_intro": true,
+      "n_obs": 15997,
+      "static_or_event": "static"
+    },
+    {
+      "location": "表1 第(4)列",
+      "fixed_effects": "企业 + 年份",
+      "coef": 0.3292,
+      "omitted_period": "",
+      "treatment_definition": "城市示范区政策，firm首次did=1 cohort；作者原始逐年城市处理",
+      "xt_vars": [],
+      "weights": "",
+      "se": null,
+      "outcome": "ihs_cro_app",
+      "notes": "括号内印刷t=2.5437；协议样本剔除一条处理关闭行后N=15996。",
+      "clustering": "城市（作者当前城市；现代规格固定为企业样本首期城市）",
+      "preferred": false,
+      "spec_id": "T1_c4_ihs",
+      "event_bins": "",
+      "outcome_transform": "IHS",
+      "in_abstract_or_intro": true,
+      "n_obs": 15997,
+      "static_or_event": "static"
+    }
+  ],
+  "near_miss_controls_only_specs": [
+    {
+      "controls": [
+        "RDSpendSum",
+        "Far",
+        "Roe",
+        "Growth",
+        "Size",
+        "Cash_as",
+        "lnpergdp",
+        "Finance1",
+        "consume1",
+        "educ",
+        "struc1"
+      ],
+      "coef": 0.2833,
+      "spec_id": "T1_c2_lnapp",
+      "se": null,
+      "location": "表1 第(2)列"
+    },
+    {
+      "controls": [
+        "RDSpendSum",
+        "Far",
+        "Roe",
+        "Growth",
+        "Size",
+        "Cash_as",
+        "lnpergdp",
+        "Finance1",
+        "consume1",
+        "educ",
+        "struc1"
+      ],
+      "coef": 0.3522,
+      "spec_id": "T1_c5_ihs",
+      "se": null,
+      "location": "表1 第(5)列"
+    },
+    {
+      "controls": [
+        "RDSpendSum",
+        "Far",
+        "Roe",
+        "Growth",
+        "Size",
+        "Cash_as",
+        "lnpergdp",
+        "Finance1",
+        "consume1",
+        "educ",
+        "struc1"
+      ],
+      "coef": 0.2539,
+      "spec_id": "T5A_c1_new",
+      "se": null,
+      "location": "表5 Panel A 第(1)列"
+    },
+    {
+      "controls": [
+        "RDSpendSum",
+        "Far",
+        "Roe",
+        "Growth",
+        "Size",
+        "Cash_as",
+        "lnpergdp",
+        "Finance1",
+        "consume1",
+        "educ",
+        "struc1"
+      ],
+      "coef": 0.2466,
+      "spec_id": "T5A_c2_digital",
+      "se": null,
+      "location": "表5 Panel A 第(2)列"
+    },
+    {
+      "controls": [
+        "RDSpendSum",
+        "Far",
+        "Roe",
+        "Growth",
+        "Size",
+        "Cash_as",
+        "lnpergdp",
+        "Finance1",
+        "consume1",
+        "educ",
+        "struc1"
+      ],
+      "coef": 0.1946,
+      "spec_id": "T5A_c3_energy",
+      "se": null,
+      "location": "表5 Panel A 第(3)列"
+    },
+    {
+      "controls": [
+        "RDSpendSum",
+        "Far",
+        "Roe",
+        "Growth",
+        "Size",
+        "Cash_as",
+        "lnpergdp",
+        "Finance1",
+        "consume1",
+        "educ",
+        "struc1"
+      ],
+      "coef": 0.1516,
+      "spec_id": "T5A_c4_clean",
+      "se": null,
+      "location": "表5 Panel A 第(4)列"
+    },
+    {
+      "controls": [
+        "RDSpendSum",
+        "Far",
+        "Roe",
+        "Growth",
+        "Size",
+        "Cash_as",
+        "lnpergdp",
+        "Finance1",
+        "consume1",
+        "educ",
+        "struc1"
+      ],
+      "coef": 0.3215,
+      "spec_id": "T5B_c1_new",
+      "se": null,
+      "location": "表5 Panel B 第(1)列"
+    },
+    {
+      "controls": [
+        "RDSpendSum",
+        "Far",
+        "Roe",
+        "Growth",
+        "Size",
+        "Cash_as",
+        "lnpergdp",
+        "Finance1",
+        "consume1",
+        "educ",
+        "struc1"
+      ],
+      "coef": 0.3171,
+      "spec_id": "T5B_c2_digital",
+      "se": null,
+      "location": "表5 Panel B 第(2)列"
+    },
+    {
+      "controls": [
+        "RDSpendSum",
+        "Far",
+        "Roe",
+        "Growth",
+        "Size",
+        "Cash_as",
+        "lnpergdp",
+        "Finance1",
+        "consume1",
+        "educ",
+        "struc1"
+      ],
+      "coef": 0.2412,
+      "spec_id": "T5B_c3_energy",
+      "se": null,
+      "location": "表5 Panel B 第(3)列"
+    },
+    {
+      "controls": [
+        "RDSpendSum",
+        "Far",
+        "Roe",
+        "Growth",
+        "Size",
+        "Cash_as",
+        "lnpergdp",
+        "Finance1",
+        "consume1",
+        "educ",
+        "struc1"
+      ],
+      "coef": 0.1954,
+      "spec_id": "T5B_c4_clean",
+      "se": null,
+      "location": "表5 Panel B 第(4)列"
+    }
+  ],
+  "ineligible_specs": [
+    {
+      "location": "表1 第(3)、(6)列",
+      "reason": "连续基期控制变量与年份虚拟变量的线性交互；与协议中的类别特征×年份固定效应不是同一编码，保留作者结果核对但不纳入冻结估计器主样本。"
+    },
+    {
+      "location": "表2—表4",
+      "reason": "机制/异质性子样本，属于处理×分组比较，不纳入主交错DID估计集合。"
+    },
+    {
+      "location": "附表/附图中的Poisson、PSM-DID及其他非线性/辅助模型",
+      "reason": "按协议排除或单列为作者附录复现。"
+    }
+  ],
+  "appendix_specs": [
+    {
+      "notes": "作者使用csdid stdipw并含时变控制变量；另与协议CSA区分。",
+      "location": "附表5—6",
+      "estimators": [
+        "CSDID",
+        "event aggregate",
+        "group aggregate"
+      ]
+    }
+  ],
+  "n_eligible_specs": 2,
+  "priority": 1,
+  "notes": "公开附件提供分析数据与Stata程序。作者报告样本16,499行，表1 TWFE因单观测企业剔除502行。按首个处理状态重建显示38家企业迁址，4家approval变动；取approval最小值会使17行提前处理，因此现代估计按did首次暴露日期定义cohort，移除1条处理后关闭记录。"
+}

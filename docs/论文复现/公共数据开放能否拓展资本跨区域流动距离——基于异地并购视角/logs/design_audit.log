@@ -1,0 +1,278 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\public_data_di
+> stance\logs/design_audit.log
+  log type:  text
+ opened on:  21 Nov 2026, 20:48:19
+
+. use "data/数据2.dta", clear
+
+. describe
+
+Contains data from data/数据2.dta
+ Observations:         8,251                  
+    Variables:            47                  11 Oct 2024 13:09
+--------------------------------------------------------------------------------
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+--------------------------------------------------------------------------------
+EventID         str12   %12s                  事件ID
+Symbol          long    %10.0g                证券代码
+year            float   %10.0g                年
+BuyerPro        str24   %24s                  所属省份
+BuyerCity       str30   %30s                  所属城市
+UnderlyingPro   str24   %24s                  省
+UnderlyingCity  str33   %33s                  市
+Pop             double  %10.0g                自然增长率-全市(‰)
+GdpGrowth       double  %10.0g                地区生产总值增长率-全市(%)
+Trade           float   %9.0g                 undertrade
+Gdp             float   %9.0g                 undergdp
+Soe             float   %9.0g                 
+Age             float   %9.0g                 age
+Size            float   %9.0g                 总资产规模取对数
+Leverage        double  %10.0g                资产负债率
+Roa             double  %10.0g                总资产收益率
+Cash            float   %9.0g                 现金及现金等价物/资产总额
+Growth          double  %10.0g                营业总收入增长率
+Independent     double  %10.0g                独董占比
+Board           float   %9.0g                 董事会规模
+MaDist          float   %9.0g                 dis
+postyear        int     %10.0g                postyear
+treat           float   %9.0g                 
+post            float   %9.0g                 
+did             float   %9.0g                 
+ind             long    %8.0g      ind        
+post1           float   %9.0g                 
+did1            float   %9.0g                 
+did_court       float   %9.0g                 
+did_belt        float   %9.0g                 
+did_internet    float   %9.0g                 
+did_broadband   float   %9.0g                 
+did_market      float   %9.0g                 
+did_bigdata     float   %9.0g                 
+LQ              float   %9.0g                 
+RCA             float   %9.0g                 
+SD              float   %9.0g                 
+SI              float   %9.0g                 
+LimitNum        float   %9.0g                 
+TtlNum          float   %9.0g                 
+UnlimitNum      float   %9.0g                 
+FrequencyScore  float   %9.0g                 
+LivelyHood      float   %9.0g                 
+Gov             float   %9.0g                 
+Environment     float   %9.0g                 
+Finance         float   %9.0g                 
+Law             float   %9.0g                 
+--------------------------------------------------------------------------------
+Sorted by: 
+
+. summarize MaDist did year postyear treat
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+      MaDist |      8,251    6.376719    1.042693   3.568957   7.929381
+         did |      8,251    .3203248    .4666296          0          1
+        year |      8,251    2014.854    3.826527       2007       2021
+    postyear |      8,251    2269.203    429.6312       2012       3000
+       treat |      8,251    .7431826    .4369043          0          1
+
+. codebook UnderlyingCity Symbol BuyerCity
+
+--------------------------------------------------------------------------------
+UnderlyingCity                                                                市
+--------------------------------------------------------------------------------
+
+                  Type: String (str33), but longest is str15
+
+         Unique values: 287                       Missing "": 0/8,251
+
+              Examples: "北京市"
+                        "宜宾市"
+                        "株洲市"
+                        "绵阳市"
+
+--------------------------------------------------------------------------------
+Symbol                                                                  证券代码
+--------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [2,838030]                    Units: 1
+         Unique values: 2,494                     Missing .: 0/8,251
+
+                  Mean: 270112
+             Std. dev.: 266739
+
+           Percentiles:    10%       25%       50%       75%       90%
+                           725      2217    300113    600351    600900
+
+--------------------------------------------------------------------------------
+BuyerCity                                                               所属城市
+--------------------------------------------------------------------------------
+
+                  Type: String (str30), but longest is str15
+
+         Unique values: 233                       Missing "": 0/8,251
+
+              Examples: "北京市"
+                        "安顺市"
+                        "沈阳市"
+                        "绍兴市"
+
+.  tab year
+
+         年 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       2007 |        308        3.73        3.73
+       2008 |        394        4.78        8.51
+       2009 |        301        3.65       12.16
+       2010 |        383        4.64       16.80
+       2011 |        401        4.86       21.66
+       2012 |        423        5.13       26.78
+       2013 |        462        5.60       32.38
+       2014 |        654        7.93       40.31
+       2015 |        983       11.91       52.22
+       2016 |        868       10.52       62.74
+       2017 |        852       10.33       73.07
+       2018 |        720        8.73       81.80
+       2019 |        549        6.65       88.45
+       2020 |        457        5.54       93.99
+       2021 |        496        6.01      100.00
+------------+-----------------------------------
+      Total |      8,251      100.00
+
+.  tab postyear
+
+   postyear |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       2012 |      1,509       18.29       18.29
+       2014 |        125        1.51       19.80
+       2015 |        327        3.96       23.77
+       2016 |        711        8.62       32.38
+       2017 |         63        0.76       33.15
+       2018 |      1,337       16.20       49.35
+       2019 |        836       10.13       59.48
+       2020 |        668        8.10       67.58
+       2021 |        556        6.74       74.32
+       3000 |      2,119       25.68      100.00
+------------+-----------------------------------
+      Total |      8,251      100.00
+
+.  tab treat
+
+      treat |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      2,119       25.68       25.68
+          1 |      6,132       74.32      100.00
+------------+-----------------------------------
+      Total |      8,251      100.00
+
+.  tab did
+
+        did |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      5,608       67.97       67.97
+          1 |      2,643       32.03      100.00
+------------+-----------------------------------
+      Total |      8,251      100.00
+
+.  tab year treat
+
+           |         treat
+        年 |         0          1 |     Total
+-----------+----------------------+----------
+      2007 |        94        214 |       308 
+      2008 |       126        268 |       394 
+      2009 |       108        193 |       301 
+      2010 |       120        263 |       383 
+      2011 |       143        258 |       401 
+      2012 |       129        294 |       423 
+      2013 |       138        324 |       462 
+      2014 |       148        506 |       654 
+      2015 |       205        778 |       983 
+      2016 |       191        677 |       868 
+      2017 |       184        668 |       852 
+      2018 |       155        565 |       720 
+      2019 |       140        409 |       549 
+      2020 |       126        331 |       457 
+      2021 |       112        384 |       496 
+-----------+----------------------+----------
+     Total |     2,119      6,132 |     8,251 
+
+.  duplicates report UnderlyingCity year
+
+Duplicates in terms of UnderlyingCity year
+
+--------------------------------------
+   Copies | Observations       Surplus
+----------+---------------------------
+        1 |          989             0
+        2 |         1000           500
+        3 |          729           486
+        4 |          484           363
+        5 |          325           260
+        6 |          306           255
+        7 |          273           234
+        8 |          208           182
+        9 |          180           160
+       10 |          220           198
+       11 |          121           110
+       12 |           84            77
+       13 |          143           132
+       14 |          126           117
+       15 |          120           112
+       16 |          112           105
+       17 |           85            80
+       18 |           54            51
+       19 |           95            90
+       20 |           60            57
+       21 |           84            80
+       22 |           66            63
+       23 |           92            88
+       24 |          120           115
+       25 |           50            48
+       26 |           78            75
+       27 |           81            78
+       28 |           56            54
+       29 |           87            84
+       30 |           60            58
+       31 |           31            30
+       32 |           96            93
+       33 |           66            64
+       36 |           72            70
+       39 |           78            76
+       40 |           40            39
+       41 |           82            80
+       42 |           42            41
+       45 |           45            44
+       47 |           47            46
+       48 |           48            47
+       50 |           50            49
+       57 |          114           112
+       62 |           62            61
+       63 |           63            62
+       65 |           65            64
+       67 |           67            66
+       75 |           75            74
+       88 |           88            87
+       92 |           92            91
+       93 |           93            92
+       95 |           95            94
+      121 |          121           120
+      131 |          131           130
+--------------------------------------
+
+.  foreach cmd in csdid did2s did_imputation {
+  2.    capture noisily which `cmd'
+  3.  }
+command csdid not found as either built-in or ado-file
+command did2s not found as either built-in or ado-file
+command did_imputation not found as either built-in or ado-file
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\public_data_di
+> stance\logs/design_audit.log
+  log type:  text
+ closed on:  21 Nov 2026, 20:48:19
+--------------------------------------------------------------------------------

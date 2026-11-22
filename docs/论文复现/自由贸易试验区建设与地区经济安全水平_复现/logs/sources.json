@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-15",
+  "pdf_url": "https://ciejournal.ajcass.com/UploadFile/Issue/201606280001/2024/4//20240418011710WU_FILE_0.pdf",
+  "zip_url": "https://ciejournal.ajcass.com/UploadFile/Issue/201606280001/2024/4//20240418011708WU_FILE_1.zip",
+  "zip_crc": "passed",
+  "zip_file_count": 5,
+  "pdf_pages": 19,
+  "appendix_pages": 5,
+  "pdf_acquisition": "已验证Edge会话打开原文；用户按Escape停止浏览器自动化并提供桌面PDF，使用该本地文件",
+  "http_status": null,
+  "http_note": "未取得网络响应头，不编造HTTP状态",
+  "upstream_snapshot": "reference/Replication_cn-main；此前2026-11-14核对远程核心；本次不声称已核验11月15日最新远程版本"
+}

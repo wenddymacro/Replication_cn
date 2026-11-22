@@ -1,0 +1,15 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+Error in file(con, "rb") : cannot open the connection
+Calls: read_any ... standardise_path -> detect_compression -> readBin -> file
+In addition: Warning messages:
+1: In file(con, "rb") :
+  cannot open file 'C:/Users/ASUS/Documents/ChatGPT/h.:fe$
+g0/replication/admin_land/data/analysis_sample.dta': Invalid argument
+2: In file(con, "rb") :
+  cannot open file 'C:/Users/ASUS/Documents/ChatGPT/h.:fe$
+g0/replication/admin_land/data/analysis_sample.dta': Invalid argument
+Execution halted

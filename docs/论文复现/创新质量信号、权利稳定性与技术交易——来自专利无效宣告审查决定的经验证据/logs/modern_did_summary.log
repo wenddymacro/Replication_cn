@@ -1,0 +1,112 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\patent_quality
+> _signal_2025\logs/modern_did_summary.log
+  log type:  text
+ opened on:  21 Nov 2026, 22:37:20
+
+. estimates dir
+
+-------------------------------------------------------------------------------
+             |           Dependent  Number of        
+        Name | Command    variable     param.  Title 
+-------------+-----------------------------------------------------------------
+ csdid_event | csdid     ln_transac~q      38  
+         bjs | did_imputationln_transac~q  13  
+sa_corrected | reghdfe   ln_transac~q     365  IW estimates for dynamic effects
+-------------------------------------------------------------------------------
+
+. capture noisily estimates restore csdid_event
+(results csdid_event are active now)
+
+. capture noisily estat simple, dropmissing
+
+Aggregated treatment effects
+Std. errors: multiplier bootstrap, 999 reps, rseed(20261121); clustered on ipc4_
+> code (371 clusters); 95% pointwise bands
+
+       egt         att          se  overall_~t  overall_se 
+----------------------------------------------------------
+         .  -.00118055   .00234018  -.00118055   .00234018 
+
+. capture noisily estat event, dropmissing
+
+Aggregated treatment effects
+Std. errors: multiplier bootstrap, 999 reps, rseed(20261121); clustered on ipc4_
+> code (371 clusters); 95% simultaneous bands
+
+          |         b         se          z     pvalue         ll         ul 
+----------+-----------------------------------------------------------------
+     Tm20 | -.0093736   .0080368  -1.166333   .2434799  -.0319466   .0131995 
+     Tm19 | -.0061669   .0032619  -1.890598   .0586781  -.0153287   .0029948 
+     Tm18 | -.0062001   .0031851  -1.946572    .051586  -.0151462    .002746 
+     Tm17 | -.0061097   .0029307  -2.084712   .0370954  -.0143413   .0021218 
+     Tm16 |  -.006407   .0028526  -2.245984    .024705  -.0144192   .0016052 
+     Tm15 | -.0069026   .0027544  -2.506019   .0122099  -.0146389   .0008337 
+     Tm14 | -.0070406   .0026045  -2.703205   .0068674   -.014356   .0002748 
+     Tm13 | -.0060319   .0030797  -1.958608   .0501587  -.0146819   .0026181 
+     Tm12 | -.0057705   .0036933  -1.562451   .1181819  -.0161438   .0046028 
+     Tm11 | -.0040365   .0039824  -1.013575   .3107857  -.0152218   .0071489 
+     Tm10 |  -.007885   .0034166  -2.307862   .0210068  -.0174813   .0017112 
+      Tm9 |   .003893   .0047921   .8123772   .4165753  -.0095666   .0173526 
+      Tm8 |  .0004831   .0044816   .1077911   .9141614  -.0121045   .0130706 
+      Tm7 | -.0005715   .0048167  -.1186599   .9055448  -.0141001   .0129571 
+      Tm6 | -.0008082   .0044143  -.1830914   .8547263  -.0132068   .0115904 
+      Tm5 | -.0030738   .0033305  -.9229155   .3560512  -.0124282   .0062806 
+      Tm4 |  .0020377   .0042051   .4845895   .6279676   -.009773   .0138485 
+      Tm3 |  .0001658   .0034209   .0484555   .9613532  -.0094425   .0097741 
+      Tm2 | -.0036487   .0033737  -1.081521   .2794654  -.0131244    .005827 
+      Tm1 |         0          .          .          .          .          . 
+      Tp0 |  .0049525   .0045287   1.093583   .2741379  -.0077673   .0176724 
+      Tp1 |  .0047835   .0043278   1.105294   .2690321  -.0073721   .0169391 
+      Tp2 |  .0022786   .0038209   .5963536    .550939  -.0084533   .0130105 
+      Tp3 | -.0015855   .0037846  -.4189309   .6752667  -.0122154   .0090444 
+      Tp4 | -.0009304   .0045291  -.2054295   .8372366  -.0136512   .0117904 
+      Tp5 | -.0011572   .0036182  -.3198194   .7491052  -.0113197   .0090054 
+      Tp6 |  -.001593   .0055592  -.2865489   .7744577  -.0172072   .0140212 
+      Tp7 |  -.001009   .0048617  -.2075438   .8355852  -.0146641   .0126461 
+      Tp8 | -.0038842   .0048435  -.8019352   .4225904  -.0174882   .0097199 
+      Tp9 | -.0022328   .0068733  -.3248553   .7452906  -.0215378   .0170722 
+     Tp10 | -.0001849   .0062571  -.0295528   .9764237  -.0177592   .0173894 
+     Tp11 | -.0122661   .0065322  -1.877781   .0604111  -.0306133    .006081 
+     Tp12 | -.0142619   .0063694  -2.239117   .0251483  -.0321518    .003628 
+     Tp13 | -.0239204   .0046981  -5.091518   3.55e-07   -.037116  -.0107248 
+     Tp14 | -.0158697   .0132576  -1.197025   .2312969  -.0531064   .0213671 
+     Tp15 |  -.023263   .0056271  -4.134063   .0000356   -.039068   -.007458 
+     Tp16 | -.0185297   .0053046  -3.493138   .0004774  -.0334288  -.0036306 
+ Post_avg | -.0063925   .0026872  -2.378924   .0173633  -.0116593  -.0011258 
+Post_avg is the overall summary effect: its interval is pointwise, while the eve
+> nt-time effects use the simultaneous band.
+
+. capture noisily estimates save "output/csdid_event.ster", replace
+(note: file output/csdid_event.ster not found)
+file output/csdid_event.ster saved
+
+. capture noisily estimates restore bjs
+(results bjs are active now)
+
+. capture noisily estimates save "output/bjs.ster", replace
+(note: file output/bjs.ster not found)
+file output/bjs.ster saved
+
+. capture noisily estimates restore did2s
+estimation result did2s not found
+
+. capture noisily estimates save "output/did2s.ster", replace
+(note: file output/did2s.ster not found)
+file output/did2s.ster saved
+
+. capture noisily estimates restore sa_corrected
+(results sa_corrected are active now)
+
+. capture noisily estimates save "output/sa_corrected.ster", replace
+(note: file output/sa_corrected.ster not found)
+file output/sa_corrected.ster saved
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\patent_quality
+> _signal_2025\logs/modern_did_summary.log
+  log type:  text
+ closed on:  21 Nov 2026, 22:37:22
+--------------------------------------------------------------------------------

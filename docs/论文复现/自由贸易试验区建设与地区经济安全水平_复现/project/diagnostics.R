@@ -1,0 +1,27 @@
+suppressPackageStartupMessages({library(data.table);library(jsonlite)})
+source('code/R/estimators.R');fixest::setFixest_nthreads(1)
+fs<-c(list.files('data/specs',full.names=TRUE,pattern='json$'),list.files('data/specs_controls',full.names=TRUE,pattern='json$'))
+out<-list();cells<-list();notes<-list()
+for(f in fs){
+ s<-fromJSON(f);raw<-fread(sub('^\\$CIE_RAW',Sys.getenv('CIE_RAW'),s$data_path));raw<-raw[eval(parse(text=s$sample_filter))]
+ p<-prep_data(raw,s);d<-p$d;m<-twfe_static(d,p$xt,p$ctrl)
+ out[[length(out)+1]]<-data.table(spec=s$spec_id,input_N=nrow(d),twfe_actual_N=m$n,units=uniqueN(d$id),first_year=min(d$tcal),last_year=max(d$tcal),always_rows=sum(d$g<=min(d$t)),never_rows=sum(!is.finite(d$g)),bjs_nonimputable_rows=sum(!bjs_imputable(d,p$xt)),raw_twfe=m$est,raw_se=m$se,unbalanced=is_unbal(d))
+ standardize_y(d)
+ warnings<-character()
+ z<-tryCatch(withCallingHandlers(csa_did(d,p$xt,p$ctrl),warning=function(w){warnings<<-c(warnings,conditionMessage(w));invokeRestart('muffleWarning')}),error=function(e)e)
+ if(inherits(z,'error')){notes[[s$spec_id]]<-list(error=conditionMessage(z));next}
+ at<-z$attgt
+ if(is.null(at))at<-z$at
+ if(is.null(at))at<-z$mp
+ if(is.null(at)){notes[[s$spec_id]]<-list(names=names(z),warnings=warnings);next}
+ cc<-data.table(spec=s$spec_id,g=at$group,t=at$t,att=at$att,se=at$se);cc[,post:=t>=g]
+ cells[[length(cells)+1]]<-cc
+ notes[[s$spec_id]]<-list(warnings=warnings,n_post=sum(cc$post),finite_post=sum(cc$post&is.finite(cc$att)),n_pre=sum(!cc$post),finite_pre=sum(!cc$post&is.finite(cc$att)))
+}
+dir.create('diagnostics',showWarnings=FALSE)
+fwrite(rbindlist(out),'diagnostics/sample_counts.csv')
+if(length(cells))fwrite(rbindlist(cells),'diagnostics/csa_cells.csv')
+write_json(notes,'diagnostics/csa_support.json',pretty=TRUE,auto_unbox=TRUE)
+source('code/R/analysis.R')
+fwrite(to_long(load_dir('specs_controls')),'diagnostics/controls_comparisons.csv')
+source('runtime_info.R')

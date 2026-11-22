@@ -1,0 +1,64 @@
+{
+  "rows": 3096,
+  "units": 258,
+  "years": [
+    2008,
+    2019
+  ],
+  "duplicate_id_year": 0,
+  "absorbing": true,
+  "g_matches_all_observed_Piolt": true,
+  "known_action_matches_g": true,
+  "cohorts": {
+    "2013.0": 1,
+    "2015.0": 6,
+    "2017.0": 13,
+    "2018.0": 2,
+    "2019.0": 12
+  },
+  "missing_or_partial_action": [
+    {
+      "id": 33,
+      "city": "南京市",
+      "g": 2019,
+      "n": 12,
+      "missing_action": 1,
+      "treat_varies": false
+    },
+    {
+      "id": 58,
+      "city": "大连市",
+      "g": 2017,
+      "n": 12,
+      "missing_action": 12,
+      "treat_varies": false
+    }
+  ],
+  "varying_Treat": [
+    {
+      "id": 35,
+      "city": "南宁市",
+      "g": 0,
+      "n": 12,
+      "missing_action": 12,
+      "treat_varies": true
+    },
+    {
+      "id": 78,
+      "city": "崇左市",
+      "g": 0,
+      "n": 12,
+      "missing_action": 12,
+      "treat_varies": true
+    },
+    {
+      "id": 187,
+      "city": "苏州市",
+      "g": 0,
+      "n": 12,
+      "missing_action": 12,
+      "treat_varies": true
+    }
+  ],
+  "omitted_empty_id_rows": 1
+}

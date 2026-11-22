@@ -1,0 +1,107 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+
+Attaching package: 'data.table'
+
+The following object is masked from 'package:base':
+
+    %notin%
+
+ [1] "patent_buy_own"        "treated_buyall_own"    "DID_buyall_own"       
+ [4] "treated_buydom_own"    "treated_buyfor_own"    "DID_buydom_own"       
+ [7] "DID_buyfor_own"        "DID_buydom_ownafg"     "DID_buyfor_ownafg"    
+[10] "lDID_buyall_own"       "lDID_buydom_own"       "lDID_buyfor_own"      
+[13] "first_buyyear_own"     "first_buyyeardom_own"  "first_buyyearfor_own" 
+[16] "indyear"               "first_comdom_year"     "first_comfor_year"    
+[19] "first_comdom_year1"    "first_comdom_year2"    "first_comfor_year2"   
+[22] "DID_buyall_owncon1"    "DID_buydom_owncon1"    "DID_buyfor_owncon1"   
+[25] "DID_buydom_ownout"     "DID_buyfor_ownout"     "DID_buydom_ownin"     
+[28] "DID_buyfor_ownin"      "DID_buydom_ownre"      "DID_buyfor_ownre"     
+[31] "DID_buyall_sameind"    "DID_buyall_unsameind"  "DID_buydom_sameind"   
+[34] "DID_buydom_unsameind"  "DID_buyfor_sameind"    "DID_buyfor_unsameind" 
+[37] "lDID_buyall_sameind"   "lDID_buyall_unsameind" "lDID_buydom_sameind"  
+[40] "lDID_buyfor_sameind"   "lDID_buydom_unsameind" "lDID_buyfor_unsameind"
+[43] "ind_id"               
+   firm_id  year indyear
+     <num> <num>   <num>
+1:     884  2004     428
+2:    2320  2004     200
+3:    1452  2004     428
+4:    1814  2004     428
+5:    2288  2004     656
+NOTE: 648 observations removed because of NA values (RHS: 648).
+NOTES: 10,496 observations removed because of NA values (RHS: 10,496).
+       0/11 fixed-effect singletons were removed (11 observations).
+NOTES: 3,424 observations removed because of NA values (LHS: 3,424).
+       33/13 fixed-effect singletons were removed (46 observations).
+NOTES: 9,582 observations removed because of NA values (LHS: 9,582).
+       54/30 fixed-effect singletons were removed (84 observations).
+    start     N
+    <num> <int>
+ 1:  2004    26
+ 2:  2005    24
+ 3:  2006    27
+ 4:  2007    36
+ 5:  2008    56
+ 6:  2009    66
+ 7:  2010    69
+ 8:  2011   155
+ 9:  2012   183
+10:  2013   124
+11:  2014    61
+12:  2015    90
+13:  2016   118
+14:  2017   110
+15:  2018   215
+16:  2019   100
+17:  2020   150
+18:  2021    71
+19:   Inf   787
+[1] 0
+    start     N
+    <num> <int>
+ 1:  2004    21
+ 2:  2005    23
+ 3:  2006    21
+ 4:  2007    34
+ 5:  2008    53
+ 6:  2009    63
+ 7:  2010    69
+ 8:  2011   147
+ 9:  2012   177
+10:  2013   119
+11:  2014    60
+12:  2015    82
+13:  2016   109
+14:  2017   101
+15:  2018   197
+16:  2019   104
+17:  2020   144
+18:  2021    74
+19:   Inf   781
+[1] 0
+    start     N
+    <num> <int>
+ 1:  2004     8
+ 2:  2005     4
+ 3:  2006     8
+ 4:  2007    11
+ 5:  2008     9
+ 6:  2009     9
+ 7:  2010    12
+ 8:  2011    33
+ 9:  2012    37
+10:  2013    38
+11:  2014    22
+12:  2015    39
+13:  2016    51
+14:  2017    46
+15:  2018    82
+16:  2019    47
+17:  2020    59
+18:  2021    31
+19:   Inf   755
+[1] 0

@@ -1,0 +1,17 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+There were 32 warnings (use warnings() to see them)
+You have an unbalanced panel. Proceeding as such.
+The Wald pre-test is not reported when clustering beyond the unit level (clustervars = 'cl_num') because the analytical variance matrix does not account for between-cluster correlation. Use the bootstrap confidence intervals to assess pre-trends.
+There were 50 or more warnings (use warnings() to see the first 50)
+   window   twfe twfe_se    csa csa_se    bjs bjs_se neg_abs G_eff_twfe
+   <char>  <num>   <num>  <num>  <num>  <num>  <num>   <num>      <num>
+1: static 0.4327  0.1994 0.3693 0.1133 0.2255 0.1458 0.02511      6.936
+   G_eff_bjs G_eff_csa
+       <num>     <num>
+1:        NA        NA
+TWFE in raw units 0.239501 vs published 0.2466 (ratio 0.9712)
+-> C:/Users/ASUS/AppData/Local/Packages/openai.codex_2p2nqsd0c76g0/AC/#!sandbox.{8b438740-907b-40ef-8419-45e9bf7ac4fe}/Temp/cie202606-modern-1b134045959243d7a51a7af37a31dd48/output/specs_controls/cie202606__T5A_c2_digital.csv 

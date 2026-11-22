@@ -1,0 +1,158 @@
+{
+  "paper_id": "cie20260205",
+  "journal": "cie",
+  "year": 2026,
+  "issue": 2,
+  "title": "专利技术外购与企业生产率",
+  "screened_from": "article_text+package+data",
+  "screen_date": "2026-11-22",
+  "staggered_design": true,
+  "eligible_design": false,
+  "near_miss": true,
+  "near_miss_controls_only": true,
+  "near_miss_reason": "时变控制变量；按协议将行业固定为各列估计样本首期行业。",
+  "policy_or_event": "企业首次购买专利，按全部、国内、国外口径",
+  "unit": "firm",
+  "assignment_unit": "firm",
+  "time_unit": "year",
+  "reports_modern_estimator": true,
+  "estimators_reported": [
+    "twfe_static",
+    "twfe_event",
+    "bjs",
+    "csa",
+    "sun_abraham"
+  ],
+  "main_or_robustness": "main",
+  "data_sources": [
+    "作者附件 数据.dta"
+  ],
+  "package_status": "data_and_code",
+  "data_access": "public",
+  "software": "Stata",
+  "eligible_specs": [],
+  "n_eligible_specs": 0,
+  "near_miss_controls_only_specs": [
+    {
+      "spec_id": "T1_c1",
+      "location": "表1 第1列（作者程序顺序）",
+      "outcome": "tfp_acf",
+      "treatment": "DID_buyall_own",
+      "gvar": "first_buyyear_own",
+      "controls": [
+        "ownership",
+        "firmsize",
+        "firmage",
+        "capex_labor",
+        "lnPatent_before85",
+        "perGDP_growth",
+        "lnCityPatent85",
+        "lnHtechfirm",
+        "lnHzone"
+      ],
+      "coef": 0.0854,
+      "se": 0.0291,
+      "n_obs": 21828
+    },
+    {
+      "spec_id": "T1_c2",
+      "location": "表1 第2列（作者程序顺序）",
+      "outcome": "tfp_acf",
+      "treatment": "DID_buydom_own",
+      "gvar": "first_buyyeardom_own",
+      "controls": [
+        "ownership",
+        "firmsize",
+        "firmage",
+        "capex_labor",
+        "lnPatent_before85",
+        "perGDP_growth",
+        "lnCityPatent85",
+        "lnHtechfirm",
+        "lnHzone"
+      ],
+      "coef": 0.0899,
+      "se": 0.0295,
+      "n_obs": 21180
+    },
+    {
+      "spec_id": "T1_c3",
+      "location": "表1 第3列（作者程序顺序）",
+      "outcome": "tfp_acf",
+      "treatment": "DID_buyfor_own",
+      "gvar": "first_buyyearfor_own",
+      "controls": [
+        "ownership",
+        "firmsize",
+        "firmage",
+        "capex_labor",
+        "lnPatent_before85",
+        "perGDP_growth",
+        "lnCityPatent85",
+        "lnHtechfirm",
+        "lnHzone"
+      ],
+      "coef": -0.0374,
+      "se": 0.0384,
+      "n_obs": 11321
+    },
+    {
+      "spec_id": "T2_c1",
+      "location": "表2 第1列（作者程序顺序）",
+      "outcome": "RD_expense",
+      "treatment": "DID_buyall_own",
+      "gvar": "first_buyyear_own",
+      "controls": [
+        "ownership",
+        "firmsize",
+        "firmage",
+        "capex_labor",
+        "lnPatent_before85",
+        "perGDP_growth",
+        "lnCityPatent85",
+        "lnHtechfirm",
+        "lnHzone"
+      ],
+      "coef": 0.1117,
+      "se": 0.038,
+      "n_obs": null
+    },
+    {
+      "spec_id": "T2_c3",
+      "location": "表2 第3列（作者程序顺序）",
+      "outcome": "RD_labor",
+      "treatment": "DID_buyall_own",
+      "gvar": "first_buyyear_own",
+      "controls": [
+        "ownership",
+        "firmsize",
+        "firmage",
+        "capex_labor",
+        "lnPatent_before85",
+        "perGDP_growth",
+        "lnCityPatent85",
+        "lnHtechfirm",
+        "lnHzone"
+      ],
+      "coef": 0.5421,
+      "se": 0.2603,
+      "n_obs": null
+    }
+  ],
+  "ineligible_specs": [
+    {
+      "location": "表1第4列、表2作者程序第5和7列、表3、表4",
+      "reason": "同时包含多个处理变量。"
+    },
+    {
+      "location": "表2作者程序第2、4、6、8列",
+      "reason": "核心解释变量是连续的预测研发投入。"
+    }
+  ],
+  "appendix_specs": [
+    {
+      "location": "附图1、附图6等",
+      "notes": "事件研究与现代估计量列在附录；本轮未复算附录。"
+    }
+  ]
+}

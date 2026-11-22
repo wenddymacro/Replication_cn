@@ -1,0 +1,99 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      Stata 19.0
+___/   /   /___/   /   /___/       MP—Parallel Edition
+
+ Statistics and Data Science       Copyright 1985-2025 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-782-8272        https://www.stata.com
+                                   979-696-4600        service@stata.com
+
+Stata license: 114514-student 64-core lab perpetual
+Serial number: 9223372036854775807
+  Licensed to: 1
+               1
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. More than 2 billion observations are allowed; see help obs_advice.
+      4. Maximum number of variables is set to 5,000 but can be increased;
+          see help set_maxvar.
+
+
+Running D:\Stata\Stata19\profile.do ...
+
+. do fullfe_probe.do 
+
+. clear all
+
+. set more off
+
+. set processors 1
+    The maximum number of processors or cores being used is changed from 16
+    to 1.  It can be set to any number between 1 and 16
+
+. use "数据.dta", clear
+
+. global xlist_land "lnarea i.landuse zhaopaigua landlevel cunliang lndiscity"
+
+. global xlist_city "c.lnpergdp9#i.ym c.lnmidu9#i.ym c.fiscrev9#i.ym c.yichan9#
+> i.ym c.lnperdoctor9#i.ym"
+
+. drop if landuse!=1&landuse!=2&landuse!=3
+(2,506 observations deleted)
+
+. reghdfe lnaprice internew $xlist_land, cluster(区代码匹配) absorb(区代码匹配 
+> ym $xlist_city)
+(dropped 74 singleton observations)
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 171 iterations)
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     29,433
+Absorbing 7 HDFE groups                           F(   7,   1554) =     767.79
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6353
+                                                  Adj R-squared   =     0.6040
+                                                  Within R-sq.    =     0.3696
+Number of clusters (区代码匹配) =      1,555      Root MSE        =     0.9468
+
+                         (Std. err. adjusted for 1,555 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    internew |   .1687154   .0491263     3.43   0.001     .0723545    .2650764
+      lnarea |  -.0564281   .0133514    -4.23   0.000    -.0826166   -.0302395
+             |
+     landuse |
+          2  |  -1.541856   .0364201   -42.34   0.000    -1.613294   -1.470418
+          3  |   .1296394   .0376989     3.44   0.001     .0556933    .2035856
+             |
+  zhaopaigua |   1.440432   .0671629    21.45   0.000     1.308693    1.572172
+   landlevel |  -.0223506   .0053078    -4.21   0.000    -.0327618   -.0119395
+    cunliang |   .1262081   .0214401     5.89   0.000     .0841536    .1682626
+   lndiscity |          0  (omitted)
+       _cons |   .4322944   .0745334     5.80   0.000     .2860978     .578491
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |      1555        1555           0    *|
+                ym |       128           0         128     |
+    ym#c.lnpergdp9 |       128           0         128    ?|
+      ym#c.lnmidu9 |       128           0         128    ?|
+     ym#c.fiscrev9 |       128           0         128    ?|
+      ym#c.yichan9 |       128           0         128    ?|
+ ym#c.lnperdoctor9 |       128           0         128    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+end of do-file

@@ -1,0 +1,28 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+
+Attaching package: 'data.table'
+
+The following object is masked from 'package:base':
+
+    %notin%
+
+T1_c1  N= 21828  changing industries= 308  supported cohorts= 17 
+NOTE: The fixed-effects are not regular, they cannot be straightforwardly interpreted.
+You have an unbalanced panel. Proceeding as such.
+T1_c2  N= 21180  changing industries= 300  supported cohorts= 17 
+NOTE: The fixed-effects are not regular, they cannot be straightforwardly interpreted.
+You have an unbalanced panel. Proceeding as such.
+T1_c3  N= 11321  changing industries= 178  supported cohorts= 17 
+NOTE: The fixed-effects are not regular, they cannot be straightforwardly interpreted.
+You have an unbalanced panel. Proceeding as such.
+T2_c1  N= 18358  changing industries= 251  supported cohorts= 15 
+NOTE: The fixed-effects are not regular, they cannot be straightforwardly interpreted.
+You have an unbalanced panel. Proceeding as such.
+T2_c3  N= 12162  changing industries= 105  supported cohorts= 10 
+NOTE: The fixed-effects are not regular, they cannot be straightforwardly interpreted. The number of references is only approximate.
+You have an unbalanced panel. Proceeding as such.
+There were 50 or more warnings (use warnings() to see the first 50)

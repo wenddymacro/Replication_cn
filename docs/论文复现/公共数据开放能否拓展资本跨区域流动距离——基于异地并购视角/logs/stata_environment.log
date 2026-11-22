@@ -1,0 +1,49 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\public_data_di
+> stance\logs/stata_environment.log
+  log type:  text
+ opened on:  21 Nov 2026, 20:39:11
+
+. about
+
+Stata/MP 19.0 for Windows (64-bit x86-64)
+Revision 08 Apr 2025
+Copyright 1985-2025 StataCorp LLC
+
+Total physical memory:       32.00 GB
+Available physical memory:   16.59 GB
+
+Stata license: 114514-student 64-core lab perpetual
+Serial number: 9223372036854775807
+  Licensed to: 1
+               1
+
+. sysdir
+   STATA:  D:\Stata\Stata19\
+    BASE:  D:\Stata\Stata19\ado\base\
+    SITE:  D:\Stata\Stata19\ado\site\
+    PLUS:  C:\ado\plus\
+PERSONAL:  C:\ado\personal\
+OLDPLACE:  C:\ado\myado\
+
+. which reghdfe
+C:\ado\plus\r\reghdfe.ado
+*! version 5.7.3 13nov2019
+
+. which ftools
+C:\ado\plus\f\ftools.ado
+*! version 2.37.0 16aug2019
+
+. which esttab
+C:\ado\plus\e\esttab.ado
+*! version 2.0.9  06feb2016  Ben Jann
+*! wrapper for estout
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\public_data_di
+> stance\logs/stata_environment.log
+  log type:  text
+ closed on:  21 Nov 2026, 20:39:11
+--------------------------------------------------------------------------------

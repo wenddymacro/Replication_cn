@@ -1,0 +1,2 @@
+window,twfe,twfe_se,csa,csa_se,csa_hullw,bjs,bjs_se,neg_rows,neg_abs,G_eff_twfe,L_max_twfe,G_eff_csa,L_max_csa,G_eff_bjs,L_max_bjs,csa_note,bjs_note,boot_B,cov_twfe_csa,cov_twfe_bjs,bsd_twfe,bsd_csa,bsd_bjs,label,n,units,y_sd,unbalanced
+static,0.12578275851511,0.0724836036976931,-0.0838949340854963,0.115907253391625,,0.14722058530065,0.0787657033073686,0,0,38.8724804474527,0.0405980821523438,,,,,"","",999,,0.00539176769066408,0.0713608257670925,,0.0785505569971463,SUPPLEMENT_complete_panel_changed_sample_NOT_author_baseline,2544,212,0.0540004738022802,FALSE

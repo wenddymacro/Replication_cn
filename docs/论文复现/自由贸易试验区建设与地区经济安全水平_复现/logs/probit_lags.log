@@ -1,0 +1,161 @@
+-------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\fta_security\
+> work\../logs/probit_lags.log
+  log type:  text
+ opened on:  15 Nov 2026, 19:05:15
+
+. use data1, clear
+
+. xtset id year
+
+Panel variable: id (unbalanced)
+ Time variable: year, 2008 to 2019
+         Delta: 1 unit
+
+. tempname H
+
+. postfile `H' str20 variant str32 term double b se z N converged using "../dat
+> a/probit_audit.dta", replace
+(file ../data/probit_audit.dta not found)
+
+. estimates use "../data/appendix_probit.ster"
+
+. foreach v in Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal {
+  2.  post `H' ("author_code_levels") ("`v'") (_b[`v']) (_se[`v']) (_b[`v']/_se
+> [`v']) (e(N)) (e(converged))
+  3. }
+
+. * Paper says covariates are lagged; supplemental test only, not author-code r
+> eplacement.
+. capture noisily xtprobit set L.(Popu Capi Phys Econ Infra Inter Urban Consum 
+> Act Coastal), iterate(50)
+
+Fitting comparison model:
+
+Iteration 0:  Log likelihood = -1287.8114  
+Iteration 1:  Log likelihood = -800.39362  
+Iteration 2:  Log likelihood = -773.22963  
+Iteration 3:  Log likelihood = -772.69738  
+Iteration 4:  Log likelihood = -772.69731  
+
+Fitting full model:
+
+rho =  0.0    Log likelihood = -772.69731
+rho =  0.1    Log likelihood = -547.53972
+rho =  0.2    Log likelihood = -443.06851
+rho =  0.3    Log likelihood = -378.40228
+rho =  0.4    Log likelihood = -332.86008
+rho =  0.5    Log likelihood = -298.33513
+rho =  0.6    Log likelihood = -270.67736
+rho =  0.7    Log likelihood =   -247.651
+rho =  0.8    Log likelihood =  -227.2414
+
+Iteration 0:  Log likelihood = -247.61597  
+Iteration 1:  Log likelihood = -144.70479  
+Iteration 2:  Log likelihood = -139.81992  
+Iteration 3:  Log likelihood =  -117.6299  
+Iteration 4:  Log likelihood = -116.39948  (not concave)
+Iteration 5:  Log likelihood = -111.37971  (not concave)
+Iteration 6:  Log likelihood = -110.23013  (not concave)
+Iteration 7:  Log likelihood = -110.22979  (not concave)
+Iteration 8:  Log likelihood = -110.22969  (not concave)
+Iteration 9:  Log likelihood = -110.09895  (not concave)
+Iteration 10: Log likelihood = -110.03643  (not concave)
+Iteration 11: Log likelihood = -109.91793  (not concave)
+Iteration 12: Log likelihood = -109.85699  (not concave)
+Iteration 13: Log likelihood = -109.74273  (not concave)
+Iteration 14: Log likelihood = -109.68601  (not concave)
+Iteration 15: Log likelihood = -109.62798  (not concave)
+Iteration 16: Log likelihood = -109.59774  (not concave)
+Iteration 17: Log likelihood = -109.42068  (not concave)
+Iteration 18: Log likelihood = -109.25672  (not concave)
+Iteration 19: Log likelihood =  -109.2191  (not concave)
+Iteration 20: Log likelihood = -109.19102  (not concave)
+Iteration 21: Log likelihood =  -109.1633  (not concave)
+Iteration 22: Log likelihood =  -109.0005  (not concave)
+Iteration 23: Log likelihood = -108.83413  (not concave)
+Iteration 24: Log likelihood = -108.81097  
+Iteration 25: Log likelihood = -107.82425  
+Iteration 26: Log likelihood = -107.43016  
+Iteration 27: Log likelihood = -107.40726  
+Iteration 28: Log likelihood = -107.40703  
+Iteration 29: Log likelihood = -107.40703  
+
+Random-effects probit regression                     Number of obs    =  2,769
+Group variable: id                                   Number of groups =    258
+
+Random effects u_i ~ Gaussian                        Obs per group:
+                                                                  min =      5
+                                                                  avg =   10.7
+                                                                  max =     11
+
+Integration method: mvaghermite                      Integration pts. =     12
+
+                                                     Wald chi2(10)    = 288.61
+Log likelihood = -107.40703                          Prob > chi2      = 0.0000
+
+------------------------------------------------------------------------------
+         set | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        Popu |
+         L1. |   1.963744   .6847751     2.87   0.004     .6216096    3.305879
+             |
+        Capi |
+         L1. |   4.479562   .4953021     9.04   0.000     3.508787    5.450336
+             |
+        Phys |
+         L1. |  -.3780537   .5719782    -0.66   0.509     -1.49911     .743003
+             |
+        Econ |
+         L1. |   1.036291   1.013037     1.02   0.306    -.9492258    3.021808
+             |
+       Infra |
+         L1. |  -.7458261   .9199998    -0.81   0.418    -2.548993     1.05734
+             |
+       Inter |
+         L1. |  -.8031194   1.969226    -0.41   0.683    -4.662731    3.056493
+             |
+       Urban |
+         L1. |   9.142344   4.673033     1.96   0.050    -.0166325    18.30132
+             |
+      Consum |
+         L1. |    -3.0364   1.117036    -2.72   0.007    -5.225751   -.8470495
+             |
+         Act |
+         L1. |  -.3304162   2.379333    -0.14   0.890    -4.993824    4.332991
+             |
+     Coastal |
+         L1. |   3.582937   .9256806     3.87   0.000     1.768636    5.397238
+             |
+       _cons |  -61.48551   8.361674    -7.35   0.000    -77.87409   -45.09693
+-------------+----------------------------------------------------------------
+    /lnsig2u |   4.395132   .1962919                      4.010407    4.779857
+-------------+----------------------------------------------------------------
+     sigma_u |   9.003073    .883615                      7.427605    10.91271
+         rho |   .9878131    .002363                      .9821967    .9916727
+------------------------------------------------------------------------------
+LR test of rho=0: chibar2(01) = 1330.58                Prob >= chibar2 = 0.000
+
+. if _rc==0 {
+.  foreach v in Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal {
+  2.   post `H' ("paper_lag_test") ("L.`v'") (_b[L.`v']) (_se[L.`v']) (_b[L.`v'
+> ]/_se[L.`v']) (e(N)) (e(converged))
+  3.  }
+. }
+
+. postclose `H'
+
+. use "../data/probit_audit.dta", clear
+
+. export delimited using "../data/probit_audit.csv", replace
+(file ../data/probit_audit.csv not found)
+file ../data/probit_audit.csv saved
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\fta_security\
+> work\../logs/probit_lags.log
+  log type:  text
+ closed on:  15 Nov 2026, 19:05:41
+-------------------------------------------------------------------------------

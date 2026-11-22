@@ -1,0 +1,169 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\patent_quality
+> _signal_2025\logs/install_dependencies.log
+  log type:  text
+ opened on:  21 Nov 2026, 21:35:05
+
+. foreach pkg in ftools reghdfe ivreg2 ranktest ivreghdfe bdiff didplacebo event
+> studyinteract event_plot ppmlhdfe csdid drdid did_imputation did2s avar {
+  2.     capture noisily ssc install `pkg', replace
+  3. }
+checking ftools consistency and verifying not already installed...
+
+the following files will be replaced:
+    C:\ado\plus\f\ftools.ado
+    C:\ado\plus\f\ftools.mata
+    C:\ado\plus\f\ftools.sthlp
+    C:\ado\plus\f\fcollapse.ado
+    C:\ado\plus\f\fcollapse.sthlp
+    C:\ado\plus\j\join.ado
+    C:\ado\plus\f\fcollapse_functions.mata
+    C:\ado\plus\f\ftools.mata
+    C:\ado\plus\f\ftools_common.mata
+    C:\ado\plus\f\ftools_main.mata
+    C:\ado\plus\m\ms_compile_mata.ado
+    C:\ado\plus\m\ms_expand_varlist.ado
+    C:\ado\plus\m\ms_get_version.ado
+    C:\ado\plus\m\ms_parse_absvars.ado
+    C:\ado\plus\m\ms_parse_vce.ado
+
+installing into C:\ado\plus\...
+installation complete.
+checking reghdfe consistency and verifying not already installed...
+
+the following files will be replaced:
+    C:\ado\plus\r\reghdfe.ado
+    C:\ado\plus\r\reghdfe.mata
+    C:\ado\plus\r\reghdfe_header.ado
+    C:\ado\plus\r\reghdfe.sthlp
+    C:\ado\plus\r\reghdfe.mata
+
+installing into C:\ado\plus\...
+installation complete.
+checking ivreg2 consistency and verifying not already installed...
+
+the following files will be replaced:
+    C:\ado\plus\i\ivreg2.ado
+    C:\ado\plus\i\ivreg2.sthlp
+    C:\ado\plus\i\ivreg2_p.ado
+
+installing into C:\ado\plus\...
+installation complete.
+checking ranktest consistency and verifying not already installed...
+
+the following files will be replaced:
+    C:\ado\plus\r\ranktest.ado
+
+installing into C:\ado\plus\...
+installation complete.
+checking ivreghdfe consistency and verifying not already installed...
+installing into C:\ado\plus\...
+installation complete.
+checking bdiff consistency and verifying not already installed...
+installing into C:\ado\plus\...
+installation complete.
+checking didplacebo consistency and verifying not already installed...
+installing into C:\ado\plus\...
+installation complete.
+checking eventstudyinteract consistency and verifying not already installed...
+installing into C:\ado\plus\...
+installation complete.
+checking event_plot consistency and verifying not already installed...
+installing into C:\ado\plus\...
+installation complete.
+checking ppmlhdfe consistency and verifying not already installed...
+installing into C:\ado\plus\...
+installation complete.
+checking csdid consistency and verifying not already installed...
+installing into C:\ado\plus\...
+installation complete.
+checking drdid consistency and verifying not already installed...
+installing into C:\ado\plus\...
+installation complete.
+checking did_imputation consistency and verifying not already installed...
+installing into C:\ado\plus\...
+installation complete.
+checking did2s consistency and verifying not already installed...
+installing into C:\ado\plus\...
+installation complete.
+checking avar consistency and verifying not already installed...
+
+the following files will be replaced:
+    C:\ado\plus\a\avar.ado
+    C:\ado\plus\a\avar.sthlp
+
+installing into C:\ado\plus\...
+installation complete.
+
+. foreach cmd in ftools reghdfe ivreg2 ranktest ivreghdfe bdiff didplacebo event
+> studyinteract event_plot ppmlhdfe csdid drdid did_imputation did2s avar {
+  2.     capture noisily which `cmd'
+  3. }
+C:\ado\plus\f\ftools.ado
+*! version 2.50.0 09jan2026
+C:\ado\plus\r\reghdfe.ado
+*! version 6.13.1 10Jan2026
+C:\ado\plus\i\ivreg2.ado
+*! ivreg2 4.1.12  14aug2024
+*! authors cfb & mes
+*! see end of file for version comments
+C:\ado\plus\r\ranktest.ado
+*! ranktest 2.0.04  21sept2020
+*! authors mes & fw; KP stat based on code by fk
+*! see end of file for version comments
+C:\ado\plus\i\ivreghdfe.ado
+*! ivreghdfe 1.1.4  29nov2025 (bugfix for github issue #61)
+*! ivreghdfe 1.1.3  04Jan2023 (bugfix for github issue #48)
+*! ivreghdfe 1.1.2  29Sep2022 (bugfix for github issue #44)
+*! ivreghdfe 1.1.1  14Dec2021 (experimental -margins- support)
+*! ivreghdfe 1.1.0  25Feb2021
+*! ivreg2 4.1.11  22Nov2019
+*! authors cfb & mes
+*! see end of file for version comments
+C:\ado\plus\b\bdiff.ado
+*! Version 1.04  24Nov2020
+C:\ado\plus\d\didplacebo.ado
+*! didplacebo 2.0.0 2024/04/08
+C:\ado\plus\e\eventstudyinteract.ado
+*! version 0.1  24jan2022  Liyang Sun, lsun20@mit.edu
+C:\ado\plus\e\event_plot.ado
+*! event_plot: Plot coefficients from a staggered adoption event study analysis
+*! Version: June 1, 2021
+*! Author: Kirill Borusyak
+*! Please check the latest version at https://github.com/borusyak/did_imputation
+> /
+*! Citation: Borusyak, Jaravel, and Spiess, "Revisiting Event Study Designs: Rob
+> ust and Efficient Estimation" (2021)
+C:\ado\plus\p\ppmlhdfe.ado
+*! version 2.3.3 02nov2025
+*! Authors: Sergio Correia, Paulo Guimarães, Thomas Zylkin
+*! URL: https://github.com/sergiocorreia/ppmlhdfe
+C:\ado\plus\c\csdid.ado
+*! csdid 2.0.3 30oct2026
+C:\ado\plus\d\drdid.ado
+C:\ado\plus\d\did_imputation.ado
+*! did_imputation: Treatment effect estimation and pre-trend testing in staggere
+> d adoption diff-in-diff designs with an imputation approach of Borusyak, Jarav
+> el, and Spiess (2023)
+*! Version: November 22, 2023
+*! Author: Kirill Borusyak
+*! Recent updates: project() option can no longer be combined with autosample, w
+> hich could lead to errors
+*! Citation: Borusyak, Jaravel, and Spiess, "Revisiting Event Study Designs: Rob
+> ust and Efficient Estimation" (2023)
+C:\ado\plus\d\did2s.ado
+*! version 0.5
+C:\ado\plus\a\avar.ado
+*! avar 1.0.07  28July2015
+*! authors cfb/mes
+*! shell based on ranktest by fk/mes
+*! see end of file for version comments
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\patent_quality
+> _signal_2025\logs/install_dependencies.log
+  log type:  text
+ closed on:  21 Nov 2026, 21:46:17
+--------------------------------------------------------------------------------

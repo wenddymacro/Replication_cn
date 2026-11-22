@@ -1,0 +1,237 @@
+{
+  "paper_id": "cie20240307",
+  "title": "自由贸易试验区建设与地区经济安全水平——基于地级市的经验证据",
+  "main_static": 1,
+  "secondary_static": 14,
+  "body_event": 0,
+  "models": [
+    {
+      "spec_id": "B1",
+      "command": "xtreg Eco_safe Piolt i.year, fe vce(robust)",
+      "term": "Piolt",
+      "location": "body",
+      "teacher_status": "main"
+    },
+    {
+      "spec_id": "B2",
+      "command": "xtreg Eco_safe Piolt Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "Piolt",
+      "location": "body",
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "B3",
+      "command": "xtreg Eco_safe Piolt Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year if Direct==1, fe vce(robust)",
+      "term": "Piolt",
+      "location": "body",
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "M1",
+      "command": "xtreg CapitalMismatch Piolt Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "Piolt",
+      "location": "body",
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "M2",
+      "command": "xtreg Labormismatch Piolt Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "Piolt",
+      "location": "body",
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "M3",
+      "command": "xtreg Agg_e Piolt Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "Piolt",
+      "location": "body",
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "M4",
+      "command": "xtreg Agg_i Piolt Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "Piolt",
+      "location": "body",
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "M5",
+      "command": "xtreg Agg_T1 Piolt Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "Piolt",
+      "location": "body",
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "M6",
+      "command": "xtreg Agg_T2 Piolt Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "Piolt",
+      "location": "body",
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "M7",
+      "command": "xtreg Agg_T3 Piolt Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "Piolt",
+      "location": "body",
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "M8",
+      "command": "xtreg Agg_T4 Piolt Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "Piolt",
+      "location": "body",
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "M9",
+      "command": "xtreg Healthindex Piolt Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "Piolt",
+      "location": "body",
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "M10",
+      "command": "xtreg Affinityindex Piolt Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "Piolt",
+      "location": "body",
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "M11",
+      "command": "xtreg Integrityindex Piolt Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "Piolt",
+      "location": "body",
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "M12",
+      "command": "xtreg Ceindex Piolt Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "Piolt",
+      "location": "body",
+      "teacher_status": "secondary_controls_only"
+    },
+    {
+      "spec_id": "A3_1",
+      "command": "xtreg Eco_safe Treatnryear Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "Treatnryear",
+      "location": "online_appendix",
+      "teacher_status": "appendix_excluded_continuous_treatment"
+    },
+    {
+      "spec_id": "A3_3",
+      "command": "xtreg Eco_safe Piolt Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year if Pilot2020==1, fe vce(robust)",
+      "term": "Piolt",
+      "location": "online_appendix",
+      "teacher_status": "appendix_controls_only"
+    },
+    {
+      "spec_id": "A3_4",
+      "command": "xtreg Eco_safe Piolt Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal Boradid Tefidid i.year, fe vce(robust)",
+      "term": "Piolt",
+      "location": "online_appendix",
+      "teacher_status": "appendix_excluded_other_treatments"
+    },
+    {
+      "spec_id": "A4_1",
+      "command": "xtreg Eco_safe a3 Popu Capi Phys Econ Infra Inter Urban Consum Act i.year, fe vce(robust)",
+      "term": "a3",
+      "location": "online_appendix",
+      "teacher_status": "appendix_excluded_treatment_interaction"
+    },
+    {
+      "spec_id": "A4_2",
+      "command": "xtreg Eco_safe a2 Popu Capi Phys Econ Infra Inter Urban Consum Act i.year, fe vce(robust)",
+      "term": "a2",
+      "location": "online_appendix",
+      "teacher_status": "appendix_excluded_treatment_interaction"
+    },
+    {
+      "spec_id": "A4_3",
+      "command": "xtreg Eco_safe a1 Popu Capi Phys Econ Infra Inter Urban Consum Act i.year, fe vce(robust)",
+      "term": "a1",
+      "location": "online_appendix",
+      "teacher_status": "appendix_excluded_treatment_interaction"
+    },
+    {
+      "spec_id": "A4_4",
+      "command": "xtreg Eco_safe b1 Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "b1",
+      "location": "online_appendix",
+      "teacher_status": "appendix_excluded_treatment_interaction"
+    },
+    {
+      "spec_id": "A4_5",
+      "command": "xtreg Eco_safe b2 Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "b2",
+      "location": "online_appendix",
+      "teacher_status": "appendix_excluded_treatment_interaction"
+    },
+    {
+      "spec_id": "A5_1",
+      "command": "xtreg Eco_safe e1 Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "e1",
+      "location": "online_appendix",
+      "teacher_status": "appendix_excluded_treatment_interaction"
+    },
+    {
+      "spec_id": "A5_2",
+      "command": "xtreg Eco_safe e2 Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "e2",
+      "location": "online_appendix",
+      "teacher_status": "appendix_excluded_treatment_interaction"
+    },
+    {
+      "spec_id": "A5_3",
+      "command": "xtreg Eco_safe e3 Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "e3",
+      "location": "online_appendix",
+      "teacher_status": "appendix_excluded_treatment_interaction"
+    },
+    {
+      "spec_id": "A5_4",
+      "command": "xtreg Eco_safe e4 Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal i.year, fe vce(robust)",
+      "term": "e4",
+      "location": "online_appendix",
+      "teacher_status": "appendix_excluded_treatment_interaction"
+    },
+    {
+      "spec_id": "A3_2",
+      "location": "online_appendix",
+      "teacher_status": "appendix_bootstrap_inference_same_model_B2"
+    },
+    {
+      "spec_id": "AF1",
+      "location": "online_appendix",
+      "teacher_status": "appendix_event_dates_inconsistent_with_Piolt_no_silent_substitution"
+    },
+    {
+      "spec_id": "A2",
+      "location": "online_appendix",
+      "teacher_status": "excluded_probit"
+    }
+  ],
+  "modern_estimator_reported": false,
+  "body_pages_reviewed": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "appendix_separate": true,
+  "source_data_available": true
+}

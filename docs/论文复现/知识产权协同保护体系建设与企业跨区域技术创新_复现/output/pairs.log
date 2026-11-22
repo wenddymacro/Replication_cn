@@ -1,0 +1,19 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+
+Attaching package: 'data.table'
+
+The following object is masked from 'package:base':
+
+    %notin%
+
+NOTES: 32,605 observations removed because of NA values (LHS: 32,605).
+       7/0/0/0 fixed-effect singletons were removed (7 observations).
+NOTES: 32,605 observations removed because of NA values (LHS: 32,605).
+       7/0/0/0 fixed-effect singletons were removed (7 observations).
+NOTE: 7,781 observations removed because of NA values (LHS: 7,781).
+NOTES: 191,163 observations removed because of NA values (LHS: 191,163).
+       100/0/0/2 fixed-effect singletons were removed (100 observations).

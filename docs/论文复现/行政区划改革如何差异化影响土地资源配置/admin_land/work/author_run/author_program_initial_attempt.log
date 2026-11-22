@@ -1,0 +1,1404 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      Stata 19.0
+___/   /   /___/   /   /___/       MP—Parallel Edition
+
+ Statistics and Data Science       Copyright 1985-2025 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-782-8272        https://www.stata.com
+                                   979-696-4600        service@stata.com
+
+Stata license: 114514-student 64-core lab perpetual
+Serial number: 9223372036854775807
+  Licensed to: 1
+               1
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. More than 2 billion observations are allowed; see help obs_advice.
+      4. Maximum number of variables is set to 5,000 but can be increased;
+          see help set_maxvar.
+
+
+Running D:\Stata\Stata19\profile.do ...
+
+. do author_program.do 
+
+. *****依据《中华人民共和国数据安全法》、《网络数据安全管理条例》等相关法规要求
+> ，本文使用的中国土地出让微观数据属自然资源部法定监管范畴。为严格履行数据安全
+> 保护义务，附件提供随机抽样的4%样本数据作验证参考。********
+. 
+. cd "C:/Users/ASUS/Documents/ChatGPT/论文复现/replication/admin_land/work/auth
+> or_run"
+C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\admin_land\work\author_run
+
+. 
+. *****************************Table1_to_Table5 & Appendix_Table2_part1********
+> ********************************
+. 
+. use "数据.dta", clear
+
+. 
+. **Determining control variables
+. global xlist_land "lnarea i.landuse zhaopaigua landlevel cunliang lndiscity"
+
+. global xlist_city "c.lnpergdp9#i.ym c.lnmidu9#i.ym c.fiscrev9#i.ym c.yichan9#
+> i.ym c.lnperdoctor9#i.ym"
+
+. 
+. drop if landuse!=1&landuse!=2&landuse!=3
+(2,506 observations deleted)
+
+. reghdfe lnaprice internew $xlist_land ,cluster( 区代码匹配 ) absorb( 区代码匹
+> 配 ym $xlist_city) 
+(dropped 74 singleton observations)
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 172 iterations)
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     29,433
+Absorbing 7 HDFE groups                           F(   7,   1554) =     767.79
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6353
+                                                  Adj R-squared   =     0.6040
+                                                  Within R-sq.    =     0.3696
+Number of clusters (区代码匹配) =      1,555      Root MSE        =     0.9468
+
+                         (Std. err. adjusted for 1,555 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    internew |   .1687154   .0491263     3.43   0.001     .0723545    .2650764
+      lnarea |  -.0564281   .0133514    -4.23   0.000    -.0826166   -.0302395
+             |
+     landuse |
+          2  |  -1.541856   .0364201   -42.34   0.000    -1.613294   -1.470418
+          3  |   .1296394   .0376989     3.44   0.001     .0556933    .2035856
+             |
+  zhaopaigua |   1.440432   .0671629    21.45   0.000     1.308693    1.572172
+   landlevel |  -.0223506   .0053078    -4.21   0.000    -.0327618   -.0119395
+    cunliang |   .1262081   .0214401     5.89   0.000     .0841536    .1682626
+   lndiscity |          0  (omitted)
+       _cons |   .4322944   .0745334     5.80   0.000     .2860978     .578491
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |      1555        1555           0    *|
+                ym |       128           0         128     |
+    ym#c.lnpergdp9 |       128           0         128    ?|
+      ym#c.lnmidu9 |       128           0         128    ?|
+     ym#c.fiscrev9 |       128           0         128    ?|
+      ym#c.yichan9 |       128           0         128    ?|
+ ym#c.lnperdoctor9 |       128           0         128    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen esample=e(sample)
+
+. keep if esample==1
+(3,297 observations deleted)
+
+. 
+. **Table1-Baseline regression
+. reghdfe lnaprice internew,cluster( 区代码匹配 ) noabsorb
+(MWFE estimator converged in 1 iterations)
+
+HDFE Linear regression                            Number of obs   =     29,433
+Absorbing 1 HDFE group                            F(   1,   1554) =      36.95
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.0105
+                                                  Adj R-squared   =     0.0105
+                                                  Within R-sq.    =     0.0105
+Number of clusters (区代码匹配) =      1,555      Root MSE        =     1.4967
+
+                         (Std. err. adjusted for 1,555 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    internew |   .4806281   .0790722     6.08   0.000     .3255287    .6357275
+       _cons |   .8902625   .0458156    19.43   0.000     .8003956    .9801294
+------------------------------------------------------------------------------
+
+. est store a
+
+. reghdfe lnaprice internew ,cluster( 区代码匹配 ) absorb( 区代码匹配 ym) 
+(MWFE estimator converged in 7 iterations)
+
+HDFE Linear regression                            Number of obs   =     29,433
+Absorbing 2 HDFE groups                           F(   1,   1554) =       9.04
+Statistics robust to heteroskedasticity           Prob > F        =     0.0027
+                                                  R-squared       =     0.4075
+                                                  Adj R-squared   =     0.3716
+                                                  Within R-sq.    =     0.0011
+Number of clusters (区代码匹配) =      1,555      Root MSE        =     1.1927
+
+                         (Std. err. adjusted for 1,555 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    internew |   .1802794   .0599436     3.01   0.003     .0627006    .2978582
+       _cons |   .9252027   .0069734   132.68   0.000     .9115245    .9388808
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+---------------------------------------------------------+
+     Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-----------------+---------------------------------------|
+      区代码匹配 |      1555        1555           0    *|
+              ym |       128           0         128     |
+---------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store b
+
+. reghdfe lnaprice internew $xlist_land ,cluster( 区代码匹配 ) absorb( 区代码匹
+> 配 ym) 
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 7 iterations)
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     29,433
+Absorbing 2 HDFE groups                           F(   7,   1554) =     772.68
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6263
+                                                  Adj R-squared   =     0.6036
+                                                  Within R-sq.    =     0.3700
+Number of clusters (区代码匹配) =      1,555      Root MSE        =     0.9473
+
+                         (Std. err. adjusted for 1,555 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    internew |   .1612957   .0509675     3.16   0.002     .0613233    .2612682
+      lnarea |  -.0561602   .0135324    -4.15   0.000    -.0827038   -.0296166
+             |
+     landuse |
+          2  |  -1.540651   .0363803   -42.35   0.000     -1.61201   -1.469291
+          3  |   .1273336   .0373279     3.41   0.001     .0541151     .200552
+             |
+  zhaopaigua |   1.440362   .0674763    21.35   0.000     1.308008    1.572717
+   landlevel |  -.0217864   .0053043    -4.11   0.000    -.0321908    -.011382
+    cunliang |   .1235075   .0216465     5.71   0.000      .081048     .165967
+   lndiscity |          0  (omitted)
+       _cons |   .4324569   .0759394     5.69   0.000     .2835024    .5814114
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+---------------------------------------------------------+
+     Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-----------------+---------------------------------------|
+      区代码匹配 |      1555        1555           0    *|
+              ym |       128           0         128     |
+---------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store c
+
+. reghdfe lnaprice internew $xlist_land ,cluster( 区代码匹配 ) absorb( 区代码匹
+> 配 ym $xlist_city) 
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 172 iterations)
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     29,433
+Absorbing 7 HDFE groups                           F(   7,   1554) =     767.79
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6353
+                                                  Adj R-squared   =     0.6040
+                                                  Within R-sq.    =     0.3696
+Number of clusters (区代码匹配) =      1,555      Root MSE        =     0.9468
+
+                         (Std. err. adjusted for 1,555 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    internew |   .1687154   .0491263     3.43   0.001     .0723545    .2650764
+      lnarea |  -.0564281   .0133514    -4.23   0.000    -.0826166   -.0302395
+             |
+     landuse |
+          2  |  -1.541856   .0364201   -42.34   0.000    -1.613294   -1.470418
+          3  |   .1296394   .0376989     3.44   0.001     .0556933    .2035856
+             |
+  zhaopaigua |   1.440432   .0671629    21.45   0.000     1.308693    1.572172
+   landlevel |  -.0223506   .0053078    -4.21   0.000    -.0327618   -.0119395
+    cunliang |   .1262081   .0214401     5.89   0.000     .0841536    .1682626
+   lndiscity |          0  (omitted)
+       _cons |   .4322944   .0745334     5.80   0.000     .2860978     .578491
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |      1555        1555           0    *|
+                ym |       128           0         128     |
+    ym#c.lnpergdp9 |       128           0         128    ?|
+      ym#c.lnmidu9 |       128           0         128    ?|
+     ym#c.fiscrev9 |       128           0         128    ?|
+      ym#c.yichan9 |       128           0         128    ?|
+ ym#c.lnperdoctor9 |       128           0         128    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store d
+
+. esttab a b c d using Table1_all_baseline.rtf,replace se compress nogap b(%6.4
+> f) scalars(r2 r2_a N F) star(* 0.1 ** 0.05 *** 0.01) 
+(file Table1_all_baseline.rtf not found)
+(output written to Table1_all_baseline.rtf)
+
+. est clear
+
+. 
+. **Table2-Regression - land price by usage type - adding control variables
+. reghdfe lnaprice internew $xlist_land if landuse==1,cluster( 区代码匹配 ) abs
+> orb( 区代码匹配 ym $xlist_city)
+(dropped 186 singleton observations)
+note: 1bn.landuse is probably collinear with the fixed effects (all partialled-
+> out values are close to zero; tol = 1.0e-09)
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 338 iterations)
+note: 1.landuse omitted because of collinearity
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     14,946
+Absorbing 7 HDFE groups                           F(   5,   1251) =     128.69
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.7336
+                                                  Adj R-squared   =     0.6919
+                                                  Within R-sq.    =     0.2099
+Number of clusters (区代码匹配) =      1,252      Root MSE        =     0.9736
+
+                         (Std. err. adjusted for 1,252 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    internew |   .2309889   .0792542     2.91   0.004     .0755031    .3864748
+      lnarea |  -.1075791   .0250094    -4.30   0.000     -.156644   -.0585141
+   1.landuse |          0  (omitted)
+  zhaopaigua |   2.037636   .1113673    18.30   0.000     1.819149    2.256123
+   landlevel |  -.0210827    .008907    -2.37   0.018    -.0385571   -.0036083
+    cunliang |   .0929718   .0339255     2.74   0.006     .0264147    .1595289
+   lndiscity |          0  (omitted)
+       _cons |  -.1208062   .1168074    -1.03   0.301    -.3499661    .1083538
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |      1252        1252           0    *|
+                ym |       128           0         128     |
+    ym#c.lnpergdp9 |       128           0         128    ?|
+      ym#c.lnmidu9 |       128           0         128    ?|
+     ym#c.fiscrev9 |       128           0         128    ?|
+      ym#c.yichan9 |       128           0         128    ?|
+ ym#c.lnperdoctor9 |       128           0         128    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store res
+
+. reghdfe lnaprice internew $xlist_land if landuse==3,cluster( 区代码匹配 ) abs
+> orb( 区代码匹配 ym $xlist_city)
+(dropped 335 singleton observations)
+note: 3bn.landuse is probably collinear with the fixed effects (all partialled-
+> out values are close to zero; tol = 1.0e-09)
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 341 iterations)
+note: 3.landuse omitted because of collinearity
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      5,078
+Absorbing 7 HDFE groups                           F(   5,    980) =      57.06
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6572
+                                                  Adj R-squared   =     0.4773
+                                                  Within R-sq.    =     0.1250
+Number of clusters (区代码匹配) =        981      Root MSE        =     0.9672
+
+                           (Std. err. adjusted for 981 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    internew |   .1817843    .103446     1.76   0.079    -.0212169    .3847855
+      lnarea |  -.1244756   .0159003    -7.83   0.000    -.1556781   -.0932731
+   3.landuse |          0  (omitted)
+  zhaopaigua |   1.043639   .0738304    14.14   0.000     .8987553    1.188523
+   landlevel |  -.0530736   .0089998    -5.90   0.000    -.0707348   -.0354125
+    cunliang |   .3237018   .0467746     6.92   0.000     .2319119    .4154917
+   lndiscity |          0  (omitted)
+       _cons |   .8201604   .0898575     9.13   0.000     .6438252    .9964956
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |       981         981           0    *|
+                ym |       127           0         127     |
+    ym#c.lnpergdp9 |       127           0         127    ?|
+      ym#c.lnmidu9 |       127           0         127    ?|
+     ym#c.fiscrev9 |       127           0         127    ?|
+      ym#c.yichan9 |       127           0         127    ?|
+ ym#c.lnperdoctor9 |       127           0         127    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store com
+
+. reghdfe lnaprice internew $xlist_land if landuse!=2,cluster( 区代码匹配 ) abs
+> orb( 区代码匹配 ym $xlist_city)
+(dropped 77 singleton observations)
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 200 iterations)
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     20,468
+Absorbing 7 HDFE groups                           F(   6,   1454) =     129.81
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6643
+                                                  Adj R-squared   =     0.6233
+                                                  Within R-sq.    =     0.1743
+Number of clusters (区代码匹配) =      1,455      Root MSE        =     1.0264
+
+                         (Std. err. adjusted for 1,455 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    internew |   .2180732   .0616515     3.54   0.000     .0971377    .3390087
+      lnarea |  -.0886656   .0181315    -4.89   0.000    -.1242322    -.053099
+   3.landuse |   .1400309   .0375419     3.73   0.000     .0663887     .213673
+  zhaopaigua |   1.679083   .0808887    20.76   0.000     1.520412    1.837754
+   landlevel |  -.0280641   .0074601    -3.76   0.000    -.0426978   -.0134304
+    cunliang |   .2092536   .0310727     6.73   0.000     .1483015    .2702056
+   lndiscity |          0  (omitted)
+       _cons |   .0862394   .0884885     0.97   0.330    -.0873394    .2598182
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |      1455        1455           0    *|
+                ym |       128           0         128     |
+    ym#c.lnpergdp9 |       128           0         128    ?|
+      ym#c.lnmidu9 |       128           0         128    ?|
+     ym#c.fiscrev9 |       128           0         128    ?|
+      ym#c.yichan9 |       128           0         128    ?|
+ ym#c.lnperdoctor9 |       128           0         128    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store rescom
+
+. reghdfe lnaprice internew $xlist_land if landuse==2,cluster( 区代码匹配 ) abs
+> orb( 区代码匹配 ym $xlist_city)
+(dropped 214 singleton observations)
+note: 2bn.landuse is probably collinear with the fixed effects (all partialled-
+> out values are close to zero; tol = 1.0e-09)
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 275 iterations)
+note: 2.landuse omitted because of collinearity
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      8,674
+Absorbing 7 HDFE groups                           F(   5,   1132) =      33.52
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.7465
+                                                  Adj R-squared   =     0.6752
+                                                  Within R-sq.    =     0.1317
+Number of clusters (区代码匹配) =      1,133      Root MSE        =     0.3995
+
+                         (Std. err. adjusted for 1,133 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    internew |  -.0527214   .0281659    -1.87   0.061    -.1079847    .0025418
+      lnarea |  -.0279766   .0051331    -5.45   0.000    -.0380481   -.0179051
+   2.landuse |          0  (omitted)
+  zhaopaigua |   .6480941   .0551668    11.75   0.000     .5398534    .7563347
+   landlevel |   -.007532   .0034869    -2.16   0.031    -.0143734   -.0006905
+    cunliang |   .0171267   .0159703     1.07   0.284    -.0142082    .0484615
+   lndiscity |          0  (omitted)
+       _cons |  -.1940648   .0541205    -3.59   0.000    -.3002526    -.087877
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |      1133        1133           0    *|
+                ym |       128           0         128     |
+    ym#c.lnpergdp9 |       128           0         128    ?|
+      ym#c.lnmidu9 |       128           0         128    ?|
+     ym#c.fiscrev9 |       128           0         128    ?|
+      ym#c.yichan9 |       128           0         128    ?|
+ ym#c.lnperdoctor9 |       128           0         128    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store ind
+
+. esttab res com rescom ind using Table2_landprice_baseline.rtf,replace se comp
+> ress nogap b(%6.4f) scalars(r2 r2_a N F) star(* 0.1 ** 0.05 *** 0.01) 
+(file Table2_landprice_baseline.rtf not found)
+(output written to Table2_landprice_baseline.rtf)
+
+. est clear
+
+. 
+. 
+. **Table3-Interaction terms for eastern, central and western regions
+. gen interneweast=internew*(qycode==1)
+
+. gen internewmiddle=internew*(qycode==2)
+
+. gen internewwest=internew*(qycode==3)
+
+. gen internewmidwes=internew*(qycode==2|qycode==3)
+
+. 
+. reghdfe lnaprice interneweast internewmidwes $xlist_land ,cluster( 区代码匹配
+>  ) absorb( 区代码匹配 ym $xlist_city) 
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 177 iterations)
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     29,433
+Absorbing 7 HDFE groups                           F(   8,   1554) =     673.18
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6353
+                                                  Adj R-squared   =     0.6040
+                                                  Within R-sq.    =     0.3697
+Number of clusters (区代码匹配) =      1,555      Root MSE        =     0.9468
+
+                         (Std. err. adjusted for 1,555 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+interneweast |   .1367335   .0693699     1.97   0.049     .0006651    .2728019
+internewmi~s |   .2105078   .0641336     3.28   0.001     .0847103    .3363054
+      lnarea |  -.0564844   .0133431    -4.23   0.000    -.0826568   -.0303121
+             |
+     landuse |
+          2  |  -1.541675   .0363821   -42.37   0.000    -1.613038   -1.470312
+          3  |   .1291741    .037697     3.43   0.001     .0552316    .2031165
+             |
+  zhaopaigua |   1.440293   .0671669    21.44   0.000     1.308545     1.57204
+   landlevel |  -.0223841   .0053064    -4.22   0.000    -.0327926   -.0119756
+    cunliang |   .1265215   .0213993     5.91   0.000     .0845469    .1684961
+   lndiscity |          0  (omitted)
+       _cons |   .4318125     .07447     5.80   0.000     .2857402    .5778848
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |      1555        1555           0    *|
+                ym |       128           0         128     |
+    ym#c.lnpergdp9 |       128           0         128    ?|
+      ym#c.lnmidu9 |       128           0         128    ?|
+     ym#c.fiscrev9 |       128           0         128    ?|
+      ym#c.yichan9 |       128           0         128    ?|
+ ym#c.lnperdoctor9 |       128           0         128    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store all_east2_int
+
+. reghdfe lnaprice interneweast internewmidwes $xlist_land if landuse==1,cluste
+> r( 区代码匹配 ) absorb( 区代码匹配 ym $xlist_city)
+(dropped 186 singleton observations)
+note: 1bn.landuse is probably collinear with the fixed effects (all partialled-
+> out values are close to zero; tol = 1.0e-09)
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 329 iterations)
+note: 1.landuse omitted because of collinearity
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     14,946
+Absorbing 7 HDFE groups                           F(   6,   1251) =     107.15
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.7337
+                                                  Adj R-squared   =     0.6920
+                                                  Within R-sq.    =     0.2104
+Number of clusters (区代码匹配) =      1,252      Root MSE        =     0.9734
+
+                         (Std. err. adjusted for 1,252 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+interneweast |   .3274473   .1164987     2.81   0.005      .098893    .5560016
+internewmi~s |   .1185499   .0846183     1.40   0.161    -.0474595    .2845593
+      lnarea |  -.1073847   .0249237    -4.31   0.000    -.1562816   -.0584878
+   1.landuse |          0  (omitted)
+  zhaopaigua |    2.03879   .1115555    18.28   0.000     1.819933    2.257646
+   landlevel |  -.0209116   .0089053    -2.35   0.019    -.0383825   -.0034407
+    cunliang |   .0921189   .0339852     2.71   0.007     .0254447    .1587931
+   lndiscity |          0  (omitted)
+       _cons |  -.1178875   .1159533    -1.02   0.310    -.3453719     .109597
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |      1252        1252           0    *|
+                ym |       128           0         128     |
+    ym#c.lnpergdp9 |       128           0         128    ?|
+      ym#c.lnmidu9 |       128           0         128    ?|
+     ym#c.fiscrev9 |       128           0         128    ?|
+      ym#c.yichan9 |       128           0         128    ?|
+ ym#c.lnperdoctor9 |       128           0         128    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store res_east2_int
+
+. reghdfe lnaprice interneweast internewmidwes $xlist_land if landuse==2,cluste
+> r( 区代码匹配 ) absorb( 区代码匹配 ym $xlist_city)
+(dropped 214 singleton observations)
+note: 2bn.landuse is probably collinear with the fixed effects (all partialled-
+> out values are close to zero; tol = 1.0e-09)
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 285 iterations)
+note: 2.landuse omitted because of collinearity
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      8,674
+Absorbing 7 HDFE groups                           F(   6,   1132) =      29.90
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.7466
+                                                  Adj R-squared   =     0.6752
+                                                  Within R-sq.    =     0.1319
+Number of clusters (区代码匹配) =      1,133      Root MSE        =     0.3995
+
+                         (Std. err. adjusted for 1,133 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+interneweast |  -.0366731   .0363007    -1.01   0.313    -.1078974    .0345512
+internewmi~s |  -.0853129   .0432013    -1.97   0.049    -.1700765   -.0005494
+      lnarea |  -.0279555    .005138    -5.44   0.000    -.0380365   -.0178744
+   2.landuse |          0  (omitted)
+  zhaopaigua |    .648063   .0552569    11.73   0.000     .5396456    .7564804
+   landlevel |  -.0075494   .0034784    -2.17   0.030    -.0143742   -.0007247
+    cunliang |   .0168315   .0159029     1.06   0.290    -.0143711     .048034
+   lndiscity |          0  (omitted)
+       _cons |  -.1939014   .0541631    -3.58   0.000    -.3001727   -.0876301
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |      1133        1133           0    *|
+                ym |       128           0         128     |
+    ym#c.lnpergdp9 |       128           0         128    ?|
+      ym#c.lnmidu9 |       128           0         128    ?|
+     ym#c.fiscrev9 |       128           0         128    ?|
+      ym#c.yichan9 |       128           0         128    ?|
+ ym#c.lnperdoctor9 |       128           0         128    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store ind_east2_int
+
+. reghdfe lnaprice interneweast internewmidwes $xlist_land if landuse==3,cluste
+> r( 区代码匹配 ) absorb( 区代码匹配 ym $xlist_city)
+(dropped 335 singleton observations)
+note: 3bn.landuse is probably collinear with the fixed effects (all partialled-
+> out values are close to zero; tol = 1.0e-09)
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 350 iterations)
+note: 3.landuse omitted because of collinearity
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      5,078
+Absorbing 7 HDFE groups                           F(   6,    980) =      47.91
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6575
+                                                  Adj R-squared   =     0.4777
+                                                  Within R-sq.    =     0.1259
+Number of clusters (区代码匹配) =        981      Root MSE        =     0.9668
+
+                           (Std. err. adjusted for 981 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+interneweast |   .0652154   .1333763     0.49   0.625    -.1965206    .3269514
+internewmi~s |   .3450016   .1431226     2.41   0.016     .0641396    .6258636
+      lnarea |  -.1245765   .0158511    -7.86   0.000    -.1556825   -.0934705
+   3.landuse |          0  (omitted)
+  zhaopaigua |   1.044749   .0738808    14.14   0.000     .8997659    1.189732
+   landlevel |  -.0531214   .0090202    -5.89   0.000    -.0708224   -.0354203
+    cunliang |   .3244718   .0467058     6.95   0.000     .2328168    .4161267
+   lndiscity |          0  (omitted)
+       _cons |   .8173964   .0901553     9.07   0.000     .6404767     .994316
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |       981         981           0    *|
+                ym |       127           0         127     |
+    ym#c.lnpergdp9 |       127           0         127    ?|
+      ym#c.lnmidu9 |       127           0         127    ?|
+     ym#c.fiscrev9 |       127           0         127    ?|
+      ym#c.yichan9 |       127           0         127    ?|
+ ym#c.lnperdoctor9 |       127           0         127    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store com_east2_int
+
+. reghdfe lnaprice interneweast internewmidwes $xlist_land if landuse!=2,cluste
+> r( 区代码匹配 ) absorb( 区代码匹配 ym $xlist_city)
+(dropped 77 singleton observations)
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 198 iterations)
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     20,468
+Absorbing 7 HDFE groups                           F(   7,   1454) =     111.53
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6643
+                                                  Adj R-squared   =     0.6233
+                                                  Within R-sq.    =     0.1743
+Number of clusters (区代码匹配) =      1,455      Root MSE        =     1.0264
+
+                         (Std. err. adjusted for 1,455 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+interneweast |   .2311133   .0920133     2.51   0.012     .0506203    .4116064
+internewmi~s |    .202705   .0692378     2.93   0.003     .0668883    .3385217
+      lnarea |  -.0886371   .0180997    -4.90   0.000    -.1241414   -.0531328
+   3.landuse |   .1401972   .0375557     3.73   0.000     .0665281    .2138663
+  zhaopaigua |   1.679146   .0809348    20.75   0.000     1.520385    1.837908
+   landlevel |  -.0280423   .0074603    -3.76   0.000    -.0426765   -.0134082
+    cunliang |   .2092134   .0310744     6.73   0.000     .1482578    .2701689
+   lndiscity |          0  (omitted)
+       _cons |   .0864917   .0882292     0.98   0.327    -.0865785    .2595619
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |      1455        1455           0    *|
+                ym |       128           0         128     |
+    ym#c.lnpergdp9 |       128           0         128    ?|
+      ym#c.lnmidu9 |       128           0         128    ?|
+     ym#c.fiscrev9 |       128           0         128    ?|
+      ym#c.yichan9 |       128           0         128    ?|
+ ym#c.lnperdoctor9 |       128           0         128    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store rescom_east2_int
+
+. esttab all_east2_int res_east2_int com_east2_int rescom_east2_int ind_east2_i
+> nt using Table3_landprice_east2_int.rtf,replace se compress nogap b(%6.4f) sc
+> alars(r2 r2_a N F) star(* 0.1 ** 0.05 *** 0.01) 
+(file Table3_landprice_east2_int.rtf not found)
+(output written to Table3_landprice_east2_int.rtf)
+
+. est clear
+
+. 
+. 
+. **Table4-Interaction terms for large, medium and small cities
+. gen interbig=internew*big
+
+. gen internobig=internew*(1-big)
+
+. 
+. reghdfe lnaprice interbig internobig $xlist_land ,cluster( 区代码匹配 ) absor
+> b( 区代码匹配 ym $xlist_city) 
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 177 iterations)
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     29,433
+Absorbing 7 HDFE groups                           F(   8,   1554) =     673.99
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6354
+                                                  Adj R-squared   =     0.6040
+                                                  Within R-sq.    =     0.3697
+Number of clusters (区代码匹配) =      1,555      Root MSE        =     0.9468
+
+                         (Std. err. adjusted for 1,555 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    interbig |   .2337442   .0677413     3.45   0.001     .1008702    .3666182
+  internobig |    .118326   .0705795     1.68   0.094     -.020115     .256767
+      lnarea |  -.0565277   .0133465    -4.24   0.000    -.0827068   -.0303486
+             |
+     landuse |
+          2  |  -1.541848   .0364152   -42.34   0.000    -1.613276    -1.47042
+          3  |   .1293736   .0376498     3.44   0.001     .0555239    .2032234
+             |
+  zhaopaigua |   1.440313   .0671904    21.44   0.000      1.30852    1.572107
+   landlevel |  -.0223365   .0053015    -4.21   0.000    -.0327353   -.0119376
+    cunliang |   .1260635   .0214152     5.89   0.000     .0840578    .1680692
+   lndiscity |          0  (omitted)
+       _cons |   .4317626   .0745211     5.79   0.000     .2855901     .577935
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |      1555        1555           0    *|
+                ym |       128           0         128     |
+    ym#c.lnpergdp9 |       128           0         128    ?|
+      ym#c.lnmidu9 |       128           0         128    ?|
+     ym#c.fiscrev9 |       128           0         128    ?|
+      ym#c.yichan9 |       128           0         128    ?|
+ ym#c.lnperdoctor9 |       128           0         128    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store all_big_int
+
+. reghdfe lnaprice interbig internobig $xlist_land if landuse==1,cluster( 区代
+> 码匹配 ) absorb( 区代码匹配 ym $xlist_city)
+(dropped 186 singleton observations)
+note: 1bn.landuse is probably collinear with the fixed effects (all partialled-
+> out values are close to zero; tol = 1.0e-09)
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 329 iterations)
+note: 1.landuse omitted because of collinearity
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     14,946
+Absorbing 7 HDFE groups                           F(   6,   1251) =     107.52
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.7336
+                                                  Adj R-squared   =     0.6918
+                                                  Within R-sq.    =     0.2099
+Number of clusters (区代码匹配) =      1,252      Root MSE        =     0.9737
+
+                         (Std. err. adjusted for 1,252 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    interbig |   .2303956   .0978126     2.36   0.019     .0385006    .4222905
+  internobig |   .2314001   .1117544     2.07   0.039     .0121534    .4506469
+      lnarea |  -.1075784   .0249791    -4.31   0.000     -.156584   -.0585729
+   1.landuse |          0  (omitted)
+  zhaopaigua |   2.037641   .1115578    18.27   0.000     1.818779    2.256502
+   landlevel |  -.0210838   .0089045    -2.37   0.018    -.0385533   -.0036144
+    cunliang |   .0929737   .0338799     2.74   0.006     .0265059    .1594415
+   lndiscity |          0  (omitted)
+       _cons |  -.1207891   .1160797    -1.04   0.298    -.3485215    .1069433
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |      1252        1252           0    *|
+                ym |       128           0         128     |
+    ym#c.lnpergdp9 |       128           0         128    ?|
+      ym#c.lnmidu9 |       128           0         128    ?|
+     ym#c.fiscrev9 |       128           0         128    ?|
+      ym#c.yichan9 |       128           0         128    ?|
+ ym#c.lnperdoctor9 |       128           0         128    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store res_big_int
+
+. reghdfe lnaprice interbig internobig $xlist_land if landuse==2,cluster( 区代
+> 码匹配 ) absorb( 区代码匹配 ym $xlist_city)
+(dropped 214 singleton observations)
+note: 2bn.landuse is probably collinear with the fixed effects (all partialled-
+> out values are close to zero; tol = 1.0e-09)
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 285 iterations)
+note: 2.landuse omitted because of collinearity
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      8,674
+Absorbing 7 HDFE groups                           F(   6,   1132) =      30.24
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.7465
+                                                  Adj R-squared   =     0.6751
+                                                  Within R-sq.    =     0.1317
+Number of clusters (区代码匹配) =      1,133      Root MSE        =     0.3995
+
+                         (Std. err. adjusted for 1,133 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    interbig |  -.0498044   .0445527    -1.12   0.264    -.1372196    .0376108
+  internobig |  -.0549579   .0352767    -1.56   0.120    -.1241729    .0142571
+      lnarea |  -.0279843   .0051325    -5.45   0.000    -.0380546   -.0179141
+   2.landuse |          0  (omitted)
+  zhaopaigua |   .6481289   .0550715    11.77   0.000     .5400752    .7561826
+   landlevel |  -.0075346   .0034861    -2.16   0.031    -.0143745   -.0006947
+    cunliang |   .0171334   .0159882     1.07   0.284    -.0142364    .0485032
+   lndiscity |          0  (omitted)
+       _cons |   -.194063   .0541332    -3.58   0.000    -.3002756   -.0878504
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |      1133        1133           0    *|
+                ym |       128           0         128     |
+    ym#c.lnpergdp9 |       128           0         128    ?|
+      ym#c.lnmidu9 |       128           0         128    ?|
+     ym#c.fiscrev9 |       128           0         128    ?|
+      ym#c.yichan9 |       128           0         128    ?|
+ ym#c.lnperdoctor9 |       128           0         128    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store ind_big_int
+
+. reghdfe lnaprice interbig internobig $xlist_land if landuse==3,cluster( 区代
+> 码匹配 ) absorb( 区代码匹配 ym $xlist_city)
+(dropped 335 singleton observations)
+note: 3bn.landuse is probably collinear with the fixed effects (all partialled-
+> out values are close to zero; tol = 1.0e-09)
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 349 iterations)
+note: 3.landuse omitted because of collinearity
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      5,078
+Absorbing 7 HDFE groups                           F(   6,    980) =      48.62
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6577
+                                                  Adj R-squared   =     0.4780
+                                                  Within R-sq.    =     0.1263
+Number of clusters (区代码匹配) =        981      Root MSE        =     0.9666
+
+                           (Std. err. adjusted for 981 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    interbig |    .381699   .1477368     2.58   0.010     .0917821    .6716158
+  internobig |   .0204761   .1441207     0.14   0.887    -.2623445    .3032968
+      lnarea |  -.1251554   .0158323    -7.91   0.000    -.1562245   -.0940863
+   3.landuse |          0  (omitted)
+  zhaopaigua |   1.042927   .0739243    14.11   0.000     .8978585    1.187995
+   landlevel |  -.0532989   .0090028    -5.92   0.000    -.0709658    -.035632
+    cunliang |   .3223968   .0467467     6.90   0.000     .2306618    .4141319
+   lndiscity |          0  (omitted)
+       _cons |   .8211576    .090155     9.11   0.000     .6442386    .9980766
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |       981         981           0    *|
+                ym |       127           0         127     |
+    ym#c.lnpergdp9 |       127           0         127    ?|
+      ym#c.lnmidu9 |       127           0         127    ?|
+     ym#c.fiscrev9 |       127           0         127    ?|
+      ym#c.yichan9 |       127           0         127    ?|
+ ym#c.lnperdoctor9 |       127           0         127    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store com_big_int
+
+. reghdfe lnaprice interbig internobig $xlist_land if landuse!=2,cluster( 区代
+> 码匹配 ) absorb( 区代码匹配 ym $xlist_city)
+(dropped 77 singleton observations)
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 206 iterations)
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     20,468
+Absorbing 7 HDFE groups                           F(   7,   1454) =     111.70
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6644
+                                                  Adj R-squared   =     0.6233
+                                                  Within R-sq.    =     0.1744
+Number of clusters (区代码匹配) =      1,455      Root MSE        =     1.0263
+
+                         (Std. err. adjusted for 1,455 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    interbig |   .2955188    .078649     3.76   0.000     .1412411    .4497964
+  internobig |   .1606721   .0883617     1.82   0.069     -.012658    .3340021
+      lnarea |   -.088781   .0181224    -4.90   0.000    -.1243299   -.0532322
+   3.landuse |   .1398069   .0374709     3.73   0.000     .0663041    .2133098
+  zhaopaigua |   1.678729   .0809771    20.73   0.000     1.519884    1.837573
+   landlevel |  -.0280224   .0074549    -3.76   0.000     -.042646   -.0133989
+    cunliang |   .2092488   .0310329     6.74   0.000     .1483748    .2701227
+   lndiscity |          0  (omitted)
+       _cons |   .0847686   .0883152     0.96   0.337    -.0884702    .2580074
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |      1455        1455           0    *|
+                ym |       128           0         128     |
+    ym#c.lnpergdp9 |       128           0         128    ?|
+      ym#c.lnmidu9 |       128           0         128    ?|
+     ym#c.fiscrev9 |       128           0         128    ?|
+      ym#c.yichan9 |       128           0         128    ?|
+ ym#c.lnperdoctor9 |       128           0         128    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store rescom_big_int
+
+. esttab all_big_int res_big_int com_big_int rescom_big_int ind_big_int using T
+> able4_landprice_big_int.rtf,replace se compress nogap b(%6.4f) scalars(r2 r2_
+> a N F) star(* 0.1 ** 0.05 *** 0.01) 
+(file Table4_landprice_big_int.rtf not found)
+(output written to Table4_landprice_big_int.rtf)
+
+. est clear
+
+. 
+. 
+. **Table5-Interaction terms for intra-city distance
+. gen close23=0 if disnew!=.&disnew>23&treatnew==1
+(23,560 missing values generated)
+
+. replace close23=1 if disnew<=23&treatnew==1
+(4,155 real changes made)
+
+. replace close23=0 if treatnew==0
+(19,405 real changes made)
+
+. gen internewclose23=internew*close23
+
+. gen internewnoclose23=internew*(1-close23)
+
+. 
+. reghdfe lnaprice internewclose23 internewnoclose23 $xlist_land ,cluster( 区代
+> 码匹配 ) absorb( 区代码匹配 ym $xlist_city) 
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 177 iterations)
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     29,433
+Absorbing 7 HDFE groups                           F(   8,   1554) =     671.99
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6358
+                                                  Adj R-squared   =     0.6045
+                                                  Within R-sq.    =     0.3704
+Number of clusters (区代码匹配) =      1,555      Root MSE        =     0.9462
+
+                         (Std. err. adjusted for 1,555 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+internewc~23 |   .3437154   .0817637     4.20   0.000     .1833367    .5040941
+internewn~23 |   .0250027   .0523746     0.48   0.633    -.0777297     .127735
+      lnarea |  -.0563518   .0133048    -4.24   0.000    -.0824489   -.0302546
+             |
+     landuse |
+          2  |  -1.541708   .0363798   -42.38   0.000    -1.613067   -1.470349
+          3  |   .1300344   .0378436     3.44   0.001     .0558045    .2042644
+             |
+  zhaopaigua |   1.440193   .0670022    21.49   0.000     1.308769    1.571618
+   landlevel |  -.0220816    .005313    -4.16   0.000     -.032503   -.0116602
+    cunliang |   .1286205   .0214629     5.99   0.000     .0865211    .1707199
+   lndiscity |          0  (omitted)
+       _cons |   .4322295   .0741009     5.83   0.000     .2868811    .5775778
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |      1555        1555           0    *|
+                ym |       128           0         128     |
+    ym#c.lnpergdp9 |       128           0         128    ?|
+      ym#c.lnmidu9 |       128           0         128    ?|
+     ym#c.fiscrev9 |       128           0         128    ?|
+      ym#c.yichan9 |       128           0         128    ?|
+ ym#c.lnperdoctor9 |       128           0         128    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store all_close_int
+
+. reghdfe lnaprice internewclose23 internewnoclose23 $xlist_land if landuse==1,
+> cluster( 区代码匹配 ) absorb( 区代码匹配 ym $xlist_city)
+(dropped 186 singleton observations)
+note: 1bn.landuse is probably collinear with the fixed effects (all partialled-
+> out values are close to zero; tol = 1.0e-09)
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 335 iterations)
+note: 1.landuse omitted because of collinearity
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     14,946
+Absorbing 7 HDFE groups                           F(   6,   1251) =     107.44
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.7340
+                                                  Adj R-squared   =     0.6923
+                                                  Within R-sq.    =     0.2111
+Number of clusters (区代码匹配) =      1,252      Root MSE        =     0.9730
+
+                         (Std. err. adjusted for 1,252 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+internewc~23 |    .395172   .1179651     3.35   0.001     .1637408    .6266031
+internewn~23 |   .0307131   .0805943     0.38   0.703    -.1274017    .1888279
+      lnarea |  -.1072613   .0248761    -4.31   0.000    -.1560647   -.0584579
+   1.landuse |          0  (omitted)
+  zhaopaigua |   2.036459   .1110071    18.35   0.000     1.818679     2.25424
+   landlevel |  -.0211659   .0089075    -2.38   0.018    -.0386413   -.0036906
+    cunliang |   .0950075   .0337105     2.82   0.005     .0288722    .1611429
+   lndiscity |          0  (omitted)
+       _cons |  -.1142093   .1152751    -0.99   0.322    -.3403632    .1119446
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |      1252        1252           0    *|
+                ym |       128           0         128     |
+    ym#c.lnpergdp9 |       128           0         128    ?|
+      ym#c.lnmidu9 |       128           0         128    ?|
+     ym#c.fiscrev9 |       128           0         128    ?|
+      ym#c.yichan9 |       128           0         128    ?|
+ ym#c.lnperdoctor9 |       128           0         128    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store res_close_int
+
+. reghdfe lnaprice internewclose23 internewnoclose23 $xlist_land if landuse==2,
+> cluster( 区代码匹配 ) absorb( 区代码匹配 ym $xlist_city)
+(dropped 214 singleton observations)
+note: 2bn.landuse is probably collinear with the fixed effects (all partialled-
+> out values are close to zero; tol = 1.0e-09)
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 285 iterations)
+note: 2.landuse omitted because of collinearity
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      8,674
+Absorbing 7 HDFE groups                           F(   6,   1132) =      29.13
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.7469
+                                                  Adj R-squared   =     0.6756
+                                                  Within R-sq.    =     0.1331
+Number of clusters (区代码匹配) =      1,133      Root MSE        =     0.3992
+
+                         (Std. err. adjusted for 1,133 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+internewc~23 |   .0507977   .0390198     1.30   0.193    -.0257615     .127357
+internewn~23 |  -.1067398   .0339201    -3.15   0.002    -.1732932   -.0401864
+      lnarea |  -.0281179   .0051045    -5.51   0.000    -.0381333   -.0181025
+   2.landuse |          0  (omitted)
+  zhaopaigua |   .6482522   .0550929    11.77   0.000     .5401566    .7563479
+   landlevel |  -.0072081    .003498    -2.06   0.040    -.0140713   -.0003449
+    cunliang |   .0196419   .0160014     1.23   0.220    -.0117538    .0510376
+   lndiscity |          0  (omitted)
+       _cons |  -.1973062   .0541428    -3.64   0.000    -.3035377   -.0910748
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |      1133        1133           0    *|
+                ym |       128           0         128     |
+    ym#c.lnpergdp9 |       128           0         128    ?|
+      ym#c.lnmidu9 |       128           0         128    ?|
+     ym#c.fiscrev9 |       128           0         128    ?|
+      ym#c.yichan9 |       128           0         128    ?|
+ ym#c.lnperdoctor9 |       128           0         128    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store ind_close_int
+
+. reghdfe lnaprice internewclose23 internewnoclose23 $xlist_land if landuse==3,
+> cluster( 区代码匹配 ) absorb( 区代码匹配 ym $xlist_city)
+(dropped 335 singleton observations)
+note: 3bn.landuse is probably collinear with the fixed effects (all partialled-
+> out values are close to zero; tol = 1.0e-09)
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 353 iterations)
+note: 3.landuse omitted because of collinearity
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =      5,078
+Absorbing 7 HDFE groups                           F(   6,    980) =      47.60
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6572
+                                                  Adj R-squared   =     0.4772
+                                                  Within R-sq.    =     0.1251
+Number of clusters (区代码匹配) =        981      Root MSE        =     0.9672
+
+                           (Std. err. adjusted for 981 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+internewc~23 |   .1160191   .1753686     0.66   0.508     -.228122    .4601602
+internewn~23 |   .2236287   .1243444     1.80   0.072    -.0203833    .4676406
+      lnarea |  -.1244061   .0159072    -7.82   0.000    -.1556222     -.09319
+   3.landuse |          0  (omitted)
+  zhaopaigua |    1.04409   .0739115    14.13   0.000     .8990466    1.189133
+   landlevel |  -.0530816   .0089995    -5.90   0.000    -.0707421   -.0354212
+    cunliang |   .3234976    .046777     6.92   0.000     .2317029    .4152922
+   lndiscity |          0  (omitted)
+       _cons |    .819537   .0900303     9.10   0.000     .6428626    .9962114
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |       981         981           0    *|
+                ym |       127           0         127     |
+    ym#c.lnpergdp9 |       127           0         127    ?|
+      ym#c.lnmidu9 |       127           0         127    ?|
+     ym#c.fiscrev9 |       127           0         127    ?|
+      ym#c.yichan9 |       127           0         127    ?|
+ ym#c.lnperdoctor9 |       127           0         127    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store com_close_int
+
+. reghdfe lnaprice internewclose23 internewnoclose23 $xlist_land if landuse!=2,
+> cluster( 区代码匹配 ) absorb( 区代码匹配 ym $xlist_city)
+(dropped 77 singleton observations)
+note: lndiscity is probably collinear with the fixed effects (all partialled-ou
+> t values are close to zero; tol = 1.0e-09)
+(MWFE estimator converged in 200 iterations)
+note: lndiscity omitted because of collinearity
+
+HDFE Linear regression                            Number of obs   =     20,468
+Absorbing 7 HDFE groups                           F(   7,   1454) =     111.09
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6645
+                                                  Adj R-squared   =     0.6235
+                                                  Within R-sq.    =     0.1747
+Number of clusters (区代码匹配) =      1,455      Root MSE        =     1.0261
+
+                         (Std. err. adjusted for 1,455 clusters in 区代码匹配)
+------------------------------------------------------------------------------
+             |               Robust
+    lnaprice | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+internewc~23 |   .3306532   .0962927     3.43   0.001     .1417657    .5195406
+internewn~23 |   .1047204    .068987     1.52   0.129    -.0306044    .2400451
+      lnarea |  -.0885557   .0180724    -4.90   0.000    -.1240065   -.0531049
+   3.landuse |   .1403428   .0376613     3.73   0.000     .0664664    .2142191
+  zhaopaigua |   1.678759   .0807439    20.79   0.000     1.520372    1.837146
+   landlevel |  -.0280184   .0074592    -3.76   0.000    -.0426503   -.0133865
+    cunliang |   .2096212   .0310948     6.74   0.000     .1486258    .2706167
+   lndiscity |          0  (omitted)
+       _cons |   .0891471    .087679     1.02   0.309    -.0828439     .261138
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------------+
+       Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------------+---------------------------------------|
+        区代码匹配 |      1455        1455           0    *|
+                ym |       128           0         128     |
+    ym#c.lnpergdp9 |       128           0         128    ?|
+      ym#c.lnmidu9 |       128           0         128    ?|
+     ym#c.fiscrev9 |       128           0         128    ?|
+      ym#c.yichan9 |       128           0         128    ?|
+ ym#c.lnperdoctor9 |       128           0         128    ?|
+-----------------------------------------------------------+
+? = number of redundant parameters may be higher
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. est store rescom_close_int
+
+. esttab all_close_int res_close_int com_close_int rescom_close_int ind_close_i
+> nt using Table5_landprice_close23_int.rtf,replace se compress nogap b(%6.4f) 
+> scalars(r2 r2_a N F) star(* 0.1 ** 0.05 *** 0.01) 
+(file Table5_landprice_close23_int.rtf not found)
+(output written to Table5_landprice_close23_int.rtf)
+
+. est clear
+
+. 
+. 
+. **Dynamic Effect
+. gen centeryear=year-int(批复时间new/10000)
+(18,129 missing values generated)
+
+. tab centeryear,gen(centeryear)
+
+ centeryear |      Freq.     Percent        Cum.
+------------+-----------------------------------
+        -10 |         27        0.24        0.24
+         -9 |         27        0.24        0.48
+         -8 |         83        0.73        1.21
+         -7 |        384        3.40        4.61
+         -6 |        581        5.14        9.75
+         -5 |        891        7.88       17.63
+         -4 |        998        8.83       26.46
+         -3 |      1,089        9.63       36.09
+         -2 |      1,155       10.22       46.31
+         -1 |      1,111        9.83       56.14
+          0 |        987        8.73       64.87
+          1 |        879        7.78       72.65
+          2 |        916        8.10       80.75
+          3 |        745        6.59       87.34
+          4 |        457        4.04       91.38
+          5 |        361        3.19       94.58
+          6 |        254        2.25       96.82
+          7 |        123        1.09       97.91
+          8 |        113        1.00       98.91
+          9 |         62        0.55       99.46
+         10 |         30        0.27       99.73
+         11 |         20        0.18       99.90
+         12 |         11        0.10      100.00
+------------+-----------------------------------
+      Total |     11,304      100.00
+
+. forvalues i=1/20{
+  2.  gen internew`i'=treatnew*centeryear`i'
+  3.  replace internew`i'=0 if internew`i'==.
+  4.  }
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+(18,129 missing values generated)
+(18,129 real changes made)
+
+. replace internew15=1 if internew16==1|internew17==1|internew18==1|internew19=
+> =1|internew20==1
+(481 real changes made)
+
+. 
+. gen internewa=1 if internew1==1|internew2==1|internew3==1|internew4==1|intern
+> ew5==1
+(28,331 missing values generated)
+
+. replace internewa=0 if internewa==.
+(28,331 real changes made)
+
+. reghdfe lnaprice internewa internew6-internew8 internew10-internew15 $xlist_l
+> and ,cluster( 区代码匹配 ) absorb( 区代码匹配 ym $xlist_city)

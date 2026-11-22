@@ -1,0 +1,48 @@
+{
+  "interaction_checks": {
+    "a1": {
+      "n": 3096,
+      "max_diff": 0.0
+    },
+    "a2": {
+      "n": 3096,
+      "max_diff": 0.0
+    },
+    "a3": {
+      "n": 3096,
+      "max_diff": 0.0
+    },
+    "b1": {
+      "n": 2840,
+      "max_diff": 0.0
+    },
+    "b2": {
+      "n": 2840,
+      "max_diff": 0.0
+    },
+    "e1": {
+      "n": 3096,
+      "max_diff": 0.0
+    },
+    "e2": {
+      "n": 3096,
+      "max_diff": 0.0
+    },
+    "e3": {
+      "n": 3096,
+      "max_diff": 0.0
+    },
+    "e4": {
+      "n": 3096,
+      "max_diff": 0.0
+    }
+  },
+  "core_files_byte_identical": true,
+  "body_specs": 15,
+  "all_body_point_estimates_and_SE_finite": true,
+  "static_bootstrap": 999,
+  "author_static_models": 28,
+  "appendix_event_coefficients": 10,
+  "placebo_draws": 500,
+  "status": "execution_validated_unresolved_source_and_protocol_gaps_remain"
+}

@@ -1,0 +1,50 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\patent_quality
+> _signal_2025\logs/modern_did_followup.log
+  log type:  text
+ opened on:  21 Nov 2026, 22:40:35
+
+. use "data/author_data.dta", clear
+
+. 
+. * Re-estimate Gardner two-stage DID with patent FE absorbed by unit option and
+>  year FE in first stage.
+. capture noisily did2s ln_transaction_freq, first_stage(i.year) second_stage(up
+> hold) treatment(uphold) cluster(ipc4_code) unit(pt_id)
+(4 missing values generated)
+(4 observations deleted)
+                              (Std. err. adjusted for clustering on ipc4_code)
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      uphold |   .0045088   .0014691     3.07   0.002     .0016293    .0073882
+------------------------------------------------------------------------------
+
+. local did2src=_rc
+
+. if `did2src'==0 {
+.  estimates store did2s_year_fe
+.  estimates save "output/did2s_year_fe.ster", replace
+(note: file output/did2s_year_fe.ster not found)
+file output/did2s_year_fe.ster saved
+. }
+
+. 
+. * Report Callaway-Sant'Anna event-study on a common [-6,+6] window.
+. capture noisily estimates use "output/csdid_event.ster"
+
+. if _rc==0 {
+.  capture noisily estat event, window(-6 6) dropmissing
+the influence functions of these results are not held in this session (csdid res
+> et, mata clear and a new session discard them); rerun the original estimation,
+>  adding storeall to keep them in e()
+. }
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\patent_quality
+> _signal_2025\logs/modern_did_followup.log
+  log type:  text
+ closed on:  21 Nov 2026, 22:40:38
+--------------------------------------------------------------------------------

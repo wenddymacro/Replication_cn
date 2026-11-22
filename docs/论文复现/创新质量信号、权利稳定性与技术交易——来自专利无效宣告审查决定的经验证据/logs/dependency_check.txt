@@ -1,0 +1,13 @@
+
+Command            Status
+-------            ------
+reghdfe            FOUND: C:\ado\plus\r\reghdfe.ado
+ivreghdfe          NOT FOUND
+bdiff              NOT FOUND
+didplacebo         NOT FOUND
+eventstudyinteract NOT FOUND
+event_plot         NOT FOUND
+ppmlhdfe           NOT FOUND
+coefplot           FOUND: C:\ado\plus\c\coefplot.ado
+
+

@@ -1,0 +1,17 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+
+Attaching package: 'data.table'
+
+The following object is masked from 'package:base':
+
+    %notin%
+
+Warning messages:
+1: In eval(.massagei(isub), x, ienv) :
+  unable to translate '<U+884C><U+653F><U+533A><U+5212><U+4EE3><U+7801>' to native encoding
+2: In eval(.massagei(isub), x, ienv) :
+  unable to translate '<U+57CE><U+5E02>' to native encoding

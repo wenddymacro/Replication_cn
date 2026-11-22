@@ -1,0 +1,28 @@
+{
+ "paper_id":"cie_law_enforcement_inflow",
+ "spec_id":"T1_c5_county_provinceyear",
+ "journal":"cie",
+ "data_path":"analysis.dta",
+ "id_var":"county_id",
+ "time_var":"year",
+ "y_var":"Firmflows",
+ "treat_var":"Discretion",
+ "cluster_var":"city_id",
+ "xt_vars":["province_id"],
+ "controls":[],
+ "sample_filter":"",
+ "static_or_event":"static",
+ "published_coef":null,
+ "published_se":null,
+ "published_n":null,
+ "published_source":"老师项目主样本：表1固定效应结构，无时变控制变量",
+ "table":"表1",
+ "column":"(5) 区县FE+省份×年FE+控制变量（现代估计无时变控制）",
+ "preferred":true,
+ "in_abstract_intro":true,
+ "reports_modern_estimator":true,
+ "software":"Stata",
+ "replication_status":"exact",
+ "notes":"公开附件含作者主样本master.dta。协议主规格使用作者样本、区县FE及省份×年份FE，不加入时变控制变量；作者含控制变量的全规格另列 secondary。"
+}
+

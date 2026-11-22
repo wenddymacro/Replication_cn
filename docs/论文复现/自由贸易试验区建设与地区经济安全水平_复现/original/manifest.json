@@ -1,0 +1,37 @@
+[
+  {
+    "file": "20240418011708WU_FILE_1.zip",
+    "bytes": 1404158,
+    "sha256": "faeae87f26c3c1ab1369c2b0dcc0bf83776637117a89152bb4c430840331c2b1"
+  },
+  {
+    "file": "自由贸易试验区建设与地区经济安全水平.pdf",
+    "bytes": 29933263,
+    "sha256": "36aa3f37752ae74779e7ac8d565a5583b3f1af2e831d1aea064553a44d93cdd7"
+  },
+  {
+    "file": "extracted/《中国工业经济》编辑部关于公开数据附件的使用说明.pdf",
+    "bytes": 255153,
+    "sha256": "46047fa2b466c3b01d5247c2b4e9453abf9f8b327ba9d468951fbffbe96ca3aa"
+  },
+  {
+    "file": "extracted/数据1.dta",
+    "bytes": 675382,
+    "sha256": "7918ee556dcdcfb977f9fcc167ad33ce6c47f65375c07bf04abbec5c7e06f114"
+  },
+  {
+    "file": "extracted/数据2.xlsx",
+    "bytes": 555822,
+    "sha256": "10c8fd33d900ea7a647455e960d2692d1940d3b302d4dfa03ddab1501c0fb46c"
+  },
+  {
+    "file": "extracted/程序.do",
+    "bytes": 6253,
+    "sha256": "a55da105b966d5d21607cd2afc44b3ce3b86d3b37300623130cc398e0c6378b1"
+  },
+  {
+    "file": "extracted/附录.pdf",
+    "bytes": 422153,
+    "sha256": "56997556135287a6cad9283fba85c7016a1b5b05fa1a7855b73648377a142131"
+  }
+]

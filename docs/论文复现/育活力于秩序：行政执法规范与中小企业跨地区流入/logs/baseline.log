@@ -1,0 +1,214 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      Stata 19.0
+___/   /   /___/   /   /___/       MP—Parallel Edition
+
+ Statistics and Data Science       Copyright 1985-2025 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-782-8272        https://www.stata.com
+                                   979-696-4600        service@stata.com
+
+Stata license: 114514-student 64-core lab perpetual
+Serial number: 9223372036854775807
+  Licensed to: 1
+               1
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. More than 2 billion observations are allowed; see help obs_advice.
+      4. Maximum number of variables is set to 5,000 but can be increased;
+          see help set_maxvar.
+
+
+Running D:\Stata\Stata19\profile.do ...
+
+. do C:\Users\ASUS\.codex\visualizations\2026\11\13\01a1d4b0-3fa8-7722-902a-2ed
+> 6474425f6\law_inflow_run\baseline.do 
+
+. clear all
+
+. set more off
+
+. set processors 1
+    The maximum number of processors or cores being used is changed from 16
+    to 1.  It can be set to any number between 1 and 16
+
+. cd "C:/Users/ASUS/.codex/visualizations/2026/11/13/01a1d4b0-3fa8-7722-902a-2e
+> d6474425f6/law_inflow_run"
+C:\Users\ASUS\.codex\visualizations\2026\11\13\01a1d4b0-3fa8-7722-902a-2ed64744
+> 25f6\law_inflow_run
+
+. use master,clear
+
+. global County_Control "Adminis Official Highrail Subway Impoverished LnPollut
+> ion LnPopolation LnLight"
+
+. reg Firmflows Discretion, vce(cluster city_id)
+
+Linear regression                               Number of obs     =     27,220
+                                                F(1, 327)         =      31.18
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.0212
+                                                Root MSE          =      1.252
+
+                              (Std. err. adjusted for 328 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+   Firmflows | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+  Discretion |   .4655909   .0833865     5.58   0.000     .3015492    .6296326
+       _cons |    .972572   .0349267    27.85   0.000     .9038625    1.041281
+------------------------------------------------------------------------------
+
+. reg Firmflows Discretion $County_Control, vce(cluster city_id)
+
+Linear regression                               Number of obs     =     27,220
+                                                F(9, 327)         =      77.13
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.1897
+                                                Root MSE          =     1.1394
+
+                              (Std. err. adjusted for 328 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+   Firmflows | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+  Discretion |   .1872008   .0678376     2.76   0.006     .0537475    .3206541
+     Adminis |   .5181886   .0659219     7.86   0.000      .388504    .6478732
+    Official |  -.1540156   .0267016    -5.77   0.000    -.2065442   -.1014871
+    Highrail |   .4297775   .0445678     9.64   0.000     .3421016    .5174534
+      Subway |   .4373272   .1271811     3.44   0.001     .1871308    .6875236
+Impoverished |  -.1986726   .0354397    -5.61   0.000    -.2683912   -.1289541
+ LnPollution |  -.1573744   .0478528    -3.29   0.001    -.2515126   -.0632362
+LnPopolation |   .1694548    .017994     9.42   0.000     .1340561    .2048535
+     LnLight |   .1386411    .040242     3.45   0.001     .0594752     .217807
+       _cons |   .5856213   .1461828     4.01   0.000     .2980439    .8731986
+------------------------------------------------------------------------------
+
+. reghdfe Firmflows Discretion $County_Control, absorb(county_id) vce(cluster c
+> ity_id)
+(MWFE estimator converged in 1 iterations)
+
+HDFE Linear regression                            Number of obs   =     27,220
+Absorbing 1 HDFE group                            F(   9,    327) =     130.47
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.5957
+                                                  Adj R-squared   =     0.5506
+                                                  Within R-sq.    =     0.2745
+Number of clusters (city_id) =        328         Root MSE        =     0.8484
+
+                              (Std. err. adjusted for 328 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+   Firmflows | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+  Discretion |   .2135509   .0770762     2.77   0.006     .0619232    .3651787
+     Adminis |   .3509608   .0773606     4.54   0.000     .1987736     .503148
+    Official |  -.0331991   .0197023    -1.69   0.093    -.0719584    .0055602
+    Highrail |   .3655568   .0445794     8.20   0.000     .2778583    .4532554
+      Subway |   .5246328   .1030488     5.09   0.000     .3219106     .727355
+Impoverished |   .2907201    .040695     7.14   0.000      .210663    .3707772
+ LnPollution |   -1.59197   .0923422   -17.24   0.000     -1.77363    -1.41031
+LnPopolation |   .2214282   .0813632     2.72   0.007     .0613669    .3814896
+     LnLight |   1.274705   .1187206    10.74   0.000     1.041152    1.508257
+       _cons |   4.692981   .5769299     8.13   0.000     3.558018    5.827943
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+   county_id |      2722        2722           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. reghdfe Firmflows Discretion $County_Control, absorb(province_id#year) vce(cl
+> uster city_id)
+(MWFE estimator converged in 1 iterations)
+
+HDFE Linear regression                            Number of obs   =     27,220
+Absorbing 1 HDFE group                            F(   9,    327) =      37.89
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.4195
+                                                  Adj R-squared   =     0.4136
+                                                  Within R-sq.    =     0.1079
+Number of clusters (city_id) =        328         Root MSE        =     0.9691
+
+                              (Std. err. adjusted for 328 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+   Firmflows | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+  Discretion |   .1586937   .0520637     3.05   0.002     .0562716    .2611158
+     Adminis |   .3573307   .0584552     6.11   0.000     .2423351    .4723264
+    Official |   .0609754   .0177412     3.44   0.001     .0260741    .0958767
+    Highrail |   .2020473   .0400657     5.04   0.000     .1232283    .2808664
+      Subway |   .2160894   .1005872     2.15   0.032     .0182096    .4139692
+Impoverished |  -.1117389   .0336066    -3.32   0.001    -.1778514   -.0456265
+ LnPollution |   .0834123   .0433914     1.92   0.055    -.0019493    .1687738
+LnPopolation |   .1204696   .0209443     5.75   0.000     .0792671    .1616721
+     LnLight |   .1327828   .0351067     3.78   0.000     .0637192    .2018463
+       _cons |  -.0185224   .1387883    -0.13   0.894     -.291553    .2545082
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------------+
+        Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------------+---------------------------------------|
+   province_id#year |       270           0         270     |
+------------------------------------------------------------+
+
+. reghdfe Firmflows Discretion $County_Control, absorb(county_id province_id#ye
+> ar) vce(cluster city_id)
+(MWFE estimator converged in 2 iterations)
+
+HDFE Linear regression                            Number of obs   =     27,220
+Absorbing 2 HDFE groups                           F(   9,    327) =      22.50
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6866
+                                                  Adj R-squared   =     0.6478
+                                                  Within R-sq.    =     0.0222
+Number of clusters (city_id) =        328         Root MSE        =     0.7511
+
+                              (Std. err. adjusted for 328 clusters in city_id)
+------------------------------------------------------------------------------
+             |               Robust
+   Firmflows | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+  Discretion |   .1599876    .048418     3.30   0.001     .0647376    .2552376
+     Adminis |   .2463862   .0749098     3.29   0.001     .0990202    .3937523
+    Official |   .0243608   .0150677     1.62   0.107    -.0052811    .0540027
+    Highrail |   .1842423   .0338275     5.45   0.000     .1176952    .2507894
+      Subway |   .3334982   .0663322     5.03   0.000     .2030065    .4639898
+Impoverished |   .1560012   .0432147     3.61   0.000     .0709872    .2410152
+ LnPollution |  -.0641787   .1125868    -0.57   0.569    -.2856646    .1573071
+LnPopolation |   .0641677   .0727624     0.88   0.378    -.0789737    .2073091
+     LnLight |   .5672409   .0725026     7.82   0.000     .4246105    .7098713
+       _cons |   .4946494   .5804529     0.85   0.395    -.6472437    1.636542
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+------------------------------------------------------------+
+        Absorbed FE | Categories  - Redundant  = Num. Coefs |
+--------------------+---------------------------------------|
+          county_id |      2722        2722           0    *|
+   province_id#year |       270           0         270     |
+------------------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. gen byte touse=e(sample)
+
+. sum Firmflows Discretion if touse
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+   Firmflows |     27,220    1.063176    1.265501          0   5.257522
+  Discretion |     27,220    .1945996    .3958994          0          1
+
+. log close _all
+
+. 
+end of do-file

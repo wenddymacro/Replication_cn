@@ -1,0 +1,329 @@
+-------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\fta_security\
+> work\../logs/ancillary.log
+  log type:  text
+ opened on:  15 Nov 2026, 18:56:09
+
+. use data1, clear
+
+. xtset id year
+
+Panel variable: id (unbalanced)
+ Time variable: year, 2008 to 2019
+         Delta: 1 unit
+
+. xtprobit set Popu Capi Phys Econ Infra Inter Urban Consum Act Coastal
+
+Fitting comparison model:
+
+Iteration 0:  Log likelihood = -1400.8436  
+Iteration 1:  Log likelihood = -872.28174  
+Iteration 2:  Log likelihood = -843.07856  
+Iteration 3:  Log likelihood =  -842.5085  
+Iteration 4:  Log likelihood = -842.50843  
+
+Fitting full model:
+
+rho =  0.0    Log likelihood = -842.50843
+rho =  0.1    Log likelihood = -582.53893
+rho =  0.2    Log likelihood =  -466.7305
+rho =  0.3    Log likelihood = -396.10388
+rho =  0.4    Log likelihood = -346.71339
+rho =  0.5    Log likelihood = -309.42584
+rho =  0.6    Log likelihood = -279.66061
+rho =  0.7    Log likelihood = -254.80341
+rho =  0.8    Log likelihood = -232.79912
+
+Iteration 0:  Log likelihood = -254.67029  
+Iteration 1:  Log likelihood = -145.77549  
+Iteration 2:  Log likelihood = -144.30225  
+Iteration 3:  Log likelihood = -116.87119  
+Iteration 4:  Log likelihood = -116.86384  
+Iteration 5:  Log likelihood = -116.85546  
+Iteration 6:  Log likelihood =  -116.0681  
+Iteration 7:  Log likelihood =  -112.4701  (not concave)
+Iteration 8:  Log likelihood = -112.46856  (not concave)
+Iteration 9:  Log likelihood = -112.45936  (not concave)
+Iteration 10: Log likelihood = -112.42713  (not concave)
+Iteration 11: Log likelihood = -112.41094  (not concave)
+Iteration 12: Log likelihood = -112.38209  (not concave)
+Iteration 13: Log likelihood = -112.35727  (not concave)
+Iteration 14: Log likelihood = -112.29326  (not concave)
+Iteration 15: Log likelihood = -112.29326  (not concave)
+Iteration 16: Log likelihood = -111.13232  (not concave)
+Iteration 17: Log likelihood =  -110.8409  (not concave)
+Iteration 18: Log likelihood =  -110.7279  (not concave)
+Iteration 19: Log likelihood = -110.63351  (not concave)
+Iteration 20: Log likelihood = -110.55441  (not concave)
+Iteration 21: Log likelihood = -110.47912  (not concave)
+Iteration 22: Log likelihood = -110.40565  (not concave)
+Iteration 23: Log likelihood = -110.34073  (not concave)
+Iteration 24: Log likelihood =  -110.2848  (not concave)
+Iteration 25: Log likelihood = -110.23033  (not concave)
+Iteration 26: Log likelihood =  -110.1781  (not concave)
+Iteration 27: Log likelihood = -110.12988  (not concave)
+Iteration 28: Log likelihood =  -110.0861  (not concave)
+Iteration 29: Log likelihood =  -110.0443  (not concave)
+Iteration 30: Log likelihood = -110.00485  (not concave)
+Iteration 31: Log likelihood = -109.96808  (not concave)
+Iteration 32: Log likelihood = -109.93407  (not concave)
+Iteration 33: Log likelihood = -109.90202  (not concave)
+Iteration 34: Log likelihood = -109.87204  (not concave)
+Iteration 35: Log likelihood = -109.84394  (not concave)
+Iteration 36: Log likelihood =  -109.8177  (not concave)
+Iteration 37: Log likelihood = -109.79299  (not concave)
+Iteration 38: Log likelihood =  -109.7698  (not concave)
+Iteration 39: Log likelihood = -109.74791  (not concave)
+Iteration 40: Log likelihood =  -109.7273  (not concave)
+Iteration 41: Log likelihood = -109.70777  (not concave)
+Iteration 42: Log likelihood =  -109.6893  (not concave)
+Iteration 43: Log likelihood = -109.67174  (not concave)
+Iteration 44: Log likelihood = -109.65507  (not concave)
+Iteration 45: Log likelihood = -109.63915  (not concave)
+Iteration 46: Log likelihood = -109.62399  (not concave)
+Iteration 47: Log likelihood = -109.60946  (not concave)
+Iteration 48: Log likelihood = -109.59558  (not concave)
+Iteration 49: Log likelihood = -109.58223  (not concave)
+Iteration 50: Log likelihood = -109.56943  (not concave)
+Iteration 51: Log likelihood = -109.55708  (not concave)
+Iteration 52: Log likelihood =  -109.5452  (not concave)
+Iteration 53: Log likelihood = -109.53372  (not concave)
+Iteration 54: Log likelihood = -109.52265  (not concave)
+Iteration 55: Log likelihood = -109.51191  (not concave)
+Iteration 56: Log likelihood = -109.50153  (not concave)
+Iteration 57: Log likelihood = -109.49144  (not concave)
+Iteration 58: Log likelihood = -109.48166  (not concave)
+Iteration 59: Log likelihood = -109.47214  (not concave)
+Iteration 60: Log likelihood =  -109.4629  (not concave)
+Iteration 61: Log likelihood = -109.45388  (not concave)
+Iteration 62: Log likelihood = -109.44511  (not concave)
+Iteration 63: Log likelihood = -109.43653  (not concave)
+Iteration 64: Log likelihood = -109.42818  (not concave)
+Iteration 65: Log likelihood =    -109.42  (not concave)
+Iteration 66: Log likelihood = -109.41202  (not concave)
+Iteration 67: Log likelihood = -109.40419  (not concave)
+Iteration 68: Log likelihood = -109.39655  (not concave)
+Iteration 69: Log likelihood = -109.38905  (not concave)
+Iteration 70: Log likelihood = -109.38171  (not concave)
+Iteration 71: Log likelihood =  -109.3745  (not concave)
+Iteration 72: Log likelihood = -109.36743  (not concave)
+Iteration 73: Log likelihood = -109.36049  (not concave)
+Iteration 74: Log likelihood = -109.35368  (not concave)
+Iteration 75: Log likelihood = -109.34697  (not concave)
+Iteration 76: Log likelihood = -109.34039  (not concave)
+Iteration 77: Log likelihood = -109.33392  (not concave)
+Iteration 78: Log likelihood = -109.32755  (not concave)
+Iteration 79: Log likelihood = -109.32128  (not concave)
+Iteration 80: Log likelihood = -109.31512  (not concave)
+Iteration 81: Log likelihood = -109.30904  (not concave)
+Iteration 82: Log likelihood = -109.30306  (not concave)
+Iteration 83: Log likelihood = -109.29716  (not concave)
+Iteration 84: Log likelihood = -109.29136  (not concave)
+Iteration 85: Log likelihood = -109.28563  (not concave)
+Iteration 86: Log likelihood = -109.27999  (not concave)
+Iteration 87: Log likelihood = -109.27442  (not concave)
+Iteration 88: Log likelihood = -109.26893  (not concave)
+Iteration 89: Log likelihood = -109.26351  (not concave)
+Iteration 90: Log likelihood = -109.25817  (not concave)
+Iteration 91: Log likelihood = -109.25289  (not concave)
+Iteration 92: Log likelihood = -109.24769  (not concave)
+Iteration 93: Log likelihood = -109.24255  (not concave)
+Iteration 94: Log likelihood = -109.23748  (not concave)
+Iteration 95: Log likelihood = -109.23247  (not concave)
+Iteration 96: Log likelihood = -109.22753  (not concave)
+Iteration 97: Log likelihood = -109.22265  (not concave)
+Iteration 98: Log likelihood = -109.21783  (not concave)
+Iteration 99: Log likelihood = -109.21306  (not concave)
+Iteration 100: Log likelihood = -109.20835  (not concave)
+Iteration 101: Log likelihood =  -109.2037  (not concave)
+Iteration 102: Log likelihood = -109.19911  (not concave)
+Iteration 103: Log likelihood = -109.19457  (not concave)
+Iteration 104: Log likelihood = -109.19009  (not concave)
+Iteration 105: Log likelihood = -109.18565  (not concave)
+Iteration 106: Log likelihood = -109.18127  (not concave)
+Iteration 107: Log likelihood = -109.17694  (not concave)
+Iteration 108: Log likelihood = -109.17266  (not concave)
+Iteration 109: Log likelihood = -109.16843  (not concave)
+Iteration 110: Log likelihood = -109.16425  (not concave)
+Iteration 111: Log likelihood = -109.16012  (not concave)
+Iteration 112: Log likelihood = -109.15603  (not concave)
+Iteration 113: Log likelihood = -109.15199  (not concave)
+Iteration 114: Log likelihood =   -109.148  (not concave)
+Iteration 115: Log likelihood = -109.14405  (not concave)
+Iteration 116: Log likelihood = -109.14015  (not concave)
+Iteration 117: Log likelihood = -109.13629  (not concave)
+Iteration 118: Log likelihood = -109.13247  (not concave)
+Iteration 119: Log likelihood =  -109.1287  (not concave)
+Iteration 120: Log likelihood = -109.12497  (not concave)
+Iteration 121: Log likelihood = -109.12128  (not concave)
+Iteration 122: Log likelihood = -109.11763  (not concave)
+Iteration 123: Log likelihood = -109.11402  (not concave)
+Iteration 124: Log likelihood = -109.11045  (not concave)
+Iteration 125: Log likelihood = -109.10692  (not concave)
+Iteration 126: Log likelihood = -109.10344  (not concave)
+Iteration 127: Log likelihood = -109.09998  (not concave)
+Iteration 128: Log likelihood = -109.09657  (not concave)
+Iteration 129: Log likelihood = -109.09319  (not concave)
+Iteration 130: Log likelihood = -109.08986  (not concave)
+Iteration 131: Log likelihood = -109.08655  (not concave)
+Iteration 132: Log likelihood = -109.08329  (not concave)
+Iteration 133: Log likelihood = -109.08006  (not concave)
+Iteration 134: Log likelihood = -109.07687  (not concave)
+Iteration 135: Log likelihood =  -109.0737  (not concave)
+Iteration 136: Log likelihood = -109.07058  (not concave)
+Iteration 137: Log likelihood = -109.06749  (not concave)
+Iteration 138: Log likelihood = -109.06443  (not concave)
+Iteration 139: Log likelihood = -109.06141  (not concave)
+Iteration 140: Log likelihood = -109.05842  (not concave)
+Iteration 141: Log likelihood = -109.05546  (not concave)
+Iteration 142: Log likelihood = -109.05253  (not concave)
+Iteration 143: Log likelihood = -109.04963  (not concave)
+Iteration 144: Log likelihood = -109.04677  (not concave)
+Iteration 145: Log likelihood = -109.04394  (not concave)
+Iteration 146: Log likelihood = -109.04113  (not concave)
+Iteration 147: Log likelihood = -109.03836  (not concave)
+Iteration 148: Log likelihood = -109.03562  (not concave)
+Iteration 149: Log likelihood = -109.03291  (not concave)
+Iteration 150: Log likelihood = -109.03022  (not concave)
+Iteration 151: Log likelihood = -109.02757  (not concave)
+Iteration 152: Log likelihood = -109.02494  (not concave)
+Iteration 153: Log likelihood = -109.02234  (not concave)
+Iteration 154: Log likelihood = -109.01977  (not concave)
+Iteration 155: Log likelihood = -109.01723  (not concave)
+Iteration 156: Log likelihood = -109.01472  (not concave)
+Iteration 157: Log likelihood = -109.01223  (not concave)
+Iteration 158: Log likelihood = -109.00976  (not concave)
+Iteration 159: Log likelihood = -109.00733  (not concave)
+Iteration 160: Log likelihood = -109.00492  (not concave)
+Iteration 161: Log likelihood = -109.00253  (not concave)
+Iteration 162: Log likelihood = -109.00018  (not concave)
+Iteration 163: Log likelihood = -108.99784  (not concave)
+Iteration 164: Log likelihood = -108.99553  (not concave)
+Iteration 165: Log likelihood = -108.99325  
+Iteration 166: Log likelihood = -108.99292  (backed up)
+Iteration 167: Log likelihood =  -108.7252  
+Iteration 168: Log likelihood =  -108.7188  
+Iteration 169: Log likelihood = -108.71852  
+Iteration 170: Log likelihood = -108.71851  
+
+Random-effects probit regression                     Number of obs    =  3,018
+Group variable: id                                   Number of groups =    258
+
+Random effects u_i ~ Gaussian                        Obs per group:
+                                                                  min =      6
+                                                                  avg =   11.7
+                                                                  max =     12
+
+Integration method: mvaghermite                      Integration pts. =     12
+
+                                                     Wald chi2(10)    = 374.63
+Log likelihood = -108.71851                          Prob > chi2      = 0.0000
+
+------------------------------------------------------------------------------
+         set | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        Popu |   3.173821   .6861779     4.63   0.000     1.828937    4.518705
+        Capi |   5.739617   .4878493    11.77   0.000      4.78345    6.695784
+        Phys |  -.3259947   .4699104    -0.69   0.488    -1.247002    .5950127
+        Econ |   .7967502   .8530498     0.93   0.350    -.8751966    2.468697
+       Infra |  -1.490098   .7845542    -1.90   0.058    -3.027795    .0476004
+       Inter |   .5967837    3.79585     0.16   0.875    -6.842946    8.036514
+       Urban |   12.41251   4.871355     2.55   0.011     2.864831    21.96019
+      Consum |   -3.12361   3.256743    -0.96   0.337     -9.50671     3.25949
+         Act |  -1.555177   2.547377    -0.61   0.542    -6.547943     3.43759
+     Coastal |   2.740803   .7854771     3.49   0.000     1.201296     4.28031
+       _cons |  -74.80349   8.855861    -8.45   0.000    -92.16066   -57.44632
+-------------+----------------------------------------------------------------
+    /lnsig2u |    4.45834    .205834                      4.054913    4.861768
+-------------+----------------------------------------------------------------
+     sigma_u |   9.292152   .9563205                      7.594745    11.36893
+         rho |    .988551   .0023296                      .9829585    .9923226
+------------------------------------------------------------------------------
+LR test of rho=0: chibar2(01) = 1467.58                Prob >= chibar2 = 0.000
+
+. estimates save "../data/appendix_probit", replace
+(note: file ../data/appendix_probit.ster not found)
+file ../data/appendix_probit.ster saved
+
+. summarize Eco_safe Piolt Popu Capi Phys Econ Infra Inter Urban Consum Act Coa
+> stal
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+    Eco_safe |      3,097    .3818226    .0547866          0   .6439571
+       Piolt |      3,096    .0297158    .1698295          0          1
+        Popu |      3,084    5.831321    .8509204   1.609438   7.730175
+        Capi |      3,056    10.58439    1.307022   5.192957   13.88976
+        Phys |      3,096    15.36735    1.270367   11.76526   22.24608
+-------------+---------------------------------------------------------
+        Econ |      3,067    7.006935    .9284606   4.151916    10.2265
+       Infra |      3,095    2.661279    .4456269  -.9416085    4.09551
+       Inter |      3,096    .1737406    .0997865   .0028178   2.266667
+       Urban |      3,096    .5336351    .1492614    .176497          1
+      Consum |      3,092    4.097885    .3591764  -.4080403   5.163805
+-------------+---------------------------------------------------------
+         Act |      3,096    4.262475     .278294    2.65184   4.604978
+     Coastal |      3,096    .2015504    .4012229          0          1
+
+. * Separate reproducible placebo seed: original program does not specify one h
+> ere.
+. set seed 12345
+
+. drop if missing(id,year)
+(1 observation deleted)
+
+. tempfile base ids years matched
+
+. save `base'
+file C:\Users\ASUS\AppData\Local\Temp\ST_4970_000001.tmp saved as .dta format
+
+. tempname H
+
+. postfile `H' int draw double b se p using "../data/placebo.dta", replace
+(file ../data/placebo.dta not found)
+
+. forvalues i=1/500 {
+  2.  quietly {
+  3.   use `base', clear
+  4.   keep if year==2008
+  5.   sample 44, count
+  6.   keep id
+  7.   save `ids', replace
+  8.   merge 1:m id using `base'
+  9.   gen byte treat1=(_merge==3)
+ 10.   drop _merge
+ 11.   save `matched', replace
+ 12.   use `base', clear
+ 13.   bsample 1, strata(id)
+ 14.   keep year
+ 15.   mkmat year, matrix(sampleYear)
+ 16.   use `matched', clear
+ 17.   xtset id year
+ 18.   gen byte time1=0
+ 19.   forvalues j=1/258 {
+ 20.    replace time1=1 if id==`j' & year>=sampleYear[`j',1]
+ 21.   }
+ 22.   gen byte did1=treat1*time1
+ 23.   xtreg Eco_safe did1 Popu Capi Phys Econ Infra Inter Urban Consum Act i.y
+> ear, fe robust
+ 24.   post `H' (`i') (_b[did1]) (_se[did1]) (2*ttail(e(N)-e(df_m)-1,abs(_b[did
+> 1]/_se[did1])))
+ 25.  }
+ 26. }
+
+. postclose `H'
+
+. use "../data/placebo.dta", clear
+
+. export delimited using "../data/placebo.csv", replace
+(file ../data/placebo.csv not found)
+file ../data/placebo.csv saved
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\fta_security\
+> work\../logs/ancillary.log
+  log type:  text
+ closed on:  15 Nov 2026, 18:59:41
+-------------------------------------------------------------------------------

@@ -1,0 +1,929 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\public_data_di
+> stance\data\../logs/author_full.log
+  log type:  text
+ opened on:  21 Nov 2026, 20:43:11
+
+. do "../code/author_original.do"
+
+. *  ==========================================================  *
+. *             公共数据开放能否拓展资本跨区域流动距离？
+. *                         ——基于异地并购视角
+. *
+. *                      蓝发钦，胡晓敏，徐卓琳
+. *  ==========================================================  *
+. * *  --------------------  软件版本   ---------------------
+. 
+. *   Stata/MP 17.0 for Windows (64-bit x86-64)
+. 
+. * *  --------------------  变量说明   ---------------------
+. /*
+> 被解释变量：
+>         异地并购地理距离：MaDist
+>         
+> 核心解释变量
+>         公共数开放：did
+> 
+> 控制变量
+>         企业年龄：Age
+>         企业产权性质：Soe
+>         企业规模：Size
+>         企业资产负债率：Leverage
+>         企业总资产收益率：Roa
+>         企业现金流：Cash
+>         企业成长性：Growth
+>         企业董事会规模：Board
+>         企业独立董事占比：Independent
+>         地区人均生产总值:Gdp
+>         地区生产总值增长率：GdpGrowth
+>         地区人均自然增长率：Pop
+>         地区进出口占比：Trade
+> 
+> 公共数据开放平台特点变量
+>         城市累计开放公共数据目录数：TtlNum
+>         累计无条件开放数据目录数：UnlimitNum
+>         累计有条件开放数据目录数：LimitNum
+>         更新频率：FrequencyScore
+>         政务服务与市场监管主题开放数据目录数：Gov
+>         财政税收与金融经济主题开放数据目录数：Finance
+>         环境保护与资源能源主题开放数据目录数：Environment
+>         民生服务及文化休闲主题开放数据目录数：LivelyHood
+>         法律主题开放数据目录数：Law
+> */
+. *   ----------------------------------------------------------
+. *   -------------------   正文实证结果   ---------------------
+. *   ----------------------------------------------------------
+. 
+. *  表1 公共数据开放与异地并购地理距离分布
+. use 数据1.dta,clear 
+
+. global xlist "Age Soe Size Leverage Roa Cash Growth Board Independent Gdp GdpG
+> rowth Pop Trade"
+
+. reghdfe MaDist did, absorb(year Symbol) vce(cluster Symbol)
+(dropped 816 singleton observations)
+(MWFE estimator converged in 8 iterations)
+
+HDFE Linear regression                            Number of obs   =      7,435
+Absorbing 2 HDFE groups                           F(   1,   1677) =       8.72
+Statistics robust to heteroskedasticity           Prob > F        =     0.0032
+                                                  R-squared       =     0.5009
+                                                  Adj R-squared   =     0.3537
+                                                  Within R-sq.    =     0.0024
+Number of clusters (Symbol)  =      1,678         Root MSE        =     0.8310
+
+                             (Std. err. adjusted for 1,678 clusters in Symbol)
+------------------------------------------------------------------------------
+             |               Robust
+      MaDist | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         did |   .1135911   .0384718     2.95   0.003     .0381333     .189049
+       _cons |   6.357937   .0117873   539.39   0.000     6.334818    6.381056
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        15           0          15     |
+      Symbol |      1678        1678           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. reghdfe MaDist did $xlist, absorb(year Symbol) vce(cluster Symbol) 
+(dropped 816 singleton observations)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =      7,435
+Absorbing 2 HDFE groups                           F(  14,   1677) =       1.90
+Statistics robust to heteroskedasticity           Prob > F        =     0.0220
+                                                  R-squared       =     0.5038
+                                                  Adj R-squared   =     0.3560
+                                                  Within R-sq.    =     0.0082
+Number of clusters (Symbol)  =      1,678         Root MSE        =     0.8295
+
+                             (Std. err. adjusted for 1,678 clusters in Symbol)
+------------------------------------------------------------------------------
+             |               Robust
+      MaDist | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         did |    .189693   .0439374     4.32   0.000     .1035151    .2758708
+         Age |  -.0395067   .0569389    -0.69   0.488    -.1511855    .0721721
+         Soe |   .0176572   .0874823     0.20   0.840    -.1539287    .1892431
+        Size |  -.0089578   .0329478    -0.27   0.786    -.0735809    .0556653
+    Leverage |   .2047585   .1376343     1.49   0.137    -.0651946    .4747116
+         Roa |  -.0669134   .3144666    -0.21   0.832    -.6837018    .5498749
+        Cash |  -.0197627   .1340915    -0.15   0.883     -.282767    .2432416
+      Growth |   .0069852   .0231634     0.30   0.763    -.0384471    .0524175
+       Board |   .1657507   .1610275     1.03   0.303    -.1500854    .4815868
+ Independent |   .0882641   .4972678     0.18   0.859    -.8870668    1.063595
+         Gdp |   .0175686    .039383     0.45   0.656    -.0596765    .0948137
+   GdpGrowth |  -.0091412    .007737    -1.18   0.238    -.0243164    .0060339
+         Pop |   .0015113   .0037127     0.41   0.684    -.0057707    .0087933
+       Trade |  -.2092964   .0616629    -3.39   0.001    -.3302407    -.088352
+       _cons |   6.120764   .9134264     6.70   0.000     4.329189     7.91234
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        15           0          15     |
+      Symbol |      1678        1678           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. *  表2 优化地区信息环境：公共数据开放数量、获取难度、更新时效与开放主题的影响
+. use 数据1.dta,clear
+
+. reghdfe MaDist did_TtlNum $xlist, absorb(year Symbol) vce(cluster Symbol)
+(dropped 816 singleton observations)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =      7,435
+Absorbing 2 HDFE groups                           F(  14,   1677) =       1.19
+Statistics robust to heteroskedasticity           Prob > F        =     0.2787
+                                                  R-squared       =     0.5018
+                                                  Adj R-squared   =     0.3534
+                                                  Within R-sq.    =     0.0042
+Number of clusters (Symbol)  =      1,678         Root MSE        =     0.8312
+
+                             (Std. err. adjusted for 1,678 clusters in Symbol)
+------------------------------------------------------------------------------
+             |               Robust
+      MaDist | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+  did_TtlNum |   .0487922   .0191646     2.55   0.011     .0112032    .0863812
+         Age |  -.0287178   .0567583    -0.51   0.613    -.1400424    .0826068
+         Soe |   .0125146   .0871435     0.14   0.886    -.1584069    .1834361
+        Size |  -.0062363   .0331251    -0.19   0.851    -.0712073    .0587347
+    Leverage |   .1962627   .1380144     1.42   0.155    -.0744359    .4669613
+         Roa |  -.0549222   .3152244    -0.17   0.862    -.6731968    .5633524
+        Cash |  -.0140226   .1347348    -0.10   0.917    -.2782888    .2502435
+      Growth |   .0073616   .0232022     0.32   0.751    -.0381468      .05287
+       Board |   .1674002   .1607981     1.04   0.298    -.1479858    .4827863
+ Independent |   .1133995   .4975299     0.23   0.820    -.8624454    1.089244
+         Gdp |   .0207701   .0395832     0.52   0.600    -.0568676    .0984077
+   GdpGrowth |  -.0099685   .0077476    -1.29   0.198    -.0251645    .0052274
+         Pop |   .0014121    .003689     0.38   0.702    -.0058233    .0086476
+       Trade |  -.1345652   .0567136    -2.37   0.018    -.2458022   -.0233283
+       _cons |   6.013813   .9165929     6.56   0.000     4.216026    7.811599
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        15           0          15     |
+      Symbol |      1678        1678           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. reghdfe MaDist did_UnlimitNum did_LimitNum $xlist, absorb(year Symbol) vce(clu
+> ster Symbol)
+(dropped 816 singleton observations)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =      7,435
+Absorbing 2 HDFE groups                           F(  15,   1677) =       1.11
+Statistics robust to heteroskedasticity           Prob > F        =     0.3372
+                                                  R-squared       =     0.5018
+                                                  Adj R-squared   =     0.3533
+                                                  Within R-sq.    =     0.0042
+Number of clusters (Symbol)  =      1,678         Root MSE        =     0.8313
+
+                              (Std. err. adjusted for 1,678 clusters in Symbol)
+-------------------------------------------------------------------------------
+              |               Robust
+       MaDist | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+did_Unlimit~m |   .4925232   .2084558     2.36   0.018     .0836622    .9013842
+ did_LimitNum |   .0428341   .1161301     0.37   0.712    -.1849411    .2706093
+          Age |  -.0287389   .0567412    -0.51   0.613    -.1400299    .0825521
+          Soe |   .0128041   .0867235     0.15   0.883    -.1572935    .1829018
+         Size |  -.0062497   .0331136    -0.19   0.850    -.0711981    .0586987
+     Leverage |   .1961549   .1380863     1.42   0.156    -.0746847    .4669945
+          Roa |  -.0554111   .3152319    -0.18   0.860    -.6737005    .5628782
+         Cash |  -.0142441   .1347328    -0.11   0.916    -.2785063     .250018
+       Growth |   .0073667   .0232038     0.32   0.751    -.0381448    .0528782
+        Board |   .1673453   .1609366     1.04   0.299    -.1483125    .4830031
+  Independent |   .1134844   .4974398     0.23   0.820    -.8621839    1.089153
+          Gdp |   .0207637   .0395901     0.52   0.600    -.0568875     .098415
+    GdpGrowth |  -.0099649   .0077454    -1.29   0.198    -.0251566    .0052268
+          Pop |   .0014084   .0036812     0.38   0.702    -.0058118    .0086287
+        Trade |  -.1344275   .0569516    -2.36   0.018    -.2461313   -.0227238
+        _cons |   6.014268   .9169195     6.56   0.000      4.21584    7.812695
+-------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        15           0          15     |
+      Symbol |      1678        1678           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. reghdfe MaDist did_FrequencyScore $xlist, absorb(year Symbol) vce(cluster Symb
+> ol)
+(dropped 847 singleton observations)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =      6,211
+Absorbing 2 HDFE groups                           F(  14,   1507) =       2.00
+Statistics robust to heteroskedasticity           Prob > F        =     0.0148
+                                                  R-squared       =     0.5362
+                                                  Adj R-squared   =     0.3838
+                                                  Within R-sq.    =     0.0133
+Number of clusters (Symbol)  =      1,508         Root MSE        =     0.8312
+
+                              (Std. err. adjusted for 1,508 clusters in Symbol)
+-------------------------------------------------------------------------------
+              |               Robust
+       MaDist | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+did_Frequen~e |   .0523548   .0262372     2.00   0.046     .0008895    .1038202
+          Age |  -.0118474   .0642485    -0.18   0.854    -.1378735    .1141786
+          Soe |  -.0690054   .0954156    -0.72   0.470    -.2561669    .1181562
+         Size |     -.0385   .0377399    -1.02   0.308    -.1125284    .0355283
+     Leverage |    .162002    .160325     1.01   0.312    -.1524817    .4764858
+          Roa |  -.1088934    .355071    -0.31   0.759    -.8053791    .5875923
+         Cash |   .0508132   .1528722     0.33   0.740    -.2490515     .350678
+       Growth |   .0058404   .0276081     0.21   0.832     -.048314    .0599947
+        Board |    .190731   .1872503     1.02   0.309    -.1765679    .5580299
+  Independent |   .2288877   .5861602     0.39   0.696    -.9208885    1.378664
+          Gdp |   .0072377   .0436675     0.17   0.868    -.0784177    .0928931
+    GdpGrowth |   .0013368   .0082302     0.16   0.871    -.0148071    .0174807
+          Pop |   .0015244   .0040925     0.37   0.710    -.0065031     .009552
+        Trade |  -.3087762   .0700985    -4.40   0.000    -.4462773   -.1712752
+        _cons |   6.701412    1.04323     6.42   0.000     4.655075    8.747748
+-------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        15           0          15     |
+      Symbol |      1508        1508           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. reghdfe MaDist did_gov did_finance did_environment did_livelyhood did_law $xli
+> st, absorb(year Symbol) vce(cluster Symbol)
+(dropped 816 singleton observations)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =      7,435
+Absorbing 2 HDFE groups                           F(  18,   1677) =       1.32
+Statistics robust to heteroskedasticity           Prob > F        =     0.1653
+                                                  R-squared       =     0.5026
+                                                  Adj R-squared   =     0.3540
+                                                  Within R-sq.    =     0.0058
+Number of clusters (Symbol)  =      1,678         Root MSE        =     0.8308
+
+                              (Std. err. adjusted for 1,678 clusters in Symbol)
+-------------------------------------------------------------------------------
+              |               Robust
+       MaDist | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+      did_gov |   .1784803   .1050366     1.70   0.089    -.0275363     .384497
+  did_finance |   1.408844   .5846846     2.41   0.016     .2620558    2.555633
+did_environ~t |  -1.940021   .7820172    -2.48   0.013    -3.473854   -.4061889
+did_livelyh~d |   .1485766   .1154327     1.29   0.198    -.0778307     .374984
+      did_law |  -6.646574   4.347374    -1.53   0.126    -15.17342    1.880276
+          Age |  -.0288791    .056726    -0.51   0.611    -.1401402     .082382
+          Soe |   .0186214   .0873127     0.21   0.831     -.152632    .1898747
+         Size |   -.006122   .0329358    -0.19   0.853    -.0707216    .0584775
+     Leverage |   .1862587   .1382624     1.35   0.178    -.0849264    .4574438
+          Roa |  -.0573736   .3125658    -0.18   0.854    -.6704337    .5556865
+         Cash |     -.0187   .1348072    -0.14   0.890     -.283108     .245708
+       Growth |   .0068988   .0231483     0.30   0.766    -.0385039    .0523014
+        Board |   .1639386   .1602118     1.02   0.306    -.1502976    .4781749
+  Independent |   .1114514   .4967409     0.22   0.823    -.8628461    1.085749
+          Gdp |   .0253068   .0396893     0.64   0.524    -.0525391    .1031526
+    GdpGrowth |  -.0104477   .0077391    -1.35   0.177    -.0256269    .0047316
+          Pop |   .0023412   .0037019     0.63   0.527    -.0049196    .0096021
+        Trade |  -.1496873   .0581865    -2.57   0.010    -.2638131   -.0355614
+        _cons |   5.976986   .9136338     6.54   0.000     4.185003    7.768969
+-------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        15           0          15     |
+      Symbol |      1678        1678           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. *  表3 优化地区信息环境：不同并购场景的异质性影响
+. use 数据1.dta,clear
+
+. reghdfe MaDist did did_FirstMA $xlist, absorb(year Symbol) vce(cluster Symbol)
+(dropped 816 singleton observations)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =      7,435
+Absorbing 2 HDFE groups                           F(  15,   1677) =       2.69
+Statistics robust to heteroskedasticity           Prob > F        =     0.0004
+                                                  R-squared       =     0.5057
+                                                  Adj R-squared   =     0.3583
+                                                  Within R-sq.    =     0.0119
+Number of clusters (Symbol)  =      1,678         Root MSE        =     0.8281
+
+                             (Std. err. adjusted for 1,678 clusters in Symbol)
+------------------------------------------------------------------------------
+             |               Robust
+      MaDist | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         did |   .0982784   .0521875     1.88   0.060    -.0040812    .2006379
+ did_FirstMA |   .2159274   .0602589     3.58   0.000     .0977368     .334118
+         Age |  -.0386531   .0569604    -0.68   0.497    -.1503742    .0730679
+         Soe |    .021457   .0873679     0.25   0.806    -.1499047    .1928186
+        Size |  -.0056661   .0332812    -0.17   0.865     -.070943    .0596109
+    Leverage |   .2138217   .1373918     1.56   0.120    -.0556557     .483299
+         Roa |  -.0750304   .3147315    -0.24   0.812    -.6923384    .5422776
+        Cash |  -.0161882   .1341948    -0.12   0.904    -.2793952    .2470188
+      Growth |   .0070981   .0232808     0.30   0.760    -.0385644    .0527607
+       Board |   .1507006   .1603042     0.94   0.347    -.1637169     .465118
+ Independent |   .0488501   .4939294     0.10   0.921    -.9199329    1.017633
+         Gdp |   .0148794   .0395487     0.38   0.707    -.0626906    .0924494
+   GdpGrowth |  -.0089859   .0077544    -1.16   0.247    -.0241952    .0062234
+         Pop |   .0015486   .0037059     0.42   0.676    -.0057202    .0088173
+       Trade |   -.211173    .061736    -3.42   0.001    -.3322608   -.0900852
+       _cons |   6.119615   .9151464     6.69   0.000     4.324666    7.914565
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        15           0          15     |
+      Symbol |      1678        1678           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. reghdfe MaDist did did_MixedMA $xlist, absorb(year Symbol) vce(cluster Symbol)
+(dropped 816 singleton observations)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =      7,435
+Absorbing 2 HDFE groups                           F(  15,   1677) =       1.98
+Statistics robust to heteroskedasticity           Prob > F        =     0.0135
+                                                  R-squared       =     0.5042
+                                                  Adj R-squared   =     0.3564
+                                                  Within R-sq.    =     0.0089
+Number of clusters (Symbol)  =      1,678         Root MSE        =     0.8293
+
+                             (Std. err. adjusted for 1,678 clusters in Symbol)
+------------------------------------------------------------------------------
+             |               Robust
+      MaDist | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         did |   .1586455   .0477392     3.32   0.001     .0650108    .2522801
+ did_MixedMA |    .089355   .0504599     1.77   0.077     -.009616     .188326
+         Age |  -.0390306   .0570186    -0.68   0.494    -.1508658    .0728046
+         Soe |   .0200973   .0873638     0.23   0.818    -.1512562    .1914509
+        Size |  -.0081804    .033012    -0.25   0.804    -.0729294    .0565687
+    Leverage |    .204637   .1377641     1.49   0.138    -.0655706    .4748447
+         Roa |  -.0673424   .3148505    -0.21   0.831    -.6848838    .5501989
+        Cash |  -.0230093   .1340632    -0.17   0.864    -.2859582    .2399395
+      Growth |   .0072568   .0231574     0.31   0.754    -.0381637    .0526773
+       Board |   .1673515   .1616162     1.04   0.301    -.1496392    .4843422
+ Independent |   .1014829   .4978196     0.20   0.838    -.8749303    1.077896
+         Gdp |    .017535   .0393443     0.45   0.656     -.059634     .094704
+   GdpGrowth |   -.009199   .0077329    -1.19   0.234    -.0243661    .0059682
+         Pop |   .0014053   .0037129     0.38   0.705    -.0058772    .0086878
+       Trade |  -.2110228   .0617504    -3.42   0.001    -.3321386   -.0899069
+       _cons |    6.09609   .9137103     6.67   0.000     4.303957    7.888223
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        15           0          15     |
+      Symbol |      1678        1678           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. reghdfe MaDist did did_Mng $xlist, absorb(year Symbol) vce(cluster Symbol)
+(dropped 402 singleton observations)
+(MWFE estimator converged in 8 iterations)
+
+HDFE Linear regression                            Number of obs   =      2,475
+Absorbing 2 HDFE groups                           F(  15,    629) =       6.23
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.5792
+                                                  Adj R-squared   =     0.4281
+                                                  Within R-sq.    =     0.0787
+Number of clusters (Symbol)  =        630         Root MSE        =     0.7757
+
+                               (Std. err. adjusted for 630 clusters in Symbol)
+------------------------------------------------------------------------------
+             |               Robust
+      MaDist | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         did |   .4679049   .0774541     6.04   0.000      .315805    .6200048
+     did_Mng |  -.9351331   .1174468    -7.96   0.000    -1.165768   -.7044979
+         Age |   .1582011   .1386399     1.14   0.254    -.1140519    .4304541
+         Soe |   -.105288   .1287869    -0.82   0.414    -.3581923    .1476164
+        Size |   .1230514   .0731692     1.68   0.093    -.0206341    .2667369
+    Leverage |   .0169541   .2771168     0.06   0.951    -.5272319    .5611401
+         Roa |  -.1792651   .4850328    -0.37   0.712    -1.131745    .7732146
+        Cash |   .0380502   .3024862     0.13   0.900    -.5559548    .6320553
+      Growth |   .1098699   .0556251     1.98   0.049     .0006365    .2191034
+       Board |   .3620989   .2938924     1.23   0.218    -.2150302     .939228
+ Independent |   .6590587   .8506977     0.77   0.439    -1.011493     2.32961
+         Gdp |  -.0109059   .0681198    -0.16   0.873    -.1446757    .1228638
+   GdpGrowth |  -.0101285   .0123689    -0.82   0.413    -.0344177    .0141608
+         Pop |   .0001561   .0051686     0.03   0.976    -.0099936    .0103058
+       Trade |  -.4309549    .115895    -3.72   0.000    -.6585429   -.2033668
+       _cons |   2.590182   2.014692     1.29   0.199    -1.366155    6.546519
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        10           0          10     |
+      Symbol |       630         630           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. *  表4 改善地方政府治理：政策不确定性与营商环境 
+. use 数据1.dta,clear
+
+. reghdfe MaDist did did_Uncertainty $xlist, absorb(year Symbol) vce(cluster Sym
+> bol) 
+(dropped 817 singleton observations)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =      7,421
+Absorbing 2 HDFE groups                           F(  15,   1675) =       2.12
+Statistics robust to heteroskedasticity           Prob > F        =     0.0073
+                                                  R-squared       =     0.5041
+                                                  Adj R-squared   =     0.3561
+                                                  Within R-sq.    =     0.0094
+Number of clusters (Symbol)  =      1,676         Root MSE        =     0.8297
+
+                              (Std. err. adjusted for 1,676 clusters in Symbol)
+-------------------------------------------------------------------------------
+              |               Robust
+       MaDist | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+          did |   .1453429   .0517923     2.81   0.005     .0437585    .2469274
+did_Uncerta~y |   .1014687   .0517056     1.96   0.050     .0000544     .202883
+          Age |  -.0364494   .0570809    -0.64   0.523    -.1484068    .0755079
+          Soe |    .019099    .087972     0.22   0.828    -.1534476    .1916456
+         Size |  -.0077665   .0332643    -0.23   0.815    -.0730105    .0574774
+     Leverage |   .2151014   .1386984     1.55   0.121    -.0569389    .4871418
+          Roa |  -.0722333   .3145488    -0.23   0.818    -.6891833    .5447168
+         Cash |  -.0262235   .1342037    -0.20   0.845     -.289448     .237001
+       Growth |   .0068533   .0234814     0.29   0.770    -.0392026    .0529092
+        Board |   .1658408   .1623476     1.02   0.307    -.1525847    .4842664
+  Independent |   .0835355    .499298     0.17   0.867    -.8957784    1.062849
+          Gdp |   .0212392   .0392868     0.54   0.589    -.0558171    .0982955
+    GdpGrowth |  -.0092884   .0077532    -1.20   0.231    -.0244955    .0059186
+          Pop |   .0014436   .0037143     0.39   0.698    -.0058414    .0087287
+        Trade |  -.2172464   .0614924    -3.53   0.000    -.3378566   -.0966363
+        _cons |   6.048575   .9172978     6.59   0.000     4.249404    7.847746
+-------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        15           0          15     |
+      Symbol |      1676        1676           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. reghdfe Uncertainty did $xlist, absorb(year Symbol) vce(cluster Symbol)
+(dropped 787 singleton observations)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =      6,782
+Absorbing 2 HDFE groups                           F(  14,   1563) =      12.88
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3657
+                                                  Adj R-squared   =     0.1711
+                                                  Within R-sq.    =     0.0344
+Number of clusters (Symbol)  =      1,564         Root MSE        =     0.4552
+
+                             (Std. err. adjusted for 1,564 clusters in Symbol)
+------------------------------------------------------------------------------
+             |               Robust
+ Uncertainty | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         did |  -.0578392    .022793    -2.54   0.011    -.1025472   -.0131312
+         Age |  -.0040635   .0329191    -0.12   0.902    -.0686338    .0605068
+         Soe |  -.0253553   .0532714    -0.48   0.634    -.1298463    .0791357
+        Size |  -.0126458   .0159688    -0.79   0.429    -.0439684    .0186768
+    Leverage |    .103281   .0746273     1.38   0.167    -.0430992    .2496612
+         Roa |   .0920221   .1566628     0.59   0.557    -.2152692    .3993134
+        Cash |  -.0398605   .0764852    -0.52   0.602     -.189885     .110164
+      Growth |   .0128878   .0112306     1.15   0.251    -.0091407    .0349164
+       Board |   .0525879   .0822007     0.64   0.522    -.1086473    .2138231
+ Independent |  -.0867137   .2488935    -0.35   0.728    -.5749141    .4014867
+         Gdp |   .0275599   .0208703     1.32   0.187    -.0133769    .0684967
+   GdpGrowth |  -.0075791   .0043367    -1.75   0.081    -.0160855    .0009273
+         Pop |  -.0137057   .0013615   -10.07   0.000    -.0163764   -.0110351
+       Trade |  -.1339865   .0290809    -4.61   0.000    -.1910282   -.0769449
+       _cons |   .5742927   .4622881     1.24   0.214    -.3324775    1.481063
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        15           0          15     |
+      Symbol |      1564        1564           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. reghdfe MaDist did did_Business $xlist, absorb(year Symbol) vce(cluster Symbol
+> ) 
+(dropped 896 singleton observations)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =      2,178
+Absorbing 2 HDFE groups                           F(  15,    720) =       1.12
+Statistics robust to heteroskedasticity           Prob > F        =     0.3297
+                                                  R-squared       =     0.5996
+                                                  Adj R-squared   =     0.3934
+                                                  Within R-sq.    =     0.0195
+Number of clusters (Symbol)  =        721         Root MSE        =     0.8066
+
+                               (Std. err. adjusted for 721 clusters in Symbol)
+------------------------------------------------------------------------------
+             |               Robust
+      MaDist | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         did |   .3302482   .1339381     2.47   0.014     .0672923    .5932041
+did_Business |  -.2312871   .1231843    -1.88   0.061    -.4731304    .0105562
+         Age |  -.0817034   .1716467    -0.48   0.634    -.4186912    .2552845
+         Soe |   -.251114   .2018296    -1.24   0.214    -.6473589     .145131
+        Size |  -.0074787   .1274732    -0.06   0.953    -.2577422    .2427848
+    Leverage |   .4138807   .4136021     1.00   0.317    -.3981296    1.225891
+         Roa |   .5261304   .6295674     0.84   0.404    -.7098767    1.762138
+        Cash |  -.0576544   .3163093    -0.18   0.855    -.6786531    .5633443
+      Growth |  -.0252494   .0384172    -0.66   0.511    -.1006726    .0501738
+       Board |   .6116481    .667656     0.92   0.360    -.6991371    1.922433
+ Independent |   1.137992   1.826877     0.62   0.534    -2.448651    4.724634
+         Gdp |  -.1082677   .1046548    -1.03   0.301    -.3137327    .0971974
+   GdpGrowth |   .0084358   .0183574     0.46   0.646    -.0276046    .0444762
+         Pop |  -.0070483    .006594    -1.07   0.285    -.0199942    .0058975
+       Trade |  -.2179977   .1414005    -1.54   0.124    -.4956042    .0596088
+       _cons |   6.120535    3.45325     1.77   0.077    -.6591062    12.90018
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |         5           0           5     |
+      Symbol |       721         721           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. reghdfe Business did $xlist, absorb(year Symbol) vce(cluster Symbol)
+(dropped 896 singleton observations)
+(MWFE estimator converged in 6 iterations)
+
+HDFE Linear regression                            Number of obs   =      2,178
+Absorbing 2 HDFE groups                           F(  14,    720) =      24.93
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.5779
+                                                  Adj R-squared   =     0.3609
+                                                  Within R-sq.    =     0.2458
+Number of clusters (Symbol)  =        721         Root MSE        =     0.3006
+
+                               (Std. err. adjusted for 721 clusters in Symbol)
+------------------------------------------------------------------------------
+             |               Robust
+    Business | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         did |    .081109   .0246371     3.29   0.001     .0327398    .1294782
+         Age |   -.070014   .0608502    -1.15   0.250    -.1894791    .0494511
+         Soe |    .089545   .0945598     0.95   0.344    -.0961009     .275191
+        Size |  -.0235352   .0364346    -0.65   0.519     -.095066    .0479956
+    Leverage |  -.1496876   .1469132    -1.02   0.309     -.438117    .1387418
+         Roa |  -.3647308   .2230823    -1.63   0.102    -.8027003    .0732387
+        Cash |   .2275067   .1673771     1.36   0.174    -.1010987    .5561121
+      Growth |   .0246627   .0164019     1.50   0.133    -.0075385    .0568639
+       Board |   .0078234   .1430383     0.05   0.956    -.2729986    .2886454
+ Independent |   .0084029   .3736634     0.02   0.982    -.7251971     .742003
+         Gdp |   .4185898   .0299932    13.96   0.000     .3597053    .4774744
+   GdpGrowth |   .0186671   .0074445     2.51   0.012     .0040515    .0332827
+         Pop |   .0063598   .0015249     4.17   0.000     .0033661    .0093535
+       Trade |  -.0991503   .0355854    -2.79   0.005    -.1690139   -.0292866
+       _cons |  -3.399996   .8871239    -3.83   0.000    -5.141655   -1.658337
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |         5           0           5     |
+      Symbol |       721         721           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. *  表5 提升地区禀赋优势：传统资源禀赋、创新资源禀赋与并购溢价
+. use 数据1.dta,clear
+
+. reghdfe MaDist did did_Energy $xlist, absorb(year Symbol) vce(cluster Symbol) 
+(dropped 816 singleton observations)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =      7,435
+Absorbing 2 HDFE groups                           F(  15,   1677) =       2.95
+Statistics robust to heteroskedasticity           Prob > F        =     0.0001
+                                                  R-squared       =     0.5059
+                                                  Adj R-squared   =     0.3587
+                                                  Within R-sq.    =     0.0125
+Number of clusters (Symbol)  =      1,678         Root MSE        =     0.8278
+
+                             (Std. err. adjusted for 1,678 clusters in Symbol)
+------------------------------------------------------------------------------
+             |               Robust
+      MaDist | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         did |   .2867996   .0483492     5.93   0.000     .1919684    .3816308
+  did_Energy |  -.2472654    .064481    -3.83   0.000    -.3737371   -.1207937
+         Age |  -.0300488   .0570734    -0.53   0.599    -.1419915    .0818938
+         Soe |   .0099391   .0880584     0.11   0.910    -.1627769    .1826551
+        Size |  -.0090754   .0329947    -0.28   0.783    -.0737905    .0556398
+    Leverage |    .201556   .1379612     1.46   0.144    -.0690382    .4721502
+         Roa |  -.0672106   .3123232    -0.22   0.830    -.6797949    .5453738
+        Cash |  -.0052641    .133985    -0.04   0.969    -.2680596    .2575314
+      Growth |   .0070394   .0231411     0.30   0.761    -.0383491    .0524278
+       Board |   .1532648   .1592033     0.96   0.336    -.1589933     .465523
+ Independent |     .07493   .4928087     0.15   0.879     -.891655    1.041515
+         Gdp |   .0238644    .039286     0.61   0.544    -.0531903    .1009191
+   GdpGrowth |  -.0090809    .007763    -1.17   0.242    -.0243071    .0061454
+         Pop |   .0056462   .0036304     1.56   0.120    -.0014744    .0127668
+       Trade |  -.2330316   .0627472    -3.71   0.000    -.3561028   -.1099605
+       _cons |   6.057654   .9119672     6.64   0.000      4.26894    7.846368
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        15           0          15     |
+      Symbol |      1678        1678           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. reghdfe MaDist did did_Wage $xlist, absorb(year Symbol) vce(cluster Symbol) 
+(dropped 817 singleton observations)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =      7,427
+Absorbing 2 HDFE groups                           F(  15,   1675) =       2.11
+Statistics robust to heteroskedasticity           Prob > F        =     0.0077
+                                                  R-squared       =     0.5051
+                                                  Adj R-squared   =     0.3576
+                                                  Within R-sq.    =     0.0103
+Number of clusters (Symbol)  =      1,676         Root MSE        =     0.8288
+
+                             (Std. err. adjusted for 1,676 clusters in Symbol)
+------------------------------------------------------------------------------
+             |               Robust
+      MaDist | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         did |  -.1374669    .133261    -1.03   0.302    -.3988424    .1239087
+    did_Wage |   .3431123   .1352662     2.54   0.011     .0778038    .6084208
+         Age |  -.0406053   .0569154    -0.71   0.476    -.1522381    .0710274
+         Soe |   .0220719   .0877319     0.25   0.801    -.1500037    .1941476
+        Size |  -.0090692   .0328584    -0.28   0.783    -.0735171    .0553786
+    Leverage |   .2017768   .1375965     1.47   0.143    -.0681024    .4716559
+         Roa |  -.0692894   .3143035    -0.22   0.826    -.6857585    .5471797
+        Cash |  -.0235174   .1343334    -0.18   0.861    -.2869964    .2399617
+      Growth |   .0067537   .0231159     0.29   0.770    -.0385853    .0520927
+       Board |   .1688365   .1607132     1.05   0.294    -.1463834    .4840565
+ Independent |   .1027296   .4965012     0.21   0.836    -.8710985    1.076558
+         Gdp |   .0033593   .0392197     0.09   0.932    -.0735653     .080284
+   GdpGrowth |  -.0091948   .0077496    -1.19   0.236    -.0243947    .0060051
+         Pop |   .0020175   .0036924     0.55   0.585    -.0052247    .0092597
+       Trade |  -.2062162   .0612587    -3.37   0.001    -.3263679   -.0860645
+       _cons |   6.269855   .9123893     6.87   0.000     4.480312    8.059398
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        15           0          15     |
+      Symbol |      1676        1676           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. reghdfe Innovation did $xlist, absorb(year Symbol) vce(cluster Symbol) 
+(dropped 816 singleton observations)
+(MWFE estimator converged in 9 iterations)
+
+HDFE Linear regression                            Number of obs   =      7,435
+Absorbing 2 HDFE groups                           F(  14,   1677) =     113.97
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.6629
+                                                  Adj R-squared   =     0.5625
+                                                  Within R-sq.    =     0.3444
+Number of clusters (Symbol)  =      1,678         Root MSE        =     2.6175
+
+                             (Std. err. adjusted for 1,678 clusters in Symbol)
+------------------------------------------------------------------------------
+             |               Robust
+  Innovation | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         did |   3.463215   .1366438    25.34   0.000     3.195205    3.731225
+         Age |  -.0629945   .1830748    -0.34   0.731    -.4220737    .2960846
+         Soe |   .5847614   .3934494     1.49   0.137    -.1869422    1.356465
+        Size |   -.133237   .1095106    -1.22   0.224    -.3480289    .0815549
+    Leverage |   .6178182   .4860682     1.27   0.204    -.3355461    1.571183
+         Roa |   .3111887   1.168174     0.27   0.790    -1.980043     2.60242
+        Cash |  -.0116957   .4218785    -0.03   0.978    -.8391596    .8157683
+      Growth |   .0201144    .071417     0.28   0.778    -.1199615    .1601903
+       Board |   .2654934   .4197222     0.63   0.527    -.5577411    1.088728
+ Independent |    .751118   1.340148     0.56   0.575     -1.87742    3.379656
+         Gdp |   1.351384   .1031437    13.10   0.000      1.14908    1.553688
+   GdpGrowth |  -.0055352    .016279    -0.34   0.734    -.0374644    .0263941
+         Pop |   .0446966   .0077062     5.80   0.000     .0295817    .0598115
+       Trade |   1.596757    .145592    10.97   0.000     1.311196    1.882318
+       _cons |  -13.13348   2.778645    -4.73   0.000    -18.58346     -7.6835
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        15           0          15     |
+      Symbol |      1678        1678           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. reghdfe premium did $xlist, absorb(year Symbol) vce(cluster Symbol) 
+(dropped 863 singleton observations)
+(MWFE estimator converged in 10 iterations)
+
+HDFE Linear regression                            Number of obs   =      3,329
+Absorbing 2 HDFE groups                           F(  14,   1010) =       1.46
+Statistics robust to heteroskedasticity           Prob > F        =     0.1194
+                                                  R-squared       =     0.4663
+                                                  Adj R-squared   =     0.2240
+                                                  Within R-sq.    =     0.0111
+Number of clusters (Symbol)  =      1,011         Root MSE        =     6.9201
+
+                             (Std. err. adjusted for 1,011 clusters in Symbol)
+------------------------------------------------------------------------------
+             |               Robust
+     premium | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         did |   1.029516   .4692553     2.19   0.028     .1086887    1.950343
+         Age |   .6735489   .7366099     0.91   0.361    -.7719121     2.11901
+         Soe |  -.5734874   1.471669    -0.39   0.697    -3.461366    2.314391
+        Size |   -.454811   .4240393    -1.07   0.284     -1.28691    .3772879
+    Leverage |   2.039754   1.717951     1.19   0.235    -1.331409    5.410917
+         Roa |   1.535202   4.697851     0.33   0.744    -7.683464    10.75387
+        Cash |   1.322138   1.571702     0.84   0.400    -1.762037    4.406314
+      Growth |   .4428573    .320722     1.38   0.168    -.1865004    1.072215
+       Board |  -.1537191   2.677022    -0.06   0.954    -5.406881    5.099443
+ Independent |   4.488031   6.640532     0.68   0.499    -8.542788    17.51885
+         Gdp |  -.0581257   .3768275    -0.15   0.877    -.7975803    .6813288
+   GdpGrowth |   .0025041   .0723335     0.03   0.972     -.139437    .1444453
+         Pop |    .018264   .0329309     0.55   0.579    -.0463568    .0828848
+       Trade |   .9404583   .6268313     1.50   0.134    -.2895826    2.170499
+       _cons |   10.70788   12.26245     0.87   0.383    -13.35491    34.77068
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        15           0          15     |
+      Symbol |      1011        1011           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. *  表6 弥合地区"数字鸿沟"
+. use 数据1.dta,clear
+
+. reghdfe MaDist did did_Digital $xlist, absorb(year Symbol) vce(cluster Symbol)
+(dropped 859 singleton observations)
+(MWFE estimator converged in 8 iterations)
+
+HDFE Linear regression                            Number of obs   =      5,715
+Absorbing 2 HDFE groups                           F(  15,   1437) =       2.77
+Statistics robust to heteroskedasticity           Prob > F        =     0.0003
+                                                  R-squared       =     0.5412
+                                                  Adj R-squared   =     0.3833
+                                                  Within R-sq.    =     0.0179
+Number of clusters (Symbol)  =      1,438         Root MSE        =     0.8071
+
+                             (Std. err. adjusted for 1,438 clusters in Symbol)
+------------------------------------------------------------------------------
+             |               Robust
+      MaDist | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         did |   .1985576   .0492053     4.04   0.000     .1020357    .2950796
+ did_Digital |   .1489535   .0526966     2.83   0.005     .0455829     .252324
+         Age |  -.0251067   .0737906    -0.34   0.734    -.1698556    .1196422
+         Soe |  -.0713642   .1067987    -0.67   0.504    -.2808622    .1381338
+        Size |   .0034362   .0401855     0.09   0.932    -.0753923    .0822647
+    Leverage |   .1281799   .1653488     0.78   0.438    -.1961709    .4525307
+         Roa |   .0966586    .350174     0.28   0.783    -.5902483    .7835655
+        Cash |  -.0087951    .162253    -0.05   0.957    -.3270733     .309483
+      Growth |   .0163223    .027635     0.59   0.555    -.0378868    .0705315
+       Board |   .2521692    .205349     1.23   0.220    -.1506467    .6549851
+ Independent |   .4022909    .595483     0.68   0.499    -.7658181      1.5704
+         Gdp |  -.0347593   .0466686    -0.74   0.457    -.1263052    .0567867
+   GdpGrowth |   .0003533    .009347     0.04   0.970     -.017982    .0186886
+         Pop |  -.0008912   .0039954    -0.22   0.824    -.0087287    .0069462
+       Trade |  -.2813121   .0731027    -3.85   0.000    -.4247114   -.1379127
+       _cons |   6.087756    1.13227     5.38   0.000     3.866676    8.308836
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        11           0          11     |
+      Symbol |      1438        1438           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. reghdfe MaDist did did_DigitalDiff $xlist, absorb(year Symbol) vce(cluster Sym
+> bol)
+(dropped 852 singleton observations)
+(MWFE estimator converged in 8 iterations)
+
+HDFE Linear regression                            Number of obs   =      5,469
+Absorbing 2 HDFE groups                           F(  15,   1386) =       3.20
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.5333
+                                                  Adj R-squared   =     0.3709
+                                                  Within R-sq.    =     0.0222
+Number of clusters (Symbol)  =      1,387         Root MSE        =     0.8162
+
+                              (Std. err. adjusted for 1,387 clusters in Symbol)
+-------------------------------------------------------------------------------
+              |               Robust
+       MaDist | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+          did |   .1800701    .051975     3.46   0.001      .078112    .2820282
+did_Digital~f |    .200867   .0610426     3.29   0.001      .081121    .3206129
+          Age |  -.0526024   .0767073    -0.69   0.493    -.2030773    .0978725
+          Soe |  -.1541318   .1084436    -1.42   0.155    -.3668631    .0585996
+         Size |   .0161599   .0419289     0.39   0.700    -.0660911    .0984108
+     Leverage |   .1371209   .1741918     0.79   0.431    -.2045871    .4788289
+          Roa |   .0723396   .3643292     0.20   0.843    -.6423567    .7870358
+         Cash |  -.0175085   .1695993    -0.10   0.918    -.3502075    .3151905
+       Growth |    .024433   .0299402     0.82   0.415    -.0342999     .083166
+        Board |   .2413335   .2157632     1.12   0.264    -.1819241    .6645912
+  Independent |   .2014602   .6269413     0.32   0.748    -1.028396    1.431317
+          Gdp |   -.014775   .0475824    -0.31   0.756    -.1081163    .0785663
+    GdpGrowth |  -.0026354   .0096482    -0.27   0.785    -.0215621    .0162913
+          Pop |  -.0024427   .0040677    -0.60   0.548    -.0104222    .0055369
+        Trade |  -.3250428   .0753727    -4.31   0.000    -.4728997    -.177186
+        _cons |   5.776356   1.162203     4.97   0.000     3.496489    8.056223
+-------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+        year |        11           0          11     |
+      Symbol |      1387        1387           0    *|
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+
+. 
+. *   ----------------------------------------------------------
+. *   -------------------   附录实证结果   ---------------------
+. *   ----------------------------------------------------------
+. use 数据2.dta,clear
+
+. 
+. *  附表3 描述性统计结果
+. sum2docx  MaDist did $xlist TtlNum UnlimitNum LimitNum FrequencyScore Gov Fina
+> nce Environment LivelyHood Law                                        ///
+>           using 描述性统计结果.docx, replace                                 /
+> //
+>                   stats(N mean(%9.4f) sd(%9.4f) min(%9.4f) max(%9.4f))        
+>        ///
+>                   title("表1  主要变量描述性统计")
+summary statistics have been written to file 描述性统计结果.docx
+
+. 
+. *  附表4 变量相关性分析                  
+. logout,save("Table1_corr") word replace: ///
+>   pwcorr_a MaDist did $xlist, format(%9.4f)
+

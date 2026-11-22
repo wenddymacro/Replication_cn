@@ -1,0 +1,2595 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\patent_quality
+> _signal_2025\logs/csdid_window.log
+  log type:  text
+ opened on:  21 Nov 2026, 22:46:02
+
+. use "data/author_data.dta", clear
+
+. gen g_cs=treat_year
+(38,528 missing values generated)
+
+. replace g_cs=0 if missing(g_cs)
+(38,528 real changes made)
+
+. xtset pt_id year
+
+Panel variable: pt_id (unbalanced)
+ Time variable: year, 1985 to 2023, but with gaps
+         Delta: 1 unit
+
+. csdid ln_transaction_freq, ivar(pt_id) time(year) gvar(g_cs) method(dr) unbala
+> nced cluster(ipc4_code) reps(999) rseed(20261121) storeall
+warning: Some groups in your dataset have very few observations, which may cause
+>  estimation problems.
+  Check groups: 1990,1993,1994,1995,1996,1998,1999,2000.
+warning: No units in group 1990 in time period 1985
+warning: No units in group 1990 in time period 2002
+warning: No units in group 1990 in time period 2003
+warning: No units in group 1990 in time period 2004
+warning: No units in group 1990 in time period 2005
+warning: No units in group 1990 in time period 2006
+warning: No units in group 1990 in time period 2007
+warning: No units in group 1990 in time period 2008
+warning: No units in group 1990 in time period 2009
+warning: No units in group 1990 in time period 2010
+warning: No units in group 1990 in time period 2011
+warning: No units in group 1990 in time period 2012
+warning: No units in group 1990 in time period 2013
+warning: No units in group 1990 in time period 2014
+warning: No units in group 1990 in time period 2015
+warning: No units in group 1990 in time period 2016
+warning: No units in group 1990 in time period 2017
+warning: No units in group 1990 in time period 2018
+warning: No units in group 1990 in time period 2019
+warning: No units in group 1990 in time period 2020
+warning: No units in group 1990 in time period 2021
+warning: No units in group 1990 in time period 2022
+warning: No units in group 1990 in time period 2023
+warning: No units in group 1993 in time period 2008
+warning: No units in group 1993 in time period 2009
+warning: No units in group 1993 in time period 2010
+warning: No units in group 1993 in time period 2011
+warning: No units in group 1993 in time period 2012
+warning: No units in group 1993 in time period 2013
+warning: No units in group 1993 in time period 2014
+warning: No units in group 1993 in time period 2015
+warning: No units in group 1993 in time period 2016
+warning: No units in group 1993 in time period 2017
+warning: No units in group 1993 in time period 2018
+warning: No units in group 1993 in time period 2019
+warning: No units in group 1993 in time period 2020
+warning: No units in group 1993 in time period 2021
+warning: No units in group 1993 in time period 2022
+warning: No units in group 1993 in time period 2023
+warning: No units in group 1994 in time period 1985
+warning: No units in group 1994 in time period 2006
+warning: No units in group 1994 in time period 2007
+warning: No units in group 1994 in time period 2008
+warning: No units in group 1994 in time period 2009
+warning: No units in group 1994 in time period 2010
+warning: No units in group 1994 in time period 2011
+warning: No units in group 1994 in time period 2012
+warning: No units in group 1994 in time period 2013
+warning: No units in group 1994 in time period 2014
+warning: No units in group 1994 in time period 2015
+warning: No units in group 1994 in time period 2016
+warning: No units in group 1994 in time period 2017
+warning: No units in group 1994 in time period 2018
+warning: No units in group 1994 in time period 2019
+warning: No units in group 1994 in time period 2020
+warning: No units in group 1994 in time period 2021
+warning: No units in group 1994 in time period 2022
+warning: No units in group 1994 in time period 2023
+warning: No units in group 1995 in time period 1985
+warning: No units in group 1995 in time period 1986
+warning: No units in group 1995 in time period 2004
+warning: No units in group 1995 in time period 2005
+warning: No units in group 1995 in time period 2006
+warning: No units in group 1995 in time period 2007
+warning: No units in group 1995 in time period 2008
+warning: No units in group 1995 in time period 2009
+warning: No units in group 1995 in time period 2010
+warning: No units in group 1995 in time period 2011
+warning: No units in group 1995 in time period 2012
+warning: No units in group 1995 in time period 2013
+warning: No units in group 1995 in time period 2014
+warning: No units in group 1995 in time period 2015
+warning: No units in group 1995 in time period 2016
+warning: No units in group 1995 in time period 2017
+warning: No units in group 1995 in time period 2018
+warning: No units in group 1995 in time period 2019
+warning: No units in group 1995 in time period 2020
+warning: No units in group 1995 in time period 2021
+warning: No units in group 1995 in time period 2022
+warning: No units in group 1995 in time period 2023
+warning: No units in group 1996 in time period 2010
+warning: No units in group 1996 in time period 2011
+warning: No units in group 1996 in time period 2012
+warning: No units in group 1996 in time period 2013
+warning: No units in group 1996 in time period 2014
+warning: No units in group 1996 in time period 2015
+warning: No units in group 1996 in time period 2016
+warning: No units in group 1996 in time period 2017
+warning: No units in group 1996 in time period 2018
+warning: No units in group 1996 in time period 2019
+warning: No units in group 1996 in time period 2020
+warning: No units in group 1996 in time period 2021
+warning: No units in group 1996 in time period 2022
+warning: No units in group 1996 in time period 2023
+warning: No units in group 1998 in time period 1985
+warning: No units in group 1998 in time period 1986
+warning: No units in group 1998 in time period 1987
+warning: No units in group 1998 in time period 2002
+warning: No units in group 1998 in time period 2003
+warning: No units in group 1998 in time period 2004
+warning: No units in group 1998 in time period 2005
+warning: No units in group 1998 in time period 2006
+warning: No units in group 1998 in time period 2007
+warning: No units in group 1998 in time period 2008
+warning: No units in group 1998 in time period 2009
+warning: No units in group 1998 in time period 2010
+warning: No units in group 1998 in time period 2011
+warning: No units in group 1998 in time period 2012
+warning: No units in group 1998 in time period 2013
+warning: No units in group 1998 in time period 2014
+warning: No units in group 1998 in time period 2015
+warning: No units in group 1998 in time period 2016
+warning: No units in group 1998 in time period 2017
+warning: No units in group 1998 in time period 2018
+warning: No units in group 1998 in time period 2019
+warning: No units in group 1998 in time period 2020
+warning: No units in group 1998 in time period 2021
+warning: No units in group 1998 in time period 2022
+warning: No units in group 1998 in time period 2023
+warning: No units in group 1999 in time period 2011
+warning: No units in group 1999 in time period 2012
+warning: No units in group 1999 in time period 2013
+warning: No units in group 1999 in time period 2014
+warning: No units in group 1999 in time period 2015
+warning: No units in group 1999 in time period 2016
+warning: No units in group 1999 in time period 2017
+warning: No units in group 1999 in time period 2018
+warning: No units in group 1999 in time period 2019
+warning: No units in group 1999 in time period 2020
+warning: No units in group 1999 in time period 2021
+warning: No units in group 1999 in time period 2022
+warning: No units in group 1999 in time period 2023
+warning: No units in group 2000 in time period 2011
+warning: No units in group 2000 in time period 2012
+warning: No units in group 2000 in time period 2013
+warning: No units in group 2000 in time period 2014
+warning: No units in group 2000 in time period 2015
+warning: No units in group 2000 in time period 2016
+warning: No units in group 2000 in time period 2017
+warning: No units in group 2000 in time period 2018
+warning: No units in group 2000 in time period 2019
+warning: No units in group 2000 in time period 2020
+warning: No units in group 2000 in time period 2021
+warning: No units in group 2000 in time period 2022
+warning: No units in group 2000 in time period 2023
+warning: No units in group 2001 in time period 1985
+warning: No units in group 2001 in time period 1986
+warning: No units in group 2001 in time period 1987
+warning: No units in group 2001 in time period 2017
+warning: No units in group 2001 in time period 2018
+warning: No units in group 2001 in time period 2019
+warning: No units in group 2001 in time period 2020
+warning: No units in group 2001 in time period 2021
+warning: No units in group 2001 in time period 2022
+warning: No units in group 2001 in time period 2023
+warning: No units in group 2002 in time period 1985
+warning: No units in group 2002 in time period 1986
+warning: No units in group 2002 in time period 1987
+warning: No units in group 2002 in time period 2018
+warning: No units in group 2002 in time period 2019
+warning: No units in group 2002 in time period 2020
+warning: No units in group 2002 in time period 2021
+warning: No units in group 2002 in time period 2022
+warning: No units in group 2002 in time period 2023
+warning: No units in group 2003 in time period 1985
+warning: No units in group 2003 in time period 2020
+warning: No units in group 2003 in time period 2021
+warning: No units in group 2003 in time period 2022
+warning: No units in group 2003 in time period 2023
+warning: No units in group 2004 in time period 1985
+warning: No units in group 2004 in time period 1986
+warning: No units in group 2004 in time period 1987
+warning: No units in group 2004 in time period 2021
+warning: No units in group 2004 in time period 2022
+warning: No units in group 2004 in time period 2023
+warning: No units in group 2005 in time period 1985
+warning: No units in group 2005 in time period 1986
+warning: No units in group 2005 in time period 1987
+warning: No units in group 2005 in time period 2022
+warning: No units in group 2005 in time period 2023
+warning: No units in group 2006 in time period 1985
+warning: No units in group 2006 in time period 1986
+warning: No units in group 2006 in time period 1987
+warning: No units in group 2006 in time period 2023
+warning: No units in group 2007 in time period 1985
+warning: No units in group 2007 in time period 1986
+warning: No units in group 2007 in time period 1987
+warning: No units in group 2007 in time period 1988
+warning: No units in group 2007 in time period 1989
+warning: No units in group 2007 in time period 1990
+warning: No units in group 2008 in time period 1985
+warning: No units in group 2008 in time period 1986
+warning: No units in group 2008 in time period 1987
+warning: No units in group 2008 in time period 1988
+warning: No units in group 2009 in time period 1985
+warning: No units in group 2009 in time period 1986
+warning: No units in group 2009 in time period 1987
+warning: No units in group 2009 in time period 1988
+warning: No units in group 2009 in time period 1989
+warning: No units in group 2009 in time period 1990
+warning: No units in group 2010 in time period 1985
+warning: No units in group 2010 in time period 1986
+warning: No units in group 2010 in time period 1987
+warning: No units in group 2010 in time period 1988
+warning: No units in group 2010 in time period 1989
+warning: No units in group 2010 in time period 1990
+warning: No units in group 2010 in time period 1991
+warning: No units in group 2010 in time period 1992
+warning: No units in group 2010 in time period 1993
+warning: No units in group 2010 in time period 1994
+warning: No units in group 2011 in time period 1985
+warning: No units in group 2011 in time period 1986
+warning: No units in group 2011 in time period 1987
+warning: No units in group 2011 in time period 1988
+warning: No units in group 2011 in time period 1989
+warning: No units in group 2011 in time period 1990
+warning: No units in group 2011 in time period 1991
+warning: No units in group 2011 in time period 1992
+warning: No units in group 2011 in time period 1993
+warning: No units in group 2012 in time period 1985
+warning: No units in group 2012 in time period 1986
+warning: No units in group 2012 in time period 1987
+warning: No units in group 2012 in time period 1988
+warning: No units in group 2012 in time period 1989
+warning: No units in group 2012 in time period 1990
+warning: No units in group 2012 in time period 1991
+warning: No units in group 2013 in time period 1985
+warning: No units in group 2013 in time period 1986
+warning: No units in group 2013 in time period 1987
+warning: No units in group 2013 in time period 1988
+warning: No units in group 2013 in time period 1989
+warning: No units in group 2013 in time period 1990
+warning: No units in group 2013 in time period 1991
+warning: No units in group 2013 in time period 1992
+warning: No units in group 2013 in time period 1993
+warning: No units in group 2014 in time period 1985
+warning: No units in group 2014 in time period 1986
+warning: No units in group 2014 in time period 1987
+warning: No units in group 2014 in time period 1988
+warning: No units in group 2014 in time period 1989
+warning: No units in group 2014 in time period 1990
+warning: No units in group 2014 in time period 1991
+warning: No units in group 2014 in time period 1992
+warning: No units in group 2014 in time period 1993
+warning: No units in group 2014 in time period 1994
+warning: No units in group 2015 in time period 1985
+warning: No units in group 2015 in time period 1986
+warning: No units in group 2015 in time period 1987
+warning: No units in group 2015 in time period 1988
+warning: No units in group 2015 in time period 1989
+warning: No units in group 2015 in time period 1990
+warning: No units in group 2015 in time period 1991
+warning: No units in group 2015 in time period 1992
+warning: No units in group 2015 in time period 1993
+warning: No units in group 2015 in time period 1994
+warning: No units in group 2015 in time period 1995
+warning: No units in group 2016 in time period 1985
+warning: No units in group 2016 in time period 1986
+warning: No units in group 2016 in time period 1987
+warning: No units in group 2016 in time period 1988
+warning: No units in group 2016 in time period 1989
+warning: No units in group 2016 in time period 1990
+warning: No units in group 2016 in time period 1991
+warning: No units in group 2016 in time period 1992
+warning: No units in group 2016 in time period 1993
+warning: No units in group 2016 in time period 1994
+warning: No units in group 2016 in time period 1995
+warning: No units in group 2016 in time period 1996
+warning: No units in group 2017 in time period 1985
+warning: No units in group 2017 in time period 1986
+warning: No units in group 2017 in time period 1987
+warning: No units in group 2017 in time period 1988
+warning: No units in group 2017 in time period 1989
+warning: No units in group 2017 in time period 1990
+warning: No units in group 2017 in time period 1991
+warning: No units in group 2017 in time period 1992
+warning: No units in group 2017 in time period 1993
+warning: No units in group 2017 in time period 1994
+warning: No units in group 2017 in time period 1995
+warning: No units in group 2017 in time period 1996
+warning: No units in group 2017 in time period 1997
+warning: No units in group 2018 in time period 1985
+warning: No units in group 2018 in time period 1986
+warning: No units in group 2018 in time period 1987
+warning: No units in group 2018 in time period 1988
+warning: No units in group 2018 in time period 1989
+warning: No units in group 2018 in time period 1990
+warning: No units in group 2018 in time period 1991
+warning: No units in group 2018 in time period 1992
+warning: No units in group 2018 in time period 1993
+warning: No units in group 2018 in time period 1994
+warning: No units in group 2018 in time period 1995
+warning: No units in group 2018 in time period 1996
+warning: No units in group 2018 in time period 1997
+warning: No units in group 2018 in time period 1998
+warning: No units in group 2019 in time period 1985
+warning: No units in group 2019 in time period 1986
+warning: No units in group 2019 in time period 1987
+warning: No units in group 2019 in time period 1988
+warning: No units in group 2019 in time period 1989
+warning: No units in group 2019 in time period 1990
+warning: No units in group 2019 in time period 1991
+warning: No units in group 2019 in time period 1992
+warning: No units in group 2019 in time period 1993
+warning: No units in group 2019 in time period 1994
+warning: No units in group 2019 in time period 1995
+warning: No units in group 2019 in time period 1996
+warning: No units in group 2019 in time period 1997
+warning: No units in group 2019 in time period 1998
+warning: No units in group 2020 in time period 1985
+warning: No units in group 2020 in time period 1986
+warning: No units in group 2020 in time period 1987
+warning: No units in group 2020 in time period 1988
+warning: No units in group 2020 in time period 1989
+warning: No units in group 2020 in time period 1990
+warning: No units in group 2020 in time period 1991
+warning: No units in group 2020 in time period 1992
+warning: No units in group 2020 in time period 1993
+warning: No units in group 2020 in time period 1994
+warning: No units in group 2020 in time period 1995
+warning: No units in group 2020 in time period 1996
+warning: No units in group 2020 in time period 1997
+warning: No units in group 2020 in time period 1998
+warning: No units in group 2020 in time period 1999
+warning: Not returning pre-test Wald statistic due to singular covariance matrix
+
+Group-time average treatment effects
+Std. errors: multiplier bootstrap, 999 reps, rseed(20261121); clustered on ipc4_
+> code (371 clusters); 95% simultaneous bands
+
+     group        time  event_time         att          se   n_treat_t 
+-----------------------------------------------------------------------
+      1990        1985          -5           .           .           0 
+      1990        1986          -4           0           .           1 
+      1990        1987          -3           0           .           1 
+      1990        1988          -2           0           .           1 
+      1990        1989          -1           0           .           1 
+      1990        1990           0           0           .           1 
+      1990        1991           1           0           .           1 
+      1990        1992           2           0           .           1 
+      1990        1993           3           0           .           1 
+      1990        1994           4           0           .           1 
+      1990        1995           5           0           .           1 
+      1990        1996           6           0           .           1 
+      1990        1997           7           0           .           1 
+      1990        1998           8           0           .           1 
+      1990        1999           9           0           .           1 
+      1990        2000          10           0           .           1 
+      1990        2001          11  -.00153351   .00204723           1 
+      1990        2002          12           .           .           0 
+      1990        2003          13           .           .           0 
+      1990        2004          14           .           .           0 
+      1990        2005          15           .           .           0 
+      1990        2006          16           .           .           0 
+      1990        2007          17           .           .           0 
+      1990        2008          18           .           .           0 
+      1990        2009          19           .           .           0 
+      1990        2010          20           .           .           0 
+      1990        2011          21           .           .           0 
+      1990        2012          22           .           .           0 
+      1990        2013          23           .           .           0 
+      1990        2014          24           .           .           0 
+      1990        2015          25           .           .           0 
+      1990        2016          26           .           .           0 
+      1990        2017          27           .           .           0 
+      1990        2018          28           .           .           0 
+      1990        2019          29           .           .           0 
+      1990        2020          30           .           .           0 
+      1990        2021          31           .           .           0 
+      1990        2022          32           .           .           0 
+      1990        2023          33           .           .           0 
+      1993        1985          -8           0           .           4 
+      1993        1986          -7           0           .           4 
+      1993        1987          -6           0           .           5 
+      1993        1988          -5           0           .           6 
+      1993        1989          -4           0           .           6 
+      1993        1990          -3           0           .           6 
+      1993        1991          -2           0           .           6 
+      1993        1992          -1           0           .           6 
+      1993        1993           0           0           .           6 
+      1993        1994           1           0           .           5 
+      1993        1995           2           0           .           5 
+      1993        1996           3           0           .           4 
+      1993        1997           4           0           .           3 
+      1993        1998           5           0           .           2 
+      1993        1999           6           0           .           2 
+      1993        2000           7           0           .           2 
+      1993        2001           8  -.00153351   .00204723           2 
+      1993        2002           9  -.00528007   .00237795           1 
+      1993        2003          10  -.00685825   .00214956           1 
+      1993        2004          11  -.00410617   .00145746           1 
+      1993        2005          12  -.00547941   .00153882           1 
+      1993        2006          13  -.00310828   .00105599           1 
+      1993        2007          14  -.00816026   .00210509           1 
+      1993        2008          15           .           .           0 
+      1993        2009          16           .           .           0 
+      1993        2010          17           .           .           0 
+      1993        2011          18           .           .           0 
+      1993        2012          19           .           .           0 
+      1993        2013          20           .           .           0 
+      1993        2014          21           .           .           0 
+      1993        2015          22           .           .           0 
+      1993        2016          23           .           .           0 
+      1993        2017          24           .           .           0 
+      1993        2018          25           .           .           0 
+      1993        2019          26           .           .           0 
+      1993        2020          27           .           .           0 
+      1993        2021          28           .           .           0 
+      1993        2022          29           .           .           0 
+      1993        2023          30           .           .           0 
+      1994        1985          -9           .           .           0 
+      1994        1986          -8           0           .           1 
+      1994        1987          -7           0           .           2 
+      1994        1988          -6           0           .           2 
+      1994        1989          -5           0           .           2 
+      1994        1990          -4           0           .           3 
+      1994        1991          -3           0           .           3 
+      1994        1992          -2           0           .           3 
+      1994        1993          -1           0           .           3 
+      1994        1994           0           0           .           3 
+      1994        1995           1           0           .           3 
+      1994        1996           2           0           .           3 
+      1994        1997           3           0           .           3 
+      1994        1998           4           0           .           3 
+      1994        1999           5           0           .           3 
+      1994        2000           6           0           .           2 
+      1994        2001           7  -.00153351   .00204723           1 
+      1994        2002           8  -.00528007   .00237795           1 
+      1994        2003           9  -.00685825   .00214956           1 
+      1994        2004          10  -.00410617   .00145746           1 
+      1994        2005          11  -.00547941   .00153882           1 
+      1994        2006          12           .           .           0 
+      1994        2007          13           .           .           0 
+      1994        2008          14           .           .           0 
+      1994        2009          15           .           .           0 
+      1994        2010          16           .           .           0 
+      1994        2011          17           .           .           0 
+      1994        2012          18           .           .           0 
+      1994        2013          19           .           .           0 
+      1994        2014          20           .           .           0 
+      1994        2015          21           .           .           0 
+      1994        2016          22           .           .           0 
+      1994        2017          23           .           .           0 
+      1994        2018          24           .           .           0 
+      1994        2019          25           .           .           0 
+      1994        2020          26           .           .           0 
+      1994        2021          27           .           .           0 
+      1994        2022          28           .           .           0 
+      1994        2023          29           .           .           0 
+      1995        1985         -10           .           .           0 
+      1995        1986          -9           .           .           0 
+      1995        1987          -8           0           .           1 
+      1995        1988          -7           0           .           1 
+      1995        1989          -6           0           .           1 
+      1995        1990          -5           0           .           1 
+      1995        1991          -4           0           .           1 
+      1995        1992          -3           0           .           1 
+      1995        1993          -2           0           .           1 
+      1995        1994          -1           0           .           1 
+      1995        1995           0           0           .           1 
+      1995        1996           1           0           .           1 
+      1995        1997           2           0           .           1 
+      1995        1998           3           0           .           1 
+      1995        1999           4           0           .           1 
+      1995        2000           5           0           .           1 
+      1995        2001           6  -.00153351   .00204723           1 
+      1995        2002           7  -.00528007   .00237795           1 
+      1995        2003           8  -.00685825   .00214956           1 
+      1995        2004           9           .           .           0 
+      1995        2005          10           .           .           0 
+      1995        2006          11           .           .           0 
+      1995        2007          12           .           .           0 
+      1995        2008          13           .           .           0 
+      1995        2009          14           .           .           0 
+      1995        2010          15           .           .           0 
+      1995        2011          16           .           .           0 
+      1995        2012          17           .           .           0 
+      1995        2013          18           .           .           0 
+      1995        2014          19           .           .           0 
+      1995        2015          20           .           .           0 
+      1995        2016          21           .           .           0 
+      1995        2017          22           .           .           0 
+      1995        2018          23           .           .           0 
+      1995        2019          24           .           .           0 
+      1995        2020          25           .           .           0 
+      1995        2021          26           .           .           0 
+      1995        2022          27           .           .           0 
+      1995        2023          28           .           .           0 
+      1996        1985         -11           0           .           1 
+      1996        1986         -10           0           .           1 
+      1996        1987          -9           0           .           2 
+      1996        1988          -8           0           .           2 
+      1996        1989          -7           0           .           4 
+      1996        1990          -6           0           .           4 
+      1996        1991          -5           0           .           4 
+      1996        1992          -4           0           .           4 
+      1996        1993          -3           0           .           4 
+      1996        1994          -2           0           .           4 
+      1996        1995          -1           0           .           4 
+      1996        1996           0           0           .           4 
+      1996        1997           1           0           .           4 
+      1996        1998           2           0           .           4 
+      1996        1999           3           0           .           4 
+      1996        2000           4           0           .           3 
+      1996        2001           5  -.00153351   .00204723           2 
+      1996        2002           6  -.00528007   .00237795           2 
+      1996        2003           7  -.00685825   .00214956           1 
+      1996        2004           8  -.00410617   .00145746           1 
+      1996        2005           9  -.00547941   .00153882           1 
+      1996        2006          10  -.00310828   .00105599           1 
+      1996        2007          11  -.00816026   .00210509           1 
+      1996        2008          12   -.0122076   .00247762           1 
+      1996        2009          13   -.0183742    .0025031           1 
+      1996        2010          14           .           .           0 
+      1996        2011          15           .           .           0 
+      1996        2012          16           .           .           0 
+      1996        2013          17           .           .           0 
+      1996        2014          18           .           .           0 
+      1996        2015          19           .           .           0 
+      1996        2016          20           .           .           0 
+      1996        2017          21           .           .           0 
+      1996        2018          22           .           .           0 
+      1996        2019          23           .           .           0 
+      1996        2020          24           .           .           0 
+      1996        2021          25           .           .           0 
+      1996        2022          26           .           .           0 
+      1996        2023          27           .           .           0 
+      1998        1985         -13           .           .           0 
+      1998        1986         -12           .           .           0 
+      1998        1987         -11           .           .           0 
+      1998        1988         -10           0           .           1 
+      1998        1989          -9           0           .           1 
+      1998        1990          -8           0           .           1 
+      1998        1991          -7           0           .           1 
+      1998        1992          -6           0           .           1 
+      1998        1993          -5           0           .           1 
+      1998        1994          -4           0           .           1 
+      1998        1995          -3           0           .           1 
+      1998        1996          -2           0           .           1 
+      1998        1997          -1           0           .           1 
+      1998        1998           0           0           .           1 
+      1998        1999           1           0           .           1 
+      1998        2000           2           0           .           1 
+      1998        2001           3  -.00153351   .00204723           1 
+      1998        2002           4           .           .           0 
+      1998        2003           5           .           .           0 
+      1998        2004           6           .           .           0 
+      1998        2005           7           .           .           0 
+      1998        2006           8           .           .           0 
+      1998        2007           9           .           .           0 
+      1998        2008          10           .           .           0 
+      1998        2009          11           .           .           0 
+      1998        2010          12           .           .           0 
+      1998        2011          13           .           .           0 
+      1998        2012          14           .           .           0 
+      1998        2013          15           .           .           0 
+      1998        2014          16           .           .           0 
+      1998        2015          17           .           .           0 
+      1998        2016          18           .           .           0 
+      1998        2017          19           .           .           0 
+      1998        2018          20           .           .           0 
+      1998        2019          21           .           .           0 
+      1998        2020          22           .           .           0 
+      1998        2021          23           .           .           0 
+      1998        2022          24           .           .           0 
+      1998        2023          25           .           .           0 
+      1999        1985         -14           0           .           1 
+      1999        1986         -13           0           .           2 
+      1999        1987         -12           0           .           3 
+      1999        1988         -11           0           .           4 
+      1999        1989         -10           0           .           5 
+      1999        1990          -9           0           .           6 
+      1999        1991          -8           0           .           7 
+      1999        1992          -7           0           .           6 
+      1999        1993          -6           0           .           6 
+      1999        1994          -5           0           .           6 
+      1999        1995          -4           0           .           6 
+      1999        1996          -3           0           .           6 
+      1999        1997          -2           0           .           6 
+      1999        1998          -1           0           .           6 
+      1999        1999           0           0           .           7 
+      1999        2000           1           0           .           6 
+      1999        2001           2  -.00153351   .00204723           6 
+      1999        2002           3  -.00528007   .00237795           5 
+      1999        2003           4  -.00685825   .00214956           5 
+      1999        2004           5  -.00410617   .00145746           4 
+      1999        2005           6  -.00547941   .00153882           4 
+      1999        2006           7  -.00310828   .00105599           4 
+      1999        2007           8  -.00816026   .00210509           4 
+      1999        2008           9   -.0122076   .00247762           3 
+      1999        2009          10   -.0183742    .0025031           2 
+      1999        2010          11   -.0234583   .00753753           1 
+      1999        2011          12           .           .           0 
+      1999        2012          13           .           .           0 
+      1999        2013          14           .           .           0 
+      1999        2014          15           .           .           0 
+      1999        2015          16           .           .           0 
+      1999        2016          17           .           .           0 
+      1999        2017          18           .           .           0 
+      1999        2018          19           .           .           0 
+      1999        2019          20           .           .           0 
+      1999        2020          21           .           .           0 
+      1999        2021          22           .           .           0 
+      1999        2022          23           .           .           0 
+      1999        2023          24           .           .           0 
+      2000        1985         -15           0           .           3 
+      2000        1986         -14           0           .           3 
+      2000        1987         -13           0           .           3 
+      2000        1988         -12           0           .           5 
+      2000        1989         -11           0           .           6 
+      2000        1990         -10           0           .           6 
+      2000        1991          -9           0           .           7 
+      2000        1992          -8           0           .           7 
+      2000        1993          -7           0           .           9 
+      2000        1994          -6           0           .          11 
+      2000        1995          -5           0           .          11 
+      2000        1996          -4           0           .          11 
+      2000        1997          -3           0           .          12 
+      2000        1998          -2           0           .          11 
+      2000        1999          -1           0           .          11 
+      2000        2000           0           0           .          11 
+      2000        2001           1  -.00153351   .00204723          11 
+      2000        2002           2  -.00528007   .00237795           7 
+      2000        2003           3  -.00685825   .00214956           7 
+      2000        2004           4  -.00410617   .00145746           6 
+      2000        2005           5  -.00547941   .00153882           5 
+      2000        2006           6  -.00310828   .00105599           5 
+      2000        2007           7  -.00816026   .00210509           5 
+      2000        2008           8   -.0122076   .00247762           4 
+      2000        2009           9   -.0183742    .0025031           3 
+      2000        2010          10   -.0234583   .00753753           2 
+      2000        2011          11           .           .           0 
+      2000        2012          12           .           .           0 
+      2000        2013          13           .           .           0 
+      2000        2014          14           .           .           0 
+      2000        2015          15           .           .           0 
+      2000        2016          16           .           .           0 
+      2000        2017          17           .           .           0 
+      2000        2018          18           .           .           0 
+      2000        2019          19           .           .           0 
+      2000        2020          20           .           .           0 
+      2000        2021          21           .           .           0 
+      2000        2022          22           .           .           0 
+      2000        2023          23           .           .           0 
+      2001        1985         -16           .           .           0 
+      2001        1986         -15           .           .           0 
+      2001        1987         -14           .           .           0 
+      2001        1988         -13           0           .           1 
+      2001        1989         -12           0           .           2 
+      2001        1990         -11           0           .           3 
+      2001        1991         -10           0           .           3 
+      2001        1992          -9           0           .           4 
+      2001        1993          -8           0           .           8 
+      2001        1994          -7           0           .           8 
+      2001        1995          -6           0           .           9 
+      2001        1996          -5           0           .          13 
+      2001        1997          -4           0           .          13 
+      2001        1998          -3           0           .          13 
+      2001        1999          -2           0           .          13 
+      2001        2000          -1           0           .          13 
+      2001        2001           0  -.00153351   .00204723          13 
+      2001        2002           1  -.00528007   .00237795          11 
+      2001        2003           2    .0561551    .0848043          11 
+      2001        2004           3     .203838     .102361          10 
+      2001        2005           4  -.00547941   .00153882          10 
+      2001        2006           5      .11896     .161192           9 
+      2001        2007           6  -.00816026   .00210509           8 
+      2001        2008           7    .0744358      .10226           8 
+      2001        2009           8   -.0183742    .0025031           8 
+      2001        2010           9   -.0234583   .00753753           7 
+      2001        2011          10     .153688     .192572           4 
+      2001        2012          11    -.017801   .00274079           4 
+      2001        2013          12   -.0146339   .00288953           3 
+      2001        2014          13   -.0149832   .00210694           3 
+      2001        2015          14   -.0183398   .00216061           3 
+      2001        2016          15   -.0162589   .00229339           2 
+      2001        2017          16           .           .           0 
+      2001        2018          17           .           .           0 
+      2001        2019          18           .           .           0 
+      2001        2020          19           .           .           0 
+      2001        2021          20           .           .           0 
+      2001        2022          21           .           .           0 
+      2001        2023          22           .           .           0 
+      2002        1985         -17           .           .           0 
+      2002        1986         -16           .           .           0 
+      2002        1987         -15           .           .           0 
+      2002        1988         -14   .00155763   .00207582           2 
+      2002        1989         -13   .00155763   .00207582           2 
+      2002        1990         -12   .00155763   .00207582           2 
+      2002        1991         -11   .00155763   .00207582           2 
+      2002        1992         -10   .00155763   .00207582           2 
+      2002        1993          -9   .00155763   .00207582           5 
+      2002        1994          -8   .00155763   .00207582           6 
+      2002        1995          -7   .00155763   .00207582           8 
+      2002        1996          -6   .00155763   .00207582          10 
+      2002        1997          -5   .00155763   .00207582          14 
+      2002        1998          -4   .00155763   .00207582          14 
+      2002        1999          -3   .00155763   .00207582          14 
+      2002        2000          -2   .00155763   .00207582          14 
+      2002        2001          -1           0           .          14 
+      2002        2002           0    .0457881    .0674883          14 
+      2002        2003           1    .0442605    .0691748          14 
+      2002        2004           2    .0470606    .0668756          14 
+      2002        2005           3    .0583961    .0851997          11 
+      2002        2006           4     .107664     .132926          10 
+      2002        2007           5  -.00721074   .00227211           9 
+      2002        2008           6   -.0112117   .00274082           8 
+      2002        2009           7   -.0173427   .00252248           7 
+      2002        2010           8   -.0234583   .00753753           5 
+      2002        2011           9   -.0195987   .00241038           4 
+      2002        2012          10    -.017801   .00274079           4 
+      2002        2013          11   -.0146339   .00288953           4 
+      2002        2014          12   -.0149832   .00210694           3 
+      2002        2015          13   -.0183398   .00216061           2 
+      2002        2016          14   -.0162589   .00229339           1 
+      2002        2017          15   -.0231334   .00236422           1 
+      2002        2018          16           .           .           0 
+      2002        2019          17           .           .           0 
+      2002        2020          18           .           .           0 
+      2002        2021          19           .           .           0 
+      2002        2022          20           .           .           0 
+      2002        2023          21           .           .           0 
+      2003        1985         -18           .           .           0 
+      2003        1986         -17    .0054146   .00242458           1 
+      2003        1987         -16    .0054146   .00242458           3 
+      2003        1988         -15    .0054146   .00242458           4 
+      2003        1989         -14    .0054146   .00242458           5 
+      2003        1990         -13    .0054146   .00242458           5 
+      2003        1991         -12    .0054146   .00242458           5 
+      2003        1992         -11    .0054146   .00242458           8 
+      2003        1993         -10    .0054146   .00242458          12 
+      2003        1994          -9    .0054146   .00242458          13 
+      2003        1995          -8    .0054146   .00242458          14 
+      2003        1996          -7    .0054146   .00242458          21 
+      2003        1997          -6    .0054146   .00242458          23 
+      2003        1998          -5    .0054146   .00242458          24 
+      2003        1999          -4    .0054146   .00242458          27 
+      2003        2000          -3    .0054146   .00242458          28 
+      2003        2001          -2   .00380637   .00271061          28 
+      2003        2002          -1           0           .          28 
+      2003        2003           0    .0233116    .0340074          28 
+      2003        2004           1  -.00087923   .00182912          28 
+      2003        2005           2  -.00214697   .00185775          27 
+      2003        2006           3     .045465     .064667          24 
+      2003        2007           4  -.00669792   .00218805          24 
+      2003        2008           5    .0515717    .0408258          22 
+      2003        2009           6    .0209316    .0505483          18 
+      2003        2010           7    -.022635   .00765691          17 
+      2003        2011           8   -.0187333    .0025837          14 
+      2003        2012           9    .0897337    .0753448          13 
+      2003        2013          10   -.0137084   .00298185          10 
+      2003        2014          11   -.0140041   .00234553           6 
+      2003        2015          12    -.017322   .00234043           4 
+      2003        2016          13   -.0152134   .00236075           4 
+      2003        2017          14   -.0220279   .00254816           2 
+      2003        2018          15   -.0200501   .00426156           1 
+      2003        2019          16   -.0159655   .00276855           1 
+      2003        2020          17           .           .           0 
+      2003        2021          18           .           .           0 
+      2003        2022          19           .           .           0 
+      2003        2023          20           .           .           0 
+      2004        1985         -19           .           .           0 
+      2004        1986         -18           .           .           0 
+      2004        1987         -17           .           .           0 
+      2004        1988         -16   -.0212546    .0392783           1 
+      2004        1989         -15   -.0212546    .0392783           1 
+      2004        1990         -14   -.0212546    .0392783           1 
+      2004        1991         -13   -.0212546    .0392783           2 
+      2004        1992         -12   -.0212546    .0392783           2 
+      2004        1993         -11   -.0212546    .0392783           4 
+      2004        1994         -10   -.0212546    .0392783           5 
+      2004        1995          -9   -.0212546    .0392783           5 
+      2004        1996          -8   -.0212546    .0392783           6 
+      2004        1997          -7   -.0212546    .0392783          13 
+      2004        1998          -6   -.0212546    .0392783          18 
+      2004        1999          -5   -.0212546    .0392783          22 
+      2004        2000          -4   -.0212546    .0392783          24 
+      2004        2001          -3   -.0229109    .0394216          25 
+      2004        2002          -2    .0749147    .0982357          25 
+      2004        2003          -1           0           .          25 
+      2004        2004           0   .00236507    .0412119          25 
+      2004        2005           1   -.0270941    .0396041          25 
+      2004        2006           2    .0032648    .0413454          25 
+      2004        2007           3  -.00092636     .042058          24 
+      2004        2008           4   -.0335812    .0398245          22 
+      2004        2009           5  -.00640163    .0477922          20 
+      2004        2010           6    .0621689    .0715836          19 
+      2004        2011           7     -.04391    .0397965          14 
+      2004        2012           8    -.042689    .0393205          14 
+      2004        2013           9   -.0394165    .0392462          14 
+      2004        2014          10    .0181545    .0776199          12 
+      2004        2015          11    -.042838    .0394204          11 
+      2004        2016          12   -.0406563    .0395199          10 
+      2004        2017          13   -.0473452    .0402244           9 
+      2004        2018          14   -.0452415    .0393035           6 
+      2004        2019          15   -.0410617    .0393003           3 
+      2004        2020          16    -.045167    .0391854           1 
+      2004        2021          17           .           .           0 
+      2004        2022          18           .           .           0 
+      2004        2023          19           .           .           0 
+      2005        1985         -20           .           .           0 
+      2005        1986         -19           .           .           0 
+      2005        1987         -18           .           .           0 
+      2005        1988         -17     -.01663    .0255288           1 
+      2005        1989         -16     -.01663    .0255288           1 
+      2005        1990         -15     -.01663    .0255288           1 
+      2005        1991         -14     -.01663    .0255288           2 
+      2005        1992         -13     -.01663    .0255288           2 
+      2005        1993         -12     -.01663    .0255288           3 
+      2005        1994         -11     -.01663    .0255288           5 
+      2005        1995         -10     -.01663    .0255288           8 
+      2005        1996          -9     -.01663    .0255288          11 
+      2005        1997          -8     -.01663    .0255288          13 
+      2005        1998          -7     -.01663    .0255288          18 
+      2005        1999          -6     -.01663    .0255288          23 
+      2005        2000          -5     -.01663    .0255288          28 
+      2005        2001          -4   .00351237   .00159611          33 
+      2005        2002          -3   -.0199624    .0260753          34 
+      2005        2003          -2  -.00235446   .00619629          34 
+      2005        2004          -1           0           .          34 
+      2005        2005           0   -.0221094    .0258952          34 
+      2005        2006           1   -.0200587     .026453          31 
+      2005        2007           2   -.0254441    .0257608          30 
+      2005        2008           3  -.00673998    .0354195          30 
+      2005        2009           4    -.036398    .0261618          27 
+      2005        2010           5    .0302589    .0586107          25 
+      2005        2011           6  -.00094716    .0552502          19 
+      2005        2012           7    -.035508    .0258987          17 
+      2005        2013           8   -.0322425      .02696          16 
+      2005        2014           9   -.0324381    .0265138          14 
+      2005        2015          10    .0413575     .101797           9 
+      2005        2016          11   -.0341631    .0249915           7 
+      2005        2017          12   -.0409016    .0264484           6 
+      2005        2018          13   -.0388264     .025621           5 
+      2005        2019          14   -.0346483    .0254438           4 
+      2005        2020          15    -.038768     .025963           2 
+      2005        2021          16   -.0344561    .0268887           1 
+      2005        2022          17           .           .           0 
+      2005        2023          18           .           .           0 
+      2006        1985         -21           .           .           0 
+      2006        1986         -20           .           .           0 
+      2006        1987         -19           .           .           0 
+      2006        1988         -18   .00563806   .00159496           1 
+      2006        1989         -17   .00563806   .00159496           1 
+      2006        1990         -16   .00563806   .00159496           1 
+      2006        1991         -15   .00563806   .00159496           1 
+      2006        1992         -14   .00563806   .00159496           1 
+      2006        1993         -13   .00563806   .00159496           7 
+      2006        1994         -12   .00563806   .00159496           7 
+      2006        1995         -11   .00563806   .00159496          10 
+      2006        1996         -10   .00563806   .00159496          12 
+      2006        1997          -9   .00563806   .00159496          21 
+      2006        1998          -8   .00563806   .00159496          24 
+      2006        1999          -7   .00563806   .00159496          28 
+      2006        2000          -6   .00563806   .00159496          35 
+      2006        2001          -5   .00472723   .00174648          43 
+      2006        2002          -4    .0169862     .020434          49 
+      2006        2003          -3  -.00073502   .00262285          54 
+      2006        2004          -2    .0150379    .0174541          54 
+      2006        2005          -1           0           .          54 
+      2006        2006           0   .00252978   .00180886          54 
+      2006        2007           1    .0184084    .0295552          52 
+      2006        2008           2    .0417684    .0316772          51 
+      2006        2009           3    .0144273    .0244859          50 
+      2006        2010           4    .0108463    .0205642          47 
+      2006        2011           5    .0611132    .0420211          42 
+      2006        2012           6   .00573912    .0256661          38 
+      2006        2013           7   -.0100938   .00323574          36 
+      2006        2014           8    .0145764    .0346893          28 
+      2006        2015           9    .0168137    .0428251          23 
+      2006        2016          10   -.0116209   .00316775          21 
+      2006        2017          11   -.0182176   .00264795          14 
+      2006        2018          12   -.0159831   .00451714           8 
+      2006        2019          13   -.0116463   .00320825           7 
+      2006        2020          14   -.0156543   .00375197           5 
+      2006        2021          15   -.0113425   .00362122           4 
+      2006        2022          16  -.00583631   .00317341           3 
+      2006        2023          17           .           .           0 
+      2007        1985         -22           .           .           0 
+      2007        1986         -21           .           .           0 
+      2007        1987         -20           .           .           0 
+      2007        1988         -19           .           .           0 
+      2007        1989         -18           .           .           0 
+      2007        1990         -17           .           .           0 
+      2007        1991         -16   .00319423   .00108028           1 
+      2007        1992         -15   .00319423   .00108028           1 
+      2007        1993         -14   .00319423   .00108028           2 
+      2007        1994         -13   .00319423   .00108028           4 
+      2007        1995         -12   .00319423   .00108028           7 
+      2007        1996         -11   .00319423   .00108028           9 
+      2007        1997         -10   .00319423   .00108028          10 
+      2007        1998          -9   .00319423   .00108028          11 
+      2007        1999          -8   .00319423   .00108028          15 
+      2007        2000          -7   .00319423   .00108028          21 
+      2007        2001          -6   .00224471   .00143255          31 
+      2007        2002          -5    .0339713    .0260403          43 
+      2007        2003          -4    .0101938     .018032          53 
+      2007        2004          -3    .0118396    .0161511          59 
+      2007        2005          -2   .00930522     .016961          60 
+      2007        2006          -1           0           .          60 
+      2007        2007           0    .0412438    .0206228          60 
+      2007        2008           1    .0556099    .0255171          60 
+      2007        2009           2    .0499845    .0284556          59 
+      2007        2010           3    .0148685    .0165392          58 
+      2007        2011           4   .00964997    .0191062          52 
+      2007        2012           5    -.015454   .00271425          47 
+      2007        2013           6    .0035702    .0222021          44 
+      2007        2014           7   .00451892    .0248774          41 
+      2007        2015           8    .0120861    .0411218          39 
+      2007        2016           9    -.013898   .00224821          32 
+      2007        2017          10   .00328149    .0331525          29 
+      2007        2018          11   -.0185089   .00425838          24 
+      2007        2019          12   -.0142942   .00273993          22 
+      2007        2020          13   -.0183925   .00320559          17 
+      2007        2021          14   -.0140807   .00319142          12 
+      2007        2022          15  -.00857449   .00311142           7 
+      2007        2023          16   -.0110693   .00343861           2 
+      2008        1985         -23           .           .           0 
+      2008        1986         -22           .           .           0 
+      2008        1987         -21           .           .           0 
+      2008        1988         -20           .           .           0 
+      2008        1989         -19    -.018695    .0236967           1 
+      2008        1990         -18    -.018695    .0236967           1 
+      2008        1991         -17    -.018695    .0236967           3 
+      2008        1992         -16    -.018695    .0236967           3 
+      2008        1993         -15    -.018695    .0236967           3 
+      2008        1994         -14    -.018695    .0236967           4 
+      2008        1995         -13    -.018695    .0236967           8 
+      2008        1996         -12    -.018695    .0236967           8 
+      2008        1997         -11    -.018695    .0236967          12 
+      2008        1998         -10    -.018695    .0236967          15 
+      2008        1999          -9    -.018695    .0236967          20 
+      2008        2000          -8    -.018695    .0236967          25 
+      2008        2001          -7   -.0196909    .0241701          34 
+      2008        2002          -6  -.00334122    .0228219          43 
+      2008        2003          -5   -.0250473    .0240487          52 
+      2008        2004          -4   -.0104421    .0233375          63 
+      2008        2005          -3    -.013602    .0235737          67 
+      2008        2006          -2   -.0219926    .0230897          68 
+      2008        2007          -1           0           .          68 
+      2008        2008           0    .0302574    .0312273          68 
+      2008        2009           1    .0243665    .0323335          68 
+      2008        2010           2    .0116152    .0557969          64 
+      2008        2011           3   -.0143242    .0332971          57 
+      2008        2012           4   -.0107655     .032977          54 
+      2008        2013           5   -.0197613    .0223814          50 
+      2008        2014           6    .0164376    .0379344          49 
+      2008        2015           7   -.0215719      .02325          43 
+      2008        2016           8   -.0164064    .0292759          36 
+      2008        2017           9    .0240661    .0923121          33 
+      2008        2018          10   .00521955    .0379641          30 
+      2008        2019          11   -.0370017    .0234932          26 
+      2008        2020          12     .018821    .0493183          23 
+      2008        2021          13   -.0371408    .0230616          20 
+      2008        2022          14    .0178759    .0724572          14 
+      2008        2023          15   -.0341295    .0238189          10 
+      2009        1985         -24           .           .           0 
+      2009        1986         -23           .           .           0 
+      2009        1987         -22           .           .           0 
+      2009        1988         -21           .           .           0 
+      2009        1989         -20           .           .           0 
+      2009        1990         -19           .           .           0 
+      2009        1991         -18  -.00914433     .016705           1 
+      2009        1992         -17  -.00914433     .016705           1 
+      2009        1993         -16  -.00914433     .016705           6 
+      2009        1994         -15  -.00914433     .016705           6 
+      2009        1995         -14  -.00914433     .016705           7 
+      2009        1996         -13  -.00914433     .016705           9 
+      2009        1997         -12  -.00914433     .016705          13 
+      2009        1998         -11  -.00914433     .016705          15 
+      2009        1999         -10  -.00914433     .016705          19 
+      2009        2000          -9  -.00914433     .016705          22 
+      2009        2001          -8   -.0101758    .0163231          24 
+      2009        2002          -7  -.00994196    .0166766          36 
+      2009        2003          -6     .018392    .0285762          55 
+      2009        2004          -5  -.00050485    .0185312          63 
+      2009        2005          -4  -.00509951    .0177373          76 
+      2009        2006          -3   .00501657    .0156546          82 
+      2009        2007          -2   -.0170744    .0164414          85 
+      2009        2008          -1           0           .          85 
+      2009        2009           0    .0343344    .0262145          85 
+      2009        2010           1    .0900408     .059133          85 
+      2009        2011           2   .00418807     .023661          83 
+      2009        2012           3    -.010448    .0248676          78 
+      2009        2013           4   -.0149468    .0189633          70 
+      2009        2014           5  -.00243139    .0154586          62 
+      2009        2015           6   -.0160113    .0215621          60 
+      2009        2016           7  -.00193854    .0241416          55 
+      2009        2017           8     .031341    .0339429          52 
+      2009        2018           9    .0197526    .0507725          47 
+      2009        2019          10   -.0146451    .0220438          46 
+      2009        2020          11     -.03344    .0160269          42 
+      2009        2021          12   -.0291281    .0155403          39 
+      2009        2022          13    -.023622    .0161202          33 
+      2009        2023          14   -.0261168    .0162501          25 
+      2010        1985         -25           .           .           0 
+      2010        1986         -24           .           .           0 
+      2010        1987         -23           .           .           0 
+      2010        1988         -22           .           .           0 
+      2010        1989         -21           .           .           0 
+      2010        1990         -20           .           .           0 
+      2010        1991         -19           .           .           0 
+      2010        1992         -18           .           .           0 
+      2010        1993         -17           .           .           0 
+      2010        1994         -16           .           .           0 
+      2010        1995         -15  -.00063101     .015518           3 
+      2010        1996         -14  -.00063101     .015518           5 
+      2010        1997         -13  -.00063101     .015518           5 
+      2010        1998         -12  -.00063101     .015518           8 
+      2010        1999         -11  -.00063101     .015518           9 
+      2010        2000         -10  -.00063101     .015518          11 
+      2010        2001          -9    .0401423    .0537783          17 
+      2010        2002          -8  -.00145423    .0154455          27 
+      2010        2003          -7    .0339684    .0324318          36 
+      2010        2004          -6  -.00306444    .0155703          39 
+      2010        2005          -5   .00788979    .0202832          52 
+      2010        2006          -4   .00864298    .0174838          59 
+      2010        2007          -3    .0209793    .0183484          72 
+      2010        2008          -2   -.0128895    .0152388          73 
+      2010        2009          -1           0           .          73 
+      2010        2010           0    .0233866    .0242658          73 
+      2010        2011           1    .0182636    .0261588          73 
+      2010        2012           2  -.00910974    .0168516          72 
+      2010        2013           3  -.00596731    .0167669          69 
+      2010        2014           4   .00419466    .0252835          67 
+      2010        2015           5   .00389628     .034465          60 
+      2010        2016           6  -.00521991    .0188013          56 
+      2010        2017           7   -.0124096    .0217158          53 
+      2010        2018           8   -.0262655    .0152507          51 
+      2010        2019           9  -.00756855    .0218439          47 
+      2010        2020          10   -.0260697    .0153568          45 
+      2010        2021          11   -.0217579    .0155955          37 
+      2010        2022          12   -.0162517    .0152186          31 
+      2010        2023          13   -.0187465    .0148346          22 
+      2011        1985         -26           .           .           0 
+      2011        1986         -25           .           .           0 
+      2011        1987         -24           .           .           0 
+      2011        1988         -23           .           .           0 
+      2011        1989         -22           .           .           0 
+      2011        1990         -21           .           .           0 
+      2011        1991         -20           .           .           0 
+      2011        1992         -19           .           .           0 
+      2011        1993         -18           .           .           0 
+      2011        1994         -17    .0087105    .0130275           4 
+      2011        1995         -16    .0087105    .0130275           9 
+      2011        1996         -15    .0087105    .0130275           9 
+      2011        1997         -14    .0087105    .0130275          16 
+      2011        1998         -13    .0087105    .0130275          23 
+      2011        1999         -12    .0087105    .0130275          25 
+      2011        2000         -11    .0087105    .0130275          34 
+      2011        2001         -10    .0087105    .0130275          34 
+      2011        2002          -9   .00784515    .0128431          41 
+      2011        2003          -8    .0194418    .0204104          49 
+      2011        2004          -7   .00615374    .0130779          63 
+      2011        2005          -6   .00366659    .0131473          75 
+      2011        2006          -5   .00612137    .0128306          87 
+      2011        2007          -4   .00800893    .0126443         105 
+      2011        2008          -3    .0273857    .0172372         115 
+      2011        2009          -2  -.00433664    .0146661         119 
+      2011        2010          -1           0           .         119 
+      2011        2011           0    .0243566    .0165893         118 
+      2011        2012           1    .0016792    .0143529         118 
+      2011        2013           2    .0235874    .0168646         115 
+      2011        2014           3   .00009659    .0120343         111 
+      2011        2015           4    .0163809    .0142967         102 
+      2011        2016           5  -.00873278     .012836          90 
+      2011        2017           6   -.0161141     .012726          84 
+      2011        2018           7   .00338989    .0196117          75 
+      2011        2019           8   .00890333    .0170775          70 
+      2011        2020           9   .00766746    .0206059          63 
+      2011        2021          10      .01518    .0226911          55 
+      2011        2022          11    .0292876    .0302837          53 
+      2011        2023          12  -.00701401    .0117352          48 
+      2012        1985         -27           .           .           0 
+      2012        1986         -26           .           .           0 
+      2012        1987         -25           .           .           0 
+      2012        1988         -24           .           .           0 
+      2012        1989         -23           .           .           0 
+      2012        1990         -22           .           .           0 
+      2012        1991         -21           .           .           0 
+      2012        1992         -20   .00007652    .0100186           1 
+      2012        1993         -19   .00007652    .0100186           3 
+      2012        1994         -18   .00007652    .0100186           5 
+      2012        1995         -17   .00007652    .0100186           6 
+      2012        1996         -16   .00007652    .0100186           9 
+      2012        1997         -15   .00007652    .0100186          12 
+      2012        1998         -14   .00007652    .0100186          13 
+      2012        1999         -13   .00007652    .0100186          15 
+      2012        2000         -12   .00007652    .0100186          16 
+      2012        2001         -11   .00007652    .0100186          22 
+      2012        2002         -10  -.00082018   .00989245          28 
+      2012        2003          -9    .0154794    .0216276          38 
+      2012        2004          -8  -.00260312     .010027          57 
+      2012        2005          -7  -.00522287    .0100134          74 
+      2012        2006          -6   .00452508    .0114227         102 
+      2012        2007          -5   -.0076363    .0100514         116 
+      2012        2008          -4     .015873    .0143657         131 
+      2012        2009          -3    .0174383    .0191607         137 
+      2012        2010          -2    .0226886    .0392869         140 
+      2012        2011          -1           0           .         142 
+      2012        2012           0    .0166871    .0183991         141 
+      2012        2013           1  -.00525411    .0123998         139 
+      2012        2014           2   -.0166037    .0100518         134 
+      2012        2015           3    .0279974    .0191747         131 
+      2012        2016           4   .00778168    .0187642         127 
+      2012        2017           5    .0124349    .0185245         122 
+      2012        2018           6   -.0170199    .0126034         112 
+      2012        2019           7      .01355    .0179867         109 
+      2012        2020           8   .00166223    .0184378         101 
+      2012        2021           9   .00349276    .0215943          94 
+      2012        2022          10   .00011351    .0202528          83 
+      2012        2023          11  -.00134991    .0211884          77 
+      2013        1985         -28           .           .           0 
+      2013        1986         -27           .           .           0 
+      2013        1987         -26           .           .           0 
+      2013        1988         -25           .           .           0 
+      2013        1989         -24           .           .           0 
+      2013        1990         -23           .           .           0 
+      2013        1991         -22           .           .           0 
+      2013        1992         -21           .           .           0 
+      2013        1993         -20           .           .           0 
+      2013        1994         -19   -.0106528    .0133814           1 
+      2013        1995         -18   -.0106528    .0133814           2 
+      2013        1996         -17   -.0106528    .0133814           3 
+      2013        1997         -16   -.0106528    .0133814           3 
+      2013        1998         -15   -.0106528    .0133814           8 
+      2013        1999         -14   -.0106528    .0133814          10 
+      2013        2000         -13   -.0106528    .0133814          16 
+      2013        2001         -12   -.0106528    .0133814          18 
+      2013        2002         -11   -.0115782    .0131821          24 
+      2013        2003         -10   -.0135961      .01345          35 
+      2013        2004          -9   -.0134308    .0133888          42 
+      2013        2005          -8   .00753331    .0221824          61 
+      2013        2006          -7   -.0131035    .0132447          75 
+      2013        2007          -6  -.00243541    .0140223          89 
+      2013        2008          -5   -.0152159     .014899         110 
+      2013        2009          -4  -.00097478    .0188942         127 
+      2013        2010          -3   -.0186155    .0187614         137 
+      2013        2011          -2   .00557519    .0199376         138 
+      2013        2012          -1           0           .         138 
+      2013        2013           0   -.0001726    .0164829         138 
+      2013        2014           1   .00487459    .0166372         137 
+      2013        2015           2    .0169978    .0189723         133 
+      2013        2016           3   -.0188176    .0154098         130 
+      2013        2017           4  -.00897092    .0193404         126 
+      2013        2018           5   -.0221153    .0157166         123 
+      2013        2019           6   -.0192883    .0163806         116 
+      2013        2020           7   -.0167783    .0171639         111 
+      2013        2021           8  -.00998141    .0165756          98 
+      2013        2022           9    -.025694    .0134423          84 
+      2013        2023          10   -.0108602    .0160404          80 
+      2014        1985         -29           .           .           0 
+      2014        1986         -28           .           .           0 
+      2014        1987         -27           .           .           0 
+      2014        1988         -26           .           .           0 
+      2014        1989         -25           .           .           0 
+      2014        1990         -24           .           .           0 
+      2014        1991         -23           .           .           0 
+      2014        1992         -22           .           .           0 
+      2014        1993         -21           .           .           0 
+      2014        1994         -20           .           .           0 
+      2014        1995         -19  -.00943427   .00841664           2 
+      2014        1996         -18  -.00943427   .00841664          11 
+      2014        1997         -17  -.00943427   .00841664          14 
+      2014        1998         -16  -.00943427   .00841664          20 
+      2014        1999         -15  -.00943427   .00841664          25 
+      2014        2000         -14  -.00943427   .00841664          30 
+      2014        2001         -13  -.00943427   .00841664          35 
+      2014        2002         -12   -.0104133   .00855351          41 
+      2014        2003         -11   -.0125356   .00859785          48 
+      2014        2004         -10   -.0123661   .00839276          60 
+      2014        2005          -9   -.0142386   .00858433          77 
+      2014        2006          -8   -.0120303   .00838277          95 
+      2014        2007          -7  -.00411441    .0117185         112 
+      2014        2008          -6   -.0159584   .00974699         146 
+      2014        2009          -5  -.00744104    .0134079         178 
+      2014        2010          -4   -.0200603    .0125084         209 
+      2014        2011          -3   .00512535    .0131121         226 
+      2014        2012          -2   -.0117384   .00961143         235 
+      2014        2013          -1           0           .         236 
+      2014        2014           0   .00212863    .0120455         235 
+      2014        2015           1  -.00356119    .0108457         231 
+      2014        2016           2    .0041917    .0130348         224 
+      2014        2017           3   -.0187748    .0110437         212 
+      2014        2018           4  -.00706364    .0155098         202 
+      2014        2019           5   -.0148119    .0120068         191 
+      2014        2020           6   -.0219692     .010551         177 
+      2014        2021           7   -.0019095    .0155987         166 
+      2014        2022           8   -.0192474     .010328         149 
+      2014        2023           9   -.0117503    .0113212         142 
+      2015        1985         -30           .           .           0 
+      2015        1986         -29           .           .           0 
+      2015        1987         -28           .           .           0 
+      2015        1988         -27           .           .           0 
+      2015        1989         -26           .           .           0 
+      2015        1990         -25           .           .           0 
+      2015        1991         -24           .           .           0 
+      2015        1992         -23           .           .           0 
+      2015        1993         -22           .           .           0 
+      2015        1994         -21           .           .           0 
+      2015        1995         -20           .           .           0 
+      2015        1996         -19   .00483662    .0100352           2 
+      2015        1997         -18   .00483662    .0100352           4 
+      2015        1998         -17   .00483662    .0100352           5 
+      2015        1999         -16   .00483662    .0100352           8 
+      2015        2000         -15   .00483662    .0100352          13 
+      2015        2001         -14   .00483662    .0100352          18 
+      2015        2002         -13   .00381879   .00985942          27 
+      2015        2003         -12   .00160893   .00968419          35 
+      2015        2004         -11     .001769    .0100637          48 
+      2015        2005         -10  -.00018004    .0101673          56 
+      2015        2006          -9    .0130825    .0153557          66 
+      2015        2007          -8   .00619023    .0118122          83 
+      2015        2008          -7  -.00701895   .00979802         108 
+      2015        2009          -6  -.00778372    .0106155         126 
+      2015        2010          -5    .0287613    .0181364         149 
+      2015        2011          -4  -.00110063    .0138398         169 
+      2015        2012          -3    .0233188    .0144323         190 
+      2015        2013          -2   .00101605    .0128151         199 
+      2015        2014          -1           0           .         200 
+      2015        2015           0    .0266472     .014921         200 
+      2015        2016           1    .0237233    .0105262         198 
+      2015        2017           2    .0246129    .0167908         194 
+      2015        2018           3    .0225826    .0216592         185 
+      2015        2019           4    .0115484     .013232         179 
+      2015        2020           5  -.00291437     .012794         165 
+      2015        2021           6    .0218089    .0271296         155 
+      2015        2022           7     .014336    .0130703         143 
+      2015        2023           8   .00926611    .0146111         128 
+      2016        1985         -31           .           .           0 
+      2016        1986         -30           .           .           0 
+      2016        1987         -29           .           .           0 
+      2016        1988         -28           .           .           0 
+      2016        1989         -27           .           .           0 
+      2016        1990         -26           .           .           0 
+      2016        1991         -25           .           .           0 
+      2016        1992         -24           .           .           0 
+      2016        1993         -23           .           .           0 
+      2016        1994         -22           .           .           0 
+      2016        1995         -21           .           .           0 
+      2016        1996         -20           .           .           0 
+      2016        1997         -19   .00010653   .00727818           1 
+      2016        1998         -18   .00010653   .00727818           1 
+      2016        1999         -17   .00010653   .00727818           2 
+      2016        2000         -16   .00010653   .00727818           5 
+      2016        2001         -15   .00010653   .00727818          10 
+      2016        2002         -14  -.00093894   .00741527          18 
+      2016        2003         -13  -.00322191   .00728441          26 
+      2016        2004         -12    .0174283    .0289039          35 
+      2016        2005         -11     .010537    .0216234          46 
+      2016        2006         -10  -.00225433   .00768274          68 
+      2016        2007          -9   .00112592    .0123862          87 
+      2016        2008          -8    .0321745    .0230488         108 
+      2016        2009          -7   .00831858    .0168095         134 
+      2016        2010          -6   .00029541    .0143232         170 
+      2016        2011          -5  -.00421684   .00967632         195 
+      2016        2012          -4    .0231044    .0142917         223 
+      2016        2013          -3  -.00012776    .0131715         255 
+      2016        2014          -2  -.00179356    .0099202         266 
+      2016        2015          -1           0           .         266 
+      2016        2016           0     .014036    .0102263         266 
+      2016        2017           1    .0130824    .0131564         264 
+      2016        2018           2   .00856193    .0123991         260 
+      2016        2019           3    -.011116   .00831748         255 
+      2016        2020           4  -.00365667    .0112575         242 
+      2016        2021           5   .00410198    .0109068         236 
+      2016        2022           6  -.00755825   .00887533         219 
+      2016        2023           7   .00427704    .0133556         207 
+      2017        1985         -32           .           .           0 
+      2017        1986         -31           .           .           0 
+      2017        1987         -30           .           .           0 
+      2017        1988         -29           .           .           0 
+      2017        1989         -28           .           .           0 
+      2017        1990         -27           .           .           0 
+      2017        1991         -26           .           .           0 
+      2017        1992         -25           .           .           0 
+      2017        1993         -24           .           .           0 
+      2017        1994         -23           .           .           0 
+      2017        1995         -22           .           .           0 
+      2017        1996         -21           .           .           0 
+      2017        1997         -20           .           .           0 
+      2017        1998         -19   -.0118813   .00992655           4 
+      2017        1999         -18   -.0118813   .00992655          12 
+      2017        2000         -17   -.0118813   .00992655          22 
+      2017        2001         -16   -.0118813   .00992655          24 
+      2017        2002         -15   -.0129868   .00999549          36 
+      2017        2003         -14   -.0153953     .010054          44 
+      2017        2004         -13   -.0144997   .00961254          52 
+      2017        2005         -12    -.016797    .0101358          69 
+      2017        2006         -11   -.0143945   .00971722          89 
+      2017        2007         -10   -.0121827     .012154         104 
+      2017        2008          -9   .00803295    .0200116         128 
+      2017        2009          -8   .00391365    .0206082         142 
+      2017        2010          -7  -.00437179    .0164659         164 
+      2017        2011          -6  -.00022031    .0161994         193 
+      2017        2012          -5   -.0103013    .0136538         220 
+      2017        2013          -4   -.0178696    .0138065         262 
+      2017        2014          -3    .0057303     .012416         290 
+      2017        2015          -2  -.00424896    .0126238         301 
+      2017        2016          -1           0           .         300 
+      2017        2017           0   -.0127946    .0136201         299 
+      2017        2018           1  -.00795435    .0136856         299 
+      2017        2019           2   .00967801     .016592         292 
+      2017        2020           3   -.0107046    .0107356         275 
+      2017        2021           4   -.0130201    .0111707         259 
+      2017        2022           5  -.00645662    .0105308         243 
+      2017        2023           6    .0172312    .0162399         232 
+      2018        1985         -33           .           .           0 
+      2018        1986         -32           .           .           0 
+      2018        1987         -31           .           .           0 
+      2018        1988         -30           .           .           0 
+      2018        1989         -29           .           .           0 
+      2018        1990         -28           .           .           0 
+      2018        1991         -27           .           .           0 
+      2018        1992         -26           .           .           0 
+      2018        1993         -25           .           .           0 
+      2018        1994         -24           .           .           0 
+      2018        1995         -23           .           .           0 
+      2018        1996         -22           .           .           0 
+      2018        1997         -21           .           .           0 
+      2018        1998         -20           .           .           0 
+      2018        1999         -19   .00209566   .00849423           3 
+      2018        2000         -18   .00209566   .00849423           7 
+      2018        2001         -17   .00209566   .00849423          16 
+      2018        2002         -16   .00094806     .008494          23 
+      2018        2003         -15   -.0015864   .00823365          36 
+      2018        2004         -14  -.00066228    .0087364          48 
+      2018        2005         -13  -.00311885   .00887411          66 
+      2018        2006         -12  -.00059304   .00888724          90 
+      2018        2007         -11   .00791649    .0130027         112 
+      2018        2008         -10  -.00160589    .0103483         127 
+      2018        2009          -9    .0407568    .0235783         145 
+      2018        2010          -8    .0147473    .0128814         164 
+      2018        2011          -7     .004133    .0136898         198 
+      2018        2012          -6   -.0108435   .00953656         237 
+      2018        2013          -5   -.0006055   .00980113         281 
+      2018        2014          -4    .0170291    .0120135         320 
+      2018        2015          -3  -.00681654    .0094168         355 
+      2018        2016          -2  -.00525388   .00816641         364 
+      2018        2017          -1           0           .         364 
+      2018        2018           0   .00763096     .010255         363 
+      2018        2019           1     .010918    .0103821         360 
+      2018        2020           2  -.00571677   .00948074         348 
+      2018        2021           3   .00108483    .0100069         336 
+      2018        2022           4   .00947912     .008817         320 
+      2018        2023           5  -.00055441   .00824958         306 
+      2019        1985         -34           .           .           0 
+      2019        1986         -33           .           .           0 
+      2019        1987         -32           .           .           0 
+      2019        1988         -31           .           .           0 
+      2019        1989         -30           .           .           0 
+      2019        1990         -29           .           .           0 
+      2019        1991         -28           .           .           0 
+      2019        1992         -27           .           .           0 
+      2019        1993         -26           .           .           0 
+      2019        1994         -25           .           .           0 
+      2019        1995         -24           .           .           0 
+      2019        1996         -23           .           .           0 
+      2019        1997         -22           .           .           0 
+      2019        1998         -21           .           .           0 
+      2019        1999         -20   -.0212301    .0206253           1 
+      2019        2000         -19   -.0212301    .0206253           5 
+      2019        2001         -18   -.0212301    .0206253          11 
+      2019        2002         -17   -.0224089    .0206038          16 
+      2019        2003         -16   -.0250386    .0210252          25 
+      2019        2004         -15   -.0241128    .0205828          39 
+      2019        2005         -14   -.0267281    .0199488          56 
+      2019        2006         -13   -.0240802    .0202692          73 
+      2019        2007         -12   -.0201879    .0227511          92 
+      2019        2008         -11   -.0113382    .0153985         113 
+      2019        2009         -10   -.0197584    .0162327         136 
+      2019        2010          -9   -.0230331    .0224303         163 
+      2019        2011          -8   -.0321604    .0206877         185 
+      2019        2012          -7   .00011174    .0264241         216 
+      2019        2013          -6    .0164429    .0308923         263 
+      2019        2014          -5   -.0178919    .0213379         286 
+      2019        2015          -4   .00164758    .0237034         323 
+      2019        2016          -3   -.0139786    .0211519         363 
+      2019        2017          -2   -.0259907    .0212386         373 
+      2019        2018          -1           0           .         375 
+      2019        2019           0   -.0210977    .0212092         374 
+      2019        2020           1   -.0286038    .0223483         369 
+      2019        2021           2   -.0257285    .0235958         357 
+      2019        2022           3   -.0107018    .0229981         335 
+      2019        2023           4  -.00536204    .0240378         328 
+      2020        1985         -35           .           .           0 
+      2020        1986         -34           .           .           0 
+      2020        1987         -33           .           .           0 
+      2020        1988         -32           .           .           0 
+      2020        1989         -31           .           .           0 
+      2020        1990         -30           .           .           0 
+      2020        1991         -29           .           .           0 
+      2020        1992         -28           .           .           0 
+      2020        1993         -27           .           .           0 
+      2020        1994         -26           .           .           0 
+      2020        1995         -25           .           .           0 
+      2020        1996         -24           .           .           0 
+      2020        1997         -23           .           .           0 
+      2020        1998         -22           .           .           0 
+      2020        1999         -21           .           .           0 
+      2020        2000         -20  -.00145227   .00584572           1 
+      2020        2001         -19  -.00145227   .00584572           7 
+      2020        2002         -18  -.00265774   .00615231          13 
+      2020        2003         -17  -.00536835   .00682751          20 
+      2020        2004         -16   -.0044282   .00605379          27 
+      2020        2005         -15  -.00715515   .00608118          37 
+      2020        2006         -14  -.00441697    .0060371          47 
+      2020        2007         -13   .00424459    .0157024          58 
+      2020        2008         -12    -.010449   .00586501          87 
+      2020        2009         -11  -.00919097    .0108809         106 
+      2020        2010         -10   -.0129467    .0118662         131 
+      2020        2011          -9   .00465078     .013221         161 
+      2020        2012          -8  -.00075704    .0105631         190 
+      2020        2013          -7   .00037997   .00979255         231 
+      2020        2014          -6  -.00193219   .00899292         275 
+      2020        2015          -5   .00037241   .00867417         313 
+      2020        2016          -4  -.00095943    .0100007         355 
+      2020        2017          -3    -.008075   .00772252         378 
+      2020        2018          -2   .00521924   .00904974         385 
+      2020        2019          -1           0           .         384 
+      2020        2020           0  -.00195212    .0100239         385 
+      2020        2021           1   .00515306   .00876008         381 
+      2020        2022           2  -.00364985   .00829589         371 
+      2020        2023           3   -.0007594   .00882816         357 
+
+ n_treat_~e  n_contro~t  n_contro~e 
+-----------------------------------
+          1          18          77 
+          1          25          77 
+          1          39          77 
+          1          63          77 
+          1          77          77 
+          1          83          77 
+          1          99          77 
+          1         105          77 
+          1         158          71 
+          1         186          69 
+          1         242          68 
+          1         316          64 
+          1         412          64 
+          1         501          63 
+          1         604          58 
+          1         748          52 
+          1         904          50 
+          1        1127          48 
+          1        1373          43 
+          1        1618          42 
+          1        1919          41 
+          1        2230          40 
+          1        2513          40 
+          1        2853          39 
+          1        3102          39 
+          1        3354          39 
+          1        3484          39 
+          1        3661          39 
+          1        3895          39 
+          1        3859          39 
+          1        3808          39 
+          1        3635          39 
+          1        3279          39 
+          1        2835          39 
+          1        2332          39 
+          1        1831          39 
+          1        1707          39 
+          1        1572          39 
+          1        1519          39 
+          6          14          99 
+          6          21          99 
+          6          34          99 
+          6          57          99 
+          6          71          99 
+          6          77          99 
+          6          93          99 
+          6          99          99 
+          6         158          99 
+          6         186          96 
+          6         242          95 
+          6         316          91 
+          6         412          91 
+          6         501          90 
+          6         604          84 
+          6         748          77 
+          6         904          73 
+          6        1127          71 
+          6        1373          63 
+          6        1618          61 
+          6        1919          59 
+          6        2230          58 
+          6        2513          57 
+          6        2853          54 
+          6        3102          53 
+          6        3354          53 
+          6        3484          53 
+          6        3661          52 
+          6        3895          52 
+          6        3859          52 
+          6        3808          52 
+          6        3635          52 
+          6        3279          52 
+          6        2835          52 
+          6        2332          52 
+          6        1831          52 
+          6        1707          52 
+          6        1572          52 
+          6        1519          52 
+          3          14         155 
+          3          20         155 
+          3          32         155 
+          3          55         155 
+          3          69         155 
+          3          74         155 
+          3          90         155 
+          3          96         155 
+          3         155         155 
+          3         186         155 
+          3         242         154 
+          3         316         150 
+          3         412         150 
+          3         501         149 
+          3         604         143 
+          3         748         134 
+          3         904         126 
+          3        1127         121 
+          3        1373         109 
+          3        1618         105 
+          3        1919         102 
+          3        2230          95 
+          3        2513          93 
+          3        2853          90 
+          3        3102          84 
+          3        3354          84 
+          3        3484          84 
+          3        3661          81 
+          3        3895          81 
+          3        3859          81 
+          3        3808          81 
+          3        3635          81 
+          3        3279          81 
+          3        2835          81 
+          3        2332          81 
+          3        1831          81 
+          3        1707          81 
+          3        1572          81 
+          3        1519          81 
+          1          14         185 
+          1          20         185 
+          1          31         185 
+          1          54         185 
+          1          68         185 
+          1          73         185 
+          1          89         185 
+          1          95         185 
+          1         154         185 
+          1         185         185 
+          1         242         185 
+          1         316         181 
+          1         412         181 
+          1         501         180 
+          1         604         174 
+          1         748         163 
+          1         904         155 
+          1        1127         149 
+          1        1373         136 
+          1        1618         131 
+          1        1919         126 
+          1        2230         119 
+          1        2513         115 
+          1        2853         111 
+          1        3102         105 
+          1        3354         105 
+          1        3484         101 
+          1        3661          96 
+          1        3895          95 
+          1        3859          95 
+          1        3808          95 
+          1        3635          95 
+          1        3279          95 
+          1        2835          95 
+          1        2332          95 
+          1        1831          95 
+          1        1707          95 
+          1        1572          95 
+          1        1519          95 
+          4          13         238 
+          4          19         238 
+          4          29         238 
+          4          52         238 
+          4          64         238 
+          4          69         238 
+          4          85         238 
+          4          91         238 
+          4         150         238 
+          4         181         238 
+          4         238         238 
+          4         316         238 
+          4         412         238 
+          4         501         237 
+          4         604         231 
+          4         748         220 
+          4         904         211 
+          4        1127         203 
+          4        1373         189 
+          4        1618         184 
+          4        1919         176 
+          4        2230         166 
+          4        2513         159 
+          4        2853         151 
+          4        3102         144 
+          4        3354         141 
+          4        3484         132 
+          4        3661         126 
+          4        3895         124 
+          4        3859         122 
+          4        3808         122 
+          4        3635         122 
+          4        3279         122 
+          4        2835         122 
+          4        2332         122 
+          4        1831         122 
+          4        1707         122 
+          4        1572         122 
+          4        1519         122 
+          1          13         411 
+          1          19         411 
+          1          29         411 
+          1          51         411 
+          1          63         411 
+          1          68         411 
+          1          84         411 
+          1          90         411 
+          1         149         411 
+          1         180         411 
+          1         237         411 
+          1         315         411 
+          1         411         411 
+          1         501         411 
+          1         604         405 
+          1         748         393 
+          1         904         380 
+          1        1127         366 
+          1        1373         343 
+          1        1618         330 
+          1        1919         317 
+          1        2230         296 
+          1        2513         286 
+          1        2853         274 
+          1        3102         261 
+          1        3354         256 
+          1        3484         240 
+          1        3661         228 
+          1        3895         225 
+          1        3859         211 
+          1        3808         207 
+          1        3635         206 
+          1        3279         206 
+          1        2835         206 
+          1        2332         206 
+          1        1831         206 
+          1        1707         206 
+          1        1572         206 
+          1        1519         206 
+          6          12         495 
+          6          17         495 
+          6          26         495 
+          6          47         495 
+          6          58         495 
+          6          62         495 
+          6          77         495 
+          6          84         495 
+          6         143         495 
+          6         174         495 
+          6         231         495 
+          6         309         495 
+          6         405         495 
+          6         495         495 
+          6         604         495 
+          6         748         484 
+          6         904         471 
+          6        1127         457 
+          6        1373         433 
+          6        1618         415 
+          6        1919         397 
+          6        2230         373 
+          6        2513         362 
+          6        2853         347 
+          6        3102         332 
+          6        3354         324 
+          6        3484         301 
+          6        3661         288 
+          6        3895         280 
+          6        3859         260 
+          6        3808         255 
+          6        3635         254 
+          6        3279         250 
+          6        2835         250 
+          6        2332         250 
+          6        1831         250 
+          6        1707         250 
+          6        1572         250 
+          6        1519         250 
+         11           9         593 
+         11          14         593 
+         11          23         593 
+         11          42         593 
+         11          52         593 
+         11          56         593 
+         11          70         593 
+         11          77         593 
+         11         134         593 
+         11         163         593 
+         11         220         593 
+         11         298         593 
+         11         393         593 
+         11         484         593 
+         11         593         593 
+         11         748         593 
+         11         904         580 
+         11        1127         566 
+         11        1373         539 
+         11        1618         517 
+         11        1919         494 
+         11        2230         466 
+         11        2513         451 
+         11        2853         431 
+         11        3102         412 
+         11        3354         403 
+         11        3484         378 
+         11        3661         363 
+         11        3895         353 
+         11        3859         328 
+         11        3808         320 
+         11        3635         318 
+         11        3279         306 
+         11        2835         303 
+         11        2332         302 
+         11        1831         302 
+         11        1707         302 
+         11        1572         302 
+         11        1519         302 
+         13           9         735 
+         13          14         735 
+         13          23         735 
+         13          41         735 
+         13          50         735 
+         13          53         735 
+         13          67         735 
+         13          73         735 
+         13         126         735 
+         13         155         735 
+         13         211         735 
+         13         285         735 
+         13         380         735 
+         13         471         735 
+         13         580         735 
+         13         735         735 
+         13         904         735 
+         13        1127         721 
+         13        1373         693 
+         13        1618         669 
+         13        1919         641 
+         13        2230         606 
+         13        2513         585 
+         13        2853         560 
+         13        3102         538 
+         13        3354         527 
+         13        3484         493 
+         13        3661         477 
+         13        3895         461 
+         13        3859         431 
+         13        3808         418 
+         13        3635         413 
+         13        3279         391 
+         13        2835         384 
+         13        2332         379 
+         13        1831         378 
+         13        1707         378 
+         13        1572         378 
+         13        1519         378 
+         14           9         890 
+         14          14         890 
+         14          23         890 
+         14          39         890 
+         14          48         890 
+         14          51         890 
+         14          65         890 
+         14          71         890 
+         14         121         890 
+         14         149         890 
+         14         203         890 
+         14         275         890 
+         14         366         890 
+         14         457         890 
+         14         566         890 
+         14         721         890 
+         14         890         890 
+         14        1127         890 
+         14        1373         862 
+         14        1618         837 
+         14        1919         804 
+         14        2230         761 
+         14        2513         730 
+         14        2853         696 
+         14        3102         672 
+         14        3354         655 
+         14        3484         621 
+         14        3661         599 
+         14        3895         581 
+         14        3859         546 
+         14        3808         528 
+         14        3635         518 
+         14        3279         494 
+         14        2835         478 
+         14        2332         467 
+         14        1831         460 
+         14        1707         460 
+         14        1572         460 
+         14        1519         460 
+         28           9        1099 
+         28          13        1099 
+         28          20        1099 
+         28          35        1099 
+         28          43        1099 
+         28          46        1099 
+         28          60        1099 
+         28          63        1099 
+         28         109        1099 
+         28         136        1099 
+         28         189        1099 
+         28         254        1099 
+         28         343        1099 
+         28         433        1099 
+         28         539        1099 
+         28         693        1099 
+         28         862        1099 
+         28        1099        1099 
+         28        1373        1099 
+         28        1618        1074 
+         28        1919        1040 
+         28        2230         991 
+         28        2513         948 
+         28        2853         905 
+         28        3102         869 
+         28        3354         842 
+         28        3484         801 
+         28        3661         773 
+         28        3895         749 
+         28        3859         708 
+         28        3808         681 
+         28        3635         663 
+         28        3279         627 
+         28        2835         604 
+         28        2332         588 
+         28        1831         575 
+         28        1707         575 
+         28        1572         575 
+         28        1519         575 
+         25           9        1348 
+         25          13        1348 
+         25          20        1348 
+         25          34        1348 
+         25          42        1348 
+         25          45        1348 
+         25          58        1348 
+         25          61        1348 
+         25         105        1348 
+         25         131        1348 
+         25         184        1348 
+         25         248        1348 
+         25         330        1348 
+         25         415        1348 
+         25         517        1348 
+         25         669        1348 
+         25         837        1348 
+         25        1074        1348 
+         25        1348        1348 
+         25        1618        1348 
+         25        1919        1314 
+         25        2230        1260 
+         25        2513        1207 
+         25        2853        1155 
+         25        3102        1100 
+         25        3354        1064 
+         25        3484        1015 
+         25        3661         977 
+         25        3895         942 
+         25        3859         894 
+         25        3808         859 
+         25        3635         833 
+         25        3279         789 
+         25        2835         753 
+         25        2332         728 
+         25        1831         708 
+         25        1707         708 
+         25        1572         708 
+         25        1519         708 
+         34           9        1584 
+         34          13        1584 
+         34          20        1584 
+         34          33        1584 
+         34          41        1584 
+         34          44        1584 
+         34          56        1584 
+         34          59        1584 
+         34         102        1584 
+         34         126        1584 
+         34         176        1584 
+         34         237        1584 
+         34         317        1584 
+         34         397        1584 
+         34         494        1584 
+         34         641        1584 
+         34         804        1584 
+         34        1040        1584 
+         34        1314        1584 
+         34        1584        1584 
+         34        1919        1584 
+         34        2230        1530 
+         34        2513        1471 
+         34        2853        1408 
+         34        3102        1345 
+         34        3354        1306 
+         34        3484        1243 
+         34        3661        1186 
+         34        3895        1144 
+         34        3859        1084 
+         34        3808        1036 
+         34        3635        1001 
+         34        3279         949 
+         34        2835         901 
+         34        2332         862 
+         34        1831         835 
+         34        1707         835 
+         34        1572         835 
+         34        1519         835 
+         54           9        1865 
+         54          13        1865 
+         54          20        1865 
+         54          32        1865 
+         54          40        1865 
+         54          43        1865 
+         54          55        1865 
+         54          58        1865 
+         54          95        1865 
+         54         119        1865 
+         54         166        1865 
+         54         225        1865 
+         54         296        1865 
+         54         373        1865 
+         54         466        1865 
+         54         606        1865 
+         54         761        1865 
+         54         991        1865 
+         54        1260        1865 
+         54        1530        1865 
+         54        1865        1865 
+         54        2230        1865 
+         54        2513        1805 
+         54        2853        1738 
+         54        3102        1662 
+         54        3354        1610 
+         54        3484        1535 
+         54        3661        1461 
+         54        3895        1400 
+         54        3859        1323 
+         54        3808        1267 
+         54        3635        1221 
+         54        3279        1152 
+         54        2835        1086 
+         54        2332        1030 
+         54        1831         993 
+         54        1707         993 
+         54        1572         993 
+         54        1519         993 
+         60           9        2170 
+         60          13        2170 
+         60          20        2170 
+         60          32        2170 
+         60          40        2170 
+         60          43        2170 
+         60          54        2170 
+         60          57        2170 
+         60          93        2170 
+         60         115        2170 
+         60         159        2170 
+         60         216        2170 
+         60         286        2170 
+         60         362        2170 
+         60         451        2170 
+         60         585        2170 
+         60         730        2170 
+         60         948        2170 
+         60        1207        2170 
+         60        1471        2170 
+         60        1805        2170 
+         60        2170        2170 
+         60        2513        2170 
+         60        2853        2102 
+         60        3102        2020 
+         60        3354        1961 
+         60        3484        1874 
+         60        3661        1772 
+         60        3895        1697 
+         60        3859        1602 
+         60        3808        1536 
+         60        3635        1468 
+         60        3279        1379 
+         60        2835        1289 
+         60        2332        1216 
+         60        1831        1169 
+         60        1707        1169 
+         60        1572        1169 
+         60        1519        1169 
+         68           9        2445 
+         68          13        2445 
+         68          20        2445 
+         68          32        2445 
+         68          39        2445 
+         68          42        2445 
+         68          51        2445 
+         68          54        2445 
+         68          90        2445 
+         68         111        2445 
+         68         151        2445 
+         68         208        2445 
+         68         274        2445 
+         68         347        2445 
+         68         431        2445 
+         68         560        2445 
+         68         696        2445 
+         68         905        2445 
+         68        1155        2445 
+         68        1408        2445 
+         68        1738        2445 
+         68        2102        2445 
+         68        2445        2445 
+         68        2853        2445 
+         68        3102        2360 
+         68        3354        2288 
+         68        3484        2183 
+         68        3661        2067 
+         68        3895        1978 
+         68        3859        1866 
+         68        3808        1783 
+         68        3635        1696 
+         68        3279        1592 
+         68        2835        1480 
+         68        2332        1388 
+         68        1831        1330 
+         68        1707        1330 
+         68        1572        1330 
+         68        1519        1330 
+         85           9        2768 
+         85          13        2768 
+         85          20        2768 
+         85          32        2768 
+         85          39        2768 
+         85          42        2768 
+         85          50        2768 
+         85          53        2768 
+         85          84        2768 
+         85         105        2768 
+         85         144        2768 
+         85         199        2768 
+         85         261        2768 
+         85         332        2768 
+         85         412        2768 
+         85         538        2768 
+         85         672        2768 
+         85         869        2768 
+         85        1100        2768 
+         85        1345        2768 
+         85        1662        2768 
+         85        2020        2768 
+         85        2360        2768 
+         85        2768        2768 
+         85        3102        2768 
+         85        3354        2695 
+         85        3484        2580 
+         85        3661        2449 
+         85        3895        2339 
+         85        3859        2193 
+         85        3808        2085 
+         85        3635        1977 
+         85        3279        1849 
+         85        2835        1722 
+         85        2332        1609 
+         85        1831        1522 
+         85        1707        1522 
+         85        1572        1522 
+         85        1519        1522 
+         73           9        3029 
+         73          13        3029 
+         73          20        3029 
+         73          32        3029 
+         73          39        3029 
+         73          42        3029 
+         73          50        3029 
+         73          53        3029 
+         73          84        3029 
+         73         105        3029 
+         73         141        3029 
+         73         194        3029 
+         73         256        3029 
+         73         324        3029 
+         73         403        3029 
+         73         527        3029 
+         73         655        3029 
+         73         842        3029 
+         73        1064        3029 
+         73        1306        3029 
+         73        1610        3029 
+         73        1961        3029 
+         73        2288        3029 
+         73        2695        3029 
+         73        3029        3029 
+         73        3354        3029 
+         73        3484        2910 
+         73        3661        2773 
+         73        3895        2646 
+         73        3859        2468 
+         73        3808        2342 
+         73        3635        2208 
+         73        3279        2066 
+         73        2835        1921 
+         73        2332        1785 
+         73        1831        1679 
+         73        1707        1679 
+         73        1572        1679 
+         73        1519        1679 
+        119           9        3235 
+        119          13        3235 
+        119          20        3235 
+        119          32        3235 
+        119          39        3235 
+        119          42        3235 
+        119          50        3235 
+        119          53        3235 
+        119          84        3235 
+        119         101        3235 
+        119         132        3235 
+        119         185        3235 
+        119         240        3235 
+        119         301        3235 
+        119         378        3235 
+        119         493        3235 
+        119         621        3235 
+        119         801        3235 
+        119        1015        3235 
+        119        1243        3235 
+        119        1535        3235 
+        119        1874        3235 
+        119        2183        3235 
+        119        2580        3235 
+        119        2910        3235 
+        119        3235        3235 
+        119        3484        3235 
+        119        3661        3095 
+        119        3895        2958 
+        119        3859        2749 
+        119        3808        2600 
+        119        3635        2430 
+        119        3279        2266 
+        119        2835        2102 
+        119        2332        1939 
+        119        1831        1808 
+        119        1707        1808 
+        119        1572        1808 
+        119        1519        1808 
+        142           9        3342 
+        142          13        3342 
+        142          20        3342 
+        142          32        3342 
+        142          39        3342 
+        142          42        3342 
+        142          50        3342 
+        142          52        3342 
+        142          81        3342 
+        142          96        3342 
+        142         126        3342 
+        142         176        3342 
+        142         228        3342 
+        142         288        3342 
+        142         363        3342 
+        142         477        3342 
+        142         599        3342 
+        142         773        3342 
+        142         977        3342 
+        142        1186        3342 
+        142        1461        3342 
+        142        1772        3342 
+        142        2067        3342 
+        142        2449        3342 
+        142        2773        3342 
+        142        3095        3342 
+        142        3342        3342 
+        142        3661        3342 
+        142        3895        3204 
+        142        3859        2978 
+        142        3808        2809 
+        142        3635        2614 
+        142        3279        2421 
+        142        2835        2223 
+        142        2332        2038 
+        142        1831        1877 
+        142        1707        1877 
+        142        1572        1877 
+        142        1519        1877 
+        138           9        3523 
+        138          13        3523 
+        138          20        3523 
+        138          32        3523 
+        138          39        3523 
+        138          42        3523 
+        138          50        3523 
+        138          52        3523 
+        138          81        3523 
+        138          95        3523 
+        138         124        3523 
+        138         173        3523 
+        138         225        3523 
+        138         280        3523 
+        138         353        3523 
+        138         461        3523 
+        138         581        3523 
+        138         749        3523 
+        138         942        3523 
+        138        1144        3523 
+        138        1400        3523 
+        138        1697        3523 
+        138        1978        3523 
+        138        2339        3523 
+        138        2646        3523 
+        138        2958        3523 
+        138        3204        3523 
+        138        3523        3523 
+        138        3895        3523 
+        138        3859        3288 
+        138        3808        3098 
+        138        3635        2875 
+        138        3279        2655 
+        138        2835        2418 
+        138        2332        2202 
+        138        1831        2012 
+        138        1707        2012 
+        138        1572        2012 
+        138        1519        2012 
+        236           9        3659 
+        236          13        3659 
+        236          20        3659 
+        236          32        3659 
+        236          39        3659 
+        236          42        3659 
+        236          50        3659 
+        236          52        3659 
+        236          81        3659 
+        236          95        3659 
+        236         122        3659 
+        236         162        3659 
+        236         211        3659 
+        236         260        3659 
+        236         328        3659 
+        236         431        3659 
+        236         546        3659 
+        236         708        3659 
+        236         894        3659 
+        236        1084        3659 
+        236        1323        3659 
+        236        1602        3659 
+        236        1866        3659 
+        236        2193        3659 
+        236        2468        3659 
+        236        2749        3659 
+        236        2978        3659 
+        236        3288        3659 
+        236        3659        3659 
+        236        3859        3659 
+        236        3808        3460 
+        236        3635        3205 
+        236        3279        2943 
+        236        2835        2662 
+        236        2332        2399 
+        236        1831        2168 
+        236        1707        2168 
+        236        1572        2168 
+        236        1519        2168 
+        200           9        3659 
+        200          13        3659 
+        200          20        3659 
+        200          32        3659 
+        200          39        3659 
+        200          42        3659 
+        200          50        3659 
+        200          52        3659 
+        200          81        3659 
+        200          95        3659 
+        200         122        3659 
+        200         160        3659 
+        200         207        3659 
+        200         255        3659 
+        200         320        3659 
+        200         418        3659 
+        200         528        3659 
+        200         681        3659 
+        200         859        3659 
+        200        1036        3659 
+        200        1267        3659 
+        200        1536        3659 
+        200        1783        3659 
+        200        2085        3659 
+        200        2342        3659 
+        200        2600        3659 
+        200        2809        3659 
+        200        3098        3659 
+        200        3460        3659 
+        200        3659        3659 
+        200        3808        3659 
+        200        3635        3393 
+        200        3279        3103 
+        200        2835        2783 
+        200        2332        2497 
+        200        1831        2222 
+        200        1707        2222 
+        200        1572        2222 
+        200        1519        2222 
+        266           9        3542 
+        266          13        3542 
+        266          20        3542 
+        266          32        3542 
+        266          39        3542 
+        266          42        3542 
+        266          50        3542 
+        266          52        3542 
+        266          81        3542 
+        266          95        3542 
+        266         122        3542 
+        266         160        3542 
+        266         206        3542 
+        266         254        3542 
+        266         318        3542 
+        266         413        3542 
+        266         518        3542 
+        266         663        3542 
+        266         833        3542 
+        266        1001        3542 
+        266        1221        3542 
+        266        1468        3542 
+        266        1696        3542 
+        266        1977        3542 
+        266        2208        3542 
+        266        2430        3542 
+        266        2614        3542 
+        266        2875        3542 
+        266        3205        3542 
+        266        3393        3542 
+        266        3542        3542 
+        266        3635        3542 
+        266        3279        3241 
+        266        2835        2886 
+        266        2332        2563 
+        266        1831        2250 
+        266        1707        2250 
+        266        1572        2250 
+        266        1519        2250 
+        300           9        3335 
+        300          13        3335 
+        300          20        3335 
+        300          32        3335 
+        300          39        3335 
+        300          42        3335 
+        300          50        3335 
+        300          52        3335 
+        300          81        3335 
+        300          95        3335 
+        300         122        3335 
+        300         160        3335 
+        300         206        3335 
+        300         250        3335 
+        300         306        3335 
+        300         391        3335 
+        300         494        3335 
+        300         627        3335 
+        300         789        3335 
+        300         949        3335 
+        300        1152        3335 
+        300        1379        3335 
+        300        1592        3335 
+        300        1849        3335 
+        300        2066        3335 
+        300        2266        3335 
+        300        2421        3335 
+        300        2655        3335 
+        300        2943        3335 
+        300        3103        3335 
+        300        3241        3335 
+        300        3335        3335 
+        300        3279        3335 
+        300        2835        2971 
+        300        2332        2608 
+        300        1831        2253 
+        300        1707        2253 
+        300        1572        2253 
+        300        1519        2253 
+        364           9        2915 
+        364          13        2915 
+        364          20        2915 
+        364          32        2915 
+        364          39        2915 
+        364          42        2915 
+        364          50        2915 
+        364          52        2915 
+        364          81        2915 
+        364          95        2915 
+        364         122        2915 
+        364         160        2915 
+        364         206        2915 
+        364         250        2915 
+        364         303        2915 
+        364         384        2915 
+        364         478        2915 
+        364         604        2915 
+        364         753        2915 
+        364         901        2915 
+        364        1086        2915 
+        364        1289        2915 
+        364        1480        2915 
+        364        1722        2915 
+        364        1921        2915 
+        364        2102        2915 
+        364        2223        2915 
+        364        2418        2915 
+        364        2662        2915 
+        364        2783        2915 
+        364        2886        2915 
+        364        2971        2915 
+        364        2915        2915 
+        364        2835        2915 
+        364        2332        2542 
+        364        1831        2164 
+        364        1707        2164 
+        364        1572        2164 
+        364        1519        2164 
+        375           9        2460 
+        375          13        2460 
+        375          20        2460 
+        375          32        2460 
+        375          39        2460 
+        375          42        2460 
+        375          50        2460 
+        375          52        2460 
+        375          81        2460 
+        375          95        2460 
+        375         122        2460 
+        375         160        2460 
+        375         206        2460 
+        375         250        2460 
+        375         302        2460 
+        375         379        2460 
+        375         467        2460 
+        375         588        2460 
+        375         728        2460 
+        375         862        2460 
+        375        1030        2460 
+        375        1216        2460 
+        375        1388        2460 
+        375        1609        2460 
+        375        1785        2460 
+        375        1939        2460 
+        375        2038        2460 
+        375        2202        2460 
+        375        2399        2460 
+        375        2497        2460 
+        375        2563        2460 
+        375        2608        2460 
+        375        2542        2460 
+        375        2460        2460 
+        375        2332        2460 
+        375        1831        2075 
+        375        1707        2075 
+        375        1572        2075 
+        375        1519        2075 
+        384           9        1948 
+        384          13        1948 
+        384          20        1948 
+        384          32        1948 
+        384          39        1948 
+        384          42        1948 
+        384          50        1948 
+        384          52        1948 
+        384          81        1948 
+        384          95        1948 
+        384         122        1948 
+        384         160        1948 
+        384         206        1948 
+        384         250        1948 
+        384         302        1948 
+        384         378        1948 
+        384         460        1948 
+        384         575        1948 
+        384         708        1948 
+        384         835        1948 
+        384         993        1948 
+        384        1169        1948 
+        384        1330        1948 
+        384        1522        1948 
+        384        1679        1948 
+        384        1808        1948 
+        384        1877        1948 
+        384        2012        1948 
+        384        2168        1948 
+        384        2222        1948 
+        384        2250        1948 
+        384        2253        1948 
+        384        2164        1948 
+        384        2075        1948 
+        384        1948        1948 
+        384        1831        1948 
+        384        1707        1948 
+        384        1572        1948 
+        384        1519        1948 
+
+. estimates store csdid_storeall
+
+. estimates save "output/csdid_storeall.ster", replace
+(note: file output/csdid_storeall.ster not found)
+file output/csdid_storeall.ster saved
+
+. estat simple, dropmissing
+
+Aggregated treatment effects
+Std. errors: multiplier bootstrap, 999 reps, rseed(20261121); clustered on ipc4_
+> code (371 clusters); 95% pointwise bands
+
+       egt         att          se  overall_~t  overall_se 
+----------------------------------------------------------
+         .  -.00118055   .00255055  -.00118055   .00255055 
+
+. estat event, window(-6 6) dropmissing saving("output/csdid_event_window.dta", 
+> replace)
+
+Aggregated treatment effects
+Std. errors: multiplier bootstrap, 999 reps, rseed(20261121); clustered on ipc4_
+> code (371 clusters); 95% simultaneous bands
+
+          |         b         se          z     pvalue         ll         ul 
+----------+-----------------------------------------------------------------
+      Tm6 | -.0008082   .0045328  -.1783074   .8584816  -.0127844   .0111679 
+      Tm5 | -.0030738    .003495  -.8794681   .3791475  -.0123081   .0061605 
+      Tm4 |  .0020377   .0044822   .4546224   .6493809  -.0098049   .0138803 
+      Tm3 |  .0001658   .0033479   .0495118   .9605115  -.0086798   .0090114 
+      Tm2 | -.0036487   .0031446  -1.160315   .2459205  -.0119571   .0046597 
+      Tm1 |         0          .          .          .          .          . 
+      Tp0 |  .0049525   .0044514   1.112567   .2658945  -.0068087   .0167138 
+      Tp1 |  .0047835   .0043976   1.087765   .2766988  -.0068354   .0164024 
+      Tp2 |  .0022786   .0036353   .6267989   .5307911  -.0073264   .0118836 
+      Tp3 | -.0015855   .0040008  -.3962918   .6918898  -.0121562   .0089852 
+      Tp4 | -.0009304   .0043498  -.2138932   .8306304  -.0124232   .0105624 
+      Tp5 | -.0011572   .0037157  -.3114312   .7554728  -.0109745   .0086601 
+      Tp6 |  -.001593   .0061413  -.2593885   .7953355  -.0178191   .0146331 
+ Post_avg |  .0009641   .0028242   .3413639   .7328296  -.0045713   .0064994 
+Post_avg is the overall summary effect: its interval is pointwise, while the eve
+> nt-time effects use the simultaneous band.
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\ASUS\Documents\ChatGPT\论文复现\replication\patent_quality
+> _signal_2025\logs/csdid_window.log
+  log type:  text
+ closed on:  21 Nov 2026, 22:46:10
+--------------------------------------------------------------------------------

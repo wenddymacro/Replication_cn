@@ -1,0 +1,51 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+There were 16 warnings (use warnings() to see them)
+There were 16 warnings (use warnings() to see them)
+There were 16 warnings (use warnings() to see them)
+There were 16 warnings (use warnings() to see them)
+There were 32 warnings (use warnings() to see them)
+There were 50 or more warnings (use warnings() to see the first 50)
+   source_rows entities cities movers approval_varying_ids source_treated_rows
+         <int>    <int>  <int>  <int>                <int>               <int>
+1:       16499     2849    203     38                    4                 727
+   approval_min_treated_rows approval_min_mismatches
+                       <int>                   <int>
+1:                       744                      17
+   approval_min_false_positive first_exposure_switchoff_rows switchoff_entities
+                         <int>                         <int>              <int>
+1:                          17                             1                  1
+   duplicate_id_years
+                <int>
+1:                  0
+                            sample     n n_units n_clusters n_cohorts     years
+                            <char> <int>   <int>      <int>     <int>    <char>
+ 1:                  keep_t1_lnapp 15996    2347        191        12 2007-2021
+ 2:                keep_t1c1_lnapp 15578    2342        191        12 2007-2021
+ 3:                keep_t1c2_lnapp 15721    2299        168        12 2007-2021
+ 4:                    keep_t1_ihs 15996    2347        191        12 2007-2021
+ 5:                  keep_t1c1_ihs 15578    2342        191        12 2007-2021
+ 6:                  keep_t1c2_ihs 15721    2299        168        12 2007-2021
+ 7:               keep_c_t5_ln_new 15578    2342        191        12 2007-2021
+ 8:           keep_c_t5_ln_digital 15578    2342        191        12 2007-2021
+ 9:      keep_c_t5_ln_clean_energy 15578    2342        191        12 2007-2021
+10:  keep_c_t5_ln_clean_production 15578    2342        191        12 2007-2021
+11:              keep_c_t5_ihs_new 15578    2342        191        12 2007-2021
+12:          keep_c_t5_ihs_digital 15578    2342        191        12 2007-2021
+13:     keep_c_t5_ihs_clean_energy 15578    2342        191        12 2007-2021
+14: keep_c_t5_ihs_clean_production 15578    2342        191        12 2007-2021
+15:        keep_c_t7_ln_enterprise 15578    2342        191        12 2007-2021
+16:          keep_c_t7_ln_multiple 15578    2342        191        12 2007-2021
+17:    keep_c_t7_ln_cross_industry 15578    2342        191        12 2007-2021
+18:      keep_c_t7_ln_quality_mean 15578    2342        191        12 2007-2021
+19:    keep_c_t7_ln_quality_median 15578    2342        191        12 2007-2021
+20:       keep_c_t7_ihs_enterprise 15578    2342        191        12 2007-2021
+21:         keep_c_t7_ihs_multiple 15578    2342        191        12 2007-2021
+22:   keep_c_t7_ihs_cross_industry 15578    2342        191        12 2007-2021
+23:     keep_c_t7_ihs_quality_mean 15578    2342        191        12 2007-2021
+24:   keep_c_t7_ihs_quality_median 15578    2342        191        12 2007-2021
+                            sample     n n_units n_clusters n_cohorts     years
+                            <char> <int>   <int>      <int>     <int>    <char>

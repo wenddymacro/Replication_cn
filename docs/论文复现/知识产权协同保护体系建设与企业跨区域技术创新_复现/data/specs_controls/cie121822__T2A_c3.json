@@ -1,0 +1,29 @@
+{
+  "paper_id": "cie121822",
+  "spec_id": "T2A_c3",
+  "journal": "cie",
+  "data_path": "data/data_3.dta",
+  "id_var": "city_id",
+  "time_var": "year",
+  "y_var": "Win",
+  "treat_var": "protect",
+  "cluster_var": "city_year",
+  "controls": [
+    "gdp",
+    "pop",
+    "ind"
+  ],
+  "static_or_event": "static",
+  "table": "2A",
+  "column": 3,
+  "published_coef": 0.0897,
+  "published_se": 0.021,
+  "published_n": 2745,
+  "preferred": false,
+  "in_abstract_intro": false,
+  "reports_modern_estimator": true,
+  "software": "Stata",
+  "replication_status": "exact",
+  "notes": "OLS reproduced to printed precision; first treated year inferred from observed city policy history.",
+  "sample_filter": "city_id %in% city_id[complete.cases(Win, protect, gdp, pop, ind, year, city_year) & (ave(as.integer(complete.cases(Win, protect, gdp, pop, ind, year, city_year)), city_id, FUN=sum) > 1)]"
+}

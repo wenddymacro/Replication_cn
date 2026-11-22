@@ -1,0 +1,23 @@
+{
+  "paper": "cie20240307",
+  "date": "2026-11-15",
+  "status": "not_fully_completed",
+  "body_original_models": 15,
+  "body_modern_specs": 15,
+  "main": 1,
+  "secondary": 14,
+  "static_joint_bootstrap_B": 999,
+  "all_three_estimates_and_SE_finite": true,
+  "source_discrepancies": [
+    "T5_c3_R2",
+    "appendix_probit",
+    "raw_index_construction_not_identified",
+    "lagged_covariate_construction_not_verified"
+  ],
+  "protocol_gaps": [
+    "unbalanced_CSA_covariate_timing",
+    "controlled_modern_leverage_not_implemented",
+    "controlled_TWFE_CSA_joint_covariance_not_computed"
+  ],
+  "full_completion_claim": false
+}

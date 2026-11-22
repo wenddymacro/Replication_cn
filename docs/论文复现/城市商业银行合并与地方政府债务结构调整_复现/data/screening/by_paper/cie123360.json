@@ -1,0 +1,340 @@
+{
+  "paper_id": "cie123360",
+  "journal": "cie",
+  "year": 2026,
+  "issue": 7,
+  "title": "城市商业银行合并与地方政府债务结构调整——基于财政金融协同的视角",
+  "screened_from": "article+package+data",
+  "screen_date": "2026-11-23",
+  "staggered_design": true,
+  "eligible_design": true,
+  "near_miss_controls_only": true,
+  "data_access": "public",
+  "package_status": "data_and_code",
+  "software": "Stata",
+  "n_eligible_specs": 6,
+  "eligible_specs": [
+    {
+      "spec_id": "T2_1_main",
+      "outcome": "debtnew_h_l",
+      "location": "T2_1_main",
+      "static_or_event": "static",
+      "n_obs": 4832,
+      "coef": 0.626,
+      "published_t": 3.7362,
+      "cohorts": 8,
+      "clustering": "city",
+      "notes": ""
+    },
+    {
+      "spec_id": "T2_2_main",
+      "outcome": "bondnew_h_l",
+      "location": "T2_2_main",
+      "static_or_event": "static",
+      "n_obs": 4832,
+      "coef": 0.4762,
+      "published_t": 3.0839,
+      "cohorts": 8,
+      "clustering": "city",
+      "notes": ""
+    },
+    {
+      "spec_id": "T2_3_main",
+      "outcome": "feibiaonew_h_l",
+      "location": "T2_3_main",
+      "static_or_event": "static",
+      "n_obs": 4832,
+      "coef": 0.5024,
+      "published_t": 3.2021,
+      "cohorts": 8,
+      "clustering": "city",
+      "notes": ""
+    },
+    {
+      "spec_id": "T2_4_main",
+      "outcome": "debtold_h_l",
+      "location": "T2_4_main",
+      "static_or_event": "static",
+      "n_obs": 4832,
+      "coef": 0.7943,
+      "published_t": 5.4294,
+      "cohorts": 8,
+      "clustering": "city",
+      "notes": ""
+    },
+    {
+      "spec_id": "T2_5_main",
+      "outcome": "bondold_h_l",
+      "location": "T2_5_main",
+      "static_or_event": "static",
+      "n_obs": 4832,
+      "coef": 0.693,
+      "published_t": 4.7565,
+      "cohorts": 8,
+      "clustering": "city",
+      "notes": ""
+    },
+    {
+      "spec_id": "T2_6_main",
+      "outcome": "feibiaoold_h_l",
+      "location": "T2_6_main",
+      "static_or_event": "static",
+      "n_obs": 4832,
+      "coef": 0.5656,
+      "published_t": 2.8472,
+      "cohorts": 8,
+      "clustering": "city",
+      "notes": ""
+    }
+  ],
+  "near_miss_controls_only_specs": [
+    {
+      "spec_id": "T2_1_controls",
+      "outcome": "debtnew_h_l",
+      "location": "T2_1_controls",
+      "static_or_event": "static",
+      "n_obs": 4029,
+      "coef": 0.4867,
+      "published_t": 3.05,
+      "cohorts": 8,
+      "clustering": "city",
+      "notes": "unbalanced"
+    },
+    {
+      "spec_id": "T2_2_controls",
+      "outcome": "bondnew_h_l",
+      "location": "T2_2_controls",
+      "static_or_event": "static",
+      "n_obs": 4029,
+      "coef": 0.3968,
+      "published_t": 2.7168,
+      "cohorts": 8,
+      "clustering": "city",
+      "notes": "unbalanced"
+    },
+    {
+      "spec_id": "T2_3_controls",
+      "outcome": "feibiaonew_h_l",
+      "location": "T2_3_controls",
+      "static_or_event": "static",
+      "n_obs": 4029,
+      "coef": 0.3316,
+      "published_t": 2.178,
+      "cohorts": 8,
+      "clustering": "city",
+      "notes": "unbalanced"
+    },
+    {
+      "spec_id": "T2_4_controls",
+      "outcome": "debtold_h_l",
+      "location": "T2_4_controls",
+      "static_or_event": "static",
+      "n_obs": 4029,
+      "coef": 0.6765,
+      "published_t": 4.7721,
+      "cohorts": 8,
+      "clustering": "city",
+      "notes": "unbalanced"
+    },
+    {
+      "spec_id": "T2_5_controls",
+      "outcome": "bondold_h_l",
+      "location": "T2_5_controls",
+      "static_or_event": "static",
+      "n_obs": 4029,
+      "coef": 0.6166,
+      "published_t": 4.4337,
+      "cohorts": 8,
+      "clustering": "city",
+      "notes": "unbalanced"
+    },
+    {
+      "spec_id": "T2_6_controls",
+      "outcome": "feibiaoold_h_l",
+      "location": "T2_6_controls",
+      "static_or_event": "static",
+      "n_obs": 4029,
+      "coef": 0.3378,
+      "published_t": 1.8201,
+      "cohorts": 8,
+      "clustering": "city",
+      "notes": "unbalanced"
+    },
+    {
+      "spec_id": "T3_bankloan_c_z",
+      "outcome": "bankloan_c_z",
+      "location": "T3_bankloan_c_z",
+      "static_or_event": "static",
+      "n_obs": 1938,
+      "coef": -0.168,
+      "published_t": -2.0568,
+      "cohorts": 7,
+      "clustering": "city",
+      "notes": "unbalanced"
+    },
+    {
+      "spec_id": "T3_bankloan_d_z",
+      "outcome": "bankloan_d_z",
+      "location": "T3_bankloan_d_z",
+      "static_or_event": "static",
+      "n_obs": 940,
+      "coef": -0.0244,
+      "published_t": -0.2075,
+      "cohorts": 5,
+      "clustering": "city",
+      "notes": "unbalanced"
+    },
+    {
+      "spec_id": "T3_bankloan_p_z",
+      "outcome": "bankloan_p_z",
+      "location": "T3_bankloan_p_z",
+      "static_or_event": "static",
+      "n_obs": 143,
+      "coef": 0.0626,
+      "published_t": 0.8679,
+      "cohorts": 5,
+      "clustering": "province",
+      "notes": "did_error: All att_gt() estimates are NA. Cannot compute aggregated treatment effects. Chec"
+    },
+    {
+      "spec_id": "T3_debtnew_c_l",
+      "outcome": "debtnew_c_l",
+      "location": "T3_debtnew_c_l",
+      "static_or_event": "static",
+      "n_obs": 4029,
+      "coef": 0.466,
+      "published_t": 3.1451,
+      "cohorts": 8,
+      "clustering": "city",
+      "notes": "unbalanced"
+    },
+    {
+      "spec_id": "T3_debtnew_d_l",
+      "outcome": "debtnew_d_l",
+      "location": "T3_debtnew_d_l",
+      "static_or_event": "static",
+      "n_obs": 4029,
+      "coef": 0.2505,
+      "published_t": 1.6888,
+      "cohorts": 8,
+      "clustering": "city",
+      "notes": "unbalanced"
+    },
+    {
+      "spec_id": "T3_debtnew_p_l",
+      "outcome": "debtnew_p_l",
+      "location": "T3_debtnew_p_l",
+      "static_or_event": "static",
+      "n_obs": 393,
+      "coef": 0.0476,
+      "published_t": 0.1401,
+      "cohorts": 8,
+      "clustering": "province",
+      "notes": "unbalanced"
+    },
+    {
+      "spec_id": "T3_debtold_c_l",
+      "outcome": "debtold_c_l",
+      "location": "T3_debtold_c_l",
+      "static_or_event": "static",
+      "n_obs": 4029,
+      "coef": 0.6689,
+      "published_t": 4.9818,
+      "cohorts": 8,
+      "clustering": "city",
+      "notes": "unbalanced"
+    },
+    {
+      "spec_id": "T3_debtold_d_l",
+      "outcome": "debtold_d_l",
+      "location": "T3_debtold_d_l",
+      "static_or_event": "static",
+      "n_obs": 4029,
+      "coef": 0.2903,
+      "published_t": 1.5463,
+      "cohorts": 8,
+      "clustering": "city",
+      "notes": "unbalanced"
+    },
+    {
+      "spec_id": "T3_debtold_p_l",
+      "outcome": "debtold_p_l",
+      "location": "T3_debtold_p_l",
+      "static_or_event": "static",
+      "n_obs": 393,
+      "coef": 0.3353,
+      "published_t": 0.9616,
+      "cohorts": 8,
+      "clustering": "province",
+      "notes": "unbalanced"
+    },
+    {
+      "spec_id": "T4_1",
+      "outcome": "bondrate",
+      "location": "T4_1",
+      "static_or_event": "static",
+      "n_obs": 8487,
+      "coef": 0.3442,
+      "published_t": 1.9898,
+      "cohorts": 5,
+      "clustering": "city",
+      "notes": "did_error: The value of idname must be unique (by tname). Some units are observed more than"
+    },
+    {
+      "spec_id": "T4_2",
+      "outcome": "bondrate",
+      "location": "T4_2",
+      "static_or_event": "static",
+      "n_obs": 3794,
+      "coef": 0.2315,
+      "published_t": 1.0511,
+      "cohorts": 5,
+      "clustering": "city",
+      "notes": "did_error: The value of idname must be unique (by tname). Some units are observed more than"
+    },
+    {
+      "spec_id": "T4_3",
+      "outcome": "bondrate",
+      "location": "T4_3",
+      "static_or_event": "static",
+      "n_obs": 3391,
+      "coef": 0.6869,
+      "published_t": 3.0787,
+      "cohorts": 2,
+      "clustering": "city",
+      "notes": "did_error: The value of idname must be unique (by tname). Some units are observed more than"
+    },
+    {
+      "spec_id": "T5_A",
+      "outcome": "debt_h_new_zs",
+      "location": "T5_A",
+      "static_or_event": "static",
+      "n_obs": 2915,
+      "coef": 0.2404,
+      "published_t": 2.1939,
+      "cohorts": 6,
+      "clustering": "city",
+      "notes": "unbalanced"
+    }
+  ],
+  "ineligible_specs": [
+    {
+      "reason": "仅一个批次有可观察处理前后期",
+      "location": "表4第4列"
+    },
+    {
+      "reason": "连续债务变量",
+      "location": "表5 B栏"
+    },
+    {
+      "reason": "含处理后债务机制变量和公司、城市、年份固定效应，不能直接作为仅时变控制的标准比较设定",
+      "location": "表5 C栏"
+    }
+  ],
+  "appendix_specs": [
+    {
+      "notes": "作者含 BJS、Sun–Abraham 等检验，未逐项运行",
+      "location": "附录"
+    }
+  ]
+}

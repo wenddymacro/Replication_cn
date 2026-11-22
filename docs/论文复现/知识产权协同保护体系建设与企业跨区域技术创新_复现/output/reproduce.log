@@ -1,0 +1,40 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+
+Attaching package: 'data.table'
+
+The following object is masked from 'package:base':
+
+    %notin%
+
+    rows cities duplicate_keys
+   <int>  <int>          <int>
+1:  3151    294              0
+   protect     N
+     <num> <int>
+1:       0   294
+   first     N
+   <num> <int>
+1:  2018     6
+2:  2019     6
+3:  2020     3
+4:  2021     9
+5:  2022    13
+[1] 0
+data/data_3.dta 3151 rows
+NOTES: 404 observations removed because of NA values (LHS: 404).
+       2/0 fixed-effect singletons were removed (2 observations).
+data/data.dta 433628 rows
+NOTE: 2,794/0 fixed-effects (179,615 observations) removed because of only 0 outcomes or singletons.
+NOTE: 2,794/0 fixed-effects (179,615 observations) removed because of only 0 outcomes or singletons.
+NOTE: 2,794/0/2 fixed-effects (179,739 observations) removed because of only 0 outcomes or singletons.
+NOTE: 2,794/0/2/65 fixed-effects (180,060 observations) removed because of only 0 outcomes or singletons.
+NOTE: 3,005/0/2/78 fixed-effects (203,674 observations) removed because of only 0 outcomes or singletons.
+NOTE: 3,042/0/2/80 fixed-effects (207,729 observations) removed because of only 0 outcomes or singletons.
+NOTE: 2,794/0/2/65 fixed-effects (180,060 observations) removed because of only 0 outcomes or singletons.
+NOTE: 3,113/0/2/80 fixed-effects (209,145 observations) removed because of only 0 outcomes or singletons.
+NOTE: 3,154/0/2/83 fixed-effects (218,784 observations) removed because of only 0 outcomes or singletons.
+NOTE: 4,134/2/3/167 fixed-effects (370,962 observations) removed because of only 0 outcomes or singletons.

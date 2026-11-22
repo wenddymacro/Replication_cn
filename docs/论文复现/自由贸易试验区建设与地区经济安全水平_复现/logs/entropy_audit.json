@@ -1,0 +1,44 @@
+{
+  "raw_indicator_missing": 1442,
+  "complete_case_rows": 2012,
+  "full_rows": 3096,
+  "printed_weight_sum": 0.9993000000000001,
+  "comparisons": [
+    {
+      "method": "global_minmax_entropy",
+      "epsilon": 0,
+      "max_weight_abs_diff": 0.1649268229773045,
+      "outcome_rmse": 0.21668256722200638,
+      "outcome_max_abs_diff": 0.3495751915088491
+    },
+    {
+      "method": "global_minmax_entropy",
+      "epsilon": 1e-06,
+      "max_weight_abs_diff": 0.16492355077639104,
+      "outcome_rmse": 0.21668005652150163,
+      "outcome_max_abs_diff": 0.3495724624237185
+    },
+    {
+      "method": "global_minmax_entropy",
+      "epsilon": 0.0001,
+      "max_weight_abs_diff": 0.16459893901048658,
+      "outcome_rmse": 0.2164320668240658,
+      "outcome_max_abs_diff": 0.34930268532707753
+    },
+    {
+      "method": "global_minmax_entropy",
+      "epsilon": 0.001,
+      "max_weight_abs_diff": 0.16168896381567427,
+      "outcome_rmse": 0.2141999950747706,
+      "outcome_max_abs_diff": 0.34687807664500814
+    },
+    {
+      "method": "global_minmax_entropy",
+      "epsilon": 0.01,
+      "max_weight_abs_diff": 0.13715267203842899,
+      "outcome_rmse": 0.1931395183907267,
+      "outcome_max_abs_diff": 0.3242488262198523
+    }
+  ],
+  "note": "附件未提供熵权构造及缺失填补代码。仅在18指标齐全的行作完整案例敏感性诊断，样本不同，不能将权重或得分差异直接认定为作者错误；不替换原作者Eco_safe，不宣称完成原始指标到指数的精确重建。"
+}

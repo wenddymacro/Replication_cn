@@ -1,0 +1,107 @@
+{
+  "B1": {
+    "warnings": ["Some groups in your dataset have very few observations, which may cause estimation problems.\n  Check groups: 11,6.", "Not returning pre-test Wald statistic due to singular covariance matrix"],
+    "n_post": 18,
+    "finite_post": 18,
+    "n_pre": 37,
+    "finite_pre": 37
+  },
+  "B2": {
+    "warnings": "Some groups in your dataset have very few observations, which may cause estimation problems.\n  Check groups: 11,6,12,8,10.",
+    "n_post": 18,
+    "finite_post": 18,
+    "n_pre": 37,
+    "finite_pre": 37
+  },
+  "B3": {
+    "warnings": "Some groups in your dataset have very few observations, which may cause estimation problems.\n  Check groups: 11,12,8,10.",
+    "n_post": 11,
+    "finite_post": 11,
+    "n_pre": 33,
+    "finite_pre": 33
+  },
+  "M1": {
+    "warnings": "Some groups in your dataset have very few observations, which may cause estimation problems.\n  Check groups: 11,6,12,8,10.",
+    "n_post": 18,
+    "finite_post": 18,
+    "n_pre": 37,
+    "finite_pre": 37
+  },
+  "M10": {
+    "warnings": ["Dropped 20 units that were already treated in the first period.", "Some groups in your dataset have very few observations, which may cause estimation problems.\n  Check groups: 2,3."],
+    "n_post": 3,
+    "finite_post": 3,
+    "n_pre": 1,
+    "finite_pre": 1
+  },
+  "M11": {
+    "warnings": ["Dropped 20 units that were already treated in the first period.", "Some groups in your dataset have very few observations, which may cause estimation problems.\n  Check groups: 2,3."],
+    "n_post": 3,
+    "finite_post": 3,
+    "n_pre": 1,
+    "finite_pre": 1
+  },
+  "M12": {
+    "warnings": "Some groups in your dataset have very few observations, which may cause estimation problems.\n  Check groups: 9,4,10,6,8.",
+    "n_post": 18,
+    "finite_post": 18,
+    "n_pre": 27,
+    "finite_pre": 27
+  },
+  "M2": {
+    "warnings": "Some groups in your dataset have very few observations, which may cause estimation problems.\n  Check groups: 11,6,12,8,10.",
+    "n_post": 18,
+    "finite_post": 18,
+    "n_pre": 37,
+    "finite_pre": 37
+  },
+  "M3": {
+    "warnings": "Some groups in your dataset have very few observations, which may cause estimation problems.\n  Check groups: 11,6,12,8,10.",
+    "n_post": 18,
+    "finite_post": 18,
+    "n_pre": 37,
+    "finite_pre": 37
+  },
+  "M4": {
+    "warnings": "Some groups in your dataset have very few observations, which may cause estimation problems.\n  Check groups: 11,6,12,8,10.",
+    "n_post": 18,
+    "finite_post": 18,
+    "n_pre": 37,
+    "finite_pre": 37
+  },
+  "M5": {
+    "warnings": "Some groups in your dataset have very few observations, which may cause estimation problems.\n  Check groups: 11,6,12,8,10.",
+    "n_post": 18,
+    "finite_post": 18,
+    "n_pre": 37,
+    "finite_pre": 37
+  },
+  "M6": {
+    "warnings": "Some groups in your dataset have very few observations, which may cause estimation problems.\n  Check groups: 11,6,12,8,10.",
+    "n_post": 18,
+    "finite_post": 18,
+    "n_pre": 37,
+    "finite_pre": 37
+  },
+  "M7": {
+    "warnings": "Some groups in your dataset have very few observations, which may cause estimation problems.\n  Check groups: 11,6,12,8,10.",
+    "n_post": 18,
+    "finite_post": 18,
+    "n_pre": 37,
+    "finite_pre": 37
+  },
+  "M8": {
+    "warnings": "Some groups in your dataset have very few observations, which may cause estimation problems.\n  Check groups: 11,6,12,8,10.",
+    "n_post": 18,
+    "finite_post": 18,
+    "n_pre": 37,
+    "finite_pre": 37
+  },
+  "M9": {
+    "warnings": ["Dropped 20 units that were already treated in the first period.", "Some groups in your dataset have very few observations, which may cause estimation problems.\n  Check groups: 2,3."],
+    "n_post": 3,
+    "finite_post": 3,
+    "n_pre": 1,
+    "finite_pre": 1
+  }
+}

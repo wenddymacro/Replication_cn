@@ -1,0 +1,38 @@
+{
+  "paper_id": "cie20260205",
+  "spec_id": "T2_c1",
+  "journal": "cie",
+  "data_path": "$CIE_RAW/数据.dta",
+  "id_var": "firm_id",
+  "time_var": "year",
+  "y_var": "RD_expense",
+  "gvar": "first_buyyear_own",
+  "treat_var": "DID_buyall_own",
+  "cluster_var": "firm_id",
+  "xt_vars": [
+    "ind_id"
+  ],
+  "controls": [
+    "ownership",
+    "firmsize",
+    "firmage",
+    "capex_labor",
+    "lnPatent_before85",
+    "perGDP_growth",
+    "lnCityPatent85",
+    "lnHtechfirm",
+    "lnHzone"
+  ],
+  "static_or_event": "static",
+  "published_coef": 0.1117,
+  "published_se": 0.038,
+  "published_n": null,
+  "table": 2,
+  "column": 1,
+  "preferred": false,
+  "in_abstract_intro": false,
+  "reports_modern_estimator": true,
+  "software": "Stata",
+  "replication_status": "exact",
+  "notes": "通过 reestimate.R 按作者 reghdfe 样本保留排除仅购买另一来源的企业、删除单例及其他缺失；不直接以原始数据运行通用脚本。表2列号为作者程序顺序。"
+}
