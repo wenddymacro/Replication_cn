@@ -1,0 +1,30 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+
+Attaching package: 'data.table'
+
+The following object is masked from 'package:base':
+
+    %notin%
+
+           used  (Mb) gc trigger   (Mb)  max used   (Mb)
+Ncells  2692919 143.9    4713791  251.8   4713791  251.8
+Vcells 33475065 255.4  149435757 1140.2 186615548 1423.8
+CSA_INPUT 2890738 331090 38969 1.032985 
+                       twfe                 bjs
+base    1.5676798249103e-02 2.1263091827714e-02
+reduced 1.5676798249097e-02 2.1260416094475e-02
+diff    5.8425486670899e-15 2.6757332384948e-06
+COMPRESSED 1691782 from 2890738 
+             twfe        bjs
+base    0.0156768 0.02126309
+reduced 0.0156768 0.02126042
+     weighted_check 
+2.0892623403442e-05 
+           used  (Mb) gc trigger   (Mb)  max used   (Mb)
+Ncells  2795845 149.4    4713791  251.8   4713791  251.8
+Vcells 58779175 448.5  206812949 1577.9 258516184 1972.4
+BOOT_SECONDS_PER_DRAW 4.292 

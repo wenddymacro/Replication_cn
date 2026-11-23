@@ -1,0 +1,35 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+
+Attaching package: 'data.table'
+
+The following object is masked from 'package:base':
+
+    %notin%
+
+      source     n values         min       max
+      <char> <int>  <int>       <num>     <num>
+1: city17_22  1670   1670 0.001634021 0.7956517
+        source     n values         min       max
+        <char> <int>  <int>       <num>     <num>
+1: county17_22 13948   1676 0.001634021 0.7956517
+       g units reversals
+   <num> <int>     <int>
+1:  2014    73         0
+2:   Inf   222         0
+        g units reversals
+    <num> <int>     <int>
+ 1:  2013    26         0
+ 2:  2014    74         0
+ 3:  2015    53         0
+ 4:  2016    30         0
+ 5:  2017    24         0
+ 6:  2018    16         0
+ 7:  2019    19         0
+ 8:  2020    27         0
+ 9:  2021     7         0
+10:  2022     6         0
+11:   Inf    13         0

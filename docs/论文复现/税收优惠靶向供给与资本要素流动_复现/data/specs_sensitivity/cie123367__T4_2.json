@@ -1,0 +1,42 @@
+{
+  "paper_id": "cie123367",
+  "spec_id": "T4_2",
+  "journal": "cie",
+  "data_path": "$CIE_RAW/model_data/cie123367__T4_2.rds",
+  "id_var": "panel",
+  "time_var": "year",
+  "y_var": "ydcom_add1",
+  "gvar": "g0",
+  "cluster_var": "citycp",
+  "xt_vars": [
+    "prov",
+    "prov_son"
+  ],
+  "controls": [
+    "size",
+    "lev",
+    "roa",
+    "perr",
+    "dual",
+    "bigstock",
+    "lrgdp2014t",
+    "third2014t",
+    "loan2014t"
+  ],
+  "static_or_event": "static",
+  "published_coef": 0.0167,
+  "published_se": 0.0032,
+  "published_n": 2358532,
+  "published_source": "表4 第(2)列",
+  "table": "4",
+  "column": "2",
+  "preferred": false,
+  "in_abstract_intro": false,
+  "reports_modern_estimator": false,
+  "software": "Stata",
+  "replication_status": "exact",
+  "original_sample_filter": "treat3==1&deep==1|ntreat==1&deep==1",
+  "original_fixed_effects": "year^prov + year^prov_son + id^city_son",
+  "data_preparation": "modern_refined.R with CIE_EXPORT_SPEC set to spec_id",
+  "notes": "来自作者样本。以事件期指标反推的首治期优先，逐行核对二元处理状态。 deep 在大量面板单位内变化，按时间变化的结果相关分组另作敏感性估计。"
+}

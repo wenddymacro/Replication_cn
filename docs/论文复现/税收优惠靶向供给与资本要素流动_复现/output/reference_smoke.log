@@ -1,0 +1,14 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+You have an unbalanced panel. Proceeding as such.
+   window     twfe twfe_se     csa  csa_se      bjs bjs_se   neg_abs G_eff_twfe
+   <char>    <num>   <num>   <num>   <num>    <num>  <num>     <num>      <num>
+1: static -0.01738 0.02006 0.09427 0.03877 -0.02122 0.0223 0.0001543       2237
+   G_eff_bjs G_eff_csa
+       <num>     <num>
+1:        NA        NA
+TWFE in raw units -0.197237 vs published -0.1972 (ratio 1.0002)
+-> output/specs_controls/cie123367__T8_1.csv 

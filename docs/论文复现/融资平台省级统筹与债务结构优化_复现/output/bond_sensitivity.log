@@ -1,0 +1,28 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+
+Attaching package: 'data.table'
+
+The following object is masked from 'package:base':
+
+    %notin%
+
+      g0 reversal     N
+   <num>   <lgcl> <int>
+1:  2020    FALSE    48
+2:  2021    FALSE    72
+3:  2022    FALSE    45
+4:  2023    FALSE     7
+5:   Inf    FALSE  1615
+The Wald pre-test is not reported when clustering beyond the unit level (clustervars = 'cl_num') because the analytical variance matrix does not account for between-cluster correlation. Use the bootstrap confidence intervals to assess pre-trends.
+Warning messages:
+1: In did_standardization(data, args) :
+  Some groups in your dataset have very few observations, which may cause estimation problems.
+  Check groups: 9.
+2: In run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 9 in time period 4
+3: In run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 9 in time period 5

@@ -1,0 +1,30 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+
+Attaching package: 'data.table'
+
+The following object is masked from 'package:base':
+
+    %notin%
+
+[1] 0.2192003
+START conventional BJS inference 
+NOTE: The fixed-effects are not regular, they cannot be straightforwardly interpreted.
+$est
+[1] 0.07295753
+
+$se
+[1] 0.01849693
+
+$note
+[1] "bjs_nonimputable_dropped=17310"
+
+$G_eff
+[1] NA
+
+$L_max
+[1] NA
+

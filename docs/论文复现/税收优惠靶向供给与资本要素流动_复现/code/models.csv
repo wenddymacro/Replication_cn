@@ -1,0 +1,51 @@
+spec,data,y,rhs,target,subset,fixed,cluster
+T1_1,1,ydcom_add1,did3,did3,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T1_2,1,ydcom_add1,did3 + lrgdp2014t + third2014t + loan2014t,did3,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T1_3,1,ydcom_add1,did3 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T1_4,1,ydcom_add1,did3,did3,treat3==1|ntreat==1,year^id + year^prov_son + id^city_son,citycp
+T2_1,1,ydcom_add1,did1,did1,treat1==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T2_2,1,ydcom_add1,did1 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did1,treat1==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T2_3,1,ydcom_add1,did2,did2,treat2==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T2_4,1,ydcom_add1,did2 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did2,treat2==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T3_1,1,ydcom_add1,did3:dis_1 + did3:dis_2 + did3:dis_3 + did3:dis_4 + did3:dis_5 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3:dis_1 did3:dis_2 did3:dis_3 did3:dis_4 did3:dis_5,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T3_2,1,ydcom_add1,did3:envir_1 + did3:envir_2 + did3:envir_3 + did3:envir_4 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3:envir_1 did3:envir_2 did3:envir_3 did3:envir_4,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T4_1,1,ydcom_add1,did3 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3,treat3==1&deep==0|ntreat==1&deep==0,year^prov + year^prov_son + id^city_son,citycp
+T4_2,1,ydcom_add1,did3 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3,treat3==1&deep==1|ntreat==1&deep==1,year^prov + year^prov_son + id^city_son,citycp
+T4_3,1,Fydcom_q1,did3 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T4_4,1,Fydcom_q2,did3 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T4_5,1,Fydcom_q3,did3 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T4_6,1,Fydcom_q4,did3 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T5_1,1,ydcom_add1,did3 + gqrd + did3:gqrd + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3 gqrd did3:gqrd,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T5_2,1,ydcom_add1,did3 + addac + did3:addac + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3 addac did3:addac,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T5_3,1,ydcom_add1,did3 + assetac + did3:assetac + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3 assetac did3:assetac,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T5_4,1,ydcom_add1,did3 + survat + did3:survat + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3 survat did3:survat,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T6_1,1,mcost_g,did3 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T6_2,1,ydcom_dum1,did3 + zdcost_g + did3:zdcost_g + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3 zdcost_g did3:zdcost_g,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T6_3,1,muncer_g,did3 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T6_4,1,ydcom_dum1,did3 + uncer_g + did3:uncer_g + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3 uncer_g did3:uncer_g,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T6_5,1,mtaxb_g,did3 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T6_6,1,ydcom_dum1,did3 + taxb_g + did3:taxb_g + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3 taxb_g did3:taxb_g,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T7_1,1,Fpoor,did3 + ydcom_dum1 + did3:ydcom_dum1 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3 ydcom_dum1 did3:ydcom_dum1,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T7_2,1,Fconjy_all,did3 + ydcom_dum1 + did3:ydcom_dum1 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3 ydcom_dum1 did3:ydcom_dum1,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T7_3,1,Fconjy_qz,did3 + ydcom_dum1 + did3:ydcom_dum1 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3 ydcom_dum1 did3:ydcom_dum1,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T7_4,1,Fconjy_fqz,did3 + ydcom_dum1 + did3:ydcom_dum1 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3 ydcom_dum1 did3:ydcom_dum1,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T7_5,1,ydcom_add1,did3:cyjj1 + did3 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3:cyjj1 did3,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T7_6,1,ydcom_add1,did3:cyjj2 + did3 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3:cyjj2 did3,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T7_7,1,ydcom_dum1,did3:cyjj1 + did3 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3:cyjj1 did3,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T7_8,1,ydcom_dum1,did3:cyjj2 + did3 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3:cyjj2 did3,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+T8_1,2,Fbdcom,did + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did,,year + id,id
+T8_2,2,Fbdcom_50,did + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did,,year + id,id
+T8_3,2,Fppe,did + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did,,year + id,id
+T8_4,2,Frd,did + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did,,year + id,id
+F3_1,1,ydcom_add1,pre_4_y + pre_3_y + pre_2_y + pre_1_y + post_0_y + post_1_y + post_2_y + post_3_y + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,pre_4_y pre_3_y pre_2_y pre_1_y post_0_y post_1_y post_2_y post_3_y,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+F3_2,1,ydcom_add1,pre_4_by + pre_3_by + pre_2_by + pre_1_by + post_0_by + post_1_by + post_2_by + post_3_by + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,pre_4_by pre_3_by pre_2_by pre_1_by post_0_by post_1_by post_2_by post_3_by,treat1==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+F3_3,1,ydcom_add1,pre_4_b + pre_3_b + pre_2_b + pre_1_b + post_0_b + post_1_b + post_2_b + post_3_b + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,pre_4_b pre_3_b pre_2_b pre_1_b post_0_b post_1_b post_2_b post_3_b,treat2==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+A2_1,1,ydcom_add50,did3 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+A2_2,1,ydcom_dum1,did3 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+A2_3,1,ydcom_add1,did3 + mmsize:year + mmlev:year + mmroa:year + mmperr:year + mmdual:year + mmbigstock:year + lrgdp2014t + third2014t + loan2014t,did3,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+A2_4,1,ydcom_add1,did3 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3,treat3==1&pro_city==0&pro_city_son==0|ntreat==1&pro_city==0&pro_city_son==0,year^prov + year^prov_son + id^city_son,citycp
+A2_5,1,ydcom_add1,did3 + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3,treat3==1&monindus==0|ntreat==1&monindus==0,year^prov + year^prov_son + id^city_son,citycp
+A3_1,1,ydcom_add1,did3 + finaccdid + finaccdid_son + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3 finaccdid finaccdid_son,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+A3_2,1,ydcom_add1,did3 + digtax + digtax_son + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3 digtax digtax_son,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+A3_3,1,ydcom_add1,did3 + busendid + busendid_son + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3 busendid busendid_son,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp
+A3_4,1,ydcom_add1,did3 + taxsodid + size + lev + roa + perr + dual + bigstock + lrgdp2014t + third2014t + loan2014t,did3 taxsodid,treat3==1|ntreat==1,year^prov + year^prov_son + id^city_son,citycp

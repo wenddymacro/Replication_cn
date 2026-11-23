@@ -1,0 +1,38 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+[1] "Chinese (Simplified)_China.utf8"
+
+Attaching package: 'data.table'
+
+The following object is masked from 'package:base':
+
+    %notin%
+
+Bond source columns id year Roa Liquidity Quick Level Cashratio Age Size Turn Lnincome Lnoutcome Lngdp Structure Integ CS 
+Bond rows 15505 firms 1787 excess rows per firm-year 7532 
+   firm_source treated contradict     N
+        <lgcl>  <lgcl>     <lgcl> <int>
+1:        TRUE   FALSE      FALSE  1506
+2:        TRUE    TRUE      FALSE    27
+3:        TRUE    TRUE       TRUE   144
+4:        TRUE   FALSE       TRUE    97
+5:       FALSE   FALSE      FALSE    12
+6:       FALSE    TRUE      FALSE     1
+You have an unbalanced panel. Proceeding as such.
+Warning messages:
+1: In did_standardization(data, args) :
+  Some groups in your dataset have very few observations, which may cause estimation problems.
+  Check groups: 9,5,4.
+2: In run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 4 in time period 3
+3: In run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 4 in time period 3
+4: In run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 5 in time period 1
+5: In run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 5 in time period 2
+6: In run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 5 in time period 9

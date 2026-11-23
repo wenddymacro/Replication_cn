@@ -1,0 +1,26 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+You have an unbalanced panel. Proceeding as such.
+Warning messages:
+1: In did_standardization(data, args) :
+  Some groups in your dataset have very few observations, which may cause estimation problems.
+  Check groups: 5,4.
+2: In run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 4 in time period 3
+3: In run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 4 in time period 3
+4: In run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 4 in time period 3
+5: In run_DRDID(cohort_data, covariates, dp2, g_val = dp2$treated_groups[g],  :
+  No units in group 5 in time period 2
+   window    twfe twfe_se      csa  csa_se    bjs  bjs_se neg_abs G_eff_twfe
+   <char>   <num>   <num>    <num>   <num>  <num>   <num>   <num>      <num>
+1: static -0.1881  0.0423 -0.09571 0.03613 -0.211 0.04216 0.00171      395.6
+   G_eff_bjs G_eff_csa
+       <num>     <num>
+1:       327     243.7
+TWFE in raw units -0.0372786 vs published -0.0373 (ratio 0.9994)
+-> output/specs/cie121816__T1_1.csv 

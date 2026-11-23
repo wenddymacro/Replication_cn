@@ -1,0 +1,2 @@
+spec_id,n,units,clusters,cohorts,supported_cohorts,y_sd,twfe,twfe_se,twfe_raw,twfe_bjs_aligned,bjs_aligned_n,neg_rows,neg_abs,G_eff_twfe,L_max_twfe,bjs,bjs_note,csa_note
+T1_1,2890738,331090,38969,5,5,1.03298542338791,0.0156767982491025,0.00294148146732368,0.016193904076716,0.0156767982490974,2701916,0.153532668234469,4.97377923525353e-13,463.344673868008,0.0138821602647887,0.0212630918277138,nonimputable_rows=188822,did not yet run

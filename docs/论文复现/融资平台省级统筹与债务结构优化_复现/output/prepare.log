@@ -1,0 +1,30 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+[1] "Chinese (Simplified)_China.utf8"
+
+Attaching package: 'data.table'
+
+The following object is masked from 'package:base':
+
+    %notin%
+
+firm rows 30677 IDs 4379 duplicates 0 
+    adoption     p reversal     N
+       <num> <num>   <lgcl> <int>
+ 1:     2019  2018    FALSE     1
+ 2:     2019  2019    FALSE     3
+ 3:     2020  2020    FALSE   115
+ 4:     2021  2021    FALSE   202
+ 5:     2022  2021    FALSE     2
+ 6:     2022  2022    FALSE    56
+ 7:     2023  2022    FALSE     1
+ 8:     2023  2023    FALSE     7
+ 9:      Inf  2018    FALSE     1
+10:      Inf  2020    FALSE     1
+11:      Inf  2021    FALSE    11
+12:      Inf  2022    FALSE     5
+13:      Inf  2023    FALSE     2
+14:      Inf   Inf    FALSE  3972

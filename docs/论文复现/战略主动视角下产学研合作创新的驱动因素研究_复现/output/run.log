@@ -1,0 +1,62 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+
+Attaching package: 'data.table'
+
+The following object is masked from 'package:base':
+
+    %notin%
+
+    rows units duplicates
+   <int> <int>      <int>
+1: 25050  2825          0
+   first     N
+   <num> <int>
+1:  2018     3
+2:  2019     5
+3:  2020     6
+4:  2021    18
+5:  2022     7
+[1] 0
+[1] 0
+NOTE: 0/23 fixed-effect singletons were removed (23 observations).
+NOTE: 0/23 fixed-effect singletons were removed (23 observations).
+NOTE: 0/23/3 fixed-effect singletons were removed (26 observations).
+NOTE: 0/23/3 fixed-effect singletons were removed (26 observations).
+NOTE: 0/23/3 fixed-effect singletons were removed (26 observations).
+NOTE: 0/23/3 fixed-effect singletons were removed (26 observations).
+NOTE: 0/23/3 fixed-effect singletons were removed (26 observations).
+NOTE: 0/23/3 fixed-effect singletons were removed (26 observations).
+NOTE: 0/23/3 fixed-effect singletons were removed (26 observations).
+NOTES: 2,310 observations removed because of NA values (LHS: 2,310).
+       0/26/4 fixed-effect singletons were removed (30 observations).
+NOTES: 2,310 observations removed because of NA values (LHS: 2,310).
+       0/26/4 fixed-effect singletons were removed (30 observations).
+NOTES: 2,310 observations removed because of NA values (LHS: 2,310).
+       0/26/4 fixed-effect singletons were removed (30 observations).
+NOTES: 2,310 observations removed because of NA values (LHS: 2,310).
+       0/26/4 fixed-effect singletons were removed (30 observations).
+NOTES: 2,310 observations removed because of NA values (LHS: 2,310).
+       0/26/4 fixed-effect singletons were removed (30 observations).
+NOTES: 2,310 observations removed because of NA values (LHS: 2,310).
+       0/26/4 fixed-effect singletons were removed (30 observations).
+NOTE: 0/23/3 fixed-effect singletons were removed (26 observations).
+NOTES: 2 observations removed because of NA values (LHS: 2).
+       0/23/3 fixed-effect singletons were removed (26 observations).
+NOTE: 0/23/3 fixed-effect singletons were removed (26 observations).
+NOTES: 3,016 observations removed because of NA values (LHS: 3,016).
+       0/35/4 fixed-effect singletons were removed (38 observations).
+NOTES: 6,048 observations removed because of NA values (LHS: 6,048).
+       0/42/45 fixed-effect singletons were removed (82 observations).
+NOTES: 6,494 observations removed because of NA values (LHS: 6,494).
+       0/44/57 fixed-effect singletons were removed (94 observations).
+NOTES: 3,014 observations removed because of NA values (LHS: 3,014).
+       0/34/4 fixed-effect singletons were removed (37 observations).
+NOTES: 3,014 observations removed because of NA values (LHS: 3,014).
+       0/34/4 fixed-effect singletons were removed (37 observations).
+NOTES: 3,017 observations removed because of NA values (LHS: 3,017).
+       0/34/4 fixed-effect singletons were removed (37 observations).
+NOTE: 0/23/3 fixed-effect singletons were removed (26 observations).

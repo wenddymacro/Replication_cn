@@ -1,0 +1,20 @@
+魏志华等：约束与激励：融资平台省级统筹与债务结构优化 2025 年第 12 期
+13
+参考文献
+[1] 陈登科. 贸易壁垒下降与环境污染改善——来自中国企业污染数据的新证据[J].经济研究, 2020，(12)：98-114. [2] 方嘉宇，陆毅.分类监管政策与地方融资平台绩效——来自融资平台退出名单制管理系统
+的经验证据[J].金融研究，2024，(4)：75-93. [3] 魏志华，曾爱民，李博.金融生态环境与企业融资约束——基于中国上市公司的实证研究
+[J].会计研究，2014，(5)：73-80. [4] 解垩，杨玉琪.智慧健康养老与医疗费用——来自智慧健康养老示范基地的证据[J].管理世
+界，2025，41(1)：108-130. [5] 徐军伟，毛捷，管星华.地方政府隐性债务再认识——基于融资平台公司的精准界定和金
+融势能的视角[J].管理世界，2020，(9)：37-59. [6] Cantoni,D.,Y.Y.Chen,D.Y.Yang,N.Yuchtman andY.J.Zhang.Curriculumand Ideology[J].Journal of
+PoliticalEconomy,2017, 125(2):338-392. [7] Cinelli, Carlos,Jeremy Ferwerda, andChad Hazlett. Sensemakr: SensitivityAnalysis Toolsfor OLS in R
+andStata[R].SSRNWorkingPaper, 2020. [8] De Chaisemartin, C. and X. D'Haultfoeuille. Two-Way Fixed Effects Estimators with Heterogeneous
+TreatmentEffects[J].AmericanEconomicReview,2020, 110(9):2964-2996. [9] Goodman-Bacon, A. Difference-in-Differences with Variation in Treatment Timing[J]. Journal of
+Econometrics,2021,225(2):254-277. [10] Sun, L.Y. and S.Abraham. Estimating Dynamic Treatment Effectsin Event Studies with Heterogeneous
+TreatmentEffects[J].Journal ofEconometrics,2021, 225(2):175-199. 注：该附录是期刊所发表论文的组成部分，同样视为作者公开发表的内容。如研究中使用该附
+录中的内容，请务必在研究成果上注明引文和下载附件出处。
+引用示例：
+参考文献引用范例：
+[1] 朱军.技术吸收、政府推动与中国全要素生产率提升[J].中国工业经济.2017,(1):5-24. 如果研究中使用了未在《中国工业经济》纸质版刊发、但在杂志网站上正式公开发表的数字内容
+（包括数据、程序、附录文件），请务必在研究成果正文中注明：
+数 据 （ 及 程 序 等 附 件 ） 来 自 朱 军 （ 2017 ）， 参 见 在 《 中 国 工 业 经 济 》 网 站
+（https://ciejournal.ajcass.com）附件下载。

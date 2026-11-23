@@ -1,0 +1,31 @@
+{
+  "paper_id": "cie20260605",
+  "journal": "cie",
+  "year": 2026,
+  "issue": 6,
+  "title": "共同富裕进程中的数字政府建设：政务服务均等化与县域经济发展的视角",
+  "eligible_design": false,
+  "staggered_design": true,
+  "near_miss_controls_only": false,
+  "n_eligible_specs": 0,
+  "eligible_specs": [],
+  "near_miss_controls_only_specs": [],
+  "package_status": "data_and_code",
+  "ineligible_specs": [
+    {
+      "reason": "连续数字政府指数；IV 另违反线性 DID 纳入条件",
+      "location": "正文表3至13、图1"
+    }
+  ],
+  "appendix_specs": [
+    {
+      "notes": "2014年同一处理时点",
+      "location": "附表16第1列"
+    },
+    {
+      "notes": "政务微信公众号有10个处理批次，位于附录",
+      "location": "附表16第2列"
+    }
+  ],
+  "notes": "复算源程序的133条 OLS/IV 回归命令。正文无合格设定。"
+}

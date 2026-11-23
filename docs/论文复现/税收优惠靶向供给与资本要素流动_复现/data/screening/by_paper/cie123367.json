@@ -1,0 +1,665 @@
+{
+  "paper_id": "cie123367",
+  "journal": "cie",
+  "year": 2026,
+  "issue": 7,
+  "title": "税收优惠靶向供给与资本要素流动——来自税务服务专员制度的证据",
+  "screened_from": "article_text+package",
+  "screen_date": "2026-11-24",
+  "staggered_design": true,
+  "eligible_design": true,
+  "near_miss": false,
+  "near_miss_controls_only": true,
+  "main_or_robustness": "main",
+  "policy_or_event": "税务服务专员制度按城市推进",
+  "unit": "母公司×子公司所在城市；表8为母公司",
+  "assignment_unit": "城市对；表8使用母公司处理指标",
+  "time_unit": "year",
+  "data_access": "public",
+  "package_status": "data_and_code",
+  "software": "Stata",
+  "reports_modern_estimator": false,
+  "estimators_reported": [
+    "twfe_static",
+    "twfe_event"
+  ],
+  "eligible_specs": [
+    {
+      "spec_id": "T1_1",
+      "location": "表1 第(1)列",
+      "outcome": "ydcom_add1",
+      "clustering": "citycp",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did3",
+      "fixed_effects": "year^prov + year^prov_son + id^city_son",
+      "xt_vars": [
+        "prov",
+        "prov_son"
+      ],
+      "controls": [],
+      "coef": 0.0162,
+      "se": 0.003,
+      "n_obs": 2890738,
+      "notes": "来自作者样本。以事件期指标反推的首治期优先，逐行核对二元处理状态。"
+    },
+    {
+      "spec_id": "T1_4",
+      "location": "表1 第(4)列",
+      "outcome": "ydcom_add1",
+      "clustering": "citycp",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did3",
+      "fixed_effects": "year^id + year^prov_son + id^city_son",
+      "xt_vars": [
+        "id",
+        "prov_son"
+      ],
+      "controls": [],
+      "coef": 0.0162,
+      "se": 0.003,
+      "n_obs": 2890738,
+      "notes": "来自作者样本。以事件期指标反推的首治期优先，逐行核对二元处理状态。 母公司类别超过 CSA 项目阈值，保留原式 TWFE 与 BJS。"
+    },
+    {
+      "spec_id": "T2_1",
+      "location": "表2 第(1)列",
+      "outcome": "ydcom_add1",
+      "clustering": "citycp",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did1",
+      "fixed_effects": "year^prov + year^prov_son + id^city_son",
+      "xt_vars": [
+        "prov",
+        "prov_son"
+      ],
+      "controls": [],
+      "coef": 0.0079,
+      "se": 0.003,
+      "n_obs": 3680352,
+      "notes": "来自作者样本。以事件期指标反推的首治期优先，逐行核对二元处理状态。"
+    },
+    {
+      "spec_id": "T2_3",
+      "location": "表2 第(3)列",
+      "outcome": "ydcom_add1",
+      "clustering": "citycp",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did2",
+      "fixed_effects": "year^prov + year^prov_son + id^city_son",
+      "xt_vars": [
+        "prov",
+        "prov_son"
+      ],
+      "controls": [],
+      "coef": -0.0073,
+      "se": 0.0035,
+      "n_obs": 4914000,
+      "notes": "来自作者样本。以事件期指标反推的首治期优先，逐行核对二元处理状态。"
+    }
+  ],
+  "near_miss_controls_only_specs": [
+    {
+      "spec_id": "T1_2",
+      "location": "表1 第(2)列",
+      "outcome": "ydcom_add1",
+      "clustering": "citycp",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did3",
+      "fixed_effects": "year^prov + year^prov_son + id^city_son",
+      "xt_vars": [
+        "prov",
+        "prov_son"
+      ],
+      "controls": [
+        "lrgdp2014t",
+        "third2014t",
+        "loan2014t"
+      ],
+      "coef": 0.0162,
+      "se": 0.003,
+      "n_obs": 2890738,
+      "notes": "来自作者样本。以事件期指标反推的首治期优先，逐行核对二元处理状态。 三项基期城市指标乘时间趋势，原式作为时变控制进入二级。"
+    },
+    {
+      "spec_id": "T1_3",
+      "location": "表1 第(3)列",
+      "outcome": "ydcom_add1",
+      "clustering": "citycp",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did3",
+      "fixed_effects": "year^prov + year^prov_son + id^city_son",
+      "xt_vars": [
+        "prov",
+        "prov_son"
+      ],
+      "controls": [
+        "size",
+        "lev",
+        "roa",
+        "perr",
+        "dual",
+        "bigstock",
+        "lrgdp2014t",
+        "third2014t",
+        "loan2014t"
+      ],
+      "coef": 0.0162,
+      "se": 0.003,
+      "n_obs": 2890738,
+      "notes": "来自作者样本。以事件期指标反推的首治期优先，逐行核对二元处理状态。"
+    },
+    {
+      "spec_id": "T2_2",
+      "location": "表2 第(2)列",
+      "outcome": "ydcom_add1",
+      "clustering": "citycp",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did1",
+      "fixed_effects": "year^prov + year^prov_son + id^city_son",
+      "xt_vars": [
+        "prov",
+        "prov_son"
+      ],
+      "controls": [
+        "size",
+        "lev",
+        "roa",
+        "perr",
+        "dual",
+        "bigstock",
+        "lrgdp2014t",
+        "third2014t",
+        "loan2014t"
+      ],
+      "coef": 0.0077,
+      "se": 0.003,
+      "n_obs": 3680352,
+      "notes": "来自作者样本。以事件期指标反推的首治期优先，逐行核对二元处理状态。"
+    },
+    {
+      "spec_id": "T2_4",
+      "location": "表2 第(4)列",
+      "outcome": "ydcom_add1",
+      "clustering": "citycp",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did2",
+      "fixed_effects": "year^prov + year^prov_son + id^city_son",
+      "xt_vars": [
+        "prov",
+        "prov_son"
+      ],
+      "controls": [
+        "size",
+        "lev",
+        "roa",
+        "perr",
+        "dual",
+        "bigstock",
+        "lrgdp2014t",
+        "third2014t",
+        "loan2014t"
+      ],
+      "coef": -0.0073,
+      "se": 0.0036,
+      "n_obs": 4914000,
+      "notes": "来自作者样本。以事件期指标反推的首治期优先，逐行核对二元处理状态。"
+    },
+    {
+      "spec_id": "T4_3",
+      "location": "表4 第(3)列",
+      "outcome": "Fydcom_q1",
+      "clustering": "citycp",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did3",
+      "fixed_effects": "year^prov + year^prov_son + id^city_son",
+      "xt_vars": [
+        "prov",
+        "prov_son"
+      ],
+      "controls": [
+        "size",
+        "lev",
+        "roa",
+        "perr",
+        "dual",
+        "bigstock",
+        "lrgdp2014t",
+        "third2014t",
+        "loan2014t"
+      ],
+      "coef": 0.0002,
+      "se": 0.0004,
+      "n_obs": 2890738,
+      "notes": "来自作者样本。以事件期指标反推的首治期优先，逐行核对二元处理状态。"
+    },
+    {
+      "spec_id": "T4_4",
+      "location": "表4 第(4)列",
+      "outcome": "Fydcom_q2",
+      "clustering": "citycp",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did3",
+      "fixed_effects": "year^prov + year^prov_son + id^city_son",
+      "xt_vars": [
+        "prov",
+        "prov_son"
+      ],
+      "controls": [
+        "size",
+        "lev",
+        "roa",
+        "perr",
+        "dual",
+        "bigstock",
+        "lrgdp2014t",
+        "third2014t",
+        "loan2014t"
+      ],
+      "coef": 0.0013,
+      "se": 0.001,
+      "n_obs": 2890738,
+      "notes": "来自作者样本。以事件期指标反推的首治期优先，逐行核对二元处理状态。"
+    },
+    {
+      "spec_id": "T4_5",
+      "location": "表4 第(5)列",
+      "outcome": "Fydcom_q3",
+      "clustering": "citycp",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did3",
+      "fixed_effects": "year^prov + year^prov_son + id^city_son",
+      "xt_vars": [
+        "prov",
+        "prov_son"
+      ],
+      "controls": [
+        "size",
+        "lev",
+        "roa",
+        "perr",
+        "dual",
+        "bigstock",
+        "lrgdp2014t",
+        "third2014t",
+        "loan2014t"
+      ],
+      "coef": 0.002,
+      "se": 0.0008,
+      "n_obs": 2890738,
+      "notes": "来自作者样本。以事件期指标反推的首治期优先，逐行核对二元处理状态。"
+    },
+    {
+      "spec_id": "T4_6",
+      "location": "表4 第(6)列",
+      "outcome": "Fydcom_q4",
+      "clustering": "citycp",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did3",
+      "fixed_effects": "year^prov + year^prov_son + id^city_son",
+      "xt_vars": [
+        "prov",
+        "prov_son"
+      ],
+      "controls": [
+        "size",
+        "lev",
+        "roa",
+        "perr",
+        "dual",
+        "bigstock",
+        "lrgdp2014t",
+        "third2014t",
+        "loan2014t"
+      ],
+      "coef": 0.0088,
+      "se": 0.0021,
+      "n_obs": 2890738,
+      "notes": "来自作者样本。以事件期指标反推的首治期优先，逐行核对二元处理状态。"
+    },
+    {
+      "spec_id": "T6_1",
+      "location": "表6 第(1)列",
+      "outcome": "mcost_g",
+      "clustering": "citycp",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did3",
+      "fixed_effects": "year^prov + year^prov_son + id^city_son",
+      "xt_vars": [
+        "prov",
+        "prov_son"
+      ],
+      "controls": [
+        "size",
+        "lev",
+        "roa",
+        "perr",
+        "dual",
+        "bigstock",
+        "lrgdp2014t",
+        "third2014t",
+        "loan2014t"
+      ],
+      "coef": 0.0099,
+      "se": 0.0049,
+      "n_obs": 1597709,
+      "notes": "来自作者样本。以事件期指标反推的首治期优先，逐行核对二元处理状态。"
+    },
+    {
+      "spec_id": "T6_3",
+      "location": "表6 第(3)列",
+      "outcome": "muncer_g",
+      "clustering": "citycp",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did3",
+      "fixed_effects": "year^prov + year^prov_son + id^city_son",
+      "xt_vars": [
+        "prov",
+        "prov_son"
+      ],
+      "controls": [
+        "size",
+        "lev",
+        "roa",
+        "perr",
+        "dual",
+        "bigstock",
+        "lrgdp2014t",
+        "third2014t",
+        "loan2014t"
+      ],
+      "coef": -0.0011,
+      "se": 0.0002,
+      "n_obs": 2157368,
+      "notes": "来自作者样本。以事件期指标反推的首治期优先，逐行核对二元处理状态。"
+    },
+    {
+      "spec_id": "T6_5",
+      "location": "表6 第(5)列",
+      "outcome": "mtaxb_g",
+      "clustering": "citycp",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did3",
+      "fixed_effects": "year^prov + year^prov_son + id^city_son",
+      "xt_vars": [
+        "prov",
+        "prov_son"
+      ],
+      "controls": [
+        "size",
+        "lev",
+        "roa",
+        "perr",
+        "dual",
+        "bigstock",
+        "lrgdp2014t",
+        "third2014t",
+        "loan2014t"
+      ],
+      "coef": 0.002,
+      "se": 0.0004,
+      "n_obs": 2033128,
+      "notes": "来自作者样本。以事件期指标反推的首治期优先，逐行核对二元处理状态。"
+    },
+    {
+      "spec_id": "T8_1",
+      "location": "表8 第(1)列",
+      "outcome": "Fbdcom",
+      "clustering": "id",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did",
+      "fixed_effects": "year + id",
+      "xt_vars": [],
+      "controls": [
+        "size",
+        "lev",
+        "roa",
+        "perr",
+        "dual",
+        "bigstock",
+        "lrgdp2014t",
+        "third2014t",
+        "loan2014t"
+      ],
+      "coef": -0.1972,
+      "se": 0.2276,
+      "n_obs": 27208,
+      "notes": "以企业首次观察到处理的年份作为首治期，逐行核对二元处理状态。"
+    },
+    {
+      "spec_id": "T8_2",
+      "location": "表8 第(2)列",
+      "outcome": "Fbdcom_50",
+      "clustering": "id",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did",
+      "fixed_effects": "year + id",
+      "xt_vars": [],
+      "controls": [
+        "size",
+        "lev",
+        "roa",
+        "perr",
+        "dual",
+        "bigstock",
+        "lrgdp2014t",
+        "third2014t",
+        "loan2014t"
+      ],
+      "coef": -0.0329,
+      "se": 0.1006,
+      "n_obs": 27208,
+      "notes": "以企业首次观察到处理的年份作为首治期，逐行核对二元处理状态。"
+    },
+    {
+      "spec_id": "T8_3",
+      "location": "表8 第(3)列",
+      "outcome": "Fppe",
+      "clustering": "id",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did",
+      "fixed_effects": "year + id",
+      "xt_vars": [],
+      "controls": [
+        "size",
+        "lev",
+        "roa",
+        "perr",
+        "dual",
+        "bigstock",
+        "lrgdp2014t",
+        "third2014t",
+        "loan2014t"
+      ],
+      "coef": 0.0085,
+      "se": 0.0025,
+      "n_obs": 27206,
+      "notes": "以企业首次观察到处理的年份作为首治期，逐行核对二元处理状态。"
+    },
+    {
+      "spec_id": "T8_4",
+      "location": "表8 第(4)列",
+      "outcome": "Frd",
+      "clustering": "id",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did",
+      "fixed_effects": "year + id",
+      "xt_vars": [],
+      "controls": [
+        "size",
+        "lev",
+        "roa",
+        "perr",
+        "dual",
+        "bigstock",
+        "lrgdp2014t",
+        "third2014t",
+        "loan2014t"
+      ],
+      "coef": 0.0018,
+      "se": 0.0006,
+      "n_obs": 25012,
+      "notes": "以企业首次观察到处理的年份作为首治期，逐行核对二元处理状态。"
+    }
+  ],
+  "additional_sensitivity_specs": [
+    {
+      "spec_id": "T4_1",
+      "location": "表4 第(1)列",
+      "outcome": "ydcom_add1",
+      "clustering": "citycp",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did3",
+      "fixed_effects": "year^prov + year^prov_son + id^city_son",
+      "xt_vars": [
+        "prov",
+        "prov_son"
+      ],
+      "controls": [
+        "size",
+        "lev",
+        "roa",
+        "perr",
+        "dual",
+        "bigstock",
+        "lrgdp2014t",
+        "third2014t",
+        "loan2014t"
+      ],
+      "coef": 0.0088,
+      "se": 0.003,
+      "n_obs": 337376,
+      "notes": "来自作者样本。以事件期指标反推的首治期优先，逐行核对二元处理状态。 deep 在大量面板单位内变化，按时间变化的结果相关分组另作敏感性估计。"
+    },
+    {
+      "spec_id": "T4_2",
+      "location": "表4 第(2)列",
+      "outcome": "ydcom_add1",
+      "clustering": "citycp",
+      "outcome_transform": "作者分析数据的现成变量",
+      "treatment_definition": "did3",
+      "fixed_effects": "year^prov + year^prov_son + id^city_son",
+      "xt_vars": [
+        "prov",
+        "prov_son"
+      ],
+      "controls": [
+        "size",
+        "lev",
+        "roa",
+        "perr",
+        "dual",
+        "bigstock",
+        "lrgdp2014t",
+        "third2014t",
+        "loan2014t"
+      ],
+      "coef": 0.0167,
+      "se": 0.0032,
+      "n_obs": 2358532,
+      "notes": "来自作者样本。以事件期指标反推的首治期优先，逐行核对二元处理状态。 deep 在大量面板单位内变化，按时间变化的结果相关分组另作敏感性估计。"
+    }
+  ],
+  "ineligible_specs": [
+    {
+      "spec_id": "T3_1",
+      "location": "表3 第(1)列",
+      "reason": "处理与分组、机制指标或税收优惠变量的交互项"
+    },
+    {
+      "spec_id": "T3_2",
+      "location": "表3 第(2)列",
+      "reason": "处理与分组、机制指标或税收优惠变量的交互项"
+    },
+    {
+      "spec_id": "T5_1",
+      "location": "表5 第(1)列",
+      "reason": "处理与分组、机制指标或税收优惠变量的交互项"
+    },
+    {
+      "spec_id": "T5_2",
+      "location": "表5 第(2)列",
+      "reason": "处理与分组、机制指标或税收优惠变量的交互项"
+    },
+    {
+      "spec_id": "T5_3",
+      "location": "表5 第(3)列",
+      "reason": "处理与分组、机制指标或税收优惠变量的交互项"
+    },
+    {
+      "spec_id": "T5_4",
+      "location": "表5 第(4)列",
+      "reason": "处理与分组、机制指标或税收优惠变量的交互项"
+    },
+    {
+      "spec_id": "T6_2",
+      "location": "表6 第(2)列",
+      "reason": "处理与分组、机制指标或税收优惠变量的交互项"
+    },
+    {
+      "spec_id": "T6_4",
+      "location": "表6 第(4)列",
+      "reason": "处理与分组、机制指标或税收优惠变量的交互项"
+    },
+    {
+      "spec_id": "T6_6",
+      "location": "表6 第(6)列",
+      "reason": "处理与分组、机制指标或税收优惠变量的交互项"
+    },
+    {
+      "spec_id": "T7_1",
+      "location": "表7 第(1)列",
+      "reason": "处理与分组、机制指标或税收优惠变量的交互项"
+    },
+    {
+      "spec_id": "T7_2",
+      "location": "表7 第(2)列",
+      "reason": "处理与分组、机制指标或税收优惠变量的交互项"
+    },
+    {
+      "spec_id": "T7_3",
+      "location": "表7 第(3)列",
+      "reason": "处理与分组、机制指标或税收优惠变量的交互项"
+    },
+    {
+      "spec_id": "T7_4",
+      "location": "表7 第(4)列",
+      "reason": "处理与分组、机制指标或税收优惠变量的交互项"
+    },
+    {
+      "spec_id": "T7_5",
+      "location": "表7 第(5)列",
+      "reason": "处理与分组、机制指标或税收优惠变量的交互项"
+    },
+    {
+      "spec_id": "T7_6",
+      "location": "表7 第(6)列",
+      "reason": "处理与分组、机制指标或税收优惠变量的交互项"
+    },
+    {
+      "spec_id": "T7_7",
+      "location": "表7 第(7)列",
+      "reason": "处理与分组、机制指标或税收优惠变量的交互项"
+    },
+    {
+      "spec_id": "T7_8",
+      "location": "表7 第(8)列",
+      "reason": "处理与分组、机制指标或税收优惠变量的交互项"
+    }
+  ],
+  "appendix_specs": [
+    {
+      "location": "附图3",
+      "spec_ids": [
+        "F3_1",
+        "F3_2",
+        "F3_3"
+      ]
+    },
+    {
+      "location": "附表1–3",
+      "scope": "描述统计、稳健性及其他政策控制"
+    }
+  ],
+  "n_eligible_specs": 4,
+  "priority": 1
+}

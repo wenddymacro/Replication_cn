@@ -1,0 +1,8 @@
+   n_unique_panel n_unique_fe n_combinations n_varying_origin_prov
+            <int>       <int>          <int>                 <int>
+1:         915090      915090         915090                     0
+   n_varying_citypair
+                <int>
+1:                  0
+BASE T1_1 2890738 38969 5 
+POINT T1_1 0.02126309 

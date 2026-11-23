@@ -1,0 +1,42 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+
+Attaching package: 'data.table'
+
+The following object is masked from 'package:base':
+
+    %notin%
+
+   n_date compatible   same     N
+    <int>     <lgcl> <lgcl> <int>
+1:      1       TRUE  FALSE   560
+2:      1       TRUE   TRUE 10314
+   mismatch       n
+      <int>   <int>
+1:        0 1884588
+   n_date compatible   same     N
+    <int>     <lgcl> <lgcl> <int>
+1:      1       TRUE  FALSE  1092
+2:      1       TRUE   TRUE 16926
+   mismatch       n
+      <int>   <int>
+1:        0 3118388
+   n_date compatible   same     N
+    <int>     <lgcl> <lgcl> <int>
+1:      1       TRUE  FALSE   983
+2:      1       TRUE   TRUE 13655
+   mismatch       n
+      <int>   <int>
+1:        0 1094583
+Warning messages:
+1: In min(relative) : no non-missing arguments to min; returning Inf
+2: In max(relative) : no non-missing arguments to max; returning -Inf
+3: In min(relative) : no non-missing arguments to min; returning Inf
+4: In max(relative) : no non-missing arguments to max; returning -Inf
+5: In min(relative) : no non-missing arguments to min; returning Inf
+6: In max(relative) : no non-missing arguments to max; returning -Inf
+null device 
+          1 

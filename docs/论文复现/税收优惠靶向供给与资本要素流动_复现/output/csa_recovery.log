@@ -1,0 +1,22 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+
+Attaching package: 'data.table'
+
+The following object is masked from 'package:base':
+
+    %notin%
+
+           used  (Mb) gc trigger   (Mb)  max used   (Mb)
+Ncells  2692919 143.9    4713830  251.8   4713830  251.8
+Vcells 33475066 255.4  149435758 1140.2 186615549 1423.8
+CSA_INPUT 2890738 331090 38969 1.032985 
+You have an unbalanced panel. Proceeding as such.
+The Wald pre-test is not reported when clustering beyond the unit level (clustervars = 'cl_num') because the analytical variance matrix does not account for between-cluster correlation. Use the bootstrap confidence intervals to assess pre-trends.
+Error in get_agg_inf_func(att = att, inffunc1 = inffunc1, whichones = keepers,  : 
+  No valid att_gt() estimates found for this aggregation. This may happen if all estimates for a particular group or time period are NA.
+Calls: <Anonymous> -> compute.aggte -> get_agg_inf_func
+Execution halted

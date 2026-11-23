@@ -1,0 +1,22 @@
+During startup - Warning messages:
+1: Setting LC_COLLATE=C.UTF-8 failed 
+2: Setting LC_CTYPE=C.UTF-8 failed 
+3: Setting LC_MONETARY=C.UTF-8 failed 
+4: Setting LC_TIME=C.UTF-8 failed 
+
+Attaching package: 'data.table'
+
+The following object is masked from 'package:base':
+
+    %notin%
+
+You have an unbalanced panel. Proceeding as such.
+The Wald pre-test is not reported when clustering beyond the unit level (clustervars = 'cl_num') because the analytical variance matrix does not account for between-cluster correlation. Use the bootstrap confidence intervals to assess pre-trends.
+ERROR T1_1 reg All att_gt() estimates are NA. Cannot compute aggregated treatment effects. Check your att_gt() results for estimation problems (e.g., too few observations, singular matrices, or overlap violations). 
+You have an unbalanced panel. Proceeding as such.
+The Wald pre-test is not reported when clustering beyond the unit level (clustervars = 'cl_num') because the analytical variance matrix does not account for between-cluster correlation. Use the bootstrap confidence intervals to assess pre-trends.
+FINISHED T1_1 rank 0.003380176 0.005051902 
+You have an unbalanced panel. Proceeding as such.
+The Wald pre-test is not reported when clustering beyond the unit level (clustervars = 'cl_num') because the analytical variance matrix does not account for between-cluster correlation. Use the bootstrap confidence intervals to assess pre-trends.
+FINISHED T2_1 reg 0.001088866 0.005365637 
+You have an unbalanced panel. Proceeding as such.

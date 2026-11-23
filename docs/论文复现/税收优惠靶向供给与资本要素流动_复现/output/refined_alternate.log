@@ -1,0 +1,14 @@
+   n_unique_panel n_unique_fe n_combinations n_varying_origin_prov
+            <int>       <int>          <int>                 <int>
+1:         915090      915090         915090                     0
+   n_varying_citypair
+                <int>
+1:                  0
+BASE T2_1 3680352 35096 5 
+BJS T2_1 0.02809303 0.005685466 
+BASE T2_2 3680352 35096 5 
+BJS T2_2 0.0272367 0.005662912 
+BASE T2_3 4914000 42224 5 
+BJS T2_3 -0.009686724 0.004575464 
+BASE T2_4 4914000 42224 5 
+BJS T2_4 -0.01026314 0.004690044 

@@ -1,0 +1,37 @@
+{
+  "paper_id": "cie20250809",
+  "journal": "cie",
+  "year": 2025,
+  "issue": 8,
+  "title": "战略主动视角下产学研合作创新的驱动因素研究",
+  "screened_from": "article_text+package+data",
+  "screen_date": "2026-11-23",
+  "staggered_design": true,
+  "eligible_design": false,
+  "near_miss_controls_only": false,
+  "n_cohorts_reported": 5,
+  "package_status": "data_and_code",
+  "data_access": "public",
+  "reports_modern_estimator": true,
+  "software": "Stata",
+  "eligible_specs": [],
+  "near_miss_controls_only_specs": [],
+  "n_eligible_specs": 0,
+  "ineligible_specs": [
+    {
+      "location": "表1第1–2列",
+      "reason": "处理在企业层面分配，只有省份×行业与年份固定效应；68个省份×行业×年组内同时有处理和未处理企业"
+    },
+    {
+      "location": "表1第3列、表2–5、图1",
+      "reason": "有时变控制变量及非冗余可加的省份×行业固定效应"
+    }
+  ],
+  "appendix_specs": [
+    {
+      "location": "稳健性材料",
+      "notes": "作者报告 Sun–Abraham 与其他估计，未逐项重跑"
+    }
+  ],
+  "notes": "正文24列及图1等价复算；未纳入项目的现代估计比较。"
+}
